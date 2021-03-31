@@ -1,0 +1,32 @@
+<h1>index</h1>
+<ul>
+    <li><a href="/#hello-world">hello</a></li>
+</ul>
+<div>
+    <div>
+        {{{title}}}
+    </div>
+    <div>
+        title: <input type="text" module-event-keyup="changeText">
+    </div>
+</div>
+<br>
+<img width="100" src="../../../assets/img.jpg">
+
+<div>
+    {{{numbers}}}
+    <button class="btn btn-info" module-event-click="changeData">change</button>
+</div>
+
+<div>
+    <input type="text" module-value="data">
+</div>
+
+
+<div>
+    <div module-isolate="data">
+        {{data}}
+        <button class="btn btn-info" module-event-click="test">test</button>
+    </div>
+    <input type="text" module-link="data">
+</div>

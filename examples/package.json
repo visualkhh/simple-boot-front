@@ -1,0 +1,72 @@
+{
+  "name": "simple-boot-front-exsample",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "jest": {
+    "transform": {
+      "^.+\\.ts$": "ts-jest"
+    },
+    "testRegex": "\\.test\\.ts$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ],
+    "globals": {
+      "ts-jest": {
+        "diagnostics": true
+      }
+    }
+  },
+  "scripts": {
+    "build": "webpack --config webpack.config.js",
+    "watch": "webpack --config webpack.config.js --watch",
+    "start:dev": "webpack serve --open ",
+    "test": "jest --detectOpenHandles --forceExit",
+    "start-noopen:dev": "webpack serve"
+  },
+  "devDependencies": {
+    "@types/jest": "^26.0.22",
+    "@typescript-eslint/eslint-plugin": "^4.16.1",
+    "@typescript-eslint/parser": "^4.16.1",
+    "css-loader": "^5.2.0",
+    "eslint": "^7.21.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.3.1",
+    "extract-loader": "^5.1.0",
+    "file-loader": "^6.2.0",
+    "handlebars-loader": "^1.7.1",
+    "html-loader": "^2.0.0",
+    "jest": "^26.6.3",
+    "raw-loader": "^4.0.2",
+    "reflect-metadata": "^0.1.13",
+    "rollup": "^2.44.0",
+    "script-loader": "^0.7.2",
+    "style-loader": "^2.0.0",
+    "supertest": "^6.1.3",
+    "ts-jest": "^26.5.4",
+    "tsconfig-paths-webpack-plugin": "^3.5.1",
+    "typescript": "^3.9.9",
+    "webpack-cli": "^4.5.0",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "clean-webpack-plugin": "^3.0.0",
+    "core-js": "^3.9.1",
+    "file": "^0.2.2",
+    "handlebars": "^4.7.7",
+    "handlebars-webpack-plugin": "^2.2.1",
+    "localized-strings": "^0.2.4",
+    "npm": "^7.5.4",
+    "rxjs": "^6.5.5",
+    "simple-boot-front": "file:..",
+    "system": "^2.0.1",
+    "ts-loader": "^7.0.5",
+    "uuid": "^8.3.2",
+    "webpack": "^5.22.0"
+  }
+}
