@@ -8,6 +8,8 @@ tip
   - https://yonghyunlee.gitlab.io/temp_post/jest/
 - vscode
     - debug: https://code.visualstudio.com/docs/editor/debugging
+- module format
+  - https://beomy.github.io/tech/javascript/cjs-amd-umd-esm/
 - ESLint
     - https://pks2974.medium.com/tslint-%EC%97%90%EC%84%9C-eslint-%EB%A1%9C-%EC%9D%B4%EC%82%AC%ED%95%98%EA%B8%B0-ecd460a1e599
     - https://www.npmjs.com/package/eslint

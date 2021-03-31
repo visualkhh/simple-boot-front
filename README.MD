@@ -1,4 +1,4 @@
-simple-boot-front  [v1.0.0]
+simple-boot-front  [v1.0.9]
 ===========
 
 Single Page Application Framworks
@@ -114,6 +114,28 @@ npm install simple-boot-front
 
     ```
 
+## Reserved key word
+ * html
+   - attribute
+     - **[router-outlet]**: child module space
+     - **[router-outlet]**: child module space
+     - **module-event-click**: click event
+       - value: method name, parameter($event, View)
+     - **module-event-change**: change event
+       - value: method name, parameter($event, View)
+     - **module-event-keyup**: keyup event
+       - value: method name, parameter($event, View)
+     - **module-event-keydown**: keydown event
+       - value: method name, parameter($event, View)
+     - **module-event-link**: link event (value change <-> input)
+       - value: variable name
+     - **module-event-value**: value injection
+       - value: variable name
+     - **module-isolate**: Partial reloading scope 
+       - value: target variable name
+         
+  * css
+   - **/\*[module-selector]\*/**: module Dedicated style
 
 ## License
 * MIT

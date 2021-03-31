@@ -1,3 +1,5 @@
+// import 'rxjs/index'
+// import 'rxjs/observable/fromEvent'
 // declare module '*.html' {
 //     const content: string
 //     export default content

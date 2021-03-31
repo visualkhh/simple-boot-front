@@ -7,6 +7,7 @@ import css from 'raw-loader!./hello-word.css'
 import {Profile} from '../../shareds/Profile'
 import {UserResponse} from '@src/app/models/UserResponse'
 import {ProjectService} from '@src/app/services/ProjectService'
+import {fromEvent} from 'rxjs'
 
 @Sim()
 export class HelloWord extends Module {
@@ -23,6 +24,7 @@ export class HelloWord extends Module {
         this.data = undefined;
         this.profile = new Profile();
         this.loadData()
+        fromEvent(this,'click').subscribe(it =>{})
     }
 
     loadData() {

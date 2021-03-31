@@ -1,7 +1,7 @@
 import Handlebars from 'handlebars'
 import {Renderer} from '../render/Renderer'
 import {LifeCycle} from '../module/LifeCycle'
-import {fromEvent} from 'rxjs'
+import {fromEvent} from 'rxjs';
 import {View} from '../service/view/View'
 import {RandomUtils} from '../util/random/RandomUtils'
 

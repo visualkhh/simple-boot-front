@@ -1,9 +1,9 @@
 import {simstanceManager} from './simstance/SimstanceManager'
 import {ConstructorType} from './types/Types'
 import {Router} from './module/Router'
-import {fromEvent} from 'rxjs'
 import {Renderer} from './render/Renderer'
 import {Module} from './module/Module'
+import {fromEvent} from 'rxjs';
 
 export class SimpleApplication {
     constructor(public rootRouter: ConstructorType<Router>) {
@@ -15,7 +15,7 @@ export class SimpleApplication {
     }
 
     private startRouting() {
-        fromEvent(window, 'hashchange').subscribe((it) => this.executeRouter())
+        fromEvent<any>(window, 'hashchange').subscribe((_) => this.executeRouter())
         window.dispatchEvent(new Event('hashchange'))
     }
 
