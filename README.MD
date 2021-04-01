@@ -1,4 +1,4 @@
-simple-boot-front  [v1.0.10]
+simple-boot-front  [v1.0.11]
 ===========
 
 Single Page Application Framworks
@@ -12,6 +12,8 @@ Single Page Application Framworks
 * Auto injection
 * Partial reloading
 
+## [😎 demo page link](https://codesandbox.io/s/example-simple-boot-front-spb5d)
+
 ## Installation and Getting Started
 The reference documentation includes detailed installation instructions as well as a comprehensive getting started guide.
 
@@ -22,7 +24,11 @@ npm install simple-boot-front
 
 ### [examples project](./examples)
 * Here is a quick teaser of a complete simple-boot-front application in typescript
-  
+  * index.ts
+    ```typescript
+    const app = new SimpleApplication(AppRouter).run().then(it => {});
+    ```
+    
   * index.html
     ```html
     <!doctype html>
@@ -60,10 +66,7 @@ npm install simple-boot-front
         constructor(public v: ViewService) {
             super('index')
         }
-    
-        onInit() {
-        }
-    
+        
         test() {
             console.log('test')
         }
@@ -113,6 +116,12 @@ npm install simple-boot-front
     </div>
 
     ```
+
+## Module LifeCycle
+* onInit(): 
+* onChangedRendered(): 
+* onInitedChiled():
+* onFinish():
 
 ## Reserved key word
  * html
