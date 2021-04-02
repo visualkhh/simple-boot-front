@@ -1,10 +1,13 @@
 import 'rxjs/Observable'
+import 'rxjs/add/operator/debounceTime'
 import {simstanceManager} from './simstance/SimstanceManager'
 import {ConstructorType} from './types/Types'
 import {Router} from './module/Router'
 import {Renderer} from './render/Renderer'
 import {Module} from './module/Module'
+// import * as rxjs from 'rxjs';
 import {fromEvent} from 'rxjs';
+// import {fromEvent} from 'rxjs';
 export class SimpleApplication {
     constructor(public rootRouter: ConstructorType<Router>) {
     }

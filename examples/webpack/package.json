@@ -64,7 +64,7 @@
     "localized-strings": "^0.2.4",
     "npm": "^7.5.4",
     "rxjs": "^6.5.5",
-    "simple-boot-front": "^1.0.13",
+    "simple-boot-front": "^1.0.14",
     "system": "^2.0.1",
     "ts-loader": "^7.0.5",
     "uuid": "^8.3.2",
