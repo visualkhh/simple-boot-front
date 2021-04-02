@@ -1,4 +1,4 @@
-simple-boot-front  [v1.0.11]
+simple-boot-front  [v1.0.13]
 ===========
 
 Single Page Application Framworks
@@ -23,6 +23,9 @@ npm install simple-boot-front
 
 
 ### [examples project](./examples)
+* #### [parcel-bundler](./examples/parcel-bundler)
+* #### [webpack](./examples/parcel-bundler)
+
 * Here is a quick teaser of a complete simple-boot-front application in typescript
   * index.ts
     ```typescript
