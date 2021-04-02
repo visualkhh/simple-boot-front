@@ -34,10 +34,10 @@ export class SimProxyMethodHandler implements ProxyHandler<any> {
                     return true;
                 }
             } catch (e) {
-
             }
+
             try {
-                const sim = simstanceManager.getOrNewSim(obj.constructor as ConstructorType<any>)
+                const sim = simstanceManager.getOrNewSim(obj.constructor as ConstructorType<Module>)
                 if (sim) {
                     sim.render();
                 } else {

@@ -121,10 +121,10 @@ npm install simple-boot-front
     ```
 
 ## Module LifeCycle
-* onInit(): 
-* onChangedRendered(): 
-* onInitedChiled():
-* onFinish():
+* onInit(): module load event
+* onChangedRender(): change rended in module event
+* onInitedChild(): module and child module inited event
+* onFinish(): lifecycle finish event
 
 ## Reserved key word
  * html
@@ -144,6 +144,8 @@ npm install simple-boot-front
        - value: variable name
      - **module-isolate**: Partial reloading scope 
        - value: target variable name
+     - **router-active-class**: url === href attribute => class add 
+       - value: add and remove class name
          
   * css
     - **/\*[module-selector]\*/**: module Dedicated style

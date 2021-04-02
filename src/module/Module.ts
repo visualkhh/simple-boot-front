@@ -5,17 +5,16 @@ import {LifeCycle} from '../module/LifeCycle'
 import {fromEvent} from 'rxjs';
 import {View} from '../service/view/View'
 import {RandomUtils} from '../util/random/RandomUtils'
+import {FunctionUtils} from '../util/function/FunctionUtils';
+import {DomUtils} from '../util/dom/DomUtils';
+import {LocationUtils} from '../util/window/LocationUtils';
 
 export class Module implements LifeCycle {
     public router_outlet_selector: string | undefined
     public styleImports: string[] | undefined
 
-    constructor(public selector = '', public template = '{{data}}', public wrapElement = 'div') {
+    constructor(public selector = '', public template = '{{value}}', public wrapElement = 'div') {
         this.selector = `___Module___${this.selector}_${RandomUtils.uuid()}`
-        if (this.template.search('\\[router-outlet\\]')) {
-            this.router_outlet_selector = `___Module___router-outlet_${this.selector}_${RandomUtils.uuid()}`
-            this.template = this.template.replace('[router-outlet]', ` id='${this.router_outlet_selector}' `)
-        }
     }
 
     public renderString(): string {
@@ -29,8 +28,7 @@ export class Module implements LifeCycle {
         rootElement.querySelectorAll<HTMLInputElement>(`[${attr}]`).forEach(it => {
             const attribute = it.getAttribute(attr)
             const newVar = this as any
-            // eslint-disable-next-line no-prototype-builtins
-            if (attribute && this.hasOwnProperty(attribute)) {
+            if (attribute && newVar[attribute]) {
                 fromEvent<MouseEvent>(it, endFix).subscribe(eit => {
                     const view = new View(eit.target! as Element)
                     if (typeof newVar[attribute] === 'function') {
@@ -43,9 +41,7 @@ export class Module implements LifeCycle {
         })
     }
 
-    //, rootElement = document.querySelector(`#${this.selector}`)
     public findChildAttributeElements<E extends Element>(attr: string, rootElement = document.querySelector(`#${this.selector}`)) {
-        // const targetSelector = `#${this.selector} [${attr}]`
         if (!rootElement) return
         return rootElement.querySelectorAll<E>(`[${attr}]`)
     }
@@ -55,17 +51,22 @@ export class Module implements LifeCycle {
     }
 
     private _onInit() {
-        // Renderer.renderTo(this.selector, '')
+        if (this.template.search('\\[router-outlet\\]')) {
+            this.router_outlet_selector = `___Module___router-outlet_${this.selector}_${RandomUtils.uuid()}`
+            this.template = this.template.replace('[router-outlet]', ` id='${this.router_outlet_selector}' `)
+        }
         this.onInit()
     }
 
-    private _onChangedRendered() {
+    private _onChangedRender() {
         this.addEvent()
-        this.onChangedRendered()
+        this.addBind()
+        this.addRout()
+        this.onChangedRender()
     }
 
-    private _onInitedChiled() {
-        this.onInitedChiled()
+    private _onInitedChild() {
+        this.onInitedChild()
     }
 
     private _onFinish() {
@@ -80,9 +81,8 @@ export class Module implements LifeCycle {
         let attr = 'module-value'
         rootElement.querySelectorAll<HTMLInputElement>(`[${attr}]`).forEach(it => {
             const attribute = it.getAttribute(attr)
-            // eslint-disable-next-line no-prototype-builtins
-            if (attribute && this.hasOwnProperty(attribute)) {
-                const newVar = this as any
+            const newVar = this as any
+            if (attribute && newVar[attribute]) {
                 if (typeof newVar[attribute] === 'function') {
                     it.value = newVar[attribute]
                 } else {
@@ -95,9 +95,8 @@ export class Module implements LifeCycle {
         attr = 'module-link'
         rootElement.querySelectorAll<HTMLInputElement>(`[${attr}]`).forEach(it => {
             const attribute = it.getAttribute(attr)
-            // eslint-disable-next-line no-prototype-builtins
-            if (attribute && this.hasOwnProperty(attribute)) {
-                const newVar = this as any
+            const newVar = this as any
+            if (attribute && newVar[attribute]) {
                 ['change'].forEach(eit => {
                     fromEvent<Event>(it, eit).subscribe(eit => {
                         if (typeof newVar[attribute] === 'function') {
@@ -111,13 +110,41 @@ export class Module implements LifeCycle {
         })
     }
 
+    private addBind(rootElement = document.querySelector(`#${this.selector}`)) {
+        // if (!rootElement) return
+        // const attr = 'module-bind'
+        // rootElement.querySelectorAll<HTMLInputElement>(`[${attr}]`).forEach(it => {
+        //     const attribute = it.getAttribute(attr)
+        //     const newVar = this as any
+        //     if (attribute && newVar[attribute] instanceof Module) {
+        //         console.log('-->', it)
+        //     }
+        // })
+    }
+
+    private addRout(rootElement = document.querySelector(`#${this.selector}`)) {
+        // if (!rootElement) return
+        // const attr = 'router-active-class';
+        // rootElement.querySelectorAll<HTMLInputElement>(`[${attr}]`).forEach(it => {
+        //     const hrefAttr = (it.getAttribute('href') ?? '').replace('#', '')
+        //     const actives = FunctionUtils.eval<string[]>(it.getAttribute(attr) ?? '[]')
+        //     if (hrefAttr === LocationUtils.hash()) {
+        //         it.classList.add(...actives)
+        //         DomUtils.setAttribute(it, actives);
+        //     } else {
+        //         it.classList.remove(...actives)
+        //         DomUtils.removeAttribute(it, actives);
+        //     }
+        // })
+    }
+
     public onInit() {
     }
 
-    public onChangedRendered() {
+    public onChangedRender() {
     }
 
-    public onInitedChiled() {
+    public onInitedChild() {
     }
 
     public onFinish() {
@@ -130,7 +157,7 @@ export class Module implements LifeCycle {
 
     public renderWrap(selector = this.selector || Renderer.selector) {
         Renderer.renderTo(selector, this.renderWrapString())
-        this._onChangedRendered()
+        this._onChangedRender()
         this.transStyle(this.selector)
     }
 

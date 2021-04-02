@@ -5,9 +5,10 @@ import {ConstructorType} from './types/Types'
 import {Router} from './module/Router'
 import {Renderer} from './render/Renderer'
 import {Module} from './module/Module'
-// import * as rxjs from 'rxjs';
 import {fromEvent} from 'rxjs';
-// import {fromEvent} from 'rxjs';
+import {FunctionUtils} from './util/function/FunctionUtils';
+import {DomUtils} from './util/dom/DomUtils';
+import {LocationUtils} from './util/window/LocationUtils';
 export class SimpleApplication {
     constructor(public rootRouter: ConstructorType<Router>) {
     }
@@ -36,11 +37,29 @@ export class SimpleApplication {
                 }
             });
             this.render(executeModule, lastRouterSelector);
-            (executeModule as any)._onInitedChiled();
-            routers.reverse().forEach(it => (it.moduleObject as any)?._onInitedChiled());
+            // -
+            this.renderd();
+            // -
+            (executeModule as any)._onInitedChild();
+            routers.reverse().forEach(it => (it.moduleObject as any)?._onInitedChild());
         } else {
             Renderer.render('404 not found')
         }
+    }
+
+    private renderd() {
+        const attr = 'router-active-class';
+        document.querySelectorAll<HTMLInputElement>(`[${attr}]`).forEach(it => {
+            const hrefAttr = (it.getAttribute('href') ?? '').replace('#', '')
+            const actives = FunctionUtils.eval<string[]>(it.getAttribute(attr) ?? '[]')
+            if (hrefAttr === LocationUtils.hash()) {
+                it.classList.add(...actives)
+                DomUtils.setAttribute(it, actives);
+            } else {
+                it.classList.remove(...actives)
+                DomUtils.removeAttribute(it, actives);
+            }
+        })
     }
 
     public renderRouterModule(module: Module | undefined, targetSelector = 'app'): boolean {

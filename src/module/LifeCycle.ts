@@ -2,9 +2,9 @@ export interface LifeCycle {
 
     onInit(): void;
 
-    onChangedRendered(): void;
+    onChangedRender(): void;
 
-    onInitedChiled(): void;
+    onInitedChild(): void;
 
     onFinish(): void;
 }
