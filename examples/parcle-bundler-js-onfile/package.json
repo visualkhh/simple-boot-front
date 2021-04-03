@@ -1,0 +1,20 @@
+{
+  "name": "test-simple-boot-front",
+  "version": "1.0.0",
+  "description": "simple-boot-front",
+  "main": "index.js",
+  "scripts": {
+    "serve": "parcel --port 3000 ./index.html",
+    "build": "parcel build  ./index.html",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "parcel-bundler": "^1.12.5",
+    "parcel-plugin-css-to-string": "^2.5.2",
+    "reflect-metadata": "^0.1.13",
+    "simple-boot-front": "^1.0.15"
+  }
+}
