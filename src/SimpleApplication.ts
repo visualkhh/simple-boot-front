@@ -54,10 +54,10 @@ export class SimpleApplication {
             const actives = FunctionUtils.eval<string[]>(it.getAttribute(attr) ?? '[]')
             if (hrefAttr === LocationUtils.hash()) {
                 it.classList.add(...actives)
-                DomUtils.setAttribute(it, actives);
+                // DomUtils.setAttribute(it, actives);
             } else {
                 it.classList.remove(...actives)
-                DomUtils.removeAttribute(it, actives);
+                // DomUtils.removeAttribute(it, actives);
             }
         })
     }

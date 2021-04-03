@@ -7,14 +7,11 @@ import {SimstanceManager} from "simple-boot-front/simstance/SimstanceManager";
 @Sim()
 export class App extends Module {
     styleImports = [css];
+    template = html;
     constructor(
         public ajaxService: AjaxService,
         public simstance: SimstanceManager
     ) {
-        super("app-router-module", html);
+        super("app-router-module");
     }
-
-    onInit() {}
-
-    onChangedRendered() {}
 }

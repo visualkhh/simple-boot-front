@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "parcel-bundler": "^1.12.5",
-    "simple-boot-front": "^1.0.14",
+    "simple-boot-front": "^1.0.15",
     "typescript": "^4.2.3"
   }
 }

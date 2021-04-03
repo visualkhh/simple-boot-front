@@ -1,4 +1,4 @@
-simple-boot-front  [v1.0.14]
+simple-boot-front  [v1.0.15]
 ===========
 
 Single Page Application Framworks
@@ -24,6 +24,7 @@ npm install simple-boot-front
 
 ### [examples project](./examples)
 * #### [parcel-bundler](./examples/parcel-bundler)
+* #### [parcel-bundler-js](./examples/parcel-bundler-js) (js version)
 * #### [webpack](./examples/parcel-bundler)
 
 * Here is a quick teaser of a complete simple-boot-front application in typescript
@@ -132,23 +133,55 @@ npm install simple-boot-front
      - **[router-outlet]**: child module space
      - **module-event-click**: click event
        - value: method name, parameter($event, View)
+       - ```html
+         <button module-event-click="changeData">change</button>
+         ```
      - **module-event-change**: change event
        - value: method name, parameter($event, View)
+       - ```html
+         <input module-event-change="changeData">
+         ```
      - **module-event-keyup**: keyup event
        - value: method name, parameter($event, View)
+       - ```html
+         <input module-event-keyup="changeData">
+         ```
      - **module-event-keydown**: keydown event
        - value: method name, parameter($event, View)
+       - ```html
+         <input module-event-keydown="changeData">
+         ```
      - **module-event-link**: link event (value change <-> input)
        - value: variable name
+       - ```html
+         <input module-event-link="value">
+         ```
      - **module-value**: value injection
        - value: variable name
+       - ```html
+         <input module-event-value="value">
+         ```
      - **module-isolate**: Partial reloading scope 
        - value: target variable name
+       - ```html
+         <div module-isolate="data">{{data}}</div>
+         ```
      - **router-active-class**: url === href attribute => class add 
        - value: add and remove class name
+       - ```html
+          <a href="#ajax" router-active-class="['active']">Ajax</a>
+         ```
          
   * css
     - **/\*[module-selector]\*/**: module Dedicated style
+      - as-is
+        -  ```css
+           /*[module-selector]*/ h1 {color: burlywood;}
+           ```  
+      - to-be
+        -  ```css
+           {{module-selector}} h1 { color: burlywood;}
+           ```  
 
 ## License
 * MIT

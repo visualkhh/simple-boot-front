@@ -13,7 +13,7 @@ export class Index extends Module {
     styleImports = [css]
 
     public title = new class extends Module {
-        public data = '';
+        public value = '';
     }()
 
     public numbers = new class extends Module {
@@ -33,7 +33,7 @@ export class Index extends Module {
     }
 
     changeText($event: KeyboardEvent, view: View<Element>) {
-        this.title.data = view.value;
+        this.title.value = view.value;
     }
 
     changeData() {

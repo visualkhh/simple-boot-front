@@ -12,7 +12,7 @@ export class Index extends Module {
     data = "default data";
 
     public title = new (class extends Module {
-        public data = "";
+        public value = "";
         public wrapElement = "span";
     })();
 
@@ -25,14 +25,12 @@ export class Index extends Module {
         super("index");
     }
 
-    onInit() {}
-
     test() {
         console.log("test");
     }
 
     changeText($event: KeyboardEvent, view: View<Element>) {
-        this.title.data = view.value;
+        this.title.value = view.value;
     }
 
     changeData() {

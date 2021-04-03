@@ -1,6 +1,6 @@
 {
   "name": "simple-boot-front",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "main": "SimpleApplication.js",
   "license": "MIT",
   "description": "front end SPA frameworks",
@@ -8,6 +8,8 @@
     "front",
     "spa",
     "SPA",
+    "module",
+    "front-end",
     "framwork",
     "node"
   ],
@@ -21,6 +23,12 @@
     "email": "visualkhh@gmail.com",
     "url": "https://github.com/visualkhh"
   },
+  "contributors": [
+    "sewoo",
+    "tkyungDev",
+    "Hoil-Gang",
+    "hwangsero"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/visualkhh/simple-boot-front"

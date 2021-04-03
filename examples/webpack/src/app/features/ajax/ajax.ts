@@ -2,14 +2,14 @@ import {Sim} from 'simple-boot-front/decorators/SimDecorator'
 import {Module} from 'simple-boot-front/module/Module'
 import {AjaxService} from 'simple-boot-front/service/AjaxService'
 import {ViewService} from 'simple-boot-front/service/view/ViewService'
-import html from './hello-world.html'
-import css from 'raw-loader!./hello-word.css'
+import html from './ajax.html'
+import css from 'raw-loader!./ajax.css'
 import {Profile} from '../../shareds/Profile'
 import {UserResponse} from '@src/app/models/UserResponse'
 import {ProjectService} from '@src/app/services/ProjectService'
 
 @Sim()
-export class HelloWord extends Module {
+export class Ajax extends Module {
     template = html
     styleImports = [css]
     public data: UserResponse | undefined

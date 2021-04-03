@@ -9,8 +9,9 @@ import css from 'raw-loader!./dashboard.css'
 @Sim()
 export class App extends Module {
     styleImports = [bootstrap, css]
+    template = html
     constructor(public ajaxService: AjaxService, public simstance: SimstanceManager) {
-        super('app-router-module', html)
+        super('app-router-module')
     }
 
     onInit() {
@@ -18,7 +19,7 @@ export class App extends Module {
         import('script-loader!../../assets/libs/feather/feather.min.js');
     }
 
-    onChangedRendered() {
+    onChangedRender() {
         import('script-loader!./layout.js');
     }
 }
