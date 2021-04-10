@@ -2,13 +2,15 @@ import {Module} from '../module/Module'
 import {ConstructorType} from '../types/Types'
 import {simstanceManager} from '../simstance/SimstanceManager'
 import {LocationUtils} from '../util/window/LocationUtils'
+import {SimBase} from './SimBase';
 
 export interface Routers {
     [name: string]: ConstructorType<any> | any
 }
 
-export class Router implements Routers {
+export class Router extends SimBase implements Routers {
     constructor(public path: string, public module?: ConstructorType<Module>, public childs: ConstructorType<Router>[] = []) {
+        super()
     }
 
     getExecuteModule(parentRouters: Router[]): Module | undefined {

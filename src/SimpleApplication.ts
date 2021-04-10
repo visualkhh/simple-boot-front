@@ -1,16 +1,18 @@
 import 'rxjs/Observable'
 import 'rxjs/add/operator/debounceTime'
 import {simstanceManager} from './simstance/SimstanceManager'
+import {intentManager} from './intent/IntentManager'
 import {ConstructorType} from './types/Types'
 import {Router} from './module/Router'
 import {Renderer} from './render/Renderer'
 import {Module} from './module/Module'
 import {fromEvent} from 'rxjs';
 import {FunctionUtils} from './util/function/FunctionUtils';
-import {DomUtils} from './util/dom/DomUtils';
 import {LocationUtils} from './util/window/LocationUtils';
 export class SimpleApplication {
     constructor(public rootRouter: ConstructorType<Router>) {
+        intentManager.init();
+        simstanceManager.init();
     }
 
     public async run(): Promise<SimpleApplication> {

@@ -5,15 +5,12 @@ import {Sim} from "simple-boot-front/decorators/SimDecorator";
 import {AjaxService} from "simple-boot-front/service/AjaxService";
 import {SimstanceManager} from "simple-boot-front/simstance/SimstanceManager";
 import {Intent} from 'simple-boot-front/intent/Intent';
-import {AppInfo} from './AppInfo';
+import {Renderer} from 'simple-boot-front/render/Renderer';
 
-@Sim({id: 'layout'})
-export class App extends Module {
-    styleImports = [css];
-    template = html;
-    info = new AppInfo();
-    constructor(public ajaxService: AjaxService, public simstance: SimstanceManager) {
-        super("app-layout-module");
+export class AppInfo extends Module {
+    template = '<div><h3>info</h3>{{datas}}</div>';
+    datas = 'default data';
+    data(i: Intent) {
+        this.datas = i.data + '->' + i.params.aa
     }
-
 }

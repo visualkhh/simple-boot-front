@@ -1,4 +1,4 @@
-simple-boot-front  [v1.0.15]
+simple-boot-front  [v1.0.17]
 ===========
 
 Single Page Application Framworks
@@ -127,6 +127,33 @@ npm install simple-boot-front
 * onInitedChild(): module and child module inited event
 * onFinish(): lifecycle finish event
 
+## Intent event broker 
+```typescript
+click() {
+  this.publish(new Intent('layout://info/data?a=wow&aa=zzz', Math.floor(RandomUtils.random(0, 100))));
+  // this.publish(new Intent('layout://info/datas', Math.floor(RandomUtils.random(0, 100))));
+}
+```
+```typescript
+@Sim({id: 'layout'})
+export class App extends Module {
+    styleImports = [css];
+    template = html;
+    info = new AppInfo();
+    constructor() {
+        super("app-layout-module");
+    }
+}
+```
+```typescript
+export class AppInfo extends Module {
+    template = '<div><h3>info</h3>{{datas}}</div>';
+    datas = 'default data';
+    data(i: Intent) {
+        this.datas = i.data + '->' + i.params.aa
+    }
+}
+```
 ## Reserved key word
  * html
    - attribute

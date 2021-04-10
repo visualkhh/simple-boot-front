@@ -3,16 +3,26 @@ import {ConstructorType} from '../types/Types'
 import {NoSuchSim} from '../throwable/NoSuchSim'
 import {SimProxyMethodHandler} from '../proxy/SimProxyMethodHandler'
 import {Module} from '../module/Module'
+import {SimConfig} from '../decorators/SimDecorator';
+import {Router} from '../module/Router';
 
 export class SimstanceManager {
     private _storege = new Map<ConstructorType<any>, any>()
+    private _configStorege = new Map<ConstructorType<any>, SimConfig | undefined>()
 
     constructor() {
+    }
+
+    public init() {
         this._storege.set(SimstanceManager, this);
     }
 
     get storege(): Map<ConstructorType<any>, any> {
         return this._storege
+    }
+
+    get configStorege(): Map<ConstructorType<any>, SimConfig | undefined> {
+        return this._configStorege;
     }
 
     getOrNewSim<T>(k: ConstructorType<T>): T {
@@ -51,10 +61,11 @@ export class SimstanceManager {
         // return newVar
     }
 
-    register(target: ConstructorType<any>): void {
+    register(target: ConstructorType<any>, config?: SimConfig): void {
         const registed = this._storege.get(target)
         if (!registed) {
             this._storege.set(target, undefined)
+            this._configStorege.set(target, config)
         }
     }
 
@@ -78,6 +89,12 @@ export class SimstanceManager {
             return this.resolve<any>(token)
         })
         const r = new target(...injections)
+        // if (r instanceof Module) {
+        //     return this.proxy(r, Module);
+        // } else if (r instanceof Router) {
+        //     return this.proxy(r, Router);
+        // } else {
+        // }
         return this.proxy(r, Module);
     }
 

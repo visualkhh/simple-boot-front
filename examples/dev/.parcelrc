@@ -1,4 +1,5 @@
 {
+  "sourceMaps": true,
   "parcel-plugin-css-to-string": {
     "assetType": ["css"],
     "minify": true,

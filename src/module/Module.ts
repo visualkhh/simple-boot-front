@@ -5,15 +5,17 @@ import {LifeCycle} from '../module/LifeCycle'
 import {fromEvent} from 'rxjs';
 import {View} from '../service/view/View'
 import {RandomUtils} from '../util/random/RandomUtils'
-import {FunctionUtils} from '../util/function/FunctionUtils';
-import {DomUtils} from '../util/dom/DomUtils';
-import {LocationUtils} from '../util/window/LocationUtils';
+// import {FunctionUtils} from '../util/function/FunctionUtils';
+// import {DomUtils} from '../util/dom/DomUtils';
+// import {LocationUtils} from '../util/window/LocationUtils';
+import {SimBase} from './SimBase';
 
-export class Module implements LifeCycle {
+export class Module extends SimBase implements LifeCycle {
     public router_outlet_selector: string | undefined
     public styleImports: string[] | undefined
 
     constructor(public selector = '', public template = '{{value}}', public wrapElement = 'div') {
+        super();
         this.selector = `___Module___${this.selector}_${RandomUtils.uuid()}`
     }
 
@@ -181,4 +183,5 @@ export class Module implements LifeCycle {
     public toString(): string {
         return this.renderWrapString()
     }
+
 }
