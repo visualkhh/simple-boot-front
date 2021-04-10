@@ -5,6 +5,7 @@ import {Sim} from "simple-boot-front/decorators/SimDecorator";
 import {Router} from "simple-boot-front/module/Router";
 import {Empty} from './features/empty/empty';
 import {Intents} from './features/intent/intents';
+import {Views} from "./features/view/views";
 
 @Sim({scheme: 'layout-router'})
 export class AppRouter extends Router {
@@ -12,5 +13,6 @@ export class AppRouter extends Router {
     "" = Index;
     "ajax" = Ajax;
     "intent" = Intents;
+    "view" = Views;
     "empty" = Empty;
 }

@@ -17,6 +17,6 @@
     "parcel-plugin-css-to-string": "^2.5.2"
   },
   "dependencies": {
-    "simple-boot-front": "^1.0.15"
+    "simple-boot-front": "^1.0.19"
   }
 }

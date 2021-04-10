@@ -46,6 +46,10 @@ export class SimProxyMethodHandler implements ProxyHandler<any> {
             } catch (e) {
                 obj.render();
             }
+
+            // const formatMetadataKey = Symbol('ChildView');
+            // const metadata = Reflect.metadata(formatMetadataKey, obj);
+            // console.log('--->', metadata);
         }
         // for (const key in obj) {
         //     if (obj[key] instanceof Module) {

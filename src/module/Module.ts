@@ -5,9 +5,6 @@ import {LifeCycle} from '../module/LifeCycle'
 import {fromEvent} from 'rxjs';
 import {View} from '../service/view/View'
 import {RandomUtils} from '../util/random/RandomUtils'
-// import {FunctionUtils} from '../util/function/FunctionUtils';
-// import {DomUtils} from '../util/dom/DomUtils';
-// import {LocationUtils} from '../util/window/LocationUtils';
 import {SimBase} from './SimBase';
 
 export class Module extends SimBase implements LifeCycle {
