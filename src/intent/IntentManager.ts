@@ -4,7 +4,6 @@ import {EventType} from '../code/EventType';
 import {filter, map} from 'rxjs/operators';
 import {Intent} from './Intent';
 import {simstanceManager} from '../simstance/SimstanceManager';
-import {IntentEvent} from './IntentEvent';
 import {ConstructorType} from '../types/Types';
 
 export class IntentManager {
@@ -18,9 +17,9 @@ export class IntentManager {
             map(it => it.detail)
         ).subscribe(it => {
             simstanceManager.configStorege.forEach((data, key, map) => {
-                if (it.schema && it.schema === data?.id) {
+                if (it.scheme && it.scheme === data?.scheme) {
                     this.extracted(key, it);
-                } else if (!it.schema) {
+                } else if (!it.scheme) {
                     this.extracted(key, it);
                 }
             })

@@ -1,6 +1,6 @@
 {
   "name": "simple-boot-front",
-  "version": "1.0.17",
+  "version": "1.0.19",
   "main": "SimpleApplication.js",
   "license": "MIT",
   "description": "front end SPA frameworks",
@@ -13,18 +13,19 @@
     "framwork",
     "node"
   ],
+  "author": "visualkhh <visualkhh@gmail.com> (https://github.com/visualkhh)",
+  "contributors": [
+    "sewoo <sewooimda@nate.com> (https://github.com/sewoo)",
+    "SeoDH <adonis_84@naver.com> (https://github.com/SeoDH)",
+    "tkyung (https://github.com/tkyungDev)",
+    "Hoil-Gang (https://github.com/khl1154)",
+    "hwangsero (https://github.com/hwangsero)"
+  ],
   "homepage": "https://github.com/visualkhh/simple-boot-front",
   "bugs": {
     "url": "https://github.com/visualkhh/simple-boot-front",
     "email": "visualkhh@gmail.com"
   },
-  "contributors": [
-    "visualkhh <visualkhh@gmail.com>",
-    "sewoo",
-    "tkyungDev",
-    "Hoil-Gang",
-    "hwangsero"
-  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/visualkhh/simple-boot-front"

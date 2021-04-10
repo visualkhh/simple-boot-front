@@ -1,9 +1,10 @@
 export class Intent<T = any> {
     // uri example: mymodule://asd/asd/b?a=545&aa=33&wow=wow
+    // <스킴>://<사용자이름>:<비밀번호>@<호스트>:<포트>/<경로>?<질의>#<프레그먼트>
     constructor(public uri?: string, public data?: T) {
     }
 
-    get schema() {
+    get scheme() {
         return this.uri?.split('://')[0];
     }
 

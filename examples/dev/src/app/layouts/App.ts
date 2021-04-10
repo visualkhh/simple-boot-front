@@ -7,7 +7,7 @@ import {SimstanceManager} from "simple-boot-front/simstance/SimstanceManager";
 import {Intent} from 'simple-boot-front/intent/Intent';
 import {AppInfo} from './AppInfo';
 
-@Sim({id: 'layout'})
+@Sim({scheme: 'layout'})
 export class App extends Module {
     styleImports = [css];
     template = html;

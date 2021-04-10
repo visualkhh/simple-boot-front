@@ -2,7 +2,7 @@ import {ConstructorType, GenericClassDecorator} from '../types/Types'
 import {simstanceManager} from '../simstance/SimstanceManager'
 
 export interface SimConfig {
- id: string,
+ scheme: string,
 
 }
 export const Sim = (config?: SimConfig): GenericClassDecorator<ConstructorType<any>> => {

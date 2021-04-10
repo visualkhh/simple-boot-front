@@ -6,7 +6,7 @@ import {Router} from "simple-boot-front/module/Router";
 import {Empty} from './features/empty/empty';
 import {Intents} from './features/intent/intents';
 
-@Sim({id: 'layout-router'})
+@Sim({scheme: 'layout-router'})
 export class AppRouter extends Router {
     module = App;
     "" = Index;

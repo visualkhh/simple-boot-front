@@ -1,4 +1,4 @@
-simple-boot-front  [v1.0.17]
+simple-boot-front  [v1.0.18]
 ===========
 
 Single Page Application Framworks
@@ -132,10 +132,13 @@ npm install simple-boot-front
 click() {
   this.publish(new Intent('layout://info/data?a=wow&aa=zzz', Math.floor(RandomUtils.random(0, 100))));
   // this.publish(new Intent('layout://info/datas', Math.floor(RandomUtils.random(0, 100))));
+  // this.publish(new Intent('layout://', Math.floor(RandomUtils.random(0, 100)))); // default callback method -> subscribe(i: Intent)
+  // this.publish(new Intent('://info/datas', Math.floor(RandomUtils.random(0, 100))));
 }
 ```
+
 ```typescript
-@Sim({id: 'layout'})
+@Sim({scheme: 'layout'})
 export class App extends Module {
     styleImports = [css];
     template = html;
