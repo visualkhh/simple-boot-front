@@ -14,7 +14,6 @@ export class Ajax extends Module {
 
     public data: UserResponse | undefined;
     public profile: Profile | undefined;
-    private uuid: any;
     constructor(public projectService: ProjectService, public ajax: AjaxService) {
         super("hello-world");
     }

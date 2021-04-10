@@ -8,8 +8,6 @@ import {Module} from "simple-boot-front/module/Module";
 import {AjaxService} from "simple-boot-front/service/AjaxService";
 import {Intent} from 'simple-boot-front/intent/Intent';
 import {RandomUtils} from 'simple-boot-front/util/random/RandomUtils';
-import {ChildView} from "simple-boot-front/decorators/ChildView";
-import {View} from "simple-boot-front/service/view/View";
 
 @Sim()
 export class Intents extends Module {

@@ -1,8 +1,8 @@
 import {fromEvent, Observable} from 'rxjs';
+import {Module} from '../../module/Module';
 
 export class View<T extends Element> {
-    constructor(private _e: T | string) {
-
+    constructor(private _e: T | string, public module?: Module) {
     }
 
     event<T>(eventName: string): Observable<T> {
@@ -15,7 +15,12 @@ export class View<T extends Element> {
 
     get e() {
         if (typeof this._e === 'string') {
-            return document.querySelector<T>(this._e)!;
+            const selector = this.module?.selector;
+            if (selector) {
+                return document.querySelector<T>(`#${selector} ${this._e}`)!;
+            } else {
+                return document.querySelector<T>(this._e)!;
+            }
         } else {
             return this._e;
         }
