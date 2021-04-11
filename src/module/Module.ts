@@ -6,6 +6,8 @@ import {fromEvent} from 'rxjs';
 import {View} from '../service/view/View'
 import {RandomUtils} from '../util/random/RandomUtils'
 import {SimBase} from './SimBase';
+import {FunctionUtils} from "../util/function/FunctionUtils";
+import {Intent} from "../intent/Intent";
 
 export class Module extends SimBase implements LifeCycle {
     public router_outlet_selector: string | undefined
@@ -22,18 +24,41 @@ export class Module extends SimBase implements LifeCycle {
 
     private setEvent(endFix: string, rootElement = document.querySelector(`#${this.selector}`)) {
         if (!rootElement) return
-
         const attr = 'module-event-' + endFix
         rootElement.querySelectorAll<HTMLInputElement>(`[${attr}]`).forEach(it => {
             const attribute = it.getAttribute(attr)
             const newVar = this as any
             if (attribute && newVar[attribute]) {
-                fromEvent<MouseEvent>(it, endFix).subscribe(eit => {
+                fromEvent<Event>(it, endFix).subscribe(eit => {
                     const view = new View(eit.target! as Element)
                     if (typeof newVar[attribute] === 'function') {
                         newVar[attribute](eit, view)
                     } else {
                         newVar[attribute] = it.value
+                    }
+                })
+            }
+        })
+    }
+
+    private setIntentEvent(endFix: string, rootElement = document.querySelector(`#${this.selector}`)) {
+        if (!rootElement) return
+        const attr = 'module-event-' + endFix + '-intent-publish'
+        rootElement.querySelectorAll<HTMLInputElement>(`[${attr}]`).forEach(it => {
+            const attribute = FunctionUtils.eval(it.getAttribute(attr))
+            const newVar = this as any
+            if (attribute && Array.isArray(attribute)) {
+                fromEvent<Event>(it, endFix).subscribe(eit => {
+                    // eit.target
+                    console.log('--->', eit)
+                    if (attribute.length === 2) {
+                        let newVarElement = newVar[attribute[1]];
+                        if (typeof newVarElement === 'function') {
+                            newVarElement = newVarElement();
+                        }
+                        this.publish(new Intent<any>(attribute[0], newVarElement, eit));
+                    } else if (attribute.length === 1) {
+                        this.publish(new Intent<any>(attribute[0], new View(eit.target! as Element, this), eit));
                     }
                 })
             }
@@ -75,7 +100,10 @@ export class Module extends SimBase implements LifeCycle {
     private addEvent(rootElement = document.querySelector(`#${this.selector}`)) {
         if (!rootElement) return
 
-        ['click', 'change', 'keyup', 'keydown'].forEach(it => this.setEvent(it, rootElement))
+        ['click', 'change', 'keyup', 'keydown'].forEach(it => {
+            this.setEvent(it, rootElement);
+            this.setIntentEvent(it, rootElement);
+        });
         // value
         let attr = 'module-value'
         rootElement.querySelectorAll<HTMLInputElement>(`[${attr}]`).forEach(it => {

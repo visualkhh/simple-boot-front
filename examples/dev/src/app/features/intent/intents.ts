@@ -13,16 +13,19 @@ import {RandomUtils} from 'simple-boot-front/util/random/RandomUtils';
 export class Intents extends Module {
     styleImports = [css];
     template = html;
-    public data: UserResponse | undefined;
+    public data = '---default data';
     public profile: Profile | undefined;
-
 
     constructor(public projectService: ProjectService, public ajax: AjaxService) {
         super("intent");
     }
 
     click() {
-        this.publish(new Intent('layout://info/data?a=wow&aa=zzz', Math.floor(RandomUtils.random(0, 100))));
+        this.publish(new Intent('layout://info/data?a=wow&aa=zzz', this.makeRandom()));
+    }
+
+    makeRandom() {
+        return Math.floor(RandomUtils.random(0, 100));
     }
 
 }

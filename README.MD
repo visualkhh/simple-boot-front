@@ -201,7 +201,25 @@ export class AppInfo extends Module {
        - ```html
           <a href="#ajax" router-active-class="['active']">Ajax</a>
          ```
+     - **module-event-{{eventName}}-intent-publish**: intent publish 
+       - value: ['uri', 'variablename'] or ['uri']
+       - publish
+       ```html
+          click event intent publish:
+           <button class="btn btn-primary" module-event-click-intent-publish="['layout://info/data?a=wow&aa=ppp','makeRandom']">publish data</button>
          
+          typing:
+           <input type="text" module-event-keyup-intent-publish="['layout://info/viewSubscribe?a=wow&aa=vvv']">
+         ```
+       - subscribe
+       ```typescript
+       data(i: Intent) {
+        this.datas = i.data + '->' + i.params.aa
+       }
+       viewSubscribe(i: Intent<View<HTMLInputElement>>) {
+         this.datas = i.data?.value + '->' + i.params.aa + '-->' + i.event
+       }
+       ```
   * css
     - **/\*[module-selector]\*/**: module Dedicated style
       - as-is
