@@ -1,7 +1,7 @@
 
 # Created by https://www.toptal.com/developers/gitignore/api/windows,macos,gradle,node,eclipse
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,macos,gradle,node,eclipse
-
+.vscode
 ### Eclipse ###
 .metadata
 bin/
