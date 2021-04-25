@@ -54,6 +54,9 @@ export class SimpleApplication {
         document.querySelectorAll<HTMLInputElement>(`[${attr}]`).forEach(it => {
             const hrefAttr = (it.getAttribute('href') ?? '').replace('#', '')
             const actives = FunctionUtils.eval<string[]>(it.getAttribute(attr) ?? '[]')
+
+            if (!actives) return;
+
             if (hrefAttr === LocationUtils.hash()) {
                 it.classList.add(...actives)
                 // DomUtils.setAttribute(it, actives);

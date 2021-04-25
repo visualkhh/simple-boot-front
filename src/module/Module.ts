@@ -6,8 +6,8 @@ import {fromEvent} from 'rxjs';
 import {View} from '../service/view/View'
 import {RandomUtils} from '../util/random/RandomUtils'
 import {SimBase} from './SimBase';
-import {FunctionUtils} from "../util/function/FunctionUtils";
-import {Intent} from "../intent/Intent";
+import {FunctionUtils} from '../util/function/FunctionUtils';
+import {Intent} from '../intent/Intent';
 
 export class Module extends SimBase implements LifeCycle {
     public router_outlet_selector: string | undefined
@@ -208,5 +208,4 @@ export class Module extends SimBase implements LifeCycle {
     public toString(): string {
         return this.renderWrapString()
     }
-
 }
