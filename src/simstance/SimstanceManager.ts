@@ -4,7 +4,7 @@ import {NoSuchSim} from '../throwable/NoSuchSim'
 import {SimProxyMethodHandler} from '../proxy/SimProxyMethodHandler'
 import {Module} from '../module/Module'
 import {SimConfig} from '../decorators/SimDecorator';
-import {Router} from '../module/Router';
+// import {Router} from '../module/Router';
 
 export class SimstanceManager {
     private _storege = new Map<ConstructorType<any>, any>()
