@@ -4,7 +4,6 @@ import {NoSuchSim} from '../throwable/NoSuchSim'
 import {SimProxyMethodHandler} from '../proxy/SimProxyMethodHandler'
 import {Module} from '../module/Module'
 import {SimConfig} from '../decorators/SimDecorator';
-// import {Router} from '../module/Router';
 
 export class SimstanceManager {
     private _storege = new Map<ConstructorType<any>, any>()
@@ -36,7 +35,6 @@ export class SimstanceManager {
     getOrNewSims<T>(k: ConstructorType<T>): T[] {
         const list = new Array<T>(0);
 
-        // console.log('-storeges--->', this._storege)
         this.storege.forEach((value, key, mapObject) => {
             let sw = false;
             if (value && value instanceof k) {
@@ -51,14 +49,8 @@ export class SimstanceManager {
                 }
                 list.push(value);
             }
-            // console.log('getSims key:', key, ' input:', k, ' value:', value, '--->', key instanceof k, '---->', sw)
         })
-        // let newVar = this.storege.get(k)
-        // if (!newVar) {
-        //     newVar = this.resolve(k)
-        // }
         return list;
-        // return newVar
     }
 
     register(target: ConstructorType<any>, config?: SimConfig): void {
@@ -89,12 +81,6 @@ export class SimstanceManager {
             return this.resolve<any>(token)
         })
         const r = new target(...injections)
-        // if (r instanceof Module) {
-        //     return this.proxy(r, Module);
-        // } else if (r instanceof Router) {
-        //     return this.proxy(r, Router);
-        // } else {
-        // }
         return this.proxy(r, Module);
     }
 

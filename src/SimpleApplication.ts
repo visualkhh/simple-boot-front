@@ -9,10 +9,12 @@ import {Module} from './module/Module'
 import {fromEvent} from 'rxjs';
 import {FunctionUtils} from './util/function/FunctionUtils';
 import {LocationUtils} from './util/window/LocationUtils';
+
 export class SimpleApplication {
-    constructor(public rootRouter: ConstructorType<Router>) {
+    constructor(public rootRouter: ConstructorType<Router>, public selector = 'app') {
         intentManager.init();
         simstanceManager.init();
+        Renderer.init(selector);
     }
 
     public async run(): Promise<SimpleApplication> {
@@ -30,7 +32,7 @@ export class SimpleApplication {
         const executeModule = simstanceManager.getOrNewSim(this.rootRouter)?.getExecuteModule(routers)
         if (executeModule) {
             // console.log('executeRouter-->', routers, executeModule)
-            let lastRouterSelector = 'app';
+            let lastRouterSelector = this.selector;
             routers.forEach(it => {
                 this.renderRouterModule(it.moduleObject, lastRouterSelector);
                 const selctor = it?.moduleObject?.router_outlet_selector || it?.moduleObject?.selector
@@ -39,9 +41,7 @@ export class SimpleApplication {
                 }
             });
             this.render(executeModule, lastRouterSelector);
-            // -
             this.renderd();
-            // -
             (executeModule as any)._onInitedChild();
             routers.reverse().forEach(it => (it.moduleObject as any)?._onInitedChild());
         } else {
@@ -51,23 +51,25 @@ export class SimpleApplication {
 
     private renderd() {
         const attr = 'router-active-class';
-        document.querySelectorAll<HTMLInputElement>(`[${attr}]`).forEach(it => {
-            const hrefAttr = (it.getAttribute('href') ?? '').replace('#', '')
-            const actives = FunctionUtils.eval<string[]>(it.getAttribute(attr) ?? '[]')
-
+        this.procAttr(attr, (it, value) => {
+            const actives = FunctionUtils.eval<string[]>(value ?? '[]')
             if (!actives) return;
-
+            const hrefAttr = (it.getAttribute('href') ?? '').replace('#', '')
             if (hrefAttr === LocationUtils.hash()) {
                 it.classList.add(...actives)
-                // DomUtils.setAttribute(it, actives);
             } else {
                 it.classList.remove(...actives)
-                // DomUtils.removeAttribute(it, actives);
             }
         })
     }
 
-    public renderRouterModule(module: Module | undefined, targetSelector = 'app'): boolean {
+    procAttr(attrName: string, f: (h: HTMLElement, value: string | null) => void) {
+        document.querySelectorAll<HTMLElement>(`[${attrName}]`).forEach(it => {
+            f(it, it.getAttribute(attrName));
+        });
+    }
+
+    public renderRouterModule(module: Module | undefined, targetSelector = this.selector): boolean {
         if (module && !module.exist()) {
             (module as any)._onInit()
             module.renderWrap(targetSelector);

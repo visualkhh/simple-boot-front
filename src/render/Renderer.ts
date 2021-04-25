@@ -4,6 +4,10 @@ import Handlebars from 'handlebars'
 export const Renderer = new class {
     public selector = 'app';
 
+    init(rootSelector: string) {
+        this.selector = rootSelector;
+    }
+
     public renderString(template: string, obj: any): string {
         return Handlebars.compile(template)(obj);
     }
