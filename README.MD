@@ -8,7 +8,7 @@ Single Page Application Framworks
 * Provide a radically faster and widely accessible getting started experience for all front end.
 
 ## Function
-* Hot apply
+* Hot apply!
 * Auto injection
 * Partial reloading
 
