@@ -4,8 +4,8 @@ import {Module} from "simple-boot-front/module/Module";
 import {ViewService} from "simple-boot-front/service/view/ViewService";
 import {RandomUtils} from "simple-boot-front/util/random/RandomUtils";
 import {View} from "simple-boot-front/service/view/View";
-import {Navigation} from "simple-boot-front/service/Navigation";
 import {Renderer} from "simple-boot-front/render/Renderer";
+import {SimstanceManager} from "simple-boot-front/simstance/SimstanceManager";
 
 @Sim()
 export class Index extends Module {
@@ -23,8 +23,9 @@ export class Index extends Module {
         template = "<ul>{{#each datas as |data i|}}<li>{{data}}</li>{{/each}}</ul>";
     }();
 
-    constructor(public v: ViewService) {
+    constructor(public v: ViewService, public manager: SimstanceManager) {
         super("index");
+        console.log('------------->', v, manager)
     }
 
     onInit() {}

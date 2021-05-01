@@ -30,7 +30,7 @@ npm install simple-boot-front
 * Here is a quick teaser of a complete simple-boot-front application in typescript
   * index.ts
     ```typescript
-    new SimpleApplication({selector: 'app', urlType: UrlType.path}).run(AppRouter)
+    new SimpleApplication({selector: 'app', urlType: UrlType.path, rootRouter: AppRouter}).run();
     ```
     
   * index.html

@@ -10,7 +10,7 @@ export interface SimConfig {
 export const Sim = (config?: SimConfig): GenericClassDecorator<ConstructorType<any>> => {
     return (target: ConstructorType<any>) => {
         SimGlobal.storage.set(target, config)
-        // console.log('simdecorator->', SimGlobal.application, target)
+        // console.log('simdecorator->', target)
         // SimGlobal.application?.simstanceManager?.register(target, config)
     }
 }

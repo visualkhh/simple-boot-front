@@ -5,25 +5,24 @@ import {SimProxyHandler} from '../proxy/SimProxyHandler'
 import {Module} from '../module/Module'
 import {getPostConstruct, SimConfig} from '../decorators/SimDecorator';
 import {Renderer} from '../render/Renderer';
-import {IntentManager} from '../intent/IntentManager';
 import {SimOption} from '../option/SimOption';
 import {Runnable} from '../run/Runnable';
 import {SimGlobal} from '../global/SimGlobal';
 
 export class SimstanceManager implements Runnable {
-    private _storege = new Map<ConstructorType<any>, any>()
+    private _storage = new Map<ConstructorType<any>, any>()
     private _configStorege = new Map<ConstructorType<any>, SimConfig | undefined>()
     private _simProxyHandler: SimProxyHandler;
     constructor(option: SimOption) {
-        this._storege.set(SimstanceManager, this);
+        this._storage.set(SimstanceManager, this);
+        this._storage.set(SimOption, option);
         const renderer = new Renderer(option);
-        this._storege.set(SimOption, option);
-        this._storege.set(Renderer, renderer);
+        this._storage.set(Renderer, renderer);
         this._simProxyHandler = new SimProxyHandler(this, renderer);
     }
 
-    get storege(): Map<ConstructorType<any>, any> {
-        return this._storege
+    get storage(): Map<ConstructorType<any>, any> {
+        return this._storage
     }
 
     get configStorege(): Map<ConstructorType<any>, SimConfig | undefined> {
@@ -32,7 +31,7 @@ export class SimstanceManager implements Runnable {
 
     getOrNewSim<T>(k?: ConstructorType<T>): T | undefined {
         if (k) {
-            let newVar = this.storege.get(k)
+            let newVar = this.storage.get(k)
             if (!newVar) {
                 newVar = this.resolve(k)
             }
@@ -43,7 +42,7 @@ export class SimstanceManager implements Runnable {
     getOrNewSims<T>(k: ConstructorType<T>): T[] {
         const list = new Array<T>(0);
 
-        this.storege.forEach((value, key, mapObject) => {
+        this.storage.forEach((value, key, mapObject) => {
             let sw = false;
             if (value && value instanceof k) {
                 sw = true;
@@ -62,22 +61,22 @@ export class SimstanceManager implements Runnable {
     }
 
     register(target: ConstructorType<any>, config?: SimConfig): void {
-        const registed = this._storege.get(target)
+        const registed = this._storage.get(target)
         if (!registed) {
-            this._storege.set(target, undefined)
+            this._storage.set(target, undefined)
             this._configStorege.set(target, config)
         }
     }
 
     resolve<T>(target: ConstructorType<any>): T {
-        const registed = this._storege.get(target)
+        const registed = this._storage.get(target)
         if (registed) {
             return registed as T
         }
 
-        if (this._storege.has(target) && undefined === registed) {
+        if (this._storage.has(target) && undefined === registed) {
             const r = this.newSime(target)
-            this._storege.set(target, r)
+            this._storage.set(target, r)
             return r
         }
         throw new NoSuchSim('no simple instance')
@@ -126,5 +125,6 @@ export class SimstanceManager implements Runnable {
         SimGlobal.storage.forEach((data, key, map) => {
             this.register(key, data);
         })
+        // console.log('---', this._storage)
     }
 }

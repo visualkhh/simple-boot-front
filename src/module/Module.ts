@@ -5,15 +5,16 @@ import {LifeCycle} from '../module/LifeCycle'
 import {fromEvent} from 'rxjs';
 import {View} from '../service/view/View'
 import {RandomUtils} from '../util/random/RandomUtils'
-import {SimBase} from './SimBase';
+import {SimBase} from '../base/SimBase';
 import {FunctionUtils} from '../util/function/FunctionUtils';
 import {Intent} from '../intent/Intent';
 import {SimGlobal} from '../global/SimGlobal';
 import {Navigation} from '../service/Navigation';
 
 export class Module extends SimBase implements LifeCycle {
-    public router_outlet_selector: string | undefined
-    public styleImports: string[] | undefined
+    public router_outlet_selector: string | undefined;
+    private router_outlet_id: string | undefined;
+    public styleImports: string[] | undefined;
 
     // @Injection(Renderer)
     // public renderer: any;
@@ -21,13 +22,15 @@ export class Module extends SimBase implements LifeCycle {
     // @Injection(Renderer)
     // private visual = undefined;
     // private renderer: Renderer|undefined;
+    public id: string;
 
     constructor(public selector = '', public template = '{{value}}', public wrapElement = 'div',
                 private _renderer = SimGlobal.application?.simstanceManager.getOrNewSim(Renderer),
                 private _navigation = SimGlobal.application?.simstanceManager.getOrNewSim(Navigation)
     ) {
         super();
-        this.selector = `___Module___${this.selector}_${RandomUtils.uuid()}`
+        this.id = `___Module___${this.selector}_${RandomUtils.uuid()}`
+        this.selector = `#${this.id}`
     }
 
     // @PostConstruct()
@@ -54,7 +57,7 @@ export class Module extends SimBase implements LifeCycle {
         thisAny[name] = value;
     }
 
-    private setEvent(endFix: string, rootElement = document.querySelector(`#${this.selector}`)) {
+    private setEvent(endFix: string, rootElement = document.querySelector(this.selector)) {
         if (!rootElement) return
         const attr = 'module-event-' + endFix
         this.procAttr<HTMLInputElement>(rootElement, attr, (it, attribute) => {
@@ -71,7 +74,7 @@ export class Module extends SimBase implements LifeCycle {
         })
     }
 
-    private setIntentEvent(endFix: string, rootElement = document.querySelector(`#${this.selector}`)) {
+    private setIntentEvent(endFix: string, rootElement = document.querySelector(this.selector)) {
         if (!rootElement) return
         const attr = 'module-event-' + endFix + '-intent-publish'
         this.procAttr(rootElement, attr, (it, attr) => {
@@ -93,7 +96,7 @@ export class Module extends SimBase implements LifeCycle {
         })
     }
 
-    public findChildAttributeElements<E extends Element>(attr: string, rootElement = document.querySelector(`#${this.selector}`)) {
+    public findChildAttributeElements<E extends Element>(attr: string, rootElement = document.querySelector(this.selector)) {
         if (!rootElement) return
         return rootElement.querySelectorAll<E>(`[${attr}]`)
     }
@@ -104,14 +107,15 @@ export class Module extends SimBase implements LifeCycle {
 
     private _onInit() {
         if (this.template.search('\\[router-outlet\\]')) {
-            this.router_outlet_selector = `___Module___router-outlet_${this.selector}_${RandomUtils.uuid()}`
-            this.template = this.template.replace('[router-outlet]', ` id='${this.router_outlet_selector}' `)
+            this.router_outlet_id = `___Module___router-outlet_${this.id}_${RandomUtils.uuid()}`
+            this.router_outlet_selector = `#${this.router_outlet_id}`
+            this.template = this.template.replace('[router-outlet]', ` id='${this.router_outlet_id}' `)
         }
         this.onInit()
     }
 
     private _onChangedRender() {
-        const rootElement = document.querySelector(`#${this.selector}`)
+        const rootElement = document.querySelector(this.selector)
         this.addEvent(rootElement)
         this.addBind(rootElement)
         this.addRout(rootElement)
@@ -247,7 +251,7 @@ export class Module extends SimBase implements LifeCycle {
         const join = this.styleImports?.map(it => {
             // eslint-disable-next-line prefer-regex-literals
             const regExp = new RegExp('\\/\\*\\[module\\-selector\\]\\*\\/', 'gi') // 생성자
-            return it.replace(regExp, '#' + selector + ' ')
+            return it.replace(regExp, selector + ' ')
         }).join(' ')
         this._renderer?.prependStyle(selector, join)
     }
@@ -259,7 +263,7 @@ export class Module extends SimBase implements LifeCycle {
     }
 
     public renderWrapString(): string {
-        return `<${this.wrapElement} id="${this.selector}">${Handlebars.compile(this.template)(this)}</${this.wrapElement}>`
+        return `<${this.wrapElement} id="${this.id}">${Handlebars.compile(this.template)(this)}</${this.wrapElement}>`
     }
 
     public exist(): boolean {

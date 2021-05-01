@@ -11,7 +11,7 @@ export class Renderer {
     }
 
     public render(module: Module | string) {
-        const targetElement = document.querySelector(`#${this.option.selector}`)
+        const targetElement = document.querySelector(this.option.selector)
         if (targetElement && module instanceof Module) {
             targetElement.innerHTML = module.renderString();
             (module as any)._onChangedRender();
@@ -26,7 +26,7 @@ export class Renderer {
     }
 
     public renderTo(selector: string, module: Module | string = this.option.selector) {
-        const targetElement = document.querySelector(`#${selector}`)
+        const targetElement = document.querySelector(selector)
         if (targetElement && module instanceof Module) {
             targetElement.innerHTML = module.renderString();
             (module as any)._onChangedRender();
@@ -37,7 +37,7 @@ export class Renderer {
     }
 
     public prependStyle(selector: string, style: string | undefined) {
-        const targetElement = document.querySelector(`#${selector}`)
+        const targetElement = document.querySelector(selector)
         if (targetElement && style) {
             const htmlStyleElement = document.createElement('style')
             htmlStyleElement.innerHTML = style;
@@ -46,7 +46,7 @@ export class Renderer {
     }
 
     public exist(selector: string): boolean {
-        if (document.querySelector(`#${selector}`)) {
+        if (document.querySelector(selector)) {
             return true;
         } else {
             return false;

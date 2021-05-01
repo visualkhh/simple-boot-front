@@ -17,7 +17,7 @@ export class View<T extends Element> {
         if (typeof this._e === 'string') {
             const selector = this.module?.selector;
             if (selector) {
-                return document.querySelector<T>(`#${selector} ${this._e}`)!;
+                return document.querySelector<T>(`${selector} ${this._e}`)!;
             } else {
                 return document.querySelector<T>(this._e)!;
             }
