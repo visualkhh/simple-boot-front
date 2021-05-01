@@ -8,8 +8,8 @@ import {RandomUtils} from '../util/random/RandomUtils'
 import {SimBase} from './SimBase';
 import {FunctionUtils} from '../util/function/FunctionUtils';
 import {Intent} from '../intent/Intent';
-import {PostConstruct} from '../decorators/SimDecorator';
-import {SimGlobal} from "../global/SimGlobal";
+import {SimGlobal} from '../global/SimGlobal';
+import {Navigation} from '../service/Navigation';
 
 export class Module extends SimBase implements LifeCycle {
     public router_outlet_selector: string | undefined
@@ -22,7 +22,10 @@ export class Module extends SimBase implements LifeCycle {
     // private visual = undefined;
     // private renderer: Renderer|undefined;
 
-    constructor(public selector = '', public template = '{{value}}', public wrapElement = 'div', private renderer = SimGlobal.application?.simstanceManager.getOrNewSim(Renderer)) {
+    constructor(public selector = '', public template = '{{value}}', public wrapElement = 'div',
+                private _renderer = SimGlobal.application?.simstanceManager.getOrNewSim(Renderer),
+                private _navigation = SimGlobal.application?.simstanceManager.getOrNewSim(Navigation)
+    ) {
         super();
         this.selector = `___Module___${this.selector}_${RandomUtils.uuid()}`
     }
@@ -37,19 +40,31 @@ export class Module extends SimBase implements LifeCycle {
         return Handlebars.compile(this.template)(this)
     }
 
+    public getValue<T = any>(name: string, value?: any): T {
+        const thisAny = this as any;
+        let r = thisAny[name];
+        if (typeof r === 'function') {
+            r = r.bind(this);
+        }
+        return r;
+    }
+
+    public setValue(name: string, value?: any) {
+        const thisAny = this as any;
+        thisAny[name] = value;
+    }
+
     private setEvent(endFix: string, rootElement = document.querySelector(`#${this.selector}`)) {
         if (!rootElement) return
         const attr = 'module-event-' + endFix
-        rootElement.querySelectorAll<HTMLInputElement>(`[${attr}]`).forEach(it => {
-            const attribute = it.getAttribute(attr)
-            const newVar = this as any
-            if (attribute && newVar[attribute]) {
+        this.procAttr<HTMLInputElement>(rootElement, attr, (it, attribute) => {
+            if (attribute && this.getValue(attribute)) {
                 fromEvent<Event>(it, endFix).subscribe(eit => {
                     const view = new View(eit.target! as Element)
-                    if (typeof newVar[attribute] === 'function') {
-                        newVar[attribute](eit, view)
+                    if (typeof this.getValue(attribute) === 'function') {
+                        this.getValue(attribute)(eit, view)
                     } else {
-                        newVar[attribute] = it.value
+                        this.setValue(attribute, it.value)
                     }
                 })
             }
@@ -59,15 +74,13 @@ export class Module extends SimBase implements LifeCycle {
     private setIntentEvent(endFix: string, rootElement = document.querySelector(`#${this.selector}`)) {
         if (!rootElement) return
         const attr = 'module-event-' + endFix + '-intent-publish'
-        rootElement.querySelectorAll<HTMLInputElement>(`[${attr}]`).forEach(it => {
-            const attribute = FunctionUtils.eval(it.getAttribute(attr))
-            const newVar = this as any
+        this.procAttr(rootElement, attr, (it, attr) => {
+            const attribute = FunctionUtils.eval(attr)
             if (attribute && Array.isArray(attribute)) {
                 fromEvent<Event>(it, endFix).subscribe(eit => {
                     // eit.target
-                    console.log('--->', eit)
                     if (attribute.length === 2) {
-                        let newVarElement = newVar[attribute[1]];
+                        let newVarElement = this.getValue(attribute[1]);
                         if (typeof newVarElement === 'function') {
                             newVarElement = newVarElement();
                         }
@@ -98,9 +111,10 @@ export class Module extends SimBase implements LifeCycle {
     }
 
     private _onChangedRender() {
-        this.addEvent()
-        this.addBind()
-        this.addRout()
+        const rootElement = document.querySelector(`#${this.selector}`)
+        this.addEvent(rootElement)
+        this.addBind(rootElement)
+        this.addRout(rootElement)
         this.onChangedRender()
     }
 
@@ -112,47 +126,69 @@ export class Module extends SimBase implements LifeCycle {
         this.onFinish()
     }
 
-    private addEvent(rootElement = document.querySelector(`#${this.selector}`)) {
+    private addEvent(rootElement: Element | null) {
         if (!rootElement) return
 
         ['click', 'change', 'keyup', 'keydown'].forEach(it => {
             this.setEvent(it, rootElement);
             this.setIntentEvent(it, rootElement);
         });
+
         // value
-        let attr = 'module-value'
-        rootElement.querySelectorAll<HTMLInputElement>(`[${attr}]`).forEach(it => {
-            const attribute = it.getAttribute(attr)
-            const newVar = this as any
-            if (attribute && newVar[attribute]) {
-                if (typeof newVar[attribute] === 'function') {
-                    it.value = newVar[attribute]
+        this.procAttr<HTMLInputElement>(rootElement, 'module-value', (it, attribute) => {
+            if (attribute && this.getValue(attribute)) {
+                if (typeof this.getValue(attribute) === 'function') {
+                    it.value = this.getValue(attribute)()
                 } else {
-                    it.value = newVar[attribute]
+                    it.value = this.getValue(attribute)
                 }
             }
         })
 
         // link
-        attr = 'module-link'
-        rootElement.querySelectorAll<HTMLInputElement>(`[${attr}]`).forEach(it => {
-            const attribute = it.getAttribute(attr)
-            const newVar = this as any
-            if (attribute && newVar[attribute]) {
+        this.procAttr<HTMLInputElement>(rootElement, 'module-link', (it, attribute) => {
+            if (attribute && this.getValue(attribute)) {
                 ['change'].forEach(eit => {
                     fromEvent<Event>(it, eit).subscribe(eit => {
-                        if (typeof newVar[attribute] === 'function') {
-                            newVar[attribute](eit)
+                        if (typeof this.getValue(attribute) === 'function') {
+                            this.getValue(attribute)(eit)
                         } else {
-                            newVar[attribute] = it.value
+                            this.setValue(attribute, it.value)
                         }
                     })
                 })
             }
         })
+
+        // router-link
+        this.procAttr(rootElement, 'router-link', (it, attribute) => {
+            fromEvent<Event>(it, 'click').subscribe(eit => {
+                this._navigation?.go(attribute || '');
+                // if (typeof this.getValue(attribute) === 'function') {
+                //     this.getValue(attribute)(eit)
+                // } else {
+                //     this.setValue(attribute, it.value)
+                // }
+            })
+        })
+        // rootElement.querySelectorAll<HTMLInputElement>(`[${attr}]`).forEach(it => {
+        //     const attribute = it.getAttribute(attr)
+        //     const newVar = this as any
+        //     if (attribute && newVar[attribute]) {
+        //         ['change'].forEach(eit => {
+        //             fromEvent<Event>(it, eit).subscribe(eit => {
+        //                 if (typeof newVar[attribute] === 'function') {
+        //                     newVar[attribute](eit)
+        //                 } else {
+        //                     newVar[attribute] = it.value
+        //                 }
+        //             })
+        //         })
+        //     }
+        // })
     }
 
-    private addBind(rootElement = document.querySelector(`#${this.selector}`)) {
+    private addBind(rootElement: Element | null) {
         // if (!rootElement) return
         // const attr = 'module-bind'
         // rootElement.querySelectorAll<HTMLInputElement>(`[${attr}]`).forEach(it => {
@@ -164,7 +200,7 @@ export class Module extends SimBase implements LifeCycle {
         // })
     }
 
-    private addRout(rootElement = document.querySelector(`#${this.selector}`)) {
+    private addRout(rootElement: Element | null) {
         // if (!rootElement) return
         // const attr = 'router-active-class';
         // rootElement.querySelectorAll<HTMLInputElement>(`[${attr}]`).forEach(it => {
@@ -193,14 +229,18 @@ export class Module extends SimBase implements LifeCycle {
     }
 
     public render(selector = this.selector) {
-        this.renderer?.renderTo(selector, this)
-        this.transStyle(this.selector)
+        this._renderer?.renderTo(selector, this)
+        this.renderd(this.selector)
     }
 
     public renderWrap(selector = this.selector) {
-        this.renderer?.renderTo(selector, this.renderWrapString())
+        this._renderer?.renderTo(selector, this.renderWrapString())
         this._onChangedRender()
-        this.transStyle(this.selector)
+        this.renderd(this.selector)
+    }
+
+    public renderd(selector: string) {
+        this.transStyle(selector);
     }
 
     public transStyle(selector: string): void {
@@ -209,7 +249,13 @@ export class Module extends SimBase implements LifeCycle {
             const regExp = new RegExp('\\/\\*\\[module\\-selector\\]\\*\\/', 'gi') // 생성자
             return it.replace(regExp, '#' + selector + ' ')
         }).join(' ')
-        this.renderer?.prependStyle(selector, join)
+        this._renderer?.prependStyle(selector, join)
+    }
+
+    procAttr<T extends HTMLElement>(element: Element | null, attrName: string, f: (h: T, value: string | null) => void) {
+        element?.querySelectorAll<T>(`[${attrName}]`).forEach(it => {
+            f(it, it.getAttribute(attrName));
+        });
     }
 
     public renderWrapString(): string {
@@ -217,7 +263,7 @@ export class Module extends SimBase implements LifeCycle {
     }
 
     public exist(): boolean {
-        return this.renderer?.exist(this.selector) || false
+        return this._renderer?.exist(this.selector) || false
     }
 
     public toString(): string {

@@ -101,3 +101,8 @@ body {
 
 a { color: inherit; }
 a:hover { color: inherit; }
+
+.pointer {
+  cursor: pointer;
+}
+/*.pointer:hover { color: cadetblue; }*/

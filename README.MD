@@ -30,7 +30,7 @@ npm install simple-boot-front
 * Here is a quick teaser of a complete simple-boot-front application in typescript
   * index.ts
     ```typescript
-    const app = new SimpleApplication(AppRouter).run().then(it => {});
+    new SimpleApplication({selector: 'app', urlType: UrlType.path}).run(AppRouter)
     ```
     
   * index.html
@@ -205,6 +205,11 @@ export class AppInfo extends Module {
        - value: add and remove class name
        - ```html
           <a href="#ajax" router-active-class="['active']">Ajax</a>
+         ```
+     - **router-link**:
+       - value: router link
+       - ```html
+          <a router-link="ajax">Ajax</a>
          ```
      - **module-event-{{eventName}}-intent-publish**: intent publish 
        - value: ['uri', 'variablename'] or ['uri']

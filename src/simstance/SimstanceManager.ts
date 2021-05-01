@@ -19,7 +19,6 @@ export class SimstanceManager implements Runnable {
         const renderer = new Renderer(option);
         this._storege.set(SimOption, option);
         this._storege.set(Renderer, renderer);
-        this._storege.set(IntentManager, new IntentManager());
         this._simProxyHandler = new SimProxyHandler(this, renderer);
     }
 

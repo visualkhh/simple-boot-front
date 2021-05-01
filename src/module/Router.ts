@@ -3,18 +3,22 @@ import {ConstructorType} from '../types/Types'
 import {LocationUtils} from '../util/window/LocationUtils'
 import {SimBase} from './SimBase';
 import {SimGlobal} from '../global/SimGlobal';
+import {Renderer} from '../render/Renderer';
+import {Navigation} from '../service/Navigation';
 
 export interface Routers {
     [name: string]: ConstructorType<any> | any
 }
 
 export class Router extends SimBase implements Routers {
-    constructor(public path: string, public module?: ConstructorType<Module>, public childs: ConstructorType<Router>[] = []) {
+    constructor(public path: string, public module?: ConstructorType<Module>, public childs: ConstructorType<Router>[] = [],
+                private _renderer = SimGlobal.application?.simstanceManager.getOrNewSim(Renderer)!,
+                private _navigation = SimGlobal.application?.simstanceManager.getOrNewSim(Navigation)!) {
         super()
     }
 
     getExecuteModule(parentRouters: Router[]): Module | undefined {
-        const path = LocationUtils.hash();
+        const path = this._navigation.url;
         const routerStrings = parentRouters.map(it => it.path || '')
         const isRoot = this.isRootUrl(routerStrings, path)
         // console.log('getExecuteModule -> ', isRoot, parentRouters, routerStrings, path, this.path);

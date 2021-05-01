@@ -23,7 +23,6 @@ export class Views extends Module {
 
     click() {
         this.data = 'data:' + Math.floor(RandomUtils.random(0, 100))
-        console.log('----->', this.a.value);
     }
 
 }

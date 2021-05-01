@@ -23,7 +23,7 @@ export class Index extends Module {
         template = "<ul>{{#each datas as |data i|}}<li>{{data}}</li>{{/each}}</ul>";
     }();
 
-    constructor(public v: ViewService, public navigation: Navigation) {
+    constructor(public v: ViewService) {
         super("index");
     }
 

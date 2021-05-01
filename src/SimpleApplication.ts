@@ -10,19 +10,24 @@ import {SimOption, UrlType} from './option/SimOption';
 import {SimstanceManager} from './simstance/SimstanceManager';
 import {SimGlobal} from './global/SimGlobal';
 import {Runnable} from './run/Runnable';
+import {IntentManager} from './intent/IntentManager';
+import {Navigation} from './service/Navigation';
 
 export class SimpleApplication implements Runnable {
-    private simstanceManager: SimstanceManager;
+    public simstanceManager: SimstanceManager;
+    public intentManager: IntentManager;
     private rootRouter: ConstructorType<Router> | undefined;
     private option: SimOption;
     constructor(_option = new SimOption()) {
-        this.option = Object.assign(_option, new SimOption())
+        this.option = Object.assign(new SimOption(), _option)
         this.simstanceManager = new SimstanceManager(this.option);
+        this.intentManager = new IntentManager();
         SimGlobal.application = this;
     }
 
     public run(rootRouter: ConstructorType<Router>) {
         this.simstanceManager.run();
+        this.intentManager.run(this.simstanceManager);
         this.rootRouter = rootRouter;
         this.startRouting()
     }
@@ -37,10 +42,9 @@ export class SimpleApplication implements Runnable {
         // fromEvent<any>(window, 'locationchange').subscribe((_) => {
         //     console.log('-->')
         // })
-
-        fromEvent<any>(window, 'locationchange').subscribe((_) => {
-            // console.log('-dd---');
-        })
+        // fromEvent<any>(window, 'locationchange').subscribe((_) => {
+        //     console.log('-dd---');
+        // })
         // fromEvent<any>(history, 'pushState').subscribe((_) => {
         //     console.log('-history pushState---');
         // })
@@ -48,30 +52,6 @@ export class SimpleApplication implements Runnable {
             // console.log('--popstate--');
             this.executeRouter()
         })
-        if (UrlType.hash === this.option?.urlType) {
-            // fromEvent<any>(window, 'hashchange').subscribe((_) => {
-            //     console.log('-hashChange---');
-            // })
-        } else if (UrlType.path === this.option?.urlType) {
-            // https://stackoverflow.com/questions/6390341/how-to-detect-if-url-has-changed-after-hash-in-javascript
-            // this.originPushState = history.pushState;
-            // console.log('old->', this.originPushState)
-            // history.pushState = (data: any, title: string, url?: string | null) => {
-            //     console.log(data, title, url, 'old2->', this.originPushState)
-            //     this.originPushState(data, title, url);
-            //     console.log('push stata');
-            // }
-            history.pushState = (f => {
-                return (data: any, title: string, url?: string | null) => {
-                    console.log(data, title, url, 'old2->', f)
-                    f(data, title, url);
-                    window.dispatchEvent(new Event('pushstate'));
-                    window.dispatchEvent(new Event('locationchange'));
-                }
-                // var ret = f.apply(this, arguments);
-                // return f;
-            })(history.pushState);
-        }
         window.dispatchEvent(new Event('popstate'))
     }
 
@@ -100,11 +80,13 @@ export class SimpleApplication implements Runnable {
 
     public renderd() {
         const attr = 'router-active-class';
+        const navigation = this.simstanceManager.getOrNewSim(Navigation);
         this.procAttr(attr, (it, value) => {
             const actives = FunctionUtils.eval<string[]>(value ?? '[]')
             if (!actives) return;
-            const hrefAttr = (it.getAttribute('href') ?? '').replace('#', '')
-            if (hrefAttr === LocationUtils.hash()) {
+            // const hrefAttr = (it.getAttribute('href') ?? '').replace('#', '')
+            const hrefAttr = (it.getAttribute('router-link') ?? '')
+            if (hrefAttr === navigation?.url) {
                 it.classList.add(...actives)
             } else {
                 it.classList.remove(...actives)

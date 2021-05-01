@@ -4,19 +4,22 @@ import {EventType} from '../code/EventType';
 import {filter, map} from 'rxjs/operators';
 import {Intent} from './Intent';
 import {ConstructorType} from '../types/Types';
-import {SimpleApplication} from '../SimpleApplication';
+import {SimstanceManager} from '../simstance/SimstanceManager';
+import {Runnable} from '../run/Runnable';
 
-export class IntentManager {
+export class IntentManager implements Runnable {
+    private simstanceManager?: SimstanceManager;
+
     constructor() {
-        this.init();
     }
 
-    public init() {
+    public run(simstanceManager: SimstanceManager) {
+        this.simstanceManager = simstanceManager;
         fromEvent<CustomEvent<Intent>>(window, EventType.intent).pipe(
             filter(it => it.detail instanceof Intent),
             map(it => it.detail)
         ).subscribe(it => {
-            SimpleApplication.simstanceManager.configStorege.forEach((data, key, map) => {
+            this.simstanceManager?.configStorege.forEach((data, key, map) => {
                 if (it.scheme && it.scheme === data?.scheme) {
                     this.extracted(key, it);
                 } else if (!it.scheme) {
@@ -27,7 +30,7 @@ export class IntentManager {
     }
 
     private extracted(key: ConstructorType<any>, it: Intent) {
-        let orNewSim = SimpleApplication.simstanceManager.getOrNewSim(key) as any;
+        let orNewSim = this.simstanceManager?.getOrNewSim(key) as any;
         if (orNewSim) {
             // console.log('-->', orNewSim, it.paths)
             if (it.paths.length > 1) {
