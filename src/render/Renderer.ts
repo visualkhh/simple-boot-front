@@ -1,9 +1,9 @@
 import {Module} from '../module/Module'
 import Handlebars from 'handlebars'
-import {SimpleApplication} from '../SimpleApplication';
+import {SimOption} from '../option/SimOption';
 
 export class Renderer {
-    constructor() {
+    constructor(private option: SimOption) {
     }
 
     public renderString(template: string, obj: any): string {
@@ -11,7 +11,7 @@ export class Renderer {
     }
 
     public render(module: Module | string) {
-        const targetElement = document.querySelector(`#${SimpleApplication.option.selector}`)
+        const targetElement = document.querySelector(`#${this.option.selector}`)
         if (targetElement && module instanceof Module) {
             targetElement.innerHTML = module.renderString();
             (module as any)._onChangedRender();
@@ -25,7 +25,7 @@ export class Renderer {
         element.innerHTML = this.renderString(template, data);
     }
 
-    public renderTo(selector: string, module: Module | string) {
+    public renderTo(selector: string, module: Module | string = this.option.selector) {
         const targetElement = document.querySelector(`#${selector}`)
         if (targetElement && module instanceof Module) {
             targetElement.innerHTML = module.renderString();

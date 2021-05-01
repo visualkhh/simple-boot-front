@@ -8,7 +8,8 @@ import {RandomUtils} from '../util/random/RandomUtils'
 import {SimBase} from './SimBase';
 import {FunctionUtils} from '../util/function/FunctionUtils';
 import {Intent} from '../intent/Intent';
-import {SimpleApplication} from '../SimpleApplication';
+import {PostConstruct} from '../decorators/SimDecorator';
+import {SimGlobal} from "../global/SimGlobal";
 
 export class Module extends SimBase implements LifeCycle {
     public router_outlet_selector: string | undefined
@@ -19,11 +20,18 @@ export class Module extends SimBase implements LifeCycle {
 
     // @Injection(Renderer)
     // private visual = undefined;
+    // private renderer: Renderer|undefined;
 
-    constructor(public selector = '', public template = '{{value}}', public wrapElement = 'div', public renderer = SimpleApplication.simstanceManager.getOrNewSim(Renderer)!) {
+    constructor(public selector = '', public template = '{{value}}', public wrapElement = 'div', private renderer = SimGlobal.application?.simstanceManager.getOrNewSim(Renderer)) {
         super();
         this.selector = `___Module___${this.selector}_${RandomUtils.uuid()}`
     }
+
+    // @PostConstruct()
+    // postConstruct(renderer: Renderer) {
+    //     this.renderer = renderer;
+    //     console.log('module renderer ', renderer)
+    // }
 
     public renderString(): string {
         return Handlebars.compile(this.template)(this)
@@ -184,13 +192,13 @@ export class Module extends SimBase implements LifeCycle {
     public onFinish() {
     }
 
-    public render(selector = this.selector || SimpleApplication.option.selector) {
-        this.renderer.renderTo(selector, this)
+    public render(selector = this.selector) {
+        this.renderer?.renderTo(selector, this)
         this.transStyle(this.selector)
     }
 
-    public renderWrap(selector = this.selector || SimpleApplication.option.selector) {
-        this.renderer.renderTo(selector, this.renderWrapString())
+    public renderWrap(selector = this.selector) {
+        this.renderer?.renderTo(selector, this.renderWrapString())
         this._onChangedRender()
         this.transStyle(this.selector)
     }
@@ -201,7 +209,7 @@ export class Module extends SimBase implements LifeCycle {
             const regExp = new RegExp('\\/\\*\\[module\\-selector\\]\\*\\/', 'gi') // 생성자
             return it.replace(regExp, '#' + selector + ' ')
         }).join(' ')
-        this.renderer.prependStyle(selector, join)
+        this.renderer?.prependStyle(selector, join)
     }
 
     public renderWrapString(): string {
@@ -209,7 +217,7 @@ export class Module extends SimBase implements LifeCycle {
     }
 
     public exist(): boolean {
-        return this.renderer.exist(this.selector)
+        return this.renderer?.exist(this.selector) || false
     }
 
     public toString(): string {

@@ -3,17 +3,21 @@ import {ConstructorType} from '../types/Types'
 import {NoSuchSim} from '../throwable/NoSuchSim'
 import {SimProxyHandler} from '../proxy/SimProxyHandler'
 import {Module} from '../module/Module'
-import {SimConfig} from '../decorators/SimDecorator';
+import {getPostConstruct, SimConfig} from '../decorators/SimDecorator';
 import {Renderer} from '../render/Renderer';
 import {IntentManager} from '../intent/IntentManager';
+import {SimOption} from '../option/SimOption';
+import {Runnable} from '../run/Runnable';
+import {SimGlobal} from '../global/SimGlobal';
 
-export class SimstanceManager {
+export class SimstanceManager implements Runnable {
     private _storege = new Map<ConstructorType<any>, any>()
     private _configStorege = new Map<ConstructorType<any>, SimConfig | undefined>()
     private _simProxyHandler: SimProxyHandler;
-    constructor() {
+    constructor(option: SimOption) {
         this._storege.set(SimstanceManager, this);
-        const renderer = new Renderer();
+        const renderer = new Renderer(option);
+        this._storege.set(SimOption, option);
         this._storege.set(Renderer, renderer);
         this._storege.set(IntentManager, new IntentManager());
         this._simProxyHandler = new SimProxyHandler(this, renderer);
@@ -81,12 +85,31 @@ export class SimstanceManager {
     }
 
     public newSime<T>(target: ConstructorType<T>): T {
-        const paramTypes = Reflect.getMetadata('design:paramtypes', target) || []
+        const r = new target(...this.getParameterSim(target))
+        // console.log('newSim-->', r, Object.getOwnPropertyNames(target.prototype))
+        // console.log('newSim--22>', r, Object.getPrototypeOf(target.prototype))
+        const prototypeOf = Object.keys(Object.getPrototypeOf(target.prototype));
+        Object.getOwnPropertyNames(target.prototype).concat(prototypeOf).forEach(it => {
+            const postConstruct = getPostConstruct(r, it);
+            // console.log('------>', it, postConstruct)
+            if (postConstruct) {
+                (r as any)[it](...this.getParameterSim(r, it))
+            }
+        })
+        return this.proxy(r, Module);
+    }
+
+    public getParameterSim(target: Object, targetKey?: string | symbol): any[] {
+        let paramTypes: any[];
+        if (targetKey) {
+            paramTypes = Reflect.getMetadata('design:paramtypes', target, targetKey) || [];
+        } else {
+            paramTypes = Reflect.getMetadata('design:paramtypes', target) || [];
+        }
         const injections = paramTypes.map((token: ConstructorType<any>) => {
             return this.resolve<any>(token)
         })
-        const r = new target(...injections)
-        return this.proxy(r, Module);
+        return injections;
     }
 
     public proxy<T>(target: T, type?: ConstructorType<any>): T {
@@ -98,5 +121,11 @@ export class SimstanceManager {
         } else {
             return target;
         }
+    }
+
+    run() {
+        SimGlobal.storage.forEach((data, key, map) => {
+            this.register(key, data);
+        })
     }
 }

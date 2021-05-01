@@ -127,6 +127,11 @@ npm install simple-boot-front
 * onInitedChild(): module and child module inited event
 * onFinish(): lifecycle finish event
 
+# Decorator
+* @Sim(): Objects managed by the SimpleBootFront framework
+  - parameter: SimConfig  {schema: string}
+* @PostConstruct(): Methods that you run for a separate initialization operation after the object is created
+
 ## Intent event broker 
 ```typescript
 click() {

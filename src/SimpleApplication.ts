@@ -6,21 +6,24 @@ import {Module} from './module/Module'
 import {fromEvent} from 'rxjs';
 import {FunctionUtils} from './util/function/FunctionUtils';
 import {LocationUtils} from './util/window/LocationUtils';
-import {SimOption} from './option/SimOption';
+import {SimOption, UrlType} from './option/SimOption';
 import {SimstanceManager} from './simstance/SimstanceManager';
+import {SimGlobal} from './global/SimGlobal';
+import {Runnable} from './run/Runnable';
 
-export const SimpleApplication = new class {
-    public simstanceManager = new SimstanceManager();
-    // private renderer?: Renderer;
-    // public static instance: SimpleApplication;
-    public rootRouter: ConstructorType<Router> | undefined;
-    public option = new SimOption();
-    constructor() {
+export class SimpleApplication implements Runnable {
+    private simstanceManager: SimstanceManager;
+    private rootRouter: ConstructorType<Router> | undefined;
+    private option: SimOption;
+    constructor(_option = new SimOption()) {
+        this.option = Object.assign(_option, new SimOption())
+        this.simstanceManager = new SimstanceManager(this.option);
+        SimGlobal.application = this;
     }
 
-    public run(rootRouter: ConstructorType<Router>, option = new SimOption()) {
+    public run(rootRouter: ConstructorType<Router>) {
+        this.simstanceManager.run();
         this.rootRouter = rootRouter;
-        this.option = option;
         this.startRouting()
     }
 
@@ -45,11 +48,11 @@ export const SimpleApplication = new class {
             // console.log('--popstate--');
             this.executeRouter()
         })
-        if (this.option?.urlType === 'hash') {
+        if (UrlType.hash === this.option?.urlType) {
             // fromEvent<any>(window, 'hashchange').subscribe((_) => {
             //     console.log('-hashChange---');
             // })
-        } else if (this.option?.urlType === 'path') {
+        } else if (UrlType.path === this.option?.urlType) {
             // https://stackoverflow.com/questions/6390341/how-to-detect-if-url-has-changed-after-hash-in-javascript
             // this.originPushState = history.pushState;
             // console.log('old->', this.originPushState)
@@ -75,6 +78,7 @@ export const SimpleApplication = new class {
     public executeRouter() {
         const routers: Router[] = [];
         const executeModule = this.simstanceManager.getOrNewSim(this.rootRouter)?.getExecuteModule(routers)
+        // const executeModule = this.rootRouter?.getExecuteModule(routers)
         if (executeModule) {
             // console.log('executeRouter-->', routers, executeModule)
             let lastRouterSelector = this.option.selector;
@@ -133,7 +137,4 @@ export const SimpleApplication = new class {
             return false
         }
     }
-}()
-// export const global = {
-//     application: undefined | SimpleApplication
-// }
+}

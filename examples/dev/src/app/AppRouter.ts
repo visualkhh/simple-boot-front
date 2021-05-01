@@ -15,4 +15,9 @@ export class AppRouter extends Router {
     "intent" = Intents;
     "view" = Views;
     "empty" = Empty;
+
+
+    constructor() {
+        super('');
+    }
 }

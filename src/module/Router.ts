@@ -2,7 +2,7 @@ import {Module} from '../module/Module'
 import {ConstructorType} from '../types/Types'
 import {LocationUtils} from '../util/window/LocationUtils'
 import {SimBase} from './SimBase';
-import {SimpleApplication} from '../SimpleApplication';
+import {SimGlobal} from '../global/SimGlobal';
 
 export interface Routers {
     [name: string]: ConstructorType<any> | any
@@ -25,7 +25,7 @@ export class Router extends SimBase implements Routers {
                 return fieldModule;
             } else {
                 for (const child of this.childs) {
-                    const route = SimpleApplication.simstanceManager.getOrNewSim(child)
+                    const route = SimGlobal.application?.simstanceManager.getOrNewSim(child)
                     const executeModule = route?.getExecuteModule(parentRouters)
                     if (route && executeModule) {
                         return executeModule
@@ -37,7 +37,7 @@ export class Router extends SimBase implements Routers {
 
     get moduleObject() {
         if (this.module) {
-            return SimpleApplication.simstanceManager.getOrNewSim(this.module)
+            return SimGlobal.application?.simstanceManager.getOrNewSim(this.module)
         }
     }
 
@@ -55,7 +55,7 @@ export class Router extends SimBase implements Routers {
         const fieldModule = (routers[path] as ConstructorType<any>)
         // console.log('routing path ', this.path, path, fieldModule)
         if (fieldModule) {
-            return SimpleApplication.simstanceManager.getOrNewSim(fieldModule)
+            return SimGlobal.application?.simstanceManager.getOrNewSim(fieldModule)
         }
     }
 }
