@@ -8,12 +8,19 @@ import {RandomUtils} from '../util/random/RandomUtils'
 import {SimBase} from './SimBase';
 import {FunctionUtils} from '../util/function/FunctionUtils';
 import {Intent} from '../intent/Intent';
+import {SimpleApplication} from '../SimpleApplication';
 
 export class Module extends SimBase implements LifeCycle {
     public router_outlet_selector: string | undefined
     public styleImports: string[] | undefined
 
-    constructor(public selector = '', public template = '{{value}}', public wrapElement = 'div') {
+    // @Injection(Renderer)
+    // public renderer: any;
+
+    // @Injection(Renderer)
+    // private visual = undefined;
+
+    constructor(public selector = '', public template = '{{value}}', public wrapElement = 'div', public renderer = SimpleApplication.simstanceManager.getOrNewSim(Renderer)!) {
         super();
         this.selector = `___Module___${this.selector}_${RandomUtils.uuid()}`
     }
@@ -177,13 +184,13 @@ export class Module extends SimBase implements LifeCycle {
     public onFinish() {
     }
 
-    public render(selector = this.selector || Renderer.selector) {
-        Renderer.renderTo(selector, this)
+    public render(selector = this.selector || SimpleApplication.option.selector) {
+        this.renderer.renderTo(selector, this)
         this.transStyle(this.selector)
     }
 
-    public renderWrap(selector = this.selector || Renderer.selector) {
-        Renderer.renderTo(selector, this.renderWrapString())
+    public renderWrap(selector = this.selector || SimpleApplication.option.selector) {
+        this.renderer.renderTo(selector, this.renderWrapString())
         this._onChangedRender()
         this.transStyle(this.selector)
     }
@@ -194,7 +201,7 @@ export class Module extends SimBase implements LifeCycle {
             const regExp = new RegExp('\\/\\*\\[module\\-selector\\]\\*\\/', 'gi') // 생성자
             return it.replace(regExp, '#' + selector + ' ')
         }).join(' ')
-        Renderer.prependStyle(selector, join)
+        this.renderer.prependStyle(selector, join)
     }
 
     public renderWrapString(): string {
@@ -202,7 +209,7 @@ export class Module extends SimBase implements LifeCycle {
     }
 
     public exist(): boolean {
-        return Renderer.exist(this.selector)
+        return this.renderer.exist(this.selector)
     }
 
     public toString(): string {

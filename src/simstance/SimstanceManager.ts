@@ -1,19 +1,22 @@
 import 'reflect-metadata'
 import {ConstructorType} from '../types/Types'
 import {NoSuchSim} from '../throwable/NoSuchSim'
-import {SimProxyMethodHandler} from '../proxy/SimProxyMethodHandler'
+import {SimProxyHandler} from '../proxy/SimProxyHandler'
 import {Module} from '../module/Module'
 import {SimConfig} from '../decorators/SimDecorator';
+import {Renderer} from '../render/Renderer';
+import {IntentManager} from '../intent/IntentManager';
 
 export class SimstanceManager {
     private _storege = new Map<ConstructorType<any>, any>()
     private _configStorege = new Map<ConstructorType<any>, SimConfig | undefined>()
-
+    private _simProxyHandler: SimProxyHandler;
     constructor() {
-    }
-
-    public init() {
         this._storege.set(SimstanceManager, this);
+        const renderer = new Renderer();
+        this._storege.set(Renderer, renderer);
+        this._storege.set(IntentManager, new IntentManager());
+        this._simProxyHandler = new SimProxyHandler(this, renderer);
     }
 
     get storege(): Map<ConstructorType<any>, any> {
@@ -24,12 +27,14 @@ export class SimstanceManager {
         return this._configStorege;
     }
 
-    getOrNewSim<T>(k: ConstructorType<T>): T {
-        let newVar = this.storege.get(k)
-        if (!newVar) {
-            newVar = this.resolve(k)
+    getOrNewSim<T>(k?: ConstructorType<T>): T | undefined {
+        if (k) {
+            let newVar = this.storege.get(k)
+            if (!newVar) {
+                newVar = this.resolve(k)
+            }
+            return newVar
         }
-        return newVar
     }
 
     getOrNewSims<T>(k: ConstructorType<T>): T[] {
@@ -89,10 +94,9 @@ export class SimstanceManager {
             for (const key in target) {
                 target[key] = this.proxy(target[key], type);
             }
-            return new Proxy(target, new SimProxyMethodHandler())
+            return new Proxy(target, this._simProxyHandler);
         } else {
             return target;
         }
     }
 }
-export const simstanceManager = new SimstanceManager();

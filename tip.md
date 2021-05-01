@@ -43,6 +43,7 @@ tip
 
 - typescript
     - decorator
+        - https://blog.logrocket.com/a-practical-guide-to-typescript-decorators/
         - https://haeguri.github.io/2019/08/25/typescript-decorator/
         - https://www.typescriptlang.org/docs/handbook/decorators.html
     - reflection

@@ -1,15 +1,18 @@
 import {Module} from '../module/Module'
-import {simstanceManager} from '../simstance/SimstanceManager'
+import {SimstanceManager} from '../simstance/SimstanceManager'
 import {ConstructorType} from '../types/Types'
 import {Renderer} from '../render/Renderer'
 
-export class SimProxyMethodHandler implements ProxyHandler<any> {
+export class SimProxyHandler implements ProxyHandler<any> {
+    constructor(private simstanceManager: SimstanceManager, private renderer: Renderer) {
+    }
+
     public get(target: any, name: string): any {
         return target[name]
     }
 
     public set(obj: any, prop: string, value: any): boolean {
-        value = simstanceManager.proxy(value, Module)
+        value = this.simstanceManager.proxy(value, Module)
 
         obj[prop] = value
         /*
@@ -28,7 +31,7 @@ export class SimProxyMethodHandler implements ProxyHandler<any> {
                     temp.innerHTML = obj.template;
                     const tempElements = temp.querySelectorAll(`[${targetSelector}]`)
                     elementNodeListOf.forEach((it, key) => {
-                        Renderer.renderInnerHTML(it, tempElements[key].innerHTML, obj);
+                        this.renderer.renderInnerHTML(it, tempElements[key].innerHTML, obj);
                         (obj as any).addEvent(it);
                     });
                     return true;
@@ -37,7 +40,7 @@ export class SimProxyMethodHandler implements ProxyHandler<any> {
             }
 
             try {
-                const sim = simstanceManager.getOrNewSim(obj.constructor as ConstructorType<Module>)
+                const sim = this.simstanceManager.getOrNewSim(obj.constructor as ConstructorType<Module>)
                 if (sim) {
                     sim.render();
                 } else {
