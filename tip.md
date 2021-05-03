@@ -46,6 +46,7 @@ tip
         - https://blog.logrocket.com/a-practical-guide-to-typescript-decorators/
         - https://haeguri.github.io/2019/08/25/typescript-decorator/
         - https://www.typescriptlang.org/docs/handbook/decorators.html
+        - https://typescript-kr.github.io/pages/decorators.html
     - reflection
         - http://blog.wolksoftware.com/decorators-metadata-reflection-in-typescript-from-novice-to-expert-part-4
         - metadata

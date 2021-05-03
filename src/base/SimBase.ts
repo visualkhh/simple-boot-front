@@ -1,14 +1,13 @@
 import {IntentEvent} from '../intent/IntentEvent';
 import {Intent} from '../intent/Intent';
-import {EventType} from '../code/EventType';
+import {SimGlobal} from '../global/SimGlobal';
 
 export abstract class SimBase implements IntentEvent {
-
     constructor() {
     }
 
     publish(intent: Intent): void {
-        window.dispatchEvent(new CustomEvent(EventType.intent, {detail: intent}));
+        SimGlobal?.application?.intentManager.publish(intent)
     }
 
     subscribe(intent: Intent): void {

@@ -40,7 +40,7 @@ export class RouterManager implements Runnable {
                     lastRouterSelector = selctor;
                 }
             });
-            console.log('-----', lastRouterSelector)
+            // console.log('-----', lastRouterSelector)
             this.render(executeModule, lastRouterSelector);
             this.renderd();
             (executeModule as any)._onInitedChild();

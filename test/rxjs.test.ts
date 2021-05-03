@@ -29,6 +29,47 @@ describe('Test', () => {
         done()
     })
 })
+
+
+
+describe('Decorator', () => {
+    test('decorator test', async (done) => {
+
+        function reportableClassDecorator<T extends { new (...args: any[]): {} }>(constructor: T) {
+            return class extends constructor {
+                reportingURL = "http://www...";
+            };
+        }
+
+        @reportableClassDecorator
+        class BugReport {
+            type = "report";
+            title: string;
+
+            constructor(t: string) {
+                this.title = t;
+            }
+        }
+
+        const bug = new BugReport("Needs dark mode");
+        console.log(bug.title); // Prints "Needs dark mode"
+        console.log(bug.type); // Prints "report"
+
+// Note that the decorator _does not_ change the TypeScript type
+// and so the new property `reportingURL` is not known
+// to the type system:
+        console.log((bug as any).reportingURL);
+
+        expect(200).toBe(200)
+        done()
+    })
+})
+
+
+
+
+
+
 // test('did not rain', () => {
 //     const index = new Index()
 //     console.log(index)

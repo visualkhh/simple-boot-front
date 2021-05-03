@@ -10,8 +10,8 @@ import {RouterManager} from './router/RouterManager';
 export class SimpleApplication implements Runnable {
     public simstanceManager: SimstanceManager;
     public intentManager: IntentManager;
+    public routerManager: RouterManager;
     private option: SimOption;
-    private routerManager: RouterManager;
     constructor(_option = new SimOption()) {
         this.option = Object.assign(new SimOption(), _option)
         this.simstanceManager = new SimstanceManager(this.option);

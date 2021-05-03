@@ -8,11 +8,13 @@ import {Renderer} from '../render/Renderer';
 import {SimOption} from '../option/SimOption';
 import {Runnable} from '../run/Runnable';
 import {SimGlobal} from '../global/SimGlobal';
+import {ObjectUtils} from '../util/object/ObjectUtils';
+import {SimstanceAtomic} from './SimstanceAtomic';
 
 export class SimstanceManager implements Runnable {
     private _storage = new Map<ConstructorType<any>, any>()
-    private _configStorege = new Map<ConstructorType<any>, SimConfig | undefined>()
     private _simProxyHandler: SimProxyHandler;
+
     constructor(option: SimOption) {
         this._storage.set(SimstanceManager, this);
         this._storage.set(SimOption, option);
@@ -25,8 +27,14 @@ export class SimstanceManager implements Runnable {
         return this._storage
     }
 
-    get configStorege(): Map<ConstructorType<any>, SimConfig | undefined> {
-        return this._configStorege;
+    getSimConfig(scheme: string | undefined): SimstanceAtomic<any>[] {
+        if (scheme) {
+            return Array.from(this._storage.keys()).map(it => new SimstanceAtomic(it)).filter(it => {
+                return it && scheme === it?.config?.scheme;
+            }) || [];
+        } else {
+            return [];
+        }
     }
 
     getOrNewSim<T>(k?: ConstructorType<T>): T | undefined {
@@ -61,10 +69,8 @@ export class SimstanceManager implements Runnable {
     }
 
     register(target: ConstructorType<any>, config?: SimConfig): void {
-        const registed = this._storage.get(target)
-        if (!registed) {
+        if (!this._storage.has(target)) {
             this._storage.set(target, undefined)
-            this._configStorege.set(target, config)
         }
     }
 
@@ -84,10 +90,20 @@ export class SimstanceManager implements Runnable {
 
     public newSime<T>(target: ConstructorType<T>): T {
         const r = new target(...this.getParameterSim(target))
+
+        // console.log('newSim-->', r, this.getAllProtoTypeName(r))
         // console.log('newSim-->', r, Object.getOwnPropertyNames(target.prototype))
-        // console.log('newSim--22>', r, Object.getPrototypeOf(target.prototype))
-        const prototypeOf = Object.keys(Object.getPrototypeOf(target.prototype));
-        Object.getOwnPropertyNames(target.prototype).concat(prototypeOf).forEach(it => {
+        // console.log('newSim--11>', Object.keys(Object.getPrototypeOf(target)))
+        // // console.log('newSim--11>', Object.getPrototypeOf(target))
+        // console.log('newSim--22>', Object.keys(Object.getPrototypeOf(target.prototype)))
+        // console.log('newSim--33>', Object.getPrototypeOf(Object.getPrototypeOf(target.prototype)))
+        // if (target.prototype?.prototype) {
+        //     console.log('newSim--33>', r, Object.getPrototypeOf(target.prototype.prototype))
+        // }
+        // const prototypeOf = Object.keys(Object.getPrototypeOf(target.prototype));
+        const set = new Set(ObjectUtils.getAllProtoTypeName(r));
+        // console.log('------>', r, set)
+        set.forEach(it => {
             const postConstruct = getPostConstruct(r, it);
             // console.log('------>', it, postConstruct)
             if (postConstruct) {

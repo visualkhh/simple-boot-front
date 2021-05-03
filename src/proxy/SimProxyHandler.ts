@@ -2,6 +2,7 @@ import {Module} from '../module/Module'
 import {SimstanceManager} from '../simstance/SimstanceManager'
 import {ConstructorType} from '../types/Types'
 import {Renderer} from '../render/Renderer'
+import {getAfter, getSim} from '../decorators/SimDecorator';
 
 export class SimProxyHandler implements ProxyHandler<any> {
     constructor(private simstanceManager: SimstanceManager, private renderer: Renderer) {
@@ -21,6 +22,11 @@ export class SimProxyHandler implements ProxyHandler<any> {
         } else if
          */
         if (obj instanceof Module) {
+            // const type = Reflect.getMetadata('design:type', obj);
+            // obj.
+            // Object.get
+            // console.log('------>', obj, getSim(obj));
+            // console.log('------>', obj, getSim(Object.getPrototypeOf(obj)))
             try {
                 // 격리변수들.. 부분 갱신만 우선시한다.
                 // let i = 0;

@@ -1,21 +1,68 @@
 import {ConstructorType, GenericClassDecorator} from '../types/Types'
-import {SimpleApplication} from '../SimpleApplication';
 import 'reflect-metadata';
 import {SimGlobal} from '../global/SimGlobal';
+
+const SimMetadataKey = Symbol('Sim');
 
 export interface SimConfig {
     scheme: string,
 }
 
 export const Sim = (config?: SimConfig): GenericClassDecorator<ConstructorType<any>> => {
+    // Reflect.metadata(SimMetadataKey, config);
+    // return (target: ConstructorType<any>) => {
+    //     SimGlobal.storage.set(target, config)
+    // }
     return (target: ConstructorType<any>) => {
-        SimGlobal.storage.set(target, config)
-        // console.log('simdecorator->', target)
-        // SimGlobal.application?.simstanceManager?.register(target, config)
+        Reflect.defineMetadata(SimMetadataKey, config, target);
+        // Reflect.defineMetadata(SimMetadataKey, config, target.prototype);
+        SimGlobal.storage.set(target, config);
+        // return Reflect.metadata(SimMetadataKey, config);
+        // Reflect.metadata(SimMetadataKey, config);
     }
 }
 
-const postConstructMetadataKey = Symbol('PostConstruct');
+export const getSim = (target: ConstructorType<any> | Function | any): SimConfig | undefined => {
+    // console.log('000>>', target, typeof target)
+    if (typeof target === 'object') {
+        target = target.constructor;
+    }
+    try {
+        return Reflect.getMetadata(SimMetadataKey, target);
+        // return Reflect.getMetadata(SimMetadataKey, target.prototype);
+    } catch (e) {
+    }
+}
+
+// export const reportableClafssDecorator = (config?: SimConfig) => <T extends { new (...args: any[]): {} }>(constructor: T) => {
+//     // config;
+//     return class extends constructor {
+//         reportingURL = 'http://www...';
+//     };
+// }
+
+const AfterMetadataKey = Symbol('After');
+const BeforeMetadataKey = Symbol('Before');
+export const After = (data: { type: ConstructorType<any>, target: string }) => {
+    return Reflect.metadata(AfterMetadataKey, data);
+}
+export const getAfter = (target: any, propertyKey: string | undefined = undefined): any => {
+    if (propertyKey) {
+        return Reflect.getMetadata(AfterMetadataKey, target, propertyKey);
+    } else {
+        return Reflect.getMetadata(AfterMetadataKey, target);
+    }
+}
+
+export const Before = (data: { type: ConstructorType<any>, target: string }) => {
+    return Reflect.metadata(BeforeMetadataKey, data);
+}
+export const getBefore = (target: any, propertyKey: string): any => {
+    return Reflect.getMetadata(BeforeMetadataKey, target, propertyKey);
+}
+
+// const postConstructMetadataKey = Symbol('PostConstruct');
+const PostConstructMetadataKey = Symbol('PostConstruct');
 // export const PostConstruct = (data: any = {}) => {
 export const PostConstruct = (data = {}) => {
     // var t = Reflect.getMetadata('design:type', target, key);
@@ -26,7 +73,7 @@ export const PostConstruct = (data = {}) => {
     // console.log(`${key} param types: ${s}`);
     // Reflect.defineMetadata('wow', s, target.constructor)
     // console.log('PostConstruct ', target, propertyKey, descriptor)
-    return Reflect.metadata(postConstructMetadataKey, data);
+    return Reflect.metadata(PostConstructMetadataKey, data);
     // const orNewSim = SimpleApplication.simstanceManager.getOrNewSim(con);
     // Object.defineProperty(target, propertyKey, {value: 11});
     // const targetElement = target[propertyKey];
@@ -34,7 +81,7 @@ export const PostConstruct = (data = {}) => {
     // return Reflect.metadata(formatMetadataKey, con);
 }
 export const getPostConstruct = (target: any, propertyKey: string): any => {
-    return Reflect.getMetadata(postConstructMetadataKey, target, propertyKey);
+    return Reflect.getMetadata(PostConstructMetadataKey, target, propertyKey);
     // return Reflect.getMetadata('wow', target, propertyKey);
 }
 // export const getPostConstruct = (target: any, propertyKey: string): Object => {

@@ -19,12 +19,12 @@ export class IntentManager implements Runnable {
             filter(it => it.detail instanceof Intent),
             map(it => it.detail)
         ).subscribe(it => {
-            this.simstanceManager?.configStorege.forEach((data, key, map) => {
-                if (it.scheme && it.scheme === data?.scheme) {
-                    this.extracted(key, it);
-                } else if (!it.scheme) {
-                    this.extracted(key, it);
-                }
+            this.simstanceManager?.getSimConfig(it.scheme).forEach((data) => {
+                this.extracted(data.type, it);
+                // if (it.scheme && it.scheme === data?.scheme) {
+                // } else if (!it.scheme) {
+                //     this.extracted(key, it);
+                // }
             })
         });
     }
@@ -50,6 +50,10 @@ export class IntentManager implements Runnable {
                 orNewSim?.subscribe?.(it);
             }
         }
+    }
+
+    publish(intent: Intent) {
+        window.dispatchEvent(new CustomEvent(EventType.intent, {detail: intent}));
     }
 }
 

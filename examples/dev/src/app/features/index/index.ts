@@ -1,5 +1,5 @@
 import html from "./index.html";
-import {PostConstruct, Sim} from "simple-boot-front/decorators/SimDecorator";
+import {After, PostConstruct, Sim} from "simple-boot-front/decorators/SimDecorator";
 import {Module} from "simple-boot-front/module/Module";
 import {ViewService} from "simple-boot-front/service/view/ViewService";
 import {RandomUtils} from "simple-boot-front/util/random/RandomUtils";
@@ -7,7 +7,9 @@ import {View} from "simple-boot-front/service/view/View";
 import {Renderer} from "simple-boot-front/render/Renderer";
 import {SimstanceManager} from "simple-boot-front/simstance/SimstanceManager";
 
-@Sim()
+@Sim({scheme: 'index'})
+// @After({type: Index, target: 'aa'})
+// @Reflect.metadata("design:type", Number)
 export class Index extends Module {
     template = html;
 
@@ -25,7 +27,7 @@ export class Index extends Module {
 
     constructor(public v: ViewService, public manager: SimstanceManager) {
         super("index");
-        console.log('------------->', v, manager)
+        // console.log('------------->', v, manager)
     }
 
     onInit() {}
