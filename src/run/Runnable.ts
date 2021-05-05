@@ -1,3 +1,3 @@
 export interface Runnable {
-    run(...data: any): void;
+    run(...data: any): any;
 }

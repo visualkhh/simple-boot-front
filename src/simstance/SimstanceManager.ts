@@ -3,24 +3,25 @@ import {ConstructorType} from '../types/Types'
 import {NoSuchSim} from '../throwable/NoSuchSim'
 import {SimProxyHandler} from '../proxy/SimProxyHandler'
 import {Module} from '../module/Module'
-import {getPostConstruct, SimConfig} from '../decorators/SimDecorator';
-import {Renderer} from '../render/Renderer';
+import {getPostConstruct, PostConstruct} from '../decorators/SimDecorator';
 import {SimOption} from '../option/SimOption';
 import {Runnable} from '../run/Runnable';
 import {SimGlobal} from '../global/SimGlobal';
 import {ObjectUtils} from '../util/object/ObjectUtils';
 import {SimstanceAtomic} from './SimstanceAtomic';
+import {ReflectUtils} from '../util/reflect/ReflectUtils';
 
 export class SimstanceManager implements Runnable {
     private _storage = new Map<ConstructorType<any>, any>()
-    private _simProxyHandler: SimProxyHandler;
+    // private _simProxyHandler: SimProxyHandler;
+    private simProxyHandler: SimProxyHandler | undefined;
 
     constructor(option: SimOption) {
         this._storage.set(SimstanceManager, this);
         this._storage.set(SimOption, option);
-        const renderer = new Renderer(option);
-        this._storage.set(Renderer, renderer);
-        this._simProxyHandler = new SimProxyHandler(this, renderer);
+        // const renderer = new Renderer(option);
+        // this._storage.set(Renderer, renderer);
+        // this._simProxyHandler = new SimProxyHandler(this, renderer);
     }
 
     get storage(): Map<ConstructorType<any>, any> {
@@ -68,7 +69,7 @@ export class SimstanceManager implements Runnable {
         return list;
     }
 
-    register(target: ConstructorType<any>, config?: SimConfig): void {
+    register(target: ConstructorType<any>): void {
         if (!this._storage.has(target)) {
             this._storage.set(target, undefined)
         }
@@ -101,46 +102,51 @@ export class SimstanceManager implements Runnable {
         //     console.log('newSim--33>', r, Object.getPrototypeOf(target.prototype.prototype))
         // }
         // const prototypeOf = Object.keys(Object.getPrototypeOf(target.prototype));
-        const set = new Set(ObjectUtils.getAllProtoTypeName(r));
         // console.log('------>', r, set)
-        set.forEach(it => {
-            const postConstruct = getPostConstruct(r, it);
-            // console.log('------>', it, postConstruct)
-            if (postConstruct) {
-                (r as any)[it](...this.getParameterSim(r, it))
-            }
-        })
+        this.callBindPostConstruct(r);
         return this.proxy(r, Module);
     }
 
+    public callBindPostConstruct(obj: any) {
+        const set = new Set(ObjectUtils.getAllProtoTypeName(obj));
+        set.forEach(it => {
+            const postConstruct = getPostConstruct(obj, it);
+            // console.log('------>', it, postConstruct)
+            if (postConstruct) {
+                (obj as any)[it](...this.getParameterSim(obj, it))
+            }
+        })
+    }
+
     public getParameterSim(target: Object, targetKey?: string | symbol): any[] {
-        let paramTypes: any[];
-        if (targetKey) {
-            paramTypes = Reflect.getMetadata('design:paramtypes', target, targetKey) || [];
-        } else {
-            paramTypes = Reflect.getMetadata('design:paramtypes', target) || [];
-        }
+        const paramTypes = ReflectUtils.getParameterTypes(target, targetKey);
         const injections = paramTypes.map((token: ConstructorType<any>) => {
             return this.resolve<any>(token)
         })
         return injections;
     }
 
+    @PostConstruct()
+    public post(simProxyHandler: SimProxyHandler) {
+        this.simProxyHandler = simProxyHandler;
+    }
+
     public proxy<T>(target: T, type?: ConstructorType<any>): T {
-        if ((type ? target instanceof type : true) && (!('isProxy' in target))) {
+        if (this.simProxyHandler && (type ? target instanceof type : true) && (!('isProxy' in target))) {
             for (const key in target) {
                 target[key] = this.proxy(target[key], type);
             }
-            return new Proxy(target, this._simProxyHandler);
+            return new Proxy(target, this.simProxyHandler);
         } else {
             return target;
         }
     }
 
     run() {
-        SimGlobal.storage.forEach((data, key, map) => {
-            this.register(key, data);
+        SimGlobal.storage.forEach(data => {
+            this.register(data);
         })
+        this.callBindPostConstruct(this);
         // console.log('---', this._storage)
     }
 }

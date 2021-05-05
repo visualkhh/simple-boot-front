@@ -21,10 +21,6 @@ export class IntentManager implements Runnable {
         ).subscribe(it => {
             this.simstanceManager?.getSimConfig(it.scheme).forEach((data) => {
                 this.extracted(data.type, it);
-                // if (it.scheme && it.scheme === data?.scheme) {
-                // } else if (!it.scheme) {
-                //     this.extracted(key, it);
-                // }
             })
         });
     }

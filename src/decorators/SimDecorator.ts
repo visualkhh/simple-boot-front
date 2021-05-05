@@ -1,6 +1,6 @@
 import {ConstructorType, GenericClassDecorator} from '../types/Types'
-import 'reflect-metadata';
 import {SimGlobal} from '../global/SimGlobal';
+import {ReflectUtils} from '../util/reflect/ReflectUtils';
 
 const SimMetadataKey = Symbol('Sim');
 
@@ -14,21 +14,23 @@ export const Sim = (config?: SimConfig): GenericClassDecorator<ConstructorType<a
     //     SimGlobal.storage.set(target, config)
     // }
     return (target: ConstructorType<any>) => {
-        Reflect.defineMetadata(SimMetadataKey, config, target);
+        ReflectUtils.defineMetadata(SimMetadataKey, config, target);
         // Reflect.defineMetadata(SimMetadataKey, config, target.prototype);
-        SimGlobal.storage.set(target, config);
+        SimGlobal.storage.add(target);
         // return Reflect.metadata(SimMetadataKey, config);
         // Reflect.metadata(SimMetadataKey, config);
     }
 }
-
+//
 export const getSim = (target: ConstructorType<any> | Function | any): SimConfig | undefined => {
     // console.log('000>>', target, typeof target)
+    // const constructor = target.constructor;
+
     if (typeof target === 'object') {
         target = target.constructor;
     }
     try {
-        return Reflect.getMetadata(SimMetadataKey, target);
+        return ReflectUtils.getMetadata(SimMetadataKey, target);
         // return Reflect.getMetadata(SimMetadataKey, target.prototype);
     } catch (e) {
     }
@@ -44,21 +46,17 @@ export const getSim = (target: ConstructorType<any> | Function | any): SimConfig
 const AfterMetadataKey = Symbol('After');
 const BeforeMetadataKey = Symbol('Before');
 export const After = (data: { type: ConstructorType<any>, target: string }) => {
-    return Reflect.metadata(AfterMetadataKey, data);
+    return ReflectUtils.metadata(AfterMetadataKey, data);
 }
 export const getAfter = (target: any, propertyKey: string | undefined = undefined): any => {
-    if (propertyKey) {
-        return Reflect.getMetadata(AfterMetadataKey, target, propertyKey);
-    } else {
-        return Reflect.getMetadata(AfterMetadataKey, target);
-    }
+    return ReflectUtils.getMetadata(target, propertyKey);
 }
 
 export const Before = (data: { type: ConstructorType<any>, target: string }) => {
-    return Reflect.metadata(BeforeMetadataKey, data);
+    return ReflectUtils.metadata(BeforeMetadataKey, data);
 }
 export const getBefore = (target: any, propertyKey: string): any => {
-    return Reflect.getMetadata(BeforeMetadataKey, target, propertyKey);
+    return ReflectUtils.getMetadata(BeforeMetadataKey, target, propertyKey);
 }
 
 // const postConstructMetadataKey = Symbol('PostConstruct');
@@ -81,7 +79,7 @@ export const PostConstruct = (data = {}) => {
     // return Reflect.metadata(formatMetadataKey, con);
 }
 export const getPostConstruct = (target: any, propertyKey: string): any => {
-    return Reflect.getMetadata(PostConstructMetadataKey, target, propertyKey);
+    return ReflectUtils.getMetadata(PostConstructMetadataKey, target, propertyKey);
     // return Reflect.getMetadata('wow', target, propertyKey);
 }
 // export const getPostConstruct = (target: any, propertyKey: string): Object => {

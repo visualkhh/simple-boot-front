@@ -9,7 +9,7 @@ export enum UrlType {
 }
 
 export class SimOption {
-    selector: string = 'app';
+    selector: string = '#app';
     urlType: UrlType = UrlType.path;
     rootRouter: ConstructorType<Router> | undefined
 }

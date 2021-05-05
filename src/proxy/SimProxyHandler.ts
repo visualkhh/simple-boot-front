@@ -2,10 +2,14 @@ import {Module} from '../module/Module'
 import {SimstanceManager} from '../simstance/SimstanceManager'
 import {ConstructorType} from '../types/Types'
 import {Renderer} from '../render/Renderer'
-import {getAfter, getSim} from '../decorators/SimDecorator';
+import {SimGlobal} from '../global/SimGlobal';
+import {Sim} from '../decorators/SimDecorator';
 
+@Sim()
 export class SimProxyHandler implements ProxyHandler<any> {
-    constructor(private simstanceManager: SimstanceManager, private renderer: Renderer) {
+    private simstanceManager?: SimstanceManager;
+    constructor(private renderer: Renderer) {
+        this.simstanceManager = SimGlobal.application?.simstanceManager;
     }
 
     public get(target: any, name: string): any {
@@ -13,7 +17,7 @@ export class SimProxyHandler implements ProxyHandler<any> {
     }
 
     public set(obj: any, prop: string, value: any): boolean {
-        value = this.simstanceManager.proxy(value, Module)
+        value = this.simstanceManager?.proxy(value, Module)
 
         obj[prop] = value
         /*
@@ -46,7 +50,7 @@ export class SimProxyHandler implements ProxyHandler<any> {
             }
 
             try {
-                const sim = this.simstanceManager.getOrNewSim(obj.constructor as ConstructorType<Module>)
+                const sim = this.simstanceManager?.getOrNewSim(obj.constructor as ConstructorType<Module>)
                 if (sim) {
                     sim.render();
                 } else {

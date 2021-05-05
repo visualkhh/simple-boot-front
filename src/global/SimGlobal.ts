@@ -1,10 +1,8 @@
 import {SimpleApplication} from '../SimpleApplication';
 import {ConstructorType} from '../types/Types';
-import {SimConfig} from '../decorators/SimDecorator';
-//
 export const SimGlobal = new class {
     _application?: SimpleApplication;
-    storage = new Map<ConstructorType<any>, SimConfig|undefined>();
+    storage = new Set<ConstructorType<any>>();
     // storage = new Map<ConstructorType<any>, { config?: SimConfig, object?: any }>();
 
     set application(application: SimpleApplication | undefined) {
