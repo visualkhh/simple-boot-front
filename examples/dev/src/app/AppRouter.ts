@@ -6,6 +6,7 @@ import {Router} from "simple-boot-front/router/Router";
 import {Empty} from './features/empty/empty';
 import {Intents} from './features/intent/intents';
 import {Views} from "./features/view/views";
+import {Exception} from "./features/exception/exception";
 
 @Sim({scheme: 'layout-router'})
 export class AppRouter extends Router {
@@ -14,5 +15,6 @@ export class AppRouter extends Router {
     'ajax' = Ajax;
     'intent' = Intents;
     'view' = Views;
+    'exception' = Exception;
     'empty' = Empty;
 }

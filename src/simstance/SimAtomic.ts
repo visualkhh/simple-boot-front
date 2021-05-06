@@ -3,7 +3,7 @@ import {SimGlobal} from '../global/SimGlobal';
 import {getSim, SimConfig} from '../decorators/SimDecorator';
 import {SimstanceManager} from './SimstanceManager';
 
-export class SimstanceAtomic<T> {
+export class SimAtomic<T> {
     constructor(public type: ConstructorType<T>,
                 private simstanceManager: SimstanceManager = SimGlobal.application?.simstanceManager!
     ) {

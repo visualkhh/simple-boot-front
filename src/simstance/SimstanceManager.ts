@@ -1,6 +1,6 @@
 import 'reflect-metadata'
 import {ConstructorType} from '../types/Types'
-import {NoSuchSim} from '../throwable/NoSuchSim'
+import {SimNoSuch} from '../throwable/SimNoSuch'
 import {SimProxyHandler} from '../proxy/SimProxyHandler'
 import {Module} from '../module/Module'
 import {getPostConstruct, PostConstruct} from '../decorators/SimDecorator';
@@ -8,7 +8,7 @@ import {SimOption} from '../option/SimOption';
 import {Runnable} from '../run/Runnable';
 import {SimGlobal} from '../global/SimGlobal';
 import {ObjectUtils} from '../util/object/ObjectUtils';
-import {SimstanceAtomic} from './SimstanceAtomic';
+import {SimAtomic} from './SimAtomic';
 import {ReflectUtils} from '../util/reflect/ReflectUtils';
 
 export class SimstanceManager implements Runnable {
@@ -28,14 +28,12 @@ export class SimstanceManager implements Runnable {
         return this._storage
     }
 
-    getSimConfig(scheme: string | undefined): SimstanceAtomic<any>[] {
-        if (scheme) {
-            return Array.from(this._storage.keys()).map(it => new SimstanceAtomic(it)).filter(it => {
-                return it && scheme === it?.config?.scheme;
-            }) || [];
-        } else {
-            return [];
-        }
+    getSimAtomics(): SimAtomic<any>[] {
+        return Array.from(this._storage.keys()).map(it => new SimAtomic(it, this));
+    }
+
+    getSimConfig(scheme: string | undefined): SimAtomic<any>[] {
+        return this.getSimAtomics().filter(it => scheme && it && scheme === it?.config?.scheme) || [];
     }
 
     getOrNewSim<T>(k?: ConstructorType<T>): T | undefined {
@@ -50,7 +48,6 @@ export class SimstanceManager implements Runnable {
 
     getOrNewSims<T>(k: ConstructorType<T>): T[] {
         const list = new Array<T>(0);
-
         this.storage.forEach((value, key, mapObject) => {
             let sw = false;
             if (value && value instanceof k) {
@@ -86,7 +83,7 @@ export class SimstanceManager implements Runnable {
             this._storage.set(target, r)
             return r
         }
-        throw new NoSuchSim('no simple instance')
+        throw new SimNoSuch('no simple instance')
     }
 
     public newSime<T>(target: ConstructorType<T>): T {
@@ -126,7 +123,7 @@ export class SimstanceManager implements Runnable {
         return injections;
     }
 
-    @PostConstruct()
+    @PostConstruct
     public post(simProxyHandler: SimProxyHandler) {
         this.simProxyHandler = simProxyHandler;
     }
@@ -136,10 +133,14 @@ export class SimstanceManager implements Runnable {
             for (const key in target) {
                 target[key] = this.proxy(target[key], type);
             }
-            return new Proxy(target, this.simProxyHandler);
-        } else {
-            return target;
+            const allProtoTypeName = ObjectUtils.getAllProtoTypeName(target);
+            allProtoTypeName.forEach(it => {
+                // console.log('proxy protoType', target, it);
+                (target as any)[it] = new Proxy((target as any)[it], this.simProxyHandler!);
+            });
+            target = new Proxy(target, this.simProxyHandler);
         }
+        return target;
     }
 
     run() {

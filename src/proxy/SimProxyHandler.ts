@@ -4,11 +4,14 @@ import {ConstructorType} from '../types/Types'
 import {Renderer} from '../render/Renderer'
 import {SimGlobal} from '../global/SimGlobal';
 import {Sim} from '../decorators/SimDecorator';
+import {getTargetAndIncludeNullAndSortExceptionHandlers} from '../decorators/exception/ExceptionDecorator';
+import {SimOption} from '../option/SimOption';
 
 @Sim()
 export class SimProxyHandler implements ProxyHandler<any> {
     private simstanceManager?: SimstanceManager;
-    constructor(private renderer: Renderer) {
+
+    constructor(private simOption: SimOption, private renderer: Renderer) {
         this.simstanceManager = SimGlobal.application?.simstanceManager;
     }
 
@@ -17,6 +20,7 @@ export class SimProxyHandler implements ProxyHandler<any> {
     }
 
     public set(obj: any, prop: string, value: any): boolean {
+        // console.log('proxy set-->')
         value = this.simstanceManager?.proxy(value, Module)
 
         obj[prop] = value
@@ -78,7 +82,26 @@ export class SimProxyHandler implements ProxyHandler<any> {
     }
 
     apply(target: any, thisArg: any, argumentsList?: any): any {
-        return target.apply(thisArg, argumentsList)
+        let r;
+        try {
+            r = target.apply(thisArg, argumentsList);
+        } catch (e: Error | any) {
+            const inHandler = getTargetAndIncludeNullAndSortExceptionHandlers(thisArg, e)
+            if (inHandler.length > 0) {
+                inHandler[inHandler.length - 1].call(e);
+            } else {
+                for (let i = 0; i < this.simOption.advice.length; i++) {
+                    const sim = this.simstanceManager?.getOrNewSim(this.simOption.advice[i]);
+                    const inHandler = getTargetAndIncludeNullAndSortExceptionHandlers(sim, e)
+                    if (inHandler.length > 0) {
+                        inHandler[inHandler.length - 1].call(e);
+                        break;
+                    }
+                }
+            }
+            console.error(e)
+        }
+        return r
     }
 
     has(target: any, key: PropertyKey): boolean {

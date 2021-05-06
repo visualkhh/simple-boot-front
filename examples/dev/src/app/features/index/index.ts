@@ -1,5 +1,5 @@
 import html from "./index.html";
-import {After, PostConstruct, Sim} from "simple-boot-front/decorators/SimDecorator";
+import {PostConstruct, Sim} from "simple-boot-front/decorators/SimDecorator";
 import {Module} from "simple-boot-front/module/Module";
 import {ViewService} from "simple-boot-front/service/view/ViewService";
 import {RandomUtils} from "simple-boot-front/util/random/RandomUtils";
@@ -14,6 +14,8 @@ export class Index extends Module {
     template = html;
 
     data = "default data";
+
+    thisData = 5151;
 
     public title = new class extends Module {
         public value = "";
@@ -30,7 +32,8 @@ export class Index extends Module {
         // console.log('------------->', v, manager)
     }
 
-    onInit() {}
+    onInit() {
+    }
 
     test() {
         console.log("test");
@@ -48,12 +51,17 @@ export class Index extends Module {
         ];
     }
 
+    thisDataChange() {
+        this.thisData = Math.floor(RandomUtils.random(1, 400));
+        console.log('thisDataChange', this.thisData)
+    }
+
     go($event: KeyboardEvent, view: View<Element>) {
         $event.preventDefault();
     }
 
     goto() {
-        const state = { 'page_id': 1, 'user_id': 5 }
+        const state = {'page_id': 1, 'user_id': 5}
         const title = 'ttttt'
         const url = 'hello-world.html'
         // history.replaceState({page: 3}, "title 3", "?page=3");
@@ -66,7 +74,7 @@ export class Index extends Module {
         // })(history.pushState);
     }
 
-    @PostConstruct()
+    @PostConstruct
     public post(renderer: Renderer) {
         //console.log('post-->', renderer)
     }

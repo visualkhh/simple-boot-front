@@ -17,6 +17,7 @@ tip
     - https://openbase.com/js/eslint-plugin-node/documentation
 - javascript
     - window hashChangeEvent: https://developer.mozilla.org/ko/docs/Web/API/WindowEventHandlers/onhashchange
+    - Object: https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Proxy
 - node
     - https://choiyb2.tistory.com/97
 - webpack

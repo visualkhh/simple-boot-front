@@ -11,5 +11,28 @@ export enum UrlType {
 export class SimOption {
     selector: string = '#app';
     urlType: UrlType = UrlType.path;
-    rootRouter: ConstructorType<Router> | undefined
+    advice: ConstructorType<Router>[] = []
+
+    constructor(public rootRouter: ConstructorType<Router>) {
+    }
+
+    setSelector(selector: string): SimOption {
+        this.selector = selector;
+        return this;
+    }
+
+    setUrlType(urlType: UrlType): SimOption {
+        this.urlType = urlType;
+        return this;
+    }
+
+    setRootRouter(rootRouter: ConstructorType<Router>): SimOption {
+        this.rootRouter = rootRouter;
+        return this;
+    }
+
+    setAdvice(...advice: ConstructorType<any>[]): SimOption {
+        this.advice = advice;
+        return this;
+    }
 }
