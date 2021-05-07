@@ -1,8 +1,6 @@
-import { UserResponse } from "../../models/UserResponse";
-import { Profile } from "../../shareds/Profile";
-import { ProjectService } from "../../services/ProjectService";
-import css from "./exception.css";
-import html from "./exception.html";
+import {ProjectService} from "../../services/ProjectService";
+import css from "./aop.css";
+import html from "./aop.html";
 import {PostConstruct, Sim} from "simple-boot-front/decorators/SimDecorator";
 import {Module} from "simple-boot-front/module/Module";
 import {AjaxService} from "simple-boot-front/service/AjaxService";
@@ -12,10 +10,10 @@ import {ExceptionHandler} from "simple-boot-front/decorators/exception/Exception
 import {SimNoSuch} from "simple-boot-front/throwable/SimNoSuch";
 import {SimError} from "simple-boot-front/throwable/SimError";
 import {RouterError} from "simple-boot-front/throwable/RouterError";
-import {RouterNotFount} from "simple-boot-front/throwable/RouterNotFount";
+import {After, Before} from "simple-boot-front/decorators/aop/AOPDecorator";
 
 @Sim()
-export class Exception extends Module {
+export class Aop extends Module {
     styleImports = [css];
     template = html;
     data = 1
@@ -24,33 +22,31 @@ export class Exception extends Module {
     }
 
     onInit() {
-        this.wow('44');
     }
 
 
     @PostConstruct
     post() {
-        console.log('---Exception-PostConstruct-----')
+        console.log('---apo-PostConstruct-----')
     }
 
-    wow(s: string) {
-        console.log('wow', s)
+    @Before({property: 'fire'})
+    before(obj: any, protoType: Function) {
+        console.log('before', obj, protoType)
     }
 
-    fireException($event: MouseEvent, view: View<Element>) {
+    @After({property: 'fire'})
+    after(obj: any, protoType: Function) {
+        console.log('after', obj, protoType)
+    }
+
+    fire($event: MouseEvent, view: View<Element>) {
+        console.log('fire method')
         this.data = RandomUtils.random(0, 100);
-        console.log('--->', this.data)
-        this.wow('aaaa');
-        const a = undefined;
-        console.log((a as any).wow)
-        // const number = 5/0;
-        // console.log('-->', number, $event, view);
     }
 
-    unkownException($event: MouseEvent, view: View<Element>) {
-        throw undefined;
-        // const number = 5/0;
-        // console.log('-->', number, $event, view);
+    unkown($event: MouseEvent, view: View<Element>) {
+        console.log('-->', 'unkown method');
     }
 
 
@@ -60,8 +56,8 @@ export class Exception extends Module {
     //     console.log('SimError exception:', e)
     // }
     @ExceptionHandler(TypeError)
-    public exceptionTypeError(e: Error, target: any, property: any, args: any) {
-        console.log('11111111TypeError exception:', e, target, property, args)
+    public exceptionTypeError(e: any) {
+        console.log('TypeError exception:', e)
     }
 
     @ExceptionHandler(SimError)

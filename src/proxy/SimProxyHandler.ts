@@ -6,6 +6,8 @@ import {SimGlobal} from '../global/SimGlobal';
 import {Sim} from '../decorators/SimDecorator';
 import {getTargetAndIncludeNullAndSortExceptionHandlers} from '../decorators/exception/ExceptionDecorator';
 import {SimOption} from '../option/SimOption';
+import {getAfters, getBefores, getProtoAfters, getProtoBefores} from '../decorators/aop/AOPDecorator';
+import {ObjectUtils} from "../util/object/ObjectUtils";
 
 @Sim()
 export class SimProxyHandler implements ProxyHandler<any> {
@@ -16,14 +18,17 @@ export class SimProxyHandler implements ProxyHandler<any> {
     }
 
     public get(target: any, name: string): any {
+        // this.aopBefore(AOPAction.get, target, name, target[name]);
+        // setTimeout(() => this.aopAfter(AOPAction.get, target, name, target[name]), 1)
         return target[name]
     }
 
     public set(obj: any, prop: string, value: any): boolean {
         // console.log('proxy set-->')
         value = this.simstanceManager?.proxy(value, Module)
-
+        // this.aopBefore(AOPAction.set, obj, prop, value);
         obj[prop] = value
+        // this.aopAfter(AOPAction.set, obj, prop, value);
         /*
         if ('isProxy' in obj && obj instanceof Module) {
             obj.render()
@@ -81,20 +86,22 @@ export class SimProxyHandler implements ProxyHandler<any> {
         return true
     }
 
-    apply(target: any, thisArg: any, argumentsList?: any): any {
+    apply(target: Function, thisArg: any, argumentsList?: any): any {
         let r;
         try {
+            this.aopBefore(thisArg, target);
             r = target.apply(thisArg, argumentsList);
+            this.aopAfter(thisArg, target);
         } catch (e: Error | any) {
             const inHandler = getTargetAndIncludeNullAndSortExceptionHandlers(thisArg, e)
             if (inHandler.length > 0) {
-                inHandler[inHandler.length - 1].call(e);
+                inHandler[inHandler.length - 1].call(e, thisArg, target, argumentsList);
             } else {
                 for (let i = 0; i < this.simOption.advice.length; i++) {
                     const sim = this.simstanceManager?.getOrNewSim(this.simOption.advice[i]);
                     const inHandler = getTargetAndIncludeNullAndSortExceptionHandlers(sim, e)
                     if (inHandler.length > 0) {
-                        inHandler[inHandler.length - 1].call(e);
+                        inHandler[inHandler.length - 1].call(e, thisArg, target, argumentsList);
                         break;
                     }
                 }
@@ -102,6 +109,40 @@ export class SimProxyHandler implements ProxyHandler<any> {
             console.error(e)
         }
         return r
+    }
+
+    private aopBefore(obj: any, protoType: Function) {
+        const propertyName = ObjectUtils.getPrototypeName(obj, protoType);
+        if (propertyName) {
+            getProtoBefores(obj, propertyName).forEach(it => {
+                it.call(obj, protoType, propertyName)
+            })
+
+            for (let i = 0; i < this.simOption.advice.length; i++) {
+                const sim = this.simstanceManager?.getOrNewSim(this.simOption.advice[i]);
+                const protoBefores = getProtoBefores(sim, propertyName, Object.getPrototypeOf(obj));
+                protoBefores.forEach(it => {
+                    it.call(obj, protoType, propertyName)
+                })
+            }
+        }
+    }
+
+    private aopAfter(obj: any, protoType: Function) {
+        const propertyName = ObjectUtils.getPrototypeName(obj, protoType);
+        if (propertyName) {
+            getProtoAfters(obj, propertyName).forEach(it => {
+                it.call(obj, protoType, propertyName)
+            })
+
+            for (let i = 0; i < this.simOption.advice.length; i++) {
+                const sim = this.simstanceManager?.getOrNewSim(this.simOption.advice[i]);
+                const protoBefores = getProtoAfters(sim, propertyName, Object.getPrototypeOf(obj));
+                protoBefores.forEach(it => {
+                    it.call(obj, protoType, propertyName)
+                })
+            }
+        }
     }
 
     has(target: any, key: PropertyKey): boolean {

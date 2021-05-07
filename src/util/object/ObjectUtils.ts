@@ -12,6 +12,26 @@ export class ObjectUtils {
         return data.filter(it => it !== 'constructor');
     }
 
+    static getProtoTypeName(target?: any): string[] {
+        let data: string[] = [];
+        if (target) {
+            const proto = Object.getPrototypeOf(target);
+            data = Object.keys(proto) || []
+        }
+        return data.filter(it => it !== 'constructor');
+    }
+
+    static getProtoTypes(target?: any): Function[] {
+        const data: Function[] = [];
+        if (target) {
+            const proto = Object.getPrototypeOf(target);
+            (Object.keys(proto) || []).filter(it => it !== 'constructor').forEach(it => {
+                data.push(proto[it])
+            })
+        }
+        return data;
+    }
+
     static seal<T>(target: T): T {
         return Object.seal(target);
     }
@@ -42,5 +62,18 @@ export class ObjectUtils {
 
     static getPrototypeOf(start: any) {
         return Object.getPrototypeOf(start);
+    }
+
+    static getPrototypeKeyMap(target: any): Map<Function, string> {
+        const data = new Map<Function, string>();
+        const proto = Object.getPrototypeOf(target);
+        (Object.keys(proto) || []).filter(it => it !== 'constructor').forEach(it => {
+            data.set(proto[it], it)
+        })
+        return data;
+    }
+
+    static getPrototypeName(target: any, fnc: Function): string | undefined {
+        return this.getPrototypeKeyMap(target).get(fnc)
     }
 }

@@ -21,6 +21,7 @@ export const getExceptionHandlers = (target: any): MetaDataPropertyAtomic<any, C
         .map(it => new MetaDataPropertyAtomic<any, ConstructorType<any> | null>(target, getExceptionHandler(target, it), it, ReflectUtils.getParameterTypes(target, it)))
         .filter(it => it.metaData !== undefined) || [];
 }
+
 export const getTargetAndIncludeNullAndSortExceptionHandlers = (target: any, error: any): MetaDataPropertyAtomic<any, ConstructorType<any> | null>[] => {
     return getExceptionHandlers(target).filter(it => it.metaData == null || ObjectUtils.isPrototypeOfTarget(it.metaData, error))
         .sort((a, b) => ObjectUtils.getAllProtoType(a.metaData).length - ObjectUtils.getAllProtoType(b.metaData).length);

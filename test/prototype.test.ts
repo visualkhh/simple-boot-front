@@ -2,7 +2,6 @@
 // import * as request from 'supertest'
 // import {Index} from '@src/app/features/index'
 
-import {SimNoSuch} from "../src/throwable/NoSuchSim";
 import {SimError} from "../src/throwable/SimError";
 
 describe('Test', () => {
@@ -53,6 +52,9 @@ describe('Test', () => {
             public c() {}
         }
 
+        const a = new A();
+        console.log(A, '--', Object.getPrototypeOf(a), a)
+        console.log(A.prototype == Object.getPrototypeOf(a), a)
 
         // const a = NoSuchSim.prototype;
         // console.log(Object.prototype.isPrototypeOf.call(a, new NoSuchSim()));

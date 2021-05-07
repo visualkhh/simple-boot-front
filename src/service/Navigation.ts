@@ -17,11 +17,11 @@ export class Navigation {
         }
     }
 
-    go(path: string) {
+    go(path: string, data = {}, title = '') {
         if (UrlType.path === this.option.urlType) {
-            history.pushState({}, '', '/' + path)
+            history.pushState(data, title, '/' + path)
         } else if (UrlType.hash === this.option.urlType) {
-            history.pushState({}, '', '/#' + path)
+            history.pushState(data, title, '/#' + path)
         }
         window.dispatchEvent(new Event('popstate'));
         // window.dispatchEvent(new Event('pushstate'));

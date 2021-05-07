@@ -7,6 +7,7 @@ import {Empty} from './features/empty/empty';
 import {Intents} from './features/intent/intents';
 import {Views} from "./features/view/views";
 import {Exception} from "./features/exception/exception";
+import {Aop} from "./features/aop/aop";
 
 @Sim({scheme: 'layout-router'})
 export class AppRouter extends Router {
@@ -16,5 +17,6 @@ export class AppRouter extends Router {
     'intent' = Intents;
     'view' = Views;
     'exception' = Exception;
+    'aop' = Aop;
     'empty' = Empty;
 }

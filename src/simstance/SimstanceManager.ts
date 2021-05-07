@@ -133,9 +133,9 @@ export class SimstanceManager implements Runnable {
             for (const key in target) {
                 target[key] = this.proxy(target[key], type);
             }
-            const allProtoTypeName = ObjectUtils.getAllProtoTypeName(target);
-            allProtoTypeName.forEach(it => {
-                // console.log('proxy protoType', target, it);
+            const protoTypeName = ObjectUtils.getProtoTypeName(target);
+            // console.log('proxy-->', allProtoTypeName)
+            protoTypeName.forEach(it => {
                 (target as any)[it] = new Proxy((target as any)[it], this.simProxyHandler!);
             });
             target = new Proxy(target, this.simProxyHandler);
