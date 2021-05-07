@@ -1,4 +1,4 @@
-simple-boot-front  [v1.0.18]
+simple-boot-front  [v1.0.20]
 ===========
 
 Single Page Application Framworks
@@ -130,7 +130,40 @@ npm install simple-boot-front
 # Decorator
 * @Sim(): Objects managed by the SimpleBootFront framework
   - parameter: SimConfig  {schema: string}
+  ```typescript
+    @Sim({scheme: 'index'})
+    export class Index extends Module {  }
+  ```
 * @PostConstruct(): Methods that you run for a separate initialization operation after the object is created
+  ```typescript
+      @PostConstruct
+      post(projectService: ProjectService) {
+          console.log('---apo-PostConstruct-----')
+      }
+  ```
+* @After, @Before
+  ```typescript
+    fire($event: MouseEvent, view: View<Element>) {
+        console.log('fire method')
+        this.data = RandomUtils.random(0, 100);
+    }
+    @Before({property: 'fire'})
+    before(obj: any, protoType: Function) {
+        console.log('before', obj, protoType)
+    }
+
+    @After({property: 'fire'})
+    after(obj: any, protoType: Function) {
+        console.log('after', obj, protoType)
+    }
+  ```
+* @ExceptionHandler
+  ```typescript
+      @ExceptionHandler()
+      public exception0(e: any) {
+          console.log('Advice Global exception:', e)
+      }
+  ```
 
 ## Intent event broker 
 ```typescript

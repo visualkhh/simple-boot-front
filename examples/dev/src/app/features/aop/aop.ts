@@ -26,7 +26,7 @@ export class Aop extends Module {
 
 
     @PostConstruct
-    post() {
+    post(projectService: ProjectService) {
         console.log('---apo-PostConstruct-----')
     }
 
