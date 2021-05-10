@@ -1,5 +1,3 @@
-import 'rxjs/Observable'
-import 'rxjs/add/operator/debounceTime'
 import {SimOption} from './option/SimOption';
 import {SimstanceManager} from './simstance/SimstanceManager';
 import {SimGlobal} from './global/SimGlobal';

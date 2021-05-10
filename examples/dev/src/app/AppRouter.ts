@@ -18,5 +18,5 @@ export class AppRouter extends Router {
     'view' = Views;
     'exception' = Exception;
     'aop' = Aop;
-    'empty' = Empty;
+    'views' = Views;
 }

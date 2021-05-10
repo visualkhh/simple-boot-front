@@ -1,4 +1,3 @@
-import 'rxjs/Observable'
 import Handlebars from 'handlebars'
 import {Renderer} from '../render/Renderer'
 import {LifeCycle} from '../module/LifeCycle'

@@ -21,6 +21,9 @@
     "emitDecoratorMetadata": true,         /* Enables experimental support for emitting type metadata for decorators. */
     /* Advanced Options */
     "forceConsistentCasingInFileNames": true,
+    "removeComments": true,
+//    "noImplicitAny": true,
+//    "plugins": [{ "name": "plugin" }],
     /* Disallow inconsistently-cased references to the same file. */
     "lib": [
       "dom",

@@ -60,6 +60,11 @@ tip
         - https://github.com/nehalist/di-ts
     - lib
         - di,ioc: https://www.npmjs.com/package/typescript-ioc
+    - plugin
+        - https://github.com/Microsoft/TypeScript/wiki/Using-the-Compiler-API
+        - https://github.com/Microsoft/TypeScript/wiki/Using-the-Language-Service-API
+        - https://github.com/microsoft/TypeScript/wiki/Using-the-Language-Service-API#reference-resolution-in-the-language-service
+        - https://github.com/microsoft/TypeScript/wiki/Writing-a-Language-Service-Plugin
 - gradle
     - [Gradle] node yarn 빌드 react 프로젝트를 gradle에 통합 포함하여 빌드하는 방법
         - https://kimchanjung.github.io/programming/2020/06/25/spring-gradle-build-with-front-end/

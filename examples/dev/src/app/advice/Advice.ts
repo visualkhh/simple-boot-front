@@ -4,6 +4,7 @@ import {After, Before} from "simple-boot-front/decorators/aop/AOPDecorator";
 import {Aop} from "../features/aop/aop";
 @Sim()
 export class Advice {
+
     @ExceptionHandler()
     public exception0(e: any) {
         console.log('Advice Global exception:', e)
@@ -18,4 +19,5 @@ export class Advice {
     public afterTest(obj: any, f: Function, name: string) {
         console.log('after Test:', obj, f, name)
     }
+
 }
