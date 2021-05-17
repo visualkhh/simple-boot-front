@@ -1,12 +1,15 @@
 {
   "compilerOptions": {
     "target": "es5",
-    "module": "commonjs",
+//    "module": "commonjs",
+//    "module": "ES6",
+    "module": "UMD",
     "moduleResolution": "node",
     "skipLibCheck": true,
     "noImplicitAny": false,
     "allowSyntheticDefaultImports":true,
-//    "sourceMap": true,
+    "removeComments": true,
+    //    "sourceMap": true,
     "lib": [
       "dom",
       "es2015",
@@ -21,7 +24,8 @@
     "dist",
     "test",
     "dist-wjs",
-    "./node_modules/typescript/*"
+    "./node_modules/typescript/*",
+//    "./node_modules/handlebars/*"
   ],
   "include": [
     "./node_modules/**/*.js",

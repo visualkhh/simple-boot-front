@@ -21,6 +21,7 @@
     }
   },
   "scripts": {
+    "serve": "node serve.js",
     "wjs-compile": "rm -rf dist-wjs && tsc --outDir dist-wjs ./wjs.ts ",
     "tsc-compile": "rm -rf dist-tsc && tsc -P ./",
     "wjs": "npm run wjs-compile && node dist-wjs/wjs.js",
@@ -34,6 +35,11 @@
   },
   "dependencies": {
     "@types/node": "^15.0.2",
+    "ejs": "^3.1.6",
+    "express": "^4.17.1",
+    "glob": "^7.1.7",
+    "http-proxy-middleware": "^2.0.0",
+    "morgan": "^1.10.0",
     "simple-boot-front": "^1.0.21",
     "typescript": "^4.2.3"
   }

@@ -20,9 +20,9 @@ export class ReflectUtils {
     }
 
     static defineMetadata(metadataKey: any, value: any, target: any, propertyKey?: string | symbol) {
-        if (propertyKey) {
+        if (propertyKey && Reflect.defineMetadata) {
             Reflect.defineMetadata(metadataKey, value, target, propertyKey);
-        } else {
+        } else if (Reflect.defineMetadata) {
             Reflect.defineMetadata(metadataKey, value, target);
         }
     }

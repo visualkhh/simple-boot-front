@@ -23,7 +23,7 @@
     "forceConsistentCasingInFileNames": true,
     "removeComments": true,
 //    "noImplicitAny": true,
-//    "plugins": [{ "name": "plugin" }],
+//    "plugins": [{ "name": "sample-ts-plugin" }],
     /* Disallow inconsistently-cased references to the same file. */
     "lib": [
       "dom",
@@ -38,6 +38,7 @@
     "examples",
     "rollup.config.js",
     "test",
+    "test-cli",
     "**/*.test.ts",
     "dist"
   ]
