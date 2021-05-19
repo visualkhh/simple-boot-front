@@ -11,15 +11,16 @@
         <div>users</div>
 
         <ul module-isolate="data">
-            {{#if data.results}}
-            {{#each data.results as |result i|}}
-            <li>{{result.email}}</li>
-            {{/each}}
-            {{/if}}
+            {%
+                for(let result of this.data?.results || []) {
+                    write('<li>' + result.email + '</li>')
+                }
+            %}
+
         </ul>
 
         <div>
-            {{{profile}}}
+            {%write(this.profile)%}
         </div>
 
     </div>

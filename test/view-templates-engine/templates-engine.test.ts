@@ -6,52 +6,71 @@ import {Renderer} from "../../src/render/Renderer";
 import {SimOption} from "../../src/option/SimOption";
 import {ConstructorType} from "../../src/types/Types";
 import {Router} from "../../src/router/Router";
-import {ObjectUtils} from "../../src/util/object/ObjectUtils";
-import {FunctionUtils} from "../../src/util/function/FunctionUtils";
+import {SimCompiler} from "../../src/render/compile/SimCompiler";
 // const ffa = -111;
 var html = `
-<div>
-    {{{ aaa }}}
-</div>
-<div>
-    {{{ ccc }}}
-</div>
-<div>
-    {{{ ddd }}}
-</div>
-<div>
-    {{{    aaa }}}
-</div>
-<div>
-{%  this.ffa  %}
-{%this.vv%}
+<html>
+<body>
+{%write(this.ggg)%}
+
 {%
-this.zz
-%}
-</div>
-{%
-    for (let i of ['a','b']) {
-        this.return(i + '-<div>aaaa</div>--')
-        {{<div>dd</div>}}
-    } 
+write('zzz')
+    for(let i of this.datas) {
+        write('<div>'+i+'</div>');
+    }
 %}
 
 {%
-1+100
+1
 %}
 <div>
-    {{{ aaa }}}
-</div>
+
 <div>
     <module var="wow"></module>
     <module ref="WOW"></module>
     <module:wow ref="WOW"></module:wow>
 </div>
+</body>
+</html>
 `
+const dataContain = {
+    aaa: 1,
+    ccc: 11,
+    ddd: 12,
+    datas: ['aaa', 'bbb', 'cc'],
+    ggg: 122,
+} as any;
+/*
+function escapeRegExp(string){
+  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"); // $&는 일치한 전체 문자열을 의미합니다.
+}
+ */
+const specialCharacterToEscape = (data: string) => {
+    ['!','@','#','$','%','^','&','*','(',')','_','+','-','=','[',']','{','}','\\','|'].forEach(it => {
+        const s = '\\'+it;
+        data = data.replace(RegExp(s, 'gm'), '\\'+it)
+    })
+    return data;
+}
 // render
 const render = new Renderer(new SimOption({} as ConstructorType<Router>))
 
+describe('utils-test', () => {
+
+    test('utils', async (done) => {
+        // console.log(specialCharacterToEscape("!@#$%^&*()_{}"))
+        console.log(specialCharacterToEscape("1+100"))
+        done()
+    })
+})
+
 describe('templates-engine', () => {
+
+    test('compile', async (done) => {
+       const result = new SimCompiler(html, dataContain).run().root?.getResult();
+        console.log(result)
+        done()
+    })
 
     test('{{{}}}', async (done) => {
         const datas = new Map<string, any>();
@@ -59,12 +78,15 @@ describe('templates-engine', () => {
             aaa: 1,
             ccc: 11,
             ddd: 12,
-        } as any
-        const origin = RegExp('\{\{\{\\s+(.+)\\s+\}\}\}', 'gm')
+        } as any// {%([\w\n\s]+)%}
+        // (?<=\{\%)(.|\n|\s|[^\%\}])*(?=\%\})
+        // const origin = RegExp('(\{\%)[\s\n]*(.+)[\s\n]*(\%\})', 'gm')
+        const origin = RegExp('\{\%([a-zA-Z0-9\s\n!@#$%^&*()_+-=\[\]]*)\%\}', 'gm')
         let originExec = origin.exec(html);
+
         while (originExec) {
-            console.log('--->', originExec)
-            datas.set(originExec[1], dataContain[originExec[1]]);
+            //console.log('--->', originExec)
+            datas.set(originExec[0], dataContain[originExec[2]]);
             originExec = origin.exec(originExec.input)
         }
         // console.log()
@@ -75,7 +97,12 @@ describe('templates-engine', () => {
         //     html = html.replace(it, data)
         // })
         datas.forEach((v, k, map) => {
-            html = html.replace(RegExp('\{\{\{\\s+' + k + '\\s+\}\}\}', 'gm'), v)
+            // html = html.replace(RegExp('(\{\%)[\s\n]*' + specialCharacterToEscape(k) + '[\s\n]*(\%\})', 'gm'), '------')
+            // const ss = '(\{\%)[\s\n]*' + specialCharacterToEscape(k) + '[\s\n]*(\%\})';
+            // const s = '(\{\%)[\s\n]*1\\+100[\s\n]*(\%\})';
+            // console.log('--->', specialCharacterToEscape(ss), '-->', specialCharacterToEscape(s))
+            // html = html.replace(RegExp(s, 'gm'), '------')
+            html = html.replace(k, v)
         });
         // html.replace()
         console.log(datas)
@@ -108,21 +135,21 @@ describe('templates-engine', () => {
         //     const data = dataContain[key].toString();
         //     html = html.replace(it, data)
         // })
-        // datas.forEach((v, k, map) => {
-        //     // console.log('k->', k)
-        //     // (window as any )['ffa'] = 11;
-        //     console.log('this--->', k)
-        //     // @ts-ignore
-        //     // const a = global.eval.call(dataContain, k)
-        //     // const ab = eval.bind(dataContain)
-        //     const n = Object.assign({return: (data) =>{ console.log('----return',data) }}, dataContain)
-        //     // const a = n.eval('this.ffa += 1');
-        //     const a = n.eval(k.trim());
-        //     // const a = eval.call(dataContain, 'ffa + 1');
-        //     // const a = eval.call(dataContain, k)
-        //     console.log('-value->', a, n[k.trim()], dataContain[k.trim()]);
-        //     // html = html.replace(RegExp('\{\{\{\\s+' + k + '\\s+\}\}\}', 'gm'), v)
-        // });
+        datas.forEach((v, k, map) => {
+            // console.log('k->', k)
+            // (window as any )['ffa'] = 11;
+            console.log('this--->', k)
+            // @ts-ignore
+            // const a = global.eval.call(dataContain, k)
+            // const ab = eval.bind(dataContain)
+            const n = Object.assign({eval: (data) =>eval(data), return: (data) =>{ console.log('----return',data) }}, dataContain)
+            // const a = n.eval('this.ffa += 1');
+            const a = n.eval(k.trim());
+            // const a = eval.call(dataContain, 'ffa + 1');
+            // const a = eval.call(dataContain, k)
+            console.log('-value->', a, n[k.trim()], dataContain[k.trim()]);
+            // html = html.replace(RegExp('\{\{\{\\s+' + k + '\\s+\}\}\}', 'gm'), v)
+        });
         // html.replace()
         console.log(datas)
         // console.log(html)

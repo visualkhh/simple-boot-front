@@ -1,7 +1,7 @@
 import {Module} from '../module/Module'
-import Handlebars from 'handlebars'
 import {SimOption} from '../option/SimOption';
 import {Sim} from '../decorators/SimDecorator';
+import {SimCompiler} from './compile/SimCompiler';
 
 @Sim()
 export class Renderer {
@@ -10,7 +10,8 @@ export class Renderer {
     }
 
     public renderString(template: string, obj: any): string {
-        return Handlebars.compile(template)(obj);
+        const root = new SimCompiler(template, obj).run().root;
+        return root?.getResult() || '';
     }
 
     public render(module: Module | string) {

@@ -26,7 +26,15 @@ export class Index extends Module {
 
     public numbers = new class extends Module {
         public datas = [1, 2, 3];
-        template = "<ul>{{#each datas as |data i|}}<li>{{data}}</li>{{/each}}</ul>";
+        template = `
+        <ul>
+        {%
+            for (let i of this.datas) {
+                write('<li>' + i + '</li>');
+            }
+        %}
+        </ul>
+        `
     }();
 
     constructor(public v: ViewService, public manager: SimstanceManager, public navigation: Navigation) {
@@ -35,11 +43,11 @@ export class Index extends Module {
     }
 
     onInit() {
-        console.log('index onInit')
+        // console.log('index onInit')
     }
 
     test() {
-        console.log("test");
+        // console.log("test");
     }
 
     changeText($event: KeyboardEvent, view: View<Element>) {

@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-12">
             <h1>
-                <a class="fas fa-hand-point-left" href='/#'></a> view page
+                <a class="fas fa-hand-point-left" router-link=''></a> view page
             </h1>
         </div>
     </div>
@@ -10,6 +10,6 @@
         <button module-event-click="click">child value</button>
     </div>
 
-    <div id="child">child {{data}}</div>
+    <div id="child">child {%write(this.data)%}</div>
     <input type="text" id="input" readonly module-value="data">
 </div>

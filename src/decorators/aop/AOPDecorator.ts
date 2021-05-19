@@ -14,7 +14,7 @@ type AOPOption = {type?: ConstructorType<any>, property: string}
 
 // after
 export const After = (data: AOPOption) => {
-    console.log('---after')
+    // console.log('---after')
     return ReflectUtils.metadata(AfterMetadataKey, data);
 }
 export const getAfter = (target: any, propertyKey: string): AOPOption => {

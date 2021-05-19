@@ -143,4 +143,8 @@ export class ConvertUtils {
 
         return results.join(spilString_s);
     };
+
+    static specialCharsToEscape(data: string): string {
+        return data.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
 }

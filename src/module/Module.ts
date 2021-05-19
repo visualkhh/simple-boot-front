@@ -1,4 +1,3 @@
-import Handlebars from 'handlebars'
 import {Renderer} from '../render/Renderer'
 import {LifeCycle} from '../module/LifeCycle'
 import {fromEvent} from 'rxjs';
@@ -23,7 +22,7 @@ export class Module extends SimBase implements LifeCycle {
     // private renderer: Renderer|undefined;
     public id: string;
 
-    constructor(public selector = '', public template = '{{value}}', public wrapElement = 'div',
+    constructor(public selector = '', public template = '{%write(this.value)%}', public wrapElement = 'div',
                 private _renderer = SimGlobal.application?.simstanceManager.getOrNewSim(Renderer),
                 private _navigation = SimGlobal.application?.simstanceManager.getOrNewSim(Navigation)
     ) {
@@ -39,7 +38,7 @@ export class Module extends SimBase implements LifeCycle {
     // }
 
     public renderString(): string {
-        return Handlebars.compile(this.template)(this)
+        return this._renderer?.renderString(this.template, this) || '';
     }
 
     public getValue<T = any>(name: string, value?: any): T {
@@ -262,7 +261,7 @@ export class Module extends SimBase implements LifeCycle {
     }
 
     public renderWrapString(): string {
-        return `<${this.wrapElement} id="${this.id}">${Handlebars.compile(this.template)(this)}</${this.wrapElement}>`
+        return `<${this.wrapElement} id="${this.id}">${this._renderer?.renderString(this.template, this) || ''}</${this.wrapElement}>`
     }
 
     public exist(): boolean {
