@@ -6,7 +6,6 @@ import {RandomUtils} from "simple-boot-front/util/random/RandomUtils";
 import {View} from "simple-boot-front/service/view/View";
 import {Renderer} from "simple-boot-front/render/Renderer";
 import {SimstanceManager} from "simple-boot-front/simstance/SimstanceManager";
-import {RouterManager} from "simple-boot-front/router/RouterManager";
 import {Navigation} from "simple-boot-front/service/Navigation";
 
 // @After({type: Index, target: 'aa'})

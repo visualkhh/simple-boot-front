@@ -129,6 +129,18 @@ npm install simple-boot-front
     </div>
     ```
 
+## View template engine
+```html
+<div>{%write(this.data)%}</div>
+<div>
+{%
+    for (let i of this.datas) {
+        write('<li>' + i + '</li>');
+    }
+%}
+</div>
+```
+
 ## Module LifeCycle
 * onInit(): module load event
 * onChangedRender(): change rended in module event
