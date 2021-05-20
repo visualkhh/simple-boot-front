@@ -1,4 +1,4 @@
-simple-boot-front  [v1.0.20]
+simple-boot-front  [v1.0.22]
 ===========
 
 Single Page Application Framworks
@@ -47,82 +47,86 @@ npm install simple-boot-front
     ```
   * AppRouter.ts
     ```typescript
-    @Sim()
+    @Sim({scheme: 'layout-router'})
     export class AppRouter extends Router {
-    module = App
-    '' = Index
-    'hello-world' = HelloWord
+      module = App;
+      '' = Index;
+      'ajax' = Ajax;
+      'intent' = Intents;
+      'view' = Views;
+      'exception' = Exception;
+      'aop' = Aop;
+      'views' = Views;
     }
     ```
   * index.ts
     ```typescript
-    @Sim()
+    @Sim({scheme: 'index'})
     export class Index extends Module {
-    template = html;
-    data = 'default data'
-    styleImports = [css]
-    
-        public title = new class extends Module {
-            public data = '';
-        }()
-    
-        public numbers = new class extends Module {
-            public datas = [1, 2, 3];
-            template = '<ul>{{#each datas as |data i|}}<li>{{data}}</li>{{/each}}</ul>'
-        }()
-    
-        constructor(public v: ViewService) {
-            super('index')
-        }
-        
-        test() {
-            console.log('test')
-        }
-    
-        changeText($event: KeyboardEvent, view: View<Element>) {
-            this.title.data = view.value;
-        }
-    
-        changeData() {
-            this.numbers.datas = [Math.floor(RandomUtils.random(1, 400)), Math.floor(RandomUtils.random(1, 400)), Math.floor(RandomUtils.random(1, 400))];
-        }
+      template = html;
+      data = "default data";
+      thisData = 5151;
+      constructor(public v: ViewService, public manager: SimstanceManager, public navigation: Navigation) {
+          super("index");
+      }
+  
+      onInit() {
+      }
+
+      @PostConstruct
+      public post(renderer: Renderer) {
+      }
     }
+
     ```
   * index.html  (handlebars)
     ```html
     <h1>index</h1>
+    links:
     <ul>
-        <li><a href="/#hello-world">hello</a></li>
+        <li>ajax example page: <a router-link="">ajax</a></li>
     </ul>
-    <div>
-        <div>
-            {{{title}}}
+    
+    <div class="card mt-2" style="width: 100%;">
+        <div class="card-body">
+            <h5 class="card-title">set module</h5>
+            <div>set variable: {%write(this.title)%}</div>
+            <div>input module variable: <input type="text" module-event-keyup="changeText"></div>
         </div>
-        <div>
-            title: <input type="text" module-event-keyup="changeText">
+    </div>
+    
+    <div class="card mt-2" style="width: 100%;">
+        <div class="card-body">
+            <h5>event click change "module-event-click"</h5>
+            {%write(this.numbers)%}
+            <button class="btn btn-info" module-event-click="changeData">change</button>
         </div>
     </div>
-    <br>
-    <img width="100" src="../../../assets/img.jpg">
     
-    <div>
-        {{{numbers}}}
-        <button class="btn btn-info" module-event-click="changeData">change</button>
-    </div>
-    
-    <div>
-        <input type="text" module-value="data">
-    </div>
-    
-    
-    <div>
-        <div module-isolate="data">
-            {{data}}
-            <button class="btn btn-info" module-event-click="test">test</button>
+    <div class="card mt-2" style="width: 100%;">
+        <div class="card-body">
+            <h5>default data set "module-value"</h5>
+            <input type="text" module-value="data">
         </div>
-        <input type="text" module-link="data">
     </div>
-
+    
+    <div class="card mt-2" style="width: 100%;">
+        <div class="card-body">
+            <h5>variable isolate "module-isolate"</h5>
+            <div module-isolate="data">
+                {%write(this.data)%}
+            </div>
+            data link change event <input type="text" module-link="data">
+        </div>
+    </div>
+    
+    <div>
+          {%write(this.thisData)%}
+        thisData <button module-event-click="thisDataChange"> this data change</button>
+    </div>
+    <div>
+        <div module-event-click="goto">aaaaaaaaa</div>
+    </div>
     ```
 
 ## Module LifeCycle
@@ -135,38 +139,38 @@ npm install simple-boot-front
 * @Sim(): Objects managed by the SimpleBootFront framework
   - parameter: SimConfig  {schema: string}
   ```typescript
-    @Sim({scheme: 'index'})
-    export class Index extends Module {  }
+  @Sim({scheme: 'index'})
+  export class Index extends Module {  }
   ```
 * @PostConstruct(): Methods that you run for a separate initialization operation after the object is created
   ```typescript
-      @PostConstruct
-      post(projectService: ProjectService) {
-          console.log('---apo-PostConstruct-----')
-      }
+  @PostConstruct
+  post(projectService: ProjectService) {
+      console.log('post Construct  and dependency injection')
+  }
   ```
 * @After, @Before
   ```typescript
-    fire($event: MouseEvent, view: View<Element>) {
-        console.log('fire method')
-        this.data = RandomUtils.random(0, 100);
-    }
-    @Before({property: 'fire'})
-    before(obj: any, protoType: Function) {
-        console.log('before', obj, protoType)
-    }
+  fire($event: MouseEvent, view: View<Element>) {
+      console.log('fire method')
+      this.data = RandomUtils.random(0, 100);
+  }
+  @Before({property: 'fire'})
+  before(obj: any, protoType: Function) {
+      console.log('before', obj, protoType)
+  }
 
-    @After({property: 'fire'})
-    after(obj: any, protoType: Function) {
-        console.log('after', obj, protoType)
-    }
+  @After({property: 'fire'})
+  after(obj: any, protoType: Function) {
+      console.log('after', obj, protoType)
+  }
   ```
 * @ExceptionHandler
   ```typescript
-      @ExceptionHandler()
-      public exception0(e: any) {
-          console.log('Advice Global exception:', e)
-      }
+  @ExceptionHandler()
+  public exception0(e: any) {
+      console.log('Advice Global exception:', e)
+  }
   ```
 
 ## Intent event broker 
@@ -192,7 +196,7 @@ export class App extends Module {
 ```
 ```typescript
 export class AppInfo extends Module {
-    template = '<div><h3>info</h3>{{datas}}</div>';
+    template = '<div><h3>info</h3>{%write(this.datas)%}</div>';
     datas = 'default data';
     data(i: Intent) {
         this.datas = i.data + '->' + i.params.aa
@@ -236,12 +240,12 @@ export class AppInfo extends Module {
      - **module-isolate**: Partial reloading scope 
        - value: target variable name
        - ```html
-         <div module-isolate="data">{{data}}</div>
+         <div module-isolate="data">{%write(this.data)%}</div>
          ```
      - **router-active-class**: url === href attribute => class add 
        - value: add and remove class name
        - ```html
-          <a href="#ajax" router-active-class="['active']">Ajax</a>
+          <a router-link="ajax" router-active-class="['active']">Ajax</a>
          ```
      - **router-link**:
        - value: router link

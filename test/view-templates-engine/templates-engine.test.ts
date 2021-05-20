@@ -7,14 +7,13 @@ import {SimOption} from "../../src/option/SimOption";
 import {ConstructorType} from "../../src/types/Types";
 import {Router} from "../../src/router/Router";
 import {SimCompiler} from "../../src/render/compile/SimCompiler";
-// const ffa = -111;
 var html = `
 <html>
 <body>
 {%write(this.ggg)%}
 
 {%
-write('zzz')
+    write('zzz')
     for(let i of this.datas) {
         write('<div>'+i+'</div>');
     }
@@ -28,7 +27,6 @@ write('zzz')
 <div>
     <module var="wow"></module>
     <module ref="WOW"></module>
-    <module:wow ref="WOW"></module:wow>
 </div>
 </body>
 </html>
@@ -67,7 +65,7 @@ describe('utils-test', () => {
 describe('templates-engine', () => {
 
     test('compile', async (done) => {
-       const result = new SimCompiler(html, dataContain).run().root?.getResult();
+       const result = new SimCompiler(html, dataContain).run().root?.execResult();
         console.log(result)
         done()
     })

@@ -10,12 +10,4 @@ export class SimCompiler implements Runnable {
         this.root = new Scope(this.raws, this.obj, this.config);
         return this;
     }
-
-    // getResult(): string {
-    //     // if (this.root) {
-    //     //     return this.raws.replace(this.config.start + this.root. + this.config.end, scopeObject.writes)
-    //     // } else {
-    //     //     return this.raws;
-    //     // }
-    // }
 }

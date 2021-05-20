@@ -9,21 +9,17 @@ import {SimstanceManager} from "simple-boot-front/simstance/SimstanceManager";
 import {RouterManager} from "simple-boot-front/router/RouterManager";
 import {Navigation} from "simple-boot-front/service/Navigation";
 
-@Sim({scheme: 'index'})
 // @After({type: Index, target: 'aa'})
 // @Reflect.metadata("design:type", Number)
+@Sim({scheme: 'index'})
 export class Index extends Module {
     template = html;
-
     data = "default data";
-
     thisData = 5151;
-
     public title = new class extends Module {
         public value = "";
         public wrapElement = "span";
     }();
-
     public numbers = new class extends Module {
         public datas = [1, 2, 3];
         template = `
@@ -39,15 +35,12 @@ export class Index extends Module {
 
     constructor(public v: ViewService, public manager: SimstanceManager, public navigation: Navigation) {
         super("index");
-       // console.log('------------->', v, manager)
     }
 
     onInit() {
-        // console.log('index onInit')
     }
 
     test() {
-        // console.log("test");
     }
 
     changeText($event: KeyboardEvent, view: View<Element>) {
@@ -74,21 +67,9 @@ export class Index extends Module {
     goto() {
         console.log('-->na', this.navigation)
         this.navigation.go('exception');
-        // const state = {'page_id': 1, 'user_id': 5}
-        // const title = 'ttttt'
-        // const url = 'hello-world.html'
-        // // history.replaceState({page: 3}, "title 3", "?page=3");
-        // history.pushState(state, title, url)
-        // history.pushState = ( f => function pushState(){
-        //     var ret = f.apply(this, arguments);
-        //     window.dispatchEvent(new Event('pushstate'));
-        //     window.dispatchEvent(new Event('locationchange'));
-        //     return ret;
-        // })(history.pushState);
     }
 
     @PostConstruct
     public post(renderer: Renderer) {
-        //console.log('post-->', renderer)
     }
 }

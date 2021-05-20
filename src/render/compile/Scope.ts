@@ -7,7 +7,7 @@ export class Scope {
         this.run();
     }
 
-    getResult(): string {
+    execResult(): string {
         let result = this.raws;
         this.childs.forEach(it => {
             const scopeObject = it.exec();
@@ -29,7 +29,7 @@ export class Scope {
         let i = this.indexOf(targetRaws, this.config.start);
         while (i !== -1) {
             const startIdx = i;
-            let endIdex = this.lastIndexOf(targetRaws, this.config.end, i);
+            let endIdex = this.tailIndexOf(targetRaws, this.config.end, i);
             while (endIdex !== -1) {
                 const sub = targetRaws.substring(startIdx, endIdex);
                 const matchStart = sub.match(RegExp(this.config.start, 'gm')) || [];
@@ -41,7 +41,7 @@ export class Scope {
                 }
                 // console.log(matchStart, matchEnd)
                 // console.log(sub)
-                endIdex = this.lastIndexOf(targetRaws, this.config.end, endIdex);
+                endIdex = this.tailIndexOf(targetRaws, this.config.end, endIdex);
             }
 
             if (endIdex !== -1) {
@@ -57,7 +57,7 @@ export class Scope {
         return data.indexOf(searchString, position);
     }
 
-    public lastIndexOf(data: string, searchString: string, position?: number): number {
+    public tailIndexOf(data: string, searchString: string, position?: number): number {
         const number = data.indexOf(searchString, position);
         return number !== -1 ? number + searchString.length : number;
     }

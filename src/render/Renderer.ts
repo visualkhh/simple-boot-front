@@ -11,7 +11,7 @@ export class Renderer {
 
     public renderString(template: string, obj: any): string {
         const root = new SimCompiler(template, obj).run().root;
-        return root?.getResult() || '';
+        return root?.execResult() || '';
     }
 
     public render(module: Module | string) {
