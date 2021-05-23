@@ -1,5 +1,5 @@
 {
-  "name": "test-simple-boot-front",
+  "name": "test-simple-boot-front-parcle-bundler-js-onefile",
   "version": "1.0.0",
   "description": "simple-boot-front",
   "main": "index.js",
@@ -11,10 +11,11 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
     "parcel-bundler": "^1.12.5",
-    "parcel-plugin-css-to-string": "^2.5.2",
-    "reflect-metadata": "^0.1.13",
-    "simple-boot-front": "^1.0.15"
+    "parcel-plugin-css-to-string": "^2.5.2"
+  },
+  "dependencies": {
+    "simple-boot-front": "^1.0.22"
   }
 }

@@ -7,13 +7,21 @@ export class Index extends Module {
     template = html;
     data = 'default data';
     title = new (class extends Module {
-        data = '';
+        value = '';
         wrapElement = 'span';
     })();
 
     numbers = new (class extends Module {
         datas = [1, 2, 3];
-        template = '<ul>{{#each datas as |data i|}}<li>{{data}}</li>{{/each}}</ul>';
+        template = `
+        <ul>
+        {%
+            for (let i of this.datas) {
+                write('<li>' + i + '</li>');
+            }
+        %}
+        </ul>
+        `
     })();
 
     test() {
@@ -21,7 +29,7 @@ export class Index extends Module {
     }
 
     changeText($event, view) {
-        this.title.data = view.value;
+        this.title.value = view.value;
     }
 
     changeData() {

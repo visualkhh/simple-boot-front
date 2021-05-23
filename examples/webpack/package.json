@@ -23,9 +23,9 @@
   "scripts": {
     "build": "webpack --config webpack.config.js",
     "watch": "webpack --config webpack.config.js --watch",
-    "start:dev": "webpack serve --open ",
+    "serve": "webpack serve --open ",
     "test": "jest --detectOpenHandles --forceExit",
-    "start-noopen:dev": "webpack serve"
+    "serve-noopen": "webpack serve"
   },
   "devDependencies": {
     "@types/jest": "^26.0.22",
@@ -58,16 +58,10 @@
     "clean-webpack-plugin": "^3.0.0",
     "core-js": "^3.9.1",
     "file": "^0.2.2",
-    "handlebars": "^4.7.7",
-    "handlebars-webpack-plugin": "^2.2.1",
     "html-webpack-plugin": "^5.3.1",
-    "localized-strings": "^0.2.4",
-    "npm": "^7.5.4",
-    "rxjs": "^6.5.5",
-    "simple-boot-front": "^1.0.19",
+    "simple-boot-front": "^1.0.22",
     "system": "^2.0.1",
     "ts-loader": "^7.0.5",
-    "uuid": "^8.3.2",
     "webpack": "^5.22.0"
   }
 }

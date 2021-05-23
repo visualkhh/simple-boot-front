@@ -1,10 +1,8 @@
-
 /*[module-selector]*/
 h1 {
-    color: burlywood;
+    color: #ad8a56;
 }
-
 /*[module-selector]*/
-div {
-    margin: 10px;
+button {
+    margin: 20px
 }

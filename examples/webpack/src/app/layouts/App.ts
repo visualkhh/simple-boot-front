@@ -1,25 +1,19 @@
-import {Sim} from 'simple-boot-front/decorators/SimDecorator'
-import {Module} from 'simple-boot-front/module/Module'
-import {AjaxService} from 'simple-boot-front/service/AjaxService'
+import css from "./app.css"
 import html from './app.html'
-import {SimstanceManager} from 'simple-boot-front/simstance/SimstanceManager'
-import bootstrap from 'raw-loader!../../assets/libs/bootstrap/css/bootstrap.min.css';
-import css from 'raw-loader!./dashboard.css'
+import {Module} from "simple-boot-front/module/Module";
+import {Sim} from "simple-boot-front/decorators/SimDecorator";
+import {AjaxService} from "simple-boot-front/service/AjaxService";
+import {SimstanceManager} from "simple-boot-front/simstance/SimstanceManager";
+import {AppInfo} from './AppInfo';
 
-@Sim()
+@Sim({scheme: 'layout'})
 export class App extends Module {
-    styleImports = [bootstrap, css]
-    template = html
+    styleImports = [css];
+    template = html;
+    info = new AppInfo();
+
     constructor(public ajaxService: AjaxService, public simstance: SimstanceManager) {
-        super('app-router-module')
+        super("app-layout-module");
     }
 
-    onInit() {
-        import('script-loader!../../assets/libs/bootstrap/js/bootstrap.bundle.min.js');
-        import('script-loader!../../assets/libs/feather/feather.min.js');
-    }
-
-    onChangedRender() {
-        import('script-loader!./layout.js');
-    }
 }

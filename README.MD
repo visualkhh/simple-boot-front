@@ -140,6 +140,7 @@ npm install simple-boot-front
 %}
 </div>
 ```
+- write: write string
 
 ## Module LifeCycle
 * onInit(): module load event

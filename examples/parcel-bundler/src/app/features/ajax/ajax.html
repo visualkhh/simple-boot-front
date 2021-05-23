@@ -9,17 +9,19 @@
     <div class="row">
         <span type="button" module-event-click="loadData" class="btn btn-outline-dark">refresh</span>
         <div>users</div>
-        {{#if data}}
-        <ul>
-            {{#if data.results}}
-            {{#each data.results as |result i|}}
-            <li>{{result.email}}</li>
-            {{/each}}
-            {{/if}}
+
+        <ul module-isolate="data">
+            {%
+                for(let result of this.data?.results || []) {
+                    write('<li>' + result.email + '</li>')
+                }
+            %}
+
         </ul>
-        {{/if}}
+
         <div>
-            {{{profile}}}
+            {%write(this.profile)%}
         </div>
+
     </div>
 </div>

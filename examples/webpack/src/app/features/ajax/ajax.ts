@@ -1,22 +1,21 @@
-import {Sim} from 'simple-boot-front/decorators/SimDecorator'
-import {Module} from 'simple-boot-front/module/Module'
-import {AjaxService} from 'simple-boot-front/service/AjaxService'
-import {ViewService} from 'simple-boot-front/service/view/ViewService'
-import html from './ajax.html'
-import css from 'raw-loader!./ajax.css'
-import {Profile} from '../../shareds/Profile'
-import {UserResponse} from '@src/app/models/UserResponse'
-import {ProjectService} from '@src/app/services/ProjectService'
+import { UserResponse } from "../../models/UserResponse";
+import { Profile } from "../../shareds/Profile";
+import { ProjectService } from "../../services/ProjectService";
+import css from "raw-loader!./ajax.css";
+import html from "./ajax.html";
+import {Sim} from "simple-boot-front/decorators/SimDecorator";
+import {Module} from "simple-boot-front/module/Module";
+import {AjaxService} from "simple-boot-front/service/AjaxService";
 
-@Sim()
+@Sim({scheme: "ajax"})
 export class Ajax extends Module {
-    template = html
-    styleImports = [css]
-    public data: UserResponse | undefined
+    styleImports = [css];
+    template = html;
+
+    public data: UserResponse | undefined;
     public profile: Profile | undefined;
-    private uuid: any
-    constructor(public projectService: ProjectService, public v: ViewService, public ajax: AjaxService) {
-        super('hello-world')
+    constructor(public projectService: ProjectService, public ajax: AjaxService) {
+        super("hello-world");
     }
 
     onInit() {
@@ -26,9 +25,13 @@ export class Ajax extends Module {
     }
 
     loadData() {
-        this.ajax.getJson<UserResponse>('https://randomuser.me/api/').subscribe(it => {
-            this.data = it;
-            this.profile?.setUser(this.data.results[0])
-        })
+        this.ajax
+            .getJson<UserResponse>("https://randomuser.me/api/")
+            .subscribe((it) => {
+                this.data = it;
+                if (this.profile && this.data.results && this.data.results.length > 0) {
+                    this.profile.setUser(this.data.results[0]);
+                }
+            });
     }
 }

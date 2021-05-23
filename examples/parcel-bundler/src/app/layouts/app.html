@@ -1,69 +1,38 @@
-<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">SimpleBootFrameworks</a>
-    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
-    <ul class="navbar-nav px-3">
-        <li class="nav-item text-nowrap">
-            <a class="nav-link" href="https://github.com/visualkhh/simple-boot-front" target='_blank'><i class="fab fa-github"></i> github</a>
-        </li>
-    </ul>
-</header>
-
-<div class="container-fluid">
-    <div class="row">
-        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-            <div class="position-sticky pt-3">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#" router-active-class="['active']">
-                            - Home
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="#ajax" router-active-class="['active']">
-                            - Ajax
-                        </a>
-                    </li>
-
-                </ul>
-                <!--
-                <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-                    <span>Saved reports</span>
-                    <a class="link-secondary" href="#" aria-label="Add a new report">
-                        <span data-feather="plus-circle"></span>
-                    </a>
-                </h6>
-                <ul class="nav flex-column mb-2">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="file-text"></span>
-                            Current month
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="file-text"></span>
-                            Last quarter
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="file-text"></span>
-                            Social engagement
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="file-text"></span>
-                            Year-end sale
-                        </a>
-                    </li>
-                </ul>
-                -->
+<div class="container">
+    <header class="blog-header py-3">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+            <div class="col-4 pt-1">
+                {%write(this.info)%}
             </div>
+            <div class="col-4 text-center">
+                <a class="blog-header-logo text-dark pointer" router-link="">simple boot</a>
+            </div>
+            <div class="col-4 d-flex justify-content-end align-items-center">
+
+                <a class="btn btn-sm btn-outline-secondary" href="https://github.com/visualkhh/simple-boot-front" target='_blank'>
+                    <i class="fab fa-github"></i> github
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="nav-scroller py-1 mb-2">
+        <nav class="nav d-flex justify-content-between">
+            <a class="p-2 link-secondary pointer" router-link="" router-active-class="['active']">Home</a>
+            <a class="p-2 link-secondary pointer" router-link="ajax" router-active-class="['active']">Ajax</a>
+            <a class="p-2 link-secondary pointer" router-link="intent" router-active-class="['active']">Intent event</a>
+            <a class="p-2 link-secondary pointer" router-link="exception" router-active-class="['active']">exception</a>
+            <a class="p-2 link-secondary pointer" router-link="aop" router-active-class="['active']">aop</a>
+            <a class="p-2 link-secondary pointer" router-link="views" router-active-class="['active']">views</a>
         </nav>
-        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4" [router-outlet] style="padding:20px"></main>
     </div>
 </div>
+
+<main class="container" [router-outlet]></main>
+
+<footer class="blog-footer">
+    <p>SimpleBootFront for <a href="mailto:visualkhh@gmail.com">visualkhh@gmail.com</a></p>
+    <p>
+        <a href="#">Back to top</a>
+    </p>
+</footer>

@@ -25,24 +25,14 @@ module.exports = {
         ],
       },
       {
-        test: /\.(txt|min)$/i,
+        test: /\.(txt|min|html|css)$/i,
         use: 'raw-loader',
       },
       {
         test: /\.html$/i,
         loader: 'html-loader',
-      },
-      {
-        test: /\.hbs$/i,
-        use: [
-          {
-            loader: 'handlebars-loader',
-          },
-          {
-            loader: 'html-loader',
-          },
-        ],
-      },
+      }
+
     ],
   },
   plugins: [
@@ -54,7 +44,6 @@ module.exports = {
   ],
   resolve: {
     alias: {
-      handlebars: __dirname + '/node_modules/handlebars/dist/handlebars.min.js',
       fs: false,
       '@src': path.resolve(__dirname, 'src'),
     },
