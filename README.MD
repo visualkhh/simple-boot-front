@@ -79,7 +79,7 @@ npm install simple-boot-front
     }
 
     ```
-  * index.html  (handlebars)
+  * index.html
     ```html
     <h1>index</h1>
     links:
