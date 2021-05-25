@@ -13,7 +13,7 @@ export interface Routers {
 export class Router extends SimBase implements Routers {
     constructor(public path: string, public module?: ConstructorType<Module>, public childs: ConstructorType<Router>[] = [],
                 private _simstanceManager = SimGlobal.application?.simstanceManager!,
-                public _navigation = _simstanceManager.getOrNewSim(Navigation)!) {
+                private _navigation = _simstanceManager.getOrNewSim(Navigation)!) {
         super()
     }
 
