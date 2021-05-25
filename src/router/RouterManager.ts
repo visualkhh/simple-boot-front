@@ -28,7 +28,7 @@ export class RouterManager implements Runnable {
     public executeRouter() {
         // console.log('-------', this.simstanceManager, this.option?.rootRouter, this.simstanceManager?.getOrNewSim(this.option?.rootRouter))
         const routers: Router[] = [];
-        const executeModule = this.simstanceManager?.getOrNewSim(this.option?.rootRouter)?.getExecuteModule(routers)
+        const executeModule = this.simstanceManager?.getOrNewSim(this.option?.rootRouter)?.getExecuteModule(routers) || this.simstanceManager?.getOrNewSim(this.simstanceManager?.getOrNewSim(this.option?.rootRouter)?.notFound())
         // const executeModule = this.rootRouter?.getExecuteModule(routers)
         if (executeModule) {
             // console.log('executeRouter-->', routers, executeModule)
@@ -46,6 +46,7 @@ export class RouterManager implements Runnable {
             (executeModule as any)._onInitedChild();
             routers.reverse().forEach(it => (it.moduleObject as any)?._onInitedChild());
         } else {
+
             // this.renderer.render('404 not found')
         }
     }

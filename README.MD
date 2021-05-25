@@ -48,7 +48,7 @@ npm install simple-boot-front
   * AppRouter.ts
     ```typescript
     @Sim({scheme: 'layout-router'})
-    export class AppRouter extends Router {
+    export class AppRouter extends RootRouter {
       module = App;
       '' = Index;
       'ajax' = Ajax;
@@ -57,7 +57,12 @@ npm install simple-boot-front
       'exception' = Exception;
       'aop' = Aop;
       'views' = Views;
+      notFound(): ConstructorType<Module> {
+          console.log(this._navigation.url)
+          return Empty;
+      }
     }
+
     ```
   * index.ts
     ```typescript
