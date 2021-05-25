@@ -57,10 +57,20 @@ npm install simple-boot-front
       'exception' = Exception;
       'aop' = Aop;
       'views' = Views;
+
+      async canActivate(url: string, module: Module): Promise<Module> {
+          if (url === 'forbidden-url') {
+              return this._simstanceManager.getOrNewSim(Forbidden)!;
+          } else {
+              return module;
+          }
+      }
+  
       notFound(): ConstructorType<Module> {
           console.log(this._navigation.url)
-          return Empty;
+          return Notfound;
       }
+    
     }
 
     ```

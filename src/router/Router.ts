@@ -2,33 +2,33 @@ import {Module} from '../module/Module'
 import {ConstructorType} from '../types/Types'
 import {SimBase} from '../base/SimBase';
 import {SimGlobal} from '../global/SimGlobal';
-import {Renderer} from '../render/Renderer';
 import {Navigation} from '../service/Navigation';
+import {RouterModule} from './RouterModule';
 
 export interface Routers {
-    [name: string]: ConstructorType<any> | any
+    [name: string]: ConstructorType<Module> | any
 }
 
 export class Router extends SimBase implements Routers {
     constructor(public path: string, public module?: ConstructorType<Module>, public childs: ConstructorType<Router>[] = [],
-                private _renderer = SimGlobal.application?.simstanceManager.getOrNewSim(Renderer)!,
-                public _navigation = SimGlobal.application?.simstanceManager.getOrNewSim(Navigation)!) {
+                public _simstanceManager = SimGlobal.application?.simstanceManager!,
+                public _navigation = _simstanceManager.getOrNewSim(Navigation)!) {
         super()
     }
 
-    getExecuteModule(parentRouters: Router[]): Module | undefined {
+    getExecuteModule(parentRouters: Router[]): RouterModule | undefined {
         const path = this._navigation.url;
         const routerStrings = parentRouters.map(it => it.path || '')
         const isRoot = this.isRootUrl(routerStrings, path)
         // console.log('getExecuteModule -> ', isRoot, parentRouters, routerStrings, path, this.path);
         if (isRoot) {
             parentRouters.push(this);
-            const fieldModule = this.routing(routerStrings, path)
-            if (fieldModule) {
-                return fieldModule;
+            const module = this.routing(routerStrings, path)
+            if (module) {
+                return new RouterModule(this, module);
             } else {
                 for (const child of this.childs) {
-                    const route = SimGlobal.application?.simstanceManager.getOrNewSim(child)
+                    const route = this._simstanceManager.getOrNewSim(child)
                     const executeModule = route?.getExecuteModule(parentRouters)
                     if (route && executeModule) {
                         return executeModule
@@ -60,5 +60,9 @@ export class Router extends SimBase implements Routers {
         if (fieldModule) {
             return SimGlobal.application?.simstanceManager.getOrNewSim(fieldModule)
         }
+    }
+
+    public async canActivate(url: string, module: Module): Promise<Module> {
+        return module;
     }
 }
