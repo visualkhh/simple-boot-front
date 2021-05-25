@@ -6,8 +6,8 @@ import {SimGlobal} from '../global/SimGlobal';
 import {Sim} from '../decorators/SimDecorator';
 import {getTargetAndIncludeNullAndSortExceptionHandlers} from '../decorators/exception/ExceptionDecorator';
 import {SimOption} from '../option/SimOption';
-import {getAfters, getBefores, getProtoAfters, getProtoBefores} from '../decorators/aop/AOPDecorator';
-import {ObjectUtils} from "../util/object/ObjectUtils";
+import {getProtoAfters, getProtoBefores} from '../decorators/aop/AOPDecorator';
+import {ObjectUtils} from '../util/object/ObjectUtils';
 
 @Sim()
 export class SimProxyHandler implements ProxyHandler<any> {

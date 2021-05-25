@@ -4,6 +4,7 @@ import {SimBase} from '../base/SimBase';
 import {SimGlobal} from '../global/SimGlobal';
 import {Navigation} from '../service/Navigation';
 import {RouterModule} from './RouterModule';
+import {Url} from '../model/Url';
 
 export interface Routers {
     [name: string]: ConstructorType<Module> | any
@@ -11,13 +12,13 @@ export interface Routers {
 
 export class Router extends SimBase implements Routers {
     constructor(public path: string, public module?: ConstructorType<Module>, public childs: ConstructorType<Router>[] = [],
-                public _simstanceManager = SimGlobal.application?.simstanceManager!,
+                private _simstanceManager = SimGlobal.application?.simstanceManager!,
                 public _navigation = _simstanceManager.getOrNewSim(Navigation)!) {
         super()
     }
 
     getExecuteModule(parentRouters: Router[]): RouterModule | undefined {
-        const path = this._navigation.url;
+        const path = this._navigation.path;
         const routerStrings = parentRouters.map(it => it.path || '')
         const isRoot = this.isRootUrl(routerStrings, path)
         // console.log('getExecuteModule -> ', isRoot, parentRouters, routerStrings, path, this.path);
@@ -50,19 +51,17 @@ export class Router extends SimBase implements Routers {
 
     // my field find
     public routing(parentRoots: string[], path: string): Module | undefined {
-        // console.log('--routing-->', parentRoots, path)
         const routers = this as Routers
         const urlRoot = parentRoots.join('') + this.path
         const regex = new RegExp('^' + urlRoot, 'i')
         path = path.replace(regex, '')
         const fieldModule = (routers[path] as ConstructorType<any>)
-        // console.log('routing path ', this.path, path, fieldModule)
         if (fieldModule) {
             return SimGlobal.application?.simstanceManager.getOrNewSim(fieldModule)
         }
     }
 
-    public async canActivate(url: string, module: Module): Promise<Module> {
+    public async canActivate(url: Url, module: Module): Promise<Module | ConstructorType<Module>> {
         return module;
     }
 }

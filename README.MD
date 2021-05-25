@@ -58,16 +58,16 @@ npm install simple-boot-front
       'aop' = Aop;
       'views' = Views;
 
-      async canActivate(url: string, module: Module): Promise<Module> {
-          if (url === 'forbidden-url') {
-              return this._simstanceManager.getOrNewSim(Forbidden)!;
+      async canActivate(url: Url, module: Module): Promise<Module | ConstructorType<Module>> {
+          if (url.path === 'views' && url.params.get('auth') === 'false') {
+              return Forbidden;
           } else {
               return module;
           }
       }
   
-      notFound(): ConstructorType<Module> {
-          console.log(this._navigation.url)
+      notFound(url: Url): ConstructorType<Module> {
+          console.log(url.path)
           return Notfound;
       }
     

@@ -14,6 +14,7 @@ import {ConstructorType} from "simple-boot-front/types/Types";
 import {Navigation} from "simple-boot-front/service/Navigation";
 import {Notfound} from "./features/errors/notfound/notfound";
 import {Forbidden} from "./features/errors/forbidden/forbidden";
+import {Url} from "simple-boot-front/model/Url";
 
 @Sim({scheme: 'layout-router'})
 export class AppRouter extends RootRouter {
@@ -26,16 +27,17 @@ export class AppRouter extends RootRouter {
     'aop' = Aop;
     'views' = Views;
 
-    async canActivate(url: string, module: Module): Promise<Module> {
-        if (url === 'forbidden-url') {
-            return this._simstanceManager.getOrNewSim(Forbidden)!;
+
+    async canActivate(url: Url, module: Module): Promise<Module | ConstructorType<Module>> {
+        if (url.path === 'views' && url.params.get('auth') === 'false') {
+            return Forbidden;
         } else {
             return module;
         }
     }
 
-    notFound(): ConstructorType<Module> {
-        console.log(this._navigation.url)
+    notFound(url: Url): ConstructorType<Module> {
+        console.log(url.path)
         return Notfound;
     }
 }

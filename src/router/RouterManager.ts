@@ -27,10 +27,11 @@ export class RouterManager implements Runnable {
 
     public executeRouter() {
         const routers: Router[] = [];
+        const navigation = this.simstanceManager?.getOrNewSim(Navigation);
         const rootRouter = this.simstanceManager?.getOrNewSim(this.option?.rootRouter);
-        const executeModule = this.simstanceManager?.getOrNewSim(this.option?.rootRouter)?.getExecuteModule(routers) || new RouterModule(rootRouter, this.simstanceManager?.getOrNewSim(rootRouter?.notFound()))
+        const executeModule = this.simstanceManager?.getOrNewSim(this.option?.rootRouter)?.getExecuteModule(routers) || new RouterModule(rootRouter, this.simstanceManager?.getOrNewSim(rootRouter?.notFound(navigation?.pathInfo!)))
         if (executeModule && executeModule.module) {
-            executeModule.router?.canActivate(this.simstanceManager?.getOrNewSim(Navigation)?.url!, executeModule.module).then(targetModule => {
+            executeModule.router?.canActivate(navigation?.pathInfo!, executeModule.module).then(targetModule => {
                 if (targetModule) {
                     let lastRouterSelector = this.option?.selector;
                     routers.forEach(it => {
@@ -40,6 +41,9 @@ export class RouterManager implements Runnable {
                             lastRouterSelector = selctor;
                         }
                     });
+                    if (typeof targetModule === 'function') {
+                        targetModule = this.simstanceManager?.getOrNewSim(targetModule) as Module;
+                    }
                     this.render(targetModule, lastRouterSelector);
                     this.renderd();
                     (targetModule as any)._onInitedChild();
@@ -58,7 +62,7 @@ export class RouterManager implements Runnable {
             const actives = FunctionUtils.eval<string[]>(value ?? '[]')
             if (!actives) return;
             const hrefAttr = (it.getAttribute('router-link') ?? '')
-            if (hrefAttr === navigation?.url) {
+            if (hrefAttr === navigation?.path) {
                 it.classList.add(...actives)
             } else {
                 it.classList.remove(...actives)
