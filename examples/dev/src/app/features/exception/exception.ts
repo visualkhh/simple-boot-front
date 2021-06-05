@@ -16,11 +16,9 @@ import {RouterNotFount} from "simple-boot-front/throwable/RouterNotFount";
 
 @Sim()
 export class Exception extends Module {
-    styleImports = [css];
-    template = html;
     data = 1
     constructor(public projectService: ProjectService, public ajax: AjaxService) {
-        super("exception");
+        super("exception", {template: html, styleImports:[css]});
     }
 
     onInit() {

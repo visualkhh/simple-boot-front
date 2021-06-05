@@ -40,32 +40,35 @@ export class SimProxyHandler implements ProxyHandler<any> {
             // Object.get
             // console.log('------>', obj, getSim(obj));
             // console.log('------>', obj, getSim(Object.getPrototypeOf(obj)))
-            try {
-                // 격리변수들.. 부분 갱신만 우선시한다.
-                // let i = 0;
-                const targetSelector = `module-isolate='${prop}'`
-                const elementNodeListOf = obj.findChildAttributeElements(targetSelector);
-                if (elementNodeListOf && elementNodeListOf.length > 0) {
-                    const temp = document.createElement('div')
-                    temp.innerHTML = obj.template;
-                    const tempElements = temp.querySelectorAll(`[${targetSelector}]`)
-                    elementNodeListOf.forEach((it, key) => {
-                        this.renderer.renderInnerHTML(it, tempElements[key].innerHTML, obj);
-                        (obj as any).addEvent(it);
-                    });
-                    return true;
-                }
-            } catch (e) {
-            }
+            // 격리변수들.. 부분 갱신만 우선시한다.
+            // try {
+            //     const targetSelector = `module-isolate='${prop}'`
+            //     const elementNodeListOf = obj.findChildAttributeElements(targetSelector);
+            //     if (elementNodeListOf && elementNodeListOf.length > 0) {
+            //         const temp = document.createElement('span')
+            //         temp.innerHTML = obj.template;
+            //         const tempElements = temp.querySelectorAll(`[${targetSelector}]`)
+            //         elementNodeListOf.forEach((it, key) => {
+            //             this.renderer.renderInnerHTML(it, tempElements[key].innerHTML, obj);
+            //             (obj as any).addEvent(it);
+            //         });
+            //         return true;
+            //     }
+            // } catch (e) {
+            // }
 
             try {
                 const sim = this.simstanceManager?.getOrNewSim(obj.constructor as ConstructorType<Module>)
                 if (sim) {
-                    sim.render();
+                    console.log('proxy --> sim, ', 'props:', prop, 'scope:', sim._scope);
+                    // sim.render();
+                    sim.renderToScope(prop)
                 } else {
+                    console.log('proxy --> else, ', 'props:', prop, 'scope:', obj._scope);
                     obj.render();
                 }
             } catch (e) {
+                console.log('proxy --> catch, ', 'props:', prop, 'scope:', obj._scope);
                 obj.render();
             }
 

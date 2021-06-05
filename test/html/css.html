@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+  p:first-child {
+    color: rebeccapurple;
+  }
+</style>
+<body>
+<div>
+  <p>aa</p>
+  <p>aa</p>
+    <div>
+        <!-- aaa -->
+        <!--% aaa %-->
+        {%write(this.ggg)%}
+
+        {%
+        write('zzz')
+        for(let i of this.datas) {
+        write('<div>'+i+'</div>');
+        }
+        %}
+
+        {%
+        write('zzz')
+        1
+        %}
+        <div>
+
+            <div>
+                <module var="wow"></module>
+                <module ref="WOW"></module>
+            </div>
+        </div>
+</div>
+</body>
+</html>

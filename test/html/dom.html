@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<style>
+  sim-start, sim-end {
+    /*border: solid 1px red;*/
+    /*height: 140px;*/
+    /*display:inline-block;*/
+  }
+</style>
+<head>
+
+</head>
+<body>
+
+<div id="wow">
+
+</div>
+
+<div id="ss">
+<!-- zzzzzz-->
+    aa
+    <a>zzz</a>
+</div>
+</body>
+<script>
+    const templateElement = document.createElement('template');
+    templateElement.innerHTML = '<!--zzz--> <a>a</a> wow  <!-- a333333aa -->'
+    const data = templateElement.content;
+    console.log(data)
+    // document.querySelector('#wow').append(templateElement.content)
+    // console.log(templateElement.content)
+    // console.log(templateElement.content.firstChild)
+    // console.log(templateElement.content.lastChild)
+    // NodeFilter
+    const nodeIterator = document.createNodeIterator(
+        templateElement.content,
+        NodeFilter.SHOW_COMMENT,
+        {acceptNode: (node) => {
+            console.log('--->', node)
+            return true ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+        }}
+    );
+    console.log(nodeIterator)
+    var currentNode;
+    while (currentNode = nodeIterator.nextNode()) {
+        console.log(currentNode)
+    }
+    // https://kyu.io/%EC%9B%B9-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B84%E2%80%8A-%E2%80%8Atemplate-element-html-imports/
+</script>
+</html>

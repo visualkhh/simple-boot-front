@@ -11,13 +11,11 @@ import {RandomUtils} from 'simple-boot-front/util/random/RandomUtils';
 
 @Sim()
 export class Intents extends Module {
-    styleImports = [css];
-    template = html;
     public data = '---default data';
     public profile: Profile | undefined;
 
     constructor(public projectService: ProjectService, public ajax: AjaxService) {
-        super("intent");
+        super("intent", {template: html, styleImports:[css]});
     }
 
     click() {

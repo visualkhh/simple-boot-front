@@ -8,28 +8,28 @@ import {ConstructorType} from "../../src/types/Types";
 import {Router} from "../../src/router/Router";
 import {SimCompiler} from "../../src/render/compile/SimCompiler";
 var html = `
-<html>
-<body>
-{%write(this.ggg)%}
-
-{%
+<div>
+    <!-- aaa -->
+    <!--% write(this.ggg)%-->
+    
+    <!--% 
+        write('zzz')
+        for(let i of this.datas) {
+            write('<div>'+i+'</div>');
+        }
+    %-->
+    
+    <!--%
     write('zzz')
-    for(let i of this.datas) {
-        write('<div>'+i+'</div>');
-    }
-%}
-
-{%
-1
-%}
-<div>
-
-<div>
-    <module var="wow"></module>
-    <module ref="WOW"></module>
+    1
+    %-->
+    <div>
+    
+    <div>
+        <module var="wow"></module>
+        <module ref="WOW"></module>
+    </div>
 </div>
-</body>
-</html>
 `
 const dataContain = {
     aaa: 1,
@@ -51,7 +51,7 @@ const specialCharacterToEscape = (data: string) => {
     return data;
 }
 // render
-const render = new Renderer(new SimOption({} as ConstructorType<Router>))
+// const render = new Renderer(new SimOption({} as ConstructorType<Router>))
 
 describe('utils-test', () => {
 
@@ -64,11 +64,36 @@ describe('utils-test', () => {
 
 describe('templates-engine', () => {
 
-    test('compile', async (done) => {
-       const result = new SimCompiler(html, dataContain).run().root?.execResult();
-        console.log(result)
+    test('innerhtml', async (done) => {
+        const htmlDivElement1 = document.createElement('div');
+        htmlDivElement1.innerHTML= 'zzzz';
+
+        const fragment = document.createDocumentFragment()
+        fragment.append(document.createTextNode('----'))
+        fragment.append(htmlDivElement1)
+        const htmlDivElement = document.createElement('template');
+        // htmlDivElement.innerHTML = '<a> zzzzzz </a>'
+        htmlDivElement.appendChild(fragment);
+        console.log(htmlDivElement.content)
         done()
     })
+
+    test('compile', async (done) => {
+       const result = new SimCompiler(html, dataContain, {start: '<!--%', end: '%-->'}).run().root?.executeFragment();
+
+        // for (let i = 0; i < result!.fragment.childNodes.length; i++) {
+        //     const childNode = result!.fragment.childNodes[i];
+        //     console.log('***-->', childNode)
+        //     for (let y = 0; y < childNode.childNodes.length; y++) {
+        //         console.log('******---->', childNode.childNodes[y])
+        //     }
+        // }
+        const templateElement = document.createElement('template');
+        templateElement.appendChild(result!.fragment);
+        console.log(templateElement.content)
+        done()
+    })
+
 
     test('{{{}}}', async (done) => {
         const datas = new Map<string, any>();

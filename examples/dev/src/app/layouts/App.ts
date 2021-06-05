@@ -8,12 +8,10 @@ import {AppInfo} from './AppInfo';
 
 @Sim({scheme: 'layout'})
 export class App extends Module {
-    styleImports = [css];
-    template = html;
     info = new AppInfo();
 
     constructor(public ajaxService: AjaxService, public simstance: SimstanceManager) {
-        super("app-layout-module");
+        super("app-layout-module", {template: html, styleImports: [css]});
     }
 
 }

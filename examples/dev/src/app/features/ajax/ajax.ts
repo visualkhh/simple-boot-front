@@ -9,13 +9,11 @@ import {AjaxService} from "simple-boot-front/service/AjaxService";
 
 @Sim({scheme: "ajax"})
 export class Ajax extends Module {
-    styleImports = [css];
-    template = html;
 
     public data: UserResponse | undefined;
     public profile: Profile | undefined;
     constructor(public projectService: ProjectService, public ajax: AjaxService) {
-        super("hello-world");
+        super("hello-world", {template: html, styleImports:[css]});
     }
 
     onInit() {

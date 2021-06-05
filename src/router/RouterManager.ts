@@ -77,6 +77,7 @@ export class RouterManager implements Runnable {
     }
 
     public renderRouterModule(module: Module | undefined, targetSelector = this.option?.selector): boolean {
+        console.log('renderRouterModule router --->', targetSelector)
         if (module && !module.exist()) {
             (module as any)._onInit()
             module.renderWrap(targetSelector);
@@ -87,6 +88,7 @@ export class RouterManager implements Runnable {
     }
 
     public render(module: Module | undefined, targetSelector: string | undefined): boolean {
+        // console.log('render router --->', targetSelector)
         if (module) {
             (module as any)._onInit()
             module.renderWrap(targetSelector);

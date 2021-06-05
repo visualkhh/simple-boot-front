@@ -14,11 +14,9 @@ import {After, Before} from "simple-boot-front/decorators/aop/AOPDecorator";
 
 @Sim()
 export class Aop extends Module {
-    styleImports = [css];
-    template = html;
     data = 1
     constructor(public projectService: ProjectService, public ajax: AjaxService) {
-        super("exception");
+        super("exception", {template: html, styleImports:[css]});
     }
 
     onInit() {

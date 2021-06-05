@@ -9,8 +9,12 @@ import {Renderer} from 'simple-boot-front/render/Renderer';
 import {View} from "simple-boot-front/service/view/View";
 
 export class AppInfo extends Module {
-    template = '<div><h3>info</h3>{%write(this.datas)%}</div>';
     datas = 'default data';
+
+    constructor() {
+        super('appInfo', {template: '<div><h3>info</h3><!--%write(this.datas)%--></div>'});
+    }
+
     data(i: Intent) {
         this.datas = i.data + '->' + i.params.aa
     }

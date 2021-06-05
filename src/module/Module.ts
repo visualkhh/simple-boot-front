@@ -8,12 +8,13 @@ import {FunctionUtils} from '../util/function/FunctionUtils';
 import {Intent} from '../intent/Intent';
 import {SimGlobal} from '../global/SimGlobal';
 import {Navigation} from '../service/Navigation';
+import {Scope} from '../render/compile/Scope';
 
 export class Module extends SimBase implements LifeCycle {
-    public router_outlet_selector: string | undefined;
-    private router_outlet_id: string | undefined;
-    public styleImports: string[] | undefined;
-
+    public router_outlet_selector?: string;
+    private router_outlet_id?: string;
+    public _scope?: Scope;
+    private _option: {template: string, styleImports: string[], wrapElement: string}
     // @Injection(Renderer)
     // public renderer: any;
 
@@ -21,24 +22,34 @@ export class Module extends SimBase implements LifeCycle {
     // private visual = undefined;
     // private renderer: Renderer|undefined;
     public id: string;
-
-    constructor(public selector = '', public template = '{%write(this.value)%}', public wrapElement = 'div',
+    // public template = '{%write(this.value)%}', public wrapElement = 'span'
+    constructor(public selector = '', option: {template?: string, styleImports?: string[], wrapElement?: string} = {},
                 private _renderer = SimGlobal.application?.simstanceManager.getOrNewSim(Renderer),
                 private _navigation = SimGlobal.application?.simstanceManager.getOrNewSim(Navigation)
     ) {
         super();
+        // default option
+        this._option = {
+            template: option.template ?? '<!--%write(this.value)%-->',
+            styleImports: option.styleImports ?? [],
+            wrapElement: option.wrapElement ?? 'span'
+        }
+
         this.id = `___Module___${this.selector}_${RandomUtils.uuid()}`
         this.selector = `#${this.id}`
+        this.init();
     }
 
-    // @PostConstruct()
-    // postConstruct(renderer: Renderer) {
-    //     this.renderer = renderer;
-    //     console.log('module renderer ', renderer)
-    // }
+    private init() {
+        if (this._option.template.search('\\[router-outlet\\]')) {
+            this.router_outlet_id = `___Module___router-outlet_${this.id}_${RandomUtils.uuid()}`
+            this.router_outlet_selector = `#${this.router_outlet_id}`
+            this._option.template = this._option.template.replace('[router-outlet]', ` id='${this.router_outlet_id}' `)
+        }
+    }
 
     public renderString(): string {
-        return this._renderer?.renderString(this.template, this) || '';
+        return this._renderer?.renderString(this._option.template, this) || '';
     }
 
     public getValue<T = any>(name: string, value?: any): T {
@@ -104,11 +115,6 @@ export class Module extends SimBase implements LifeCycle {
     }
 
     private _onInit() {
-        if (this.template.search('\\[router-outlet\\]')) {
-            this.router_outlet_id = `___Module___router-outlet_${this.id}_${RandomUtils.uuid()}`
-            this.router_outlet_selector = `#${this.router_outlet_id}`
-            this.template = this.template.replace('[router-outlet]', ` id='${this.router_outlet_id}' `)
-        }
         this.onInit()
     }
 
@@ -230,13 +236,27 @@ export class Module extends SimBase implements LifeCycle {
     public onFinish() {
     }
 
+    private get scope() {
+        // console.log('scope -->', this._scope)
+        if (!this._scope) {
+            this._scope = this._renderer?.compileScope(this.templateWrapString, this);
+        }
+        // console.log('length-->', this._scope?.executeFragment().fragment.childNodes.length)
+        return this._scope!;
+    }
+
+    public renderToScope(varName: string) {
+        this._renderer?.renderToScope(this.scope, this, varName);
+    }
+
     public render(selector = this.selector) {
-        this._renderer?.renderTo(selector, this)
+        console.log('module render', selector, '\\n', this.selector)
+        this._renderer?.renderToByScope(this.scope, selector, this)
         this.renderd(this.selector)
     }
 
     public renderWrap(selector = this.selector) {
-        this._renderer?.renderTo(selector, this.renderWrapString())
+        this._renderer?.renderToByScope(this.scope, selector, this.renderWrapString())
         this._onChangedRender()
         this.renderd(this.selector)
     }
@@ -246,7 +266,7 @@ export class Module extends SimBase implements LifeCycle {
     }
 
     public transStyle(selector: string): void {
-        const join = this.styleImports?.map(it => {
+        const join = this._option.styleImports?.map(it => {
             // eslint-disable-next-line prefer-regex-literals
             const regExp = new RegExp('\\/\\*\\[module\\-selector\\]\\*\\/', 'gi') // 생성자
             return it.replace(regExp, selector + ' ')
@@ -261,7 +281,11 @@ export class Module extends SimBase implements LifeCycle {
     }
 
     public renderWrapString(): string {
-        return `<${this.wrapElement} id="${this.id}">${this._renderer?.renderString(this.template, this) || ''}</${this.wrapElement}>`
+        return `<${this._option.wrapElement} id="${this.id}">${this._renderer?.renderString(this._option.template, this) || ''}</${this._option.wrapElement}>`
+    }
+
+    public get templateWrapString(): string {
+        return `<${this._option.wrapElement} id="${this.id}">${this._option.template || ''}</${this._option.wrapElement}>`
     }
 
     public exist(): boolean {

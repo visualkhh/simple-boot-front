@@ -12,7 +12,6 @@ import {Navigation} from "simple-boot-front/service/Navigation";
 // @Reflect.metadata("design:type", Number)
 @Sim({scheme: 'index'})
 export class Index extends Module {
-    template = html;
     data = "default data";
     thisData = 5151;
     public title = new class extends Module {
@@ -21,19 +20,23 @@ export class Index extends Module {
     }();
     public numbers = new class extends Module {
         public datas = [1, 2, 3];
-        template = `
+
+        constructor() {
+            super('numbers', {template: `
         <ul>
-        {%
+        <!--%
             for (let i of this.datas) {
                 write('<li>' + i + '</li>');
             }
-        %}
+        %-->
         </ul>
-        `
+        `});
+        }
+
     }();
 
     constructor(public v: ViewService, public manager: SimstanceManager, public navigation: Navigation) {
-        super("index");
+        super("index", {template:html});
     }
 
     onInit() {

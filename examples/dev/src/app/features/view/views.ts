@@ -10,15 +10,12 @@ import {View} from "simple-boot-front/service/view/View";
 
 @Sim()
 export class Views extends Module {
-    styleImports = [css];
-    template = html;
     public data = 'data';
     public profile: Profile | undefined;
-
     public a = new View<Element>('#input', this);
 
     constructor(public projectService: ProjectService, public ajax: AjaxService) {
-        super("view");
+        super("view", {template: html, styleImports:[css]});
     }
 
     click() {

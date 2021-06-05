@@ -10,17 +10,17 @@
         <span type="button" module-event-click="loadData" class="btn btn-outline-dark">refresh</span>
         <div>users</div>
 
-        <ul module-isolate="data">
-            {%
+        <ul>
+            <!--%
                 for(let result of this.data?.results || []) {
                     write('<li>' + result.email + '</li>')
                 }
-            %}
+            %-->
 
         </ul>
 
         <div>
-            {%write(this.profile)%}
+            <!--%write(this.profile)%-->
         </div>
 
     </div>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<style>
+  sim-start, sim-end {
+    /*border: solid 1px red;*/
+    /*height: 140px;*/
+    /*display:inline-block;*/
+  }
+</style>
+<head>
+
+</head>
+<body>
+
+<p>Click the button to create, and add, a comment to the HTML document.</p>
+<p>Click the button to create, and add, a comment to the HTML document.</p>
+<!--https://www.html5rocks.com/ko/tutorials/webcomponents/imports/-->
+<template></template>
+
+<!-- 빵꾸똥꾸 -->
+<!-- <div>zzz</div> -->
+<sim style="width: 10px;">
+    <p style="position: absolute; top: 10px">Click the button to create, and add, a comment to the HTML document.</p>
+</sim>
+
+
+<div>
+<img id="myimg" src="https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_150x54dp.png" />
+    <p>aaaaaaa</p>
+    <p>aaaaaaa</p>
+    <p>aaaaaaa</p>
+    <p>aaaaaaa</p>
+    <p>aaaaaaa</p>
+    <p>aaaaaaa</p>
+    <p>aaaaaaa</p>
+<!--    <p>aaaaaaa</p>-->
+</div>
+
+<div id="wow">
+
+</div>
+</body>
+<script async>
+    function htmlloaded (e) {
+        console.log('-->',e)
+    }
+    // var link = document.querySelector('link[rel="import"]');
+    // var content = link.import;
+    //
+    // // Grab DOM from warning.html's document.
+    // // var el = content.querySelector('.warning');
+    // console.log(content)
+    // document.body.appendChild(content.cloneNode(true));
+    // var link = document.querySelector('link[rel="import"]');
+    //
+    // // import에서 <template>를 복제합니다.
+    // var template = link.import.querySelector('template');
+    // var clone = document.importNode(template.content, true);
+    //
+    // document.querySelector('#container').appendChild(clone);
+</script>
+<link rel="import" href="./bootstrap.html" onload="htmlloaded(event)">
+<script>
+
+    // let fragment = new DocumentFragment();
+    // const html = "<li>1234</li><li>1234333</li><li>123<li>1232224</li>2224</li><li>1333234</li><li>122234</li>";
+    // // element를 생성하여 추가합니다.
+    // const template = document.createElement('div');
+    // template.innerHTML = html;
+    // var z = document.createNodeIterator(template, NodeFilter.SHOW_DOCUMENT_FRAGMENT)
+    // console.log(z)
+
+    // var nodeIterator = document.createNodeIterator(
+    //     document.querySelector('body'),
+    //     NodeFilter.SHOW_DOCUMENT_FRAGMENT
+    // );
+    // var pars = [];
+    // var currentNode;
+    //
+    // while (currentNode = nodeIterator.nextNode()) {
+    //     pars.push(currentNode);
+    // }
+    // console.log(pars)
+    //
+    // pars.forEach(it => {
+    //     // var txt=document.createElement("span");
+    //     // var txt=document.createTextNode('aa');
+    //     // txt.innerHTML = it.data;
+    //     var txt = document.createTextNode(it.data)
+    //     it.parentNode.insertBefore(txt, it.nextSibling);
+    // })
+
+    // var nodes = {
+    //     element: document.querySelector('body'),
+    //     childs: []
+    // }
+    // var body = document.querySelector('body');
+    // console.log(body)
+    // function myFunction() {
+    //   var c = document.createComment("My personal comments");
+    //   document.body.appendChild(c);
+    //   var x = document.getElementById("demo");
+    //   x.innerHTML = "A comment was added to this document, but as you know, comments are invisible.";
+    // }
+
+    // var myimg = document.getElementById('myimg');
+    // var txt=document.createElement("span");
+    // txt.innerHTML="Whatever text you want to write . . .";
+    // myimg.parentNode.insertBefore(txt,myimg.nextSibling);
+    // myimg.parentNode.appendChild(txt);
+    // if(myimg.nextSibling){
+    //     myimg.parentNode.insertBefore(txt,myimg.nextSibling);
+    // }else{
+    //     myimg.parentNode.appendChild(txt);
+    // }
+
+    // https://developer.mozilla.org/en-US/docs/Web/API/Document/createDocumentFragment
+    const html = "<div>zzz</div><li>1234</li><li>123<span>aaaaaaaaaaaaa</span>4333</li><li>12<span>aaaaaaaaaaaaa</span>3<li>1232224</li><li>2224</li><li>1333234</li><li>122234</li>";
+    // element를 생성하여 추가합니다.
+    const template = document.createElement('template');
+    template.innerHTML = html;
+    document.body.appendChild(template)
+    console.log(template, template.childNodes.length);
+    // var nodeIterator = document.createNodeIterator(template, NodeFilter.SHOW_ELEMENT)
+    // var pars = [];
+    // var currentNode;
+    //
+    // while (currentNode = nodeIterator.nextNode()) {
+    //     pars.push(currentNode);
+    // }
+    // console.log(template, nodeIterator,pars)
+
+    // https://kyu.io/%EC%9B%B9-%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B84%E2%80%8A-%E2%80%8Atemplate-element-html-imports/
+</script>
+</html>
