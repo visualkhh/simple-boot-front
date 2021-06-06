@@ -7,6 +7,11 @@
 
     thisData <button module-event-click="thisDataChange"> this data change</button>
 
-    <div>zzzzzz</div>
+    <div>set variable: <!--%module(this.title)%--></div>
+    <div>input module variable: <input type="text" module-event-keyup="changeText"></div>
+
+
+    <div>sub numbers module: <!--%module(this.numbers)%--></div>
+    <button class="btn btn-info" module-event-click="changeData">change numbers</button>
 </div>
 

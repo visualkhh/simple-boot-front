@@ -8,30 +8,32 @@ import {Renderer} from "simple-boot-front/render/Renderer";
 import {SimstanceManager} from "simple-boot-front/simstance/SimstanceManager";
 import {Navigation} from "simple-boot-front/service/Navigation";
 import css from "./index.css";
+import {Title} from "./Title";
 
 @Sim({scheme: 'index'})
 export class Index extends Module {
     data = "default data";
     thisData = 5151;
-    // public title = new class extends Module {
-    //     public value = "";
-    //     public wrapElement = "span";
-    // }();
-    // public numbers = new class extends Module {
-    //     public datas = [1, 2, 3];
-    //     template = `
-    //     <ul>
-    //     {%
-    //         for (let i of this.datas) {
-    //             write('<li>' + i + '</li>');
-    //         }
-    //     %}
-    //     </ul>
-    //     `
-    // }();
 
-    constructor(public v: ViewService, public manager: SimstanceManager, public navigation: Navigation) {
-        super("index", {template: html, styleImports:[css]});
+    public numbers = new class extends Module {
+        constructor() {
+            super('numbers', {
+                template: `
+                                    <ul>
+                                    <!--%
+                                        for (let i of this.value) {
+                                            write('<li>' + i + '</li>');
+                                        }
+                                    %-->
+                                    </ul>
+                            `,
+                value: [1, 2, 3]
+            });
+        }
+    }();
+
+    constructor(public title: Title, public v: ViewService, public manager: SimstanceManager, public navigation: Navigation) {
+        super("index", {template: html, styleImports: [css]});
     }
 
     onInit() {
@@ -40,17 +42,18 @@ export class Index extends Module {
     test() {
     }
 
-    // changeText($event: KeyboardEvent, view: View<Element>) {
-    //     this.title.value = view.value;
-    // }
-    //
-    // changeData() {
-    //     this.numbers.datas = [
-    //         Math.floor(RandomUtils.random(1, 400)),
-    //         Math.floor(RandomUtils.random(1, 400)),
-    //         Math.floor(RandomUtils.random(1, 400))
-    //     ];
-    // }
+    changeText($event: KeyboardEvent, view: View<Element>) {
+        this.title.value = view.value;
+        console.log('------->', this.title.value)
+    }
+
+    changeData() {
+        this.numbers.value = [
+            Math.floor(RandomUtils.random(1, 400)),
+            Math.floor(RandomUtils.random(1, 400)),
+            Math.floor(RandomUtils.random(1, 400))
+        ];
+    }
 
     thisDataChange() {
         this.thisData = Math.floor(RandomUtils.random(1, 400));

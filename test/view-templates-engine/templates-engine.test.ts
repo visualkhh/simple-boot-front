@@ -23,6 +23,10 @@ var html = `
     write('zzz')
     1
     %-->
+    <img src="<!--%write('zzzzzzz')%-->">
+    <!--%
+    write(this.sub)
+    %-->
     <div>
     
     <div>
@@ -37,6 +41,7 @@ const dataContain = {
     ddd: 12,
     datas: ['aaa', 'bbb', 'cc'],
     ggg: 122,
+    sub: '<!--% write(this.aaa) %-->',
 } as any;
 /*
 function escapeRegExp(string){
@@ -88,9 +93,9 @@ describe('templates-engine', () => {
         //         console.log('******---->', childNode.childNodes[y])
         //     }
         // }
-        const templateElement = document.createElement('template');
+        const templateElement = document.createElement('div');
         templateElement.appendChild(result!.fragment);
-        console.log(templateElement.content)
+        console.log(templateElement.innerHTML)
         done()
     })
 

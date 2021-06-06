@@ -5,7 +5,9 @@ export class ScopeObject {
     [name: string]: any;
 
     public writes = '';
-    public uuid = RandomUtils.uuid();
+
+    constructor(public uuid = RandomUtils.uuid()) {
+    }
 
     public executeResultSet(code: string): ScopeResultSet {
         this.eval(code);
@@ -27,6 +29,14 @@ export class ScopeObject {
         return Function(`"use strict";
         const write = (str) => {
             this.writes += str;
+        }
+        const module = (module) => {
+            // this.writes += module._option.template;
+            if (module.renderWrapString) {
+                 this.writes += module.renderWrapString();
+            }
+            // module.renderWrap();
+            // console.log('--module sub' ,module);
         }
         ${script}
         `).bind(scope)();

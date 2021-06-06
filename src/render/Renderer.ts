@@ -36,17 +36,21 @@ export class Renderer {
     public renderToScope(scope: Scope, module: Module, varName: string): boolean {
         const targets = scope.childs.filter(it => it.usingVars.includes(varName));
         targets.forEach(it => {
+            if (!it.scopeResult) {
+                it.exec()
+            }
             if (it.scopeResult) {
                 it.scopeResult.childNodes.forEach(it => it.remove());
                 const startComment = it.scopeResult.startComment;
                 const endComment = it.scopeResult.endComment;
+                // console.log('startComment->', startComment, it.uuid)
                 it.exec(module)
                 it.scopeResult.childNodes.forEach(cit => startComment.parentNode?.insertBefore(cit, startComment.nextSibling));
                 startComment.parentNode?.replaceChild(it.scopeResult.startComment, startComment);
                 endComment.parentNode?.replaceChild(it.scopeResult.endComment, endComment);
             }
         })
-        console.log('renderToScope-->', targets)
+        // console.log('renderToScope-->', targets)
         // scope.executeFragment();//.scopeObjects.filter(it => it.)
         return false;
     }

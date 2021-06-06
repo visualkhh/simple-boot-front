@@ -2,7 +2,7 @@
 <div class="card mt-2" style="width: 100%;">
     <div class="card-body">
         <h5 class="card-title">set module</h5>
-        <div>set variable: <!--%write(this.title)%--></div>
+        <div>set variable: <!--%module(this.title)%--></div>
         <div>input module variable: <input type="text" module-event-keyup="changeText"></div>
     </div>
 </div>
@@ -10,7 +10,7 @@
 <div class="card mt-2" style="width: 100%;">
     <div class="card-body">
         <h5>event click change "module-event-click"</h5>
-        <!--%write(this.numbers)%-->
+        <!--%module(this.numbers)%-->
         <button class="btn btn-info" module-event-click="changeData">change</button>
     </div>
 </div>
@@ -23,10 +23,8 @@
 </div>
 <div class="card mt-2" style="width: 100%;">
     <div class="card-body">
-        <h5>variable isolate "module-isolate"</h5>
-        <div module-isolate="data">
-            <!--%write(this.data)%-->
-        </div>
+        <h5>variable module</h5>
+        <!--%write(this.data)%-->
         data link change event <input type="text" module-link="data">
     </div>
 </div>

@@ -17,8 +17,8 @@ export class Scope {
     public execResult(): string {
         let result = this.raws;
         // this.childs.forEach(it => {
-        //     this.scopeObject = it.exec();
-        //     result = result.replace(this.config.start + it.raws + this.config.end, this.scopeObject.commentWrites)
+        //     const scopeObject = it.exec();
+        //     result = result.replace(this.config.start + it.raws + this.config.end, scopeObject.commentWrites)
         // })
         return result;
     }
@@ -46,15 +46,11 @@ export class Scope {
     executeFragment(): {fragment: DocumentFragment, scopeObjects: ScopeObject[]} {
         const templateElement = document.createElement('template');
         templateElement.innerHTML = this.raws;
-        // const templateElement = document.createElement('template');
-        // templateElement.innerHTML = '<!--zzz--> <a>a</a> wow  <!-- a333333aa -->'
         const rawFragment = templateElement.content;
         console.log('executeFragment ', rawFragment.childNodes.length)
-
         this.childs.forEach(it => {
             it.exec();
             const childScopeObject = it.scopeResult!
-
             const nodeIterator = document.createNodeIterator(
                 rawFragment,
                 NodeFilter.SHOW_COMMENT,
@@ -79,48 +75,17 @@ export class Scope {
                 // console.log('------>', currentNode.textContent)
             };
         })
-        // const nodeIterator = document.createNodeIterator(
-        //     data,
-        //     NodeFilter.SHOW_COMMENT,
-        //     {
-        //         acceptNode: (node) => {
-        //             const coment = (node as Comment).data;
-        //             return coment.startsWith('%') && coment.endsWith('%') ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
-        //         }
-        //     }
-        // );
-
-        // console.log('--->', nodeIterator)
-
         const scopeObjects: ScopeObject[] = [];
         return {fragment: rawFragment, scopeObjects: scopeObjects};
     }
 
-    //
-    // // eslint-disable-next-line no-undef
-    // executeChildNodes(): {childNodes: ChildNode[], scopeObjects: ScopeObject[]} {
-    //     const data = this.executeChildNodeList();
-    //     // eslint-disable-next-line no-undef
-    //     const childNodes: ChildNode[] = [];
-    //     for (let i = 0; i < data.childNodes.length; i++) {
-    //         childNodes.push(data.childNodes[i]);
-    //     }
-    //     return {childNodes, scopeObjects: data.scopeObjects};
-    // }
-
     exec(obj: any = this.obj) {
         const scopeObject = new ScopeObject();
         // scopeObject.eval(this.raws, obj);
-        const target = Object.assign(scopeObject, obj) as ScopeObject
-        this.scopeResult = target.executeResultSet(this.raws);
+        const object = Object.assign(scopeObject, obj) as ScopeObject
+        this.scopeResult = object.executeResultSet(this.raws);
+        return {object, result: this.scopeResult};
     }
-
-    // newScopeObject(obj: any = this.obj) {
-    //     const scopeObject = new ScopeObject();
-    //     // scopeObject.eval(this.raws, obj);
-    //     const target = Object.assign(scopeObject, obj) as ScopeObject
-    //     return target;
-    // }
 
     private run(): Scope {
         // const targetRaws = this.raws.substring(this.config.start.length, this.raws.length - this.config.end.length);

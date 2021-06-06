@@ -34,6 +34,7 @@ export class RouterManager implements Runnable {
             executeModule.router?.canActivate(navigation?.pathInfo!, executeModule.module).then(targetModule => {
                 if (targetModule) {
                     let lastRouterSelector = this.option?.selector;
+                    // routerModule render
                     routers.forEach(it => {
                         this.renderRouterModule(it.moduleObject, lastRouterSelector);
                         const selctor = it?.moduleObject?.router_outlet_selector || it?.moduleObject?.selector
@@ -44,6 +45,7 @@ export class RouterManager implements Runnable {
                     if (typeof targetModule === 'function') {
                         targetModule = this.simstanceManager?.getOrNewSim(targetModule) as Module;
                     }
+                    // Module render
                     this.render(targetModule, lastRouterSelector);
                     this.renderd();
                     (targetModule as any)._onInitedChild();
@@ -88,7 +90,7 @@ export class RouterManager implements Runnable {
     }
 
     public render(module: Module | undefined, targetSelector: string | undefined): boolean {
-        // console.log('render router --->', targetSelector)
+        console.log('render router --->', targetSelector)
         if (module) {
             (module as any)._onInit()
             module.renderWrap(targetSelector);

@@ -1,4 +1,4 @@
-simple-boot-front  [v1.0.23]
+simple-boot-front  [v1.0.24]
 ===========
 
 Single Page Application Framworks
@@ -105,7 +105,7 @@ npm install simple-boot-front
     <div class="card mt-2" style="width: 100%;">
         <div class="card-body">
             <h5 class="card-title">set module</h5>
-            <div>set variable: {%write(this.title)%}</div>
+            <div>set variable: <!--%write(this.title)%--></div>
             <div>input module variable: <input type="text" module-event-keyup="changeText"></div>
         </div>
     </div>
@@ -113,7 +113,7 @@ npm install simple-boot-front
     <div class="card mt-2" style="width: 100%;">
         <div class="card-body">
             <h5>event click change "module-event-click"</h5>
-            {%write(this.numbers)%}
+            <!--%module(this.numbers)%-->
             <button class="btn btn-info" module-event-click="changeData">change</button>
         </div>
     </div>
@@ -127,16 +127,14 @@ npm install simple-boot-front
     
     <div class="card mt-2" style="width: 100%;">
         <div class="card-body">
-            <h5>variable isolate "module-isolate"</h5>
-            <div module-isolate="data">
-                {%write(this.data)%}
-            </div>
+            <h5>variable module</h5>
+              <!--%module(this.data)%-->
             data link change event <input type="text" module-link="data">
         </div>
     </div>
     
     <div>
-          {%write(this.thisData)%}
+          <!--%write(this.thisData)%-->
         thisData <button module-event-click="thisDataChange"> this data change</button>
     </div>
     <div>
@@ -145,14 +143,16 @@ npm install simple-boot-front
     ```
 
 ## View template engine
+ - ### Update view only for parts where the value has changed.
 ```html
-<div>{%write(this.data)%}</div>
+<div><!--%write(this.data)%--></div>
+<div><!--%module(this.aModule)%--></div>
 <div>
-{%
+<!--%
     for (let i of this.datas) {
         write('<li>' + i + '</li>');
     }
-%}
+%-->
 </div>
 ```
 - write: write string
@@ -224,7 +224,7 @@ export class App extends Module {
 ```
 ```typescript
 export class AppInfo extends Module {
-    template = '<div><h3>info</h3>{%write(this.datas)%}</div>';
+    template = '<div><h3>info</h3><!--%write(this.datas)%--></div>';
     datas = 'default data';
     data(i: Intent) {
         this.datas = i.data + '->' + i.params.aa
@@ -264,11 +264,6 @@ export class AppInfo extends Module {
        - value: variable name
        - ```html
          <input module-event-value="value">
-         ```
-     - **module-isolate**: Partial reloading scope 
-       - value: target variable name
-       - ```html
-         <div module-isolate="data">{%write(this.data)%}</div>
          ```
      - **router-active-class**: url === href attribute => class add 
        - value: add and remove class name

@@ -13,7 +13,8 @@ const styleImports = [
 const template = `
 <h1>profile</h1>
 <div class="card" style="width: 18rem;">
-  <img src="<!--%write(this.data?.picture?.large)%-->">
+    <!--%write('<img src="'+this.data?.picture?.large+'">')%-->
+ 
   <div class="card-body">
       <h5 class="card-title"><!--%write(this.data?.name?.title)%--></h5>
       <p class="card-text">name: <!--%write(this.data?.name?.first)%--> <!--%write(this.data?.name?.last)%--></p>

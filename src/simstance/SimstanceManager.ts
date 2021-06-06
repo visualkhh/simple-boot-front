@@ -36,6 +36,8 @@ export class SimstanceManager implements Runnable {
         return this.getSimAtomics().filter(it => scheme && it && scheme === it?.config?.scheme) || [];
     }
 
+    // this.resolve(k) exception 내야하나..? throws... 안쪽에서 undifined해야되는거 아닌가?
+    // 아니다 익명 Module이 있을수 있으니 매번 오류메시지 낼필요없다.
     getOrNewSim<T>(k?: ConstructorType<T>): T | undefined {
         if (k) {
             let newVar = this.storage.get(k)

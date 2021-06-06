@@ -13,22 +13,18 @@ import {Scope} from '../render/compile/Scope';
 export class Module extends SimBase implements LifeCycle {
     public router_outlet_selector?: string;
     private router_outlet_id?: string;
+    private id: string;
     public _scope?: Scope;
-    private _option: {template: string, styleImports: string[], wrapElement: string}
-    // @Injection(Renderer)
-    // public renderer: any;
-
-    // @Injection(Renderer)
-    // private visual = undefined;
-    // private renderer: Renderer|undefined;
-    public id: string;
-    // public template = '{%write(this.value)%}', public wrapElement = 'span'
-    constructor(public selector = '', option: {template?: string, styleImports?: string[], wrapElement?: string} = {},
+    public _option: {template: string, styleImports: string[], wrapElement: string}
+    public value: any;
+    constructor(public selector = '', option: {template?: string, styleImports?: string[], wrapElement?: string, value?: any} = {},
                 private _renderer = SimGlobal.application?.simstanceManager.getOrNewSim(Renderer),
                 private _navigation = SimGlobal.application?.simstanceManager.getOrNewSim(Navigation)
     ) {
         super();
+        // console.log('module', selector, option.template)
         // default option
+        this.value = option.value;
         this._option = {
             template: option.template ?? '<!--%write(this.value)%-->',
             styleImports: option.styleImports ?? [],
@@ -252,14 +248,29 @@ export class Module extends SimBase implements LifeCycle {
     public render(selector = this.selector) {
         console.log('module render', selector, '\\n', this.selector)
         this._renderer?.renderToByScope(this.scope, selector, this)
-        this.renderd(this.selector)
+        this.renderd(this.selector);
+        this.findModuleField().forEach(it => it.renderWrap());
     }
 
     public renderWrap(selector = this.selector) {
         this._renderer?.renderToByScope(this.scope, selector, this.renderWrapString())
         this._onChangedRender()
-        this.renderd(this.selector)
+        this.renderd(this.selector);
+        this.findModuleField().forEach(it => it.renderWrap());
     }
+
+    private findModuleField() {
+        const inModuleVars: Module[] = [];
+        for (const key in this) {
+            if (this[key] instanceof Module) {
+                const targetModule = this[key] as any as Module;
+                inModuleVars.push(targetModule);
+                console.log('key-->', this.selector, key)
+            }
+        }
+        return inModuleVars;
+    }
+
 
     public renderd(selector: string) {
         this.transStyle(selector);
@@ -280,6 +291,7 @@ export class Module extends SimBase implements LifeCycle {
         });
     }
 
+    /** *@deprecated */
     public renderWrapString(): string {
         return `<${this._option.wrapElement} id="${this.id}">${this._renderer?.renderString(this._option.template, this) || ''}</${this._option.wrapElement}>`
     }
@@ -290,9 +302,5 @@ export class Module extends SimBase implements LifeCycle {
 
     public exist(): boolean {
         return this._renderer?.exist(this.selector) || false
-    }
-
-    public toString(): string {
-        return this.renderWrapString()
     }
 }
