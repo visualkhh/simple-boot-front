@@ -60,14 +60,11 @@ export class SimProxyHandler implements ProxyHandler<any> {
             try {
                 const sim = this.simstanceManager?.getOrNewSim(obj.constructor as ConstructorType<Module>)
                 if (sim) {
-                    console.log('proxy --> sim, ', 'props:', prop, 'scope:', sim._scope);
                     sim.renderToScope(prop)
                 } else {
-                    console.log('proxy --> else, ', 'props:', prop, 'scope:', obj._scope);
                     obj.renderToScope(prop)
                 }
             } catch (e) {
-                console.log('proxy --> catch, ', 'props:', prop, 'scope:', obj._scope);
                 obj.renderToScope(prop)
             }
 

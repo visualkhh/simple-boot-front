@@ -32,7 +32,7 @@ export class Exception extends Module {
     }
 
     wow(s: string) {
-        console.log('wow', s)
+        //console.log('wow', s)
     }
 
     fireException($event: MouseEvent, view: View<Element>) {

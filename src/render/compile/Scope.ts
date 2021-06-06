@@ -47,7 +47,7 @@ export class Scope {
         const templateElement = document.createElement('template');
         templateElement.innerHTML = this.raws;
         const rawFragment = templateElement.content;
-        console.log('executeFragment ', rawFragment.childNodes.length)
+        // console.log('executeFragment ', rawFragment.childNodes.length)
         this.childs.forEach(it => {
             it.exec();
             const childScopeObject = it.scopeResult!

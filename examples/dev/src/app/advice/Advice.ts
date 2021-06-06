@@ -7,17 +7,17 @@ export class Advice {
 
     @ExceptionHandler()
     public exception0(e: any) {
-        console.log('Advice Global exception:', e)
+        console.log('Advice Global exception:')
     }
 
     @Before({type: Aop, property: 'unkown'})
     public beforeTest(obj: any, f: Function, name: string) {
-        console.log('before Test:', obj, f, name)
+        console.log('before Test:')
     }
 
     @After({type: Aop, property: 'unkown'})
     public afterTest(obj: any, f: Function, name: string) {
-        console.log('after Test:', obj, f, name)
+        console.log('after Test:')
     }
 
 }

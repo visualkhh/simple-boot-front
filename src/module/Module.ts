@@ -246,7 +246,7 @@ export class Module extends SimBase implements LifeCycle {
     }
 
     public render(selector = this.selector) {
-        console.log('module render', selector, '\\n', this.selector)
+        // console.log('module render', selector, '\\n', this.selector)
         this._renderer?.renderToByScope(this.scope, selector, this)
         this.renderd(this.selector);
         this.findModuleField().forEach(it => it.renderWrap());
@@ -265,7 +265,7 @@ export class Module extends SimBase implements LifeCycle {
             if (this[key] instanceof Module) {
                 const targetModule = this[key] as any as Module;
                 inModuleVars.push(targetModule);
-                console.log('key-->', this.selector, key)
+                // console.log('key-->', this.selector, key)
             }
         }
         return inModuleVars;

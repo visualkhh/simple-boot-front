@@ -30,12 +30,12 @@ export class Aop extends Module {
 
     @Before({property: 'fire'})
     before(obj: any, protoType: Function) {
-        console.log('before', obj, protoType)
+        console.log('before', protoType)
     }
 
     @After({property: 'fire'})
     after(obj: any, protoType: Function) {
-        console.log('after', obj, protoType)
+        console.log('after', protoType)
     }
 
     fire($event: MouseEvent, view: View<Element>) {
@@ -55,22 +55,22 @@ export class Aop extends Module {
     // }
     @ExceptionHandler(TypeError)
     public exceptionTypeError(e: any) {
-        console.log('TypeError exception:', e)
+        console.log('TypeError exception:')
     }
 
     @ExceptionHandler(SimError)
     public exception1(e: any) {
-        console.log('SimError exception:', e)
+        console.log('SimError exception:')
     }
 
     @ExceptionHandler(RouterError)
     public exception3(e: any) {
-        console.log('NotFountRoute exception:', e)
+        console.log('NotFountRoute exception:')
     }
 
     @ExceptionHandler(SimNoSuch)
     public exception2(e: any) {
-        console.log('NoSuchSim exception:', e)
+        console.log('NoSuchSim exception:')
     }
 
 

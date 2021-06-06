@@ -1,4 +1,4 @@
-simple-boot-front  [v1.0.24]
+simple-boot-front  [v1.0.25]
 ===========
 
 Single Page Application Framworks
@@ -78,11 +78,10 @@ npm install simple-boot-front
     ```typescript
     @Sim({scheme: 'index'})
     export class Index extends Module {
-      template = html;
       data = "default data";
       thisData = 5151;
       constructor(public v: ViewService, public manager: SimstanceManager, public navigation: Navigation) {
-          super("index");
+          super("index",{template: html});
       }
   
       onInit() {
@@ -214,18 +213,18 @@ click() {
 ```typescript
 @Sim({scheme: 'layout'})
 export class App extends Module {
-    styleImports = [css];
-    template = html;
     info = new AppInfo();
     constructor() {
-        super("app-layout-module");
+        super("app-layout-module", {template: html, styleImports:[css]});
     }
 }
 ```
 ```typescript
 export class AppInfo extends Module {
-    template = '<div><h3>info</h3><!--%write(this.datas)%--></div>';
     datas = 'default data';
+    constructor() {
+      super("app-info", {template: '<div><h3>info</h3><!--%write(this.datas)%--></div>'});
+    }
     data(i: Intent) {
         this.datas = i.data + '->' + i.params.aa
     }
