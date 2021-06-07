@@ -15,17 +15,18 @@ export class Index extends Module {
     data = "default data";
     thisData = 5151;
     public title = new class extends Module {
-        public value = "";
-        public wrapElement = "span";
+        constructor() {
+            super('title', {styleImports: ['/*[module-selector]*/* {color: red}'], value: ''});
+        }
     }();
     public numbers = new class extends Module {
-        public datas = [1, 2, 3];
+        public value = [1, 2, 3];
 
         constructor() {
             super('numbers', {template: `
         <ul>
         <!--%
-            for (let i of this.datas) {
+            for (let i of this.value) {
                 write('<li>' + i + '</li>');
             }
         %-->
@@ -50,7 +51,7 @@ export class Index extends Module {
     }
 
     changeData() {
-        this.numbers.datas = [
+        this.numbers.value = [
             Math.floor(RandomUtils.random(1, 400)),
             Math.floor(RandomUtils.random(1, 400)),
             Math.floor(RandomUtils.random(1, 400))

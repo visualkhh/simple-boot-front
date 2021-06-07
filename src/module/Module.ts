@@ -44,10 +44,6 @@ export class Module extends SimBase implements LifeCycle {
         }
     }
 
-    public renderString(): string {
-        return this._renderer?.renderString(this._option.template, this) || '';
-    }
-
     public getValue<T = any>(name: string, value?: any): T {
         const thisAny = this as any;
         let r = thisAny[name];
@@ -233,12 +229,16 @@ export class Module extends SimBase implements LifeCycle {
     }
 
     private get scope() {
-        // console.log('scope -->', this._scope)
+        // console.log('    scope -->', this.selector, this._scope)
         if (!this._scope) {
             this._scope = this._renderer?.compileScope(this.templateWrapString, this);
         }
         // console.log('length-->', this._scope?.executeFragment().fragment.childNodes.length)
         return this._scope!;
+    }
+
+    public setScope(wrap = true) {
+        this._scope = this._renderer?.compileScope(wrap ? this.templateWrapString : this.templateString, this);
     }
 
     public renderToScope(varName: string) {
@@ -249,15 +249,24 @@ export class Module extends SimBase implements LifeCycle {
         // console.log('module render', selector, '\\n', this.selector)
         this._renderer?.renderToByScope(this.scope, selector, this)
         this.renderd(this.selector);
-        this.findModuleField().forEach(it => it.renderWrap());
+        this.findModuleField().forEach(it => it.render());
     }
 
     public renderWrap(selector = this.selector) {
-        this._renderer?.renderToByScope(this.scope, selector, this.renderWrapString())
+        console.log('module renderWrap******************* \r\n target:', selector, '\r\n my:', this.selector, '\r\n scope:', this.scope)
+        this._renderer?.renderToByScope(this.scope, selector, this.templateWrapString)
         this._onChangedRender()
         this.renderd(this.selector);
         this.findModuleField().forEach(it => it.renderWrap());
     }
+
+    // public renderStripWrap(selector = this.selector) {
+    //     this._scope = this._renderer?.compileScope(this.templateString, this);
+    //     this._renderer?.renderToByScope(this.scope, selector, this.templateWrapString)
+    //     this._onChangedRender()
+    //     this.renderd(this.selector);
+    //     this.findModuleField().forEach(it => it.renderWrap());
+    // }
 
     private findModuleField() {
         const inModuleVars: Module[] = [];
@@ -270,7 +279,6 @@ export class Module extends SimBase implements LifeCycle {
         }
         return inModuleVars;
     }
-
 
     public renderd(selector: string) {
         this.transStyle(selector);
@@ -291,13 +299,13 @@ export class Module extends SimBase implements LifeCycle {
         });
     }
 
-    /** *@deprecated */
-    public renderWrapString(): string {
-        return `<${this._option.wrapElement} id="${this.id}">${this._renderer?.renderString(this._option.template, this) || ''}</${this._option.wrapElement}>`
-    }
-
     public get templateWrapString(): string {
         return `<${this._option.wrapElement} id="${this.id}">${this._option.template || ''}</${this._option.wrapElement}>`
+        // return `<${this._option.wrapElement} id="${this.id}" module-id="${this.id}">${this._option.template || ''}</${this._option.wrapElement}>`
+    }
+
+    public get templateString(): string {
+        return this._option.template || '';
     }
 
     public exist(): boolean {

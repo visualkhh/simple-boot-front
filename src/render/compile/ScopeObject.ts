@@ -31,12 +31,16 @@ export class ScopeObject {
             this.writes += str;
         }
         const module = (module) => {
-            // this.writes += module._option.template;
-            if (module.renderWrapString) {
-                 this.writes += module.renderWrapString();
+            // console.log('scope Eval', module);
+            module.setScope(false);
+            if (module.templateWrapString) {
+                 this.writes += module.templateWrapString;
             }
-            // module.renderWrap();
-            // console.log('--module sub' ,module);
+        }
+        const stripModule = (module) => {
+            if (module.templateString) {
+                 this.writes += module.templateString;
+            }
         }
         ${script}
         `).bind(scope)();

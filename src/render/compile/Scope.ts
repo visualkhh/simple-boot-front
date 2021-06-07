@@ -1,47 +1,17 @@
 import {ScopeObject} from './ScopeObject';
 import {ScopePosition} from './ScopePosition';
-import {RandomUtils} from '../../util/random/RandomUtils';
+// import {RandomUtils} from '../../util/random/RandomUtils';
 import {ScopeResultSet} from './ScopeResultSet';
 
 export class Scope {
     public childs: Scope[] = [];
     public usingVars: string[] = [];
-    public uuid = RandomUtils.uuid();
+    // public uuid = RandomUtils.uuid();
     public scopeResult?: ScopeResultSet;
 
     constructor(private raws: string, private obj: any, private config = {start: '{%', end: '%}'}, private position = new ScopePosition(0, raws.length)) {
         this.run();
     }
-
-    /** @deprecated */
-    public execResult(): string {
-        let result = this.raws;
-        // this.childs.forEach(it => {
-        //     const scopeObject = it.exec();
-        //     result = result.replace(this.config.start + it.raws + this.config.end, scopeObject.commentWrites)
-        // })
-        return result;
-    }
-
-    // executeTemplateElement(): {templateElement: HTMLTemplateElement, scopeObjects: ScopeObject[]} {
-    //     const templateElement = document.createElement('template');
-    //     templateElement.innerHTML = this.execResult();
-    //     const scopeObjects: ScopeObject[] = [];
-    //     // templateElement.
-    //     // this.childs.forEach(it => {
-    //     //     document.createNodeIterator(
-    //     //         templateElement,
-    //     //         NodeFilter.SHOW_COMMENT,
-    //     //         {
-    //     //             acceptNode: (node) => {
-    //     //                 console.log('node-->', node)
-    //     //                 return NodeFilter.FILTER_ACCEPT;
-    //     //             }
-    //     //         }
-    //     //     );
-    //     // })
-    //     return {templateElement, scopeObjects};
-    // }
 
     executeFragment(): {fragment: DocumentFragment, scopeObjects: ScopeObject[]} {
         const templateElement = document.createElement('template');
@@ -63,17 +33,14 @@ export class Scope {
                 }
             )
 
-            let currentNode: Node | null;
-            // eslint-disable-next-line no-cond-assign
-            while (currentNode = nodeIterator.nextNode()) {
-                // currentNode?.parentNode?.insertBefore(childScopeObject.startComment, currentNode.nextSibling)
-                // currentNode?.insertBefore(childScopeObject.startComment, currentNode.nextSibling);
-                currentNode?.parentNode?.insertBefore(childScopeObject.startComment, currentNode);
-                currentNode?.parentNode?.insertBefore(childScopeObject.endComment, currentNode.nextSibling);
-                currentNode?.parentNode?.replaceChild(childScopeObject.fragment, currentNode);
-                // currentNode?.parentNode?.replaceChild(this.scopeObject.renderFragment(), currentNode);
-                // console.log('------>', currentNode.textContent)
-            };
+            const currentNode = nodeIterator.nextNode();
+            currentNode?.parentNode?.insertBefore(childScopeObject.startComment, currentNode);
+            currentNode?.parentNode?.insertBefore(childScopeObject.endComment, currentNode.nextSibling);
+            currentNode?.parentNode?.replaceChild(childScopeObject.fragment, currentNode);
+            /*
+                let currentNode = nodeIterator.nextNode();
+                while (currentNode = nodeIterator.nextNode()) {...}
+             */
         })
         const scopeObjects: ScopeObject[] = [];
         return {fragment: rawFragment, scopeObjects: scopeObjects};

@@ -4,7 +4,7 @@ import {ScopePosition} from './ScopePosition';
 
 export class SimCompiler implements Runnable {
     public root: Scope | undefined;
-    constructor(private raws: string, private obj: any, public config = {start: '<!--%', end: '%-->'}) {
+    constructor(public raws: string, private obj: any, public config = {start: '<!--%', end: '%-->'}) {
     }
 
     run(): SimCompiler {
