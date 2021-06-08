@@ -1,26 +1,38 @@
 import {ScopeObject} from './ScopeObject';
 import {ScopePosition} from './ScopePosition';
-// import {RandomUtils} from '../../util/random/RandomUtils';
+import {RandomUtils} from '../../util/random/RandomUtils';
 import {ScopeResultSet} from './ScopeResultSet';
 
 export class Scope {
     public childs: Scope[] = [];
     public usingVars: string[] = [];
-    // public uuid = RandomUtils.uuid();
+    public uuid = RandomUtils.uuid();
     public scopeResult?: ScopeResultSet;
 
     constructor(private raws: string, private obj: any, private config = {start: '{%', end: '%}'}, private position = new ScopePosition(0, raws.length)) {
         this.run();
     }
 
-    executeFragment(): {fragment: DocumentFragment, scopeObjects: ScopeObject[]} {
+    // clenResults() {
+    //     if (!this.scopeResult?.startComment.isConnected) {
+    //         console.log('scope clenResults->', this.scopeResult)
+    //         this.scopeResult = undefined;
+    //     }
+    //     this.childs.forEach(it => {
+    //         it.clenResults();
+    //     })
+    //     this.childs = this.childs.filter(it => it.scopeResult);
+    // }
+
+    // executeFragment(): {fragment: DocumentFragment, scopeObjects: ScopeObject[]} {
+    executeFragment() {
         const templateElement = document.createElement('template');
         templateElement.innerHTML = this.raws;
         const rawFragment = templateElement.content;
         // console.log('executeFragment ', rawFragment.childNodes.length)
         this.childs.forEach(it => {
-            it.exec();
-            const childScopeObject = it.scopeResult!
+            const childScopeObject = it.exec().result;
+            // const childScopeObject = it.scopeResult!
             const nodeIterator = document.createNodeIterator(
                 rawFragment,
                 NodeFilter.SHOW_COMMENT,
@@ -42,8 +54,8 @@ export class Scope {
                 while (currentNode = nodeIterator.nextNode()) {...}
              */
         })
-        const scopeObjects: ScopeObject[] = [];
-        return {fragment: rawFragment, scopeObjects: scopeObjects};
+        // const scopeObjects: ScopeObject[] = [];
+        return rawFragment;
     }
 
     exec(obj: any = this.obj) {

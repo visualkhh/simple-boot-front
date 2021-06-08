@@ -16,7 +16,7 @@ export class ScopeObject {
         const startComment = document.createComment('scope start ' + this.uuid)
         const endComment = document.createComment('scope end ' + this.uuid)
         // templateElement.innerHTML = '<!--scope start ' + this.uuid + '-->' + this.writes + '<!--scope end ' + this.uuid + '-->'
-        return new ScopeResultSet(this, templateElement.content, startComment, endComment)
+        return new ScopeResultSet(this.uuid, this, templateElement.content, startComment, endComment)
         // return new ScopeResultSet(this, templateElement.content, code, returnValue)
     }
 
@@ -31,15 +31,10 @@ export class ScopeObject {
             this.writes += str;
         }
         const module = (module) => {
-            // console.log('scope Eval', module);
-            module.setScope(false);
-            if (module.templateWrapString) {
-                 this.writes += module.templateWrapString;
-            }
-        }
-        const stripModule = (module) => {
-            if (module.templateString) {
-                 this.writes += module.templateString;
+            if (module) {
+                const scope = module.setScope(false);
+                // console.log('scope Eval', module, scope);
+                this.writes += (module?.getTemplateWrapScopeString(scope) ?? '');
             }
         }
         ${script}

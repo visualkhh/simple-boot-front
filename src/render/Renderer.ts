@@ -3,7 +3,8 @@ import {SimOption} from '../option/SimOption';
 import {Sim} from '../decorators/SimDecorator';
 import {SimCompiler} from './compile/SimCompiler';
 import {Scope} from './compile/Scope';
-import {DomUtils} from "../util/dom/DomUtils";
+import {DomUtils} from '../util/dom/DomUtils';
+import {ScopeResultSet} from './compile/ScopeResultSet';
 
 @Sim()
 export class Renderer {
@@ -20,22 +21,13 @@ export class Renderer {
             targetElement.innerHTML = module.templateString;
             (module as any)._onChangedRender();
         } else if (targetElement && typeof module === 'string') {
-            // console.log('Renderer-->render', module, targetElement)
             targetElement.innerHTML = module
         }
     }
 
-    // public renderInnerHTML(element: Element, template: string, data: any) {
-    //     element.innerHTML = this.renderString(template, data);
-    // }
-
     public renderToScope(scope: Scope, module: Module, varName: string): boolean {
         const targets = scope.childs.filter(it => it.usingVars.includes(varName));
         targets.forEach(it => {
-            // console.log('target scope--->', it.uuid)
-            // if (!it.scopeResult) {
-            //     it.exec()
-            // }
             if (it.scopeResult) {
                 it.scopeResult.childNodes.forEach(it => it.remove());
                 const startComment = it.scopeResult.startComment;
@@ -47,26 +39,24 @@ export class Renderer {
                 endComment.parentNode?.replaceChild(it.scopeResult.endComment, endComment);
             }
         })
-        // console.log('renderToScope-->', targets)
-        // scope.executeFragment();//.scopeObjects.filter(it => it.)
         return false;
     }
 
-    // /** @deprecated */
-    public renderToByScope(scope: Scope, selector: string, module: Module | string = this.option.selector) {
-        const targetElements = DomUtils.selectorElements(selector);
-        if (targetElements.length > 0 && module instanceof Module) {
-            targetElements.forEach(it => {
-                it.innerHTML = '';
-                it.appendChild(scope.executeFragment().fragment);
-            });
-            (module as any)._onChangedRender();
-        } else if (targetElements.length > 0 && typeof module === 'string') {
-            targetElements.forEach(it => {
-                it.innerHTML = '';
-                it.appendChild(scope.executeFragment().fragment);
-            });
-        }
+    public renderToByScopes(selector: string, ...scopes: Scope[]) {
+        scopes.forEach(scope => {
+            const targetElement = document.querySelector(selector + `[scope='${scope.uuid}']`) ?? document.querySelector(selector)
+            if (targetElement) {
+                targetElement.innerHTML = '';
+                targetElement.appendChild(scope.executeFragment());
+            }
+        })
+    }
+
+    public renderToByScopeResultSet(scopeResultSet: ScopeResultSet, selector: string) {
+        DomUtils.selectorElements(selector).forEach(it => {
+            it.innerHTML = '';
+            it.appendChild(scopeResultSet.fragment);
+        });
     }
 
     /**

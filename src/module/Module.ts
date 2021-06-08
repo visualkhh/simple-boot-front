@@ -14,7 +14,7 @@ export class Module extends SimBase implements LifeCycle {
     public router_outlet_selector?: string;
     private router_outlet_id?: string;
     private id: string;
-    public _scope?: Scope;
+    public _scopes = new Map<string, Scope>();
     public _option: {template: string, styleImports: string[], wrapElement: string}
     public value: any;
     constructor(public selector = '', option: {template?: string, styleImports?: string[], wrapElement?: string, value?: any} = {},
@@ -22,7 +22,6 @@ export class Module extends SimBase implements LifeCycle {
                 private _navigation = SimGlobal.application?.simstanceManager.getOrNewSim(Navigation)
     ) {
         super();
-        // console.log('module', selector, option.template)
         // default option
         this.value = option.value;
         this._option = {
@@ -228,33 +227,48 @@ export class Module extends SimBase implements LifeCycle {
     public onFinish() {
     }
 
-    private get scope() {
-        // console.log('    scope -->', this.selector, this._scope)
-        if (!this._scope) {
-            this._scope = this._renderer?.compileScope(this.templateWrapString, this);
-        }
-        // console.log('length-->', this._scope?.executeFragment().fragment.childNodes.length)
-        return this._scope!;
-    }
+    // private get scopes() {
+    //     this.setScope(true);
+    //     // this._scopes.push(this._renderer?.compileScope(this.templateWrapString, this));
+    //     return this._scopes;
+    //     // if (!this._scope) {
+    //     //     this._scope = this._renderer?.compileScope(this.templateWrapString, this);
+    //     // }
+    //     // return this._scope!;
+    // }
+
+    // public clenScopeResults() {
+    //     this._scopes = this._scopes.filter(it => {
+    //         it.clenResults();
+    //         return !!it.scopeResult
+    //     });
+    // }
 
     public setScope(wrap = true) {
-        this._scope = this._renderer?.compileScope(wrap ? this.templateWrapString : this.templateString, this);
+        const scope = this._renderer?.compileScope(wrap ? this.templateWrapString : this.templateString, this);
+        if (scope) {
+            this._scopes.set(scope.uuid, scope);
+        }
+        //     items.executeFragment();
+        //     if (items.scopeResult) {
+        //         this._scopes.set(items.scopeResult.uuid, items);
+        //     }
+        // }
+        return scope;
+        // return this._scopes;
     }
 
     public renderToScope(varName: string) {
-        this._renderer?.renderToScope(this.scope, this, varName);
-    }
-
-    public render(selector = this.selector) {
-        // console.log('module render', selector, '\\n', this.selector)
-        this._renderer?.renderToByScope(this.scope, selector, this)
-        this.renderd(this.selector);
-        this.findModuleField().forEach(it => it.render());
+        this._scopes.forEach(it => {
+            this._renderer?.renderToScope(it, this, varName);
+        })
     }
 
     public renderWrap(selector = this.selector) {
-        console.log('module renderWrap******************* \r\n target:', selector, '\r\n my:', this.selector, '\r\n scope:', this.scope)
-        this._renderer?.renderToByScope(this.scope, selector, this.templateWrapString)
+        if (this._scopes.size <= 0) {
+            this.setScope();
+        }
+        this._renderer?.renderToByScopes(selector, ...Array.from(this._scopes.values()))
         this._onChangedRender()
         this.renderd(this.selector);
         this.findModuleField().forEach(it => it.renderWrap());
@@ -274,7 +288,6 @@ export class Module extends SimBase implements LifeCycle {
             if (this[key] instanceof Module) {
                 const targetModule = this[key] as any as Module;
                 inModuleVars.push(targetModule);
-                // console.log('key-->', this.selector, key)
             }
         }
         return inModuleVars;
@@ -301,6 +314,11 @@ export class Module extends SimBase implements LifeCycle {
 
     public get templateWrapString(): string {
         return `<${this._option.wrapElement} id="${this.id}">${this._option.template || ''}</${this._option.wrapElement}>`
+        // return `<${this._option.wrapElement} id="${this.id}" module-id="${this.id}">${this._option.template || ''}</${this._option.wrapElement}>`
+    }
+
+    public getTemplateWrapScopeString(scope: Scope): string {
+        return `<${this._option.wrapElement} id="${this.id}" scope="${scope.uuid}">${this._option.template || ''}</${this._option.wrapElement}>`
         // return `<${this._option.wrapElement} id="${this.id}" module-id="${this.id}">${this._option.template || ''}</${this._option.wrapElement}>`
     }
 
