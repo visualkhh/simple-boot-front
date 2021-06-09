@@ -87,7 +87,7 @@ export class Scope {
                 const matchStart = sub.match(RegExp(this.config.start, 'gm')) || [];
                 const matchEnd = sub.match(RegExp(this.config.end, 'gm')) || [];
                 if (matchStart.length === matchEnd.length) {
-                    const scope = new Scope(sub.substring(this.config.start.length, sub.length - this.config.end.length), this.obj, this.config, new ScopePosition(startIdx, endIdx));
+                    const scope = new Scope(sub.substring(this.config.start.length, sub.length - this.config.end.length), this.obj, RandomUtils.uuid(), this.config, new ScopePosition(startIdx, endIdx));
                     this.childs.push(scope);
                     // this.childs.push(new Scope(sub, this.config));
                     break;

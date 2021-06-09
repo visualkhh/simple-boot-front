@@ -48,7 +48,7 @@ export class Renderer {
 
     public renderToByScopes(scope: RootScope) {
         // const targetElement = document.querySelector(selector + `[scope='${scope.uuid}']`) ?? document.querySelector(selector)
-        console.log('renderToByScope-->', scope.targetNode.node, scope);
+        // console.log('renderToByScope-->', scope.targetNode.node, scope);
         if (TargetNodeMode.child === scope.targetNode.mode) {
             NodeUtils.removeAllChildNode(scope.targetNode.node)
             scope.targetNode.node.appendChild(scope.executeFragment());

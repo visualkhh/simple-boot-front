@@ -247,7 +247,7 @@ export class Module extends SimBase implements LifeCycle {
 
     public setScope(targetNode: TargetNode, strip = false, uuid = RandomUtils.uuid()) {
         const scope = this._renderer?.compileScope(strip ? this.templateString : this.getTemplateWrapScopeString(uuid), this, uuid);
-        console.log('setScope-->', targetNode, this.selector, '-->', uuid, scope)
+        // console.log('setScope-->', targetNode, this.selector, '-->', uuid, scope)
         if (scope) {
             scope.targetNode = targetNode;
             this._scopes.set(scope.uuid, scope);

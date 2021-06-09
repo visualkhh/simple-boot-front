@@ -48,7 +48,6 @@ export class ScopeObject {
             const targetSelecotr = module.getTemplateWrapScopeSelector(uuid)
             // const targetNode = new TargetNode(targetSelecotr, strip === true ? TargetNodeMode.replace : TargetNodeMode.child);
             const targetNode = new TargetNode(targetSelecotr, TargetNodeMode.replace);
-            console.log('--->', targetNode)
             const scope = module.setScope(targetNode, strip === true, uuid);
             if (scope) {
                 this.writes += (module.getWrapScopeString(scope.uuid) ?? '');
