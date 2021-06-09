@@ -6,13 +6,15 @@ import {Scope} from './compile/Scope';
 import {DomUtils} from '../util/dom/DomUtils';
 import {ScopeResultSet} from './compile/ScopeResultSet';
 import {RandomUtils} from '../util/random/RandomUtils';
+import {NodeUtils} from '../util/node/NodeUtils';
+import {RootScope, TargetNodeMode} from './compile/RootScope';
 
 @Sim()
 export class Renderer {
     constructor(private option: SimOption) {
     }
 
-    public compileScope(template: string, obj: any, rootUUID = RandomUtils.uuid()): Scope | undefined {
+    public compileScope(template: string, obj: any, rootUUID = RandomUtils.uuid()): RootScope | undefined {
         const compiler = new SimCompiler(template, obj, rootUUID)
         return compiler.run().root;
     }
@@ -44,15 +46,16 @@ export class Renderer {
         return false;
     }
 
-    public renderToByScopes(selector: string, ...scopes: Scope[]) {
-        scopes.forEach(scope => {
-            const targetElement = document.querySelector(selector + `[scope='${scope.uuid}']`) ?? document.querySelector(selector)
-            console.log('renderToByScope-->', targetElement, scope);
-            if (targetElement) {
-                targetElement.innerHTML = '';
-                targetElement.appendChild(scope.executeFragment());
-            }
-        })
+    public renderToByScopes(scope: RootScope) {
+        // const targetElement = document.querySelector(selector + `[scope='${scope.uuid}']`) ?? document.querySelector(selector)
+        console.log('renderToByScope-->', scope.targetNode.node, scope);
+        if (TargetNodeMode.child === scope.targetNode.mode) {
+            NodeUtils.removeAllChildNode(scope.targetNode.node)
+            scope.targetNode.node.appendChild(scope.executeFragment());
+        } else if (TargetNodeMode.replace === scope.targetNode.mode) {
+            NodeUtils.replaceNode(scope.targetNode.node, scope.executeFragment())
+        }
+        // targetElement.innerHTML = '';
     }
 
     public renderToByScopeResultSet(scopeResultSet: ScopeResultSet, selector: string) {

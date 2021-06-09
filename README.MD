@@ -1,4 +1,4 @@
-simple-boot-front  [v1.0.25]
+simple-boot-front  [v1.0.27]
 ===========
 
 Single Page Application Framworks
@@ -143,17 +143,26 @@ npm install simple-boot-front
 
 ## View template engine
  - ### Update view only for parts where the value has changed.
-```html
-<div><!--%write(this.data)%--></div>
-<div><!--%module(this.aModule)%--></div>
-<div>
-<!--%
-    for (let i of this.datas) {
-        write('<li>' + i + '</li>');
-    }
-%-->
-</div>
-```
+ - scope
+   - start: <!--% 
+   - end: %-->
+   - write: write
+   - method  
+     - module: module include  (Wrap element)
+     - stripModule: module include (no Wrap Element)
+   - ex
+      ```html
+      <div><!--%write(this.data)%--></div>
+      <div><!--%module(this.aModule)%--></div>
+      <div><!--%stripModule(this.aModule)%--></div>
+      <div>
+      <!--%
+          for (let i of this.datas) {
+              write('<li>' + i + '</li>');
+          }
+      %-->
+      </div>
+      ```
 - write: write string
 
 ## Module LifeCycle

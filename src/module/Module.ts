@@ -8,13 +8,13 @@ import {FunctionUtils} from '../util/function/FunctionUtils';
 import {Intent} from '../intent/Intent';
 import {SimGlobal} from '../global/SimGlobal';
 import {Navigation} from '../service/Navigation';
-import {Scope} from '../render/compile/Scope';
+import {RootScope, TargetNode, TargetNodeMode} from '../render/compile/RootScope';
 
 export class Module extends SimBase implements LifeCycle {
     public router_outlet_selector?: string;
     private router_outlet_id?: string;
     private id: string;
-    public _scopes = new Map<string, Scope>();
+    public _scopes = new Map<string, RootScope>();
     public _option: { template: string, styleImports: string[], wrapElement: string }
     public value: any;
 
@@ -245,11 +245,11 @@ export class Module extends SimBase implements LifeCycle {
     //     });
     // }
 
-    public setScope(wrap = true) {
-        const uuid = RandomUtils.uuid();
-        const scope = this._renderer?.compileScope(wrap ? this.getTemplateWrapScopeString(uuid) : this.templateString, this, uuid);
-        console.log('setScope-->', wrap, this.selector, '-->', uuid, scope)
+    public setScope(targetNode: TargetNode, strip = false, uuid = RandomUtils.uuid()) {
+        const scope = this._renderer?.compileScope(strip ? this.templateString : this.getTemplateWrapScopeString(uuid), this, uuid);
+        console.log('setScope-->', targetNode, this.selector, '-->', uuid, scope)
         if (scope) {
+            scope.targetNode = targetNode;
             this._scopes.set(scope.uuid, scope);
         }
         //     items.executeFragment();
@@ -267,11 +267,13 @@ export class Module extends SimBase implements LifeCycle {
         })
     }
 
-    public renderWrap(selector = this.selector) {
-        if (this._scopes.size <= 0) {
-            this.setScope();
-        }
-        this._renderer?.renderToByScopes(selector, ...Array.from(this._scopes.values()))
+    public renderWrap() {
+        // if (this._scopes.size <= 0) {
+        //     this.setScope({node: document.querySelector(this.selector)!, mode: TargetNodeMode.child});
+        // }
+        this._scopes.forEach(it => {
+            this._renderer?.renderToByScopes(it)
+        })
         this._onChangedRender()
         this.renderd(this.selector);
         this.findModuleField().forEach(it => it.renderWrap());
@@ -318,6 +320,14 @@ export class Module extends SimBase implements LifeCycle {
     public get templateWrapString(): string {
         return `<${this._option.wrapElement} id="${this.id}">${this._option.template || ''}</${this._option.wrapElement}>`
         // return `<${this._option.wrapElement} id="${this.id}" module-id="${this.id}">${this._option.template || ''}</${this._option.wrapElement}>`
+    }
+
+    public getTemplateWrapScopeSelector(scope_uuid: string): string {
+        return this.selector + `[scope='${scope_uuid}']`;
+    }
+
+    public getWrapScopeString(scope_uuid: string): string {
+        return `<${this._option.wrapElement} id="${this.id}" scope="${scope_uuid}"></${this._option.wrapElement}>`
     }
 
     public getTemplateWrapScopeString(scope_uuid: string): string {

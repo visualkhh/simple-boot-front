@@ -1,5 +1,7 @@
 import {RandomUtils} from '../../util/random/RandomUtils';
 import {ScopeResultSet} from './ScopeResultSet';
+import {Module} from '../../module/Module';
+import {TargetNode, TargetNodeMode} from './RootScope';
 
 export class ScopeObject {
     [name: string]: any;
@@ -31,13 +33,26 @@ export class ScopeObject {
             this.writes += str;
         }
         const module = (module) => {
-            if (module) {
-                const scope = module.setScope(false);
-                // console.log('scope Eval', module, scope);
-                this.writes += (module?.getTemplateWrapScopeString(scope.uuid) ?? '');
-            }
+            this.moduleWriteAndSetScope(module, false);
+        }
+        const stripModule = (module) => {
+            this.moduleWriteAndSetScope(module, true);
         }
         ${script}
         `).bind(scope)();
+    }
+
+    public moduleWriteAndSetScope(module: Module, strip: boolean) {
+        if (module) {
+            const uuid = RandomUtils.uuid();
+            const targetSelecotr = module.getTemplateWrapScopeSelector(uuid)
+            // const targetNode = new TargetNode(targetSelecotr, strip === true ? TargetNodeMode.replace : TargetNodeMode.child);
+            const targetNode = new TargetNode(targetSelecotr, TargetNodeMode.replace);
+            console.log('--->', targetNode)
+            const scope = module.setScope(targetNode, strip === true, uuid);
+            if (scope) {
+                this.writes += (module.getWrapScopeString(scope.uuid) ?? '');
+            }
+        }
     }
 }

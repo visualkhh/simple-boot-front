@@ -16,7 +16,7 @@ export class Index extends Module {
     thisData = 5151;
     public title = new class extends Module {
         constructor() {
-            super('title', {styleImports: ['/*[module-selector]*/* {color: red}'], value: ''});
+            super('title', {styleImports: ['/*[module-selector]*/ {color: red}'], value: ''});
         }
     }();
     public numbers = new class extends Module {

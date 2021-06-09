@@ -8,6 +8,7 @@ import {SimOption} from '../option/SimOption';
 import {Navigation} from '../service/Navigation';
 import {Router} from './Router';
 import {RouterModule} from './RouterModule';
+import {TargetNode, TargetNodeMode} from "../render/compile/RootScope";
 
 export class RouterManager implements Runnable {
     private simstanceManager?: SimstanceManager;
@@ -36,7 +37,7 @@ export class RouterManager implements Runnable {
                     let lastRouterSelector = this.option?.selector;
                     // routerModule render
                     routers.forEach(it => {
-                        this.renderRouterModule(it.moduleObject, lastRouterSelector);
+                        this.renderRouterModule(it.moduleObject, document.querySelector(lastRouterSelector!));
                         const selctor = it?.moduleObject?.router_outlet_selector || it?.moduleObject?.selector
                         if (selctor) {
                             lastRouterSelector = selctor;
@@ -46,7 +47,7 @@ export class RouterManager implements Runnable {
                         targetModule = this.simstanceManager?.getOrNewSim(targetModule) as Module;
                     }
                     // Module render
-                    this.render(targetModule, lastRouterSelector);
+                    this.render(targetModule, document.querySelector(lastRouterSelector!));
                     this.renderd();
                     (targetModule as any)._onInitedChild();
                     routers.reverse().forEach(it => (it.moduleObject as any)?._onInitedChild());
@@ -78,22 +79,24 @@ export class RouterManager implements Runnable {
         });
     }
 
-    public renderRouterModule(module: Module | undefined, targetSelector = this.option?.selector): boolean {
+    public renderRouterModule(module: Module | undefined, targetSelector: Node | null): boolean {
         // console.log('renderRouterModule router --->', targetSelector)
         if (module && !module.exist()) {
-            (module as any)._onInit()
-            module.renderWrap(targetSelector);
+            this.render(module, targetSelector);
+            // (module as any)._onInit()
+            // module.renderWrap(targetSelector);
             return true
         } else {
             return false
         }
     }
 
-    public render(module: Module | undefined, targetSelector: string | undefined): boolean {
+    public render(module: Module | undefined, targetSelector: Node | null): boolean {
         // console.log('render router --->', targetSelector)
         if (module) {
             (module as any)._onInit()
-            module.renderWrap(targetSelector);
+            module.setScope(new TargetNode(targetSelector!, TargetNodeMode.child))
+            module.renderWrap();
             return true
         } else {
             return false

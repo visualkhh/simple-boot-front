@@ -8,7 +8,7 @@ export class Scope {
     public usingVars: string[] = [];
     public scopeResult?: ScopeResultSet;
 
-    constructor(private raws: string, private obj: any, public uuid = RandomUtils.uuid(), private config = {start: '{%', end: '%}'}, private position = new ScopePosition(0, raws.length)) {
+    constructor(private raws: string, private obj: any, public uuid = RandomUtils.uuid(), private config = {start: '<!--%', end: '%-->'}, private position = new ScopePosition(0, raws.length)) {
         this.run();
     }
 
