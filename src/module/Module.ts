@@ -15,9 +15,10 @@ export class Module extends SimBase implements LifeCycle {
     private router_outlet_id?: string;
     private id: string;
     public _scopes = new Map<string, Scope>();
-    public _option: {template: string, styleImports: string[], wrapElement: string}
+    public _option: { template: string, styleImports: string[], wrapElement: string }
     public value: any;
-    constructor(public selector = '', option: {template?: string, styleImports?: string[], wrapElement?: string, value?: any} = {},
+
+    constructor(public selector = '', option: { template?: string, styleImports?: string[], wrapElement?: string, value?: any } = {},
                 private _renderer = SimGlobal.application?.simstanceManager.getOrNewSim(Renderer),
                 private _navigation = SimGlobal.application?.simstanceManager.getOrNewSim(Navigation)
     ) {
@@ -245,7 +246,9 @@ export class Module extends SimBase implements LifeCycle {
     // }
 
     public setScope(wrap = true) {
-        const scope = this._renderer?.compileScope(wrap ? this.templateWrapString : this.templateString, this);
+        const uuid = RandomUtils.uuid();
+        const scope = this._renderer?.compileScope(wrap ? this.getTemplateWrapScopeString(uuid) : this.templateString, this, uuid);
+        console.log('setScope-->', wrap, this.selector, '-->', uuid, scope)
         if (scope) {
             this._scopes.set(scope.uuid, scope);
         }
@@ -317,8 +320,8 @@ export class Module extends SimBase implements LifeCycle {
         // return `<${this._option.wrapElement} id="${this.id}" module-id="${this.id}">${this._option.template || ''}</${this._option.wrapElement}>`
     }
 
-    public getTemplateWrapScopeString(scope: Scope): string {
-        return `<${this._option.wrapElement} id="${this.id}" scope="${scope.uuid}">${this._option.template || ''}</${this._option.wrapElement}>`
+    public getTemplateWrapScopeString(scope_uuid: string): string {
+        return `<${this._option.wrapElement} id="${this.id}" scope="${scope_uuid}">${this._option.template || ''}</${this._option.wrapElement}>`
         // return `<${this._option.wrapElement} id="${this.id}" module-id="${this.id}">${this._option.template || ''}</${this._option.wrapElement}>`
     }
 

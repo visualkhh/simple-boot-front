@@ -34,7 +34,7 @@ export class ScopeObject {
             if (module) {
                 const scope = module.setScope(false);
                 // console.log('scope Eval', module, scope);
-                this.writes += (module?.getTemplateWrapScopeString(scope) ?? '');
+                this.writes += (module?.getTemplateWrapScopeString(scope.uuid) ?? '');
             }
         }
         ${script}

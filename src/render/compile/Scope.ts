@@ -6,10 +6,9 @@ import {ScopeResultSet} from './ScopeResultSet';
 export class Scope {
     public childs: Scope[] = [];
     public usingVars: string[] = [];
-    public uuid = RandomUtils.uuid();
     public scopeResult?: ScopeResultSet;
 
-    constructor(private raws: string, private obj: any, private config = {start: '{%', end: '%}'}, private position = new ScopePosition(0, raws.length)) {
+    constructor(private raws: string, private obj: any, public uuid = RandomUtils.uuid(), private config = {start: '{%', end: '%}'}, private position = new ScopePosition(0, raws.length)) {
         this.run();
     }
 

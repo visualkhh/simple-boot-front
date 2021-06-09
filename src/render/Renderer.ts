@@ -5,13 +5,15 @@ import {SimCompiler} from './compile/SimCompiler';
 import {Scope} from './compile/Scope';
 import {DomUtils} from '../util/dom/DomUtils';
 import {ScopeResultSet} from './compile/ScopeResultSet';
+import {RandomUtils} from '../util/random/RandomUtils';
 
 @Sim()
 export class Renderer {
     constructor(private option: SimOption) {
     }
 
-    public compileScope(template: string, obj: any, compiler = new SimCompiler(template, obj)): Scope | undefined {
+    public compileScope(template: string, obj: any, rootUUID = RandomUtils.uuid()): Scope | undefined {
+        const compiler = new SimCompiler(template, obj, rootUUID)
         return compiler.run().root;
     }
 
@@ -45,6 +47,7 @@ export class Renderer {
     public renderToByScopes(selector: string, ...scopes: Scope[]) {
         scopes.forEach(scope => {
             const targetElement = document.querySelector(selector + `[scope='${scope.uuid}']`) ?? document.querySelector(selector)
+            console.log('renderToByScope-->', targetElement, scope);
             if (targetElement) {
                 targetElement.innerHTML = '';
                 targetElement.appendChild(scope.executeFragment());
