@@ -8,7 +8,7 @@ import {FunctionUtils} from '../util/function/FunctionUtils';
 import {Intent} from '../intent/Intent';
 import {SimGlobal} from '../global/SimGlobal';
 import {Navigation} from '../service/Navigation';
-import {RootScope, TargetNode, TargetNodeMode} from '../render/compile/RootScope';
+import {RootScope, TargetNode} from '../render/compile/RootScope';
 
 export class Module extends SimBase implements LifeCycle {
     public router_outlet_selector?: string;
@@ -55,7 +55,12 @@ export class Module extends SimBase implements LifeCycle {
 
     public setValue(name: string, value?: any) {
         const thisAny = this as any;
-        thisAny[name] = value;
+        const thisAnyElement = thisAny[name];
+        if (typeof thisAnyElement === 'number') {
+            thisAny[name] = Number(value);
+        } else {
+            thisAny[name] = value.toString();
+        }
     }
 
     private setEvent(endFix: string, rootElement = document.querySelector(this.selector)) {
@@ -128,7 +133,6 @@ export class Module extends SimBase implements LifeCycle {
 
     private addEvent(rootElement: Element | null) {
         if (!rootElement) return
-
         ['click', 'change', 'keyup', 'keydown'].forEach(it => {
             this.setEvent(it, rootElement);
             this.setIntentEvent(it, rootElement);
@@ -157,6 +161,12 @@ export class Module extends SimBase implements LifeCycle {
                         }
                     })
                 })
+
+                if (typeof this.getValue(attribute) === 'function') {
+                    it.value = this.getValue(attribute);
+                } else {
+                    it.value = this.getValue(attribute);
+                }
             }
         })
 
@@ -228,64 +238,25 @@ export class Module extends SimBase implements LifeCycle {
     public onFinish() {
     }
 
-    // private get scopes() {
-    //     this.setScope(true);
-    //     // this._scopes.push(this._renderer?.compileScope(this.templateWrapString, this));
-    //     return this._scopes;
-    //     // if (!this._scope) {
-    //     //     this._scope = this._renderer?.compileScope(this.templateWrapString, this);
-    //     // }
-    //     // return this._scope!;
-    // }
-
-    // public clenScopeResults() {
-    //     this._scopes = this._scopes.filter(it => {
-    //         it.clenResults();
-    //         return !!it.scopeResult
-    //     });
-    // }
-
     public setScope(targetNode: TargetNode, strip = false, uuid = RandomUtils.uuid()) {
         const scope = this._renderer?.compileScope(strip ? this.templateString : this.getTemplateWrapScopeString(uuid), this, uuid);
-        // console.log('setScope-->', targetNode, this.selector, '-->', uuid, scope)
         if (scope) {
             scope.targetNode = targetNode;
             this._scopes.set(scope.uuid, scope);
         }
-        //     items.executeFragment();
-        //     if (items.scopeResult) {
-        //         this._scopes.set(items.scopeResult.uuid, items);
-        //     }
-        // }
         return scope;
-        // return this._scopes;
     }
 
     public renderToScope(varName: string) {
-        this._scopes.forEach(it => {
-            this._renderer?.renderToScope(it, this, varName);
-        })
+        this._scopes.forEach(it => this._renderer?.renderToScope(it, this, varName))
     }
 
     public renderWrap() {
-        // if (this._scopes.size <= 0) {
-        //     this.setScope({node: document.querySelector(this.selector)!, mode: TargetNodeMode.child});
-        // }
-        this._scopes.forEach(it => {
-            this._renderer?.renderToByScopes(it)
-        })
-        this._onChangedRender()
+        this._scopes.forEach(it => this._renderer?.renderToByScopes(it));
+        this._onChangedRender();
         this.renderd(this.selector);
         this.findModuleField().forEach(it => it.renderWrap());
     }
-
-    // public renderStripWrap(selector = this.selector) {
-    //     this._scope = this._renderer?.compileScope(this.templateString, this);
-    //     this._renderer?.renderToByScope(this.scope, selector, this.templateWrapString)
-    //     this._onChangedRender()
-    //     this.renderd(this.selector);
-    //     this.findModuleField().forEach(it => it.renderWrap());
-    // }
 
     private findModuleField() {
         const inModuleVars: Module[] = [];

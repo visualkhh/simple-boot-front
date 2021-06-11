@@ -142,6 +142,7 @@ npm install simple-boot-front
     ```
 
 ## View template engine
+ - ### It's a compiler that takes your declarative components and converts them into efficient JavaScript that surgically updates the DOM.
  - ### Update view only for parts where the value has changed.
  - scope
    - start: <!--% 
@@ -263,10 +264,10 @@ export class AppInfo extends Module {
        - ```html
          <input module-event-keydown="changeData">
          ```
-     - **module-event-link**: link event (value change <-> input)
+     - **module-link**: link event (value change <-> input)
        - value: variable name
        - ```html
-         <input module-event-link="value">
+         <input module-link="value">
          ```
      - **module-value**: value injection
        - value: variable name

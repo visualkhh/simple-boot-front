@@ -8,7 +8,7 @@ import {SimOption} from '../option/SimOption';
 import {Navigation} from '../service/Navigation';
 import {Router} from './Router';
 import {RouterModule} from './RouterModule';
-import {TargetNode, TargetNodeMode} from "../render/compile/RootScope";
+import {TargetNode, TargetNodeMode} from '../render/compile/RootScope';
 
 export class RouterManager implements Runnable {
     private simstanceManager?: SimstanceManager;

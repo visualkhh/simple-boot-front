@@ -7,9 +7,21 @@ export class NodeUtils {
         }
     }
 
-    static replaceNode(targetNode: Node, newNode: Node) {
-        targetNode.parentNode?.replaceChild(newNode, targetNode);
+    static appendChild(parentNode: Node, childNode: Node) {
+        return parentNode.appendChild(childNode)
     }
+
+    static replaceNode(targetNode: Node, newNode: Node) {
+        return targetNode.parentNode?.replaceChild(newNode, targetNode);
+    }
+
+    static addNode(targetNode: Node, newNode: Node) {
+        return targetNode.parentNode?.insertBefore(newNode, targetNode.nextSibling);
+    }
+
+    // static childNodes(): ChildNode[] {
+    //     return Array.prototype.slice.call(element.querySelectorAll(selector));
+    // }
     // static nodeListToArray(nodeList: NodeListOf<Element>) {
     //     Array.prototype.slice.call(nodeList);
     // }

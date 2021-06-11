@@ -68,3 +68,7 @@ tip
 - gradle
     - [Gradle] node yarn 빌드 react 프로젝트를 gradle에 통합 포함하여 빌드하는 방법
         - https://kimchanjung.github.io/programming/2020/06/25/spring-gradle-build-with-front-end/
+
+- SVELTE
+  - Svelte소개: https://beomy.github.io/tech/svelte/introduction-svelte/
+  - https://svelte.dev/tutorial/basics 
