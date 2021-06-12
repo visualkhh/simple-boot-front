@@ -215,8 +215,8 @@ export class Module extends SimBase implements LifeCycle {
 
     public scopeUpdate() {
         this._scopes.forEach((it, key, map) => {
-            if (it.targetNode.node) {
-                // console.log('-->', it.targetNode.node)
+            // console.log('-->', it.targetNode.node, it.childIsContain())
+            if (it.targetNode.node || it.childIsContain()) {
                 this._renderer?.renderToByScopes(it, this);
             } else {
                 map.delete(key);
