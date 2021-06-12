@@ -1,4 +1,4 @@
-simple-boot-front  [v1.0.27]
+simple-boot-front  [v1.0.28]
 ===========
 
 Single Page Application Framworks
