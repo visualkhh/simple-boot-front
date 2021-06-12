@@ -11,6 +11,13 @@
     </div>
 </div>
 
+<!--%
+    for(var i = 0 ; i < this.count ; i ++) {
+        stripModule(this.title);
+    }
+%-->
+
+<button class="btn btn-info" module-event-click="plusCount"><!--%write(this.count)%--></button>
 <!--<div class="card mt-2" style="width: 100%;">-->
 <!--    <div class="card-body">-->
 <!--        <h5>event click change "module-event-click"</h5>-->
@@ -25,12 +32,12 @@
 <!--        <input type="text" module-value="data">-->
 <!--    </div>-->
 <!--</div>-->
-<div class="card mt-2" style="width: 100%;">
-    <div class="card-body">
-        <h5>variable module</h5>
-        <!--%write(this.data)%-->
-        data link change event <input type="text" module-link="data">
-    </div>
+<!--<div class="card mt-2" style="width: 100%;">-->
+<!--    <div class="card-body">-->
+<!--        <h5>variable module</h5>-->
+<!--        &lt;!&ndash;%write(this.data)%&ndash;&gt;-->
+<!--        data link change event <input type="text" module-link="data">-->
+<!--    </div>-->
 <!--</div>-->
 
 <!--<div>11 &lt;!&ndash;%write(this.thisData)%&ndash;&gt; 22 </div>-->

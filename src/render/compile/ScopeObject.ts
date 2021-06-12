@@ -45,6 +45,7 @@ export class ScopeObject {
     public moduleWriteAndSetScope(module: Module, strip: boolean) {
         if (module) {
             const uuid = RandomUtils.uuid();
+            // console.log('moduleWriteAndSetScope', uuid, module);
             const targetSelecotr = module.getTemplateWrapScopeSelector(uuid)
             // const targetNode = new TargetNode(targetSelecotr, strip === true ? TargetNodeMode.replace : TargetNodeMode.child);
             const targetNode = new TargetNode(targetSelecotr, TargetNodeMode.replace);

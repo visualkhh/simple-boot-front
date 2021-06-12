@@ -28,10 +28,15 @@ export class Renderer {
     }
 
     public renderToScope(scope: Scope, module: Module, varName: string): boolean {
+        /*
+            const targets = scope.usingVars.includes(varName) ? [scope] : []
+            const targets = [];.push(...scope.childs.filter(it => it.usingVars.includes(varName)));
+         */
         const targets = scope.childs.filter(it => it.usingVars.includes(varName));
         targets.forEach(it => {
             if (it.scopeResult) {
-                it.scopeResult.childNodes.forEach(it => it.remove());
+                it.scopeResult.childAllRemove();
+                // it.scopeResult.childNodes.forEach(it => it.remove());
                 const startComment = it.scopeResult.startComment;
                 const endComment = it.scopeResult.endComment;
                 it.exec(module)
@@ -39,19 +44,29 @@ export class Renderer {
                 NodeUtils.replaceNode(startComment, it.scopeResult.startComment);
                 NodeUtils.replaceNode(endComment, it.scopeResult.endComment);
             }
+            it.usingVars.filter(uit => module.getValue(uit) instanceof Module).forEach(mit => {
+                module.getValue(mit).scopeUpdate();
+            })
         })
         return false;
     }
 
-    public renderToByScopes(scope: RootScope) {
-        if (TargetNodeMode.child === scope.targetNode.mode) {
-            NodeUtils.removeAllChildNode(scope.targetNode.node)
-            NodeUtils.appendChild(scope.targetNode.node, scope.executeFragment())
-        } else if (TargetNodeMode.replace === scope.targetNode.mode) {
-            NodeUtils.replaceNode(scope.targetNode.node, scope.executeFragment())
+    public renderToByScopes(scope: RootScope, module: Module) {
+        if (scope.targetNode.node) {
+            const childNode = scope.executeFragment();
+            module.addEvent(childNode);
+            if (TargetNodeMode.child === scope.targetNode.mode) {
+                NodeUtils.removeAllChildNode(scope.targetNode.node)
+                NodeUtils.appendChild(scope.targetNode.node, childNode)
+            } else if (TargetNodeMode.replace === scope.targetNode.mode) {
+                NodeUtils.replaceNode(scope.targetNode.node, childNode)
+            }
+            // const rootElement = document.querySelector(this.selector)
+            // this.addEvent(rootElement)
+            // this.addBind(rootElement)
+            // this.addRout(rootElement)
         }
     }
-
 
     public prependStyle(selector: string, style: string | undefined) {
         const targetElement = document.querySelector(selector)

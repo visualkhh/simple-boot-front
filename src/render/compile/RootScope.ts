@@ -12,9 +12,9 @@ export class TargetNode {
     constructor(private _node: Node | string = document, public mode = TargetNodeMode.child) {
     }
 
-    get node(): Node {
+    get node(): Node | Element | null {
         if (typeof this._node === 'string') {
-            return document.querySelector(this._node) ?? document;
+            return document.querySelector(this._node);
         } else {
             return this._node;
         }
@@ -24,7 +24,11 @@ export class TargetNode {
 export class RootScope extends Scope {
     public targetNode: TargetNode = new TargetNode();
 
-    // constructor(raws: string, obj: any, uuid: string, config: { start: string; end: string }, position: ScopePosition) {
+    setScanUsingVar() {
+        // root not using variable
+    }
+
+// constructor(raws: string, obj: any, uuid: string, config: { start: string; end: string }, position: ScopePosition) {
     //     super(raws, obj, uuid, config, position);
     // }
 }

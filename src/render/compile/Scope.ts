@@ -12,6 +12,14 @@ export class Scope {
         this.run();
     }
 
+    childIsContain() {
+        for (let i = 0; i < this.childs.length; i++) {
+            if (this.childs[i].scopeResult?.startComment.isConnected) {
+                return true;
+            }
+        }
+        return false;
+    }
     // clenResults() {
     //     if (!this.scopeResult?.startComment.isConnected) {
     //         console.log('scope clenResults->', this.scopeResult)
@@ -68,15 +76,7 @@ export class Scope {
     private run(): Scope {
         // const targetRaws = this.raws.substring(this.config.start.length, this.raws.length - this.config.end.length);
         const targetRaws = this.raws;
-        // using variable search
-        const varRegexStr = 'this\\.([a-zA-Z_$.]*)';
-        const varRegex = RegExp(varRegexStr, 'gm');
-        let varExec = varRegex.exec(targetRaws)
-        this.usingVars = [];
-        while (varExec) {
-            this.usingVars.push(varExec[1]);
-            varExec = varRegex.exec(varExec.input)
-        }
+        this.setScanUsingVar();
 
         let i = this.indexOf(targetRaws, this.config.start);
         while (i !== -1) {
@@ -114,5 +114,17 @@ export class Scope {
     public tailIndexOf(data: string, searchString: string, position?: number): number {
         const number = data.indexOf(searchString, position);
         return number !== -1 ? number + searchString.length : number;
+    }
+
+    public setScanUsingVar() {
+        // using variable search
+        const varRegexStr = 'this\\.([a-zA-Z_$.]*)';
+        const varRegex = RegExp(varRegexStr, 'gm');
+        let varExec = varRegex.exec(this.raws)
+        this.usingVars = [];
+        while (varExec) {
+            this.usingVars.push(varExec[1]);
+            varExec = varRegex.exec(varExec.input)
+        }
     }
 }

@@ -10,4 +10,15 @@ export class ScopeResultSet {
             this.childNodes.push(fragment.childNodes[i]);
         }
     }
+
+    public childAllRemove() {
+        let next = this.startComment.nextSibling;
+        while (next) {
+            if (next === this.endComment) {
+                break;
+            }
+            next.remove();
+            next = this.startComment.nextSibling;
+        }
+    }
 }

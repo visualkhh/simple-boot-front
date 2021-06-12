@@ -14,6 +14,7 @@ import {Title} from "./Title";
 export class Index extends Module {
     data = "default data";
     thisData = 5151;
+    count = 0;
 
     public numbers = new class extends Module {
         constructor() {
@@ -40,6 +41,11 @@ export class Index extends Module {
     }
 
     test() {
+    }
+
+    plusCount($event: KeyboardEvent, view: View<Element>) {
+        this.count++;
+        console.log('scope-title->', this.title._scopes)
     }
 
     changeText($event: KeyboardEvent, view: View<Element>) {
