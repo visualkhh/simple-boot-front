@@ -60,6 +60,8 @@ export class Renderer {
                 NodeUtils.appendChild(scope.targetNode.node, childNode)
             } else if (TargetNodeMode.replace === scope.targetNode.mode) {
                 NodeUtils.replaceNode(scope.targetNode.node, childNode)
+            } else {
+                // nothing..
             }
             // const rootElement = document.querySelector(this.selector)
             // this.addEvent(rootElement)
