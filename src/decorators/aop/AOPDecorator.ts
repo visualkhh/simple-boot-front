@@ -1,7 +1,7 @@
 import {ReflectUtils} from '../../util/reflect/ReflectUtils';
 import {MetaDataPropertyAtomic} from '../MetaDataAtomic';
 import {ObjectUtils} from '../../util/object/ObjectUtils';
-import {ConstructorType} from "../../types/Types";
+import {ConstructorType} from '../../types/Types';
 
 const AfterMetadataKey = Symbol('After');
 const BeforeMetadataKey = Symbol('Before');

@@ -42,6 +42,9 @@ tip
             - https://kdydesign.github.io/2020/10/06/spa-route-tutorial/
     - Webpack, Typescript에서 Path Alias 설정하기: https://jonghyun-park.medium.com/webpack-typescript%EC%97%90%EC%84%9C-path-alias-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0-ec32428622d2
 
+- javascript
+  - function parameter name: https://stackoverflow.com/questions/1007981/how-to-get-function-parameter-names-values-dynamically
+    
 - typescript
     - decorator
         - https://blog.logrocket.com/a-practical-guide-to-typescript-decorators/
@@ -49,6 +52,7 @@ tip
         - https://www.typescriptlang.org/docs/handbook/decorators.html
         - https://typescript-kr.github.io/pages/decorators.html
     - reflection
+        - Reflect: https://rbuckton.github.io/reflect-metadata/
         - http://blog.wolksoftware.com/decorators-metadata-reflection-in-typescript-from-novice-to-expert-part-4
         - metadata
             - https://typescript-kr.github.io/pages/decorators.html

@@ -10,6 +10,8 @@ import {SimGlobal} from '../global/SimGlobal';
 import {ObjectUtils} from '../util/object/ObjectUtils';
 import {SimAtomic} from './SimAtomic';
 import {ReflectUtils} from '../util/reflect/ReflectUtils';
+import {FunctionUtils} from "../util/function/FunctionUtils";
+import {getInject} from "../decorators/Inject";
 
 export class SimstanceManager implements Runnable {
     private _storage = new Map<ConstructorType<any>, any>()
@@ -85,7 +87,7 @@ export class SimstanceManager implements Runnable {
             this._storage.set(target, r)
             return r
         }
-        throw new SimNoSuch('no simple instance')
+        throw new SimNoSuch('no simple instance ' + target)
     }
 
     public newSime<T>(target: ConstructorType<T>): T {
@@ -119,8 +121,11 @@ export class SimstanceManager implements Runnable {
 
     public getParameterSim(target: Object, targetKey?: string | symbol): any[] {
         const paramTypes = ReflectUtils.getParameterTypes(target, targetKey);
-        const injections = paramTypes.map((token: ConstructorType<any>) => {
-            return this.resolve<any>(token)
+        const paramNames = FunctionUtils.getParameterNames(target, targetKey);
+        const injections = paramTypes.map((token: ConstructorType<any>, idx: number) => {
+            target = targetKey ? (target as any)[targetKey] : target;
+            const inject = getInject(target, paramNames[idx]);
+            return this.resolve<any>(inject ?? token)
         })
         return injections;
     }

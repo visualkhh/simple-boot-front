@@ -9,6 +9,9 @@ import {SimstanceManager} from "simple-boot-front/simstance/SimstanceManager";
 import {Navigation} from "simple-boot-front/service/Navigation";
 import css from "./index.css";
 import {Title} from "./Title";
+import {Inject} from "simple-boot-front/decorators/Inject";
+import {ATitle} from "./ATitle";
+import {BTitle} from "./BTitle";
 
 @Sim({scheme: 'index'})
 export class Index extends Module {
@@ -33,14 +36,16 @@ export class Index extends Module {
         }
     }();
 
-    constructor(public title: Title, public v: ViewService, public manager: SimstanceManager, public navigation: Navigation) {
+    constructor(@Inject(ATitle) public title: Title, public v: ViewService, public manager: SimstanceManager, public navigation: Navigation) {
         super("index", {template: html, styleImports: [css]});
     }
 
     onInit() {
     }
 
-    test() {
+    @PostConstruct
+    test(@Inject(BTitle) title: Title) {
+        console.log('-->', title)
     }
 
     plusCount($event: KeyboardEvent, view: View<Element>) {
