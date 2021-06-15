@@ -1,28 +1,21 @@
-simple-boot-front  [v1.0.29]
-===========
+[![Single Page Application Framworks](assets/banner.png)](https://svelte.dev)
+[![npm version](https://img.shields.io/badge/npm-v1.0.30-blue)](https://www.npmjs.com/package/simple-boot-front) [![license](https://img.shields.io/badge/license-MIT-green)](LICENSE.md) [![Chat](https://img.shields.io/discord/457912077277855764?label=chat&logo=discord)](https://discord.gg/PW56dpns)
 
-Single Page Application Framworks
+#[😎 demo page link](https://codesandbox.io/s/example-simple-boot-front-spb5d)
 
 
 ## Our primary goals are
+* Single Page Application Framworks for Web
 * Provide a radically faster and widely accessible getting started experience for all front end.
 
-## Function
-* Hot apply!
-* Auto injection
-* Partial reloading
-
-## [😎 demo page link](https://codesandbox.io/s/example-simple-boot-front-spb5d)
 
 ## Installation and Getting Started
-The reference documentation includes detailed installation instructions as well as a comprehensive getting started guide.
-
 ```
 npm install simple-boot-front
 ```
 
 
-### [examples project](./examples)
+## [😃 examples project](./examples)
 * #### [parcel-bundler](./examples/parcel-bundler)
 * #### [parcel-bundler-js](./examples/parcel-bundler-js) (js version)
 * #### [webpack](./examples/parcel-bundler)
@@ -147,7 +140,7 @@ npm install simple-boot-front
  - scope
    - start: <!--% 
    - end: %-->
-   - write: write
+   - write: write string
    - method  
      - module: module include  (Wrap element)
      - stripModule: module include (no Wrap Element)
@@ -164,7 +157,6 @@ npm install simple-boot-front
       %-->
       </div>
       ```
-- write: write string
 
 ## Module LifeCycle
 * onInit(): module load event

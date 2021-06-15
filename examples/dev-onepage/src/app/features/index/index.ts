@@ -48,6 +48,11 @@ export class Index extends Module {
         console.log('-->', title)
     }
 
+    // public m = BTitle;
+    // createModule() {
+    //     return new BTitle();
+    // }
+
     plusCount($event: KeyboardEvent, view: View<Element>) {
         this.count++;
         console.log('scope-title->', this.title._scopes)
