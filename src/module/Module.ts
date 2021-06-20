@@ -235,7 +235,6 @@ export class Module extends SimBase implements LifeCycle {
 
     public scopeUpdateAndRenderToByScopes() {
         this._scopes.forEach((it, key, map) => {
-            // console.log('-->', it.targetNode.node, it.childIsContain())
             if (it.targetNode.node || it.childIsContain()) {
                 this._renderer?.renderToByScopes(it, this);
             } else {
@@ -276,7 +275,6 @@ export class Module extends SimBase implements LifeCycle {
 
     public get templateWrapString(): string {
         return `<${this._option.wrapElement} id="${this.id}">${this._option.template || ''}</${this._option.wrapElement}>`
-        // return `<${this._option.wrapElement} id="${this.id}" module-id="${this.id}">${this._option.template || ''}</${this._option.wrapElement}>`
     }
 
     public getTemplateWrapScopeSelector(scope_uuid: string): string {
@@ -289,7 +287,6 @@ export class Module extends SimBase implements LifeCycle {
 
     public getTemplateWrapScopeString(scope_uuid: string): string {
         return `<${this._option.wrapElement} id="${this.id}" scope="${scope_uuid}">${this._option.template || ''}</${this._option.wrapElement}>`
-        // return `<${this._option.wrapElement} id="${this.id}" module-id="${this.id}">${this._option.template || ''}</${this._option.wrapElement}>`
     }
 
     public get templateString(): string {

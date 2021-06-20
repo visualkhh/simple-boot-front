@@ -43,7 +43,7 @@ export class ScopeObject {
     }
 
     public appendWrite(str: string) {
-        console.log('appendWrite--->', str)
+        // console.log('appendWrite--->', str)
         this.writes += str;
     }
 

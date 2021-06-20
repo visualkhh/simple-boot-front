@@ -12,6 +12,7 @@ import {SimAtomic} from './SimAtomic';
 import {ReflectUtils} from '../util/reflect/ReflectUtils';
 import {FunctionUtils} from '../util/function/FunctionUtils';
 import {getInject} from '../decorators/Inject';
+import {SimObjectProxyHandler} from '../proxy/SimObjectProxyHandler';
 
 export class SimstanceManager implements Runnable {
     private _storage = new Map<ConstructorType<any>, any>()
@@ -85,6 +86,12 @@ export class SimstanceManager implements Runnable {
         if (this._storage.has(target) && undefined === registed) {
             const r = this.newSime(target)
             this._storage.set(target, r)
+
+            // object in module proxy
+            if (r instanceof Module) {
+                this.moduleObjectPropProxy(r);
+            }
+
             return r
         }
         throw new SimNoSuch('no simple instance ' + target)
@@ -135,18 +142,65 @@ export class SimstanceManager implements Runnable {
         this.simProxyHandler = simProxyHandler;
     }
 
+    /**
+     * @deprecated
+     */
     public proxy<T>(target: T, type?: ConstructorType<any>): T {
         if (this.simProxyHandler && (type ? target instanceof type : true) && (!('isProxy' in target))) {
             for (const key in target) {
+                // console.log('target->', target, key)
                 target[key] = this.proxy(target[key], type);
             }
             const protoTypeName = ObjectUtils.getProtoTypeName(target);
-            // console.log('proxy-->', allProtoTypeName)
+            // console.log('proxy-->', target, protoTypeName)
             protoTypeName.forEach(it => {
                 (target as any)[it] = new Proxy((target as any)[it], this.simProxyHandler!);
             });
             target = new Proxy(target, this.simProxyHandler);
         }
+        return target;
+    }
+
+    public moduleObjectPropProxy(target: Module): Module {
+        // console.log('isProxy-->', ('isProxy' in target));
+        // if (target instanceof Object && !('isProxy' in target)) {
+        for (const key in target) {
+            const prop = (target as any)[key];
+            if (prop instanceof Module) {
+                this.moduleObjectPropProxy(prop)
+            } else if (prop && typeof prop === 'object' && !(prop instanceof Map)) {
+                // console.log(prop);
+                if (!('isProxy' in prop)) {
+                    (target as any)[key] = new Proxy(prop, new SimObjectProxyHandler());
+                }
+                const _refModule = ((target as any)[key]).simObjectProxyHandler_refModule;
+                if (_refModule) {
+                    _refModule.set(key, target)
+                }
+                // console.log('----->', _refModule)
+                // console.log('kk-->', target, (target as any).id, (target as any)[key], ',', key, ('isProxy' in prop))
+            }
+            // target[key] = this.moduleProxy(target[key]);
+        }
+
+        // if (!target instanceof Module && target instanceof Object) {
+        //
+        // }
+        //     const protoTypeName = ObjectUtils.getProtoTypeName(target);
+        //     protoTypeName.forEach(it => {
+        //         if (target instanceof Module) {
+        //             (target as any)[it] = new Proxy((target as any)[it], this.simProxyHandler!);
+        //         } else if (target instanceof Object) {
+        //             target = new Proxy(target, new SimObjectProxyHandler());
+        //         }
+        //     });
+        //
+        //     if (target instanceof Module) {
+        //         target = new Proxy(target, this.simProxyHandler!);
+        //     } else if (target instanceof Object) {
+        //         target = new Proxy(target, new SimObjectProxyHandler());
+        //     }
+        // }
         return target;
     }
 

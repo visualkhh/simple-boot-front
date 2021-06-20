@@ -2,6 +2,8 @@
 // import * as request from 'supertest'
 // import {Index} from '@src/app/features/index'
 
+import {SimObjectProxyHandler} from "../../src/proxy/SimObjectProxyHandler";
+
 describe('Proxy Test', () => {
     test('proxy test', async (done) => {
 
@@ -64,6 +66,21 @@ describe('Proxy Test', () => {
 
 
         nameS.toString();
+        done()
+    })
+
+
+    test('map proxy test', async (done) => {
+       let names = new Map<string, string>()
+        console.log((names instanceof Map))
+
+        names.set('z', 'zvaava')
+        names = new Proxy(names, {});
+        console.log(names.get('z'));
+
+
+
+
         done()
     })
 })

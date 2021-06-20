@@ -12,6 +12,7 @@ import {Title} from "./Title";
 import {Inject} from "simple-boot-front/decorators/Inject";
 import {ATitle} from "./ATitle";
 import {BTitle} from "./BTitle";
+import {SimGlobal} from "simple-boot-front/global/SimGlobal";
 
 @Sim({scheme: 'index'})
 export class Index extends Module {
@@ -45,7 +46,7 @@ export class Index extends Module {
 
     @PostConstruct
     test(@Inject(BTitle) title: Title) {
-        console.log('-->', title)
+        // console.log('-->', title)
     }
 
     // public m = BTitle;
@@ -60,7 +61,10 @@ export class Index extends Module {
 
     changeText($event: KeyboardEvent, view: View<Element>) {
         this.title.value = view.value;
+        this.title.datas.push(11);
+        (this.title as ATitle).adata.name='zz'
         console.log('------->', this.title.value)
+        console.log('------->', (SimGlobal.application?.simstanceManager as any)['_storage'])
     }
 
     changeData() {
