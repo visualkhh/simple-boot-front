@@ -14,6 +14,7 @@ export class Module extends SimBase implements LifeCycle {
     public router_outlet_selector?: string;
     private router_outlet_id?: string;
     private id: string;
+    public _refModule = new Map<string, Map<Module, string>>();
     public _scopes = new Map<string, RootScope>();
     public _option: { template: string, styleImports: string[], wrapElement: string }
     public value: any;
@@ -207,13 +208,32 @@ export class Module extends SimBase implements LifeCycle {
     }
 
     public renderWrap() {
+        // using variable ref adding~
+        const usingVarSet = new Set<string>();
+        Array.from(this._scopes.values()).map(it => it.usingVars).forEach(it => it.forEach(sit => usingVarSet.add(sit)));
+        usingVarSet.forEach(it => {
+            const s = it.split('.')
+            for (let i = 1; i <= s.length; i++) {
+                const tail = s.slice(s.length - i, s.length - i + 1)
+                const front = s.slice(0, s.length - i)
+                const frontEnd = this.getValue(front[front.length - 1]);
+                const tailEnd = tail[tail.length - 1];
+                if (frontEnd instanceof Module && tailEnd) {
+                    if (!frontEnd._refModule.get(tailEnd)) {
+                        frontEnd._refModule.set(tailEnd, new Map());
+                    }
+                    frontEnd._refModule.get(tailEnd)?.set(this, it);
+                }
+            }
+        })
+
         this._scopes.forEach(it => this._renderer?.renderToByScopes(it, this));
         this._onChangedRender();
         this.renderd(this.selector);
         this.findModuleField().forEach(it => it.renderWrap());
     }
 
-    public scopeUpdate() {
+    public scopeUpdateAndRenderToByScopes() {
         this._scopes.forEach((it, key, map) => {
             // console.log('-->', it.targetNode.node, it.childIsContain())
             if (it.targetNode.node || it.childIsContain()) {

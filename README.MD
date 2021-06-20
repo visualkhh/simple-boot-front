@@ -1,11 +1,12 @@
 [![Single Page Application Framworks](assets/banner.png)](https://svelte.dev)
-[![npm version](https://img.shields.io/badge/npm-v1.0.30-blue)](https://www.npmjs.com/package/simple-boot-front) [![license](https://img.shields.io/badge/license-MIT-green)](LICENSE.md) [![Chat](https://img.shields.io/discord/457912077277855764?label=chat&logo=discord)](https://discord.gg/PW56dpns)
+[![npm version](https://img.shields.io/badge/npm-v1.0.30-blue)](https://www.npmjs.com/package/simple-boot-front) [![license](https://img.shields.io/badge/license-MIT-green)](LICENSE.md) [![Chat](https://img.shields.io/badge/npm-20%20online-brightgreen?logo=discord)](https://discord.gg/PW56dpns) [![Github](https://img.shields.io/badge/-github-black?logo=github)](https://github.com/visualkhh/simple-boot-front)
 
-#[😎 demo page link](https://codesandbox.io/s/example-simple-boot-front-spb5d)
+Single Page Application Framworks for Web
+
+# [😎 demo page link](https://codesandbox.io/s/example-simple-boot-front-spb5d)
 
 
 ## Our primary goals are
-* Single Page Application Framworks for Web
 * Provide a radically faster and widely accessible getting started experience for all front end.
 
 

@@ -10,8 +10,8 @@ import {SimGlobal} from '../global/SimGlobal';
 import {ObjectUtils} from '../util/object/ObjectUtils';
 import {SimAtomic} from './SimAtomic';
 import {ReflectUtils} from '../util/reflect/ReflectUtils';
-import {FunctionUtils} from "../util/function/FunctionUtils";
-import {getInject} from "../decorators/Inject";
+import {FunctionUtils} from '../util/function/FunctionUtils';
+import {getInject} from '../decorators/Inject';
 
 export class SimstanceManager implements Runnable {
     private _storage = new Map<ConstructorType<any>, any>()

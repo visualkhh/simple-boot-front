@@ -118,7 +118,7 @@ export class Scope {
 
     public setScanUsingVar() {
         // using variable search
-        const varRegexStr = 'this\\.([a-zA-Z_$.]*)';
+        const varRegexStr = 'this\\.([a-zA-Z_$][a-zA-Z_.$0-9]*)';
         const varRegex = RegExp(varRegexStr, 'gm');
         let varExec = varRegex.exec(this.raws)
         this.usingVars = [];

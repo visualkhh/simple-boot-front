@@ -24,9 +24,9 @@ export class TargetNode {
 export class RootScope extends Scope {
     public targetNode: TargetNode = new TargetNode();
 
-    setScanUsingVar() {
-        // root not using variable
-    }
+    // setScanUsingVar() {
+    //     // root not using variable
+    // }
 
 // constructor(raws: string, obj: any, uuid: string, config: { start: string; end: string }, position: ScopePosition) {
     //     super(raws, obj, uuid, config, position);

@@ -1,9 +1,11 @@
 <h1>index</h1>
-
+<div>
+    <!--%write(this.title.value);%-->
+</div>
 <div class="card mt-2" style="width: 100%;">
-    <div class="card-body">
-        <h5 class="card-title">set module</h5>
-        <div>set variable: <!--%module(this.title)%--></div>
+   <div class="card-body">
+       <h5 class="card-title">set module</h5>
+       <div>set variable: <!--%module(this.title)%--></div>
         <div>set variable: <!--%stripModule(this.title)%--></div>
 <!--        <div>set variable: &lt;!&ndash;%module(this.title, true)%&ndash;&gt;</div>-->
 <!--        <div>set variable: &lt;!&ndash;%module(this.title)%&ndash;&gt;</div>-->
@@ -18,7 +20,6 @@
     }
     %-->
 </div>
-
 
 <button class="btn btn-info" module-event-click="plusCount"><!--%write(this.count)%--></button>
 <!--<div class="card mt-2" style="width: 100%;">-->

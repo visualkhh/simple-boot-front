@@ -30,7 +30,7 @@ export class ScopeObject {
         // eslint-disable-next-line no-new-func
         return Function(`"use strict";
         const write = (str) => {
-            this.writes += str;
+            this.appendWrite(str);
         }
         const module = (module) => {
             this.moduleWriteAndSetScope(module, false);
@@ -42,6 +42,11 @@ export class ScopeObject {
         `).bind(scope)();
     }
 
+    public appendWrite(str: string) {
+        console.log('appendWrite--->', str)
+        this.writes += str;
+    }
+
     public moduleWriteAndSetScope(module: Module, strip: boolean) {
         if (module) {
             const uuid = RandomUtils.uuid();
@@ -51,7 +56,7 @@ export class ScopeObject {
             const targetNode = new TargetNode(targetSelecotr, TargetNodeMode.replace);
             const scope = module.setScope(targetNode, strip === true, uuid);
             if (scope) {
-                this.writes += (module.getWrapScopeString(scope.uuid) ?? '');
+                this.appendWrite(module.getWrapScopeString(scope.uuid) ?? '');
             }
         }
     }

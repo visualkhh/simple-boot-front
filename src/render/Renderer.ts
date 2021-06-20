@@ -45,7 +45,7 @@ export class Renderer {
                 NodeUtils.replaceNode(endComment, it.scopeResult.endComment);
             }
             it.usingVars.filter(uit => module.getValue(uit) instanceof Module).forEach(mit => {
-                module.getValue(mit).scopeUpdate();
+                module.getValue(mit).scopeUpdateAndRenderToByScopes();
             })
         })
         return false;

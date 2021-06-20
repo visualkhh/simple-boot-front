@@ -3,6 +3,7 @@ import {Intent} from '../intent/Intent';
 import {SimGlobal} from '../global/SimGlobal';
 
 export abstract class SimBase implements IntentEvent {
+
     constructor() {
     }
 

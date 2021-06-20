@@ -2,7 +2,7 @@
 // import * as request from 'supertest'
 // import {Index} from '@src/app/features/index'
 
-describe('Test', () => {
+describe('Proxy Test', () => {
     test('proxy test', async (done) => {
 
 //
@@ -48,6 +48,22 @@ describe('Test', () => {
         // 6
 
         expect(200).toBe(200)
+        done()
+    })
+
+
+    test('proxy test2', async (done) => {
+        const name = 'name';
+        const nameS = new Proxy(name as Object, {
+            apply: function (target, thisArg, argumentsList) {
+                console.log('호출됨: ' + argumentsList.join(', '));
+                return 'ppppppproxy'
+            }
+        });
+
+
+
+        nameS.toString();
         done()
     })
 })

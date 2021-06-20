@@ -35,28 +35,13 @@ export class SimProxyHandler implements ProxyHandler<any> {
         } else if
          */
         if (obj instanceof Module) {
-            // const type = Reflect.getMetadata('design:type', obj);
-            // obj.
-            // Object.get
-            // console.log('------>', obj, getSim(obj));
-            // console.log('------>', obj, getSim(Object.getPrototypeOf(obj)))
-            // 격리변수들.. 부분 갱신만 우선시한다.
-            // try {
-            //     const targetSelector = `module-isolate='${prop}'`
-            //     const elementNodeListOf = obj.findChildAttributeElements(targetSelector);
-            //     if (elementNodeListOf && elementNodeListOf.length > 0) {
-            //         const temp = document.createElement('span')
-            //         temp.innerHTML = obj.template;
-            //         const tempElements = temp.querySelectorAll(`[${targetSelector}]`)
-            //         elementNodeListOf.forEach((it, key) => {
-            //             this.renderer.renderInnerHTML(it, tempElements[key].innerHTML, obj);
-            //             (obj as any).addEvent(it);
-            //         });
-            //         return true;
-            //     }
-            // } catch (e) {
-            // }
-
+            // 참조하는 Module에 리턴시켜준다.
+            const refModules = obj._refModule.get(prop);
+            if (refModules) {
+                refModules.forEach((it, val) => {
+                    val.renderToScope(it);
+                });
+            }
             try {
                 const sim = this.simstanceManager?.getOrNewSim(obj.constructor as ConstructorType<Module>)
                 if (sim) {
