@@ -169,7 +169,7 @@ export class SimstanceManager implements Runnable {
             if (prop instanceof Module) {
                 this.moduleObjectPropProxy(prop)
             } else if (prop && typeof prop === 'object' && !(prop instanceof Map)) {
-                // console.log(prop);
+                // map Object는 proxy 안걸린다 왜그러는건가?
                 if (!('isProxy' in prop)) {
                     (target as any)[key] = new Proxy(prop, new SimObjectProxyHandler());
                 }

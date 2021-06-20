@@ -70,12 +70,29 @@ describe('Proxy Test', () => {
     })
 
 
+
     test('map proxy test', async (done) => {
        let names = new Map<string, string>()
         console.log((names instanceof Map))
 
         names.set('z', 'zvaava')
-        names = new Proxy(names, {});
+        names = new Proxy(names, {
+            get(target, prop, receiver) {
+                var value = Reflect.get(target, prop, receiver);
+                if (prop === "set" && typeof value === "function") {
+                    // When `proxy.set` is accessed, return your own
+                    // fake implementation that logs the arguments, then
+                    // calls the original .set() behavior.
+                    const origSet = value;
+                    value = function(key: any, value: any) {
+                        console.log(key, value);
+
+                        return origSet.apply(names, arguments);
+                    };
+                }
+                return value;
+            }
+        });
         console.log(names.get('z'));
 
 
