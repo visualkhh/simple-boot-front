@@ -1,40 +1,27 @@
 <h1>index</h1>
+
 <div>
-    <!--%write(this.title.value);%-->
-</div>
-<div>
-    <!--%write(this.title.datas.length);%-->
-</div>
-<div>
-    <!--%write(this.title.datas);%-->
-</div>
-<div>
-    <!--%write(this.title.adata.name);%-->
-</div>
-<div>
+    <!--%write(this.title.datas.length);%--> ;
     <!--%write(this.numbers.value);%-->
 </div>
-<div class="card mt-2" style="width: 100%;">
-   <div class="card-body">
-       <h5 class="card-title">set module</h5>
-       <div>set variable: <!--%module(this.title)%--></div>
-        <div>set variable: <!--%stripModule(this.title)%--></div>
-<!--        <div>set variable: &lt;!&ndash;%module(this.title, true)%&ndash;&gt;</div>-->
-<!--        <div>set variable: &lt;!&ndash;%module(this.title)%&ndash;&gt;</div>-->
-        <div>input module variable: <input type="text" module-event-keyup="changeText"></div>
-    </div>
+<div>
+    <!--%module(this.numbers);%-->
 </div>
-
+<div>
+    <!--%module('cmodule').value=555;%-->
+</div>
 <div>
     <!--%
     for(var i = 0 ; i < this.count ; i ++) {
-        module(this.title);
+        module('cmodule')
     }
     %-->
 </div>
 
+<button class="btn btn-info" module-event-click="plusCount">count++</button>
+<button class="btn btn-info" module-event-click="minusCount">count--</button>
 <button class="btn btn-info" module-event-click="changeData">changeData</button>
-<button class="btn btn-info" module-event-click="plusCount"><!--%write(this.count)%--></button>
+<button class="btn btn-info" module-event-click="changeText">changeText</button>
 <!--<div class="card mt-2" style="width: 100%;">-->
 <!--    <div class="card-body">-->
 <!--        <h5>event click change "module-event-click"</h5>-->

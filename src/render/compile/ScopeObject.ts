@@ -2,8 +2,14 @@ import {RandomUtils} from '../../util/random/RandomUtils';
 import {ScopeResultSet} from './ScopeResultSet';
 import {Module} from '../../module/Module';
 import {TargetNode, TargetNodeMode} from './RootScope';
+import {SimGlobal} from "../../global/SimGlobal";
+import {ModuleOption} from "../../module/ModuleOption";
 
+export type ScopeObjectCalls = {name: string, parameter: any[], result: any}[];
 export class ScopeObject {
+    declare _dynamicModule: Map<string, Module[]>;
+    declare _option: ModuleOption
+    public calls: ScopeObjectCalls = [];
     [name: string]: any;
 
     public writes = '';
@@ -18,7 +24,7 @@ export class ScopeObject {
         const startComment = document.createComment('scope start ' + this.uuid)
         const endComment = document.createComment('scope end ' + this.uuid)
         // templateElement.innerHTML = '<!--scope start ' + this.uuid + '-->' + this.writes + '<!--scope end ' + this.uuid + '-->'
-        return new ScopeResultSet(this.uuid, this, templateElement.content, startComment, endComment)
+        return new ScopeResultSet(this.uuid, this, templateElement.content, startComment, endComment, this.calls)
         // return new ScopeResultSet(this, templateElement.content, code, returnValue)
     }
 
@@ -33,13 +39,34 @@ export class ScopeObject {
             this.appendWrite(str);
         }
         const module = (module) => {
+            if (typeof module === 'string') {
+                module = this.newSimOrAddDynamicModule(module);
+            }
             this.moduleWriteAndSetScope(module, false);
+            this.calls.push({name: 'module', parameter: [module], result: module});
+            return module;
         }
         const stripModule = (module) => {
+            if (typeof module === 'string') {
+                module = this.newSimOrAddDynamicModule(module);
+            }
             this.moduleWriteAndSetScope(module, true);
+            this.calls.push({name: 'stripModule', parameter: [module], result: module});
+            return module;
         }
         ${script}
         `).bind(scope)();
+    }
+
+
+    public newSimOrAddDynamicModule(moduleName: string) {
+        const module = this._option.modules[moduleName];
+        if (module) {
+            const newSim = SimGlobal.application?.simstanceManager.newSim(module)
+            if (newSim) {
+                return newSim;
+            }
+        }
     }
 
     public appendWrite(str: string) {

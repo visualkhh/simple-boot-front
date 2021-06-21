@@ -36,12 +36,9 @@ export class SimProxyHandler implements ProxyHandler<any> {
          */
         if (obj instanceof Module) {
             // 참조하는 Module에 리턴시켜준다.
-            const refModules = obj._refModule.get(prop);
-            if (refModules) {
-                refModules.forEach((it, val) => {
-                    val.renderToScope(it);
-                });
-            }
+            obj._refModule.get(prop)?.forEach((it, val) => {
+                it.forEach(sit => val.renderToScope(sit));
+            });
             try {
                 const sim = this.simstanceManager?.getOrNewSim(obj.constructor as ConstructorType<Module>)
                 if (sim) {

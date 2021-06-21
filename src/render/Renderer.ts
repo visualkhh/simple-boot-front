@@ -27,11 +27,7 @@ export class Renderer {
         }
     }
 
-    public renderToScope(scope: Scope, module: Module, varName: string): boolean {
-        /*
-            const targets = scope.usingVars.includes(varName) ? [scope] : []
-            const targets = [];.push(...scope.childs.filter(it => it.usingVars.includes(varName)));
-         */
+    public renderToScope(scope: Scope, module: Module, varName: string) {
         const targets = scope.childs.filter(it => it.usingVars.includes(varName));
         targets.forEach(it => {
             if (it.scopeResult) {
@@ -43,12 +39,14 @@ export class Renderer {
                 it.scopeResult.childNodes.forEach(cit => NodeUtils.addNode(startComment, cit));
                 NodeUtils.replaceNode(startComment, it.scopeResult.startComment);
                 NodeUtils.replaceNode(endComment, it.scopeResult.endComment);
+                it.scopeResult.calls.filter(it => it.name === 'module' || it.name === 'stripModule').map(it => it.result).forEach(it => {
+                    (it as Module).renderWrap();
+                })
             }
             it.usingVars.filter(uit => module.getValue(uit) instanceof Module).forEach(mit => {
                 module.getValue(mit).scopeUpdateAndRenderToByScopes();
             })
         })
-        return false;
     }
 
     public renderToByScopes(scope: RootScope, module: Module) {
@@ -63,6 +61,11 @@ export class Renderer {
             } else {
                 // nothing..
             }
+            scope.childs.forEach(it => {
+                it.scopeResult?.calls.filter(it => it.name === 'module' || it.name === 'stripModule').map(it => it.result).forEach(it => {
+                    (it as Module).renderWrap();
+                })
+            })
             // const rootElement = document.querySelector(this.selector)
             // this.addEvent(rootElement)
             // this.addBind(rootElement)

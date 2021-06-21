@@ -9,28 +9,27 @@ import {Intent} from '../intent/Intent';
 import {SimGlobal} from '../global/SimGlobal';
 import {Navigation} from '../service/Navigation';
 import {RootScope, TargetNode} from '../render/compile/RootScope';
+import {ModuleOption} from './ModuleOption';
+import {ConstructorType} from '../types/Types';
 
 export class Module extends SimBase implements LifeCycle {
     public router_outlet_selector?: string;
     private router_outlet_id?: string;
     private id: string;
-    public _refModule = new Map<string, Map<Module, string>>();
+    public _refModule = new Map<string, Map<Module, string[]>>();
+    // public _dynamicModule = new Map<string, Module[]>();
     public _scopes = new Map<string, RootScope>();
-    public _option: { template: string, styleImports: string[], wrapElement: string }
+    public _option: ModuleOption
     public value: any;
 
-    constructor(public selector = '', option: { template?: string, styleImports?: string[], wrapElement?: string, value?: any } = {},
+    constructor(public selector = '', option: { template?: string, styleImports?: string[], wrapElement?: string, modules?: { [name: string]: ConstructorType<Module> }, value?: any } = {},
                 private _renderer = SimGlobal.application?.simstanceManager.getOrNewSim(Renderer),
                 private _navigation = SimGlobal.application?.simstanceManager.getOrNewSim(Navigation)
     ) {
         super();
         // default option
         this.value = option.value;
-        this._option = Object.assign({
-            template: '<!--%write(this.value)%-->',
-            styleImports: [],
-            wrapElement: 'span'
-        }, option)
+        this._option = Object.assign(new ModuleOption(), option)
 
         this.id = `___Module___${this.selector}_${RandomUtils.uuid()}`
         this.selector = `#${this.id}`
@@ -220,9 +219,9 @@ export class Module extends SimBase implements LifeCycle {
                 const tailEnd = tail[tail.length - 1];
                 if (frontEnd instanceof Module && tailEnd) {
                     if (!frontEnd._refModule.get(tailEnd)) {
-                        frontEnd._refModule.set(tailEnd, new Map());
+                        frontEnd._refModule.set(tailEnd, new Map([[this, []]]));
                     }
-                    frontEnd._refModule.get(tailEnd)?.set(this, it);
+                    frontEnd._refModule.get(tailEnd)?.get(this)?.push(it);
                 }
             }
         })
@@ -230,7 +229,7 @@ export class Module extends SimBase implements LifeCycle {
         this._scopes.forEach(it => this._renderer?.renderToByScopes(it, this));
         this._onChangedRender();
         this.renderd(this.selector);
-        this.findModuleField().forEach(it => it.renderWrap());
+        // this.findModuleField().forEach(it => it.renderWrap());
     }
 
     public scopeUpdateAndRenderToByScopes() {
@@ -251,6 +250,12 @@ export class Module extends SimBase implements LifeCycle {
                 inModuleVars.push(targetModule);
             }
         }
+
+        // this._dynamicModule.forEach((it) => it.forEach(sit => {
+        //     inModuleVars.push(sit);
+        // }))
+
+
         return inModuleVars;
     }
 

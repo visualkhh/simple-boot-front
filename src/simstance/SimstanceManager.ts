@@ -13,6 +13,7 @@ import {ReflectUtils} from '../util/reflect/ReflectUtils';
 import {FunctionUtils} from '../util/function/FunctionUtils';
 import {getInject} from '../decorators/Inject';
 import {SimObjectProxyHandler} from '../proxy/SimObjectProxyHandler';
+import {ModuleOption} from "../module/ModuleOption";
 
 export class SimstanceManager implements Runnable {
     private _storage = new Map<ConstructorType<any>, any>()
@@ -84,35 +85,22 @@ export class SimstanceManager implements Runnable {
         }
 
         if (this._storage.has(target) && undefined === registed) {
-            const r = this.newSime(target)
-            this._storage.set(target, r)
-
-            // object in module proxy
-            if (r instanceof Module) {
-                this.moduleObjectPropProxy(r);
-            }
-
-            return r
+            return this.newSim(target, (data) => this._storage.set(target, data))
         }
         throw new SimNoSuch('no simple instance ' + target)
     }
 
-    public newSime<T>(target: ConstructorType<T>): T {
+    public newSim<T>(target: ConstructorType<T>, simCreateAfter?: (data: T) => void): T {
         const r = new target(...this.getParameterSim(target))
-
-        // console.log('newSim-->', r, this.getAllProtoTypeName(r))
-        // console.log('newSim-->', r, Object.getOwnPropertyNames(target.prototype))
-        // console.log('newSim--11>', Object.keys(Object.getPrototypeOf(target)))
-        // // console.log('newSim--11>', Object.getPrototypeOf(target))
-        // console.log('newSim--22>', Object.keys(Object.getPrototypeOf(target.prototype)))
-        // console.log('newSim--33>', Object.getPrototypeOf(Object.getPrototypeOf(target.prototype)))
-        // if (target.prototype?.prototype) {
-        //     console.log('newSim--33>', r, Object.getPrototypeOf(target.prototype.prototype))
-        // }
-        // const prototypeOf = Object.keys(Object.getPrototypeOf(target.prototype));
-        // console.log('------>', r, set)
         this.callBindPostConstruct(r);
-        return this.proxy(r, Module);
+        const p = this.proxy(r, Module);
+        // 순환참조 막기위한 콜백 처리
+        simCreateAfter?.(p);
+        // object in module proxy
+        if (p instanceof Module) {
+            this.moduleObjectPropProxy(p);
+        }
+        return p;
     }
 
     public callBindPostConstruct(obj: any) {
@@ -142,9 +130,6 @@ export class SimstanceManager implements Runnable {
         this.simProxyHandler = simProxyHandler;
     }
 
-    /**
-     * @deprecated
-     */
     public proxy<T>(target: T, type?: ConstructorType<any>): T {
         if (this.simProxyHandler && (type ? target instanceof type : true) && (!('isProxy' in target))) {
             for (const key in target) {
@@ -168,7 +153,7 @@ export class SimstanceManager implements Runnable {
             const prop = (target as any)[key];
             if (prop instanceof Module) {
                 this.moduleObjectPropProxy(prop)
-            } else if (prop && typeof prop === 'object' && !(prop instanceof Map)) {
+            } else if (prop && typeof prop === 'object' && !(prop instanceof Map) && !(prop instanceof ModuleOption)) {
                 // map Object는 proxy 안걸린다 왜그러는건가?
                 if (!('isProxy' in prop)) {
                     (target as any)[key] = new Proxy(prop, new SimObjectProxyHandler());
@@ -183,24 +168,6 @@ export class SimstanceManager implements Runnable {
             // target[key] = this.moduleProxy(target[key]);
         }
 
-        // if (!target instanceof Module && target instanceof Object) {
-        //
-        // }
-        //     const protoTypeName = ObjectUtils.getProtoTypeName(target);
-        //     protoTypeName.forEach(it => {
-        //         if (target instanceof Module) {
-        //             (target as any)[it] = new Proxy((target as any)[it], this.simProxyHandler!);
-        //         } else if (target instanceof Object) {
-        //             target = new Proxy(target, new SimObjectProxyHandler());
-        //         }
-        //     });
-        //
-        //     if (target instanceof Module) {
-        //         target = new Proxy(target, this.simProxyHandler!);
-        //     } else if (target instanceof Object) {
-        //         target = new Proxy(target, new SimObjectProxyHandler());
-        //     }
-        // }
         return target;
     }
 

@@ -10,7 +10,10 @@ export interface SimConfig {
     scheme?: string,
     // type?: SimConfigType,
 }
-
+// export const SimInjectorble = (config?: SimConfig): GenericClassDecorator<ConstructorType<any>> => {
+//     return (target: ConstructorType<any>) => {
+//     }
+// }
 const SimMetadataKey = Symbol('Sim');
 export const Sim = (config?: SimConfig): GenericClassDecorator<ConstructorType<any>> => {
     // Reflect.metadata(SimMetadataKey, config);

@@ -29,7 +29,7 @@ export class SimObjectProxyHandler implements ProxyHandler<any> {
         obj[prop] = value
         this.simObjectProxyHandler_refModule.forEach((module, key) => {
             module._refModule.get(key)?.forEach((sit, m) => {
-                m.renderToScope(sit);
+                sit.forEach(ssit => m.renderToScope(ssit))
             })
         })
         return true

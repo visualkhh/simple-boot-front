@@ -1,5 +1,4 @@
 import {ConstructorType} from '../types/Types';
-import {Router} from '../router/Router';
 import {RootRouter} from '../router/RootRouter';
 
 export enum UrlType {

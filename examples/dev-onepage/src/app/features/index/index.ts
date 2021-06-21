@@ -13,6 +13,7 @@ import {Inject} from "simple-boot-front/decorators/Inject";
 import {ATitle} from "./ATitle";
 import {BTitle} from "./BTitle";
 import {SimGlobal} from "simple-boot-front/global/SimGlobal";
+import {CTitle} from "./CTitle";
 
 @Sim({scheme: 'index'})
 export class Index extends Module {
@@ -31,14 +32,18 @@ export class Index extends Module {
                                         }
                                     %-->
                                     </ul>
+                                    <button module-event-click="aa">aaa</button>
                             `,
                 value: [1, 2, 3]
             });
         }
+        aa() {
+            console.log('number clikc => ', this.value);
+        }
     }();
 
     constructor(@Inject(ATitle) public title: Title, public v: ViewService, public manager: SimstanceManager, public navigation: Navigation) {
-        super("index", {template: html, styleImports: [css]});
+        super("index", {template: html, styleImports: [css], modules: {'cmodule': CTitle}});
     }
 
     onInit() {
@@ -56,18 +61,21 @@ export class Index extends Module {
 
     plusCount($event: KeyboardEvent, view: View<Element>) {
         this.count++;
-        console.log('scope-title->', this.title._scopes)
+    }
+    minusCount($event: KeyboardEvent, view: View<Element>) {
+        this.count--;
     }
 
     changeText($event: KeyboardEvent, view: View<Element>) {
         this.title.value = view.value;
-        this.title.datas.push(11);
+        this.title.datas.push(Math.floor(RandomUtils.random(1, 400)));
         (this.title as ATitle).adata.name='zz'
-        console.log('------->', this.title.value)
-        console.log('------->', (SimGlobal.application?.simstanceManager as any)['_storage'])
+        // console.log('------->', this.title.value)
+        // console.log('------->', (SimGlobal.application?.simstanceManager as any)['_storage'])
     }
 
     changeData() {
+        console.log('-->changeData')
         this.numbers.value = [
             Math.floor(RandomUtils.random(1, 400)),
             Math.floor(RandomUtils.random(1, 400)),

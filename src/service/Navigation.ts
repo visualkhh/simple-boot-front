@@ -1,7 +1,7 @@
 import {Sim} from '../decorators/SimDecorator'
 import {SimOption, UrlType} from '../option/SimOption';
 import {LocationUtils} from '../util/window/LocationUtils';
-import {Url} from "../model/Url";
+import {Url} from '../model/Url';
 
 @Sim()
 export class Navigation {
