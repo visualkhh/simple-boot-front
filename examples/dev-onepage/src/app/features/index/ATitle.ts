@@ -8,6 +8,7 @@ export class ATitle extends Title {
     constructor(testService: TestService) {
         super('Atitle', {
             template: 'value:(<!--% write(this.value) %--> <button module-event-click="aa">aa</button>)',
+            styleImports: ["/*[module-selector]*/ {color: red}"],
             value: 111
         });
         console.log('ATitle Constructor', testService)

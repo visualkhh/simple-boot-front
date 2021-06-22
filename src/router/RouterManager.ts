@@ -31,26 +31,29 @@ export class RouterManager implements Runnable {
         const navigation = this.simstanceManager?.getOrNewSim(Navigation);
         const rootRouter = this.simstanceManager?.getOrNewSim(this.option?.rootRouter);
         const executeModule = this.simstanceManager?.getOrNewSim(this.option?.rootRouter)?.getExecuteModule(routers) || new RouterModule(rootRouter, this.simstanceManager?.getOrNewSim(rootRouter?.notFound(navigation?.pathInfo!)))
+
         if (executeModule && executeModule.module) {
-            executeModule.router?.canActivate(navigation?.pathInfo!, executeModule.module).then(targetModule => {
+            executeModule.router?.canActivate(navigation?.pathInfo!, executeModule).then(targetModule => {
+                console.log('targetModule==>', targetModule)
                 if (targetModule) {
                     let lastRouterSelector = this.option?.selector;
                     // routerModule render
                     routers.forEach(it => {
-                        this.renderRouterModule(it.moduleObject, document.querySelector(lastRouterSelector!));
-                        const selctor = it?.moduleObject?.router_outlet_selector || it?.moduleObject?.selector
+                        const moduleObj = this.simstanceManager?.getOrNewSim(it.module?.module)
+                        this.renderRouterModule(moduleObj, it.module?.stripWrap, document.querySelector(lastRouterSelector!));
+                        const selctor = moduleObj?.router_outlet_selector || moduleObj?.selector
                         if (selctor) {
                             lastRouterSelector = selctor;
                         }
                     });
-                    if (typeof targetModule === 'function') {
-                        targetModule = this.simstanceManager?.getOrNewSim(targetModule) as Module;
-                    }
+                    // if (typeof targetModule === 'function') {
+                    //     targetModule = this.simstanceManager?.getOrNewSim(targetModule) as Module;
+                    // }
                     // Module render
-                    this.render(targetModule, document.querySelector(lastRouterSelector!));
+                    this.render(targetModule.module, targetModule.moduleOption?.stripWrap, document.querySelector(lastRouterSelector!));
                     this.renderd();
-                    (targetModule as any)._onInitedChild();
-                    routers.reverse().forEach(it => (it.moduleObject as any)?._onInitedChild());
+                    (targetModule.module as any)._onInitedChild();
+                    routers.reverse().forEach(it => (this.simstanceManager?.getOrNewSim(it.module?.module) as any)?._onInitedChild());
                 }
             })
         } else {
@@ -79,23 +82,24 @@ export class RouterManager implements Runnable {
         });
     }
 
-    public renderRouterModule(module: Module | undefined, targetSelector: Node | null): boolean {
+    public renderRouterModule(module: Module | undefined, stripWrap: boolean | undefined, targetSelector: Node | null): boolean {
         // console.log('renderRouterModule router --->', targetSelector)
         if (module && !module.exist()) {
-            this.render(module, targetSelector);
+            this.render(module, stripWrap, targetSelector);
             // (module as any)._onInit()
-            // module.renderWrap(targetSelector);
+            // module.setScope(new TargetNode(targetSelector!, TargetNodeMode.child), stripWrap)
+            // module.renderWrap();
             return true
         } else {
             return false
         }
     }
 
-    public render(module: Module | undefined, targetSelector: Node | null): boolean {
+    public render(module: Module | undefined, stripWrap: boolean | undefined, targetSelector: Node | null): boolean {
         // console.log('render router --->', targetSelector)
         if (module) {
             (module as any)._onInit()
-            module.setScope(new TargetNode(targetSelector!, TargetNodeMode.child))
+            module.setScope(new TargetNode(targetSelector!, TargetNodeMode.child), stripWrap)
             module.renderWrap();
             return true
         } else {

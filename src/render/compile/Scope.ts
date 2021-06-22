@@ -32,7 +32,7 @@ export class Scope {
     // }
 
     // executeFragment(): {fragment: DocumentFragment, scopeObjects: ScopeObject[]} {
-    executeFragment() {
+    executeFragment(option?: {head?: Node, tail?: Node}) {
         const templateElement = document.createElement('template');
         templateElement.innerHTML = this.raws;
         const rawFragment = templateElement.content;
@@ -55,6 +55,17 @@ export class Scope {
             const currentNode = nodeIterator.nextNode();
             currentNode?.parentNode?.insertBefore(childScopeObject.startComment, currentNode);
             currentNode?.parentNode?.insertBefore(childScopeObject.endComment, currentNode.nextSibling);
+            // childScopeObject.fragment.childNodes.forEach(it => {
+            //     if (it.nodeType === Node.ELEMENT_NODE) {
+            //         (it as Element).setAttribute('module-id', this.uuid);
+            //     }
+            // })
+            if(option?.head) {
+                childScopeObject.fragment.prepend(option?.head)
+            }
+            if(option?.tail) {
+                childScopeObject.fragment.append(option?.tail)
+            }
             currentNode?.parentNode?.replaceChild(childScopeObject.fragment, currentNode);
             /*
                 let currentNode = nodeIterator.nextNode();
@@ -62,6 +73,11 @@ export class Scope {
              */
         })
         // const scopeObjects: ScopeObject[] = [];
+        rawFragment.childNodes.forEach(it => {
+            if (it.nodeType === Node.ELEMENT_NODE) {
+                (it as Element).setAttribute('scope-id', this.uuid);
+            }
+        })
         return rawFragment;
     }
 

@@ -8,7 +8,7 @@ import {SimstanceManager} from "simple-boot-front/simstance/SimstanceManager";
 @Sim({scheme: 'layout'})
 export class App extends Module {
     constructor(public ajaxService: AjaxService, public simstance: SimstanceManager) {
-        super("app-layout-module", {template: html, styleImports:[css]});
+        super("app-layout-module", {template: html, styleImports:[css], wrapElement: 'span'});
     }
 
 }

@@ -6,6 +6,7 @@ import {Scope} from './compile/Scope';
 import {RandomUtils} from '../util/random/RandomUtils';
 import {NodeUtils} from '../util/node/NodeUtils';
 import {RootScope, TargetNodeMode} from './compile/RootScope';
+import {DomUtils} from "../util/dom/DomUtils";
 
 @Sim()
 export class Renderer {
@@ -51,7 +52,11 @@ export class Renderer {
 
     public renderToByScopes(scope: RootScope, module: Module) {
         if (scope.targetNode.node) {
-            const childNode = scope.executeFragment();
+            // const h = document.createElement('div')
+            // const t = document.createElement('div')
+            // h.innerHTML = 'h'
+            // t.innerHTML = 't'
+            const childNode = scope.executeFragment(); // {head: h, tail: t} //{head: module.transStyle(scope.uuid)}
             module.addEvent(childNode);
             if (TargetNodeMode.child === scope.targetNode.mode) {
                 NodeUtils.removeAllChildNode(scope.targetNode.node)
@@ -61,6 +66,8 @@ export class Renderer {
             } else {
                 // nothing..
             }
+
+
             scope.childs.forEach(it => {
                 it.scopeResult?.calls.filter(it => it.name === 'module' || it.name === 'stripModule').map(it => it.result).forEach(it => {
                     (it as Module).renderWrap();

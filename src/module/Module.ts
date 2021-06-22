@@ -207,6 +207,7 @@ export class Module extends SimBase implements LifeCycle {
     }
 
     public renderWrap() {
+        // this.parentStyle();
         // using variable ref adding~
         const usingVarSet = new Set<string>();
         Array.from(this._scopes.values()).map(it => it.usingVars).forEach(it => it.forEach(sit => usingVarSet.add(sit)));
@@ -242,22 +243,16 @@ export class Module extends SimBase implements LifeCycle {
         });
     }
 
-    private findModuleField() {
-        const inModuleVars: Module[] = [];
-        for (const key in this) {
-            if (this[key] instanceof Module) {
-                const targetModule = this[key] as any as Module;
-                inModuleVars.push(targetModule);
-            }
-        }
-
-        // this._dynamicModule.forEach((it) => it.forEach(sit => {
-        //     inModuleVars.push(sit);
-        // }))
-
-
-        return inModuleVars;
-    }
+    // private findModuleField() {
+    //     const inModuleVars: Module[] = [];
+    //     for (const key in this) {
+    //         if (this[key] instanceof Module) {
+    //             const targetModule = this[key] as any as Module;
+    //             inModuleVars.push(targetModule);
+    //         }
+    //     }
+    //     return inModuleVars;
+    // }
 
     public renderd(selector: string) {
         this.transStyle(selector);
@@ -271,6 +266,21 @@ export class Module extends SimBase implements LifeCycle {
         }).join(' ')
         this._renderer?.prependStyle(selector, join)
     }
+    // public parentStyle(): void {
+    //     const join = this._option.styleImports?.map(it => {
+    //         // eslint-disable-next-line prefer-regex-literals
+    //         const regExp = new RegExp('\\/\\*\\[module\\-selector\\]\\*\\/', 'gi') // 생성자
+    //         return it.replace(regExp, this.selector + ' ')
+    //     }).join(' ')
+    //
+    //     if (join) {
+    //         const targetElement = document.querySelector(this.selector)
+    //         const htmlStyleElement = document.createElement('style')
+    //         htmlStyleElement.innerHTML = join
+    //         targetElement?.parentNode?.append(htmlStyleElement)
+    //     }
+    //     // this._renderer?.prependStyle(selector, join)
+    // }
 
     procAttr<T extends HTMLElement>(element: DocumentFragment, attrName: string, f: (h: T, value: string | null) => void) {
         element.querySelectorAll<T>(`[${attrName}]`).forEach(it => {

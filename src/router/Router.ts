@@ -6,12 +6,18 @@ import {Navigation} from '../service/Navigation';
 import {RouterModule} from './RouterModule';
 import {Url} from '../model/Url';
 
+
+export interface RouterModuleOption {
+    module: ConstructorType<Module>;
+    stripWrap?: boolean;
+}
+
 export interface Routers {
-    [name: string]: ConstructorType<Module> | any
+    [name: string]: RouterModuleOption | any
 }
 
 export class Router extends SimBase implements Routers {
-    constructor(public path: string, public module?: ConstructorType<Module>, public childs: ConstructorType<Router>[] = [],
+    constructor(public path: string, public module?: RouterModuleOption, public childs: ConstructorType<Router>[] = [],
                 private _simstanceManager = SimGlobal.application?.simstanceManager!,
                 private _navigation = _simstanceManager.getOrNewSim(Navigation)!) {
         super()
@@ -25,8 +31,8 @@ export class Router extends SimBase implements Routers {
         if (isRoot) {
             parentRouters.push(this);
             const module = this.routing(routerStrings, path)
-            if (module) {
-                return new RouterModule(this, module);
+            if (module?.module) {
+                return module;
             } else {
                 for (const child of this.childs) {
                     const route = this._simstanceManager.getOrNewSim(child)
@@ -39,29 +45,24 @@ export class Router extends SimBase implements Routers {
         }
     }
 
-    get moduleObject() {
-        if (this.module) {
-            return SimGlobal.application?.simstanceManager.getOrNewSim(this.module)
-        }
-    }
 
     public isRootUrl(parentRoots: string[], hashUrl: string): boolean {
         return hashUrl.startsWith(parentRoots.join('') + (this.path || ''))
     }
 
     // my field find
-    public routing(parentRoots: string[], path: string): Module | undefined {
+    public routing(parentRoots: string[], path: string): RouterModule | undefined {
         const routers = this as Routers
         const urlRoot = parentRoots.join('') + this.path
         const regex = new RegExp('^' + urlRoot, 'i')
         path = path.replace(regex, '')
-        const fieldModule = (routers[path] as ConstructorType<any>)
+        const fieldModule = (routers[path] as RouterModuleOption)
         if (fieldModule) {
-            return SimGlobal.application?.simstanceManager.getOrNewSim(fieldModule)
+            return new RouterModule(this, this._simstanceManager.getOrNewSim(fieldModule.module), fieldModule)
         }
     }
 
-    public async canActivate(url: Url, module: Module): Promise<Module | ConstructorType<Module>> {
+    public async canActivate(url: Url, module: RouterModule): Promise<RouterModule> {
         return module;
     }
 }
