@@ -3,10 +3,8 @@ import {RandomUtils} from "../../../../../../dist/util/random/RandomUtils";
 import {PostConstruct, Sim} from "simple-boot-front/decorators/SimDecorator";
 import {Injectable} from "simple-boot-front/decorators/Injectable";
 import {TestService} from "../../services/TestService";
-import {Inject} from "simple-boot-front/decorators/Inject";
 
 @Injectable()
-// @Sim()
 export class CTitle extends Title {
     constructor(public testService: TestService) {
         super('Ctitle', {

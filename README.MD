@@ -1,5 +1,5 @@
 [![Single Page Application Framworks](assets/banner.png)](https://svelte.dev)
-[![npm version](https://img.shields.io/badge/npm-v1.0.31-blue)](https://www.npmjs.com/package/simple-boot-front) [![license](https://img.shields.io/badge/license-MIT-green)](LICENSE.md) [![Chat](https://img.shields.io/badge/npm-20%20online-brightgreen?logo=discord)](https://discord.gg/PW56dpns) [![Github](https://img.shields.io/badge/-github-black?logo=github)](https://github.com/visualkhh/simple-boot-front)
+[![npm version](https://img.shields.io/badge/npm-v1.0.32-blue)](https://www.npmjs.com/package/simple-boot-front) [![license](https://img.shields.io/badge/license-MIT-green)](LICENSE.md) [![Chat](https://img.shields.io/badge/npm-20%20online-brightgreen?logo=discord)](https://discord.gg/PW56dpns) [![Github](https://img.shields.io/badge/-github-black?logo=github)](https://github.com/visualkhh/simple-boot-front)
 
 Single Page Application Framworks for Web
 
@@ -178,6 +178,28 @@ npm install simple-boot-front
   post(projectService: ProjectService) {
       console.log('post Construct  and dependency injection')
   }
+  ```
+* @Injectable: No Sim Decorator Class Inject Sim 
+  ```typescript
+  @Injectable()
+  export class CTitle extends Title {
+  constructor(public testService: TestService) {
+    super('Ctitle', {
+      template: 'value:(<!--% write(this.value) %--> <button module-event-click="cc">CC</button>)',
+      value: 'default value'
+    });
+    console.log('ctitle constructor-->', this.testService)
+  }
+  
+      cc() {
+          this.value = this.testService.tail(Math.floor(RandomUtils.random(1, 50)), '---');
+      }
+      @PostConstruct
+      ttt(testService: TestService) {
+          console.log('poo->', testService)
+      }
+  }
+
   ```
 * @After, @Before
   ```typescript
