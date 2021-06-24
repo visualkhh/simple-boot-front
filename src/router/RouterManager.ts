@@ -30,9 +30,13 @@ export class RouterManager implements Runnable {
         const routers: Router[] = [];
         const navigation = this.simstanceManager?.getOrNewSim(Navigation);
         const rootRouter = this.simstanceManager?.getOrNewSim(this.option?.rootRouter);
-        const executeModule = this.simstanceManager?.getOrNewSim(this.option?.rootRouter)?.getExecuteModule(routers) || new RouterModule(rootRouter, this.simstanceManager?.getOrNewSim(rootRouter?.notFound(navigation?.pathInfo!)))
+        let executeModule = this.simstanceManager?.getOrNewSim(this.option?.rootRouter)?.getExecuteModule(routers);
+        if (!executeModule) {
+            const notFound = rootRouter?.notFound(navigation?.pathInfo!);
+            executeModule = new RouterModule(rootRouter, this.simstanceManager?.getOrNewSim(notFound?.module), notFound);
+        }
 
-        if (executeModule && executeModule.module) {
+        if (executeModule.module) {
             executeModule.router?.canActivate(navigation?.pathInfo!, executeModule).then(targetModule => {
                 // console.log('targetModule==>', targetModule)
                 if (targetModule) {

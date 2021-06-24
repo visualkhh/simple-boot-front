@@ -60,9 +60,9 @@ npm install simple-boot-front
                 return module;
             }
         }
-        notFound(url: Url): ConstructorType<Module> {
+        notFound(url: Url): RouterModuleOption {
             console.log(url.path)
-            return Notfound;
+            return {module: Notfound, stripWrap: false};
         }
     }
 

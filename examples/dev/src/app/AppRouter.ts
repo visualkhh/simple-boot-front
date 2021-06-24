@@ -38,8 +38,8 @@ export class AppRouter extends RootRouter {
         }
     }
 
-    notFound(url: Url): ConstructorType<Module> {
+    notFound(url: Url): RouterModuleOption {
         console.log(url.path)
-        return Notfound;
+        return {module: Notfound, stripWrap: false};
     }
 }
