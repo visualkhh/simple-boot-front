@@ -53,11 +53,6 @@ export class Renderer {
 
     public renderToByScopes(scope: RootScope, module: Module) {
         if (scope.targetNode.node) {
-            // style settinhg
-            // const h = document.createElement('div')
-            // const t = document.createElement('div')
-            // h.innerHTML = 'h'
-            // t.innerHTML = 't'
             const childNode = scope.executeFragment({childElementAttr: new Map([['module-id', module.id]])}); // {head: h, tail: t} //{head: module.transStyle(scope.uuid)}
             module.addEvent(childNode);
             if (TargetNodeMode.child === scope.targetNode.mode) {

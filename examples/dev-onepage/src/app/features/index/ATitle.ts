@@ -6,7 +6,7 @@ import {TestService} from "../../services/TestService";
 export class ATitle extends Title {
     adata = {name: 'kim', age: 44}
     constructor(testService: TestService) {
-        super('Atitle', {
+        super({
             template: 'value:(<!--% write(this.value) %--> <button module-event-click="aa">aa</button>)',
             styleImports: ["/*[module-selector]*/ {color: red}"],
             value: 111

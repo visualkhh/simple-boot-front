@@ -8,13 +8,11 @@ import {SimstanceManager} from '../simstance/SimstanceManager';
 import {Runnable} from '../run/Runnable';
 
 export class IntentManager implements Runnable {
-    private simstanceManager?: SimstanceManager;
 
-    constructor() {
+    constructor(public simstanceManager: SimstanceManager) {
     }
 
-    public run(simstanceManager: SimstanceManager) {
-        this.simstanceManager = simstanceManager;
+    public run() {
         fromEvent<CustomEvent<Intent>>(window, EventType.intent).pipe(
             filter(it => it.detail instanceof Intent),
             map(it => it.detail)

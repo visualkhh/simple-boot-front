@@ -15,7 +15,7 @@ export class Exception extends Module {
     data = 1
 
     constructor(public ajax: AjaxService) {
-        super("exception", {template: html, styleImports: [css]});
+        super({template: html, styleImports: [css]});
     }
 
     onInit() {

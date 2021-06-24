@@ -11,15 +11,11 @@ import {RouterModule} from './RouterModule';
 import {TargetNode, TargetNodeMode} from '../render/compile/RootScope';
 
 export class RouterManager implements Runnable {
-    private simstanceManager?: SimstanceManager;
-    private option?: SimOption;
 
-    constructor() {
+    constructor(private option: SimOption, private simstanceManager: SimstanceManager) {
     }
 
-    public run(option: SimOption, simstanceManager: SimstanceManager) {
-        this.option = option;
-        this.simstanceManager = simstanceManager;
+    public run() {
         fromEvent<any>(window, 'popstate').subscribe((_) => {
             this.executeRouter()
         })
@@ -28,12 +24,12 @@ export class RouterManager implements Runnable {
 
     public executeRouter() {
         const routers: Router[] = [];
-        const navigation = this.simstanceManager?.getOrNewSim(Navigation);
-        const rootRouter = this.simstanceManager?.getOrNewSim(this.option?.rootRouter);
-        let executeModule = this.simstanceManager?.getOrNewSim(this.option?.rootRouter)?.getExecuteModule(routers);
+        const navigation = this.simstanceManager.getOrNewSim(Navigation);
+        const rootRouter = this.simstanceManager.getOrNewSim(this.option.rootRouter);
+        let executeModule = this.simstanceManager.getOrNewSim(this.option.rootRouter)?.getExecuteModule(routers);
         if (!executeModule) {
             const notFound = rootRouter?.notFound(navigation?.pathInfo!);
-            executeModule = new RouterModule(rootRouter, this.simstanceManager?.getOrNewSim(notFound?.module), notFound);
+            executeModule = new RouterModule(rootRouter, this.simstanceManager?.getOrNewSim(notFound));
         }
 
         if (executeModule.module) {
@@ -43,9 +39,9 @@ export class RouterManager implements Runnable {
                     let lastRouterSelector = this.option?.selector;
                     // routerModule render
                     routers.forEach(it => {
-                        const moduleObj = this.simstanceManager?.getOrNewSim(it.module?.module)
-                        this.render(moduleObj, it.module?.stripWrap, document.querySelector(lastRouterSelector!));
-                        const selctor = moduleObj?.router_outlet_selector || moduleObj?.selector
+                        const moduleObj = this.simstanceManager?.getOrNewSim(it.module)
+                        this.render(moduleObj, document.querySelector(lastRouterSelector!));
+                        const selctor = moduleObj?.router_outlet_selector || '#'+moduleObj?.id
                         if (selctor) {
                             lastRouterSelector = selctor;
                         }
@@ -54,12 +50,11 @@ export class RouterManager implements Runnable {
                     //     targetModule = this.simstanceManager?.getOrNewSim(targetModule) as Module;
                     // }
                     // Module render
-                    let module = targetModule instanceof RouterModule ? targetModule.module : this.simstanceManager?.getOrNewSim(targetModule.module)!;
-                    let option = targetModule instanceof RouterModule ? targetModule.moduleOption : targetModule;
-                    this.render(module, option?.stripWrap, document.querySelector(lastRouterSelector!));
+                    let module = targetModule instanceof RouterModule ? targetModule.module : this.simstanceManager?.getOrNewSim(targetModule)!;
+                    this.render(module, document.querySelector(lastRouterSelector!));
                     this.renderd();
-                    (targetModule.module as any)._onInitedChild();
-                    routers.reverse().forEach(it => (this.simstanceManager?.getOrNewSim(it.module?.module) as any)?._onInitedChild());
+                    (module as any)._onInitedChild();
+                    routers.reverse().forEach(it => (this.simstanceManager?.getOrNewSim(it.module) as any)?._onInitedChild());
                 }
             })
         } else {
@@ -88,24 +83,11 @@ export class RouterManager implements Runnable {
         });
     }
 
-    // public renderRouterModule(module: Module | undefined, stripWrap: boolean | undefined, targetSelector: Node | null): boolean {
-    //     // console.log('renderRouterModule router --->', targetSelector)
-    //     this.render(module, stripWrap, targetSelector);
-    //     if (module && !module.exist()) {
-    //         // (module as any)._onInit()
-    //         // module.setScope(new TargetNode(targetSelector!, TargetNodeMode.child), stripWrap)
-    //         // module.renderWrap();
-    //         return true
-    //     } else {
-    //         return false
-    //     }
-    // }
-
-    public render(module: Module | undefined, stripWrap: boolean | undefined, targetSelector: Node | null): boolean {
+    public render(module: Module | undefined, targetSelector: Node | null): boolean {
         // console.log('render router --->', targetSelector)
         if (module) {
             (module as any)._onInit()
-            module.setScope(new TargetNode(targetSelector!, TargetNodeMode.child), stripWrap)
+            module.setScope(new TargetNode(targetSelector!, TargetNodeMode.child))
             module.renderWrap();
             return true
         } else {

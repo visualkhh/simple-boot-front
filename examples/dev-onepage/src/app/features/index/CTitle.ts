@@ -7,7 +7,7 @@ import {TestService} from "../../services/TestService";
 @Injectable()
 export class CTitle extends Title {
     constructor(public testService: TestService) {
-        super('Ctitle', {
+        super({
             template: 'value:(<!--% write(this.value) %--> <button module-event-click="cc">CC</button>)',
             value: 'zz'
         });

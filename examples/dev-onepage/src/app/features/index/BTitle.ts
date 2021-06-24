@@ -4,7 +4,7 @@ import {Title} from "./Title";
 @Sim({scheme: 'bTitle'})
 export class BTitle extends Title {
     constructor() {
-        super('Btitle', {
+        super({
             template: 'value:(<!--% write(this.value) %--> <button module-event-click="aa">bb</button>)',
             value: 4444
         });

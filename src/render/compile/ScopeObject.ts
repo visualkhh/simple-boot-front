@@ -47,15 +47,8 @@ export class ScopeObject {
         const moduleIdAttrSelector = () => {
             return write("*[module-id='"+this.id+"']");
         }
+
         const module = (module) => {
-            if (typeof module === 'string') {
-                module = this.newSimOrAddDynamicModule(module);
-            }
-            this.moduleWriteAndSetScope(module, false);
-            this.calls.push({name: 'module', parameter: [module], result: module});
-            return module;
-        }
-        const stripModule = (module) => {
             if (typeof module === 'string') {
                 module = this.newSimOrAddDynamicModule(module);
             }
@@ -79,20 +72,19 @@ export class ScopeObject {
     }
 
     public appendWrite(str: string) {
-        // console.log('appendWrite--->', str)
         this.writes += str;
     }
 
-    public moduleWriteAndSetScope(module: Module, strip: boolean) {
+    public moduleWriteAndSetScope(module: Module) {
         if (module) {
             const uuid = RandomUtils.uuid();
             // console.log('moduleWriteAndSetScope', uuid, module);
-            const targetSelecotr = module.getTemplateWrapScopeSelector(uuid)
+            const targetSelecotr = module.getTemplateSelector(uuid)
             // const targetNode = new TargetNode(targetSelecotr, strip === true ? TargetNodeMode.replace : TargetNodeMode.child);
             const targetNode = new TargetNode(targetSelecotr, TargetNodeMode.replace);
-            const scope = module.setScope(targetNode, strip === true, uuid);
+            const scope = module.setScope(targetNode, uuid);
             if (scope) {
-                this.appendWrite(module.getWrapScopeString(scope.uuid) ?? '');
+                this.appendWrite(module.getTemplateElementString(scope.uuid) ?? '');
             }
         }
     }

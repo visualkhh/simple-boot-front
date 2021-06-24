@@ -4,6 +4,7 @@ h1 {
 }
 
 <!--%moduleIdAttrSelector()%-->
+div
 {
  color: pink;
 }

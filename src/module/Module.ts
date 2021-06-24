@@ -21,18 +21,18 @@ export class Module extends SimBase implements LifeCycle {
     public _scopes = new Map<string, RootScope>();
     public _option: ModuleOption
     public value: any;
+    private _renderer: Renderer;
+    private _navigation: Navigation;
 
-    constructor(public selector = '', option: { template?: string, styleImports?: string[], wrapElement?: string, modules?: { [name: string]: ConstructorType<Module> }, value?: any } = {},
-                private _renderer = SimGlobal.application?.simstanceManager.getOrNewSim(Renderer),
-                private _navigation = SimGlobal.application?.simstanceManager.getOrNewSim(Navigation)
-    ) {
+    constructor(option: { template?: string, styleImports?: string[], modules?: { [name: string]: ConstructorType<Module> }, value?: any, name?: string } = {}) {
         super();
+        this._renderer = SimGlobal.application?.simstanceManager.getOrNewSim(Renderer)!
+        this._navigation = SimGlobal.application?.simstanceManager.getOrNewSim(Navigation)!
         // default option
         this.value = option.value;
         this._option = Object.assign(new ModuleOption(), option)
         this._option.template = this._option.template
-        this.id = `___Module___${this.selector}_${RandomUtils.uuid()}`
-        this.selector = `#${this.id}`
+        this.id = `___Module__${this._option.name}_${RandomUtils.uuid()}`
         this.init();
     }
 
@@ -101,14 +101,10 @@ export class Module extends SimBase implements LifeCycle {
         })
     }
 
-    public findChildAttributeElements<E extends Element>(attr: string, rootElement = document.querySelector(this.selector)) {
-        if (!rootElement) return
-        return rootElement.querySelectorAll<E>(`[${attr}]`)
-    }
-
-    private createChildId(): string {
-        return `${this.selector}_child_${RandomUtils.uuid()}`
-    }
+    // public findChildAttributeElements<E extends Element>(attr: string, rootElement = document.querySelector(this.selector)) {
+    //     if (!rootElement) return
+    //     return rootElement.querySelectorAll<E>(`[${attr}]`)
+    // }
 
     private _onInit() {
         this.onInit()
@@ -173,12 +169,6 @@ export class Module extends SimBase implements LifeCycle {
         })
     }
 
-    // private addBind(rootElement: Element | null) {
-    // }
-    //
-    // private addRout(rootElement: Element | null) {
-    // }
-
     public onInit() {
     }
 
@@ -191,8 +181,8 @@ export class Module extends SimBase implements LifeCycle {
     public onFinish() {
     }
 
-    public setScope(targetNode: TargetNode, strip = false, uuid = RandomUtils.uuid()) {
-        const rawSet = new ScopeRawSet(strip ? this.templateString : this.getTemplateWrapScopeString(uuid), this._option.styleImports);
+    public setScope(targetNode: TargetNode, uuid = RandomUtils.uuid()) {
+        const rawSet = new ScopeRawSet(this.templateString, this._option.styleImports);
         const scope = this._renderer?.compileScope(rawSet, this, uuid);
         if (scope) {
             scope.targetNode = targetNode;
@@ -229,7 +219,6 @@ export class Module extends SimBase implements LifeCycle {
 
         this._scopes.forEach(it => this._renderer?.renderToByScopes(it, this));
         this._onChangedRender();
-        this.renderd(this.selector);
     }
 
     public scopeUpdateAndRenderToByScopes() {
@@ -242,32 +231,22 @@ export class Module extends SimBase implements LifeCycle {
         });
     }
 
-    public renderd(selector: string) {
-    }
-
     procAttr<T extends HTMLElement>(element: DocumentFragment, attrName: string, f: (h: T, value: string | null) => void) {
         element.querySelectorAll<T>(`[${attrName}]`).forEach(it => {
             f(it, it.getAttribute(attrName));
         });
     }
 
-    public get templateWrapString(): string {
-        return `<${this._option.wrapElement} id="${this.id}">${this._option.template || ''}</${this._option.wrapElement}>`
+    public getTemplateSelector(scope_uuid: string): string {
+        return `#${this.id}[module-scope='${scope_uuid}']`;
     }
 
-    public getTemplateWrapScopeSelector(scope_uuid: string): string {
-        return this.selector + `[scope='${scope_uuid}']`;
-    }
 
-    public getWrapScopeString(scope_uuid: string): string {
-        return `<${this._option.wrapElement} id="${this.id}" scope="${scope_uuid}"></${this._option.wrapElement}>`
-    }
-
-    public getTemplateWrapScopeString(scope_uuid: string): string {
-        return `<${this._option.wrapElement} id="${this.id}" scope="${scope_uuid}">${this._option.template || ''}</${this._option.wrapElement}>`
+    public getTemplateElementString(scope_uuid: string): string {
+        return `<template id="${this.id}" module-scope="${scope_uuid}"></template>`
     }
 
     public get templateString(): string {
-        return this._option.template || '';
+        return this._option.template ?? '';
     }
 }

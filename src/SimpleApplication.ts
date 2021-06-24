@@ -11,14 +11,14 @@ export class SimpleApplication implements Runnable {
     public routerManager: RouterManager;
     constructor(public option: SimOption) {
         this.simstanceManager = new SimstanceManager(this.option);
-        this.intentManager = new IntentManager();
-        this.routerManager = new RouterManager();
+        this.intentManager = new IntentManager(this.simstanceManager);
+        this.routerManager = new RouterManager(this.option, this.simstanceManager);
         SimGlobal.application = this;
     }
 
     public run() {
         this.simstanceManager.run();
-        this.intentManager.run(this.simstanceManager);
-        this.routerManager.run(this.option, this.simstanceManager)
+        this.intentManager.run();
+        this.routerManager.run()
     }
 }

@@ -23,7 +23,7 @@ export class Index extends Module {
 
     public numbers = new class extends Module {
         constructor() {
-            super('numbers', {
+            super({
                 template: `
                                     <ul>
                                     <!--%
@@ -43,7 +43,7 @@ export class Index extends Module {
     }();
 
     constructor(@Inject(ATitle) public title: Title, public v: ViewService, public manager: SimstanceManager, public navigation: Navigation) {
-        super("index", {template: html, styleImports: [css], modules: {'cmodule': CTitle}});
+        super({template: html, styleImports: [css], modules: {'cmodule': CTitle}, name: 'index'});
     }
 
     onInit() {
@@ -60,9 +60,11 @@ export class Index extends Module {
     // }
 
     plusCount($event: KeyboardEvent, view: View<Element>) {
+        console.log('this.count--> ', this.count);
         this.count++;
     }
     minusCount($event: KeyboardEvent, view: View<Element>) {
+        console.log('this.count--> ', this.count);
         this.count--;
     }
 

@@ -12,7 +12,7 @@ export class Notfound extends Module {
     public data: UserResponse | undefined;
     public profile: Profile | undefined;
     constructor(public projectService: ProjectService, public ajax: AjaxService) {
-        super("notfound", {template: html, styleImports: [css]});
+        super({template: html, styleImports: [css]});
     }
 
     onInit() {

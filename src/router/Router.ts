@@ -7,17 +7,15 @@ import {RouterModule} from './RouterModule';
 import {Url} from '../model/Url';
 
 
-export interface RouterModuleOption {
-    module: ConstructorType<Module>;
-    stripWrap?: boolean;
-}
+// export interface RouterModuleOption {
+//     module: ConstructorType<Module>;
+// }
 
-export interface Routers {
-    [name: string]: RouterModuleOption | any
-}
 
-export class Router extends SimBase implements Routers {
-    constructor(public path: string, public module?: RouterModuleOption, public childs: ConstructorType<Router>[] = [],
+export class Router extends SimBase {
+    [name: string]: ConstructorType<Module> | any;
+
+    constructor(public path: string, public module?: ConstructorType<Module>, public childs: ConstructorType<Router>[] = [],
                 private _simstanceManager = SimGlobal.application?.simstanceManager!,
                 private _navigation = _simstanceManager.getOrNewSim(Navigation)!) {
         super()
@@ -52,17 +50,16 @@ export class Router extends SimBase implements Routers {
 
     // my field find
     public routing(parentRoots: string[], path: string): RouterModule | undefined {
-        const routers = this as Routers
         const urlRoot = parentRoots.join('') + this.path
         const regex = new RegExp('^' + urlRoot, 'i')
         path = path.replace(regex, '')
-        const fieldModule = (routers[path] as RouterModuleOption)
+        const fieldModule = (this[path] as ConstructorType<Module>)
         if (fieldModule) {
-            return new RouterModule(this, this._simstanceManager.getOrNewSim(fieldModule.module), fieldModule)
+            return new RouterModule(this, this._simstanceManager.getOrNewSim(fieldModule))
         }
     }
 
-    public async canActivate(url: Url, module: RouterModule): Promise<RouterModule | RouterModuleOption> {
+    public async canActivate(url: Url, module: RouterModule): Promise<RouterModule | ConstructorType<Module>> {
         return module;
     }
 }
