@@ -85,9 +85,9 @@ export class RouterManager implements Runnable {
 
     public render(module: Module | undefined, targetSelector: Node | null): boolean {
         // console.log('render router --->', targetSelector)
-        if (module) {
+        if (module && targetSelector) {
             (module as any)._onInit()
-            module.setScope(new TargetNode(targetSelector!, TargetNodeMode.child))
+            module.setScope(new TargetNode(targetSelector, TargetNodeMode.child))
             module.renderWrap();
             return true
         } else {
