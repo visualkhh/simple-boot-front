@@ -34,13 +34,13 @@ export class RouterManager implements Runnable {
 
         if (executeModule && executeModule.module) {
             executeModule.router?.canActivate(navigation?.pathInfo!, executeModule).then(targetModule => {
-                console.log('targetModule==>', targetModule)
+                // console.log('targetModule==>', targetModule)
                 if (targetModule) {
                     let lastRouterSelector = this.option?.selector;
                     // routerModule render
                     routers.forEach(it => {
                         const moduleObj = this.simstanceManager?.getOrNewSim(it.module?.module)
-                        this.renderRouterModule(moduleObj, it.module?.stripWrap, document.querySelector(lastRouterSelector!));
+                        this.render(moduleObj, it.module?.stripWrap, document.querySelector(lastRouterSelector!));
                         const selctor = moduleObj?.router_outlet_selector || moduleObj?.selector
                         if (selctor) {
                             lastRouterSelector = selctor;
@@ -50,7 +50,9 @@ export class RouterManager implements Runnable {
                     //     targetModule = this.simstanceManager?.getOrNewSim(targetModule) as Module;
                     // }
                     // Module render
-                    this.render(targetModule.module, targetModule.moduleOption?.stripWrap, document.querySelector(lastRouterSelector!));
+                    let module = targetModule instanceof RouterModule ? targetModule.module : this.simstanceManager?.getOrNewSim(targetModule.module)!;
+                    let option = targetModule instanceof RouterModule ? targetModule.moduleOption : targetModule;
+                    this.render(module, option?.stripWrap, document.querySelector(lastRouterSelector!));
                     this.renderd();
                     (targetModule.module as any)._onInitedChild();
                     routers.reverse().forEach(it => (this.simstanceManager?.getOrNewSim(it.module?.module) as any)?._onInitedChild());
@@ -82,18 +84,18 @@ export class RouterManager implements Runnable {
         });
     }
 
-    public renderRouterModule(module: Module | undefined, stripWrap: boolean | undefined, targetSelector: Node | null): boolean {
-        // console.log('renderRouterModule router --->', targetSelector)
-        if (module && !module.exist()) {
-            this.render(module, stripWrap, targetSelector);
-            // (module as any)._onInit()
-            // module.setScope(new TargetNode(targetSelector!, TargetNodeMode.child), stripWrap)
-            // module.renderWrap();
-            return true
-        } else {
-            return false
-        }
-    }
+    // public renderRouterModule(module: Module | undefined, stripWrap: boolean | undefined, targetSelector: Node | null): boolean {
+    //     // console.log('renderRouterModule router --->', targetSelector)
+    //     this.render(module, stripWrap, targetSelector);
+    //     if (module && !module.exist()) {
+    //         // (module as any)._onInit()
+    //         // module.setScope(new TargetNode(targetSelector!, TargetNodeMode.child), stripWrap)
+    //         // module.renderWrap();
+    //         return true
+    //     } else {
+    //         return false
+    //     }
+    // }
 
     public render(module: Module | undefined, stripWrap: boolean | undefined, targetSelector: Node | null): boolean {
         // console.log('render router --->', targetSelector)

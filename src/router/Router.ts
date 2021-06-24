@@ -62,7 +62,7 @@ export class Router extends SimBase implements Routers {
         }
     }
 
-    public async canActivate(url: Url, module: RouterModule): Promise<RouterModule> {
+    public async canActivate(url: Url, module: RouterModule): Promise<RouterModule | RouterModuleOption> {
         return module;
     }
 }

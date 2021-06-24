@@ -1,5 +1,5 @@
 [![Single Page Application Framworks](assets/banner.png)](https://svelte.dev)
-[![npm version](https://img.shields.io/badge/npm-v1.0.32-blue)](https://www.npmjs.com/package/simple-boot-front) [![license](https://img.shields.io/badge/license-MIT-green)](LICENSE.md) [![Chat](https://img.shields.io/badge/npm-20%20online-brightgreen?logo=discord)](https://discord.gg/PW56dpns) [![Github](https://img.shields.io/badge/-github-black?logo=github)](https://github.com/visualkhh/simple-boot-front)
+[![npm version](https://img.shields.io/badge/npm-v1.0.33-blue)](https://www.npmjs.com/package/simple-boot-front) [![license](https://img.shields.io/badge/license-MIT-green)](LICENSE.md) [![Chat](https://img.shields.io/badge/npm-20%20online-brightgreen?logo=discord)](https://discord.gg/PW56dpns) [![Github](https://img.shields.io/badge/-github-black?logo=github)](https://github.com/visualkhh/simple-boot-front)
 
 Single Page Application Framworks for Web
 
@@ -319,14 +319,14 @@ export class AppInfo extends Module {
        }
        ```
   * css
-    - **/\*[module-selector]\*/**: module Dedicated style
+    - **moduleIdAttrSelector()**: module Dedicated style
       - as-is
         -  ```css
-           /*[module-selector]*/ h1 {color: burlywood;}
+           <!--%moduleIdAttrSelector()%--> h1 {color: burlywood;}
            ```  
       - to-be
         -  ```css
-           {{module-selector}} h1 { color: burlywood;}
+           *[module-id='___Module___module-selector..'] h1 { color: burlywood;}
            ```  
 
 ## License

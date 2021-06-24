@@ -1,4 +1,9 @@
-/*[module-selector]*/
+
 h1 {
-    color: #fa02fa;
+    color: #<!--% write(this.count+''+this.count+''+this.count+''+this.count+''+this.count+''+this.count) %-->;
+}
+
+<!--%moduleIdAttrSelector()%-->
+{
+ color: pink;
 }

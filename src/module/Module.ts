@@ -11,11 +11,12 @@ import {Navigation} from '../service/Navigation';
 import {RootScope, TargetNode} from '../render/compile/RootScope';
 import {ModuleOption} from './ModuleOption';
 import {ConstructorType} from '../types/Types';
+import {ScopeRawSet} from "../render/compile/ScopeRawSet";
 
 export class Module extends SimBase implements LifeCycle {
     public router_outlet_selector?: string;
     private router_outlet_id?: string;
-    private id: string;
+    public id: string;
     public _refModule = new Map<string, Map<Module, string[]>>();
     // public _dynamicModule = new Map<string, Module[]>();
     public _scopes = new Map<string, RootScope>();
@@ -30,7 +31,8 @@ export class Module extends SimBase implements LifeCycle {
         // default option
         this.value = option.value;
         this._option = Object.assign(new ModuleOption(), option)
-
+        // const styles = option.styleImports?.map(it => `<style>${it}</style>`).join('');
+        this._option.template = this._option.template
         this.id = `___Module___${this.selector}_${RandomUtils.uuid()}`
         this.selector = `#${this.id}`
         this.init();
@@ -192,7 +194,8 @@ export class Module extends SimBase implements LifeCycle {
     }
 
     public setScope(targetNode: TargetNode, strip = false, uuid = RandomUtils.uuid()) {
-        const scope = this._renderer?.compileScope(strip ? this.templateString : this.getTemplateWrapScopeString(uuid), this, uuid);
+        const rawSet = new ScopeRawSet(strip ? this.templateString : this.getTemplateWrapScopeString(uuid), this._option.styleImports);
+        const scope = this._renderer?.compileScope(rawSet, this, uuid);
         if (scope) {
             scope.targetNode = targetNode;
             this._scopes.set(scope.uuid, scope);
@@ -255,9 +258,12 @@ export class Module extends SimBase implements LifeCycle {
     // }
 
     public renderd(selector: string) {
-        this.transStyle(selector);
+        // this.transStyle(selector);
     }
 
+    // public transStyleTagString(styles: string[]): string | undefined {
+    //     return this._option.styleImports?.map(it => `<style>${it}</style>`).join('');
+    // }
     public transStyle(selector: string): void {
         const join = this._option.styleImports?.map(it => {
             // eslint-disable-next-line prefer-regex-literals
@@ -308,7 +314,7 @@ export class Module extends SimBase implements LifeCycle {
         return this._option.template || '';
     }
 
-    public exist(): boolean {
-        return this._renderer?.exist(this.selector) || false
-    }
+    // public exist(): boolean {
+    //     return this._renderer?.exist(this.selector) || false
+    // }
 }

@@ -7,14 +7,15 @@ import {RandomUtils} from '../util/random/RandomUtils';
 import {NodeUtils} from '../util/node/NodeUtils';
 import {RootScope, TargetNodeMode} from './compile/RootScope';
 import {DomUtils} from "../util/dom/DomUtils";
+import {ScopeRawSet} from "./compile/ScopeRawSet";
 
 @Sim()
 export class Renderer {
     constructor(private option: SimOption) {
     }
 
-    public compileScope(template: string, obj: any, rootUUID = RandomUtils.uuid()): RootScope | undefined {
-        const compiler = new SimCompiler(template, obj, rootUUID)
+    public compileScope(rawSet: ScopeRawSet, obj: any, rootUUID = RandomUtils.uuid()): RootScope | undefined {
+        const compiler = new SimCompiler(rawSet, obj, rootUUID)
         return compiler.run().root;
     }
 
@@ -52,11 +53,12 @@ export class Renderer {
 
     public renderToByScopes(scope: RootScope, module: Module) {
         if (scope.targetNode.node) {
+            // style settinhg
             // const h = document.createElement('div')
             // const t = document.createElement('div')
             // h.innerHTML = 'h'
             // t.innerHTML = 't'
-            const childNode = scope.executeFragment(); // {head: h, tail: t} //{head: module.transStyle(scope.uuid)}
+            const childNode = scope.executeFragment({childElementAttr: new Map([['module-id', module.id]])}); // {head: h, tail: t} //{head: module.transStyle(scope.uuid)}
             module.addEvent(childNode);
             if (TargetNodeMode.child === scope.targetNode.mode) {
                 NodeUtils.removeAllChildNode(scope.targetNode.node)
@@ -89,11 +91,11 @@ export class Renderer {
         }
     }
 
-    public exist(selector: string): boolean {
-        if (document.querySelector(selector)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
+    // public exist(selector: string): boolean {
+    //     if (document.querySelector(selector)) {
+    //         return true;
+    //     } else {
+    //         return false;
+    //     }
+    // }
 }

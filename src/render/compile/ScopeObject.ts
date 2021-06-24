@@ -24,6 +24,12 @@ export class ScopeObject {
         const startComment = document.createComment('scope start ' + this.uuid)
         const endComment = document.createComment('scope end ' + this.uuid)
         // templateElement.innerHTML = '<!--scope start ' + this.uuid + '-->' + this.writes + '<!--scope end ' + this.uuid + '-->'
+        templateElement.content.childNodes.forEach(it => {
+            if (it.nodeType === Node.ELEMENT_NODE) {
+                // (it as Element).setAttribute('scope-parent', parentScope);
+                (it as Element).setAttribute('scope-uuid', this.uuid);
+            }
+        })
         return new ScopeResultSet(this.uuid, this, templateElement.content, startComment, endComment, this.calls)
         // return new ScopeResultSet(this, templateElement.content, code, returnValue)
     }
@@ -37,6 +43,9 @@ export class ScopeObject {
         return Function(`"use strict";
         const write = (str) => {
             this.appendWrite(str);
+        }
+        const moduleIdAttrSelector = () => {
+            return write("*[module-id='"+this.id+"']");
         }
         const module = (module) => {
             if (typeof module === 'string') {

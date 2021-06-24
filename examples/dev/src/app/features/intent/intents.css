@@ -1,8 +1,8 @@
-/*[module-selector]*/
+<!--%moduleIdAttrSelector()%-->
 h1 {
     color: #ad8a56;
 }
-/*[module-selector]*/
+<!--%moduleIdAttrSelector()%-->
 button {
     margin: 20px
 }

@@ -2,13 +2,14 @@ import {ScopeObject} from './ScopeObject';
 import {ScopePosition} from './ScopePosition';
 import {RandomUtils} from '../../util/random/RandomUtils';
 import {ScopeResultSet} from './ScopeResultSet';
+import {ScopeRawSet} from "./ScopeRawSet";
 
 export class Scope {
     public childs: Scope[] = [];
     public usingVars: string[] = [];
     public scopeResult?: ScopeResultSet;
 
-    constructor(private raws: string, private obj: any, public uuid = RandomUtils.uuid(), private config = {start: '<!--%', end: '%-->'}, private position = new ScopePosition(0, raws.length)) {
+    constructor(public raws: string, public obj: any, public uuid = RandomUtils.uuid(), public config = {start: '<!--%', end: '%-->'}, private position = new ScopePosition(0, raws.length)) {
         this.run();
     }
 
@@ -31,61 +32,13 @@ export class Scope {
     //     this.childs = this.childs.filter(it => it.scopeResult);
     // }
 
-    // executeFragment(): {fragment: DocumentFragment, scopeObjects: ScopeObject[]} {
-    executeFragment(option?: {head?: Node, tail?: Node}) {
-        const templateElement = document.createElement('template');
-        templateElement.innerHTML = this.raws;
-        const rawFragment = templateElement.content;
-        // console.log('executeFragment ', rawFragment.childNodes.length)
-        this.childs.forEach(it => {
-            const childScopeObject = it.exec().result;
-            // const childScopeObject = it.scopeResult!
-            const nodeIterator = document.createNodeIterator(
-                rawFragment,
-                NodeFilter.SHOW_COMMENT,
-                {
-                    acceptNode: (node) => {
-                        const coment = (node as Comment).data;
-                        const b = coment.startsWith('%') && coment.endsWith('%') && coment === ('%' + it.raws + '%');
-                        return b ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
-                    }
-                }
-            )
 
-            const currentNode = nodeIterator.nextNode();
-            currentNode?.parentNode?.insertBefore(childScopeObject.startComment, currentNode);
-            currentNode?.parentNode?.insertBefore(childScopeObject.endComment, currentNode.nextSibling);
-            // childScopeObject.fragment.childNodes.forEach(it => {
-            //     if (it.nodeType === Node.ELEMENT_NODE) {
-            //         (it as Element).setAttribute('module-id', this.uuid);
-            //     }
-            // })
-            if(option?.head) {
-                childScopeObject.fragment.prepend(option?.head)
-            }
-            if(option?.tail) {
-                childScopeObject.fragment.append(option?.tail)
-            }
-            currentNode?.parentNode?.replaceChild(childScopeObject.fragment, currentNode);
-            /*
-                let currentNode = nodeIterator.nextNode();
-                while (currentNode = nodeIterator.nextNode()) {...}
-             */
-        })
-        // const scopeObjects: ScopeObject[] = [];
-        rawFragment.childNodes.forEach(it => {
-            if (it.nodeType === Node.ELEMENT_NODE) {
-                (it as Element).setAttribute('scope-id', this.uuid);
-            }
-        })
-        return rawFragment;
-    }
 
     exec(obj: any = this.obj) {
         const scopeObject = new ScopeObject();
         // scopeObject.eval(this.raws, obj);
         const object = Object.assign(scopeObject, obj) as ScopeObject
-        this.scopeResult = object.executeResultSet(this.raws);
+        this.scopeResult = object.executeResultSet(this.raws); // , this.uuid
         return {object, result: this.scopeResult};
     }
 
