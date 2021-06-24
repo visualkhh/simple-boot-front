@@ -5,20 +5,16 @@ import {SimGlobal} from '../global/SimGlobal';
 import {Navigation} from '../service/Navigation';
 import {RouterModule} from './RouterModule';
 import {Url} from '../model/Url';
-
-
-// export interface RouterModuleOption {
-//     module: ConstructorType<Module>;
-// }
-
+import {SimstanceManager} from "../simstance/SimstanceManager";
 
 export class Router extends SimBase {
     [name: string]: ConstructorType<Module> | any;
-
-    constructor(public path: string, public module?: ConstructorType<Module>, public childs: ConstructorType<Router>[] = [],
-                private _simstanceManager = SimGlobal.application?.simstanceManager!,
-                private _navigation = _simstanceManager.getOrNewSim(Navigation)!) {
-        super()
+    private _simstanceManager: SimstanceManager;
+    private _navigation: Navigation;
+    constructor(public path: string, public module?: ConstructorType<Module>, public childs: ConstructorType<Router>[] = []) {
+        super();
+        this._simstanceManager = SimGlobal.application?.simstanceManager!,
+        this._navigation = this._simstanceManager.getOrNewSim(Navigation)!
     }
 
     getExecuteModule(parentRouters: Router[]): RouterModule | undefined {
