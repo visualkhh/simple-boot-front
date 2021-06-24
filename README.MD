@@ -43,28 +43,27 @@ npm install simple-boot-front
     ```typescript
     @Sim({scheme: 'layout-router'})
     export class AppRouter extends RootRouter {
-      module = App;
-      '' = Index;
-      'ajax' = Ajax;
-      'intent' = Intents;
-      'view' = Views;
-      'exception' = Exception;
-      'aop' = Aop;
-      'views' = Views;
-
-      async canActivate(url: Url, module: Module): Promise<Module | ConstructorType<Module>> {
-          if (url.path === 'views' && url.params.get('auth') === 'false') {
-              return Forbidden;
-          } else {
-              return module;
-          }
-      }
-  
-      notFound(url: Url): ConstructorType<Module> {
-          console.log(url.path)
-          return Notfound;
-      }
-    
+        '' = {module: Index, stripWrap: true};
+        'ajax' = {module: Ajax, stripWrap: true};
+        'intent' = {module: Intents, stripWrap: true};
+        'view' = {module: Views, stripWrap: true};
+        'exception' = {module: Exception, stripWrap: true};
+        'aop' = {module: Aop, stripWrap: true};
+        'views' = {module: Views, stripWrap: true};
+        constructor() {
+            super('', {module: App, stripWrap: true});
+        }
+        async canActivate(url: Url, module: RouterModule): Promise<RouterModule | RouterModuleOption> {
+            if (url.path === 'views' && url.params.get('auth') === 'false') {
+                return {module: Forbidden, stripWrap: true};
+            } else {
+                return module;
+            }
+        }
+        notFound(url: Url): ConstructorType<Module> {
+            console.log(url.path)
+            return Notfound;
+        }
     }
 
     ```
