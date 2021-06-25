@@ -1,5 +1,5 @@
 [![Single Page Application Framworks](assets/banner.png)](https://svelte.dev)
-[![npm version](https://img.shields.io/badge/npm-v1.0.33-blue)](https://www.npmjs.com/package/simple-boot-front) [![license](https://img.shields.io/badge/license-MIT-green)](LICENSE.md) [![Chat](https://img.shields.io/badge/npm-20%20online-brightgreen?logo=discord)](https://discord.gg/PW56dpns) [![Github](https://img.shields.io/badge/-github-black?logo=github)](https://github.com/visualkhh/simple-boot-front)
+[![npm version](https://img.shields.io/badge/npm-v1.0.34-blue)](https://www.npmjs.com/package/simple-boot-front) [![license](https://img.shields.io/badge/license-MIT-green)](LICENSE.md) [![Chat](https://img.shields.io/badge/npm-20%20online-brightgreen?logo=discord)](https://discord.gg/PW56dpns) [![Github](https://img.shields.io/badge/-github-black?logo=github)](https://github.com/visualkhh/simple-boot-front)
 
 Single Page Application Framworks for Web
 
@@ -260,54 +260,76 @@ export class AppInfo extends Module {
      - **[router-outlet]**: child module space
      - **module-event-click**: click event
        - value: method name, parameter($event, View)
-       - ```html
-         <button module-event-click="changeData">change</button>
-         ```
+     ```html
+     <button module-event-click="changeData">change</button>
+     ```
      - **module-event-change**: change event
        - value: method name, parameter($event, View)
-       - ```html
-         <input module-event-change="changeData">
-         ```
+     ```html
+     <input module-event-change="changeData">
+     ```
      - **module-event-keyup**: keyup event
        - value: method name, parameter($event, View)
-       - ```html
-         <input module-event-keyup="changeData">
-         ```
+     ```html
+     <input module-event-keyup="changeData">
+     ```
      - **module-event-keydown**: keydown event
        - value: method name, parameter($event, View)
-       - ```html
-         <input module-event-keydown="changeData">
-         ```
+     ```html
+     <input module-event-keydown="changeData">
+     ```
+     - **module-event-input**: input event
+       - value: method name, parameter($event, View)
+     ```html
+     <input module-event-input="changeData">
+     ```
      - **module-link**: link event (value change <-> input)
        - value: variable name
-       - ```html
-         <input module-link="value">
-         ```
+     ```html
+     <input module-link="value">
+     ```
      - **module-value**: value injection
        - value: variable name
-       - ```html
-         <input module-event-value="value">
-         ```
+     ```html
+     <input module-event-value="value">
+     ```
+     - **module-change-attr**: change value setAttribute
+       - [detect variableName, script]
+         - script
+           - it: detect variable value
+           - attribute: element attribute
+       ```html
+       <img src="https://cdn.imweb.me/thumbnail/20190912/460132b4e4fce.jpg" module-change-attr="['size', 'return {height: it, width: it}']">
+       ```
+     - **module-change-style**: change value set Style
+       - [detect variableName, script]
+         - script
+           - it: detect variable value
+           - style: element style
+       ```html
+       <div module-change-style="['size', 'return {fontSize: `${it}px`, color: this.randomColor()}']">hello</div>
+       ```
      - **router-active-class**: url === href attribute => class add 
        - value: add and remove class name
-       - ```html
-          <a router-link="ajax" router-active-class="['active']">Ajax</a>
-         ```
+     ```html
+     <a router-link="ajax" router-active-class="['active']">Ajax</a>
+     ```
      - **router-link**:
        - value: router link
-       - ```html
-          <a router-link="ajax">Ajax</a>
-         ```
+     ```html
+     <a router-link="ajax">Ajax</a>
+     ```
      - **module-event-{{eventName}}-intent-publish**: intent publish 
        - value: ['uri', 'variablename'] or ['uri']
        - publish
-       ```html
-          click event intent publish:
-           <button class="btn btn-primary" module-event-click-intent-publish="['layout://info/data?a=wow&aa=ppp','makeRandom']">publish data</button>
+     ```html
+     click event intent publish:
+     <button class="btn btn-primary" module-event-click-intent-publish="['layout://info/data?a=wow&aa=ppp','makeRandom']">publish data</button>
          
-          typing:
-           <input type="text" module-event-keyup-intent-publish="['layout://info/viewSubscribe?a=wow&aa=vvv']">
-         ```
+     typing:
+     <input type="text" module-event-keyup-intent-publish="['layout://info/viewSubscribe?a=wow&aa=vvv']">
+     ```
+     
        - subscribe
        ```typescript
        data(i: Intent) {
@@ -316,7 +338,7 @@ export class AppInfo extends Module {
        viewSubscribe(i: Intent<View<HTMLInputElement>>) {
          this.datas = i.data?.value + '->' + i.params.aa + '-->' + i.event
        }
-       ```
+      ```
   * css
     - **moduleIdAttrSelector()**: module Dedicated style
       - as-is

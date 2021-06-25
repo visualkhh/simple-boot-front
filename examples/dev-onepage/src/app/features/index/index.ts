@@ -20,6 +20,7 @@ export class Index extends Module {
     data = "default data";
     thisData = 5151;
     count = 0;
+    size = 10;
 
     public numbers = new class extends Module {
         constructor() {
@@ -63,17 +64,26 @@ export class Index extends Module {
         console.log('this.count--> ', this.count);
         this.count++;
     }
+    plusSize($event: KeyboardEvent, view: View<Element>) {
+        console.log('--->', this._refModule)
+        this.size++;
+    }
     minusCount($event: KeyboardEvent, view: View<Element>) {
         console.log('this.count--> ', this.count);
         this.count--;
     }
 
     changeText($event: KeyboardEvent, view: View<Element>) {
-        this.title.value = view.value;
+        // this.title.value = view.value;
         this.title.datas.push(Math.floor(RandomUtils.random(1, 400)));
-        (this.title as ATitle).adata.name='zz'
+        console.log('--->', this.title.datas)
+        // (this.title as ATitle).adata.name='zz'
         // console.log('------->', this.title.value)
         // console.log('------->', (SimGlobal.application?.simstanceManager as any)['_storage'])
+    }
+
+    inputChange($event: InputEvent, view: View<Element>) {
+        console.log('--inputChange----->', $event.data, view)
     }
 
     changeData() {

@@ -1,27 +1,21 @@
 <h1>index</h1>
+
 <div>
-    <!--%module(this.title);%--> ;
-</div>
-<div>
-    <!--%write(this.title.datas.length);%--> ;
-    <!--%write(this.numbers.value);%-->
-</div>
-<div>
-    <!--%module(this.numbers);%-->
-</div>
-<div>
-    <!--%module('cmodule').value=555;%-->
+    <div module-change-style="['size', 'return {fontSize: `${it}px`, color: this.randomColor()}']">hello</div>
+    <img src="https://cdn.imweb.me/thumbnail/20190912/460132b4e4fce.jpg" module-change-attr="['size', 'return {height: it, width: it}']">
 </div>
 <div>
     <!--%
     for(var i = 0 ; i < this.count ; i ++) {
-        module('cmodule')
+        write("<img src='https://cdn.imweb.me/thumbnail/20190912/460132b4e4fce.jpg' module-change-attr=\"['size', 'return {height: it, width: it}']\">");
     }
     %-->
 </div>
 
+<button class="btn btn-info" module-event-click="plusSize">size++</button>
 <button class="btn btn-info" module-event-click="plusCount">count++</button>
 <button class="btn btn-info" module-event-click="minusCount">count--</button>
-<button class="btn btn-info" module-event-click="changeData">changeData</button>
+<!--<button class="btn btn-info" module-event-click="changeData">changeData</button>-->
 <button class="btn btn-info" module-event-click="changeText">changeText</button>
 
+<input type="text" module-event-input="inputChange">

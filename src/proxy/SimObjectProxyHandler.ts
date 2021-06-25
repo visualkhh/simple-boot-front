@@ -28,8 +28,8 @@ export class SimObjectProxyHandler implements ProxyHandler<any> {
     public set(obj: any, prop: string, value: any): boolean {
         obj[prop] = value
         this.simObjectProxyHandler_refModule.forEach((module, key) => {
-            module._refModule.get(key)?.forEach((sit, m) => {
-                sit.forEach(ssit => m.renderToScope(ssit))
+            module._refModule.get(key)?.forEach((it, m) => {
+                it.forEach(sit => sit.callBack.apply(m, sit.params))
             })
         })
         return true

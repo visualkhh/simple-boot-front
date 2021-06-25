@@ -76,4 +76,10 @@ export class ObjectUtils {
     static getPrototypeName(target: any, fnc: Function): string | undefined {
         return this.getPrototypeKeyMap(target).get(fnc)
     }
+
+    // static getObjectKeyValue() {
+    //     for(const [key, value] of Object.entries(rtnAttribute)) {
+    //         it.setAttribute(key, value);
+    //     }
+    // }
 }

@@ -41,9 +41,10 @@ export class RouterManager implements Runnable {
                     routers.forEach(it => {
                         const moduleObj = this.simstanceManager?.getOrNewSim(it.module)
                         this.render(moduleObj, document.querySelector(lastRouterSelector!));
-                        const selctor = moduleObj?.router_outlet_selector || '#'+moduleObj?.id
-                        if (selctor) {
-                            lastRouterSelector = selctor;
+                        if (moduleObj?.router_outlet_id) {
+                            lastRouterSelector = '#'+moduleObj?.router_outlet_id;
+                        } else {
+                            lastRouterSelector = '#'+moduleObj?.id;
                         }
                     });
                     // if (typeof targetModule === 'function') {

@@ -25,4 +25,19 @@ export class DomUtils {
             result.setAttribute(it.name, it.value)
         });
     }
+
+    static getAttributeToObject(input: HTMLElement): any {
+        const attribute = {} as any;
+        input.getAttributeNames().forEach(ait => attribute[ait] = input.getAttribute(ait));
+        return attribute;
+    }
+
+    static getStyleToObject(input: HTMLElement): any {
+        const style = {} as any;
+        for (let i = 0; i < input.style.length; i++) {
+            const key = input.style[i];
+            style[key] = (input.style as any)[key];
+        }
+        return style;
+    }
 }

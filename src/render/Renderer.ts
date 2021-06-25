@@ -34,14 +34,17 @@ export class Renderer {
         targets.forEach(it => {
             if (it.scopeResult) {
                 it.scopeResult.childAllRemove();
-                // it.scopeResult.childNodes.forEach(it => it.remove());
+                //clean refEvent
+                module.refModuleClean();
+
                 const startComment = it.scopeResult.startComment;
                 const endComment = it.scopeResult.endComment;
                 it.exec(module)
+                module.addEvent(it.scopeResult.fragment);
                 it.scopeResult.childNodes.forEach(cit => NodeUtils.addNode(startComment, cit));
                 NodeUtils.replaceNode(startComment, it.scopeResult.startComment);
                 NodeUtils.replaceNode(endComment, it.scopeResult.endComment);
-                it.scopeResult.calls.filter(it => it.name === 'module' || it.name === 'stripModule').map(it => it.result).forEach(it => {
+                it.scopeResult.calls.filter(it => it.name === 'module').map(it => it.result).forEach(it => {
                     (it as Module).renderWrap();
                 })
             }
@@ -57,6 +60,8 @@ export class Renderer {
             module.addEvent(childNode);
             if (TargetNodeMode.child === scope.targetNode.mode) {
                 NodeUtils.removeAllChildNode(scope.targetNode.node)
+                //clean refEvent
+                // module.refModuleClean();
                 NodeUtils.appendChild(scope.targetNode.node, childNode)
             } else if (TargetNodeMode.replace === scope.targetNode.mode) {
                 NodeUtils.replaceNode(scope.targetNode.node, childNode)
@@ -66,7 +71,7 @@ export class Renderer {
 
 
             scope.childs.forEach(it => {
-                it.scopeResult?.calls.filter(it => it.name === 'module' || it.name === 'stripModule').map(it => it.result).forEach(it => {
+                it.scopeResult?.calls.filter(it => it.name === 'module').map(it => it.result).forEach(it => {
                     (it as Module).renderWrap();
                 })
             })
