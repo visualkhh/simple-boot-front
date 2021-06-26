@@ -1,5 +1,5 @@
 [![Single Page Application Framworks](assets/banner.png)](https://svelte.dev)
-[![npm version](https://img.shields.io/badge/npm-v1.0.36-blue)](https://www.npmjs.com/package/simple-boot-front) [![license](https://img.shields.io/badge/license-MIT-green)](LICENSE.md) [![Chat](https://img.shields.io/badge/discord-20%20online-brightgreen?logo=discord)](https://discord.gg/PW56dpns) [![Github](https://img.shields.io/badge/-github-black?logo=github)](https://github.com/visualkhh/simple-boot-front)
+[![npm version](https://img.shields.io/badge/npm-v1.0.37-blue)](https://www.npmjs.com/package/simple-boot-front) [![license](https://img.shields.io/badge/license-MIT-green)](LICENSE.md) [![Chat](https://img.shields.io/badge/discord-20%20online-brightgreen?logo=discord)](https://discord.gg/PW56dpns) [![Github](https://img.shields.io/badge/-github-black?logo=github)](https://github.com/visualkhh/simple-boot-front)
 
 Single Page Application Framworks for Web
 
@@ -43,28 +43,32 @@ npm install simple-boot-front
     ```typescript
     @Sim({scheme: 'layout-router'})
     export class AppRouter extends RootRouter {
-        '' = {module: Index, stripWrap: true};
-        'ajax' = {module: Ajax, stripWrap: true};
-        'intent' = {module: Intents, stripWrap: true};
-        'view' = {module: Views, stripWrap: true};
-        'exception' = {module: Exception, stripWrap: true};
-        'aop' = {module: Aop, stripWrap: true};
-        'views' = {module: Views, stripWrap: true};
+      '' = Index;
+      'ajax' = Ajax;
+      'intent' = Intents;
+      'view' = Views;
+      'exception' = Exception;
+      'aop' = Aop;
+      'views' = Views;
+    
         constructor() {
-            super('', {module: App, stripWrap: true});
+            super(App);
         }
-        async canActivate(url: Url, module: RouterModule): Promise<RouterModule | RouterModuleOption> {
+    
+        async canActivate(url: Url, module: RouterModule): Promise<RouterModule | ConstructorType<Module>>{
             if (url.path === 'views' && url.params.get('auth') === 'false') {
-                return {module: Forbidden, stripWrap: true};
+                return Forbidden;
             } else {
                 return module;
             }
         }
-        notFound(url: Url): RouterModuleOption {
+    
+        notFound(url: Url): ConstructorType<Module> {
             console.log(url.path)
-            return {module: Notfound, stripWrap: false};
+            return Notfound;
         }
     }
+
 
     ```
   * index.ts
@@ -215,6 +219,18 @@ npm install simple-boot-front
   after(obj: any, protoType: Function) {
       console.log('after', obj, protoType)
   }
+  ```
+* @EventListener
+  ```typescript
+    @EventListener({target: window, name: 'resize'})
+    callBackResize($event: Event, view: View<any>) {
+        console.log('----resize-----', view, $event)
+    }
+
+    @EventListener({target: '#zzz', name: 'input'})
+    callBackInput($event: Event, view: View<any>) {
+        console.log('----input-----', view, $event)
+    }
   ```
 * @ExceptionHandler
   ```typescript

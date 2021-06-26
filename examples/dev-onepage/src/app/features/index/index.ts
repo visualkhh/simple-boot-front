@@ -14,6 +14,7 @@ import {ATitle} from "./ATitle";
 import {BTitle} from "./BTitle";
 import {SimGlobal} from "simple-boot-front/global/SimGlobal";
 import {CTitle} from "./CTitle";
+import {EventListener, EventListenerOption} from "simple-boot-front/decorators/event/EventListener";
 
 @Sim({scheme: 'index'})
 export class Index extends Module {
@@ -54,6 +55,16 @@ export class Index extends Module {
     }
 
     onInit() {
+    }
+
+    @EventListener({target: window, name: 'resize'})
+    callBackResize($event: Event, option: View<any>) {
+        console.log('---------', option, $event)
+    }
+
+    @EventListener({target: '#zzz', name: 'input'})
+    callBackInput($event: Event, option: View<any>) {
+        console.log('----input-----', option, $event)
     }
 
     @PostConstruct

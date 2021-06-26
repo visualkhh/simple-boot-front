@@ -14,18 +14,16 @@ import {FunctionUtils} from '../util/function/FunctionUtils';
 import {getInject} from '../decorators/Inject';
 import {SimObjectProxyHandler} from '../proxy/SimObjectProxyHandler';
 import {ModuleOption} from "../module/ModuleOption";
+import {EventListener, getEventListener} from "../decorators/event/EventListener";
+import {View} from "../service/view/View";
 
 export class SimstanceManager implements Runnable {
     private _storage = new Map<ConstructorType<any>, any>()
-    // private _simProxyHandler: SimProxyHandler;
     private simProxyHandler: SimProxyHandler | undefined;
 
     constructor(option: SimOption) {
         this._storage.set(SimstanceManager, this);
         this._storage.set(SimOption, option);
-        // const renderer = new Renderer(option);
-        // this._storage.set(Renderer, renderer);
-        // this._simProxyHandler = new SimProxyHandler(this, renderer);
     }
 
     get storage(): Map<ConstructorType<any>, any> {
@@ -93,6 +91,7 @@ export class SimstanceManager implements Runnable {
     public newSim<T>(target: ConstructorType<T>, simCreateAfter?: (data: T) => void): T {
         const r = new target(...this.getParameterSim(target))
         this.callBindPostConstruct(r);
+        //this.settingEventListener(r);
         const p = this.proxy(r, Module);
         // 순환참조 막기위한 콜백 처리
         simCreateAfter?.(p);
@@ -113,6 +112,8 @@ export class SimstanceManager implements Runnable {
             }
         })
     }
+
+
 
     public getParameterSim(target: Object, targetKey?: string | symbol): any[] {
         const paramTypes = ReflectUtils.getParameterTypes(target, targetKey);

@@ -24,7 +24,6 @@ export class AppRouter extends RootRouter {
     'aop' = Aop;
     'views' = Views;
 
-
     constructor() {
         super(App);
     }

@@ -14,6 +14,8 @@ import {ConstructorType} from '../types/Types';
 import {ScopeRawSet} from "../render/compile/ScopeRawSet";
 import {DomUtils} from "../util/dom/DomUtils";
 import {Scope} from "../render/compile/Scope";
+import {ObjectUtils} from "../util/object/ObjectUtils";
+import {getEventListener} from "../decorators/event/EventListener";
 
 export type RefModuleItem = {dest?: any, params: any[], callBack: Function };
 
@@ -113,6 +115,16 @@ export class Module extends SimBase implements LifeCycle {
     }
 
     private _onChangedRender() {
+        const set = new Set(ObjectUtils.getAllProtoTypeName(this));
+        set.forEach(it => {
+            const data = getEventListener(this, it);
+            if (data) {
+                const view = new View(data.target, this);
+                view.event(data.name).subscribe(sit => {
+                    (this as any)[it](sit, view);
+                })
+            }
+        });
         this.onChangedRender()
     }
 
@@ -126,6 +138,8 @@ export class Module extends SimBase implements LifeCycle {
 
     public addEvent(rootElement: DocumentFragment) {
         if (!rootElement) return
+
+
         ['click', 'change', 'keyup', 'keydown', 'input'].forEach(it => {
             this.setEvent(it, rootElement);
             this.setIntentEvent(it, rootElement);
