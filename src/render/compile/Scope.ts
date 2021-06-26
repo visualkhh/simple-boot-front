@@ -45,7 +45,7 @@ export class Scope {
     private run(): Scope {
         // const targetRaws = this.raws.substring(this.config.start.length, this.raws.length - this.config.end.length);
         const targetRaws = this.raws;
-        this.setScanUsingVar();
+        this.usingVars = Scope.usingThisVar(targetRaws);
 
         let i = this.indexOf(targetRaws, this.config.start);
         while (i !== -1) {
@@ -85,15 +85,16 @@ export class Scope {
         return number !== -1 ? number + searchString.length : number;
     }
 
-    public setScanUsingVar() {
+    public static usingThisVar(raws: string): string[] {
         // using variable search
         const varRegexStr = 'this\\.([a-zA-Z_$][a-zA-Z_.$0-9]*)';
         const varRegex = RegExp(varRegexStr, 'gm');
-        let varExec = varRegex.exec(this.raws)
-        this.usingVars = [];
+        let varExec = varRegex.exec(raws)
+        const usingVars = [];
         while (varExec) {
-            this.usingVars.push(varExec[1]);
+            usingVars.push(varExec[1]);
             varExec = varRegex.exec(varExec.input)
         }
+        return usingVars;
     }
 }

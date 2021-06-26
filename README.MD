@@ -1,5 +1,5 @@
 [![Single Page Application Framworks](assets/banner.png)](https://svelte.dev)
-[![npm version](https://img.shields.io/badge/npm-v1.0.34-blue)](https://www.npmjs.com/package/simple-boot-front) [![license](https://img.shields.io/badge/license-MIT-green)](LICENSE.md) [![Chat](https://img.shields.io/badge/npm-20%20online-brightgreen?logo=discord)](https://discord.gg/PW56dpns) [![Github](https://img.shields.io/badge/-github-black?logo=github)](https://github.com/visualkhh/simple-boot-front)
+[![npm version](https://img.shields.io/badge/npm-v1.0.35-blue)](https://www.npmjs.com/package/simple-boot-front) [![license](https://img.shields.io/badge/license-MIT-green)](LICENSE.md) [![Chat](https://img.shields.io/badge/discord-20%20online-brightgreen?logo=discord)](https://discord.gg/PW56dpns) [![Github](https://img.shields.io/badge/-github-black?logo=github)](https://github.com/visualkhh/simple-boot-front)
 
 Single Page Application Framworks for Web
 
@@ -294,21 +294,19 @@ export class AppInfo extends Module {
      <input module-event-value="value">
      ```
      - **module-change-attr**: change value setAttribute
-       - [detect variableName, script]
-         - script
-           - it: detect variable value
-           - attribute: element attribute
-       ```html
-       <img src="https://cdn.imweb.me/thumbnail/20190912/460132b4e4fce.jpg" module-change-attr="['size', 'return {height: it, width: it}']">
-       ```
+       - script
+         - it: detect variable value
+         - attribute: element attribute
+     ```html
+     <img src="https://cdn.imweb.me/thumbnail/20190912/460132b4e4fce.jpg" module-change-attr="return {height: it, width: it}">
+     ```
      - **module-change-style**: change value set Style
-       - [detect variableName, script]
-         - script
-           - it: detect variable value
-           - style: element style
-       ```html
-       <div module-change-style="['size', 'return {fontSize: `${it}px`, color: this.randomColor()}']">hello</div>
-       ```
+       - script
+         - it: detect variable value
+         - style: element style
+     ```html
+     <div module-change-style="return {fontSize: `${it}px`, color: this.randomColor()}">hello</div>
+     ```
      - **router-active-class**: url === href attribute => class add 
        - value: add and remove class name
      ```html

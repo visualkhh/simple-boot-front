@@ -13,6 +13,7 @@ import {ModuleOption} from './ModuleOption';
 import {ConstructorType} from '../types/Types';
 import {ScopeRawSet} from "../render/compile/ScopeRawSet";
 import {DomUtils} from "../util/dom/DomUtils";
+import {Scope} from "../render/compile/Scope";
 
 export class Module extends SimBase implements LifeCycle {
     public router_outlet_id?: string;
@@ -163,16 +164,16 @@ export class Module extends SimBase implements LifeCycle {
 
         // attribute
         this.procAttr(rootElement, 'module-change-attr', (it, attribute) => {
-            const atts = FunctionUtils.eval<string[]>(attribute ?? '[]');
-            if (atts && atts.length >= 2) {
-                const varName = atts[0];
-                const script = atts[1];
+            const varNames = new Set(Scope.usingThisVar(attribute ?? ''));
+            const script = attribute;
+            varNames.forEach(varName => {
+                console.log('--->', varName)
                 if (!this._refModule.get(varName)) {
                     this._refModule.set(varName, new Map([[this, []]]));
                 }
                 const item = {
                     dest: it, params: [it, varName, script], callBack: (it: HTMLElement, varName: string, script: string) => {
-                        const rtnAttribute = FunctionUtils.eval<Object>(`const attribute = ${JSON.stringify(DomUtils.getAttributeToObject(it))}; const it=${this.getValue(varName)};` + script, this) ?? {};
+                        const rtnAttribute = FunctionUtils.eval<Object>(`const attribute = ${JSON.stringify(DomUtils.getAttributeToObject(it))};` + script, this) ?? {};
                         for(const [key, value] of Object.entries(rtnAttribute)) {
                             it.setAttribute(key, value);
                         }
@@ -180,21 +181,20 @@ export class Module extends SimBase implements LifeCycle {
                 };
                 this._refModule.get(varName)?.get(this)?.push(item);
                 item.callBack.apply(this, item.params as [HTMLElement, string, string]);
-            }
+            })
         })
 
         // style
         this.procAttr(rootElement, 'module-change-style', (it, attribute) => {
-            const atts = FunctionUtils.eval<string[]>(attribute ?? '[]');
-            if (atts && atts.length >= 2) {
-                const varName = atts[0];
-                const script = atts[1];
+            const varNames = new Set(Scope.usingThisVar(attribute ?? ''));
+            const script = attribute;
+            varNames.forEach(varName => {
                 if (!this._refModule.get(varName)) {
                     this._refModule.set(varName, new Map([[this, []]]));
                 }
                 const item = {
                     dest: it, params: [it, varName, script], callBack: (it: HTMLElement, varName: string, script: string) => {
-                        const rtnStyle = FunctionUtils.eval<string>(`const style=${JSON.stringify(DomUtils.getStyleToObject(it))}; const it=${this.getValue(varName)};` + script, this) ?? {};
+                        const rtnStyle = FunctionUtils.eval<string>(`const style=${JSON.stringify(DomUtils.getStyleToObject(it))};` + script, this) ?? {};
                         for(const [key, value] of Object.entries(rtnStyle)) {
                             (it.style as any)[key] = value;
                         }
@@ -202,7 +202,7 @@ export class Module extends SimBase implements LifeCycle {
                 };
                 this._refModule.get(varName)?.get(this)?.push(item);
                 item.callBack.apply(this, item.params as [HTMLElement, string, string]);
-            }
+            })
         })
 
 
