@@ -15,7 +15,7 @@ export class Views extends Module {
     public a = new View<Element>('#input', this);
 
     constructor(public projectService: ProjectService, public ajax: AjaxService) {
-        super("view", {template: html, styleImports:[css]});
+        super({template: html, styleImports:[css]});
     }
 
     click() {

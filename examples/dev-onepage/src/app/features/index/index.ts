@@ -22,6 +22,12 @@ export class Index extends Module {
     count = 0;
     size = 10;
 
+    public title2 = new class extends Module {
+        constructor() {
+            super({value: '4444444'});
+        }
+    }();
+
     public numbers = new class extends Module {
         constructor() {
             super({
@@ -93,6 +99,10 @@ export class Index extends Module {
             Math.floor(RandomUtils.random(1, 400)),
             Math.floor(RandomUtils.random(1, 400))
         ];
+    }
+
+    public randomColor(): string {
+        return RandomUtils.getRandomColor();
     }
 
     thisDataChange() {

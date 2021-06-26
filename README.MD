@@ -283,15 +283,15 @@ export class AppInfo extends Module {
      ```html
      <input module-event-input="changeData">
      ```
-     - **module-link**: link event (value change <-> input)
+     - **module-value-link**: link event (value change <-> input)
        - value: variable name
      ```html
-     <input module-link="value">
+     <input module-value-link="value">
      ```
      - **module-value**: value injection
        - value: variable name
      ```html
-     <input module-event-value="value">
+     <input module-value="value">
      ```
      - **module-change-attr**: change value setAttribute
        - script

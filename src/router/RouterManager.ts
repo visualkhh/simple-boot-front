@@ -24,7 +24,7 @@ export class RouterManager implements Runnable {
 
     public executeRouter() {
         const routers: Router[] = [];
-        const navigation = this.simstanceManager.getOrNewSim(Navigation);
+        const navigation = this.simstanceManager.getOrNewSim(Navigation)!;
         const rootRouter = this.simstanceManager.getOrNewSim(this.option.rootRouter);
         let executeModule = this.simstanceManager.getOrNewSim(this.option.rootRouter)?.getExecuteModule(routers);
         if (!executeModule) {
@@ -33,7 +33,7 @@ export class RouterManager implements Runnable {
         }
 
         if (executeModule.module) {
-            executeModule.router?.canActivate(navigation?.pathInfo!, executeModule).then(targetModule => {
+            executeModule.router?.canActivate(navigation.pathInfo, executeModule).then(targetModule => {
                 // console.log('targetModule==>', targetModule)
                 if (targetModule) {
                     let lastRouterSelector = this.option?.selector;

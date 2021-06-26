@@ -12,7 +12,7 @@ export class AppInfo extends Module {
     datas = 'default data';
 
     constructor() {
-        super('appInfo', {template: '<div><h3>info</h3><!--%write(this.datas)%--></div>'});
+        super({template: '<div><h3>info</h3><!--%write(this.datas)%--></div>'});
     }
 
     data(i: Intent) {

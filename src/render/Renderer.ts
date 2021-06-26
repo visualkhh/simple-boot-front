@@ -6,7 +6,6 @@ import {Scope} from './compile/Scope';
 import {RandomUtils} from '../util/random/RandomUtils';
 import {NodeUtils} from '../util/node/NodeUtils';
 import {RootScope, TargetNodeMode} from './compile/RootScope';
-import {DomUtils} from "../util/dom/DomUtils";
 import {ScopeRawSet} from "./compile/ScopeRawSet";
 
 @Sim()
@@ -36,7 +35,6 @@ export class Renderer {
                 it.scopeResult.childAllRemove();
                 //clean refEvent
                 module.refModuleClean();
-
                 const startComment = it.scopeResult.startComment;
                 const endComment = it.scopeResult.endComment;
                 it.exec(module)
@@ -68,8 +66,6 @@ export class Renderer {
             } else {
                 // nothing..
             }
-
-
             scope.childs.forEach(it => {
                 it.scopeResult?.calls.filter(it => it.name === 'module').map(it => it.result).forEach(it => {
                     (it as Module).renderWrap();
@@ -90,12 +86,4 @@ export class Renderer {
             targetElement.prepend(htmlStyleElement)
         }
     }
-
-    // public exist(selector: string): boolean {
-    //     if (document.querySelector(selector)) {
-    //         return true;
-    //     } else {
-    //         return false;
-    //     }
-    // }
 }

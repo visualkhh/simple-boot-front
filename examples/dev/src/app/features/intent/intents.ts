@@ -15,7 +15,7 @@ export class Intents extends Module {
     public profile: Profile | undefined;
 
     constructor(public projectService: ProjectService, public ajax: AjaxService) {
-        super("intent", {template: html, styleImports:[css]});
+        super({template: html, styleImports:[css]});
     }
 
     click() {

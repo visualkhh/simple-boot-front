@@ -1,5 +1,5 @@
 <h1>index</h1>
-
+<!--%module(this.title2)%-->
 <div>
     <div module-change-style="return {fontSize: `${this.size}px`, color: this.randomColor()}">hello</div>
     <img src="https://cdn.imweb.me/thumbnail/20190912/460132b4e4fce.jpg" module-change-attr="return {height: this.size, width: this.size}">
@@ -18,4 +18,6 @@
 <!--<button class="btn btn-info" module-event-click="changeData">changeData</button>-->
 <button class="btn btn-info" module-event-click="changeText">changeText</button>
 
+<input type="text" module-change-attr="return {value: this.size}">
+<input type="text" module-value-link="size">
 <input type="text" module-event-input="inputChange">

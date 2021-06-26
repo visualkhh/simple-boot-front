@@ -11,7 +11,6 @@ export class ScopeObject {
     declare _option: ModuleOption
     public calls: ScopeObjectCalls = [];
     [name: string]: any;
-
     public writes = '';
 
     constructor(public uuid = RandomUtils.uuid()) {
@@ -23,15 +22,12 @@ export class ScopeObject {
         templateElement.innerHTML = this.writes;
         const startComment = document.createComment('scope start ' + this.uuid)
         const endComment = document.createComment('scope end ' + this.uuid)
-        // templateElement.innerHTML = '<!--scope start ' + this.uuid + '-->' + this.writes + '<!--scope end ' + this.uuid + '-->'
         templateElement.content.childNodes.forEach(it => {
             if (it.nodeType === Node.ELEMENT_NODE) {
-                // (it as Element).setAttribute('scope-parent', parentScope);
                 (it as Element).setAttribute('scope-uuid', this.uuid);
             }
         })
         return new ScopeResultSet(this.uuid, this, templateElement.content, startComment, endComment, this.calls)
-        // return new ScopeResultSet(this, templateElement.content, code, returnValue)
     }
 
     private eval(str: string): any {
@@ -47,13 +43,12 @@ export class ScopeObject {
         const moduleIdAttrSelector = () => {
             return write("*[module-id='"+this.id+"']");
         }
-
         const module = (module) => {
             if (typeof module === 'string') {
                 module = this.newSimOrAddDynamicModule(module);
             }
             this.moduleWriteAndSetScope(module, true);
-            this.calls.push({name: 'stripModule', parameter: [module], result: module});
+            this.calls.push({name: 'module', parameter: [module], result: module});
             return module;
         }
         ${script}
@@ -78,9 +73,7 @@ export class ScopeObject {
     public moduleWriteAndSetScope(module: Module) {
         if (module) {
             const uuid = RandomUtils.uuid();
-            // console.log('moduleWriteAndSetScope', uuid, module);
             const targetSelecotr = module.getTemplateSelector(uuid)
-            // const targetNode = new TargetNode(targetSelecotr, strip === true ? TargetNodeMode.replace : TargetNodeMode.child);
             const targetNode = new TargetNode(targetSelecotr, TargetNodeMode.replace);
             const scope = module.setScope(targetNode, uuid);
             if (scope) {

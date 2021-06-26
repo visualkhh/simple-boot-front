@@ -2,7 +2,6 @@ import {ScopeObject} from './ScopeObject';
 import {ScopePosition} from './ScopePosition';
 import {RandomUtils} from '../../util/random/RandomUtils';
 import {ScopeResultSet} from './ScopeResultSet';
-import {ScopeRawSet} from "./ScopeRawSet";
 
 export class Scope {
     public childs: Scope[] = [];
@@ -21,18 +20,6 @@ export class Scope {
         }
         return false;
     }
-    // clenResults() {
-    //     if (!this.scopeResult?.startComment.isConnected) {
-    //         console.log('scope clenResults->', this.scopeResult)
-    //         this.scopeResult = undefined;
-    //     }
-    //     this.childs.forEach(it => {
-    //         it.clenResults();
-    //     })
-    //     this.childs = this.childs.filter(it => it.scopeResult);
-    // }
-
-
 
     exec(obj: any = this.obj) {
         const scopeObject = new ScopeObject();
@@ -43,10 +30,8 @@ export class Scope {
     }
 
     private run(): Scope {
-        // const targetRaws = this.raws.substring(this.config.start.length, this.raws.length - this.config.end.length);
         const targetRaws = this.raws;
         this.usingVars = Scope.usingThisVar(targetRaws);
-
         let i = this.indexOf(targetRaws, this.config.start);
         while (i !== -1) {
             const startIdx = i;
@@ -58,11 +43,8 @@ export class Scope {
                 if (matchStart.length === matchEnd.length) {
                     const scope = new Scope(sub.substring(this.config.start.length, sub.length - this.config.end.length), this.obj, RandomUtils.uuid(), this.config, new ScopePosition(startIdx, endIdx));
                     this.childs.push(scope);
-                    // this.childs.push(new Scope(sub, this.config));
                     break;
                 }
-                // console.log(matchStart, matchEnd)
-                // console.log(sub)
                 endIdx = this.tailIndexOf(targetRaws, this.config.end, endIdx);
             }
 
@@ -72,7 +54,6 @@ export class Scope {
                 break;
             }
         }
-        // console.log('idx', this.position)
         return this;
     }
 
@@ -86,10 +67,8 @@ export class Scope {
     }
 
     public static usingThisVar(raws: string): string[] {
-
-        const regex = /".*"/gm;
+        const regex = /["'].*["']/gm;
         raws = raws.replace(regex, '');
-        // using variable search
         const varRegexStr = 'this\\.([a-zA-Z_$][a-zA-Z_.$0-9]*)';
         const varRegex = RegExp(varRegexStr, 'gm');
         let varExec = varRegex.exec(raws)

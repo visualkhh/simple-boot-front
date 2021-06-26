@@ -8,22 +8,20 @@ import {Renderer} from "simple-boot-front/render/Renderer";
 import {SimstanceManager} from "simple-boot-front/simstance/SimstanceManager";
 import {Navigation} from "simple-boot-front/service/Navigation";
 
-// @After({type: Index, target: 'aa'})
-// @Reflect.metadata("design:type", Number)
 @Sim({scheme: 'index'})
 export class Index extends Module {
     data = "default data";
     thisData = 5151;
     public title = new class extends Module {
         constructor() {
-            super('title', {styleImports: ['/*[module-selector]*/ {color: red}'], value: ''});
+            super({styleImports: ['/*[module-selector]*/ {color: red}'], value: ''});
         }
     }();
     public numbers = new class extends Module {
         public value = [1, 2, 3];
 
         constructor() {
-            super('numbers', {template: `
+            super({template: `
         <ul>
         <!--%
             for (let i of this.value) {
@@ -37,7 +35,7 @@ export class Index extends Module {
     }();
 
     constructor(public v: ViewService, public manager: SimstanceManager, public navigation: Navigation) {
-        super("index", {template:html});
+        super({template:html});
     }
 
     onInit() {
@@ -47,6 +45,7 @@ export class Index extends Module {
     }
 
     changeText($event: KeyboardEvent, view: View<Element>) {
+        console.log('--->',  view.value)
         this.title.value = view.value;
     }
 

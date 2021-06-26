@@ -11,6 +11,6 @@ export class ATitle extends Title {
             styleImports: ["/*[module-selector]*/ {color: red}"],
             value: 111
         });
-        console.log('ATitle Constructor', testService)
+        console.log('ATitle Constructor', this.id, testService)
     }
 }

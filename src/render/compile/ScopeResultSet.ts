@@ -6,14 +6,9 @@ export class ScopeResultSet {
     constructor(public uuid: string, public object: ScopeObject, public fragment: DocumentFragment, public startComment: Comment, public endComment: Comment, public calls: ScopeObjectCalls = []) {
         // eslint-disable-next-line no-undef
         this.childNodes = [];
-        // this.childNodes = fragment.childNodes;
         for (let i = 0; i < fragment.childNodes.length; i++) {
             const childNode = fragment.childNodes[i];
-            // console.log('-->', childNode.nodeType, childNode)
-            // if (childNode.nodeType === Node.ELEMENT_NODE) {
-            //     (childNode as HTMLElement).setAttribute('module-id', uuid);
-            // }
-            this.childNodes.push(fragment.childNodes[i]);
+            this.childNodes.push(childNode);
         }
     }
 

@@ -15,10 +15,12 @@ import {ScopeRawSet} from "../render/compile/ScopeRawSet";
 import {DomUtils} from "../util/dom/DomUtils";
 import {Scope} from "../render/compile/Scope";
 
+export type RefModuleItem = {dest?: any, params: any[], callBack: Function };
+
 export class Module extends SimBase implements LifeCycle {
     public router_outlet_id?: string;
     public id: string;
-    public _refModule = new Map<string, Map<Module, {dest?: any, params: any[], callBack: Function }[]> >();
+    public _refModule = new Map<string, Map<Module, RefModuleItem[]> >();
     public _scopes = new Map<string, RootScope>();
     public _option: ModuleOption
     public value: any;
@@ -141,23 +143,26 @@ export class Module extends SimBase implements LifeCycle {
         })
 
         // link
-        this.procAttr<HTMLInputElement>(rootElement, 'module-link', (it, attribute) => {
-            if (attribute && this.getValue(attribute)) {
-                ['input'].forEach(eit => {
-                    fromEvent<Event>(it, eit).subscribe(eit => {
-                        if (typeof this.getValue(attribute) === 'function') {
-                            this.getValue(attribute)(eit)
-                        } else {
-                            this.setValue(attribute, it.value)
-                        }
-                    })
+        this.procAttr<HTMLInputElement>(rootElement, 'module-value-link', (it, varName) => {
+            if (varName && this.getValue(varName)) {
+                fromEvent<Event>(it, 'input').subscribe(eit => {
+                    if (typeof this.getValue(varName) === 'function') {
+                        this.getValue(varName)(eit)
+                    } else {
+                        this.setValue(varName, it.value)
+                    }
                 })
 
-                if (typeof this.getValue(attribute) === 'function') {
-                    it.value = this.getValue(attribute);
+                if (typeof this.getValue(varName) === 'function') {
+                    it.value = this.getValue(varName);
                 } else {
-                    it.value = this.getValue(attribute);
+                    it.value = this.getValue(varName);
                 }
+                this.pushAndCallBackRefModule(varName, {
+                    dest: it, params: [it, varName], callBack: (it: HTMLElement, varName: string) => {
+                        (it as any).value = this.getValue(varName);
+                    }
+                });
             }
         })
 
@@ -167,20 +172,16 @@ export class Module extends SimBase implements LifeCycle {
             const varNames = new Set(Scope.usingThisVar(attribute ?? ''));
             const script = attribute;
             varNames.forEach(varName => {
-                console.log('--->', varName)
-                if (!this._refModule.get(varName)) {
-                    this._refModule.set(varName, new Map([[this, []]]));
-                }
-                const item = {
-                    dest: it, params: [it, varName, script], callBack: (it: HTMLElement, varName: string, script: string) => {
+                this.pushAndCallBackRefModule(varName, {
+                    dest: it,
+                    params: [it, varName, script],
+                    callBack: (it: HTMLElement, varName: string, script: string) => {
                         const rtnAttribute = FunctionUtils.eval<Object>(`const attribute = ${JSON.stringify(DomUtils.getAttributeToObject(it))};` + script, this) ?? {};
-                        for(const [key, value] of Object.entries(rtnAttribute)) {
+                        for (const [key, value] of Object.entries(rtnAttribute)) {
                             it.setAttribute(key, value);
                         }
                     }
-                };
-                this._refModule.get(varName)?.get(this)?.push(item);
-                item.callBack.apply(this, item.params as [HTMLElement, string, string]);
+                });
             })
         })
 
@@ -189,19 +190,16 @@ export class Module extends SimBase implements LifeCycle {
             const varNames = new Set(Scope.usingThisVar(attribute ?? ''));
             const script = attribute;
             varNames.forEach(varName => {
-                if (!this._refModule.get(varName)) {
-                    this._refModule.set(varName, new Map([[this, []]]));
-                }
-                const item = {
-                    dest: it, params: [it, varName, script], callBack: (it: HTMLElement, varName: string, script: string) => {
+                this.pushAndCallBackRefModule(varName, {
+                    dest: it,
+                    params: [it, varName, script],
+                    callBack: (it: HTMLElement, varName: string, script: string) => {
                         const rtnStyle = FunctionUtils.eval<string>(`const style=${JSON.stringify(DomUtils.getStyleToObject(it))};` + script, this) ?? {};
-                        for(const [key, value] of Object.entries(rtnStyle)) {
+                        for (const [key, value] of Object.entries(rtnStyle)) {
                             (it.style as any)[key] = value;
                         }
                     }
-                };
-                this._refModule.get(varName)?.get(this)?.push(item);
-                item.callBack.apply(this, item.params as [HTMLElement, string, string]);
+                });
             })
         })
 
@@ -214,9 +212,18 @@ export class Module extends SimBase implements LifeCycle {
         })
     }
 
-    public randomColor(): string {
-        return RandomUtils.getRandomColor();
+    public pushRefModule(varName: string, refModuleItem: RefModuleItem, module: Module = this) {
+        if (!this._refModule.get(varName)) {
+            this._refModule.set(varName, new Map([[this, []]]));
+        }
+        this._refModule.get(varName)?.get(module)?.push(refModuleItem);
     }
+
+    public pushAndCallBackRefModule(varName: string, refModuleItem: RefModuleItem, module: Module = this) {
+        this.pushRefModule(varName, refModuleItem, module);
+        refModuleItem.callBack.apply(module, refModuleItem.params);
+    }
+
     public onInit() {
     }
 
@@ -242,7 +249,6 @@ export class Module extends SimBase implements LifeCycle {
                     this._refModule.delete(itk);
                 }
             });
-
         })
 
     }

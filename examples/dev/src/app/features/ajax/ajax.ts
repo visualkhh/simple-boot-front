@@ -13,7 +13,7 @@ export class Ajax extends Module {
     public data: UserResponse | undefined;
     public profile: Profile | undefined;
     constructor(public projectService: ProjectService, public ajax: AjaxService) {
-        super("hello-world", {template: html, styleImports:[css]});
+        super({template: html, styleImports:[css]});
     }
 
     onInit() {

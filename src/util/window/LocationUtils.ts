@@ -4,7 +4,7 @@ export class LocationUtils {
     }
 
     static hashPath(): string {
-        return window.location.hash.replace('#', '').split('?')[0]
+        return '/' + window.location.hash.replace('#', '').split('?')[0]
     }
 
     static hashQueryParams(): Map<string, string> {
@@ -13,7 +13,7 @@ export class LocationUtils {
     }
 
     static path(): string {
-        return window.location.pathname.substring(1);
+        return window.location.pathname;//.substring(1);
     }
 
     static pathQueryParams(): Map<string, string> {

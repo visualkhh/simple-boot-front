@@ -13,33 +13,32 @@ import {Notfound} from "./features/errors/notfound/notfound";
 import {Forbidden} from "./features/errors/forbidden/forbidden";
 import {Url} from "simple-boot-front/model/Url";
 import {RouterModule} from "simple-boot-front/router/RouterModule";
-import {RouterModuleOption} from "simple-boot-front/router/Router";
 
 @Sim({scheme: 'layout-router'})
 export class AppRouter extends RootRouter {
-    '' = {module: Index, stripWrap: true};
-    'ajax' = {module: Ajax, stripWrap: true};
-    'intent' = {module: Intents, stripWrap: true};
-    'view' = {module: Views, stripWrap: true};
-    'exception' = {module: Exception, stripWrap: true};
-    'aop' = {module: Aop, stripWrap: true};
-    'views' = {module: Views, stripWrap: true};
+    '' = Index;
+    'ajax' = Ajax;
+    'intent' = Intents;
+    'view' = Views;
+    'exception' = Exception;
+    'aop' = Aop;
+    'views' = Views;
 
 
     constructor() {
-        super('', {module: App, stripWrap: true});
+        super(App);
     }
 
-    async canActivate(url: Url, module: RouterModule): Promise<RouterModule | RouterModuleOption> {
+    async canActivate(url: Url, module: RouterModule): Promise<RouterModule | ConstructorType<Module>>{
         if (url.path === 'views' && url.params.get('auth') === 'false') {
-            return {module: Forbidden, stripWrap: true};
+            return Forbidden;
         } else {
             return module;
         }
     }
 
-    notFound(url: Url): RouterModuleOption {
+    notFound(url: Url): ConstructorType<Module> {
         console.log(url.path)
-        return {module: Notfound, stripWrap: false};
+        return Notfound;
     }
 }

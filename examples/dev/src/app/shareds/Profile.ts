@@ -31,7 +31,7 @@ export class Profile extends Module {
     private data: User | undefined;
 
     constructor() {
-        super("profile", {template: template, styleImports: styleImports});
+        super({template: template, styleImports: styleImports});
     }
 
     public setUser(data: User) {

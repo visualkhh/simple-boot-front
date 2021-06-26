@@ -11,7 +11,7 @@ export class App extends Module {
     info = new AppInfo();
 
     constructor(public ajaxService: AjaxService, public simstance: SimstanceManager) {
-        super("app-layout-module", {template: html, styleImports: [css]});
+        super({template: html, styleImports: [css]});
     }
 
 }

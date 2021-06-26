@@ -15,7 +15,8 @@ export class AppRouter extends RootRouter {
     '' = Index;
 
     constructor() {
-        super('', App);
+
+        super(App);
     }
 
     async canActivate(url: Url, module: RouterModule): Promise<RouterModule | ConstructorType<Module>> {

@@ -12,7 +12,7 @@ export class Empty extends Module {
     public data: UserResponse | undefined;
     public profile: Profile | undefined;
     constructor(public projectService: ProjectService, public ajax: AjaxService) {
-        super("empty-world", {template: html, styleImports:[css]});
+        super({template: html, styleImports:[css]});
     }
 
     onInit() {

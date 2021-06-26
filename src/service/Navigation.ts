@@ -34,9 +34,10 @@ export class Navigation {
 
     go(path: string, data = {}, title = '') {
         if (UrlType.path === this.option.urlType) {
-            history.pushState(data, title, '/' + path)
+            history.pushState(data, title, path)
         } else if (UrlType.hash === this.option.urlType) {
-            history.pushState(data, title, '/#' + path)
+            path = '#'+ path.substring(1)
+            history.pushState(data, title, path)
         }
         window.dispatchEvent(new Event('popstate'));
         // window.dispatchEvent(new Event('pushstate'));

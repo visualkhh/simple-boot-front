@@ -39,7 +39,6 @@ export class Router extends SimBase {
         }
     }
 
-
     public isRootUrl(parentRoots: string[], hashUrl: string): boolean {
         return hashUrl.startsWith(parentRoots.join('') + (this.path || ''))
     }
