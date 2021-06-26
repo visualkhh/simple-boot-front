@@ -1,5 +1,6 @@
 export interface User {
     gender: string;
+    cell: string;
     name: { title: string, first: string, last: string };
     location: {
         street: {name: string, number: number}, city: string, state: string, postcode: string,
@@ -29,12 +30,12 @@ export interface User {
             name: string,
             value: string
         },
-        picture: {
-            large: string,
-            medium: string,
-            thumbnail: string,
-        },
         nat: string
+    };
+    picture: {
+        large: string,
+        medium: string,
+        thumbnail: string,
     };
 }
 

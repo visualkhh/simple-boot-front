@@ -22,6 +22,12 @@ export class Ajax extends Module {
         this.loadData();
     }
 
+    sync() {
+        if (this.profile && this.data) {
+            this.profile.setUser(this.data.results[0]);
+        }
+    }
+
     loadData() {
         this.ajax
             .getJson<UserResponse>("https://randomuser.me/api/")

@@ -176,7 +176,8 @@ export class Module extends SimBase implements LifeCycle {
                     dest: it,
                     params: [it, varName, script],
                     callBack: (it: HTMLElement, varName: string, script: string) => {
-                        const rtnAttribute = FunctionUtils.eval<Object>(`const attribute = ${JSON.stringify(DomUtils.getAttributeToObject(it))};` + script, this) ?? {};
+                        const a = JSON.stringify(DomUtils.getAttributeToObject(it));
+                        const rtnAttribute = FunctionUtils.eval<Object>(`const attribute = ${a};` + script, this) ?? {};
                         for (const [key, value] of Object.entries(rtnAttribute)) {
                             it.setAttribute(key, value);
                         }
