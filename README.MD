@@ -95,7 +95,7 @@ npm install simple-boot-front
     <h1>index</h1>
     links:
     <ul>
-        <li>ajax example page: <a router-link="">ajax</a></li>
+        <li>ajax example page: <a router-link="/ajax">ajax</a></li>
     </ul>
     
     <div class="card mt-2" style="width: 100%;">
@@ -125,7 +125,7 @@ npm install simple-boot-front
         <div class="card-body">
             <h5>variable module</h5>
               <!--%module(this.data)%-->
-            data link change event <input type="text" module-link="data">
+            data link change event <input type="text" module-value-link="data">
         </div>
     </div>
     
@@ -146,19 +146,24 @@ npm install simple-boot-front
    - end: %-->
    - write: write string
    - method  
-     - module: module include  (Wrap element)
-     - stripModule: module include (no Wrap Element)
+     - module: module include 
    - ex
       ```html
       <div><!--%write(this.data)%--></div>
       <div><!--%module(this.aModule)%--></div>
-      <div><!--%stripModule(this.aModule)%--></div>
       <div>
       <!--%
           for (let i of this.datas) {
               write('<li>' + i + '</li>');
           }
       %-->
+      </div>
+      <div>
+          <!--%
+          for(var i = 0 ; i < this.count ; i ++) {
+              write("<img src='https://cdn.imweb.me/thumbnail/20190912/460132b4e4fce.jpg' module-change-attr=\"return {height: this.size, width: this.size}\">");
+          }
+          %-->
       </div>
       ```
 
@@ -187,7 +192,7 @@ npm install simple-boot-front
   @Injectable()
   export class CTitle extends Title {
   constructor(public testService: TestService) {
-    super('Ctitle', {
+    super({
       template: 'value:(<!--% write(this.value) %--> <button module-event-click="cc">CC</button>)',
       value: 'default value'
     });
@@ -255,7 +260,7 @@ click() {
 export class App extends Module {
     info = new AppInfo();
     constructor() {
-        super("app-layout-module", {template: html, styleImports:[css]});
+        super({template: html, styleImports:[css]});
     }
 }
 ```
@@ -263,7 +268,7 @@ export class App extends Module {
 export class AppInfo extends Module {
     datas = 'default data';
     constructor() {
-      super("app-info", {template: '<div><h3>info</h3><!--%write(this.datas)%--></div>'});
+      super({template: '<div><h3>info</h3><!--%write(this.datas)%--></div>'});
     }
     data(i: Intent) {
         this.datas = i.data + '->' + i.params.aa
@@ -344,15 +349,15 @@ export class AppInfo extends Module {
      <input type="text" module-event-keyup-intent-publish="['layout://info/viewSubscribe?a=wow&aa=vvv']">
      ```
      
-       - subscribe
-       ```typescript
-       data(i: Intent) {
-        this.datas = i.data + '->' + i.params.aa
-       }
-       viewSubscribe(i: Intent<View<HTMLInputElement>>) {
-         this.datas = i.data?.value + '->' + i.params.aa + '-->' + i.event
-       }
-      ```
+     - subscribe
+     ```typescript
+     data(i: Intent) {
+      this.datas = i.data + '->' + i.params.aa
+     }
+     viewSubscribe(i: Intent<View<HTMLInputElement>>) {
+       this.datas = i.data?.value + '->' + i.params.aa + '-->' + i.event
+     }
+    ```
   * css
     - **moduleIdAttrSelector()**: module Dedicated style
       - as-is
