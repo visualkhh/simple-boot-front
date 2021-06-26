@@ -86,6 +86,9 @@ export class Scope {
     }
 
     public static usingThisVar(raws: string): string[] {
+
+        const regex = /".*"/gm;
+        raws = raws.replace(regex, '');
         // using variable search
         const varRegexStr = 'this\\.([a-zA-Z_$][a-zA-Z_.$0-9]*)';
         const varRegex = RegExp(varRegexStr, 'gm');
