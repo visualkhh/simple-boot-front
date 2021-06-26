@@ -1,6 +1,6 @@
 import {fromEvent, Observable} from 'rxjs';
 import {Module} from '../../module/Module';
-import {FromEventTarget} from "rxjs/src/internal/observable/fromEvent";
+import {FromEventTarget} from "rxjs/internal/observable/fromEvent";
 
 export class View<T extends Element> {
     constructor(private _e: T | FromEventTarget<any> | string, public module?: Module) {
