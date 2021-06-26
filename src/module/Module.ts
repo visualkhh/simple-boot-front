@@ -203,7 +203,6 @@ export class Module extends SimBase implements LifeCycle {
             })
         })
 
-
         // router-link
         this.procAttr(rootElement, 'router-link', (it, attribute) => {
             fromEvent<Event>(it, 'click').subscribe(eit => {
@@ -250,7 +249,6 @@ export class Module extends SimBase implements LifeCycle {
                 }
             });
         })
-
     }
 
     public setScope(targetNode: TargetNode, uuid = RandomUtils.uuid()) {
