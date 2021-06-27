@@ -19,14 +19,14 @@ export interface TemplateOption {
 
 const TemplateOptions: TemplateOption[] = [
   {
-    name: 'Svelte',
+    name: 'simple-boot-front',
     port: {
       parcel: '5000',
       rollup: null,
       webpack: null
     },
     template: {
-      parcel: 'https://github.com/sveltejs/template#master',
+      parcel: 'https://github.com/visualkhh/simple-boot-front/templates/parcel-bundler#master',
       rollup: null,
       webpack: null
     }

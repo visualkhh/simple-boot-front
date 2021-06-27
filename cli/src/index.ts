@@ -105,10 +105,10 @@ class CreateSvelteCmd extends Command {
     console.log(chalk.white('Next Steps:\n'));
     console.log(chalk.cyan(`cd ${projectName}\n`));
     if (port !== '') {
-      console.log(chalk.cyan(`npm run dev\n`));
+      console.log(chalk.cyan(`npm run serve\n`));
       console.log(chalk.white(`Visit ${chalk.cyan(`http://localhost:${port}`)} in your browser.\n`));
     } else {
-      console.log(chalk.cyan(`tns run --bundle\n`));
+      console.log(chalk.cyan(`npm run build\n`));
       console.log(chalk.white(`The app should open on your device.\n`));
     }
   }
