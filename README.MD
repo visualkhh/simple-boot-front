@@ -9,11 +9,12 @@ Single Page Application Framworks for Web
 ## Our primary goals are
 * Provide a radically faster and widely accessible getting started experience for all front end.
 
+## 🚀 Quick start cli
+  - npm init simple-boot-front projectname
+  - cd projectname
+  - npm run serve
 
-## Installation and Getting Started
-```
-npm install simple-boot-front
-```
+
 
 
 ## [😃 examples project](./examples)
@@ -21,11 +22,6 @@ npm install simple-boot-front
 * #### [parcel-bundler-js](./examples/parcel-bundler-js) (js version)
 * #### [webpack](./examples/parcel-bundler)
 
-* #🚀 Quick start cli
-  - npm init simple-boot-front@next projectname
-  - cd projectname
-  - npm run serve
-  
   
 * Here is a quick teaser of a complete simple-boot-front application in typescript
   * index.ts

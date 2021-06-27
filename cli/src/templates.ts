@@ -21,7 +21,7 @@ const TemplateOptions: TemplateOption[] = [
   {
     name: 'simple-boot-front',
     port: {
-      parcel: '5000',
+      parcel: '3000',
       rollup: null,
       webpack: null
     },

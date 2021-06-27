@@ -1,7 +1,7 @@
 {
   "name": "create-simple-boot-front",
   "description": "Create a Svelte or Sapper site in a single command.",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "visualkhh",
   "bin": {
     "create-simple-boot-front": "./bin/run",
