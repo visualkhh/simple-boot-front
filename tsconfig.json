@@ -38,8 +38,11 @@
     "examples",
     "rollup.config.js",
     "test",
+    "cli",
+    "assets",
     "test-cli",
     "**/*.test.ts",
+    "templates",
     "dist"
   ]
 }

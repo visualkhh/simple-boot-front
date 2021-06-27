@@ -1,5 +1,5 @@
 [![Single Page Application Framworks](assets/banner.png)](https://svelte.dev)
-[![npm version](https://img.shields.io/badge/npm-v1.0.37-blue)](https://www.npmjs.com/package/simple-boot-front) [![license](https://img.shields.io/badge/license-MIT-green)](LICENSE.md) [![Chat](https://img.shields.io/badge/discord-20%20online-brightgreen?logo=discord)](https://discord.gg/PW56dpns) [![Github](https://img.shields.io/badge/-github-black?logo=github)](https://github.com/visualkhh/simple-boot-front)
+[![npm version](https://img.shields.io/badge/npm-v1.0.39-blue)](https://www.npmjs.com/package/simple-boot-front) [![license](https://img.shields.io/badge/license-MIT-green)](LICENSE.md) [![Chat](https://img.shields.io/badge/discord-20%20online-brightgreen?logo=discord)](https://discord.gg/PW56dpns) [![Github](https://img.shields.io/badge/-github-black?logo=github)](https://github.com/visualkhh/simple-boot-front)
 
 Single Page Application Framworks for Web
 
@@ -78,7 +78,7 @@ npm install simple-boot-front
       data = "default data";
       thisData = 5151;
       constructor(public v: ViewService, public manager: SimstanceManager, public navigation: Navigation) {
-          super("index",{template: html});
+          super({template: html});
       }
   
       onInit() {

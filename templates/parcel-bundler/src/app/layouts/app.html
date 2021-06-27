@@ -1,0 +1,29 @@
+<div class="container">
+    <header class="blog-header">
+        <div class="row flex-nowrap justify-content-between align-items-center">
+            <div class="col-4 text-center">
+                <img width="100%" src="https://github.com/visualkhh/simple-boot-front/raw/master/assets/banner.png">
+            </div>
+        </div>
+    </header>
+
+    <div class="nav-scroller py-1 mb-2">
+        <nav class="nav d-flex justify-content-between">
+            <a class="p-2 link-secondary pointer" router-link="/" router-active-class="['active']">Home</a>
+            <a class="p-2 link-secondary pointer" router-link="/ajax" router-active-class="['active']">Ajax</a>
+            <a class="p-2 link-secondary pointer" router-link="/intent" router-active-class="['active']">Intent event</a>
+            <a class="p-2 link-secondary pointer" router-link="/exception" router-active-class="['active']">exception</a>
+            <a class="p-2 link-secondary pointer" router-link="/aop" router-active-class="['active']">aop</a>
+            <a class="p-2 link-secondary pointer" router-link="/views" router-active-class="['active']">views</a>
+        </nav>
+    </div>
+</div>
+
+<main class="container" [router-outlet]></main>
+
+<footer class="blog-footer">
+    <p>
+        <a href="https://github.com/visualkhh/simple-boot-front" target="_blank"><img src="https://img.shields.io/badge/-github-black?logo=github"></a>
+    </p>
+    <p><a href="mailto:visualkhh@gmail.com">visualkhh@gmail.com</a></p>
+</footer>

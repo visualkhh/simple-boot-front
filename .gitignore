@@ -264,3 +264,4 @@ gradle-app.setting
 # End of https://www.toptal.com/developers/gitignore/api/windows,macos,gradle,node,eclipse
 /**/node_modules/
 /**/dist/
+/templates/parcel-bundler/dist/
