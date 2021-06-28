@@ -1,5 +1,5 @@
 import {ConstructorType} from '../types/Types';
-import {RootRouter} from '../router/RootRouter';
+import {Router} from '../router/Router';
 
 export enum UrlType {
     // eslint-disable-next-line no-unused-vars
@@ -11,9 +11,9 @@ export enum UrlType {
 export class SimOption {
     selector: string = '#app';
     urlType: UrlType = UrlType.path;
-    advice: ConstructorType<RootRouter>[] = []
+    advice: ConstructorType<Router>[] = []
 
-    constructor(public rootRouter: ConstructorType<RootRouter>) {
+    constructor(public rootRouter: ConstructorType<Router>) {
     }
 
     setSelector(selector: string): SimOption {
@@ -26,7 +26,7 @@ export class SimOption {
         return this;
     }
 
-    setRootRouter(rootRouter: ConstructorType<RootRouter>): SimOption {
+    setRootRouter(rootRouter: ConstructorType<Router>): SimOption {
         this.rootRouter = rootRouter;
         return this;
     }

@@ -10,9 +10,16 @@ Single Page Application Framworks for Web
 * Provide a radically faster and widely accessible getting started experience for all front end.
 
 ## 🚀 Quick start cli
-  - npm init simple-boot-front projectname
-  - cd projectname
-  - npm run serve
+  ```shell
+  npm init simple-boot-front projectname
+  cd projectname
+  npm run serve
+  ```
+
+- Installation and Getting Started
+```
+npm install simple-boot-front
+```
 
 
 

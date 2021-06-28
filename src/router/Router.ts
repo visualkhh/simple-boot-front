@@ -17,9 +17,12 @@ export class Router extends SimBase {
         this._navigation = this._simstanceManager.getOrNewSim(Navigation)!
     }
 
+    // getExecuteModule(parentRouters: Router[]): RouterModule | undefined {
+    //
+    // }
     getExecuteModule(parentRouters: Router[]): RouterModule | undefined {
         const path = this._navigation.path;
-        const routerStrings = parentRouters.map(it => it.path || '')
+        const routerStrings = parentRouters.slice(1).map(it => it.path || '')
         const isRoot = this.isRootUrl(routerStrings, path)
         // console.log('getExecuteModule -> ', isRoot, parentRouters, routerStrings, path, this.path);
         if (isRoot) {
@@ -39,8 +42,8 @@ export class Router extends SimBase {
         }
     }
 
-    public isRootUrl(parentRoots: string[], hashUrl: string): boolean {
-        return hashUrl.startsWith(parentRoots.join('') + (this.path || ''))
+    public isRootUrl(parentRoots: string[], url: string): boolean {
+        return url.startsWith(parentRoots.join('') + (this.path || ''))
     }
 
     // my field find
@@ -51,10 +54,16 @@ export class Router extends SimBase {
         const fieldModule = (this[path] as ConstructorType<Module>)
         if (fieldModule) {
             return new RouterModule(this, this._simstanceManager.getOrNewSim(fieldModule))
+        // } else {
+        //     return new RouterModule(this, this._simstanceManager.getOrNewSim(fieldModule))
         }
     }
 
     public async canActivate(url: Url, module: RouterModule): Promise<RouterModule | ConstructorType<Module>> {
         return module;
+    }
+
+    public notFound(url: Url): ConstructorType<Module> | undefined {
+        return undefined;
     }
 }

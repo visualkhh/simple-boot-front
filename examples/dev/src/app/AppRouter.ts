@@ -6,26 +6,28 @@ import {Intents} from './features/intent/intents';
 import {Views} from "./features/view/views";
 import {Exception} from "./features/exception/exception";
 import {Aop} from "./features/aop/aop";
-import {RootRouter} from "simple-boot-front/router/RootRouter";
 import {Module} from "simple-boot-front/module/Module";
 import {ConstructorType} from "simple-boot-front/types/Types";
 import {Notfound} from "./features/errors/notfound/notfound";
 import {Forbidden} from "./features/errors/forbidden/forbidden";
 import {Url} from "simple-boot-front/model/Url";
 import {RouterModule} from "simple-boot-front/router/RouterModule";
+import {DocumentRouter} from "./features/documents/DocumentRouter";
+import {Router} from "simple-boot-front/router/Router";
 
 @Sim({scheme: 'layout-router'})
-export class AppRouter extends RootRouter {
+export class AppRouter extends Router {
     '' = Index;
-    'ajax' = Ajax;
-    'intent' = Intents;
-    'view' = Views;
-    'exception' = Exception;
-    'aop' = Aop;
-    'views' = Views;
+    '/' = Index;
+    '/ajax' = Ajax;
+    '/intent' = Intents;
+    '/view' = Views;
+    '/exception' = Exception;
+    '/aop' = Aop;
+    '/views' = Views;
 
     constructor() {
-        super(App);
+        super('', App, [DocumentRouter]);
     }
 
     async canActivate(url: Url, module: RouterModule): Promise<RouterModule | ConstructorType<Module>>{
