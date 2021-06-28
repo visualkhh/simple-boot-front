@@ -54,8 +54,6 @@ export class Router extends SimBase {
         const fieldModule = (this[path] as ConstructorType<Module>)
         if (fieldModule) {
             return new RouterModule(this, this._simstanceManager.getOrNewSim(fieldModule))
-        // } else {
-        //     return new RouterModule(this, this._simstanceManager.getOrNewSim(fieldModule))
         }
     }
 

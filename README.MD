@@ -1,5 +1,5 @@
 [![Single Page Application Framworks](assets/banner.png)](https://svelte.dev)
-[![npm version](https://img.shields.io/badge/npm-v1.0.40-blue)](https://www.npmjs.com/package/simple-boot-front) [![license](https://img.shields.io/badge/license-MIT-green)](LICENSE.md) [![Chat](https://img.shields.io/badge/discord-20%20online-brightgreen?logo=discord)](https://discord.gg/PW56dpns) [![Github](https://img.shields.io/badge/-github-black?logo=github)](https://github.com/visualkhh/simple-boot-front)
+[![npm version](https://img.shields.io/badge/npm-v1.0.41-blue)](https://www.npmjs.com/package/simple-boot-front) [![license](https://img.shields.io/badge/license-MIT-green)](LICENSE.md) [![Chat](https://img.shields.io/badge/discord-20%20online-brightgreen?logo=discord)](https://discord.gg/PW56dpns) [![Github](https://img.shields.io/badge/-github-black?logo=github)](https://github.com/visualkhh/simple-boot-front)
 
 Single Page Application Framworks for Web
 
@@ -51,17 +51,18 @@ npm install simple-boot-front
   * AppRouter.ts
     ```typescript
     @Sim({scheme: 'layout-router'})
-    export class AppRouter extends RootRouter {
+    export class AppRouter extends Router {
       '' = Index;
-      'ajax' = Ajax;
-      'intent' = Intents;
-      'view' = Views;
-      'exception' = Exception;
-      'aop' = Aop;
-      'views' = Views;
+      '/' = Index;
+      '/ajax' = Ajax;
+      '/intent' = Intents;
+      '/view' = Views;
+      '/exception' = Exception;
+      '/aop' = Aop;
+      '/views' = Views;
     
         constructor() {
-            super(App);
+            super('', App);
         }
     
         async canActivate(url: Url, module: RouterModule): Promise<RouterModule | ConstructorType<Module>>{
