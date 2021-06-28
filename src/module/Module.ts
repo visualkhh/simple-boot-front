@@ -20,7 +20,7 @@ import {getEventListener} from "../decorators/event/EventListener";
 export type RefModuleItem = {dest?: any, params: any[], callBack: Function };
 
 export class Module extends SimBase implements LifeCycle {
-    public router_outlet_id?: string;
+    public _router_outlet_id?: string;
     public id: string;
     public _refModule = new Map<string, Map<Module, RefModuleItem[]> >();
     public _scopes = new Map<string, RootScope>();
@@ -43,8 +43,8 @@ export class Module extends SimBase implements LifeCycle {
 
     private init() {
         if (this._option.template.search('\\[router-outlet\\]')) {
-            this.router_outlet_id = `___Module___router-outlet_${this.id}_${RandomUtils.uuid()}`
-            this._option.template = this._option.template.replace('[router-outlet]', ` id='${this.router_outlet_id}' `)
+            this._router_outlet_id = `___Module___router-outlet_${this.id}_${RandomUtils.uuid()}`
+            this._option.template = this._option.template.replace('[router-outlet]', ` id='${this._router_outlet_id}' `)
         }
     }
 

@@ -52,8 +52,8 @@ export class RouterManager implements Runnable {
                         if (!document.querySelector(`[module-id='${moduleObj?.id}']`)) {
                             this.render(moduleObj, document.querySelector(lastRouterSelector!));
                         }
-                        if (moduleObj?.router_outlet_id) {
-                            lastRouterSelector = '#'+moduleObj?.router_outlet_id;
+                        if (moduleObj?._router_outlet_id) {
+                            lastRouterSelector = '#'+moduleObj?._router_outlet_id;
                         } else {
                             lastRouterSelector = '#'+moduleObj?.id;
                         }
@@ -69,8 +69,6 @@ export class RouterManager implements Runnable {
                     routers.reverse().forEach(it => (this.simstanceManager?.getOrNewSim(it.module) as any)?._onInitedChild());
                 }
             })
-        // } else if (executeModule.router){
-            // this.renderer.render('404 not found')
         } else {
             // this.renderer.render('404 not found')
         }
@@ -98,7 +96,6 @@ export class RouterManager implements Runnable {
     }
 
    public render(module: Module | undefined, targetSelector: Node | null): boolean {
-        // console.log('render router --->', targetSelector)
         if (module && targetSelector) {
             (module as any)._onInit()
             module.setScope(new TargetNode(targetSelector, TargetNodeMode.child))

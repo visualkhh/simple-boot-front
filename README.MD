@@ -325,18 +325,14 @@ export class AppInfo extends Module {
      <input module-value="value">
      ```
      - **module-change-attr**: change value setAttribute
-       - script
-         - it: detect variable value
-         - attribute: element attribute
+       - value: script
      ```html
-     <img src="https://cdn.imweb.me/thumbnail/20190912/460132b4e4fce.jpg" module-change-attr="return {height: it, width: it}">
+     <img src="https://cdn.imweb.me/thumbnail/20190912/460132b4e4fce.jpg" module-change-attr="return {height: this.size, width: this.size}">
      ```
      - **module-change-style**: change value set Style
-       - script
-         - it: detect variable value
-         - style: element style
+       - value: script
      ```html
-     <div module-change-style="return {fontSize: `${it}px`, color: this.randomColor()}">hello</div>
+     <div module-change-style="return {fontSize: `${this.size}px`, color: this.randomColor()}">hello</div>
      ```
      - **router-active-class**: url === href attribute => class add 
        - value: add and remove class name
