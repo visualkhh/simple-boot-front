@@ -6,6 +6,7 @@ import html from "./ajax.html";
 import {Sim} from "simple-boot-front/decorators/SimDecorator";
 import {Module} from "simple-boot-front/module/Module";
 import {AjaxService} from "simple-boot-front/service/AjaxService";
+import {Intent} from "simple-boot-front/intent/Intent";
 
 @Sim({scheme: "ajax"})
 export class Ajax extends Module {
@@ -26,6 +27,10 @@ export class Ajax extends Module {
         if (this.profile && this.data) {
             this.profile.setUser(this.data.results[0]);
         }
+    }
+
+    goo(intent: Intent) {
+        console.log('-->', intent)
     }
 
     loadData() {

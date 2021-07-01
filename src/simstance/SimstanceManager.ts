@@ -35,7 +35,8 @@ export class SimstanceManager implements Runnable {
     }
 
     getSimConfig(scheme: string | undefined): SimAtomic<any>[] {
-        return this.getSimAtomics().filter(it => scheme && it && scheme === it?.config?.scheme) || [];
+        const newVar = this.getSimAtomics().filter(it => scheme && it && scheme === it?.config?.scheme) || [];
+        return newVar;
     }
 
     // this.resolve(k) exception 내야하나..? throws... 안쪽에서 undifined해야되는거 아닌가?

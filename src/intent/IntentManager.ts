@@ -27,7 +27,7 @@ export class IntentManager implements Runnable {
         let orNewSim = this.simstanceManager?.getOrNewSim(key) as any;
         if (orNewSim) {
             // console.log('-->', orNewSim, it.paths)
-            if (it.paths.length > 1) {
+            if (it.paths.length > 0) {
                 let callthis = orNewSim;
                 let lastProp = '';
                 it.paths.filter(i => i).forEach(i => {

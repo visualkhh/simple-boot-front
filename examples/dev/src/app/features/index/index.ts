@@ -7,6 +7,7 @@ import {View} from "simple-boot-front/service/view/View";
 import {Renderer} from "simple-boot-front/render/Renderer";
 import {SimstanceManager} from "simple-boot-front/simstance/SimstanceManager";
 import {Navigation} from "simple-boot-front/service/Navigation";
+import {Intent} from "simple-boot-front/intent/Intent";
 
 @Sim({scheme: 'index'})
 export class Index extends Module {
@@ -55,6 +56,7 @@ export class Index extends Module {
             Math.floor(RandomUtils.random(1, 400)),
             Math.floor(RandomUtils.random(1, 400))
         ];
+        this.publish(new Intent<any, Event>('ajax://goo', this.numbers));
     }
 
     thisDataChange() {

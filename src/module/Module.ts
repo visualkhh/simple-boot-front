@@ -43,7 +43,7 @@ export class Module extends SimBase implements LifeCycle {
 
     private init() {
         if (this._option.template.search('\\[router-outlet\\]')) {
-            this._router_outlet_id = `___Module___router-outlet_${this.id}_${RandomUtils.uuid()}`
+            this._router_outlet_id = `___Module__${this.constructor.name}_router-outlet_${this.id}_${RandomUtils.uuid()}`
             this._option.template = this._option.template.replace('[router-outlet]', ` id='${this._router_outlet_id}' `)
         }
     }
@@ -105,11 +105,6 @@ export class Module extends SimBase implements LifeCycle {
         })
     }
 
-    // public findChildAttributeElements<E extends Element>(attr: string, rootElement = document.querySelector(this.selector)) {
-    //     if (!rootElement) return
-    //     return rootElement.querySelectorAll<E>(`[${attr}]`)
-    // }
-
     private _onInit() {
         this.onInit()
     }
@@ -138,13 +133,10 @@ export class Module extends SimBase implements LifeCycle {
 
     public addEvent(rootElement: DocumentFragment) {
         if (!rootElement) return
-
-
         ['click', 'change', 'keyup', 'keydown', 'input'].forEach(it => {
             this.setEvent(it, rootElement);
             this.setIntentEvent(it, rootElement);
         });
-
         // value
         this.procAttr<HTMLInputElement>(rootElement, 'module-value', (it, attribute) => {
             if (attribute && this.getValue(attribute)) {
@@ -155,7 +147,6 @@ export class Module extends SimBase implements LifeCycle {
                 }
             }
         })
-
         // link
         this.procAttr<HTMLInputElement>(rootElement, 'module-value-link', (it, varName) => {
             if (varName && this.getValue(varName)) {
@@ -166,7 +157,6 @@ export class Module extends SimBase implements LifeCycle {
                         this.setValue(varName, it.value)
                     }
                 })
-
                 if (typeof this.getValue(varName) === 'function') {
                     it.value = this.getValue(varName);
                 } else {
@@ -179,8 +169,6 @@ export class Module extends SimBase implements LifeCycle {
                 });
             }
         })
-
-
         // attribute
         this.procAttr(rootElement, 'module-change-attr', (it, attribute) => {
             const varNames = new Set(Scope.usingThisVar(attribute ?? ''));
@@ -199,7 +187,6 @@ export class Module extends SimBase implements LifeCycle {
                 });
             })
         })
-
         // style
         this.procAttr(rootElement, 'module-change-style', (it, attribute) => {
             const varNames = new Set(Scope.usingThisVar(attribute ?? ''));
@@ -217,7 +204,6 @@ export class Module extends SimBase implements LifeCycle {
                 });
             })
         })
-
         // router-link
         this.procAttr(rootElement, 'router-link', (it, attribute) => {
             fromEvent<Event>(it, 'click').subscribe(eit => {
@@ -277,9 +263,7 @@ export class Module extends SimBase implements LifeCycle {
     }
 
     public renderToScope(varName: string) {
-        // console.log('--->', varName, this._scopes)
         this._scopes.forEach(it => this._renderer?.renderToScope(it, this, varName));
-        // this.findModuleField().forEach(it => it.renderToScope(varName));
     }
 
     public renderWrap() {
@@ -301,7 +285,6 @@ export class Module extends SimBase implements LifeCycle {
                 }
             }
         })
-
         this._scopes.forEach(it => this._renderer?.renderToByScopes(it, this));
         this._onChangedRender();
     }

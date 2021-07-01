@@ -1,6 +1,6 @@
 {
   "name": "simple-boot-front",
-  "version": "1.0.41",
+  "version": "1.0.42",
   "main": "SimpleApplication.js",
   "license": "MIT",
   "description": "front end SPA frameworks",
