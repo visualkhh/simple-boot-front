@@ -1,8 +1,7 @@
-import {Sim} from "simple-boot-front/decorators/SimDecorator";
+import {Sim} from 'simple-boot-core/decorators/SimDecorator';
 
 @Sim()
 export class TestService {
-
     constructor() {
         console.log('testService Constructor')
     }

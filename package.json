@@ -31,7 +31,8 @@
     "url": "https://github.com/visualkhh/simple-boot-front"
   },
   "workspaces": [
-    "examples/dev"
+    "examples/dev",
+    "templates/parcel-bundler"
   ],
   "jest": {
     "transform": {
