@@ -1,20 +1,20 @@
-import {Module} from '../module/Module'
-import {SimstanceManager} from '../simstance/SimstanceManager'
-import {ConstructorType} from '../types/Types'
-import {Renderer} from '../render/Renderer'
-import {SimGlobal} from '../global/SimGlobal';
-import {Sim} from '../decorators/SimDecorator';
-import {getTargetAndIncludeNullAndSortExceptionHandlers} from '../decorators/exception/ExceptionDecorator';
-import {SimOption} from '../option/SimOption';
-import {getProtoAfters, getProtoBefores} from '../decorators/aop/AOPDecorator';
-import {ObjectUtils} from '../util/object/ObjectUtils';
+import {Module} from 'simple-boot-core/module/Module'
+import {SimstanceManager} from 'simple-boot-core/simstance/SimstanceManager'
+import {ConstructorType} from 'simple-boot-core/types/Types'
+import {SimGlobal} from 'simple-boot-core/global/SimGlobal';
+import {getTargetAndIncludeNullAndSortExceptionHandlers} from 'simple-boot-core/decorators/exception/ExceptionDecorator';
+import {SimFrontOption} from '../option/SimFrontOption';
+import {getProtoAfters, getProtoBefores} from 'simple-boot-core/decorators/aop/AOPDecorator';
+import {ObjectUtils} from 'simple-boot-core/utils/object/ObjectUtils';
+import {SimProxy} from 'simple-boot-core/proxy/SimProxy';
+import {FrontModule} from '../module/FrontModule';
 
-@Sim()
-export class SimProxyHandler implements ProxyHandler<any> {
+export class SimFrontProxyHandler extends SimProxy {
     private simstanceManager?: SimstanceManager;
 
-    constructor(private simOption: SimOption, private renderer: Renderer) {
-        this.simstanceManager = SimGlobal.application?.simstanceManager;
+    constructor(private simOption: SimFrontOption) {
+        super()
+        this.simstanceManager = SimGlobal().application?.simstanceManager;
     }
 
     public get(target: any, name: string): any {
@@ -24,24 +24,14 @@ export class SimProxyHandler implements ProxyHandler<any> {
     }
 
     public set(obj: any, prop: string, value: any): boolean {
-        // console.log('proxy set-->')
-        value = this.simstanceManager?.proxy(value, Module)
-        // this.aopBefore(AOPAction.set, obj, prop, value);
-        obj[prop] = value
-        // this.aopAfter(AOPAction.set, obj, prop, value);
-        /*
-        if ('isProxy' in obj && obj instanceof Module) {
-            obj.render()
-        } else if
-         */
-        if (obj instanceof Module) {
+        if (obj instanceof FrontModule) {
             // 참조하는 Module에 리턴시켜준다.
             obj._refModule.get(prop)?.forEach((it, val) => {
                 it.forEach(sit => sit.callBack.apply(val, sit.params));
             });
             try {
                 const sim = this.simstanceManager?.getOrNewSim(obj.constructor as ConstructorType<Module>)
-                if (sim) {
+                if (sim && sim instanceof FrontModule) {
                     sim.renderToScope(prop)
                 } else {
                     obj.renderToScope(prop)
@@ -49,17 +39,7 @@ export class SimProxyHandler implements ProxyHandler<any> {
             } catch (e) {
                 obj.renderToScope(prop)
             }
-
-            // const formatMetadataKey = Symbol('ChildView');
-            // const metadata = Reflect.metadata(formatMetadataKey, obj);
-            // console.log('--->', metadata);
         }
-        // for (const key in obj) {
-        //     if (obj[key] instanceof Module) {
-        //         obj[key].render();
-        //     }
-        // }
-
         return true
     }
 
@@ -124,12 +104,5 @@ export class SimProxyHandler implements ProxyHandler<any> {
                 })
             }
         }
-    }
-
-    has(target: any, key: PropertyKey): boolean {
-        if (key === 'isProxy') {
-            return true
-        }
-        return key in target
     }
 }

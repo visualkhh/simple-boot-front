@@ -1,42 +1,40 @@
 import {Renderer} from '../render/Renderer'
-import {LifeCycle} from '../module/LifeCycle'
 import {fromEvent} from 'rxjs';
 import {View} from '../service/view/View'
-import {RandomUtils} from '../util/random/RandomUtils'
-import {SimBase} from '../base/SimBase';
-import {FunctionUtils} from '../util/function/FunctionUtils';
-import {Intent} from '../intent/Intent';
-import {SimGlobal} from '../global/SimGlobal';
+import {RandomUtils} from 'simple-boot-core/utils/random/RandomUtils'
+import {FunctionUtils} from 'simple-boot-core/utils/function/FunctionUtils';
+import {Intent} from 'simple-boot-core/intent/Intent';
+import {SimGlobal} from 'simple-boot-core/global/SimGlobal';
 import {Navigation} from '../service/Navigation';
 import {RootScope, TargetNode} from '../render/compile/RootScope';
-import {ModuleOption} from './ModuleOption';
-import {ConstructorType} from '../types/Types';
-import {ScopeRawSet} from "../render/compile/ScopeRawSet";
-import {DomUtils} from "../util/dom/DomUtils";
-import {Scope} from "../render/compile/Scope";
-import {ObjectUtils} from "../util/object/ObjectUtils";
-import {getEventListener} from "../decorators/event/EventListener";
+import {FrontModuleOption} from './FrontModuleOption';
+import {ConstructorType} from 'simple-boot-core/types/Types';
+import {ScopeRawSet} from '../render/compile/ScopeRawSet';
+import {DomUtils} from '../utils/dom/DomUtils';
+import {Scope} from '../render/compile/Scope';
+import {ObjectUtils} from 'simple-boot-core/utils/object/ObjectUtils';
+import {getEventListener} from 'simple-boot-core/decorators/event/EventListener';
+import {Module} from 'simple-boot-core/module/Module';
 
-export type RefModuleItem = {dest?: any, params: any[], callBack: Function };
+export type RefModuleItem = { dest?: any, params: any[], callBack: Function };
 
-export class Module extends SimBase implements LifeCycle {
+export class FrontModule extends Module {
     public _router_outlet_id?: string;
     public id: string;
-    public _refModule = new Map<string, Map<Module, RefModuleItem[]> >();
+    public _refModule = new Map<string, Map<FrontModule, RefModuleItem[]>>();
     public _scopes = new Map<string, RootScope>();
-    public _option: ModuleOption
+    public _option: FrontModuleOption
     public value: any;
     private _renderer: Renderer;
     private _navigation: Navigation;
 
-    constructor(option: { template?: string, styleImports?: string[], modules?: { [name: string]: ConstructorType<Module> }, value?: any, name?: string } = {}) {
+    constructor(option: { template?: string, styleImports?: string[], modules?: { [name: string]: ConstructorType<FrontModule> }, value?: any, name?: string } = {}) {
         super();
-        this._renderer = SimGlobal.application?.simstanceManager.getOrNewSim(Renderer)!
-        this._navigation = SimGlobal.application?.simstanceManager.getOrNewSim(Navigation)!
+        this._renderer = SimGlobal().application?.simstanceManager.getOrNewSim(Renderer)!
+        this._navigation = SimGlobal().application?.simstanceManager.getOrNewSim(Navigation)!
         // default option
         this.value = option.value;
-        this._option = Object.assign(new ModuleOption(), option)
-        this._option.template = this._option.template
+        this._option = Object.assign(new FrontModuleOption(), option)
         this.id = `___Module__${this.constructor.name}_${RandomUtils.uuid()}`
         this.init();
     }
@@ -163,7 +161,9 @@ export class Module extends SimBase implements LifeCycle {
                     it.value = this.getValue(varName);
                 }
                 this.pushAndCallBackRefModule(varName, {
-                    dest: it, params: [it, varName], callBack: (it: HTMLElement, varName: string) => {
+                    dest: it,
+                    params: [it, varName],
+                    callBack: (it: HTMLElement, varName: string) => {
                         (it as any).value = this.getValue(varName);
                     }
                 });
@@ -212,14 +212,14 @@ export class Module extends SimBase implements LifeCycle {
         })
     }
 
-    public pushRefModule(varName: string, refModuleItem: RefModuleItem, module: Module = this) {
+    public pushRefModule(varName: string, refModuleItem: RefModuleItem, module: FrontModule = this) {
         if (!this._refModule.get(varName)) {
             this._refModule.set(varName, new Map([[this, []]]));
         }
         this._refModule.get(varName)?.get(module)?.push(refModuleItem);
     }
 
-    public pushAndCallBackRefModule(varName: string, refModuleItem: RefModuleItem, module: Module = this) {
+    public pushAndCallBackRefModule(varName: string, refModuleItem: RefModuleItem, module: FrontModule = this) {
         this.pushRefModule(varName, refModuleItem, module);
         refModuleItem.callBack.apply(module, refModuleItem.params);
     }
@@ -236,7 +236,7 @@ export class Module extends SimBase implements LifeCycle {
     public onFinish() {
     }
 
-    public refModuleClean(){
+    public refModuleClean() {
         this._refModule.forEach((it, itk) => {
             it.forEach((sit, sitk) => {
                 const filter = sit.filter(sitem => sitem.dest === undefined || sitem.dest.isConnected === true)
@@ -277,7 +277,7 @@ export class Module extends SimBase implements LifeCycle {
                 const front = s.slice(0, s.length - i)
                 const frontEnd = this.getValue(front[front.length - 1]);
                 const tailEnd = tail[tail.length - 1];
-                if (frontEnd instanceof Module && tailEnd) {
+                if (frontEnd instanceof FrontModule && tailEnd) {
                     if (!frontEnd._refModule.get(tailEnd)) {
                         frontEnd._refModule.set(tailEnd, new Map([[this, []]]));
                     }
@@ -308,7 +308,6 @@ export class Module extends SimBase implements LifeCycle {
     public getTemplateSelector(scope_uuid: string): string {
         return `#${this.id}[module-scope='${scope_uuid}']`;
     }
-
 
     public getTemplateElementString(scope_uuid: string): string {
         return `<template id="${this.id}" module-scope="${scope_uuid}"></template>`

@@ -1,6 +1,6 @@
-import {Module} from "simple-boot-front/module/Module";
+import {FrontModule} from "simple-boot-front/module/Module";
 import {RandomUtils} from "simple-boot-front/util/random/RandomUtils";
-export class Title extends Module {
+export class Title extends FrontModule {
     public datas = [1,23,44]
     aa() {
         this.value = Math.floor(RandomUtils.random(1,55))

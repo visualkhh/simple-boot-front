@@ -1,11 +1,11 @@
-import {Sim} from '../decorators/SimDecorator'
-import {SimOption, UrlType} from '../option/SimOption';
-import {LocationUtils} from '../util/window/LocationUtils';
+import {Sim} from 'simple-boot-core/decorators/SimDecorator'
+import {SimFrontOption, UrlType} from '../option/SimFrontOption';
+import {LocationUtils} from '../utils/window/LocationUtils';
 import {Url} from '../model/Url';
 
 @Sim()
 export class Navigation {
-    constructor(private option: SimOption) {
+    constructor(private option: SimFrontOption) {
     }
 
     get path(): string {
@@ -36,7 +36,7 @@ export class Navigation {
         if (UrlType.path === this.option.urlType) {
             history.pushState(data, title, path)
         } else if (UrlType.hash === this.option.urlType) {
-            path = '#'+ path.substring(1)
+            path = '#' + path.substring(1)
             history.pushState(data, title, path)
         }
         window.dispatchEvent(new Event('popstate'));

@@ -1,8 +1,7 @@
-import {Runnable} from '../../run/Runnable';
-import {ScopePosition} from './ScopePosition';
-import {RandomUtils} from '../../util/random/RandomUtils';
+import {Runnable} from 'simple-boot-core/run/Runnable';
+import {RandomUtils} from 'simple-boot-core/utils/random/RandomUtils';
 import {RootScope} from './RootScope';
-import {ScopeRawSet} from "./ScopeRawSet";
+import {ScopeRawSet} from './ScopeRawSet';
 
 export class SimCompiler implements Runnable {
     public root: RootScope | undefined;

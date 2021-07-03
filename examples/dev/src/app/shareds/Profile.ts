@@ -1,5 +1,5 @@
 import {User} from "../models/UserResponse";
-import {Module} from "simple-boot-front/module/Module";
+import {FrontModule} from "simple-boot-front/module/FrontModule";
 
 const styleImports = [
     `
@@ -26,7 +26,7 @@ const template = `
 </div>
 `;
 
-export class Profile extends Module {
+export class Profile extends FrontModule {
     private data: User | undefined;
 
     constructor() {

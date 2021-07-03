@@ -1,6 +1,6 @@
 import {ScopeObject} from './ScopeObject';
 import {ScopePosition} from './ScopePosition';
-import {RandomUtils} from '../../util/random/RandomUtils';
+import {RandomUtils} from 'simple-boot-core/utils/random/RandomUtils';
 import {ScopeResultSet} from './ScopeResultSet';
 
 export class Scope {

@@ -1,7 +1,7 @@
 import css from "./exception.css";
 import html from "./exception.html";
 import {PostConstruct, Sim} from "simple-boot-front/decorators/SimDecorator";
-import {Module} from "simple-boot-front/module/Module";
+import {FrontModule} from "simple-boot-front/module/Module";
 import {AjaxService} from "simple-boot-front/service/AjaxService";
 import {View} from "simple-boot-front/service/view/View";
 import {RandomUtils} from "simple-boot-front/util/random/RandomUtils";
@@ -11,7 +11,7 @@ import {SimError} from "simple-boot-front/throwable/SimError";
 import {RouterError} from "simple-boot-front/throwable/RouterError";
 
 @Sim()
-export class Exception extends Module {
+export class Exception extends FrontModule {
     data = 1
 
     constructor(public ajax: AjaxService) {

@@ -1,13 +1,11 @@
-import css from "./document.css"
+import css from './document.css'
 import html from './document.html'
-import {Module} from "simple-boot-front/module/Module";
-import {Sim} from "simple-boot-front/decorators/SimDecorator";
+import {FrontModule} from 'simple-boot-front/module/FrontModule';
+import {Sim} from 'simple-boot-core/decorators/SimDecorator';
 
 @Sim()
-export class Document extends Module {
-
+export class Document extends FrontModule {
     constructor() {
         super({template: html, styleImports: [css]});
     }
-
 }

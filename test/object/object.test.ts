@@ -3,19 +3,19 @@
 // import css from "./app.css"
 
 
-import {Module} from "../../src/module/Module";
+import {FrontModule} from "../../src/module/Module";
 import {ObjectUtils} from "../../src/util/object/ObjectUtils";
 
-export class Test extends Module {
+export class Test extends FrontModule {
 
 }
 
 describe('object-test', () => {
 
     test('object', async (done) => {
-        console.log(new Test() instanceof Module)
+        console.log(new Test() instanceof FrontModule)
 
-        console.log(ObjectUtils.isPrototypeOfTarget(Module, new Test()))
+        console.log(ObjectUtils.isPrototypeOfTarget(FrontModule, new Test()))
         done()
     })
 

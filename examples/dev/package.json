@@ -1,5 +1,5 @@
 {
-  "name": "simple-boot-front-exsample-parcel-bundler",
+  "name": "dev",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
@@ -44,6 +44,7 @@
   },
   "dependencies": {
     "bootstrap": "^5.0.0-beta3",
+    "simple-boot-front": "1.0.42",
     "typescript": "^4.2.3"
   }
 }

@@ -1,14 +1,8 @@
-import css from "./app.css"
-import html from './app.html'
-import {Module} from "simple-boot-front/module/Module";
-import {Sim} from "simple-boot-front/decorators/SimDecorator";
-import {AjaxService} from "simple-boot-front/service/AjaxService";
-import {SimstanceManager} from "simple-boot-front/simstance/SimstanceManager";
-import {Intent} from 'simple-boot-front/intent/Intent';
-import {Renderer} from 'simple-boot-front/render/Renderer';
+import {FrontModule} from "simple-boot-front/module/FrontModule";
+import {Intent} from 'simple-boot-core/intent/Intent';
 import {View} from "simple-boot-front/service/view/View";
 
-export class AppInfo extends Module {
+export class AppInfo extends FrontModule {
     datas = 'default data';
 
     constructor() {

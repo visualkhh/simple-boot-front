@@ -1,12 +1,12 @@
 import css from "./app.css"
 import html from './app.html'
-import {Module} from "simple-boot-front/module/Module";
+import {FrontModule} from "simple-boot-front/module/Module";
 import {Sim} from "simple-boot-front/decorators/SimDecorator";
 import {AjaxService} from "simple-boot-front/service/AjaxService";
 import {SimstanceManager} from "simple-boot-front/simstance/SimstanceManager";
 
 @Sim({scheme: 'layout'})
-export class App extends Module {
+export class App extends FrontModule {
     constructor(public ajaxService: AjaxService, public simstance: SimstanceManager) {
         super({template: html, styleImports:[css]});
     }

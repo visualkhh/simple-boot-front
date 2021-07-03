@@ -3,7 +3,7 @@
 // import css from "./app.css"
 
 import {Renderer} from "../../src/render/Renderer";
-import {SimOption} from "../../src/option/SimOption";
+import {SimFrontOption} from "../../src/option/SimOption";
 import {ConstructorType} from "../../src/types/Types";
 import {Router} from "../../src/router/Router";
 import {SimCompiler} from "../../src/render/compile/SimCompiler";

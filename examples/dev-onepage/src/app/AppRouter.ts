@@ -3,7 +3,7 @@ import {App} from "./layouts/App";
 import {Sim} from "simple-boot-front/decorators/SimDecorator";
 
 import {Router} from "simple-boot-front/router/Router";
-import {Module} from "simple-boot-front/module/Module";
+import {FrontModule} from "simple-boot-front/module/Module";
 import {ConstructorType} from "simple-boot-front/types/Types";
 import {Url} from "simple-boot-front/model/Url";
 import {Notfound} from "../../../dev/src/app/features/errors/notfound/notfound";
@@ -19,7 +19,7 @@ export class AppRouter extends Router {
         super('', App);
     }
 
-    async canActivate(url: Url, module: RouterModule): Promise<RouterModule | ConstructorType<Module>> {
+    async canActivate(url: Url, module: RouterModule): Promise<RouterModule | ConstructorType<FrontModule>> {
         if (url.path === 'views' && url.params.get('auth') === 'false') {
             return Forbidden;
         } else {
@@ -27,7 +27,7 @@ export class AppRouter extends Router {
         }
     }
 
-    notFound(url: Url): ConstructorType<Module> {
+    notFound(url: Url): ConstructorType<FrontModule> {
         console.log('notfound --> ', url.path)
         return Notfound;
     }

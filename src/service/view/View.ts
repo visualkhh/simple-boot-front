@@ -1,9 +1,9 @@
 import {fromEvent, Observable} from 'rxjs';
-import {Module} from '../../module/Module';
-import {FromEventTarget} from "rxjs/internal/observable/fromEvent";
+import {FrontModule} from '../../module/FrontModule';
+import {FromEventTarget} from 'rxjs/internal/observable/fromEvent';
 
 export class View<T extends Element> {
-    constructor(private _e: T | FromEventTarget<any> | string, public module?: Module) {
+    constructor(private _e: T | FromEventTarget<any> | string, public module?: FrontModule) {
     }
 
     event<T>(eventName: string): Observable<T> {
@@ -15,10 +15,10 @@ export class View<T extends Element> {
     }
 
     get e() {
-        if (typeof this._e === 'string'  && this.module) {
+        if (typeof this._e === 'string' && this.module) {
             const selector = `[module-id='${this.module.id}']`;
             return (document.querySelector<T>(`*${selector} ${this._e}`) ?? document.querySelector<T>(`${this._e}${selector}`)) !;
-        } else if(typeof this._e === 'string') {
+        } else if (typeof this._e === 'string') {
             return document.querySelector<T>(this._e)!;
         } else {
             return this._e;

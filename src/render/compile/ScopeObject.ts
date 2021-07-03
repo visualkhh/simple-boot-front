@@ -1,14 +1,14 @@
-import {RandomUtils} from '../../util/random/RandomUtils';
+import {RandomUtils} from 'simple-boot-core/utils/random/RandomUtils';
 import {ScopeResultSet} from './ScopeResultSet';
-import {Module} from '../../module/Module';
+import {FrontModule} from '../../module/FrontModule';
 import {TargetNode, TargetNodeMode} from './RootScope';
-import {SimGlobal} from "../../global/SimGlobal";
-import {ModuleOption} from "../../module/ModuleOption";
+import {SimGlobal} from 'simple-boot-core/global/SimGlobal';
+import {FrontModuleOption} from '../../module/FrontModuleOption';
 
 export type ScopeObjectCalls = {name: string, parameter: any[], result: any}[];
 export class ScopeObject {
-    declare _dynamicModule: Map<string, Module[]>;
-    declare _option: ModuleOption
+    declare _dynamicModule: Map<string, FrontModule[]>;
+    declare _option: FrontModuleOption
     public calls: ScopeObjectCalls = [];
     [name: string]: any;
     public writes = '';
@@ -55,11 +55,10 @@ export class ScopeObject {
         `).bind(scope)();
     }
 
-
     public newSimOrAddDynamicModule(moduleName: string) {
         const module = this._option.modules[moduleName];
         if (module) {
-            const newSim = SimGlobal.application?.simstanceManager.newSim(module)
+            const newSim = SimGlobal().application?.simstanceManager.newSim(module)
             if (newSim) {
                 return newSim;
             }
@@ -70,7 +69,7 @@ export class ScopeObject {
         this.writes += str;
     }
 
-    public moduleWriteAndSetScope(module: Module) {
+    public moduleWriteAndSetScope(module: FrontModule) {
         if (module) {
             const uuid = RandomUtils.uuid();
             const targetSelecotr = module.getTemplateSelector(uuid)

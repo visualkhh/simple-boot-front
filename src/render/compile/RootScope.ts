@@ -2,7 +2,7 @@ import {Scope} from './Scope';
 import {ScopePosition} from './ScopePosition';
 import {ScopeRawSet} from './ScopeRawSet';
 import {ScopeResultSet} from './ScopeResultSet';
-import {RandomUtils} from '../../util/random/RandomUtils';
+import {RandomUtils} from 'simple-boot-core/utils/random/RandomUtils';
 
 export enum TargetNodeMode {
     // eslint-disable-next-line no-unused-vars

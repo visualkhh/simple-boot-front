@@ -3,19 +3,19 @@ import { Profile } from "../../shareds/Profile";
 import { ProjectService } from "../../services/ProjectService";
 import css from "./exception.css";
 import html from "./exception.html";
-import {PostConstruct, Sim} from "simple-boot-front/decorators/SimDecorator";
-import {Module} from "simple-boot-front/module/Module";
+import {PostConstruct, Sim} from "simple-boot-core/decorators/SimDecorator";
+import {FrontModule} from "simple-boot-front/module/FrontModule";
 import {AjaxService} from "simple-boot-front/service/AjaxService";
 import {View} from "simple-boot-front/service/view/View";
-import {RandomUtils} from "simple-boot-front/util/random/RandomUtils";
-import {ExceptionHandler} from "simple-boot-front/decorators/exception/ExceptionDecorator";
-import {SimNoSuch} from "simple-boot-front/throwable/SimNoSuch";
-import {SimError} from "simple-boot-front/throwable/SimError";
+import {RandomUtils} from 'simple-boot-core/utils/random/RandomUtils';
+import {ExceptionHandler} from "simple-boot-core/decorators/exception/ExceptionDecorator";
+import {SimNoSuch} from "simple-boot-core/throwable/SimNoSuch";
+import {SimError} from "simple-boot-core/throwable/SimError";
 import {RouterError} from "simple-boot-front/throwable/RouterError";
 import {RouterNotFount} from "simple-boot-front/throwable/RouterNotFount";
 
 @Sim()
-export class Exception extends Module {
+export class Exception extends FrontModule {
     data = 1
     constructor(public projectService: ProjectService, public ajax: AjaxService) {
         super({template: html, styleImports:[css]});

@@ -2,8 +2,6 @@
 // import * as request from 'supertest'
 import {of} from 'rxjs'
 import {mergeMap} from 'rxjs/operators'
-import {ObjectUtils} from "../src/util/object/ObjectUtils";
-// import {Index} from '@src/app/features/index'
 
 describe('Test', () => {
     test('rxjs test', async (done) => {

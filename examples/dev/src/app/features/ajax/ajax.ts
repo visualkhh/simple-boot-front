@@ -1,20 +1,20 @@
-import { UserResponse } from "../../models/UserResponse";
-import { Profile } from "../../shareds/Profile";
-import { ProjectService } from "../../services/ProjectService";
-import css from "./ajax.css";
-import html from "./ajax.html";
-import {Sim} from "simple-boot-front/decorators/SimDecorator";
-import {Module} from "simple-boot-front/module/Module";
-import {AjaxService} from "simple-boot-front/service/AjaxService";
-import {Intent} from "simple-boot-front/intent/Intent";
+import {UserResponse} from '../../models/UserResponse';
+import {Profile} from '../../shareds/Profile';
+import {ProjectService} from '../../services/ProjectService';
+import css from './ajax.css';
+import html from './ajax.html';
+import {Sim} from 'simple-boot-core/decorators/SimDecorator';
+import {FrontModule} from 'simple-boot-front/module/FrontModule';
+import {AjaxService} from 'simple-boot-front/service/AjaxService';
+import {Intent} from 'simple-boot-core/intent/Intent';
 
-@Sim({scheme: "ajax"})
-export class Ajax extends Module {
-
+@Sim({scheme: 'ajax'})
+export class Ajax extends FrontModule {
     public data: UserResponse | undefined;
     public profile: Profile | undefined;
+
     constructor(public projectService: ProjectService, public ajax: AjaxService) {
-        super({template: html, styleImports:[css]});
+        super({template: html, styleImports: [css]});
     }
 
     onInit() {
@@ -35,7 +35,7 @@ export class Ajax extends Module {
 
     loadData() {
         this.ajax
-            .getJson<UserResponse>("https://randomuser.me/api/")
+            .getJson<UserResponse>('https://randomuser.me/api/')
             .subscribe((it) => {
                 this.data = it;
                 if (this.profile && this.data.results && this.data.results.length > 0) {

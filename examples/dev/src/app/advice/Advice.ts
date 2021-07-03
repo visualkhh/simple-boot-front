@@ -1,9 +1,12 @@
-import {Sim} from "simple-boot-front/decorators/SimDecorator";
-import {ExceptionHandler} from "simple-boot-front/decorators/exception/ExceptionDecorator";
-import {After, Before} from "simple-boot-front/decorators/aop/AOPDecorator";
+import {Sim} from "simple-boot-core/decorators/SimDecorator";
+import {ExceptionHandler} from "simple-boot-core/decorators/exception/ExceptionDecorator";
+import {After, Before} from "simple-boot-core/decorators/aop/AOPDecorator";
 import {Aop} from "../features/aop/aop";
 @Sim()
 export class Advice {
+    constructor() {
+        console.log('-Advice-->?')
+    }
 
     @ExceptionHandler()
     public exception0(e: any) {

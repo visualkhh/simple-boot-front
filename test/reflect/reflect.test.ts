@@ -3,11 +3,11 @@
 // import css from "./app.css"
 
 
-import {Module} from "../../src/module/Module";
+import {FrontModule} from "../../src/module/Module";
 import {Renderer} from "../../src/render/Renderer";
 import {ReflectUtils} from "../../src/util/reflect/ReflectUtils";
 
-export class ZTitle extends Module {
+export class ZTitle extends FrontModule {
 
     constructor(render: Renderer) {
         super();

@@ -1,6 +1,6 @@
 import html from "./index.html";
 import {PostConstruct, Sim} from "simple-boot-front/decorators/SimDecorator";
-import {Module} from "simple-boot-front/module/Module";
+import {FrontModule} from "simple-boot-front/module/Module";
 import {ViewService} from "simple-boot-front/service/view/ViewService";
 import {RandomUtils} from "simple-boot-front/util/random/RandomUtils";
 import {View} from "simple-boot-front/service/view/View";
@@ -17,19 +17,19 @@ import {CTitle} from "./CTitle";
 import {EventListener, EventListenerOption} from "simple-boot-front/decorators/event/EventListener";
 
 @Sim({scheme: 'index'})
-export class Index extends Module {
+export class Index extends FrontModule {
     data = "default data";
     thisData = 5151;
     count = 0;
     size = 10;
 
-    public title2 = new class extends Module {
+    public title2 = new class extends FrontModule {
         constructor() {
             super({value: '4444444'});
         }
     }();
 
-    public numbers = new class extends Module {
+    public numbers = new class extends FrontModule {
         constructor() {
             super({
                 template: `

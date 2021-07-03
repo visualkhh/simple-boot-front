@@ -1,24 +1,24 @@
 import html from "./index.html";
-import {PostConstruct, Sim} from "simple-boot-front/decorators/SimDecorator";
-import {Module} from "simple-boot-front/module/Module";
+import {PostConstruct, Sim} from "simple-boot-core/decorators/SimDecorator";
+import {FrontModule} from "simple-boot-front/module/FrontModule";
 import {ViewService} from "simple-boot-front/service/view/ViewService";
-import {RandomUtils} from "simple-boot-front/util/random/RandomUtils";
+import {RandomUtils} from "simple-boot-core/utils/random/RandomUtils";
 import {View} from "simple-boot-front/service/view/View";
 import {Renderer} from "simple-boot-front/render/Renderer";
-import {SimstanceManager} from "simple-boot-front/simstance/SimstanceManager";
+import {SimstanceManager} from "simple-boot-core/simstance/SimstanceManager";
 import {Navigation} from "simple-boot-front/service/Navigation";
-import {Intent} from "simple-boot-front/intent/Intent";
+import {Intent} from "simple-boot-core/intent/Intent";
 
 @Sim({scheme: 'index'})
-export class Index extends Module {
+export class Index extends FrontModule {
     data = "default data";
     thisData = 5151;
-    public title = new class extends Module {
+    public title = new class extends FrontModule {
         constructor() {
             super({styleImports: ['/*[module-selector]*/ {color: red}'], value: ''});
         }
     }();
-    public numbers = new class extends Module {
+    public numbers = new class extends FrontModule {
         public value = [1, 2, 3];
 
         constructor() {

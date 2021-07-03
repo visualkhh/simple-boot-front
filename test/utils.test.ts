@@ -3,7 +3,7 @@
 // import {Index} from '@src/app/features/index'
 
 import {ObjectUtils} from "../src/util/object/ObjectUtils";
-import {Module} from "../src/module/Module";
+import {FrontModule} from "../src/module/Module";
 import {Router} from "../src/router/Router";
 
 describe('Test', () => {

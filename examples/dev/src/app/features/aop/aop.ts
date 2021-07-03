@@ -1,27 +1,27 @@
-import {ProjectService} from "../../services/ProjectService";
-import css from "./aop.css";
-import html from "./aop.html";
-import {PostConstruct, Sim} from "simple-boot-front/decorators/SimDecorator";
-import {Module} from "simple-boot-front/module/Module";
-import {AjaxService} from "simple-boot-front/service/AjaxService";
-import {View} from "simple-boot-front/service/view/View";
-import {RandomUtils} from "simple-boot-front/util/random/RandomUtils";
-import {ExceptionHandler} from "simple-boot-front/decorators/exception/ExceptionDecorator";
-import {SimNoSuch} from "simple-boot-front/throwable/SimNoSuch";
-import {SimError} from "simple-boot-front/throwable/SimError";
-import {RouterError} from "simple-boot-front/throwable/RouterError";
-import {After, Before} from "simple-boot-front/decorators/aop/AOPDecorator";
+import {ProjectService} from '../../services/ProjectService';
+import {PostConstruct, Sim} from 'simple-boot-core/decorators/SimDecorator';
+import {FrontModule} from 'simple-boot-front/module/FrontModule';
+import {AjaxService} from 'simple-boot-front/service/AjaxService';
+import {View} from 'simple-boot-front/service/view/View';
+import {RandomUtils} from 'simple-boot-core/utils/random/RandomUtils';
+import {ExceptionHandler} from 'simple-boot-core/decorators/exception/ExceptionDecorator';
+import {SimNoSuch} from 'simple-boot-core/throwable/SimNoSuch';
+import {SimError} from 'simple-boot-core/throwable/SimError';
+import {RouterError} from 'simple-boot-front/throwable/RouterError';
+import {After, Before} from 'simple-boot-core/decorators/aop/AOPDecorator';
+import css from './aop.css';
+import html from './aop.html';
 
 @Sim()
-export class Aop extends Module {
+export class Aop extends FrontModule {
     data = 1
+
     constructor(public projectService: ProjectService, public ajax: AjaxService) {
-        super({template: html, styleImports:[css]});
+        super({template: html, styleImports: [css]});
     }
 
     onInit() {
     }
-
 
     @PostConstruct
     post(projectService: ProjectService) {
@@ -47,8 +47,6 @@ export class Aop extends Module {
         console.log('-->', 'unkown method');
     }
 
-
-
     // @ExceptionHandler()
     // public exception0(e: any) {
     //     console.log('SimError exception:', e)
@@ -72,7 +70,4 @@ export class Aop extends Module {
     public exception2(e: any) {
         console.log('NoSuchSim exception:')
     }
-
-
-
 }

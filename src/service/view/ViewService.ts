@@ -1,4 +1,4 @@
-import {Sim} from '../../decorators/SimDecorator'
+import {Sim} from 'simple-boot-core/decorators/SimDecorator'
 import {View} from '../../service/view/View';
 
 @Sim()
