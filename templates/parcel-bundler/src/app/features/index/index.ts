@@ -1,11 +1,11 @@
 import html from './index.html';
-import {RandomUtils} from 'simple-boot-front/util/random/RandomUtils';
-import {SimstanceManager} from 'simple-boot-front/simstance/SimstanceManager';
 import {Navigation} from 'simple-boot-front/service/Navigation';
 import css from './index.css';
 import {TestService} from '../../services/TestService';
 import {FrontModule} from 'simple-boot-front/module/FrontModule';
 import {Sim} from 'simple-boot-core/decorators/SimDecorator';
+import {SimstanceManager} from 'simple-boot-core/simstance/SimstanceManager';
+import {RandomUtils} from 'simple-boot-core/utils/random/RandomUtils';
 
 @Sim({scheme: 'index'})
 export class Index extends FrontModule {
