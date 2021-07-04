@@ -1,7 +1,6 @@
 import {Router} from '../router/Router';
 import {SimOption} from 'simple-boot-core/SimOption';
 import {ConstructorType} from 'simple-boot-core/types/Types';
-import {SimFrontProxyHandler} from "../proxy/SimFrontProxyHandler";
 
 export enum UrlType {
     // eslint-disable-next-line no-unused-vars

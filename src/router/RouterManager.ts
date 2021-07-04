@@ -63,7 +63,7 @@ export class RouterManager implements Runnable {
                     //     targetModule = this.simstanceManager?.getOrNewSim(targetModule) as Module;
                     // }
                     // Module render
-                    let module = targetModule instanceof RouterModule ? targetModule.module : this.simstanceManager?.getOrNewSim(targetModule)!;
+                    const module = targetModule instanceof RouterModule ? targetModule.module : this.simstanceManager?.getOrNewSim(targetModule)!;
                     this.render(module, document.querySelector(lastRouterSelector!));
                     this.renderd();
                     (module as any)._onInitedChild();
