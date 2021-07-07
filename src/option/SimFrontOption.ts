@@ -1,4 +1,3 @@
-import {Router} from '../router/Router';
 import {SimOption} from 'simple-boot-core/SimOption';
 import {ConstructorType} from 'simple-boot-core/types/Types';
 
@@ -13,7 +12,7 @@ export class SimFrontOption extends SimOption {
     selector: string = '#app';
     urlType: UrlType = UrlType.path;
 
-    constructor(public rootRouter: ConstructorType<Router>, advice: ConstructorType<any>[]) {
+    constructor(advice: ConstructorType<any>[]) {
         super(advice);
     }
 
@@ -24,11 +23,6 @@ export class SimFrontOption extends SimOption {
 
     setUrlType(urlType: UrlType): SimFrontOption {
         this.urlType = urlType;
-        return this;
-    }
-
-    setRootRouter(rootRouter: ConstructorType<Router>): SimFrontOption {
-        this.rootRouter = rootRouter;
         return this;
     }
 }

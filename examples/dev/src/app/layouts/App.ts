@@ -1,9 +1,9 @@
-import css from "./app.css"
+import css from './app.css'
 import html from './app.html'
-import {FrontModule} from "simple-boot-front/module/FrontModule";
-import {Sim} from "simple-boot-core/decorators/SimDecorator";
-import {AjaxService} from "simple-boot-front/service/AjaxService";
-import {SimstanceManager} from "simple-boot-core/simstance/SimstanceManager";
+import {FrontModule} from 'simple-boot-front/module/FrontModule';
+import {Sim} from 'simple-boot-core/decorators/SimDecorator';
+import {AjaxService} from 'simple-boot-front/service/AjaxService';
+import {SimstanceManager} from 'simple-boot-core/simstance/SimstanceManager';
 import {AppInfo} from './AppInfo';
 import bootstrap_css from 'bootstrap/dist/css/bootstrap.min.css'; // <-- There it is!
 @Sim({scheme: 'layout'})

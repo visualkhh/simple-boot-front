@@ -1,6 +1,6 @@
-import {FrontModule} from "simple-boot-front/module/FrontModule";
+import {FrontModule} from 'simple-boot-front/module/FrontModule';
 import {Intent} from 'simple-boot-core/intent/Intent';
-import {View} from "simple-boot-front/service/view/View";
+import {View} from 'simple-boot-front/service/view/View';
 
 export class AppInfo extends FrontModule {
     datas = 'default data';
@@ -10,9 +10,10 @@ export class AppInfo extends FrontModule {
     }
 
     data(i: Intent) {
-        this.datas = i.data + '->' + i.params.aa
+        this.datas = i.data + '->' + i.queryParams.aa
     }
+
     viewSubscribe(i: Intent<View<HTMLInputElement>>) {
-        this.datas = i.data?.value + '->' + i.params.aa + '-->' + i.event
+        this.datas = i.data?.value + '->' + i.queryParams.aa + '-->' + i.event
     }
 }

@@ -1,28 +1,30 @@
-import html from "./index.html";
-import {PostConstruct, Sim} from "simple-boot-core/decorators/SimDecorator";
-import {FrontModule} from "simple-boot-front/module/FrontModule";
-import {ViewService} from "simple-boot-front/service/view/ViewService";
-import {RandomUtils} from "simple-boot-core/utils/random/RandomUtils";
-import {View} from "simple-boot-front/service/view/View";
-import {Renderer} from "simple-boot-front/render/Renderer";
-import {SimstanceManager} from "simple-boot-core/simstance/SimstanceManager";
-import {Navigation} from "simple-boot-front/service/Navigation";
-import {Intent} from "simple-boot-core/intent/Intent";
+import html from './index.html';
+import {PostConstruct, Sim} from 'simple-boot-core/decorators/SimDecorator';
+import {FrontModule} from 'simple-boot-front/module/FrontModule';
+import {ViewService} from 'simple-boot-front/service/view/ViewService';
+import {RandomUtils} from 'simple-boot-core/utils/random/RandomUtils';
+import {View} from 'simple-boot-front/service/view/View';
+import {Renderer} from 'simple-boot-front/render/Renderer';
+import {SimstanceManager} from 'simple-boot-core/simstance/SimstanceManager';
+import {Navigation} from 'simple-boot-front/service/Navigation';
+import {Intent} from 'simple-boot-core/intent/Intent';
 
 @Sim({scheme: 'index'})
 export class Index extends FrontModule {
-    data = "default data";
+    data = 'default data';
     thisData = 5151;
     public title = new class extends FrontModule {
         constructor() {
             super({styleImports: ['/*[module-selector]*/ {color: red}'], value: ''});
         }
     }();
+
     public numbers = new class extends FrontModule {
         public value = [1, 2, 3];
 
         constructor() {
-            super({template: `
+            super({
+                template: `
         <ul>
         <!--%
             for (let i of this.value) {
@@ -30,13 +32,13 @@ export class Index extends FrontModule {
             }
         %-->
         </ul>
-        `});
+        `
+            });
         }
-
     }();
 
     constructor(public v: ViewService, public manager: SimstanceManager, public navigation: Navigation) {
-        super({template:html});
+        super({template: html});
     }
 
     onInit() {
@@ -46,7 +48,7 @@ export class Index extends FrontModule {
     }
 
     changeText($event: KeyboardEvent, view: View<Element>) {
-        console.log('--->',  view.value)
+        console.log('--->', view.value)
         this.title.value = view.value;
     }
 

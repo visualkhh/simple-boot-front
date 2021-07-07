@@ -10,13 +10,13 @@ import {FrontModule} from 'simple-boot-front/module/FrontModule';
 import {ConstructorType} from 'simple-boot-core/types/Types';
 import {Notfound} from './features/errors/notfound/notfound';
 import {Forbidden} from './features/errors/forbidden/forbidden';
-import {Url} from 'simple-boot-front/model/Url';
-import {RouterModule} from 'simple-boot-front/router/RouterModule';
 import {DocumentRouter} from './features/documents/DocumentRouter';
-import {Router} from 'simple-boot-front/router/Router';
+import {FrontRouter} from 'simple-boot-front/router/FrontRouter';
+import {Intent} from 'simple-boot-core/intent/Intent';
+import {RouterModule} from 'simple-boot-core/route/RouterModule';
 
 @Sim({scheme: 'layout-router'})
-export class AppRouter extends Router {
+export class AppRouter extends FrontRouter {
     '' = Index;
     '/' = Index;
     '/ajax' = Ajax;
@@ -30,16 +30,16 @@ export class AppRouter extends Router {
         super('', App, [DocumentRouter]);
     }
 
-    async canActivate(url: Url, module: RouterModule) {
-        if (url.path === 'views' && url.params.get('auth') === 'false') {
+    async canActivate(url: Intent, module: RouterModule) {
+        if (url.pathname === 'views' && url.queryParams?.auth === 'false') {
             return Forbidden;
         } else {
-            return module;
+            return module.module;
         }
     }
 
-    notFound(url: Url): ConstructorType<FrontModule> {
-        console.log(url.path)
+    notFound(url: Intent): ConstructorType<FrontModule> {
+        console.log(url.pathname)
         return Notfound;
     }
 }
