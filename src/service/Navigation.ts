@@ -1,7 +1,6 @@
 import {Sim} from 'simple-boot-core/decorators/SimDecorator'
 import {SimFrontOption, UrlType} from '../option/SimFrontOption';
 import {LocationUtils} from '../utils/window/LocationUtils';
-import {Url} from '../model/Url';
 
 @Sim()
 export class Navigation {
@@ -28,8 +27,8 @@ export class Navigation {
         }
     }
 
-    get pathInfo(): Url {
-        return {path: this.path, params: this.queryParams} as Url;
+    get pathInfo() {
+        return {path: this.path, queryParams: this.queryParams};
     }
 
     go(path: string, data = {}, title = '') {
