@@ -267,3 +267,4 @@ gradle-app.setting
 /**/dist/
 /templates/parcel-bundler/dist/
 /cli/lib/
+/libs/

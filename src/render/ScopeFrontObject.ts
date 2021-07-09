@@ -1,45 +1,23 @@
 import {RandomUtils} from 'simple-boot-core/utils/random/RandomUtils';
-import {ScopeResultSet} from './ScopeResultSet';
-import {FrontModule} from '../../module/FrontModule';
-import {TargetNode, TargetNodeMode} from './RootScope';
+import {FrontModule} from '../module/FrontModule';
 import {SimGlobal} from 'simple-boot-core/global/SimGlobal';
-import {FrontModuleOption} from '../../module/FrontModuleOption';
+import {FrontModuleOption} from '../module/FrontModuleOption';
+import {ScopeObject} from 'dom-render/ScopeObject';
+import {TargetNode, TargetNodeMode} from 'dom-render/RootScope';
 
 export type ScopeObjectCalls = {name: string, parameter: any[], result: any}[];
-export class ScopeObject {
+export class ScopeFrontObject extends ScopeObject {
     declare _dynamicModule: Map<string, FrontModule[]>;
     declare _option: FrontModuleOption
     public calls: ScopeObjectCalls = [];
     [name: string]: any;
-    public writes = '';
 
     constructor(public uuid = RandomUtils.uuid()) {
+        super();
     }
 
-    public executeResultSet(code: string): ScopeResultSet {
-        this.eval(code);
-        const templateElement = document.createElement('template');
-        templateElement.innerHTML = this.writes;
-        const startComment = document.createComment('scope start ' + this.uuid)
-        const endComment = document.createComment('scope end ' + this.uuid)
-        templateElement.content.childNodes.forEach(it => {
-            if (it.nodeType === Node.ELEMENT_NODE) {
-                (it as Element).setAttribute('scope-uuid', this.uuid);
-            }
-        })
-        return new ScopeResultSet(this.uuid, this, templateElement.content, startComment, endComment, this.calls)
-    }
-
-    private eval(str: string): any {
-        return this.scopeEval(this, str);
-    }
-
-    private scopeEval(scope: any, script: string) {
-        // eslint-disable-next-line no-new-func
-        return Function(`"use strict";
-        const write = (str) => {
-            this.appendWrite(str);
-        }
+    public customScript(): string {
+        return `
         const moduleIdAttrSelector = () => {
             return write("*[module-id='"+this.id+"']");
         }
@@ -51,8 +29,7 @@ export class ScopeObject {
             this.calls.push({name: 'module', parameter: [module], result: module});
             return module;
         }
-        ${script}
-        `).bind(scope)();
+        `;
     }
 
     public newSimOrAddDynamicModule(moduleName: string) {
@@ -63,10 +40,6 @@ export class ScopeObject {
                 return newSim;
             }
         }
-    }
-
-    public appendWrite(str: string) {
-        this.writes += str;
     }
 
     public moduleWriteAndSetScope(module: FrontModule) {

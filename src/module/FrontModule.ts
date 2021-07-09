@@ -6,15 +6,15 @@ import {FunctionUtils} from 'simple-boot-core/utils/function/FunctionUtils';
 import {Intent} from 'simple-boot-core/intent/Intent';
 import {SimGlobal} from 'simple-boot-core/global/SimGlobal';
 import {Navigation} from '../service/Navigation';
-import {RootScope, TargetNode} from '../render/compile/RootScope';
 import {FrontModuleOption} from './FrontModuleOption';
 import {ConstructorType} from 'simple-boot-core/types/Types';
-import {ScopeRawSet} from '../render/compile/ScopeRawSet';
 import {DomUtils} from '../utils/dom/DomUtils';
-import {Scope} from '../render/compile/Scope';
 import {ObjectUtils} from 'simple-boot-core/utils/object/ObjectUtils';
 import {getEventListener} from 'simple-boot-core/decorators/event/EventListener';
 import {Module} from 'simple-boot-core/module/Module';
+import {RootScope, TargetNode} from 'dom-render/RootScope';
+import {Scope} from 'dom-render/Scope';
+import {ScopeRawSet} from 'dom-render/ScopeRawSet';
 
 export type RefModuleItem = { dest?: any, params: any[], callBack: Function };
 
@@ -254,9 +254,8 @@ export class FrontModule extends Module {
 
     public setScope(targetNode: TargetNode, uuid = RandomUtils.uuid()) {
         const rawSet = new ScopeRawSet(this.templateString, this._option.styleImports);
-        const scope = this._renderer?.compileScope(rawSet, this, uuid);
+        const scope = this._renderer?.compileScope(rawSet, this, targetNode, uuid);
         if (scope) {
-            scope.targetNode = targetNode;
             this._scopes.set(scope.uuid, scope);
         }
         return scope;

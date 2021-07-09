@@ -7,8 +7,8 @@ import {Intent} from 'simple-boot-core/intent/Intent';
 import {FrontRouter} from './router/FrontRouter';
 import {FrontModule} from './module/FrontModule';
 import {FunctionUtils} from 'simple-boot-core/utils/function/FunctionUtils';
-import {TargetNode, TargetNodeMode} from './render/compile/RootScope';
 import {fromEvent} from 'rxjs';
+import {TargetNode, TargetNodeMode} from 'dom-render/RootScope';
 
 export class SimpleBootFront extends SimpleApplication {
     constructor(public rootRouter: ConstructorType<FrontRouter>, public option: SimFrontOption) {

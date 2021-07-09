@@ -1,21 +1,25 @@
 import {FrontModule} from '../module/FrontModule'
 import {SimFrontOption} from '../option/SimFrontOption';
 import {Sim} from 'simple-boot-core/decorators/SimDecorator';
-import {SimCompiler} from './compile/SimCompiler';
-import {Scope} from './compile/Scope';
 import {RandomUtils} from 'simple-boot-core/utils/random/RandomUtils';
 import {NodeUtils} from '../utils/node/NodeUtils';
-import {RootScope, TargetNodeMode} from './compile/RootScope';
-import {ScopeRawSet} from './compile/ScopeRawSet';
+import {RootScope, TargetNode, TargetNodeMode} from 'dom-render/RootScope';
+import {Scope} from 'dom-render/Scope';
+import {DomRender} from 'dom-render/DomRender';
+import {Config} from 'dom-render/Config';
+import {ScopeFrontObject} from './ScopeFrontObject';
+import {ScopeRawSet} from 'dom-render/ScopeRawSet';
 
 @Sim()
 export class Renderer {
     constructor(private option: SimFrontOption) {
     }
 
-    public compileScope(rawSet: ScopeRawSet, obj: any, rootUUID = RandomUtils.uuid()): RootScope | undefined {
-        const compiler = new SimCompiler(rawSet, obj, rootUUID)
-        return compiler.run().root;
+    public compileScope(rawSet: ScopeRawSet, obj: any, targetNode: TargetNode, rootUUID = RandomUtils.uuid()): RootScope | undefined {
+        const config = new Config((_) => new ScopeFrontObject());
+        const domRender = new DomRender(rawSet, config, rootUUID);
+        (domRender as any).rootUUID = rootUUID;
+        return domRender.compile(obj, targetNode);
     }
 
     public render(module: FrontModule | string) {
