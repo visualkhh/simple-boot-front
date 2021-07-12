@@ -72,7 +72,12 @@ export class Index extends FrontModule {
 
     goto() {
         console.log('-->na', this.navigation)
-        this.navigation.go('exception');
+        this.navigation.go('/exception');
+    }
+
+    gotoUser() {
+        console.log('-->na', this.navigation)
+        this.navigation.go('/user/' + RandomUtils.uuid());
     }
 
     @PostConstruct

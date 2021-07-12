@@ -2,9 +2,7 @@ import {SimOption} from 'simple-boot-core/SimOption';
 import {ConstructorType} from 'simple-boot-core/types/Types';
 
 export enum UrlType {
-    // eslint-disable-next-line no-unused-vars
     path = 'path',
-    // eslint-disable-next-line no-unused-vars
     hash = 'hash'
 }
 
@@ -14,6 +12,7 @@ export class SimFrontOption extends SimOption {
 
     constructor(advice: ConstructorType<any>[]) {
         super(advice);
+        const a = '2';
     }
 
     setSelector(selector: string): SimFrontOption {

@@ -25,6 +25,7 @@ export class AppRouter extends FrontRouter {
     '/exception' = Exception;
     '/aop' = Aop;
     '/views' = Views;
+    '/user/:id' = Views;
 
     constructor() {
         super('', App, [DocumentRouter]);

@@ -1,12 +1,6 @@
 /* eslint-disable */
 // import * as request from 'supertest'
 // import css from "./app.css"
-
-import {Renderer} from "../../src/render/Renderer";
-import {SimFrontOption} from "../../src/option/SimOption";
-import {ConstructorType} from "../../src/types/Types";
-import {Router} from "../../src/router/Router";
-import {SimCompiler} from "../../src/render/compile/SimCompiler";
 const html = `
 write(this.title.value2.wow.zzz);
 `
