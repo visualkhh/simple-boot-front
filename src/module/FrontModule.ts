@@ -28,7 +28,7 @@ export class FrontModule extends Module {
     private _renderer: Renderer;
     private _navigation: Navigation;
 
-    constructor(private _inputOption: {template?: string|Promise<string|void>, styleImports?: (string|Promise<string|void>)[], modules?: { [name: string]: ConstructorType<FrontModule> }, value?: any, name?: string } = {}) {
+    constructor(public _inputOption: {template?: string|Promise<string|void>, styleImports?: (string|Promise<string|void>)[], modules?: { [name: string]: ConstructorType<FrontModule> }, value?: any, name?: string } = {}) {
         super();
         this._renderer = SimGlobal().application?.simstanceManager.getOrNewSim(Renderer)!
         this._navigation = SimGlobal().application?.simstanceManager.getOrNewSim(Navigation)!
