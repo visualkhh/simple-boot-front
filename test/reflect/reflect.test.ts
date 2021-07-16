@@ -3,9 +3,9 @@
 // import css from "./app.css"
 
 
-import {FrontModule} from "../../src/module/Module";
+import {FrontModule} from "../../src/module/FrontModule";
 import {Renderer} from "../../src/render/Renderer";
-import {ReflectUtils} from "../../src/util/reflect/ReflectUtils";
+import {ReflectUtils} from "simple-boot-core/utils/reflect/ReflectUtils";
 
 export class ZTitle extends FrontModule {
 

@@ -4,6 +4,7 @@ import {SimGlobal} from 'simple-boot-core/global/SimGlobal';
 import {FrontModuleOption} from '../module/FrontModuleOption';
 import {ScopeObject} from 'dom-render/ScopeObject';
 import {TargetNode, TargetNodeMode} from 'dom-render/RootScope';
+import {Config} from 'dom-render/Config';
 
 export type ScopeObjectCalls = {name: string, parameter: any[], result: any}[];
 export class ScopeFrontObject extends ScopeObject {
@@ -12,8 +13,8 @@ export class ScopeFrontObject extends ScopeObject {
     public calls: ScopeObjectCalls = [];
     [name: string]: any;
 
-    constructor(public uuid = RandomUtils.uuid()) {
-        super();
+    constructor(config: Config, public uuid = RandomUtils.uuid()) {
+        super(config);
     }
 
     public customScript(): string {

@@ -3,8 +3,8 @@
 // import css from "./app.css"
 
 
-import {FrontModule} from "../../src/module/Module";
-import {ObjectUtils} from "../../src/util/object/ObjectUtils";
+import {FrontModule} from '../../src/module/FrontModule';
+import {ObjectUtils} from "simple-boot-core/utils/object/ObjectUtils";
 
 export class Test extends FrontModule {
 

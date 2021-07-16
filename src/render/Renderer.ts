@@ -16,7 +16,7 @@ export class Renderer {
     }
 
     public compileScope(rawSet: ScopeRawSet, obj: any, targetNode: TargetNode, rootUUID = RandomUtils.uuid()): RootScope | undefined {
-        const config = new Config((_) => new ScopeFrontObject());
+        const config = new Config(document, (scope) => new ScopeFrontObject(scope.config));
         const domRender = new DomRender(rawSet, config, rootUUID);
         (domRender as any).rootUUID = rootUUID;
         return domRender.compile(obj, targetNode);

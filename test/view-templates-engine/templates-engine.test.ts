@@ -2,11 +2,9 @@
 // import * as request from 'supertest'
 // import css from "./app.css"
 
-import {Renderer} from "../../src/render/Renderer";
-import {SimFrontOption} from "../../src/option/SimOption";
-import {ConstructorType} from "../../src/types/Types";
-import {Router} from "../../src/router/Router";
-import {SimCompiler} from "../../src/render/compile/SimCompiler";
+import {DomRender} from "dom-render/DomRender";
+import {ScopeRawSet} from "dom-render/ScopeRawSet";
+import {Config} from "dom-render/Config";
 var html = `
 <div>
     <!-- aaa -->
@@ -84,7 +82,8 @@ describe('templates-engine', () => {
     })
 
     test('compile', async (done) => {
-       const result = new SimCompiler(html, dataContain, {start: '<!--%', end: '%-->'}).run().root?.executeFragment();
+       const result = new DomRender(new ScopeRawSet(html), new Config(document));
+       const r = result.runRender(dataContain);
 
         // for (let i = 0; i < result!.fragment.childNodes.length; i++) {
         //     const childNode = result!.fragment.childNodes[i];
@@ -93,9 +92,9 @@ describe('templates-engine', () => {
         //         console.log('******---->', childNode.childNodes[y])
         //     }
         // }
-        const templateElement = document.createElement('div');
-        templateElement.appendChild(result!.fragment);
-        console.log(templateElement.innerHTML)
+        // const templateElement = document.createElement('div');
+        // templateElement.appendChild(result!.fragment);
+        // console.log(templateElement.innerHTML)
         done()
     })
 
