@@ -28,22 +28,49 @@ export class FrontModule extends Module {
     private _renderer: Renderer;
     private _navigation: Navigation;
 
-    constructor(option: { template?: string|Promise<string|undefined>, styleImports?: string|Promise<string|undefined>[], modules?: { [name: string]: ConstructorType<FrontModule> }, value?: any, name?: string } = {}) {
+    constructor(private _inputOption: {template?: string|Promise<string|void>, styleImports?: (string|Promise<string|void>)[], modules?: { [name: string]: ConstructorType<FrontModule> }, value?: any, name?: string } = {}) {
         super();
         this._renderer = SimGlobal().application?.simstanceManager.getOrNewSim(Renderer)!
         this._navigation = SimGlobal().application?.simstanceManager.getOrNewSim(Navigation)!
         // default option
-        this.value = option.value;
-        this._option = Object.assign(new FrontModuleOption(), option)
+        this.value = _inputOption.value;
+        const option = new FrontModuleOption();
+        if (_inputOption.modules) {
+            option.modules = _inputOption.modules
+        }
+        this._option = option;
+        // this._option = Object.assign(new FrontModuleOption(), option)
         this.id = `___Module__${this.constructor.name}_${RandomUtils.uuid()}`
-        this.init();
+        // this.init();
     }
 
-    private init() {
-        if (this._option.template.search('\\[router-outlet\\]')) {
-            this._router_outlet_id = `___Module__${this.constructor.name}_router-outlet_${this.id}_${RandomUtils.uuid()}`
-            this._option.template = this._option.template.replace('[router-outlet]', ` id='${this._router_outlet_id}' `)
+    public async init() {
+        if (this._inputOption.template) {
+            if (this._inputOption.template instanceof Promise) {
+                this._option.template = (await this._inputOption.template) ?? '';
+            } else {
+                this._option.template = this._inputOption.template ?? '';
+            }
+
+            if (this._option.template.search('\\[router-outlet\\]')) {
+                this._router_outlet_id = `___Module__${this.constructor.name}_router-outlet_${this.id}_${RandomUtils.uuid()}`
+                this._option.template = this._option.template.replace('[router-outlet]', ` id='${this._router_outlet_id}' `)
+            }
+
+            delete this._inputOption.template;
         }
+        for (let i = 0; this._inputOption.styleImports && i < this._inputOption.styleImports.length; i++) {
+            if (this._inputOption.styleImports[i]) {
+                const sp = this._inputOption.styleImports[i];
+                if (sp instanceof Promise) {
+                    this._option.styleImports[i] = (await sp) ?? '';
+                } else {
+                    this._option.styleImports[i] = sp ?? '';
+                }
+                delete this._inputOption.styleImports[i];
+            }
+        }
+        return this._option;
     }
 
     public getValue<T = any>(name: string, value?: any): T {

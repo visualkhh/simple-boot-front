@@ -13,6 +13,7 @@ import {TargetNode, TargetNodeMode} from 'dom-render/RootScope';
 export class SimpleBootFront extends SimpleApplication {
     constructor(public rootRouter: ConstructorType<FrontRouter>, public option: SimFrontOption) {
         super(rootRouter, option);
+        window.__dirname = 'simple-boot-front__dirname';
         option.simProxy = new SimFrontProxyHandler(option);
     }
 
@@ -24,25 +25,29 @@ export class SimpleBootFront extends SimpleApplication {
             this.routing<FrontRouter, FrontModule>(intent).then(it => {
                 let lastRouterSelector = this.option?.selector;
                 it.routerChains.forEach(it => {
-                    const moduleObj = this.simstanceManager?.getOrNewSim(it.module)
+                    const moduleObj = this.simstanceManager?.getOrNewSim(it.module);
                     if (moduleObj instanceof FrontModule) {
-                        if (!document.querySelector(`[module-id='${moduleObj?.id}']`)) {
-                            this.render(moduleObj, document.querySelector(lastRouterSelector!));
-                        }
-                        if (moduleObj?._router_outlet_id) {
-                            lastRouterSelector = '#' + moduleObj?._router_outlet_id;
-                        } else {
-                            lastRouterSelector = '#' + moduleObj?.id;
-                        }
+                        moduleObj.init().then(_ => {
+                            if (!document.querySelector(`[module-id='${moduleObj?.id}']`)) {
+                                this.render(moduleObj, document.querySelector(lastRouterSelector!));
+                            }
+                            if (moduleObj?._router_outlet_id) {
+                                lastRouterSelector = '#' + moduleObj?._router_outlet_id;
+                            } else {
+                                lastRouterSelector = '#' + moduleObj?.id;
+                            }
+                        })
                     }
                 });
 
                 // Module render
                 const module = it.getModuleInstance();
-                this.render(module, document.querySelector(lastRouterSelector!));
-                this.renderd();
-                (module as any)._onInitedChild();
-                it.routerChains.reverse().forEach(it => (this.simstanceManager?.getOrNewSim(it.module) as any)?._onInitedChild());
+                module.init().then(_ => {
+                    this.render(module, document.querySelector(lastRouterSelector!));
+                    this.renderd();
+                    (module as any)._onInitedChild();
+                    it.routerChains.reverse().forEach(it => (this.simstanceManager?.getOrNewSim(it.module) as any)?._onInitedChild());
+                })
             })
         })
         window.dispatchEvent(new Event('popstate'))
