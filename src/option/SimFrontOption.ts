@@ -10,7 +10,7 @@ export class SimFrontOption extends SimOption {
     selector: string = '#app';
     urlType: UrlType = UrlType.path;
 
-    constructor(advice: ConstructorType<any>[]) {
+    constructor(advice: ConstructorType<any>[] = []) {
         super(advice);
         const a = '2';
     }

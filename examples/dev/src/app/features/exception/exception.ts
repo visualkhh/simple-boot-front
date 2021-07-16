@@ -1,30 +1,29 @@
-import { UserResponse } from "../../models/UserResponse";
-import { Profile } from "../../shareds/Profile";
-import { ProjectService } from "../../services/ProjectService";
-import css from "./exception.css";
-import html from "./exception.html";
-import {PostConstruct, Sim} from "simple-boot-core/decorators/SimDecorator";
-import {FrontModule} from "simple-boot-front/module/FrontModule";
-import {AjaxService} from "simple-boot-front/service/AjaxService";
-import {View} from "simple-boot-front/service/view/View";
+import { UserResponse } from '../../models/UserResponse';
+import { Profile } from '../../shareds/Profile';
+import { ProjectService } from '../../services/ProjectService';
+import css from './exception.css';
+import html from './exception.html';
+import {PostConstruct, Sim} from 'simple-boot-core/decorators/SimDecorator';
+import {FrontModule} from 'simple-boot-front/module/FrontModule';
+import {AjaxService} from 'simple-boot-front/service/AjaxService';
+import {View} from 'simple-boot-front/service/view/View';
 import {RandomUtils} from 'simple-boot-core/utils/random/RandomUtils';
-import {ExceptionHandler} from "simple-boot-core/decorators/exception/ExceptionDecorator";
-import {SimNoSuch} from "simple-boot-core/throwable/SimNoSuch";
-import {SimError} from "simple-boot-core/throwable/SimError";
-import {RouterError} from "simple-boot-front/throwable/RouterError";
-import {RouterNotFount} from "simple-boot-front/throwable/RouterNotFount";
+import {ExceptionHandler} from 'simple-boot-core/decorators/exception/ExceptionDecorator';
+import {SimNoSuch} from 'simple-boot-core/throwable/SimNoSuch';
+import {SimError} from 'simple-boot-core/throwable/SimError';
+import {RouterError} from 'simple-boot-front/throwable/RouterError';
+import {RouterNotFount} from 'simple-boot-front/throwable/RouterNotFount';
 
 @Sim()
 export class Exception extends FrontModule {
     data = 1
     constructor(public projectService: ProjectService, public ajax: AjaxService) {
-        super({template: html, styleImports:[css]});
+        super({template: html, styleImports: [css]});
     }
 
     onInit() {
         this.wow('44');
     }
-
 
     @PostConstruct
     post() {
@@ -32,7 +31,7 @@ export class Exception extends FrontModule {
     }
 
     wow(s: string) {
-        //console.log('wow', s)
+        // console.log('wow', s)
     }
 
     fireException($event: MouseEvent, view: View<Element>) {
@@ -50,8 +49,6 @@ export class Exception extends FrontModule {
         // const number = 5/0;
         // console.log('-->', number, $event, view);
     }
-
-
 
     // @ExceptionHandler()
     // public exception0(e: any) {
@@ -76,7 +73,4 @@ export class Exception extends FrontModule {
     public exception2(e: any) {
         console.log('NoSuchSim exception:', e)
     }
-
-
-
 }
