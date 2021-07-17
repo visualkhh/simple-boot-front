@@ -48,7 +48,7 @@ export class FrontModule extends Module {
     public async init(param?: any) {
         if (this._inputOption.template) {
             if (this._inputOption.template.startsWith('fetch://') && this._inputOption.fetcher) {
-                this._option.template = (await this._inputOption.fetcher.text(this._inputOption.template.replace('fetch://', ''), param)) ?? '';
+                this._option.template = (await this._inputOption.fetcher.text(this._inputOption.template.replace('fetch://', ''), param, this._inputOption.name)) ?? '';
             } else {
                 this._option.template = this._inputOption.template ?? '';
             }
@@ -64,7 +64,7 @@ export class FrontModule extends Module {
             if (this._inputOption.styleImports[i]) {
                 const sp = this._inputOption.styleImports[i];
                 if (sp.startsWith('fetch://') && this._inputOption.fetcher) {
-                    this._option.styleImports[i] = (await this._inputOption.fetcher.text(sp.replace('fetch://', ''), param)) ?? '';
+                    this._option.styleImports[i] = (await this._inputOption.fetcher.text(sp.replace('fetch://', ''), param, this._inputOption.name)) ?? '';
                 } else {
                     this._option.styleImports[i] = sp ?? '';
                 }
