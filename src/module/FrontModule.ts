@@ -15,6 +15,7 @@ import {Module} from 'simple-boot-core/module/Module';
 import {RootScope, TargetNode} from 'dom-render/RootScope';
 import {Scope} from 'dom-render/Scope';
 import {ScopeRawSet} from 'dom-render/ScopeRawSet';
+import {Fetcher} from '../fetch/Fetcher';
 
 export type RefModuleItem = { dest?: any, params: any[], callBack: Function };
 
@@ -28,7 +29,7 @@ export class FrontModule extends Module {
     private _renderer: Renderer;
     private _navigation: Navigation;
 
-    constructor(public _inputOption: {template?: string|Promise<string|void>, styleImports?: (string|Promise<string|void>)[], modules?: { [name: string]: ConstructorType<FrontModule> }, value?: any, name?: string } = {}) {
+    constructor(public _inputOption: {template?: string, styleImports?: (string)[], modules?: { [name: string]: ConstructorType<FrontModule> }, fetcher?: Fetcher, value?: any, name?: string } = {}) {
         super();
         this._renderer = SimGlobal().application?.simstanceManager.getOrNewSim(Renderer)!
         this._navigation = SimGlobal().application?.simstanceManager.getOrNewSim(Navigation)!
@@ -44,10 +45,10 @@ export class FrontModule extends Module {
         // this.init();
     }
 
-    public async init() {
+    public async init(param?: any) {
         if (this._inputOption.template) {
-            if (this._inputOption.template instanceof Promise) {
-                this._option.template = (await this._inputOption.template) ?? '';
+            if (this._inputOption.template.startsWith('fetch://') && this._inputOption.fetcher) {
+                this._option.template = (await this._inputOption.fetcher.text(this._inputOption.template.replace('fetch://', ''), param)) ?? '';
             } else {
                 this._option.template = this._inputOption.template ?? '';
             }
@@ -62,8 +63,8 @@ export class FrontModule extends Module {
         for (let i = 0; this._inputOption.styleImports && i < this._inputOption.styleImports.length; i++) {
             if (this._inputOption.styleImports[i]) {
                 const sp = this._inputOption.styleImports[i];
-                if (sp instanceof Promise) {
-                    this._option.styleImports[i] = (await sp) ?? '';
+                if (sp.startsWith('fetch://') && this._inputOption.fetcher) {
+                    this._option.styleImports[i] = (await this._inputOption.fetcher.text(sp.replace('fetch://', ''), param)) ?? '';
                 } else {
                     this._option.styleImports[i] = sp ?? '';
                 }

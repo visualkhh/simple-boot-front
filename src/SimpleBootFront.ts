@@ -22,32 +22,30 @@ export class SimpleBootFront extends SimpleApplication {
         const navigation = this.simstanceManager.getOrNewSim(Navigation)!
         fromEvent<any>(window, 'popstate').subscribe((_) => {
             const intent = new Intent(navigation.path ?? '');
-            this.routing<FrontRouter, FrontModule>(intent).then(it => {
+            this.routing<FrontRouter, FrontModule>(intent).then(async it => {
                 let lastRouterSelector = this.option?.selector;
-                it.routerChains.forEach(it => {
-                    const moduleObj = this.simstanceManager?.getOrNewSim(it.module);
+                for (const routerChain of it.routerChains) {
+                    const moduleObj = this.simstanceManager?.getOrNewSim(routerChain.module);
                     if (moduleObj instanceof FrontModule) {
-                        moduleObj.init().then(_ => {
-                            if (!document.querySelector(`[module-id='${moduleObj?.id}']`)) {
-                                this.render(moduleObj, document.querySelector(lastRouterSelector!));
-                            }
-                            if (moduleObj?._router_outlet_id) {
-                                lastRouterSelector = '#' + moduleObj?._router_outlet_id;
-                            } else {
-                                lastRouterSelector = '#' + moduleObj?.id;
-                            }
-                        })
+                        const option = await moduleObj.init({router: 'true'});
+                        if (!document.querySelector(`[module-id='${moduleObj?.id}']`)) {
+                            this.render(moduleObj, document.querySelector(lastRouterSelector!));
+                        }
+                        if (moduleObj?._router_outlet_id) {
+                            lastRouterSelector = '#' + moduleObj?._router_outlet_id;
+                        } else {
+                            lastRouterSelector = '#' + moduleObj?.id;
+                        }
                     }
-                });
+                }
 
                 // Module render
                 const module = it.getModuleInstance();
-                module.init().then(_ => {
-                    this.render(module, document.querySelector(lastRouterSelector!));
-                    this.renderd();
-                    (module as any)._onInitedChild();
-                    it.routerChains.reverse().forEach(it => (this.simstanceManager?.getOrNewSim(it.module) as any)?._onInitedChild());
-                })
+                const option = await module.init();
+                this.render(module, document.querySelector(lastRouterSelector!));
+                this.renderd();
+                (module as any)._onInitedChild();
+                it.routerChains.reverse().forEach(it => (this.simstanceManager?.getOrNewSim(it.module) as any)?._onInitedChild());
             })
         })
         window.dispatchEvent(new Event('popstate'))
