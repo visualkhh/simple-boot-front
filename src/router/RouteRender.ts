@@ -30,11 +30,13 @@ export class RouteRender {
 
         // Module render
         const module = it.getModuleInstance();
-        const option = await module.init();
-        this.render(module, document.querySelector(lastRouterSelector!), document);
-        this.renderd(document);
-        (module as any)._onInitedChild();
-        it.routerChains.reverse().forEach(it => (this.simstanceManager?.getOrNewSim(it.module) as any)?._onInitedChild());
+        if (module instanceof FrontModule) {
+            const option = await module.init();
+            this.render(module, document.querySelector(lastRouterSelector!), document);
+            this.renderd(document);
+            (module as any)._onInitedChild();
+            it.routerChains.reverse().forEach(it => (this.simstanceManager?.getOrNewSim(it.module) as any)?._onInitedChild());
+        }
     }
 
     private renderd(document: Document) {
