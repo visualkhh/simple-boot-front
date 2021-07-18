@@ -280,9 +280,9 @@ export class FrontModule extends Module {
         })
     }
 
-    public setScope(targetNode: TargetNode, uuid = RandomUtils.uuid()) {
+    public setScope(document: Document, targetNode: TargetNode, uuid = RandomUtils.uuid()) {
         const rawSet = new ScopeRawSet(this.templateString, this._option.styleImports);
-        const scope = this._renderer?.compileScope(rawSet, this, targetNode, uuid);
+        const scope = this._renderer?.compileScope(document, rawSet, this, targetNode, uuid);
         if (scope) {
             this._scopes.set(scope.uuid, scope);
         }

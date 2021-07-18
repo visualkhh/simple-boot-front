@@ -15,14 +15,14 @@ export class Renderer {
     constructor(private option: SimFrontOption) {
     }
 
-    public compileScope(rawSet: ScopeRawSet, obj: any, targetNode: TargetNode, rootUUID = RandomUtils.uuid()): RootScope | undefined {
+    public compileScope(document: Document, rawSet: ScopeRawSet, obj: any, targetNode: TargetNode, rootUUID = RandomUtils.uuid()): RootScope | undefined {
         const config = new Config(document, (scope) => new ScopeFrontObject(scope.config));
         const domRender = new DomRender(rawSet, config, rootUUID);
         (domRender as any).rootUUID = rootUUID;
         return domRender.compile(obj, targetNode);
     }
 
-    public render(module: FrontModule | string) {
+    public render(module: FrontModule | string, document: Document) {
         const targetElement = document.querySelector(this.option.selector)
         if (targetElement && module instanceof FrontModule) {
             targetElement.innerHTML = module.templateString;
@@ -75,19 +75,15 @@ export class Renderer {
                     (it as FrontModule).renderWrap();
                 })
             })
-            // const rootElement = document.querySelector(this.selector)
-            // this.addEvent(rootElement)
-            // this.addBind(rootElement)
-            // this.addRout(rootElement)
         }
     }
 
-    public prependStyle(selector: string, style: string | undefined) {
-        const targetElement = document.querySelector(selector)
-        if (targetElement && style) {
-            const htmlStyleElement = document.createElement('style')
-            htmlStyleElement.innerHTML = style;
-            targetElement.prepend(htmlStyleElement)
-        }
-    }
+    // public prependStyle(selector: string, style: string | undefined) {
+    //     const targetElement = document.querySelector(selector)
+    //     if (targetElement && style) {
+    //         const htmlStyleElement = document.createElement('style')
+    //         htmlStyleElement.innerHTML = style;
+    //         targetElement.prepend(htmlStyleElement)
+    //     }
+    // }
 }

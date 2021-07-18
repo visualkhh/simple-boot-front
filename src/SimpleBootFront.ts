@@ -9,12 +9,15 @@ import {FrontModule} from './module/FrontModule';
 import {FunctionUtils} from 'simple-boot-core/utils/function/FunctionUtils';
 import {fromEvent} from 'rxjs';
 import {TargetNode, TargetNodeMode} from 'dom-render/RootScope';
+import { RouteRender } from './router/RouteRender';
 
 export class SimpleBootFront extends SimpleApplication {
+    public routeRender: RouteRender;
     constructor(public rootRouter: ConstructorType<FrontRouter>, public option: SimFrontOption) {
         super(rootRouter, option);
         window.__dirname = 'simple-boot-front__dirname';
         option.simProxy = new SimFrontProxyHandler(option);
+        this.routeRender = new RouteRender(this.option, this.simstanceManager);
     }
 
     public run() {
@@ -23,63 +26,9 @@ export class SimpleBootFront extends SimpleApplication {
         fromEvent<any>(window, 'popstate').subscribe((_) => {
             const intent = new Intent(navigation.path ?? '');
             this.routing<FrontRouter, FrontModule>(intent).then(async it => {
-                let lastRouterSelector = this.option?.selector;
-                for (const routerChain of it.routerChains) {
-                    const moduleObj = this.simstanceManager?.getOrNewSim(routerChain.module);
-                    if (moduleObj instanceof FrontModule) {
-                        const option = await moduleObj.init({router: 'true'});
-                        if (!document.querySelector(`[module-id='${moduleObj?.id}']`)) {
-                            this.render(moduleObj, document.querySelector(lastRouterSelector!));
-                        }
-                        if (moduleObj?._router_outlet_id) {
-                            lastRouterSelector = '#' + moduleObj?._router_outlet_id;
-                        } else {
-                            lastRouterSelector = '#' + moduleObj?.id;
-                        }
-                    }
-                }
-
-                // Module render
-                const module = it.getModuleInstance();
-                const option = await module.init();
-                this.render(module, document.querySelector(lastRouterSelector!));
-                this.renderd();
-                (module as any)._onInitedChild();
-                it.routerChains.reverse().forEach(it => (this.simstanceManager?.getOrNewSim(it.module) as any)?._onInitedChild());
+                this.routeRender.routeRender(it, document);
             })
         })
         window.dispatchEvent(new Event('popstate'))
-    }
-
-    public renderd() {
-        const attr = 'router-active-class';
-        const navigation = this.simstanceManager?.getOrNewSim(Navigation);
-        this.procAttr(attr, (it, value) => {
-            const actives = FunctionUtils.eval<string[]>(value ?? '[]')
-            if (!actives) return;
-            const hrefAttr = (it.getAttribute('router-link') ?? '')
-            if (hrefAttr === navigation?.path) {
-                it.classList.add(...actives)
-            } else {
-                it.classList.remove(...actives)
-            }
-        })
-    }
-
-    procAttr(attrName: string, f: (h: HTMLElement, value: string | null) => void) {
-        document.querySelectorAll<HTMLElement>(`[${attrName}]`).forEach(it => {
-            f(it, it.getAttribute(attrName));
-        });
-    }
-
-    public render(module: FrontModule | undefined, targetSelector: Node | null): boolean {
-        if (module && targetSelector) {
-            (module as any)._onInit()
-            module.setScope(new TargetNode(targetSelector, TargetNodeMode.child))
-            module.renderWrap();
-            return true
-        } else {
-            return false
-        }
     }
 }

@@ -48,7 +48,7 @@ export class ScopeFrontObject extends ScopeObject {
             const uuid = RandomUtils.uuid();
             const targetSelecotr = module.getTemplateSelector(uuid)
             const targetNode = new TargetNode(targetSelecotr, TargetNodeMode.replace);
-            const scope = module.setScope(targetNode, uuid);
+            const scope = module.setScope(this.config.document, targetNode, uuid);
             if (scope) {
                 this.appendWrite(module.getTemplateElementString(scope.uuid) ?? '');
             }
