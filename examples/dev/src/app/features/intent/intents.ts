@@ -18,6 +18,7 @@ export class Intents extends FrontModule {
     }
 
     click() {
+        console.log('------')
         this.publish(new Intent('layout://info/data?a=wow&aa=zzz', this.makeRandom()));
     }
 

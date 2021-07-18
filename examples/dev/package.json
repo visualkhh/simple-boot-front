@@ -47,6 +47,6 @@
   },
   "dependencies": {
     "bootstrap": "^5.0.0-beta3",
-    "simple-boot-front": "1.0.49"
+    "simple-boot-front": "1.0.54"
   }
 }
