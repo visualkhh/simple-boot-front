@@ -16,10 +16,11 @@ import {RootScope, TargetNode} from 'dom-render/RootScope';
 import {Scope} from 'dom-render/Scope';
 import {ScopeRawSet} from 'dom-render/ScopeRawSet';
 import {Fetcher} from '../fetch/Fetcher';
+import { FrontLifeCycle } from './FrontLifeCycle';
 
 export type RefModuleItem = { dest?: any, params: any[], callBack: Function };
 
-export class FrontModule extends Module {
+export class FrontModule extends Module implements FrontLifeCycle {
     public _router_outlet_id?: string;
     public id: string;
     public _refModule = new Map<string, Map<FrontModule, RefModuleItem[]>>();
@@ -39,10 +40,26 @@ export class FrontModule extends Module {
         if (_inputOption.modules) {
             option.modules = _inputOption.modules
         }
-        this._option = option;
+        if (!_inputOption.fetcher) {
+            option.template = _inputOption.template ?? option.template;
+            option.styleImports = _inputOption.styleImports ?? option.styleImports;
+            this._option = option;
+            delete _inputOption.template;
+            delete _inputOption.styleImports;
+            this._init();
+        } else {
+            this._option = option;
+        }
         // this._option = Object.assign(new FrontModuleOption(), option)
         this.id = `___Module__${this.constructor.name}_${RandomUtils.uuid()}`
         // this.init();
+    }
+
+    private _init() {
+        if (this._option.template.search('\\[router-outlet\\]')) {
+            this._router_outlet_id = `___Module__${this.constructor.name}_router-outlet_${this.id}_${RandomUtils.uuid()}`
+            this._option.template = this._option.template.replace('[router-outlet]', ` id='${this._router_outlet_id}' `)
+        }
     }
 
     public async init(param?: any) {
@@ -52,12 +69,7 @@ export class FrontModule extends Module {
             } else {
                 this._option.template = this._inputOption.template ?? '';
             }
-
-            if (this._option.template.search('\\[router-outlet\\]')) {
-                this._router_outlet_id = `___Module__${this.constructor.name}_router-outlet_${this.id}_${RandomUtils.uuid()}`
-                this._option.template = this._option.template.replace('[router-outlet]', ` id='${this._router_outlet_id}' `)
-            }
-
+            this._init();
             delete this._inputOption.template;
         }
         for (let i = 0; this._inputOption.styleImports && i < this._inputOption.styleImports.length; i++) {
@@ -71,7 +83,8 @@ export class FrontModule extends Module {
                 delete this._inputOption.styleImports[i];
             }
         }
-        return this._option;
+
+        return this;
     }
 
     public getValue<T = any>(name: string, value?: any): T {

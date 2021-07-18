@@ -9,10 +9,26 @@ import {DomRender} from 'dom-render/DomRender';
 import {Config} from 'dom-render/Config';
 import {ScopeFrontObject} from './ScopeFrontObject';
 import {ScopeRawSet} from 'dom-render/ScopeRawSet';
+import { FrontLifeCycle } from '../module/FrontLifeCycle';
 
 @Sim()
-export class Renderer {
+export class Renderer implements FrontLifeCycle {
     constructor(private option: SimFrontOption) {
+    }
+
+    onInit(): void {
+    }
+
+    onChangedRender(): void {
+    }
+
+    onInitedChild(): void {
+    }
+
+    onFinish(): void {
+    }
+
+    onCreate(): void {
     }
 
     public compileScope(document: Document, rawSet: ScopeRawSet, obj: any, targetNode: TargetNode, rootUUID = RandomUtils.uuid()): RootScope | undefined {
@@ -47,7 +63,7 @@ export class Renderer {
                 NodeUtils.replaceNode(startComment, it.scopeResult.startComment);
                 NodeUtils.replaceNode(endComment, it.scopeResult.endComment);
                 it.scopeResult.calls.filter(it => it.name === 'module').map(it => it.result).forEach(it => {
-                    (it as FrontModule).renderWrap();
+                    (it as FrontModule)?.renderWrap();
                 })
             }
             it.usingVars.filter(uit => module.getValue(uit) instanceof FrontModule).forEach(mit => {
@@ -72,7 +88,7 @@ export class Renderer {
             }
             scope.childs.forEach(it => {
                 it.scopeResult?.calls.filter(it => it.name === 'module').map(it => it.result).forEach(it => {
-                    (it as FrontModule).renderWrap();
+                    (it as FrontModule)?.renderWrap();
                 })
             })
         }

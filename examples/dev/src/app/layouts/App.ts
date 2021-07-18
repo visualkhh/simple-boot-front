@@ -8,10 +8,14 @@ import {AppInfo} from './AppInfo';
 import bootstrap_css from 'bootstrap/dist/css/bootstrap.min.css'; // <-- There it is!
 @Sim({scheme: 'layout'})
 export class App extends FrontModule {
-    info = new AppInfo();
+    info?: AppInfo;
 
     constructor(public ajaxService: AjaxService, public simstance: SimstanceManager) {
         super({template: html, styleImports: [bootstrap_css, css]});
+    }
+
+    onCreate() {
+        new AppInfo().init().then(it => { this.info = it });
     }
 
     onInit() {

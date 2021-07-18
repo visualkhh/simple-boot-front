@@ -14,6 +14,18 @@ describe('typescript basic', () => {
         done()
     })
 
+
+
+    test('typescript promise test', async (done) => {
+        const a = async (s: string) => {
+            console.log('---------')
+            return '--------->';
+        }
+
+        a('aa').then(it => console.log(it));
+        done()
+    })
+
 })
 
 

@@ -1,5 +1,5 @@
-import {User} from "../models/UserResponse";
-import {FrontModule} from "simple-boot-front/module/FrontModule";
+import {User} from '../models/UserResponse';
+import {FrontModule} from 'simple-boot-front/module/FrontModule';
 
 const styleImports = [
     `

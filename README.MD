@@ -178,6 +178,7 @@ npm install simple-boot-front
       ```
 
 ## Module LifeCycle
+* onCreate(): Sim onCreate just one call
 * onInit(): module load event
 * onChangedRender(): change rended in module event
 * onInitedChild(): module and child module inited event
