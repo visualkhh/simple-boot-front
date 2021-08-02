@@ -13,6 +13,20 @@ describe('typescript basic', () => {
         console.log(JSON.stringify(result));
         done()
     })
+    test('instanceof test', async (done) => {
+        const s = 'aa';
+        const a = {name:'aa'}
+        const aa = (a: object) => {
+            if (a instanceof Object) {
+                console.log('-->')
+            }
+        }
+
+        aa(a);
+        // console.log( (a instanceof Object))
+        // console.log( (a instanceof object))
+        done()
+    })
 
 
 

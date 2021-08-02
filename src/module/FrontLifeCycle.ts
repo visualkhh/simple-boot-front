@@ -1,4 +1,4 @@
-import { LifeCycle } from 'simple-boot-core/module/LifeCycle';
+import { LifeCycle } from 'simple-boot-core/cycles/LifeCycle';
 
 export interface FrontLifeCycle extends LifeCycle {
     onInit(): void;

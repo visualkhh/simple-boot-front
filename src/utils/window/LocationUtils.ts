@@ -13,7 +13,7 @@ export class LocationUtils {
     }
 
     static path(): string {
-        return window.location.pathname;//.substring(1);
+        return window.location.pathname;
     }
 
     static pathQueryParams(): Map<string, string> {

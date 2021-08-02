@@ -27,6 +27,8 @@
     "test": "jest --detectOpenHandles --forceExit"
   },
   "alias": {
+    "dom-render": "../../libs/dom-render/src",
+    "simple-boot-core": "../../libs/simple-boot-core/src",
     "simple-boot-front": "../../src"
   },
   "devDependencies": {
@@ -39,12 +41,16 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.3.1",
     "less": "^4.1.1",
-    "typescript": "^4.2.3",
     "parcel-bundler": "^1.12.5",
-    "parcel-plugin-css-to-string": "^2.5.2"
+    "parcel-plugin-css-to-string": "^2.5.2",
+    "typescript": "^4.2.3"
   },
   "dependencies": {
     "bootstrap": "^5.0.0-beta3",
-    "simple-boot-front": "1.0.54"
+    "dom-render": "file:../../libs/dom-render/src",
+    "reflect-metadata": "^0.1.13",
+    "rxjs": "^6.6.7",
+    "simple-boot-core": "file:../../libs/simple-boot-core/src",
+    "simple-boot-front": "file:../../src"
   }
 }

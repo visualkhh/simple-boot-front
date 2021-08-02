@@ -1,4 +1,3 @@
-import {FrontModule} from '../module/FrontModule'
 import {SimFrontOption} from '../option/SimFrontOption';
 import {Sim} from 'simple-boot-core/decorators/SimDecorator';
 import {RandomUtils} from 'simple-boot-core/utils/random/RandomUtils';
@@ -7,7 +6,6 @@ import {RootScope, TargetNode, TargetNodeMode} from 'dom-render/RootScope';
 import {Scope} from 'dom-render/Scope';
 import {DomRender} from 'dom-render/DomRender';
 import {Config} from 'dom-render/Config';
-import {ScopeFrontObject} from './ScopeFrontObject';
 import {ScopeRawSet} from 'dom-render/ScopeRawSet';
 import { FrontLifeCycle } from '../module/FrontLifeCycle';
 

@@ -30,12 +30,7 @@
     "type": "git",
     "url": "https://github.com/visualkhh/simple-boot-front"
   },
-  "workspaces": [
-    "./",
-    "examples/dev",
-    "examples/dev-onepage",
-    "templates/parcel-bundler"
-  ],
+  "workspaces": [],
   "jest": {
     "transform": {
       "^.+\\.ts$": "ts-jest"
@@ -62,6 +57,10 @@
     "tsc": "tsc",
     "test": "jest --detectOpenHandles --forceExit"
   },
+  "alias": {
+    "dom-render": "./libs/dom-render/src",
+    "simple-boot-core": "./libs/simple-boot-core/src"
+  },
   "devDependencies": {
     "@types/jest": "^26.0.22",
     "@typescript-eslint/eslint-plugin": "^4.16.1",
@@ -77,9 +76,11 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
-    "dom-render": "^1.0.10",
+    "decorators": "^0.0.1",
+    "dom-render": "file:libs/dom-render/src",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^6.6.7",
-    "simple-boot-core": "^1.0.16"
+    "simple-boot-core": "file:libs/simple-boot-core/src",
+    "simple-boot-front": "file:src"
   }
 }
