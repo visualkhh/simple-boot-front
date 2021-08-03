@@ -1,7 +1,7 @@
 import {ProjectService} from '../../services/ProjectService';
 import {PostConstruct, Sim} from 'simple-boot-core/decorators/SimDecorator';
 import {FrontModule} from 'simple-boot-front/module/FrontModule';
-import {AjaxService} from 'simple-boot-front/service/AjaxService';
+import {HttpService} from 'simple-boot-front/service/HttpService';
 import {View} from 'simple-boot-front/service/view/View';
 import {RandomUtils} from 'simple-boot-core/utils/random/RandomUtils';
 import {ExceptionHandler} from 'simple-boot-core/decorators/exception/ExceptionDecorator';
@@ -16,7 +16,7 @@ import html from './aop.html';
 export class Aop extends FrontModule {
     data = 1
 
-    constructor(public projectService: ProjectService, public ajax: AjaxService) {
+    constructor(public projectService: ProjectService, public ajax: HttpService) {
         super({template: html, styleImports: [css]});
     }
 

@@ -2,7 +2,7 @@ import css from "./app.css"
 import html from './app.html'
 import {Module} from "simple-boot-front/module/Module";
 import {Sim} from "simple-boot-front/decorators/SimDecorator";
-import {AjaxService} from "simple-boot-front/service/AjaxService";
+import {HttpService} from "../../../src/service/HttpService";
 import {SimstanceManager} from "simple-boot-front/simstance/SimstanceManager";
 import {AppInfo} from './AppInfo';
 
@@ -12,7 +12,7 @@ export class App extends Module {
     template = html;
     info = new AppInfo();
 
-    constructor(public ajaxService: AjaxService, public simstance: SimstanceManager) {
+    constructor(public ajaxService: HttpService, public simstance: SimstanceManager) {
         super("app-layout-module");
     }
 

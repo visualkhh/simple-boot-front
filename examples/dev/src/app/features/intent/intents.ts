@@ -4,7 +4,7 @@ import css from './intents.css';
 import html from './intents.html';
 import {Sim} from 'simple-boot-core/decorators/SimDecorator';
 import {FrontModule} from 'simple-boot-front/module/FrontModule';
-import {AjaxService} from 'simple-boot-front/service/AjaxService';
+import {HttpService} from 'simple-boot-front/service/HttpService';
 import {Intent} from 'simple-boot-core/intent/Intent';
 import {RandomUtils} from 'simple-boot-core/utils/random/RandomUtils';
 
@@ -13,7 +13,7 @@ export class Intents extends FrontModule {
     public data = '---default data';
     public profile: Profile | undefined;
 
-    constructor(public projectService: ProjectService, public ajax: AjaxService) {
+    constructor(public projectService: ProjectService, public ajax: HttpService) {
         super({template: html, styleImports: [css]});
     }
 

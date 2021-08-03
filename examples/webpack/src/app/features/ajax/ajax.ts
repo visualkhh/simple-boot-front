@@ -5,7 +5,7 @@ import css from "raw-loader!./ajax.css";
 import html from "./ajax.html";
 import {Sim} from "simple-boot-front/decorators/SimDecorator";
 import {Module} from "simple-boot-front/module/Module";
-import {AjaxService} from "simple-boot-front/service/AjaxService";
+import {HttpService} from "../../../src/service/HttpService";
 
 @Sim({scheme: "ajax"})
 export class Ajax extends Module {
@@ -14,7 +14,7 @@ export class Ajax extends Module {
 
     public data: UserResponse | undefined;
     public profile: Profile | undefined;
-    constructor(public projectService: ProjectService, public ajax: AjaxService) {
+    constructor(public projectService: ProjectService, public ajax: HttpService) {
         super("hello-world");
     }
 

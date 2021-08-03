@@ -2,7 +2,7 @@ import css from "./app.css"
 import html from './app.html'
 import {Module} from "simple-boot-front/module/Module";
 import {Sim} from "simple-boot-front/decorators/SimDecorator";
-import {AjaxService} from "simple-boot-front/service/AjaxService";
+import {HttpService} from "../../../src/service/HttpService";
 import {SimstanceManager} from "simple-boot-front/simstance/SimstanceManager";
 import {Intent} from 'simple-boot-front/intent/Intent';
 import {Renderer} from 'simple-boot-front/render/Renderer';

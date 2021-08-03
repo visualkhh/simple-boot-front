@@ -2,7 +2,6 @@ import { ConstructorType, GenericClassDecorator } from 'simple-boot-core/types/T
 import { ReflectUtils } from 'simple-boot-core/utils/reflect/ReflectUtils';
 
 export interface ComponentConfig {
-    id?: string,
     template?: string,
     styles?: (string)[],
     modules?: { [name: string]: ConstructorType<any> }

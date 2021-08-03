@@ -5,7 +5,7 @@ import css from './ajax.css';
 import html from './ajax.html';
 import {Sim} from 'simple-boot-core/decorators/SimDecorator';
 import {FrontModule} from 'simple-boot-front/module/FrontModule';
-import {AjaxService} from 'simple-boot-front/service/AjaxService';
+import {HttpService} from 'simple-boot-front/service/HttpService';
 import {Intent} from 'simple-boot-core/intent/Intent';
 
 @Sim({scheme: 'ajax'})
@@ -13,7 +13,7 @@ export class Ajax extends FrontModule {
     public data: UserResponse | undefined;
     public profile: Profile | undefined;
 
-    constructor(public projectService: ProjectService, public ajax: AjaxService) {
+    constructor(public projectService: ProjectService, public ajax: HttpService) {
         super({template: html, styleImports: [css]});
     }
 

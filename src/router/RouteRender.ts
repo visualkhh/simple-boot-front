@@ -9,11 +9,11 @@ export class RouteRender {
     constructor(private option: SimFrontOption, private simstanceManager: SimstanceManager) {
     }
 
-    async routeRender(it: RouterModule, document: Document) {
-        const lastRouterSelector = this.option.selector;
-        const targetNode = new TargetNode(lastRouterSelector, TargetNodeMode.child, document)
-        const rootScope = DomRender.proxyObjectCompileRootScope(it.router, targetNode);
-        rootScope.executeRender();
+    async routeRender(it: RouterModule) {
+        // const lastRouterSelector = this.option.selector;
+        // const targetNode = new TargetNode(lastRouterSelector, TargetNodeMode.child, document)
+        // const rootScope = DomRender.proxyObjectCompileRootScope(it.router, targetNode);
+        // rootScope.executeRender();
         // getComponent(it.router)
         console.log('routerRendeer --> ', it.router)
         for (const routerChain of it.routerChains) {

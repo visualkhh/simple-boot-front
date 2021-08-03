@@ -49,7 +49,6 @@
     "bootstrap": "^5.0.0-beta3",
     "dom-render": "file:../../libs/dom-render/src",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^6.6.7",
     "simple-boot-core": "file:../../libs/simple-boot-core/src",
     "simple-boot-front": "file:../../src"
   }

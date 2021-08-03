@@ -4,7 +4,7 @@ import css from "./views.css";
 import html from "./views.html";
 import {Sim} from "simple-boot-front/decorators/SimDecorator";
 import {Module} from "simple-boot-front/module/Module";
-import {AjaxService} from "simple-boot-front/service/AjaxService";
+import {HttpService} from "../../../src/service/HttpService";
 import {RandomUtils} from 'simple-boot-front/util/random/RandomUtils';
 import {View} from "simple-boot-front/service/view/View";
 
@@ -17,7 +17,7 @@ export class Views extends Module {
 
     public a = new View<Element>('#input', this);
 
-    constructor(public projectService: ProjectService, public ajax: AjaxService) {
+    constructor(public projectService: ProjectService, public ajax: HttpService) {
         super("view");
     }
 
