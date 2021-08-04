@@ -1,7 +1,8 @@
-import {Sim} from "simple-boot-core/decorators/SimDecorator";
-import {ExceptionHandler} from "simple-boot-core/decorators/exception/ExceptionDecorator";
-import {After, Before} from "simple-boot-core/decorators/aop/AOPDecorator";
-import {Aop} from "../features/aop/aop";
+import {Sim} from 'simple-boot-core/decorators/SimDecorator';
+import {ExceptionHandler} from 'simple-boot-core/decorators/exception/ExceptionDecorator';
+import {After, Before} from 'simple-boot-core/decorators/aop/AOPDecorator';
+import {Aop} from '../features/aop/aop';
+import { Component } from 'simple-boot-front/decorators/Component';
 @Sim()
 export class Advice {
     constructor() {
@@ -22,5 +23,4 @@ export class Advice {
     public afterTest(obj: any, f: Function, name: string) {
         console.log('after Test:')
     }
-
 }

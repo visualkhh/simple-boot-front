@@ -1,17 +1,16 @@
-import css from "./introduction.css";
-import html from "./introduction.html";
-import {Sim} from "simple-boot-core/decorators/SimDecorator";
-import {FrontModule} from "simple-boot-front/module/FrontModule";
+import template from './introduction.html';
+import css from './introduction.css';
+import {Sim} from 'simple-boot-core/decorators/SimDecorator';
+import { Component } from 'simple-boot-front/decorators/Component';
 
 @Sim()
-export class Introduction extends FrontModule {
+@Component({template, styles: [css]})
+export class Introduction {
     public data = 'data';
 
     constructor() {
-        super({template: html, styleImports:[css]});
     }
 
     click() {
     }
-
 }

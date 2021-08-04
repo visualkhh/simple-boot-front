@@ -1,18 +1,16 @@
-import {fromEvent, Observable} from 'rxjs';
-import {FrontModule} from '../../module/FrontModule';
-import {FromEventTarget} from 'rxjs/internal/observable/fromEvent';
 
 export class View<T extends Element> {
-    constructor(private _e: T | FromEventTarget<any> | string, public module?: FrontModule) {
+    constructor(private _e: T | string, public module?: any) {
     }
 
-    event<T>(eventName: string): Observable<T> {
-        return fromEvent<T>(this.e, eventName)
-    }
-
-    click<E>(): Observable<E> {
-        return fromEvent<E>(this.e, 'click');
-    }
+    // event<T>(eventName: string): Observable<T> {
+    //     this.e.addEventListener(eventName, )
+    //     return fromEvent<T>(this.e, eventName)
+    // }
+    //
+    // click<E>(): Observable<E> {
+    //     return fromEvent<E>(this.e, 'click');
+    // }
 
     get e() {
         if (typeof this._e === 'string' && this.module) {

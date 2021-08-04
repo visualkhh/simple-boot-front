@@ -1,35 +1,30 @@
-import {Sim} from 'simple-boot-core/decorators/SimDecorator';
-import {FrontModule} from 'simple-boot-front/module/FrontModule';
+import { Router, Sim } from 'simple-boot-core/decorators/SimDecorator';
 import {ConstructorType} from 'simple-boot-core/types/Types';
 import {Introduction} from './introduction/introduction';
 import {Event} from './event/event';
-import {Document} from './layout/document';
-import {Forbidden} from '../errors/forbidden/forbidden';
-import {Notfound} from './errors/notfound/notfound';
-import {FrontRouter} from 'simple-boot-front/router/FrontRouter';
 import {Intent} from 'simple-boot-core/intent/Intent';
-import {RouterModule} from 'simple-boot-core/route/RouterModule';
-
+import { Component } from 'simple-boot-front/decorators/Component';
+import css from './layout/document.css'
+import template from './layout/document.html'
+import { RouterAction } from 'simple-boot-core/route/RouterAction';
+import { Navigation } from 'simple-boot-front/service/Navigation';
 @Sim({scheme: 'document-router'})
-export class DocumentRouter extends FrontRouter {
-    '' = Introduction;
-    '/' = Introduction;
-    '/event' = Event;
-
-    constructor() {
-        super('/documents', Document);
+@Component({template, styles: [css]})
+@Router({
+    path: '/documents',
+    childs: {
+        '': Introduction,
+        '/': Introduction,
+        '/event': Event
+    }
+})
+export class DocumentRouter implements RouterAction {
+    child?: ConstructorType<any>
+    constructor(private navigation: Navigation) {
     }
 
-    async canActivate(url: Intent, module: RouterModule) {
-        if (url.pathname === 'views' && url.queryParams.auth === 'false') {
-            return Forbidden;
-        } else {
-            return module.module;
-        }
-    }
-
-    notFound(url: Intent): ConstructorType<FrontModule> {
-        console.log(url.pathname)
-        return Notfound;
+    canActivate(url: Intent, module: ConstructorType<object>) {
+        console.log('-------DocumentRouter----->', url, module)
+        this.child = module;
     }
 }

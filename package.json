@@ -30,7 +30,6 @@
     "type": "git",
     "url": "https://github.com/visualkhh/simple-boot-front"
   },
-  "workspaces": [],
   "jest": {
     "transform": {
       "^.+\\.ts$": "ts-jest"
@@ -59,7 +58,8 @@
   },
   "alias": {
     "dom-render": "./libs/dom-render/src",
-    "simple-boot-core": "./libs/simple-boot-core/src"
+    "simple-boot-core": "./libs/simple-boot-core/src",
+    "simple-boot-front": "./src"
   },
   "devDependencies": {
     "@types/jest": "^26.0.22",
@@ -78,7 +78,6 @@
   "dependencies": {
     "dom-render": "file:libs/dom-render/src",
     "reflect-metadata": "^0.1.13",
-    "rxjs": "^7.3.0",
     "simple-boot-core": "file:libs/simple-boot-core/src",
     "simple-boot-front": "file:src"
   }

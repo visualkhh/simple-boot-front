@@ -45,6 +45,4 @@ export class AppRouter implements RouterAction, LifeCycle {
     onScopeMaked(data: Scope): void {
         // console.log('--onScopeMaked')
     }
-
-
 }

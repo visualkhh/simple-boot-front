@@ -1,10 +1,7 @@
-import { UserResponse } from '../../models/UserResponse';
-import { Profile } from '../../shareds/Profile';
 import { ProjectService } from '../../services/ProjectService';
 import css from './exception.css';
-import html from './exception.html';
+import template from './exception.html';
 import {PostConstruct, Sim} from 'simple-boot-core/decorators/SimDecorator';
-import {FrontModule} from 'simple-boot-front/module/FrontModule';
 import {HttpService} from 'simple-boot-front/service/HttpService';
 import {View} from 'simple-boot-front/service/view/View';
 import {RandomUtils} from 'simple-boot-core/utils/random/RandomUtils';
@@ -13,12 +10,13 @@ import {SimNoSuch} from 'simple-boot-core/throwable/SimNoSuch';
 import {SimError} from 'simple-boot-core/throwable/SimError';
 import {RouterError} from 'simple-boot-front/throwable/RouterError';
 import {RouterNotFount} from 'simple-boot-front/throwable/RouterNotFount';
+import { Component } from 'simple-boot-front/decorators/Component';
 
 @Sim()
-export class Exception extends FrontModule {
+@Component({template, styles: [css]})
+export class Exception {
     data = 1
     constructor(public projectService: ProjectService, public ajax: HttpService) {
-        super({template: html, styleImports: [css]});
     }
 
     onInit() {

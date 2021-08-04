@@ -29,6 +29,8 @@
     "test": "jest --detectOpenHandles --forceExit"
   },
   "alias": {
+    "dom-render": "../../libs/dom-render/src",
+    "simple-boot-core": "../../libs/simple-boot-core/src",
     "simple-boot-front": "../../src"
   },
   "devDependencies": {
@@ -47,6 +49,8 @@
   },
   "dependencies": {
     "bootstrap": "^5.0.0-beta3",
-    "simple-boot-front": "1.0.54"
+    "dom-render": "file:../../libs/dom-render/src",
+    "simple-boot-core": "file:../../libs/simple-boot-core/src",
+    "simple-boot-front": "file:../../src"
   }
 }

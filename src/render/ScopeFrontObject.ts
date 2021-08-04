@@ -20,7 +20,6 @@ export class ScopeFrontObject extends ScopeObject {
             if (componentPrototype) {
                 try{
                     include(this.simstanceManager.getOrNewSim(componentPrototype));
-                    // console.log('---', this.simstanceManager.getOrNewSim(componentPrototype), componentPrototype)
                 } catch(e) {
                     console.error(e);
                 }

@@ -1,21 +1,16 @@
-import { UserResponse } from "../../../models/UserResponse";
-import { Profile } from "../../../shareds/Profile";
-import { ProjectService } from "../../../services/ProjectService";
-import css from "./forbidden.css";
-import html from "./forbidden.html";
-import {Sim} from "simple-boot-core/decorators/SimDecorator";
-import {FrontModule} from "simple-boot-front/module/FrontModule";
-import {HttpService} from "simple-boot-front/service/HttpService";
+import { ProjectService } from '../../../services/ProjectService';
+import css from './forbidden.css';
+import template from './forbidden.html';
+import {Sim} from 'simple-boot-core/decorators/SimDecorator';
+import {HttpService} from 'simple-boot-front/service/HttpService';
+import { Component } from 'simple-boot-front/decorators/Component';
 
 @Sim()
-export class Forbidden extends FrontModule {
-    public data: UserResponse | undefined;
-    public profile: Profile | undefined;
+@Component({template, styles: [css]})
+export class Forbidden {
     constructor(public projectService: ProjectService, public ajax: HttpService) {
-        super({template: html, styleImports:[css]});
     }
 
     onInit() {
     }
-
 }

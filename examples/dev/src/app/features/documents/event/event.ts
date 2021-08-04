@@ -1,14 +1,14 @@
 import css from './event.css';
-import html from './event.html';
+import template from './event.html';
 import {Sim} from 'simple-boot-core/decorators/SimDecorator';
-import {FrontModule} from 'simple-boot-front/module/FrontModule';
+import { Component } from 'simple-boot-front/decorators/Component';
 
 @Sim()
-export class Event extends FrontModule {
+@Component({template, styles: [css]})
+export class Event {
     public data = 'data';
 
     constructor() {
-        super({template: html, styleImports: [css]});
     }
 
     click() {

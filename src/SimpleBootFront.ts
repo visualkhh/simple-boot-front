@@ -1,10 +1,9 @@
 import { SimFrontOption } from './option/SimFrontOption';
 import { ConstructorType } from 'simple-boot-core/types/Types';
-import { RouteRender } from './router/RouteRender';
 import { getComponent } from './decorators/Component';
 import { DomRender } from 'dom-render/DomRender';
 import { TargetNode, TargetNodeMode } from 'dom-render/RootScope';
-import { SimAtomic } from '../libs/simple-boot-core/src/simstance/SimAtomic';
+import { SimAtomic } from 'simple-boot-core/simstance/SimAtomic';
 import { SimpleApplication } from 'simple-boot-core/SimpleApplication';
 import { Intent } from 'simple-boot-core/intent/Intent';
 import { Navigation } from './service/Navigation';
@@ -14,8 +13,6 @@ import { HttpService } from './service/HttpService';
 import { SimstanceManager } from 'simple-boot-core/simstance/SimstanceManager';
 
 export class SimpleBootFront extends SimpleApplication {
-    public routeRender: RouteRender;
-
     constructor(public rootRouter: ConstructorType<any>, public option: SimFrontOption) {
         super(rootRouter, option);
         window.__dirname = 'simple-boot-front__dirname';
@@ -24,16 +21,15 @@ export class SimpleBootFront extends SimpleApplication {
             onProxy: (it: any) => {
                 const component = getComponent(it);
                 if (component && typeof it === 'object') {
+                    console.log('proxyxxxxx', it)
                     const proxy = DomRender.proxy(it, {template: component.template ?? '', styles: component.styles},
-                        [SimpleApplication, SimstanceManager, RouteRender, SimFrontOption, Navigation, ViewService, HttpService]);
-                    console.log('proxyxxxxx', proxy)
+                        [SimpleApplication, SimstanceManager, SimFrontOption, Navigation, ViewService, HttpService]);
+                    console.log('proxyxxxxx--->', proxy)
                     return proxy
                 }
                 return it;
             }
         };
-        // option.simProxy = new SimFrontProxyHandler(option);
-        this.routeRender = new RouteRender(this.option, this.simstanceManager);
     }
 
     public run() {
@@ -50,15 +46,20 @@ export class SimpleBootFront extends SimpleApplication {
         const navigation = this.simstanceManager.getOrNewSim(Navigation)!
         window.addEventListener('popstate', (event) => {
             const intent = new Intent(navigation.path ?? '');
-            this.routing(intent).then(async it => {
-                it.routerChains.reduce((a, b) => {
-                    if (a.canActivate) {
-                        a.canActivate(intent, b)
+            this.routing<SimAtomic, any>(intent).then(async it => {
+                if (it) {
+                    it.routerChains.reduce((a, b) => {
+                        const value = a.value! as any;
+                        if (value.canActivate) {
+                            value.canActivate(intent, b.type)
+                        }
+                        return b;
+                    });
+
+                    const r = it.router?.value! as any;
+                    if (r.canActivate) {
+                        r.canActivate(intent, it.module)
                     }
-                    return b;
-                });
-                if (it.router.canActivate) {
-                    it.router.canActivate(intent, it.module)
                 }
             })
         })

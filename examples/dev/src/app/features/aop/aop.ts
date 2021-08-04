@@ -1,6 +1,5 @@
 import {ProjectService} from '../../services/ProjectService';
 import {PostConstruct, Sim} from 'simple-boot-core/decorators/SimDecorator';
-import {FrontModule} from 'simple-boot-front/module/FrontModule';
 import {HttpService} from 'simple-boot-front/service/HttpService';
 import {View} from 'simple-boot-front/service/view/View';
 import {RandomUtils} from 'simple-boot-core/utils/random/RandomUtils';
@@ -10,14 +9,15 @@ import {SimError} from 'simple-boot-core/throwable/SimError';
 import {RouterError} from 'simple-boot-front/throwable/RouterError';
 import {After, Before} from 'simple-boot-core/decorators/aop/AOPDecorator';
 import css from './aop.css';
-import html from './aop.html';
+import template from './aop.html';
+import { Component } from 'simple-boot-front/decorators/Component';
 
 @Sim()
-export class Aop extends FrontModule {
+@Component({template, styles: [css]})
+export class Aop {
     data = 1
 
     constructor(public projectService: ProjectService, public ajax: HttpService) {
-        super({template: html, styleImports: [css]});
     }
 
     onInit() {
