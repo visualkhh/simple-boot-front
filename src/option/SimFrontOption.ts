@@ -1,6 +1,6 @@
 import { SimOption } from 'simple-boot-core/SimOption';
 import { ConstructorType } from 'simple-boot-core/types/Types';
-import { Config } from 'dom-render/Config';
+import { Config, ConfigParam, ScopeObjectFactory } from 'dom-render/Config';
 import { Scope } from 'dom-render/Scope';
 import { ScopeObject } from 'dom-render/ScopeObject';
 
@@ -12,15 +12,19 @@ export enum UrlType {
 export class SimFrontOption extends SimOption {
     selector: string = '#app';
     urlType: UrlType = UrlType.path;
-    domRenderConfig = new Config();
+    private _domRenderConfig?: Config;
 
     constructor(public window: Window, advice: ConstructorType<any>[] = []) {
         super(advice);
     }
 
-    setFactoryScopeObject(factoryScopeObject: (scope: Scope) => ScopeObject | undefined): SimFrontOption {
-        this.domRenderConfig.factoryScopeObject = factoryScopeObject;
+    setDomRenderConfig(config: ConfigParam): SimFrontOption {
+        this._domRenderConfig = new Config(config);
         return this;
+    }
+
+    getDomRenderConfig(): Config | undefined {
+        return this._domRenderConfig;
     }
 
     setSelector(selector: string): SimFrontOption {

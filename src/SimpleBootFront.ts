@@ -11,20 +11,37 @@ import { ScopeFrontObject } from './render/ScopeFrontObject';
 import { ViewService } from './service/view/ViewService';
 import { HttpService } from './service/HttpService';
 import { SimstanceManager } from 'simple-boot-core/simstance/SimstanceManager';
+import { Config } from 'dom-render/Config';
+import { eventManager } from 'dom-render/events/EventManager';
+import { SimGlobal } from 'simple-boot-core/global/SimGlobal';
 
 export class SimpleBootFront extends SimpleApplication {
     constructor(public rootRouter: ConstructorType<any>, public option: SimFrontOption) {
         super(rootRouter, option);
         window.__dirname = 'simple-boot-front__dirname';
-        option.setFactoryScopeObject((scope) => new ScopeFrontObject(scope, this.simstanceManager))
+        option.setDomRenderConfig({
+            factoryScopeObject: (scope) => new ScopeFrontObject(scope, this.simstanceManager)
+            // applyEvent: (obj, elements) => {
+            //     eventManager.procAttr(elements, 'router-link', (e, v) => {
+            //         console.log('applyEvent --> ', e, v);
+            //     })
+            // },
+            // changeVar(obj, elements, varName) {
+            //     const navigation = SimGlobal().application.simstanceManager.getOrNewSim(Navigation);
+            //     eventManager.procAttr(elements, 'router-link', (e, v) => {
+            //         e.addEventListener('click', () => {
+            //             navigation.go(v)
+            //         })
+            //         // console.log('changeVar --> ', e, v);
+            //     })
+            // }
+        })
         option.proxy = {
             onProxy: (it: any) => {
                 const component = getComponent(it);
                 if (component && typeof it === 'object') {
-                    console.log('proxyxxxxx', it)
                     const proxy = DomRender.proxy(it, {template: component.template ?? '', styles: component.styles},
                         [SimpleApplication, SimstanceManager, SimFrontOption, Navigation, ViewService, HttpService]);
-                    console.log('proxyxxxxx--->', proxy)
                     return proxy
                 }
                 return it;
@@ -39,12 +56,12 @@ export class SimpleBootFront extends SimpleApplication {
         const targetNode = new TargetNode(this.option.selector, TargetNodeMode.child, this.option.window.document)
         const router = routerAtomic.value!;
         console.log('executeRender==before', router)
-        const rootScope = DomRender.proxyObjectRender(router, targetNode, this.option.domRenderConfig);
+        const rootScope = DomRender.proxyObjectRender(router, targetNode, this.option.getDomRenderConfig());
         console.log('executeRender==before====')
         // rootScope.executeRender();
 
         const navigation = this.simstanceManager.getOrNewSim(Navigation)!
-        window.addEventListener('popstate', (event) => {
+        this.option.window.addEventListener('popstate', (event) => {
             const intent = new Intent(navigation.path ?? '');
             this.routing<SimAtomic, any>(intent).then(async it => {
                 if (it) {
@@ -60,6 +77,21 @@ export class SimpleBootFront extends SimpleApplication {
                     if (r.canActivate) {
                         r.canActivate(intent, it.module)
                     }
+
+                    const navigation = this.simstanceManager.getOrNewSim(Navigation)!
+                    this.option.window.document.querySelectorAll('[router-active-class]').forEach(it => {
+                        const attribute = it.getAttribute('router-active-class');
+                        const datas = attribute?.split(':');
+                        if (datas && datas.length === 2) {
+                            const path = datas[0];
+                            const classs = datas[1].split(',');
+                            if (navigation.path === path) {
+                                it.classList.add(...classs);
+                            } else {
+                                it.classList.remove(...classs);
+                            }
+                        }
+                    });
                 }
             })
         })
