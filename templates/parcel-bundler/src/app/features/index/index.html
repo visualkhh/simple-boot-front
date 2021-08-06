@@ -1,6 +1,6 @@
 <h1><!--%write(this.data)%--></h1>
 <div>
 your content...
-    <div><!--%write(this.randomData)%--><button module-event-click="random"> test random data</button></div>
-    <div><span module-change-style="return {color: this.randomColorData}">random data color</span><button module-event-click="randomColor"> test random color data</button></div>
+    <div><!--%write(this.randomData)%--><button dr-event-click="this.random()"> test random data</button></div>
+    <div><span dr-style="return {color: this.randomColorData}">random data color</span><button dr-event-click="this.randomColor()"> test random color data</button></div>
 </div>
