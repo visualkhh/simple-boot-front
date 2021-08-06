@@ -1,6 +1,6 @@
 {
   "name": "simple-boot-front",
-  "version": "1.0.54",
+  "version": "1.0.57",
   "main": "SimpleApplication.js",
   "license": "MIT",
   "description": "front end SPA frameworks",
@@ -51,7 +51,7 @@
     "build": "rm -rf dist && tsc --outDir dist --declarationDir dist",
     "dev:serve": "npm run serve --workspace=dev",
     "dev-onepage:serve": "npm run serve --workspace=dev-onepage",
-    "npm-build": "rm -rf dist && tsc --outDir dist --declarationDir dist && cp package.json dist && cp README.MD dist",
+    "npm-build": "rm -rf dist && tsc --outDir dist --declarationDir dist && cp package-prod.json dist/package.json && cp README.MD dist",
     "npm-publish": "npm run npm-build && npm publish ./dist",
     "tsc": "tsc",
     "test": "jest --detectOpenHandles --forceExit"
