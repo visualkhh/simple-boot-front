@@ -118,12 +118,14 @@ npm install simple-boot-front
    - start: <!--% 
    - end: %-->
    - write: write string
-   - method  
-     - module: module include 
+   - include  
+     - include: donRenderProxy obj include 
+   - component  
+     - component: component include 
    - ex
       ```html
       <div><!--%write(this.data)%--></div>
-      <div><!--%module(this.aModule)%--></div>
+      <div><!--%component(this.aModule)%--></div>
       <div>
       <!--%
           for (let i of this.datas) {
