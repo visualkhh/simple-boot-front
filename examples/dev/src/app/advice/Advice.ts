@@ -6,7 +6,7 @@ import { Component } from 'simple-boot-front/decorators/Component';
 @Sim()
 export class Advice {
     constructor() {
-        console.log('-Advice-->?')
+        // console.log('-Advice-->?')
     }
 
     @ExceptionHandler()

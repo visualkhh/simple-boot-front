@@ -51,6 +51,7 @@
     "bootstrap": "^5.0.0-beta3",
     "dom-render": "file:../../libs/dom-render/src",
     "simple-boot-core": "file:../../libs/simple-boot-core/src",
-    "simple-boot-front": "file:../../src"
+    "simple-boot-front": "file:../../src",
+    "src": "^1.1.2"
   }
 }

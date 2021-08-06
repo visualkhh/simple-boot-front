@@ -43,13 +43,13 @@ export class AppRouter implements RouterAction, LifeCycle {
     }
 
     onReady(data: HTMLFrameElement): void {
-        console.log('onReady', data);
+        // console.log('onReady', data);
     }
     onRenderd(data: HTMLFrameElement): void {
-        console.log('onRenderd', data);
+        // console.log('onRenderd', data);
     }
     onScopeMaked(data: Scope): void {
-        console.log('onScopeMaked', data);
+        // console.log('onScopeMaked', data);
     }
 
     canActivate(url: Intent, module: ConstructorType<object>): void {

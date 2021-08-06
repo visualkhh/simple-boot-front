@@ -30,7 +30,6 @@ export class SimpleBootFront extends SimpleApplication {
                     if (v) {
                         e.addEventListener('click', (event) => {
                             SimGlobal().application.simstanceManager.getOrNewSim(Navigation)?.go(v)
-                            console.log('applyEvent --> ', e, v);
                         })
                     }
                 })
