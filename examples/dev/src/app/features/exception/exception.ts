@@ -34,7 +34,7 @@ export class Exception {
 
     fireException($event: MouseEvent, view: View<Element>) {
         this.data = RandomUtils.random(0, 100);
-        console.log('--->', this.data)
+        console.log('--->', this.data, this)
         this.wow('aaaa');
         const a = undefined;
         console.log((a as any).wow)

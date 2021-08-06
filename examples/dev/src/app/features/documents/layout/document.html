@@ -10,8 +10,7 @@ gggggggggggggggggggggg
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
-                <a dr-event-click="this.navigation.go('/documents')" class="nav-link active" aria-current="page"
-                   router-active-class="['active']">
+                <a router-link="/documents" class="nav-link text-white" aria-current="page" router-active-class="active">
                     <svg class="bi me-2" width="16" height="16">
                         <use xlink:href="#home"/>
                     </svg>
@@ -19,7 +18,7 @@ gggggggggggggggggggggg
                 </a>
             </li>
             <li>
-                <a dr-event-click="this.navigation.go('/documents/event')" class="nav-link text-white" router-active-class="['active']">
+                <a router-link="/documents/event" class="nav-link text-white" router-active-class="active">
                     <svg class="bi me-2" width="16" height="16">
                         <use xlink:href="#speedometer2"/>
                     </svg>
@@ -27,7 +26,7 @@ gggggggggggggggggggggg
                 </a>
             </li>
             <li>
-                <a dr-event-click="this.navigation.go('/documents/test')" class="nav-link text-white" router-active-class="['active']">
+                <a router-link="/documents/test" class="nav-link text-white" router-active-class="active">
                     <svg class="bi me-2" width="16" height="16">
                         <use xlink:href="#speedometer2"/>
                     </svg>

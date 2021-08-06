@@ -14,6 +14,15 @@ import { Component } from 'simple-boot-front/decorators/Component';
 export class Index {
     data = 'default data';
     thisData = 5151;
+
+
+
+    // public title = new class {
+    //     constructor() {
+    //     }
+    // }();
+
+
     constructor(public v: ViewService, public simstanceManager: SimstanceManager, public navigation: Navigation) {
     }
 
@@ -37,19 +46,19 @@ export class Index {
     //     // this.publish(new Intent<any, Event>('ajax://goo', this.numbers));
     // }
     //
-    // thisDataChange() {
-    //     this.thisData = Math.floor(RandomUtils.random(1, 400));
-    //     console.log('thisDataChange', this.thisData)
-    // }
+    thisDataChange() {
+        this.thisData = Math.floor(RandomUtils.random(1, 400));
+        console.log('thisDataChange', this.thisData)
+    }
     //
     // go($event: KeyboardEvent, view: View<Element>) {
     //     $event.preventDefault();
     // }
     //
-    // goto() {
-    //     console.log('-->na', this.navigation)
-    //     this.navigation.go('/exception');
-    // }
+    goto() {
+        console.log('-->na', this.navigation)
+        this.navigation.go('/exception');
+    }
     //
     // gotoUser() {
     //     console.log('-->na', this.navigation)

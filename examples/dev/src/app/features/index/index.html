@@ -16,29 +16,28 @@
 <!--    </div>-->
 <!--</div>-->
 
-<!--<div class="card mt-2" style="width: 100%;">-->
-<!--    <div class="card-body">-->
-<!--        <h5>default data set "module-value"</h5>-->
-<!--        <input type="text" module-value="data">-->
-<!--    </div>-->
-<!--</div>-->
-<!--<div class="card mt-2" style="width: 100%;">-->
-<!--    <div class="card-body">-->
-<!--        <h5>variable module</h5>-->
-<!--        &lt;!&ndash;%write(this.data)%&ndash;&gt;-->
-<!--        data link change event <input type="text" module-value-link="data">-->
-<!--    </div>-->
-<!--</div>-->
-
-<!--<div>11 &lt;!&ndash;%write(this.thisData)%&ndash;&gt; 22 </div>-->
-<!--<div>-->
-<!--    &lt;!&ndash;%-->
-<!--    write(this.thisData)-->
-<!--    %&ndash;&gt;-->
-<!--    thisData <button module-event-click="thisDataChange"> this data change</button>-->
-<!--</div>-->
-<!--<div>-->
-<!--    <div module-event-click="goto">aaaaaaaaa</div>-->
-<!--    <div module-event-click="gotoUser">user</div>-->
-<!--</div>-->
+<div class="card mt-2" style="width: 100%;">
+    <div class="card-body">
+        <h5>default data set "module-value"</h5>
+        <input type="text" dr-value="return this.data">
+    </div>
+</div>
+<div class="card mt-2" style="width: 100%;">
+    <div class="card-body">
+        <h5>variable module</h5>
+        "<!--%write(this.data)%-->"
+        data link change event <input type="text" dr-value-link="data">
+    </div>
+</div>
+<div>11 <!--%write(this.thisData)%--> 22 </div>
+<div>
+    <!--%
+    write(this.thisData)
+    %-->
+    thisData <button dr-event-click="this.thisDataChange()"> this data change</button>
+</div>
+<div>
+    <div dr-event-click="this.goto()">aaaaaaaaa</div>
+    <div dr-event-click="gotoUser">user</div>
+</div>
 

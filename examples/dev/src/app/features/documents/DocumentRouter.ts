@@ -24,7 +24,7 @@ export class DocumentRouter implements RouterAction {
     }
 
     canActivate(url: Intent, module: ConstructorType<object>) {
-        console.log('-------DocumentRouter----->', url, module)
+        // console.log('-------DocumentRouter----->', url, module)
         this.child = module;
     }
 }

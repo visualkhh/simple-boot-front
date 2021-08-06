@@ -2,7 +2,7 @@
     <header class="blog-header py-3">
         <div class="row flex-nowrap justify-content-between align-items-center">
             <div class="col-4 pt-1">
-                -------
+                <!--%write(this.data)%-->
             </div>
             <div class="col-4 text-center">
                 <a class="blog-header-logo text-dark pointer" router-link="">simple boot</a>
@@ -18,13 +18,13 @@
 
     <div class="nav-scroller py-1 mb-2">
         <nav class="nav d-flex justify-content-between">
-            <a class="p-2 link-secondary pointer" dr-event-click="this.navigation.go('/')" router-active-class="/:active">Home11111</a>
-            <a class="p-2 link-secondary pointer" dr-event-click="this.navigation.go('/ajax')" router-active-class="/ajax:active">Ajax</a>
-            <a class="p-2 link-secondary pointer" dr-event-click="this.navigation.go('/intent')" router-active-class="/intent:active">Intent event</a>
-            <a class="p-2 link-secondary pointer" dr-event-click="this.navigation.go('/exception')" router-active-class="/exception:active">exception</a>
-            <a class="p-2 link-secondary pointer" dr-event-click="this.navigation.go('/aop')" router-active-class="/aop:active">aop</a>
-            <a class="p-2 link-secondary pointer" dr-event-click="this.navigation.go('/views')" router-active-class="/views:active">views</a>
-            <a class="p-2 link-secondary pointer" dr-event-click="this.navigation.go('/documents')" router-active-class="/documents:active">documents</a>
+            <a class="p-2 link-secondary pointer" router-link='/'           router-active-class="active">Home11111</a>
+            <a class="p-2 link-secondary pointer" router-link='/ajax'       router-active-class="active">Ajax</a>
+            <a class="p-2 link-secondary pointer" router-link='/intent'     router-active-class="active">Intent event</a>
+            <a class="p-2 link-secondary pointer" router-link='/exception'  router-active-class="active">exception</a>
+            <a class="p-2 link-secondary pointer" router-link='/aop'        router-active-class="active">aop</a>
+            <a class="p-2 link-secondary pointer" router-link='/views'      router-active-class="active">views</a>
+            <a class="p-2 link-secondary pointer" router-link='/documents'  router-active-class="active">documents</a>
         </nav>
     </div>
 </div>

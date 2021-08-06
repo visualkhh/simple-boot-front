@@ -12,7 +12,7 @@ import { Component } from 'simple-boot-front/decorators/Component';
 @Component({template, styles: [css]})
 export class Views {
     public data = 'data';
-    public a = new View<Element>('#input', this);
+    // public a = new View<Element>('#input', this);
 
     constructor(public projectService: ProjectService, public ajax: HttpService, private routerManager: RouterManager) {
     }
@@ -23,6 +23,6 @@ export class Views {
 
     click() {
         this.data = 'data:' + Math.floor(RandomUtils.random(0, 100))
-        console.log('-->', this.a.e)
+        // console.log('-->', this.a.e)
     }
 }

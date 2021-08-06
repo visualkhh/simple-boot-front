@@ -25,20 +25,19 @@ import { Scope } from 'dom-render/Scope';
     path: '',
     childs: {
         '': Index,
-        '/': Index
-        // '/ajax': Ajax,
-        // '/intent': Intents,
-        // '/view': Views,
-        // '/exception': Exception,
-        // '/aop': Aop,
-        // '/views': Views,
+        '/': Index,
+        '/ajax': Ajax,
+        '/intent': Intents,
+        '/views': Views,
+        '/exception': Exception,
+        '/aop': Aop,
         // '/user/:id': Views
     },
     childRouters: [DocumentRouter]
 })
 export class AppRouter implements RouterAction, LifeCycle {
     child?: ConstructorType<object>;
-
+    data = 'my name is visual'
     constructor(private navigation: Navigation) {
 
     }
@@ -54,7 +53,9 @@ export class AppRouter implements RouterAction, LifeCycle {
     }
 
     canActivate(url: Intent, module: ConstructorType<object>): void {
-        console.log('-------AppRouter----->', url, module)
-        this.child = module;
+        // console.log('-------AppRouter----->', url, module)
+        if (this.child !== module) {
+            this.child = module;
+        }
     }
 }
