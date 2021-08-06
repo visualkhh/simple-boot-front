@@ -18,8 +18,8 @@
       "simple-boot-core/*": ["./libs/simple-boot-core/src/*"],
       "simple-boot-front/*": ["./src/*"],
     },
-    "typeRoots": ["@type", "node_modules/@types", "node_modules/handlebars", "node_modules/reflect-metadata", "node_modules/rxjs","@types"],                       /* List of folders to include type definitions from. */
-    "types": ["node", "reflect-metadata", "rxjs", "jest"],                     /* Type declaration files to be included in compilation. */
+    "typeRoots": ["@type", "node_modules/@types", "node_modules/handlebars", "node_modules/reflect-metadata", "@types"],                       /* List of folders to include type definitions from. */
+    "types": ["node", "reflect-metadata", "jest"],                     /* Type declaration files to be included in compilation. */
     "esModuleInterop": true,                  /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */
     /* Experimental Options */
     "experimentalDecorators": true,        /* Enables experimental support for ES7 decorators. */

@@ -1,6 +1,6 @@
 {
   "name": "simple-boot-front-templates-parcel-bundler",
-  "version": "1.0.0",
+  "version": "1.0.55",
   "main": "index.js",
   "license": "MIT",
   "jest": {
@@ -43,6 +43,6 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
-    "simple-boot-front": "^1.0.54"
+    "simple-boot-front": "^1.0.55"
   }
 }

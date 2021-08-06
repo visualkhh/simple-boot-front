@@ -1,10 +1,11 @@
 import css from './forbidden.css';
 import html from './forbidden.html';
-import {FrontModule} from 'simple-boot-front/module/FrontModule';
 import {Sim} from 'simple-boot-core/decorators/SimDecorator';
+import { Component } from '../../src/decorators/Component';
 
 @Sim()
-export class Forbidden extends FrontModule {
+@Component
+export class Forbidden {
     constructor() {
         super({template: html, styleImports: [css]});
     }

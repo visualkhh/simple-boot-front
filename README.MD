@@ -33,11 +33,9 @@ npm install simple-boot-front
 * Here is a quick teaser of a complete simple-boot-front application in typescript
   * index.ts
     ```typescript
-    const option = new SimOption(AppRouter)
-    .setUrlType(UrlType.path)
-    .setAdvice(Advice);
-    const simpleApplication = new SimpleApplication(option);
-    simpleApplication.run();    
+    const option = new SimFrontOption(window, [Advice]).setUrlType(UrlType.path);
+    const simpleApplication = new SimpleBootFront(AppRouter, option);
+    simpleApplication.run(); 
     ```
     
   * index.html
@@ -51,101 +49,66 @@ npm install simple-boot-front
   * AppRouter.ts
     ```typescript
     @Sim({scheme: 'layout-router'})
-    export class AppRouter extends Router {
-      '' = Index;
-      '/' = Index;
-      '/ajax' = Ajax;
-      '/intent' = Intents;
-      '/view' = Views;
-      '/exception' = Exception;
-      '/aop' = Aop;
-      '/views' = Views;
+    @Component({template, styles: [css]})
+    @Router({
+      path: '',
+      childs: {
+      '': Index,
+      '/': Index,
+      '/user': User
+      }
+    })
+    export class AppRouter implements RouterAction, LifeCycle {
+        name = 'AppRouter'
+        data = {name: 'good'}
+        child?: ConstructorType<any>
     
-        constructor() {
-            super('', App);
+        constructor(private navigation: Navigation) {
         }
     
-        async canActivate(url: Url, module: RouterModule): Promise<RouterModule | ConstructorType<Module>>{
-            if (url.path === 'views' && url.params.get('auth') === 'false') {
-                return Forbidden;
-            } else {
-                return module;
-            }
+        canActivate(url: Intent, module: ConstructorType<object>) {
+            console.log('canActivate  router--->', url, module)
+            this.child = module;
         }
     
-        notFound(url: Url): ConstructorType<Module> {
-            console.log(url.path)
-            return Notfound;
+        onReady(data: HTMLFrameElement): void {
+        }
+    
+        onRenderd(data: HTMLFrameElement): void {
+        }
+    
+        onScopeMaked(data: Scope): void {
         }
     }
-
 
     ```
   * index.ts
     ```typescript
     @Sim({scheme: 'index'})
-    export class Index extends Module {
-      data = "default data";
-      thisData = 5151;
-      constructor(public v: ViewService, public manager: SimstanceManager, public navigation: Navigation) {
-          super({template: html});
-      }
-  
+    Component({
+      template,
+      styles: [css]
+    })
+    export class Index {
+      public user?: User;
+      public data = {name: 'visualkhh'}
       onInit() {
+      console.log('-->')
       }
-
+      
       @PostConstruct
-      public post(renderer: Renderer) {
+      public g(s: User) {
+      
       }
     }
+
 
     ```
   * index.html
     ```html
     <h1>index</h1>
-    links:
-    <ul>
-        <li>ajax example page: <a router-link="/ajax">ajax</a></li>
-    </ul>
-    
-    <div class="card mt-2" style="width: 100%;">
-        <div class="card-body">
-            <h5 class="card-title">set module</h5>
-            <div>set variable: <!--%write(this.title)%--></div>
-            <div>input module variable: <input type="text" module-event-keyup="changeText"></div>
-        </div>
-    </div>
-    
-    <div class="card mt-2" style="width: 100%;">
-        <div class="card-body">
-            <h5>event click change "module-event-click"</h5>
-            <!--%module(this.numbers)%-->
-            <button class="btn btn-info" module-event-click="changeData">change</button>
-        </div>
-    </div>
-    
-    <div class="card mt-2" style="width: 100%;">
-        <div class="card-body">
-            <h5>default data set "module-value"</h5>
-            <input type="text" module-value="data">
-        </div>
-    </div>
-    
-    <div class="card mt-2" style="width: 100%;">
-        <div class="card-body">
-            <h5>variable module</h5>
-              <!--%module(this.data)%-->
-            data link change event <input type="text" module-value-link="data">
-        </div>
-    </div>
-    
-    <div>
-          <!--%write(this.thisData)%-->
-        thisData <button module-event-click="thisDataChange"> this data change</button>
-    </div>
-    <div>
-        <div module-event-click="goto">aaaaaaaaa</div>
-    </div>
+    <!--% write(this.data.name); %-->
+    <button dr-event-click="this.data.name='vvv'"> change name </button>
     ```
 
 ## View template engine
@@ -189,7 +152,11 @@ npm install simple-boot-front
   - parameter: SimConfig  {schema: string}
   ```typescript
   @Sim({scheme: 'index'})
-  export class Index extends Module {  }
+  @Component({
+  template,
+  styles: [css]
+  })
+  export class Index {  }
   ```
 * @PostConstruct(): Methods that you run for a separate initialization operation after the object is created
   ```typescript
@@ -203,10 +170,6 @@ npm install simple-boot-front
   @Injectable()
   export class CTitle extends Title {
   constructor(public testService: TestService) {
-    super({
-      template: 'value:(<!--% write(this.value) %--> <button module-event-click="cc">CC</button>)',
-      value: 'default value'
-    });
     console.log('ctitle constructor-->', this.testService)
   }
   
@@ -259,7 +222,7 @@ npm install simple-boot-front
 ## Intent event broker 
 ```typescript
 click() {
-  this.publish(new Intent('layout://info/data?a=wow&aa=zzz', Math.floor(RandomUtils.random(0, 100))));
+  intentManager.publish(new Intent('layout://info/data?a=wow&aa=zzz', Math.floor(RandomUtils.random(0, 100))));
   // this.publish(new Intent('layout://info/datas', Math.floor(RandomUtils.random(0, 100))));
   // this.publish(new Intent('layout://', Math.floor(RandomUtils.random(0, 100)))); // default callback method -> subscribe(i: Intent)
   // this.publish(new Intent('://info/datas', Math.floor(RandomUtils.random(0, 100))));
@@ -268,19 +231,18 @@ click() {
 
 ```typescript
 @Sim({scheme: 'layout'})
-export class App extends Module {
+@Component({
+  template,
+  styles: [css]
+})
+export class App {
     info = new AppInfo();
-    constructor() {
-        super({template: html, styleImports:[css]});
-    }
+    constructor() {}
 }
 ```
 ```typescript
-export class AppInfo extends Module {
+export class AppInfo {
     datas = 'default data';
-    constructor() {
-      super({template: '<div><h3>info</h3><!--%write(this.datas)%--></div>'});
-    }
     data(i: Intent) {
         this.datas = i.data + '->' + i.params.aa
     }
@@ -293,37 +255,37 @@ export class AppInfo extends Module {
      - **module-event-click**: click event
        - value: method name, parameter($event, View)
      ```html
-     <button module-event-click="changeData">change</button>
+     <button dr-event-click="changeData">change</button>
      ```
      - **module-event-change**: change event
        - value: method name, parameter($event, View)
      ```html
-     <input module-event-change="changeData">
+     <input dr-event-change="changeData">
      ```
      - **module-event-keyup**: keyup event
        - value: method name, parameter($event, View)
      ```html
-     <input module-event-keyup="changeData">
+     <input dr-event-keyup="changeData">
      ```
      - **module-event-keydown**: keydown event
        - value: method name, parameter($event, View)
      ```html
-     <input module-event-keydown="changeData">
+     <input dr-event-keydown="changeData">
      ```
      - **module-event-input**: input event
        - value: method name, parameter($event, View)
      ```html
-     <input module-event-input="changeData">
+     <input dr-event-input="changeData">
      ```
      - **module-value-link**: link event (value change <-> input)
        - value: variable name
      ```html
-     <input module-value-link="value">
+     <input dr-value-link="value">
      ```
      - **module-value**: value injection
        - value: variable name
      ```html
-     <input module-value="value">
+     <input dr-value="value">
      ```
      - **module-change-attr**: change value setAttribute
        - value: script
@@ -345,17 +307,6 @@ export class AppInfo extends Module {
      ```html
      <a router-link="ajax">Ajax</a>
      ```
-     - **module-event-{{eventName}}-intent-publish**: intent publish 
-       - value: ['uri', 'variablename'] or ['uri']
-       - publish
-     ```html
-     click event intent publish:
-     <button class="btn btn-primary" module-event-click-intent-publish="['layout://info/data?a=wow&aa=ppp','makeRandom']">publish data</button>
-         
-     typing:
-     <input type="text" module-event-keyup-intent-publish="['layout://info/viewSubscribe?a=wow&aa=vvv']">
-     ```
-     
      - subscribe
      ```typescript
      data(i: Intent) {
@@ -365,16 +316,7 @@ export class AppInfo extends Module {
        this.datas = i.data?.value + '->' + i.params.aa + '-->' + i.event
      }
     ```
-  * css
-    - **moduleIdAttrSelector()**: module Dedicated style
-      - as-is
-        -  ```css
-           <!--%moduleIdAttrSelector()%--> h1 {color: burlywood;}
-           ```  
-      - to-be
-        -  ```css
-           *[module-id='___Module___module-selector..'] h1 { color: burlywood;}
-           ```  
+
 
 ## License
 * MIT

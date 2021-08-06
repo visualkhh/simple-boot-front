@@ -35,14 +35,11 @@ export class AppRouter implements RouterAction, LifeCycle {
     }
 
     onReady(data: HTMLFrameElement): void {
-        // console.log('--onReady')
     }
 
     onRenderd(data: HTMLFrameElement): void {
-        // console.log('--onRenderd')
     }
 
     onScopeMaked(data: Scope): void {
-        // console.log('--onScopeMaked')
     }
 }
