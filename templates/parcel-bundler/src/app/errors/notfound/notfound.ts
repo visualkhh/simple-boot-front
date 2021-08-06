@@ -1,14 +1,11 @@
 import css from './notfound.css';
-import html from './notfound.html';
-import {FrontModule} from 'simple-boot-front/module/FrontModule';
+import template from './notfound.html';
 import {Sim} from 'simple-boot-core/decorators/SimDecorator';
+import { Component } from 'simple-boot-front/decorators/Component';
 
 @Sim()
-export class Notfound extends FrontModule {
-    constructor() {
-        super({template: html, styleImports: [css]});
-    }
-
+@Component({template, styles: [css]})
+export class Notfound {
     onInit() {
     }
 }

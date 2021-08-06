@@ -11,7 +11,6 @@ import { ScopeFrontObject } from './render/ScopeFrontObject';
 import { ViewService } from './service/view/ViewService';
 import { HttpService } from './service/HttpService';
 import { SimstanceManager } from 'simple-boot-core/simstance/SimstanceManager';
-import { Config } from 'dom-render/Config';
 import { eventManager } from 'dom-render/events/EventManager';
 import { SimGlobal } from 'simple-boot-core/global/SimGlobal';
 import { IntentManager } from 'simple-boot-core/intent/IntentManager';
@@ -19,6 +18,7 @@ import { RouterManager } from 'simple-boot-core/route/RouterManager';
 
 export class SimpleBootFront extends SimpleApplication {
     navigation!: Navigation;
+
     constructor(public rootRouter: ConstructorType<any>, public option: SimFrontOption) {
         super(rootRouter, option);
         window.__dirname = 'simple-boot-front__dirname';
@@ -64,10 +64,7 @@ export class SimpleBootFront extends SimpleApplication {
         const routerAtomic = new SimAtomic(this.rootRouter);
         const targetNode = new TargetNode(this.option.selector, TargetNodeMode.child, this.option.window.document)
         const router = routerAtomic.value!;
-        // console.log('executeRender==before', router)
         const rootScope = DomRender.proxyObjectRender(router, targetNode, this.option.getDomRenderConfig());
-        // console.log('executeRender==before====')
-        // rootScope.executeRender();
 
         this.option.window.addEventListener('popstate', (event) => {
             const intent = new Intent(this.navigation.path ?? '');
