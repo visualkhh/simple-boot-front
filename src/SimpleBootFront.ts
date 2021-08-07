@@ -1,7 +1,7 @@
 import { SimFrontOption } from './option/SimFrontOption';
 import { ConstructorType } from 'simple-boot-core/types/Types';
 import { getComponent } from './decorators/Component';
-import { DomRender } from 'dom-render/DomRender';
+import { DomRender, RawSet } from 'dom-render/DomRender';
 import { TargetNode, TargetNodeMode } from 'dom-render/RootScope';
 import { SimAtomic } from 'simple-boot-core/simstance/SimAtomic';
 import { SimpleApplication } from 'simple-boot-core/SimpleApplication';
@@ -45,15 +45,21 @@ export class SimpleBootFront extends SimpleApplication {
             // }
         })
         option.proxy = {
-            onProxy: (it: any) => {
-                const component = getComponent(it);
-                if (component && typeof it === 'object') {
-                    const proxy = DomRender.proxy(it, {template: component.template ?? '', styles: component.styles}, this.domRendoerExcludeProxy);
-                    return proxy
-                }
-                return it;
-            }
+            onProxy: (it: any) => this.createDomRender(it)
         };
+    }
+
+    public createDomRender<T>(obj: T, raws?: RawSet): T {
+        if (raws) {
+            return DomRender.proxy(obj, raws, this.domRendoerExcludeProxy);
+        } else {
+            const component = getComponent(obj);
+            if (component && typeof obj === 'object') {
+                return DomRender.proxy(obj, {template: component.template ?? '', styles: component.styles}, this.domRendoerExcludeProxy);
+            }
+        }
+
+        return obj;
     }
 
     public run() {

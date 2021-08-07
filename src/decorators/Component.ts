@@ -17,11 +17,7 @@ export const Component = (config?: ComponentConfig): GenericClassDecorator<Const
     }
 }
 Component.create = <T>(obj: T, raws?: RawSet): T => {
-    if (raws) {
-        return DomRender.proxy(obj, raws, SimGlobal().application.domRendoerExcludeProxy);
-    } else {
-        return SimGlobal().application.option.proxy?.onProxy(obj);
-    }
+    return SimGlobal().application.createDomRender(obj, raws);
 }
 
 export const getComponent = (target: ConstructorType<any> | Function | any): ComponentConfig | undefined => {
