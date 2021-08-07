@@ -70,27 +70,23 @@ export class SimpleBootFront extends SimpleApplication {
         const targetNode = new TargetNode(this.option.selector, TargetNodeMode.child, this.option.window.document)
         const router = routerAtomic.value!;
         const rootScope = DomRender.proxyObjectRender(router, targetNode, this.option.getDomRenderConfig());
-
         this.option.window.addEventListener('popstate', (event) => {
             const intent = new Intent(this.navigation.path ?? '');
             this.routing<SimAtomic, any>(intent).then(async it => {
-                if (it) {
-                    it.routerChains.reduce((a, b) => {
+                if (it?.routerChains?.length && it?.routerChains?.length > 0) {
+                    it?.routerChains?.reduce?.((a, b) => {
                         const value = a.value! as any;
                         value?.canActivate?.(intent, b.type);
                         return b;
                     });
-
-                    // 페이지 찾지못했을시.
-                    if (!it.module) {
-                        const a = it.routerChains[it.routerChains.length - 1];
-                        (a.value as any)?.canActivate?.(intent, it.module)
-                    } else { // 페이지 찾았을시
-                        const r = it.router?.value! as any;
-                        r?.canActivate?.(intent, it.module);
-                    }
-                    this.afterSetting();
                 }
+                // 페이지 찾지못했을시.
+                if (!it?.module) {
+                    (it?.routerChains[it.routerChains.length - 1] as any)?.canActivate?.(intent, it?.module);
+                } else { // 페이지 찾았을시
+                    (it.router?.value! as any)?.canActivate?.(intent, it.module);
+                }
+                this.afterSetting();
             })
         })
         this.option.window.dispatchEvent(new Event('popstate'))

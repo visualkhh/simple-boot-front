@@ -10,6 +10,8 @@ import { User } from './features/index/User';
 import { LifeCycle } from 'dom-render/LifeCycle';
 import { Scope } from 'dom-render/Scope';
 import { Navigation } from 'simple-boot-front/service/Navigation';
+import { SimFrontOption } from 'simple-boot-front/option/SimFrontOption';
+import { FrontLifeCycle } from 'simple-boot-front/module/FrontLifeCycle';
 
 @Sim({scheme: 'layout-router'})
 @Component({template, styles: [css]})
@@ -21,12 +23,12 @@ import { Navigation } from 'simple-boot-front/service/Navigation';
         '/user': User
     }
 })
-export class AppRouter implements RouterAction, LifeCycle {
+export class AppRouter implements RouterAction, LifeCycle, FrontLifeCycle {
     name = 'AppRouter'
     data = {name: 'good'}
     child?: ConstructorType<any>
 
-    constructor(private navigation: Navigation) {
+    constructor(private navigation: Navigation, private simOption: SimFrontOption) {
     }
 
     canActivate(url: Intent, module: ConstructorType<object>) {
@@ -41,5 +43,28 @@ export class AppRouter implements RouterAction, LifeCycle {
     }
 
     onScopeMaked(data: Scope): void {
+    }
+
+    onChangedRender(): void {
+    }
+
+    onCreate(): void {
+        // this.simOption.window.addEventListener('popstate', (event) => {
+        //     if (this.navigation.path === '/user') {
+        //         this.child = User;
+        //     } else {
+        //         this.child = Index;
+        //     }
+        //     console.log('---', this.navigation.path)
+        // })
+    }
+
+    onFinish(): void {
+    }
+
+    onInit(): void {
+    }
+
+    onInitedChild(): void {
     }
 }
