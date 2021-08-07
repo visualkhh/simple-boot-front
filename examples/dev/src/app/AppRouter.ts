@@ -53,7 +53,7 @@ export class AppRouter implements RouterAction, LifeCycle {
     }
 
     canActivate(url: Intent, module: ConstructorType<object>): void {
-        // console.log('-------AppRouter----->', url, module)
+        console.log('-------AppRouter----->', url, module)
         if (this.child !== module) {
             this.child = module;
         }

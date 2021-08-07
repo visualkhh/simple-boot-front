@@ -22,12 +22,15 @@ export class Ajax implements LifeCycle{
 
     onCreate(): void {
         this.data = undefined;
-        this.profile = this.option.proxy?.onProxy(new Profile())
+        this.profile = Component.create(new Profile());
         this.loadData();
     }
 
     post() {
     }
+    // createProfile() {
+    //     return Component.create(new Profile());
+    // }
 
     sync() {
         this.profile?.setUser(this.data?.results[0])

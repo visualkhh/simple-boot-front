@@ -8,6 +8,7 @@ import css from './layout/document.css'
 import template from './layout/document.html'
 import { RouterAction } from 'simple-boot-core/route/RouterAction';
 import { Navigation } from 'simple-boot-front/service/Navigation';
+import { Notfound } from '../errors/notfound/notfound';
 @Sim({scheme: 'document-router'})
 @Component({template, styles: [css]})
 @Router({
@@ -24,7 +25,11 @@ export class DocumentRouter implements RouterAction {
     }
 
     canActivate(url: Intent, module: ConstructorType<object>) {
-        // console.log('-------DocumentRouter----->', url, module)
-        this.child = module;
+        console.log('-------DocumentRouter----->', url, module)
+        if (module) {
+            this.child = module;
+        } else {
+            this.child = Notfound
+        }
     }
 }

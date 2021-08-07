@@ -18,7 +18,7 @@ import { RouterManager } from 'simple-boot-core/route/RouterManager';
 
 export class SimpleBootFront extends SimpleApplication {
     navigation!: Navigation;
-
+    public domRendoerExcludeProxy = [SimpleApplication, IntentManager, RouterManager, SimstanceManager, SimFrontOption, Navigation, ViewService, HttpService];
     constructor(public rootRouter: ConstructorType<any>, public option: SimFrontOption) {
         super(rootRouter, option);
         window.__dirname = 'simple-boot-front__dirname';
@@ -48,8 +48,7 @@ export class SimpleBootFront extends SimpleApplication {
             onProxy: (it: any) => {
                 const component = getComponent(it);
                 if (component && typeof it === 'object') {
-                    const proxy = DomRender.proxy(it, {template: component.template ?? '', styles: component.styles},
-                        [SimpleApplication, IntentManager, RouterManager, SimstanceManager, SimFrontOption, Navigation, ViewService, HttpService]);
+                    const proxy = DomRender.proxy(it, {template: component.template ?? '', styles: component.styles}, this.domRendoerExcludeProxy);
                     return proxy
                 }
                 return it;
@@ -72,15 +71,17 @@ export class SimpleBootFront extends SimpleApplication {
                 if (it) {
                     it.routerChains.reduce((a, b) => {
                         const value = a.value! as any;
-                        if (value.canActivate) {
-                            value.canActivate(intent, b.type)
-                        }
+                        value?.canActivate?.(intent, b.type);
                         return b;
                     });
 
-                    const r = it.router?.value! as any;
-                    if (r.canActivate) {
-                        r.canActivate(intent, it.module)
+                    // 페이지 찾지못했을시.
+                    if (!it.module) {
+                        const a = it.routerChains[it.routerChains.length - 1];
+                        (a.value as any)?.canActivate?.(intent, it.module)
+                    } else { // 페이지 찾았을시
+                        const r = it.router?.value! as any;
+                        r?.canActivate?.(intent, it.module);
                     }
                     this.afterSetting();
                 }
