@@ -12,6 +12,7 @@ import { Component } from 'simple-boot-front/decorators/Component';
 export class Index {
     public user?: User;
     public data = {name: 'visualkhh'}
+    public cnt = 0;
     onInit() {
         console.log('-->')
     }
