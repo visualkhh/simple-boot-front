@@ -26,8 +26,12 @@
         </nav>
     </div>
 </div>
+
 <main class="container">
-    <!--%component(this.child)%-->
+    <div dr-for="var i = 0 ; i < 2 ; i++" dr-strip="true" dr-it="i">
+        aaaa ${it}
+    </div>
+    <dr-script>component(this.child)</dr-script>
 </main>
 
 <footer class="blog-footer">

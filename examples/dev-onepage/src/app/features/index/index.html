@@ -1,20 +1,27 @@
 <h1>index</h1>
-<!--% write(this.data.name); %-->
-<!--% ifWrite(this.cnt===2,
-`<div>
-    aaa
-</div>`); %-->
-<!--% forWrite(this.cnt, this.data.name); %-->
-<!--% element('span', {z: 'aaaaa', cnt: this.cnt, 'dr-event-click': 'console.log(this.cnt)'}, 'zzzzzzzz'); %-->
 
-<scope if="this.cnt === 2">
-ccifififififfi22222
-</scope>
+<div dr-if='this.cnt1 === 2'>
+    <button dr-for-of="[1,3,4]">
+        ${it}
+        ${this.cnt1}
+    </button>
+    2222
+    asd
+    asd
+    asd
+</div>
 
-<!--<scope forOf="[5,7,3,5]">-->
-<!--    ${it === 3 ? 'aaa' : 'v'}-->
-<!--    <div>${it}</div>-->
-<!--</scope>-->
+<hr>
+<div dr-include="this.test">
+    <div dr-for="var i = 0 ; i < it.age; i++" dr-it="it">
+        [${it.name}]
+    </div>
+    ${it.name} - ${it.age}
+</div>
 
-<button dr-event-click="this.data.name=this.data.name+(this.cnt++);"> change name<!--%write(this.cnt)%--> </button>
-<button dr-event-click="this.data.name=this.data.name+(this.cnt++);"> change name </button>
+
+
+
+<button dr-event-click="this.data.name=this.data.name+(this.cnt1++);"> change name<!--%write(this.cnt)%--> </button>
+<button dr-event-click="this.data.name=this.data.name+(this.cnt2++);"> change name </button>
+<button dr-event-click="this.test.age=5;"> change name </button>

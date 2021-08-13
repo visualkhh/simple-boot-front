@@ -12,7 +12,9 @@ import { Component } from 'simple-boot-front/decorators/Component';
 export class Index {
     public user?: User;
     public data = {name: 'visualkhh'}
-    public cnt = 0;
+    public cnt1 = 0;
+    public cnt2 = 0;
+    public test = {name: 'test', age:2}
     onInit() {
         console.log('-->')
     }
