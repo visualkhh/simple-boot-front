@@ -5,10 +5,7 @@ import { Router, Sim } from 'simple-boot-core/decorators/SimDecorator';
 import { Component } from 'simple-boot-front/decorators/Component';
 import { RouterAction } from 'simple-boot-core/route/RouterAction';
 import { Intent } from 'simple-boot-core/intent/Intent';
-import { ConstructorType } from 'simple-boot-core/types/Types';
 import { User } from './features/index/User';
-import { LifeCycle } from 'dom-render/LifeCycle';
-import { Scope } from 'dom-render/Scope';
 import { Navigation } from 'simple-boot-front/service/Navigation';
 import { SimFrontOption } from 'simple-boot-front/option/SimFrontOption';
 import { FrontLifeCycle } from 'simple-boot-front/module/FrontLifeCycle';
@@ -23,15 +20,15 @@ import { FrontLifeCycle } from 'simple-boot-front/module/FrontLifeCycle';
         '/user': User
     }
 })
-export class AppRouter implements RouterAction, LifeCycle, FrontLifeCycle {
+export class AppRouter implements RouterAction, FrontLifeCycle {
     name = 'AppRouter'
     data = {name: 'good'}
-    child?: ConstructorType<any>
+    child?: any
 
     constructor(private navigation: Navigation, private simOption: SimFrontOption) {
     }
 
-    canActivate(url: Intent, module: ConstructorType<object>) {
+    canActivate(url: Intent, module: any) {
         console.log('canActivate  router--->', url, module)
         this.child = module;
     }
@@ -42,8 +39,8 @@ export class AppRouter implements RouterAction, LifeCycle, FrontLifeCycle {
     onRenderd(data: HTMLFrameElement): void {
     }
 
-    onScopeMaked(data: Scope): void {
-    }
+    // onScopeMaked(data: Scope): void {
+    // }
 
     onChangedRender(): void {
     }

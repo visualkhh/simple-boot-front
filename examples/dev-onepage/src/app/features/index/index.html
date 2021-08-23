@@ -1,27 +1,6 @@
 <h1>index</h1>
 
-<div dr-if='this.cnt1 === 2'>
-    <button dr-for-of="[1,3,4]">
-        ${it}
-        ${this.cnt1}
-    </button>
-    2222
-    asd
-    asd
-    asd
-</div>
+<!--${this.cnt1}-->
+${this.cnt1}
 
-<hr>
-<div dr-include="this.test">
-    <div dr-for="var i = 0 ; i < it.age; i++" dr-it="it">
-        [${it.name}]
-    </div>
-    ${it.name} - ${it.age}
-</div>
-
-
-
-
-<button dr-event-click="this.data.name=this.data.name+(this.cnt1++);"> change name<!--%write(this.cnt)%--> </button>
-<button dr-event-click="this.data.name=this.data.name+(this.cnt2++);"> change name </button>
-<button dr-event-click="this.test.age=5;"> change name </button>
+<button dr-event-click="this.cnt1++; console.log(this)">aaaaaaa</button>

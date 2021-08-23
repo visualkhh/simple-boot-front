@@ -1,7 +1,6 @@
 import { ConstructorType, GenericClassDecorator } from 'simple-boot-core/types/Types';
 import { ReflectUtils } from 'simple-boot-core/utils/reflect/ReflectUtils';
-import { SimGlobal } from 'simple-boot-core/global/SimGlobal';
-import { DomRender, RawSet } from 'dom-render/DomRender';
+
 
 export interface ComponentConfig {
     template?: string,
@@ -16,12 +15,12 @@ export const Component = (config?: ComponentConfig): GenericClassDecorator<Const
         ReflectUtils.defineMetadata(ComponentMetadataKey, config, target);
     }
 }
-Component.create = <T>(obj: T, raws?: RawSet): T => {
-    return SimGlobal().application.createDomRender(obj, raws);
-}
+// Component.create = <T>(obj: T, raws?: RawSet): T => {
+//     return SimGlobal().application.createDomRender(obj, raws);
+// }
 
 export const getComponent = (target: ConstructorType<any> | Function | any): ComponentConfig | undefined => {
-    if (typeof target === 'object') {
+    if (target && typeof target === 'object') {
         target = target.constructor;
     }
     try {

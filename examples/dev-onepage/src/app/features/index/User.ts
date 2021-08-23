@@ -3,7 +3,7 @@ import { Component } from 'simple-boot-front/decorators/Component';
 
 @Sim()
 @Component({
-    template: `<div><!--%write(this.name)%--></div>`
+    template: '<div>${this.name}</div>'
 })
 export class User{
     public name = 'wow';
