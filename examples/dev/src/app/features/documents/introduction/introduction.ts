@@ -7,7 +7,7 @@ import { Component } from 'simple-boot-front/decorators/Component';
 @Component({template, styles: [css]})
 export class Introduction {
     public data = 'data';
-
+    public name = 'introduction'
     constructor() {
     }
 

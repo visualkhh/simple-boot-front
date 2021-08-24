@@ -20,16 +20,18 @@ import { Notfound } from '../errors/notfound/notfound';
     }
 })
 export class DocumentRouter implements RouterAction {
-    child?: ConstructorType<any>
-    constructor(private navigation: Navigation) {
+    name = 'DocumentRouter Name';
+    child?: any
+    constructor(private navigation: Navigation, public notFound: Notfound) {
     }
 
-    canActivate(url: Intent, module: ConstructorType<object>) {
-        console.log('-------DocumentRouter----->', url, module)
-        if (module) {
+    canActivate(url: Intent, module: any) {
+        console.log('-------DocumentRouter----->', url, 'module-->', module)
+        if (!module) { // 404
+            this.child = this.notFound;
+        } else if (this.child !== module) {
             this.child = module;
-        } else {
-            this.child = Notfound
         }
+
     }
 }

@@ -37,14 +37,18 @@ export class SimpleBootFront extends SimpleApplication {
                         if (attrValue) {
                             const targetObj = ScriptUtils.eval(`return ${attrValue}`, obj)
                             const component = getComponent(targetObj)
+                            const styles = (component?.styles?.map(it => `<style>${it}</style>`) ?? []).join(' ');
+                            const template = (component?.template ?? '').replace(/this/g, attrValue);
+                            const innerHTML = styles + template;
                             if (component) {
                                 ScriptUtils.eval(`
                                 const n = this.__element.cloneNode(true);
-                                n.innerHTML = \`<style>\${this.component?.styles?.join(' ') ?? ''}</style> \${this.component?.template ?? ''}\`.replace(/this/g, \`${attrValue}\`);
+                                n.innerHTML = this.innerHTML;
                                 Array.from(n.childNodes).forEach(it => this.__fag.append(it));
-                                `, {__fag: fag, __element: element, component});
+                                `, {__fag: fag, __element: element, innerHTML});
                             }
                         }
+                        // console.log('component->>>>scan->' , element, attrValue, obj, fag)
                         return fag;
                     }
                 }],
@@ -97,7 +101,8 @@ export class SimpleBootFront extends SimpleApplication {
                 }
                 // 페이지 찾지못했을시.
                 if (!it?.module) {
-                    (it?.routerChains[it.routerChains.length - 1] as any)?.canActivate?.(intent, it?.getModuleInstance());
+                    const routerChain = it?.routerChains[it.routerChains.length - 1] as any;
+                    routerChain?.value?.canActivate?.(intent, it?.getModuleInstance());
                 } else { // 페이지 찾았을시
                     (it.router?.value! as any)?.canActivate?.(intent, it.getModuleInstance());
                 }

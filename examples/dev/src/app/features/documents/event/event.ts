@@ -7,7 +7,7 @@ import { Component } from 'simple-boot-front/decorators/Component';
 @Component({template, styles: [css]})
 export class Event {
     public data = 'data';
-
+    public name = 'event'
     constructor() {
     }
 

@@ -5,6 +5,7 @@ import css from './notfound.css'
 @Sim()
 @Component({template, styles: [css]})
 export class Notfound {
+    public name = 'notfound'
     constructor() {
     }
 

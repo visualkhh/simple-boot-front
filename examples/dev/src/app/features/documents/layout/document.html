@@ -1,5 +1,4 @@
 <main>
-gggggggggggggggggggggg
     <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
         <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
             <svg class="bi me-2" width="40" height="32">
@@ -10,7 +9,8 @@ gggggggggggggggggggggg
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
             <li class="nav-item">
-                <a router-link="/documents" class="nav-link text-white" aria-current="page" router-active-class="active">
+                <a router-link="/documents" class="nav-link text-white" aria-current="page"
+                   router-active-class="active">
                     <svg class="bi me-2" width="16" height="16">
                         <use xlink:href="#home"/>
                     </svg>
@@ -40,9 +40,15 @@ gggggggggggggggggggggg
 </main>
 
 <div>
-
+    <div test="${this.name}">
+    ${this.name}
+    </div>
+    <div test="${this.child}">
+    ${this.child?.name}
+    </div>
     <main class="container">
-        <!--%component(this.child)%-->
+<!--        <scope component="this.child"></scope>-->
+        <scope component="this.child">22222222222</scope>
     </main>
 
 </div>

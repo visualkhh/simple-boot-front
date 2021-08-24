@@ -10,13 +10,11 @@ import { ConstructorType } from 'simple-boot-core/types/Types';
 import { DocumentRouter } from './features/documents/DocumentRouter';
 import { Intent } from 'simple-boot-core/intent/Intent';
 import { RouterAction } from 'simple-boot-core/route/RouterAction';
-import { HttpService } from 'simple-boot-front/service/HttpService';
-import { SimstanceManager } from 'simple-boot-core/simstance/SimstanceManager';
 import bootstrap_css from 'bootstrap/dist/css/bootstrap.min.css';
 import template from './layouts/app.html';
 import css from './layouts/app.css';
-import { Navigation } from 'simple-boot-front/service/Navigation';
 import { FrontLifeCycle } from 'simple-boot-front/module/FrontLifeCycle';
+import { SubNotfound } from './features/documents/errors/notfound/subNotfound';
 
 @Sim({scheme: 'layout-router'})
 @Component({template, styles: [css, bootstrap_css]})
@@ -37,29 +35,31 @@ import { FrontLifeCycle } from 'simple-boot-front/module/FrontLifeCycle';
 export class AppRouter implements RouterAction, FrontLifeCycle {
     child?: any;
     data = 'my name is visual'
-    constructor(private navigation: Navigation) {
+    constructor(private subNotfound: SubNotfound) {
 
     }
 
     onInit(): void {
-        console.log('onInit');
+        console.log('AppRouter--->onInit');
     }
     onChangedRender(): void {
-        console.log('onChangedRender');
+        console.log('AppRouter--->onChangedRender');
     }
     onInitedChild(): void {
-        console.log('onInitedChild');
+        console.log('AppRouter--->onInitedChild');
     }
     onFinish(): void {
-        console.log('onFinish');
+        console.log('AppRouter--->onFinish');
     }
     onCreate(): void {
-        console.log('onCreate');
+        console.log('AppRouter--->onCreate');
     }
 
     canActivate(url: Intent, module: any): void {
-        console.log('-------AppRouter----->', url, module)
-        if (this.child !== module) {
+        console.log('-------AppRouter----->', url, this.child, module, this.child !== module)
+        if (!module) { // 404
+            this.child = this.subNotfound;
+        } else if (this.child !== module) {
             this.child = module;
         }
     }

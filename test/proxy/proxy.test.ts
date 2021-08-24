@@ -2,9 +2,30 @@
 // import * as request from 'supertest'
 // import {Index} from '@src/app/features/index'
 
-import {SimObjectProxyHandler} from "../../src/proxy/SimObjectProxyHandler";
-
+class TestClass {
+    name= 'zzz'
+}
 describe('Proxy Test', () => {
+    test('proxy instanceof test', async (done) => {
+        const a = new TestClass();
+        const b = new TestClass();
+
+        const a1 =  new Proxy(a, {
+            apply: function (target, thisArg, argumentsList) {
+                console.log('호출됨: ' + argumentsList.join(', '));
+                return 'ppppppproxy'
+            }
+        });
+
+        const a2 = new Proxy(a1, {
+            apply: function (target, thisArg, argumentsList) {
+                console.log('호출됨: ' + argumentsList.join(', '));
+                return 'ppppppproxy'
+            }
+        });
+        console.log(a2 instanceof TestClass);
+    })
+
     test('proxy test', async (done) => {
 
 //
