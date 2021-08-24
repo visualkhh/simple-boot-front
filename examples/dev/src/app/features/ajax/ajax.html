@@ -13,17 +13,30 @@
         <span type="button" dr-event-click="this.loadData()" class="btn btn-outline-dark">refresh</span>
         <div>users</div>
 
-        <!--% console.log(this.template)%-->
-<!--        <ul>-->
-<!--            &lt;!&ndash;%-->
-<!--                for(let result of this.data?.results || []) {-->
-<!--                    write('<li>' + result.email + '</li>')-->
-<!--                }-->
-<!--            %&ndash;&gt;-->
-<!--        </ul>-->
+
 
         <div>
-            <!--%include(this.profile)%-->
+            <style>
+                div.card {
+                    border: solid 1px;
+                    padding: 10px;
+                    margin: 10px;
+                }
+            </style>
+            <h1>profile</h1>
+            <div class="card" style="width: 18rem;">
+                <img df-if="this.profile?.picture?.large" dr-attr="return {src: this.profile?.picture?.large}">
+                <div class="card-body">
+                    <h5 class="card-title">${this.profile?.name.title ?? ''}</h5>
+                    <p class="card-text">name: ${this.profile?.name.first ?? ''} ${this.profile?.name.last ?? ''}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">street: ${this.profile?.location?.street?.name ?? ''}</li>
+                    <li class="list-group-item">city: ${this.profile?.location?.city ?? ''}</li>
+                    <li class="list-group-item">state: ${this.profile?.location?.state ?? ''}</li>
+                </ul>
+                <button dr-event-click="console.log('-------')">ddd</button>
+            </div>
         </div>
 
     </div>

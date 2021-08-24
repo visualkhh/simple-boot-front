@@ -2,14 +2,11 @@ import {User} from '../models/UserResponse';
 import { Component } from 'simple-boot-front/decorators/Component';
 
 const styles = [
-    `
-  /*[module-selector]*/
-    div.card {
+    `div.card {
         border: solid 1px;
         padding: 10px;
         margin: 10px;
-    }
-  `];
+    }`];
 const template = `
 <h1>profile</h1>
 <div class="card" style="width: 18rem;">

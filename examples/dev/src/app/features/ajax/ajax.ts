@@ -15,27 +15,26 @@ import { FrontLifeCycle } from 'simple-boot-front/module/FrontLifeCycle';
 @Component({template, styles: [css]})
 export class Ajax implements FrontLifeCycle {
     public data: UserResponse | undefined;
-    public profile?: Profile;
+    private profile: User | undefined;
     constructor(public option: SimFrontOption, public ajax: HttpService) {
-        console.log('--->profile',  this.profile)
     }
 
     onInit(): void {
         this.data = undefined;
-        this.loadData();
-        console.log('Method not implemented.');
+        console.log('onInit-->Method not implemented.');
     }
     onChangedRender(): void {
-        console.log('Method not implemented.');
+        console.log('onChangedRender-->Method not implemented.');
     }
     onInitedChild(): void {
-        console.log('Method not implemented.');
+        console.log('onInitedChild-->Method not implemented.');
     }
     onFinish(): void {
-        console.log('Method not implemented.');
+        console.log('onFinish-->Method not implemented.');
     }
     onCreate(): void {
-        console.log('Method not implemented.');
+        this.loadData();
+        console.log('onCreate-->Method not implemented.');
     }
 
 
@@ -46,8 +45,11 @@ export class Ajax implements FrontLifeCycle {
     // }
 
     sync() {
-        this.profile?.setUser(this.data?.results[0])
-        console.log('-->this.profile', this.profile)
+        this.profile = this.data?.results[0];
+        console.log('-->', this.profile)
+        // this.loadData();
+        // this.profile?.setUser(this.data?.results[0])
+        // console.log('-->this.profile', this.profile)
     }
 
     goo(intent: Intent) {
