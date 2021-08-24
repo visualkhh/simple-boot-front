@@ -8,23 +8,36 @@ import {Intent} from 'simple-boot-core/intent/Intent';
 import { Component } from 'simple-boot-front/decorators/Component';
 import { SimFrontOption } from 'simple-boot-front/option/SimFrontOption';
 import { Profile } from '../../shareds/Profile';
-import { LifeCycle } from 'simple-boot-core/cycles/LifeCycle';
 import { User } from '../../models/UserResponse';
+import { FrontLifeCycle } from 'simple-boot-front/module/FrontLifeCycle';
 
 @Sim({scheme: 'ajax'})
 @Component({template, styles: [css]})
-export class Ajax implements LifeCycle{
+export class Ajax implements FrontLifeCycle {
     public data: UserResponse | undefined;
     public profile?: Profile;
     constructor(public option: SimFrontOption, public ajax: HttpService) {
         console.log('--->profile',  this.profile)
     }
 
-    onCreate(): void {
+    onInit(): void {
         this.data = undefined;
-        this.profile = Component.create(new Profile());
         this.loadData();
+        console.log('Method not implemented.');
     }
+    onChangedRender(): void {
+        console.log('Method not implemented.');
+    }
+    onInitedChild(): void {
+        console.log('Method not implemented.');
+    }
+    onFinish(): void {
+        console.log('Method not implemented.');
+    }
+    onCreate(): void {
+        console.log('Method not implemented.');
+    }
+
 
     post() {
     }

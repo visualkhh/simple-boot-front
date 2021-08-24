@@ -16,8 +16,7 @@ import bootstrap_css from 'bootstrap/dist/css/bootstrap.min.css';
 import template from './layouts/app.html';
 import css from './layouts/app.css';
 import { Navigation } from 'simple-boot-front/service/Navigation';
-import { LifeCycle } from 'dom-render/LifeCycle';
-import { Scope } from 'dom-render/Scope';
+import { FrontLifeCycle } from 'simple-boot-front/module/FrontLifeCycle';
 
 @Sim({scheme: 'layout-router'})
 @Component({template, styles: [css, bootstrap_css]})
@@ -35,24 +34,30 @@ import { Scope } from 'dom-render/Scope';
     },
     childRouters: [DocumentRouter]
 })
-export class AppRouter implements RouterAction, LifeCycle {
-    child?: ConstructorType<object>;
+export class AppRouter implements RouterAction, FrontLifeCycle {
+    child?: any;
     data = 'my name is visual'
     constructor(private navigation: Navigation) {
 
     }
 
-    onReady(data: HTMLFrameElement): void {
-        // console.log('onReady', data);
+    onInit(): void {
+        console.log('onInit');
     }
-    onRenderd(data: HTMLFrameElement): void {
-        // console.log('onRenderd', data);
+    onChangedRender(): void {
+        console.log('onChangedRender');
     }
-    onScopeMaked(data: Scope): void {
-        // console.log('onScopeMaked', data);
+    onInitedChild(): void {
+        console.log('onInitedChild');
+    }
+    onFinish(): void {
+        console.log('onFinish');
+    }
+    onCreate(): void {
+        console.log('onCreate');
     }
 
-    canActivate(url: Intent, module: ConstructorType<object>): void {
+    canActivate(url: Intent, module: any): void {
         console.log('-------AppRouter----->', url, module)
         if (this.child !== module) {
             this.child = module;

@@ -70,9 +70,19 @@ export class SimpleBootFront extends SimpleApplication {
         if (target && routerAtomic.value) {
             // console.log('target-->', routerAtomic.value)
             const component = routerAtomic.getConfig<ComponentConfig>(ComponentMetadataKey)
-            target.innerHTML = `<style>${component?.styles ?? ''}</style> ${component?.template ?? ''}`;
+            const template = this.option.window.document.createElement('template')
+            // template.innerHTML = `<style>${component?.styles ?? ''}</style> ${component?.template ?? ''}`;
+            const styles = (component?.styles?.map(it => `<style>${it}</style>`) ?? []).join(' ')
+            target.innerHTML = `${styles} ${component?.template ?? ''}`;
             const domRenderProxy = routerAtomic.value._DomRender_proxy as DomRenderProxy<any>
             domRenderProxy.initRender(target);
+            // console.log('--->', template.content.childNodes)
+            // domRenderProxy.initRender(template.content);
+
+            // target.innerHTML = '';
+            // target.append(template.content)
+            // console.log('--->', template.content.childNodes)
+            // console.log('--->', target.childNodes)
             // console.log('routeratomic value=>', component, domRenderProxy)
         }
         this.option.window.addEventListener('popstate', (event) => {
