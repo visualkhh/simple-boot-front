@@ -13,8 +13,8 @@
 
     <div class="row">
         click event intent publish
-        <button class="btn btn-primary" dr-event-click="this.intentManager.publish('layout-router://data', 'zz')">publish data</button>
-        typing: <input type="text" dr-event-keyup="this.intentManager.publish()">
+        <button class="btn btn-primary" dr-event-click="this.intentManager.publish('layout-router://dataStr', 'zz')">publish data</button>
+        typing: <input type="text" dr-event-keyup="this.intentManager.publish('layout-router://data', $target.value)">
     </div>
 
 </div>

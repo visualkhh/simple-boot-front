@@ -56,7 +56,7 @@ export class AppRouter implements RouterAction, FrontLifeCycle {
     }
 
     canActivate(url: Intent, module: any): void {
-        console.log('-------AppRouter----->', url, this.child, module, this.child !== module)
+        // console.log('-------AppRouter----->', url, this.child, module, this.child !== module)
         if (!module) { // 404
             this.child = this.subNotfound;
         } else if (this.child !== module) {

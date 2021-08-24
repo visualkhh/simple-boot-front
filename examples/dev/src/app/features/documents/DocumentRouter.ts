@@ -26,7 +26,7 @@ export class DocumentRouter implements RouterAction {
     }
 
     canActivate(url: Intent, module: any) {
-        console.log('-------DocumentRouter----->', url, 'module-->', module)
+        //  console.log('-------DocumentRouter----->', url, 'module-->', module)
         if (!module) { // 404
             this.child = this.notFound;
         } else if (this.child !== module) {
