@@ -16,16 +16,16 @@
 
 
         <div>
-            <style>
-                div.card {
-                    border: solid 1px;
-                    padding: 10px;
-                    margin: 10px;
-                }
-            </style>
+<!--            <style>-->
+<!--                div.card {-->
+<!--                    border: solid 1px;-->
+<!--                    padding: 10px;-->
+<!--                    margin: 10px;-->
+<!--                }-->
+<!--            </style>-->
             <h1>profile</h1>
             <div class="card" style="width: 18rem;">
-                <img df-if="this.profile?.picture?.large" dr-attr="return {src: this.profile?.picture?.large}">
+                <img dr-if="this.profile?.picture?.large" dr-attr="return {src: this.profile?.picture?.large ??''}">
                 <div class="card-body">
                     <h5 class="card-title">${this.profile?.name.title ?? ''}</h5>
                     <p class="card-text">name: ${this.profile?.name.first ?? ''} ${this.profile?.name.last ?? ''}</p>

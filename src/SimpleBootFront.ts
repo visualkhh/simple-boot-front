@@ -14,6 +14,7 @@ import { RouterManager } from 'simple-boot-core/route/RouterManager';
 import { DomRenderProxy } from 'dom-render/DomRenderProxy';
 import { ScriptUtils } from 'dom-render/utils/script/ScriptUtils';
 import { SimGlobal } from 'simple-boot-core/global/SimGlobal';
+import { RawSet } from '../libs/dom-render/src/RawSet';
 
 export class SimpleBootFront extends SimpleApplication {
     navigation!: Navigation;
@@ -38,15 +39,19 @@ export class SimpleBootFront extends SimpleApplication {
                             const targetObj = ScriptUtils.eval(`return ${attrValue}`, obj)
                             const component = getComponent(targetObj)
                             const styles = (component?.styles?.map(it => `<style>${it}</style>`) ?? []).join(' ');
-                            const template = (component?.template ?? '').replace(/this/g, attrValue);
+                            const template = (component?.template ?? '');
+                            const n = element.cloneNode(true) as Element;
                             const innerHTML = styles + template;
-                            if (component) {
-                                ScriptUtils.eval(`
-                                const n = this.__element.cloneNode(true);
-                                n.innerHTML = this.innerHTML;
-                                Array.from(n.childNodes).forEach(it => this.__fag.append(it));
-                                `, {__fag: fag, __element: element, innerHTML});
-                            }
+                            n.innerHTML = innerHTML;
+                            fag.append(RawSet.thisCreate(n, attrValue, '', true, obj));
+                            // const template = (component?.template ?? '').replace(/this/g, attrValue);
+                            // if (component) {
+                            //     ScriptUtils.eval(`
+                            //     const n = this.__element.cloneNode(true);
+                            //     n.innerHTML = this.innerHTML;
+                            //     Array.from(n.childNodes).forEach(it => this.__fag.append(it));
+                            //     `, {__fag: fag, __element: element, innerHTML});
+                            // }
                         }
                         // console.log('component->>>>scan->' , element, attrValue, obj, fag)
                         return fag;
