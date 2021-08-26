@@ -1,6 +1,5 @@
-<h1><!--%write(this.data)%--></h1>
+<h1>${this.data}</h1>
 <div>
 your content...
-    <div><!--%write(this.randomData)%--><button dr-event-click="this.random()"> test random data</button></div>
-    <div><span dr-style="return {color: this.randomColorData}">random data color</span><button dr-event-click="this.randomColor()"> test random color data</button></div>
+    <div>${this.randomData}<button dr-event-click="this.random()"> test random data</button></div>
 </div>

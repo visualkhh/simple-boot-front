@@ -48,38 +48,50 @@ npm install simple-boot-front
     ```
   * AppRouter.ts
     ```typescript
-    @Sim({scheme: 'layout-router'})
-    @Component({template, styles: [css]})
-    @Router({
-      path: '',
-      childs: {
-      '': Index,
-      '/': Index,
-      '/user': User
-      }
-    })
-    export class AppRouter implements RouterAction, LifeCycle {
-        name = 'AppRouter'
-        data = {name: 'good'}
-        child?: ConstructorType<any>
-    
-        constructor(private navigation: Navigation) {
-        }
-    
-        canActivate(url: Intent, module: ConstructorType<object>) {
-            console.log('canActivate  router--->', url, module)
-            this.child = module;
-        }
-    
-        onReady(data: HTMLFrameElement): void {
-        }
-    
-        onRenderd(data: HTMLFrameElement): void {
-        }
-    
-        onScopeMaked(data: Scope): void {
-        }
-    }
+     @Sim({scheme: 'layout-router'})
+     @Component({template, styles: [css]})
+     @Router({
+     path: '',
+     childs: {
+     '': Index,
+     '/': Index,
+     '/user': User
+     }
+     })
+     export class AppRouter implements RouterAction, FrontLifeCycle {
+     name = 'AppRouter'
+     data = {name: 'good'}
+     child?: any
+     
+         constructor(private navigation: Navigation, private simOption: SimFrontOption) {
+         }
+     
+         canActivate(url: Intent, module: any) {
+             console.log('canActivate  router--->', url, module)
+             this.child = module;
+         }
+     
+         onReady(data: HTMLFrameElement): void {
+         }
+     
+         onRenderd(data: HTMLFrameElement): void {
+         }
+     
+         onChangedRender(): void {
+         }
+     
+         onCreate(): void {
+         }
+     
+         onFinish(): void {
+         }
+     
+         onInit(): void {
+         }
+     
+         onInitedChild(): void {
+         }
+     }
 
     ```
   * index.ts
@@ -107,40 +119,14 @@ npm install simple-boot-front
   * index.html
     ```html
     <h1>index</h1>
-    <!--% write(this.data.name); %-->
+    ${this.data.name}
     <button dr-event-click="this.data.name='vvv'"> change name </button>
     ```
 
-## View template engine
+## View template engine (dom-render)
+ - https://github.com/visualkhh/dom-render
  - ### It's a compiler that takes your declarative components and converts them into efficient JavaScript that surgically updates the DOM.
  - ### Update view only for parts where the value has changed.
- - scope
-   - start: <!--% 
-   - end: %-->
-   - write: write string
-   - include  
-     - include: donRenderProxy obj include 
-   - component  
-     - component: component include 
-   - ex
-      ```html
-      <div><!--%write(this.data)%--></div>
-      <div><!--%component(this.aModule)%--></div>
-      <div>
-      <!--%
-          for (let i of this.datas) {
-              write('<li>' + i + '</li>');
-          }
-      %-->
-      </div>
-      <div>
-          <!--%
-          for(var i = 0 ; i < this.count ; i ++) {
-              write("<img src='https://cdn.imweb.me/thumbnail/20190912/460132b4e4fce.jpg' module-change-attr=\"return {height: this.size, width: this.size}\">");
-          }
-          %-->
-      </div>
-      ```
 
 ## Module LifeCycle
 * onCreate(): Sim onCreate just one call

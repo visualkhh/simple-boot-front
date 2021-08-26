@@ -39,21 +39,10 @@ export class AppRouter implements RouterAction, FrontLifeCycle {
     onRenderd(data: HTMLFrameElement): void {
     }
 
-    // onScopeMaked(data: Scope): void {
-    // }
-
     onChangedRender(): void {
     }
 
     onCreate(): void {
-        // this.simOption.window.addEventListener('popstate', (event) => {
-        //     if (this.navigation.path === '/user') {
-        //         this.child = User;
-        //     } else {
-        //         this.child = Index;
-        //     }
-        //     console.log('---', this.navigation.path)
-        // })
     }
 
     onFinish(): void {

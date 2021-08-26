@@ -14,7 +14,7 @@ import { RouterManager } from 'simple-boot-core/route/RouterManager';
 import { DomRenderProxy } from 'dom-render/DomRenderProxy';
 import { ScriptUtils } from 'dom-render/utils/script/ScriptUtils';
 import { SimGlobal } from 'simple-boot-core/global/SimGlobal';
-import { RawSet } from '../libs/dom-render/src/RawSet';
+import { RawSet } from 'dom-render/RawSet';
 
 export class SimpleBootFront extends SimpleApplication {
     navigation!: Navigation;
