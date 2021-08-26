@@ -43,7 +43,7 @@ export class SimpleBootFront extends SimpleApplication {
                             const n = element.cloneNode(true) as Element;
                             const innerHTML = styles + template;
                             n.innerHTML = innerHTML;
-                            fag.append(RawSet.thisCreate(n, attrValue, '', true, obj));
+                            fag.append(RawSet.drThisCreate(n, attrValue, '', true, obj));
                             // const template = (component?.template ?? '').replace(/this/g, attrValue);
                             // if (component) {
                             //     ScriptUtils.eval(`

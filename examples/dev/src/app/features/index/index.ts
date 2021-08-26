@@ -11,7 +11,7 @@ import { Component } from 'simple-boot-front/decorators/Component';
 export class Index {
     data = 'default data';
     tData = 5151;
-
+    public friends = [{name: 'z'}, {name: 'b'}, {name: 'c'}]
     constructor(public v: ViewService, public simstanceManager: SimstanceManager, public navigation: Navigation) {
     }
 

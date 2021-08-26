@@ -26,9 +26,11 @@
     <div class="card-body">
         <h5>variable module</h5>
         "${this.data}"
+        <div dr-if="this.data">ddd</div>
         data link change event  <input type="text" dr-value-link="this.data">
     </div>
 </div>
+<button dr-event-click="this.data='zzz'">change defaultData</button>
 <div>11 ${this.tData} 22 </div>
 <div>
     ${this.tData}
@@ -39,3 +41,9 @@
     <div dr-event-click="gotoUser">user</div>
 </div>
 
+${this.friends.length}
+<div dr-for-of="this.friends">
+    ${#it#.name}
+</div>
+
+<button dr-event-click="this.friends.push({name:'zzzzz'})">add friends</button>
