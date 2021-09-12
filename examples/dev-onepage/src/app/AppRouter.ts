@@ -41,17 +41,22 @@ export class AppRouter implements RouterAction, FrontLifeCycle {
     }
 
     onChangedRender(): void {
+        console.log('onChangedRender AppRouter')
     }
 
     onCreate(): void {
+        console.log('onCreate AppRouter')
     }
 
     onFinish(): void {
+        console.log('onFinish AppRouter')
     }
 
     onInit(): void {
+        console.log('onInit AppRouter')
     }
 
     onInitedChild(): void {
+        console.log('onInitedChild AppRouter')
     }
 }

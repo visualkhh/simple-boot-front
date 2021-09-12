@@ -57,6 +57,13 @@ export class SimpleBootFront extends SimpleApplication {
                         return fag;
                     }
                 }],
+                onInit: (attrName: string, attrValue: string, obj: any) => {
+                    if (attrName === 'component') {
+                    // console.log('-onInit-->', attrName, attrValue)
+                    const bindObj = ScriptUtils.evalReturn(attrValue, obj);
+                    (bindObj as any)?.onInit?.();
+                    }
+                },
                 applyEvents: [{
                     attrName: 'router-link', callBack: (elements: Element, attrValue: string, obj: any) => {
                         elements.addEventListener('click', (event) => {
@@ -83,8 +90,10 @@ export class SimpleBootFront extends SimpleApplication {
             // template.innerHTML = `<style>${component?.styles ?? ''}</style> ${component?.template ?? ''}`;
             const styles = (component?.styles?.map(it => `<style>${it}</style>`) ?? []).join(' ')
             target.innerHTML = `${styles} ${component?.template ?? ''}`;
-            const domRenderProxy = routerAtomic.value._DomRender_proxy as DomRenderProxy<any>
+            const val = routerAtomic.value;
+            const domRenderProxy = val._DomRender_proxy as DomRenderProxy<any>
             domRenderProxy.initRender(target);
+            (val as any)?.onInit?.();
             // console.log('--->', template.content.childNodes)
             // domRenderProxy.initRender(template.content);
 
