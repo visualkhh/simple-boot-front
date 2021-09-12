@@ -16,8 +16,8 @@ import { ConstructorType } from 'simple-boot-core/types/Types';
 })
 @Component({template, styles: [css]})
 export class AppRouter implements RouterAction {
-    child?: ConstructorType<object>;
-    canActivate(url: Intent, module: ConstructorType<object>): void {
+    child?: any;
+    canActivate(url: Intent, module: any): void {
         this.child = module;
     }
 }
