@@ -17,6 +17,7 @@ export class Index {
     public cnt2 = 0;
     public test = {name: 'test', age:2}
     public randomColorData = '#ff0000';
+    public date = new Date();
     onInit() {
         console.log('-->')
     }

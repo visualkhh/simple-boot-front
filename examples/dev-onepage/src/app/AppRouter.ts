@@ -29,7 +29,8 @@ export class AppRouter implements RouterAction, FrontLifeCycle {
     }
 
     canActivate(url: Intent, module: any) {
-        console.log('canActivate  router--->', url, module)
+        console.log('canActivate  router--->', this, url, module)
+        this.name= 'zz'
         this.child = module;
     }
 

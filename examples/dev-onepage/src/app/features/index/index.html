@@ -2,6 +2,9 @@
 
 <!--${this.cnt1}-->
 ${this.cnt1}
+<div>
+${this.date} <button dr-event-click="this.date = new Date();"> renew</button>
+</div>
 
 <button dr-event-click="this.cnt1++; console.log(this)">aaaaaaa</button>
-<div><span dr-style="this.randomColorData; return {color: this.randomColorData}">random data color</span><button dr-event-click="this.randomColor()"> test random color data</button></div>
+<div><span dr-style="{color: this.randomColorData}">random data color</span><button dr-event-click="this.randomColor()"> test random color data</button></div>
