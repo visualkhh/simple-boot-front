@@ -9,6 +9,7 @@ import { User } from './features/index/User';
 import { Navigation } from 'simple-boot-front/service/Navigation';
 import { SimFrontOption } from 'simple-boot-front/option/SimFrontOption';
 import { FrontLifeCycle } from 'simple-boot-front/module/FrontLifeCycle';
+import { ScriptUtils } from 'dom-render/utils/script/ScriptUtils';
 
 @Sim({scheme: 'layout-router'})
 @Component({template, styles: [css]})
@@ -26,6 +27,10 @@ export class AppRouter implements RouterAction, FrontLifeCycle {
     child?: any
 
     constructor(private navigation: Navigation, private simOption: SimFrontOption) {
+    }
+
+    async onInitRender() {
+
     }
 
     canActivate(url: Intent, module: any) {

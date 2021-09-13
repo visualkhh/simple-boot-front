@@ -33,4 +33,7 @@ export class User implements FrontLifeCycle {
     onInitedChild(): void {
         console.log('--user  onInitedChild')
     }
+
+    onInitRender(): void {
+    }
 }
