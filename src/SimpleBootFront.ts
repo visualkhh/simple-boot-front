@@ -103,6 +103,12 @@ export class SimpleBootFront extends SimpleApplication {
             // console.log('--->', target.childNodes)
             // console.log('routeratomic value=>', component, domRenderProxy)
         }
+        // new Event('mouseleave', { bubbles: true, cancelable: true });
+        this.option.window.addEventListener('intent', (event) => {
+            const cevent = event as CustomEvent
+            this.publishIntent(new Intent(cevent.detail.uri, cevent.detail.data, event));
+            //console.log('intent--?', event)
+        });
         this.option.window.addEventListener('popstate', (event) => {
             const intent = new Intent(this.navigation.path ?? '');
             this.routing<SimAtomic, any>(intent).then(async it => {

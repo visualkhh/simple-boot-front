@@ -7,6 +7,7 @@ import { RandomUtils } from 'simple-boot-core/utils/random/RandomUtils';
 import { FrontLifeCycle } from 'simple-boot-front/module/FrontLifeCycle';
 import { ScriptUtils } from 'dom-render/utils/script/ScriptUtils';
 import { DomRenderProxy } from 'dom-render/DomRenderProxy';
+import { Intent } from 'simple-boot-core/intent/Intent';
 
 declare var naver: any;
 @Sim({scheme: 'index'})
@@ -109,5 +110,14 @@ export class Index implements FrontLifeCycle {
     }
 
     async onInitRender() {
+    }
+
+
+    pushItent() {
+        const data = new CustomEvent('intent', {detail: {uri: 'index://gg', data: {name: '1123'}}});
+        window.dispatchEvent(data);
+    }
+    gg(i: Intent) {
+        console.log('gg)', i, i.data )
     }
 }
