@@ -28,4 +28,3 @@ export class Index implements RouterAction{
 }
 const simpleApplication = new SimpleBootFront(Index, new SimFrontOption(window));
 simpleApplication.run();
-console.log('----22-----')
