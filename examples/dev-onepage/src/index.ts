@@ -5,3 +5,6 @@ import {Advice} from './app/advice/Advice';
 const option = new SimFrontOption(window, [Advice]).setUrlType(UrlType.path);
 const simpleApplication = new SimpleBootFront(AppRouter, option);
 simpleApplication.run();
+// const user = simpleApplication.simstanceManager.newSim(selectors.get('user')!)
+// console.log('-------', selectors, user);
+

@@ -50,6 +50,7 @@
     "dom-render": "file:../../libs/dom-render/src",
     "reflect-metadata": "^0.1.13",
     "simple-boot-core": "file:../../libs/simple-boot-core/src",
-    "simple-boot-front": "file:../../src"
+    "simple-boot-front": "file:../../src",
+    "src": "^1.1.2"
   }
 }

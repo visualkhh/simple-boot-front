@@ -10,6 +10,8 @@ import { Navigation } from 'simple-boot-front/service/Navigation';
 import { SimFrontOption } from 'simple-boot-front/option/SimFrontOption';
 import { FrontLifeCycle } from 'simple-boot-front/module/FrontLifeCycle';
 import { ScriptUtils } from 'dom-render/utils/script/ScriptUtils';
+import { EventListener } from 'simple-boot-core/decorators/event/EventListener';
+import { View } from 'simple-boot-front/service/view/View';
 
 @Sim({scheme: 'layout-router'})
 @Component({template, styles: [css]})
@@ -31,6 +33,15 @@ export class AppRouter implements RouterAction, FrontLifeCycle {
 
     async onInitRender() {
 
+    }
+
+    @EventListener({target: window, name: 'resize'})
+    callBackResize($event: Event, view: View<any>) {
+        console.log('----resize-----', view, $event)
+    }
+    @EventListener({target: '#name-input', name: 'input'})
+    callBackInput($event: Event, view: View<any>) {
+        console.log('----input-----', view, $event)
     }
 
     canActivate(url: Intent, module: any) {

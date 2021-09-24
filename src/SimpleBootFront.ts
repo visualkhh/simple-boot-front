@@ -1,6 +1,11 @@
 import { SimFrontOption } from './option/SimFrontOption';
 import { ConstructorType } from 'simple-boot-core/types/Types';
-import { ComponentConfig, ComponentMetadataKey, getComponent } from './decorators/Component';
+import {
+    ComponentConfig,
+    ComponentMetadataKey,
+    componentSelectors,
+    getComponent,
+} from './decorators/Component';
 import { DomRender } from 'dom-render/DomRender';
 import { SimAtomic } from 'simple-boot-core/simstance/SimAtomic';
 import { SimpleApplication } from 'simple-boot-core/SimpleApplication';
@@ -15,49 +20,85 @@ import { DomRenderProxy } from 'dom-render/DomRenderProxy';
 import { ScriptUtils } from 'dom-render/utils/script/ScriptUtils';
 import { SimGlobal } from 'simple-boot-core/global/SimGlobal';
 import { RawSet } from 'dom-render/RawSet';
+import { Config, TargetElement, TargetAttr } from 'dom-render/Config';
 
 export class SimpleBootFront extends SimpleApplication {
     navigation!: Navigation;
     public domRendoerExcludeProxy = [SimpleApplication, IntentManager, RouterManager, SimstanceManager, SimFrontOption, Navigation, ViewService, HttpService];
-
+    public targetElements: TargetElement[];
+    public targetAttrs: TargetAttr[];
     constructor(public rootRouter: ConstructorType<any>, public option: SimFrontOption) {
         super(rootRouter, option);
         window.__dirname = 'simple-boot-front__dirname';
+        this.targetElements = [];
+        // for (const [key, value] of Object.entries(selectors)) {}
+        // console.log('-->???', SimGlobal().data.components.storage)
+        // const selectors = SimGlobal().data.components.storage as Map<string, ConstructorType<any>>;
+        const selectors = componentSelectors;
+        selectors.forEach((val, name) => {
+            this.targetElements.push({
+                name,
+                callBack: (element: Element, obj: any, rawSet: RawSet) => {
+                    const componentObj = this.simstanceManager.newSim(val);
+                    const set = element.getAttribute('dr-set')
+                    if (set) {
+                        const comEvalTargetObj: any = {}
+                        comEvalTargetObj[name] = componentObj;
+                        const script = `var ${name} = this['${name}']; ${set} `;
+                        ScriptUtils.eval(script, Object.assign(comEvalTargetObj, obj))
+                    }
+                    const componentOption = getComponent(componentObj);
+                    const fag = this.option.window.document.createDocumentFragment();
+                    if (componentOption) {
+                        // if (!obj.__componentInstances) {
+                        //     obj.__componentInstances = {};
+                        // }
+                        obj.__componentInstances[rawSet.uuid] = componentObj;
+                        // obj.__componentInstances.vava = componentObj;
+                        // componentOption.instances.set(rawSet.uuid, componentObj);
+                        // console.log('-->',componentOption)
+                        const template = this.option.window.document.createElement('div');
+                        template.innerHTML = this.getComponentInnerHtml(componentObj);
+                        // SimGlobal.data.componentSelectors.instances.get('${rawSet.uuid}')
+                        fag.append(RawSet.drThisCreate(template, `this.__componentInstances['${rawSet.uuid}']`, '', true, obj))
+                    }
+                    return fag;
+                }
+            })
+        });
+        // console.log('---sele-->', selectors, this.targetElements)
+        this.targetAttrs = [{
+            name: 'component', callBack: (element: Element, attrValue: string, obj: any, rawSet: RawSet) => {
+                const fag = this.option.window.document.createDocumentFragment();
+                if (attrValue) {
+                    const targetObj = ScriptUtils.eval(`return ${attrValue}`, obj)
+                    const n = element.cloneNode(true) as Element;
+                    const innerHTML = this.getComponentInnerHtml(targetObj);
+                    n.innerHTML = innerHTML;
+                    fag.append(RawSet.drThisCreate(n, attrValue, '', true, obj));
+                }
+                return fag;
+            }
+        }];
         option.proxy = {
             onProxy: (it: any) => this.createDomRender(it)
         };
+    }
+
+    public getComponentInnerHtml(targetObj: any) {
+        const component = getComponent(targetObj)
+        const styles = (component?.styles?.map(it => `<style>${it}</style>`) ?? []).join(' ');
+        const template = (component?.template ?? '');
+        return styles + template;
     }
 
     public createDomRender<T extends object>(obj: T): T {
         const component = getComponent(obj);
         if (component && typeof obj === 'object') {
             return DomRender.run(obj, undefined, {
-                targets: [{
-                    attrName: 'component', callBack: (element: Element, attrValue: string, obj: any) => {
-                        const fag = this.option.window.document.createDocumentFragment();
-                        if (attrValue) {
-                            const targetObj = ScriptUtils.eval(`return ${attrValue}`, obj)
-                            const component = getComponent(targetObj)
-                            const styles = (component?.styles?.map(it => `<style>${it}</style>`) ?? []).join(' ');
-                            const template = (component?.template ?? '');
-                            const n = element.cloneNode(true) as Element;
-                            const innerHTML = styles + template;
-                            n.innerHTML = innerHTML;
-                            fag.append(RawSet.drThisCreate(n, attrValue, '', true, obj));
-                            // const template = (component?.template ?? '').replace(/this/g, attrValue);
-                            // if (component) {
-                            //     ScriptUtils.eval(`
-                            //     const n = this.__element.cloneNode(true);
-                            //     n.innerHTML = this.innerHTML;
-                            //     Array.from(n.childNodes).forEach(it => this.__fag.append(it));
-                            //     `, {__fag: fag, __element: element, innerHTML});
-                            // }
-                        }
-                        // console.log('component->>>>scan->' , element, attrValue, obj, fag)
-                        return fag;
-                    }
-                }],
-                onInit: (attrName: string, attrValue: string, obj: any) => {
+                targetElements: this.targetElements,
+                targetAttrs: this.targetAttrs,
+                onAttrInit: (attrName: string, attrValue: string, obj: any) => {
                     if (attrName === 'component') {
                     // console.log('-onInit-->', attrName, attrValue)
                     const bindObj = ScriptUtils.evalReturn(attrValue, obj);

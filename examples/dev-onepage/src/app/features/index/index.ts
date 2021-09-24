@@ -12,6 +12,7 @@ import { Intent } from 'simple-boot-core/intent/Intent';
 declare var naver: any;
 @Sim({scheme: 'index'})
 @Component({
+    selector: 'index',
     template,
     styles: [css]
 })

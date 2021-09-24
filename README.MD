@@ -187,18 +187,7 @@ npm install simple-boot-front
       console.log('after', obj, protoType)
   }
   ```
-* @EventListener
-  ```typescript
-    @EventListener({target: window, name: 'resize'})
-    callBackResize($event: Event, view: View<any>) {
-        console.log('----resize-----', view, $event)
-    }
 
-    @EventListener({target: '#zzz', name: 'input'})
-    callBackInput($event: Event, view: View<any>) {
-        console.log('----input-----', view, $event)
-    }
-  ```
 * @ExceptionHandler
   ```typescript
   @ExceptionHandler()
