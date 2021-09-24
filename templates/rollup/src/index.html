@@ -1,0 +1,21 @@
+<div>
+  <header>
+    <nav>
+      <ul>
+        <li>
+          <button router-link="/">home</button>
+        </li>
+        <li>
+          <button router-link="/user">user</button>
+        </li>
+      </ul>
+    </nav>
+
+  </header>
+  <main>
+    <router component="this.child"></router>
+  </main>
+  <footer>
+    footer
+  </footer>
+</div>
