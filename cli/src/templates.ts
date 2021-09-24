@@ -27,7 +27,7 @@ const TemplateOptions: TemplateOption[] = [
     },
     template: {
       parcel: 'https://github.com/visualkhh/simple-boot-front/templates/parcel-bundler#master',
-      rollup: null,
+      rollup: 'https://github.com/visualkhh/simple-boot-front/templates/rollup#master',
       webpack: null
     }
   }

@@ -1,0 +1,9 @@
+#!/usr/bin/env node
+
+const path = require('path');
+const project = path.join(__dirname, '../tsconfig.json');
+const dev = process.env.NODE_ENV === 'development';
+if (dev) {
+  require('ts-node').register({ project });
+}
+require(`../${dev ? 'src' : 'lib'}`).run().catch(require('@oclif/errors/handle'));

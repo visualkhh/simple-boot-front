@@ -5,6 +5,7 @@
 ### Eclipse ###
 .metadata
 bin/
+!cli/bin/
 tmp/
 *.tmp
 *.db

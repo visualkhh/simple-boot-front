@@ -48,7 +48,7 @@ class CreateSvelteCmd extends Command {
     let templateUrl: string = '';
     let port: string = '';
 
-    const choices = [ 'Parcel'];
+    const choices = [ 'parcel', 'rollup'];
     // if (templates.other) templates.other.forEach((item) => choices.push(item.name));
     response = await inquirer.prompt([
       {
@@ -59,9 +59,11 @@ class CreateSvelteCmd extends Command {
       }
     ]);
     const { template } = response;
-    if (template === 'Parcel') {
+    if (template === 'parcel') {
       templateUrl = templates.parcel as string;
       port = typeof ports == 'string' ? ports as string : (ports as any).parcel;
+    } else if (template === 'rollup') {
+      templateUrl = templates.rollup as string;
     }
 
 
@@ -81,7 +83,7 @@ class CreateSvelteCmd extends Command {
     try {
       await emitter.clone(projectName);
     } catch (err) {
-      this.error(chalk.yellow('Something went wrong, try again! ') + chalk.red(err));
+      // this.error(chalk.yellow('Something went wrong, try again! ') + chalk.red(err));
       process.exit(1);
     }
     const endTime = performance.now();
