@@ -169,9 +169,9 @@ npm install simple-boot-front
           console.log('poo->', testService)
       }
   }
-
   ```
-* @After, @Before
+  
+* @After, @Before   (AOP)
   ```typescript
   fire($event: MouseEvent, view: View<Element>) {
       console.log('fire method')
@@ -200,9 +200,10 @@ npm install simple-boot-front
 ```typescript
 click() {
   intentManager.publish(new Intent('layout://info/data?a=wow&aa=zzz', Math.floor(RandomUtils.random(0, 100))));
-  // this.publish(new Intent('layout://info/datas', Math.floor(RandomUtils.random(0, 100))));
-  // this.publish(new Intent('layout://', Math.floor(RandomUtils.random(0, 100)))); // default callback method -> subscribe(i: Intent)
-  // this.publish(new Intent('://info/datas', Math.floor(RandomUtils.random(0, 100))));
+  // const data = new CustomEvent('intent', {detail: {uri: 'index://showStore', data: {id: ${it.ID}}}}); window.dispatchEvent(data);
+  //intentManager(new Intent('layout://info/datas', Math.floor(RandomUtils.random(0, 100))));
+  //intentManager(new Intent('layout://', Math.floor(RandomUtils.random(0, 100)))); // default callback method -> subscribe(i: Intent)
+  //intentManager(new Intent('://info/datas', Math.floor(RandomUtils.random(0, 100))));
 }
 ```
 
@@ -228,73 +229,23 @@ export class AppInfo {
 ## Reserved key word
  * html
    - attribute
-     - **[router-outlet]**: child module space
-     - **module-event-click**: click event
-       - value: method name, parameter($event, View)
-     ```html
-     <button dr-event-click="changeData">change</button>
-     ```
-     - **module-event-change**: change event
-       - value: method name, parameter($event, View)
-     ```html
-     <input dr-event-change="changeData">
-     ```
-     - **module-event-keyup**: keyup event
-       - value: method name, parameter($event, View)
-     ```html
-     <input dr-event-keyup="changeData">
-     ```
-     - **module-event-keydown**: keydown event
-       - value: method name, parameter($event, View)
-     ```html
-     <input dr-event-keydown="changeData">
-     ```
-     - **module-event-input**: input event
-       - value: method name, parameter($event, View)
-     ```html
-     <input dr-event-input="changeData">
-     ```
-     - **module-value-link**: link event (value change <-> input)
-       - value: variable name
-     ```html
-     <input dr-value-link="value">
-     ```
-     - **module-value**: value injection
-       - value: variable name
-     ```html
-     <input dr-value="value">
-     ```
-     - **module-change-attr**: change value setAttribute
-       - value: script
-     ```html
-     <img src="https://cdn.imweb.me/thumbnail/20190912/460132b4e4fce.jpg" module-change-attr="return {height: this.size, width: this.size}">
-     ```
-     - **module-change-style**: change value set Style
-       - value: script
-     ```html
-     <div module-change-style="return {fontSize: `${this.size}px`, color: this.randomColor()}">hello</div>
-     ```
      - **router-active-class**: url === href attribute => class add 
        - value: add and remove class name
      ```html
-     <a router-link="ajax" router-active-class="['active']">Ajax</a>
+     <a router-link="ajax" router-active-class="active">Ajax</a>
      ```
      - **router-link**:
        - value: router link
      ```html
      <a router-link="ajax">Ajax</a>
      ```
-     - subscribe
+     - intent
      ```typescript
-     data(i: Intent) {
+     showStore(i: Intent) {
       this.datas = i.data + '->' + i.params.aa
      }
-     viewSubscribe(i: Intent<View<HTMLInputElement>>) {
-       this.datas = i.data?.value + '->' + i.params.aa + '-->' + i.event
-     }
-    ```
-
-
+     call -> const data = new CustomEvent('intent', {detail: {uri: 'index://showStore', data: {id: ${it.ID}}}}); window.dispatchEvent(data);
+     ```
 ## License
 * MIT
 * visualkhh@gmail.com
