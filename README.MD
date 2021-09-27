@@ -13,6 +13,7 @@ Single Page Application Framworks for Web
   ```shell
   npm init simple-boot-front projectname
   cd projectname
+  npm run bundle
   npm run serve
   ```
 
