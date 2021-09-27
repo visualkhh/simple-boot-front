@@ -8,7 +8,7 @@ import { RawSet } from 'dom-render/RawSet';
 @Sim()
 @Component({
     selector: 'user',
-    template: '<div id="uu">zzzzzzzzz ${this.name} <hr dr-on-init="this.profile"> <profile dr-on-init-component="this.component" dr-set="profile.setParent(this);"></profile></div>',
+    template: '<div id="uu">zzzzzzzzz ${this.name} <hr dr-on-init="this.profile"> <profile dr-on-init-component="this.component" dr-set="profile.setParent(this, $innerHTML);"><div>innenenenen</div></profile></div>',
     using: [Profile]
 })
 export class User implements FrontLifeCycle {

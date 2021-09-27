@@ -15,6 +15,8 @@ const template = `
    <button dr-event-click="this.age = 899">zzzzzzzz</button>
    <button dr-event-click="console.log(this.age, this)">zzzzzzzz</button>
 </div>
+<div dr-strip="true" dr-inner-html="this.html">
+</div>
 `;
 
 @Component({
@@ -23,12 +25,14 @@ const template = `
 })
 export class Profile {
     public age = 100;
+    private html?: string;
 
     constructor(public testService: TestService) {
     }
 
-    public setParent(obj: User) {
-        // console.log('setParent-->!!!!!!!!!!!!!!!!!', obj)
+    public setParent(obj: User, html: string) {
+        console.log('setParent-->!!!!!!!!!!!!!!!!!', html)
+        this.html = html;
         // setTimeout(() => {
         //     obj.name='zzzzzzz%%%%%%%%%';
         // }, 10000)

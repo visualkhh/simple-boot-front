@@ -41,10 +41,16 @@ export class SimpleBootFront extends SimpleApplication {
                 callBack: (element: Element, obj: any, rawSet: RawSet) => {
                     const componentObj = this.simstanceManager.newSim(val);
                     const set = element.getAttribute('dr-set')
+                    let any;
                     if (set) {
-                        const comEvalTargetObj: any = {}
+                        const comEvalTargetObj: any = {'$attribute': any = {}};
+                        element.getAttributeNames().forEach(it => {
+                            comEvalTargetObj['$attribute'][it] = element.getAttribute(it);
+                        });
+                        comEvalTargetObj['$innerHTML'] = element.innerHTML;
+                        comEvalTargetObj['$element'] = element;
                         comEvalTargetObj[name] = componentObj;
-                        const script = `var ${name} = this['${name}']; ${set} `;
+                        const script = `var ${name} = this['${name}']; var $element = this['$element']; var $innerHTML = this['$innerHTML']; var $attribute = this['$attribute'];  ${set} `;
                         ScriptUtils.eval(script, Object.assign(comEvalTargetObj, obj))
                     }
                     const componentOption = getComponent(componentObj);
