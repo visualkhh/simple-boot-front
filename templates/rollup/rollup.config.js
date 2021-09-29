@@ -34,6 +34,7 @@ export default {
         sourcemaps(),
         // typescript({outDir: './dist', module: 'commonjs', declaration: false}),
         replace({
+            preventAssignment: true,
             "Object.defineProperty(exports, '__esModule', { value: true });": 'try{if(!exports) {var exports = {}}}catch (e) {var exports = {}} Object.defineProperty(exports, \'__esModule\', { value: true });',
             delimiters: ['\n', '\n']
         }),
