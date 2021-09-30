@@ -37,6 +37,7 @@
     ]
   },
   "exclude": [
+    "bin",
     "example",
     "examples",
     "rollup.config.js",

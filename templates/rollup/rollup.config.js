@@ -1,11 +1,8 @@
-// import typescript from '@rollup/plugin-typescript';
 import replace from '@rollup/plugin-replace';
-//import nodeResolve from '@rollup/plugin-node-resolve';
 import copy from 'rollup-plugin-copy';
 import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import html from 'rollup-plugin-html';
-//import babel from 'rollup-plugin-babel';
 import css from 'rollup-plugin-import-css';
 import typescript from 'rollup-plugin-typescript2';
 import sourcemaps from 'rollup-plugin-sourcemaps';
@@ -16,7 +13,7 @@ export default {
         sourcemap: true,
         dir: 'dist',
         entryFileNames: 'bundle.js',
-        format: 'cjs',
+        format: 'cjs'
     },
     plugins: [
         // babel(),

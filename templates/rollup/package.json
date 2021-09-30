@@ -21,7 +21,9 @@
     }
   },
   "scripts": {
-    "serve": "http-server ./dist",
+    "serve": "node bin/http-server --path ./dist --port 4200",
+    "serve:8080": "node bin/http-server --path ./dist --port 4200 --proxy http://localhost:8080",
+    "serve:8085": "node bin/http-server --path ./dist --port 4200 --proxy http://localhost:8085",
     "bundle": "rollup -c ",
     "bundle:watch": "rollup -c -w "
   },
@@ -36,8 +38,10 @@
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.3.1",
-    "http-server": "^13.0.2",
+    "http-proxy": "^1.18.1",
     "jest": "^26.6.3",
+    "mime-types": "^2.1.32",
+    "optimist": "^0.6.1",
     "rollup": "^2.52.8",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-commonjs": "^10.1.0",
@@ -54,6 +58,6 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
-    "simple-boot-front": "^1.0.73"
+    "simple-boot-front": "^1.0.74"
   }
 }
