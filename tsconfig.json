@@ -40,7 +40,7 @@
     ]
   },
   "exclude": [
-    "bin",
+    "http-server",
     "libs",
     "examples",
     "rollup.config.js",
