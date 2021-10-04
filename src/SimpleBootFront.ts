@@ -24,19 +24,18 @@ import { Config, TargetElement, TargetAttr } from 'dom-render/Config';
 
 export class SimpleBootFront extends SimpleApplication {
     navigation!: Navigation;
-    public domRendoerExcludeProxy = [SimpleApplication, IntentManager, RouterManager, SimstanceManager, SimFrontOption, Navigation, ViewService, HttpService];
-    public targetElements: TargetElement[];
-    public targetAttrs: TargetAttr[];
+    public domRendoerExcludeProxy = [SimpleApplication, IntentManager, RouterManager, SimstanceManager, SimFrontOption, Navigation, ViewService, HttpService, HTMLElement];
+    public domRenderTargetElements: TargetElement[] = [];
+    public domRenderTargetAttrs: TargetAttr[] = [];
     constructor(public rootRouter: ConstructorType<any>, public option: SimFrontOption) {
         super(rootRouter, option);
         window.__dirname = 'simple-boot-front__dirname';
-        this.targetElements = [];
         // for (const [key, value] of Object.entries(selectors)) {}
         // console.log('-->???', SimGlobal().data.components.storage)
         // const selectors = SimGlobal().data.components.storage as Map<string, ConstructorType<any>>;
         const selectors = componentSelectors;
         selectors.forEach((val, name) => {
-            this.targetElements.push({
+            this.domRenderTargetElements.push({
                 name,
                 callBack: (element: Element, obj: any, rawSet: RawSet) => {
                     const componentObj = this.simstanceManager.newSim(val);
@@ -73,7 +72,7 @@ export class SimpleBootFront extends SimpleApplication {
             })
         });
         // console.log('---sele-->', selectors, this.targetElements)
-        this.targetAttrs = [{
+        this.domRenderTargetAttrs.push({
             name: 'component', callBack: (element: Element, attrValue: string, obj: any, rawSet: RawSet) => {
                 const fag = this.option.window.document.createDocumentFragment();
                 if (attrValue) {
@@ -85,7 +84,7 @@ export class SimpleBootFront extends SimpleApplication {
                 }
                 return fag;
             }
-        }];
+        });
         option.proxy = {
             onProxy: (it: any) => this.createDomRender(it)
         };
@@ -102,8 +101,8 @@ export class SimpleBootFront extends SimpleApplication {
         const component = getComponent(obj);
         if (component && typeof obj === 'object') {
             return DomRender.run(obj, undefined, {
-                targetElements: this.targetElements,
-                targetAttrs: this.targetAttrs,
+                targetElements: this.domRenderTargetElements,
+                targetAttrs: this.domRenderTargetAttrs,
                 onAttrInit: (attrName: string, attrValue: string, obj: any) => {
                     if (attrName === 'component') {
                     // console.log('-onInit-->', attrName, attrValue)
@@ -141,14 +140,6 @@ export class SimpleBootFront extends SimpleApplication {
             const domRenderProxy = val._DomRender_proxy as DomRenderProxy<any>
             domRenderProxy.initRender(target);
             (val as any)?.onInit?.();
-            // console.log('--->', template.content.childNodes)
-            // domRenderProxy.initRender(template.content);
-
-            // target.innerHTML = '';
-            // target.append(template.content)
-            // console.log('--->', template.content.childNodes)
-            // console.log('--->', target.childNodes)
-            // console.log('routeratomic value=>', component, domRenderProxy)
         }
         // new Event('mouseleave', { bubbles: true, cancelable: true });
         this.option.window.addEventListener('intent', (event) => {
