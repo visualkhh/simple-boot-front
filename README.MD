@@ -26,11 +26,7 @@ npm install simple-boot-front
 
 
 ## [😃 examples project](./examples)
-* #### [parcel-bundler](./examples/parcel-bundler)
-* #### [parcel-bundler-js](./examples/parcel-bundler-js) (js version)
-* #### [webpack](./examples/parcel-bundler)
-
-  
+ 
 * Here is a quick teaser of a complete simple-boot-front application in typescript
   * index.ts
     ```typescript

@@ -1,6 +1,6 @@
 {
   "name": "simple-boot-front",
-  "version": "1.0.76",
+  "version": "1.0.77",
   "main": "SimpleApplication.js",
   "license": "MIT",
   "description": "front end SPA frameworks",
@@ -54,6 +54,8 @@
     "npm-build": "rm -rf dist && tsc --outDir dist --declarationDir dist && cp package-prod.json dist/package.json && cp README.MD dist",
     "npm-publish": "npm run npm-build && npm publish ./dist",
     "tsc": "tsc",
+    "tsc:watch": "rm -rf ./dist && mkdir dist && cp package.json dist && tsc --watch --sourceMap true",
+    "tsc:watch:dev": "rm -rf ./dist && mkdir dist && cp package-dev.json dist && tsc --watch --sourceMap true",
     "test": "jest --detectOpenHandles --forceExit"
   },
   "alias": {},
@@ -72,7 +74,7 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
-    "dom-render": "^1.0.38",
+    "dom-render": "file:libs/dom-render/dist",
     "reflect-metadata": "^0.1.13",
     "simple-boot-core": "^1.0.20"
   }

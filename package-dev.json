@@ -1,6 +1,6 @@
 {
   "name": "simple-boot-front",
-  "version": "1.0.76",
+  "version": "1.0.77",
   "main": "SimpleApplication.js",
   "license": "MIT",
   "description": "front end SPA frameworks",
@@ -54,13 +54,11 @@
     "npm-build": "rm -rf dist && tsc --outDir dist --declarationDir dist && cp package-prod.json dist/package.json && cp README.MD dist",
     "npm-publish": "npm run npm-build && npm publish ./dist",
     "tsc": "tsc",
+    "tsc:watch": "rm -rf ./dist && mkdir dist && cp package.json dist && tsc --watch --sourceMap true",
+    "tsc:watch:dev": "rm -rf ./dist && mkdir dist && cp package-dev.json dist && tsc --watch --sourceMap true",
     "test": "jest --detectOpenHandles --forceExit"
   },
-  "alias": {
-    "dom-render": "./libs/dom-render/src",
-    "simple-boot-core": "./libs/simple-boot-core/src",
-    "simple-boot-front": "./src"
-  },
+  "alias": {},
   "devDependencies": {
     "@types/jest": "^26.0.22",
     "@typescript-eslint/eslint-plugin": "^4.16.1",
@@ -76,9 +74,8 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
-    "dom-render": "file:libs/dom-render/src",
+    "dom-render": "^1.0.40",
     "reflect-metadata": "^0.1.13",
-    "simple-boot-core": "file:libs/simple-boot-core/src",
-    "simple-boot-front": "file:src"
+    "simple-boot-core": "^1.0.20"
   }
 }
