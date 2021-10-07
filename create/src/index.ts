@@ -44,11 +44,12 @@ class CreateSvelteCmd extends Command {
     const { projectType } = response;
 
     const templateOption = templateOptions.find((o: TemplateOption) => o.name === projectType) as TemplateOption;
-    const { template: templates, port: ports } = templateOption;
+    const { template: templates} = templateOption;
     let templateUrl: string = '';
-    let port: string = '';
+    // let port: string = '';
 
-    const choices = [ 'parcel', 'rollup'];
+    const choices = ['rollup'];
+    // const choices = ['parcel', 'rollup'];
     // if (templates.other) templates.other.forEach((item) => choices.push(item.name));
     response = await inquirer.prompt([
       {
@@ -59,10 +60,11 @@ class CreateSvelteCmd extends Command {
       }
     ]);
     const { template } = response;
-    if (template === 'parcel') {
-      templateUrl = templates.parcel as string;
-      port = typeof ports == 'string' ? ports as string : (ports as any).parcel;
-    } else if (template === 'rollup') {
+    // if (template === 'parcel') {
+    //   templateUrl = templates.parcel as string;
+    //   port = typeof ports == 'string' ? ports as string : (ports as any).parcel;
+    // } else
+    if (template === 'rollup') {
       templateUrl = templates.rollup as string;
     }
 
@@ -106,13 +108,14 @@ class CreateSvelteCmd extends Command {
     console.log(chalk.green(`\n\n🚀  Your new app is ready to go!\n`));
     console.log(chalk.white('Next Steps:\n'));
     console.log(chalk.cyan(`cd ${projectName}\n`));
-    if (port !== '') {
-      console.log(chalk.cyan(`npm run serve\n`));
-      console.log(chalk.white(`Visit ${chalk.cyan(`http://localhost:${port}`)} in your browser.\n`));
-    } else {
-      console.log(chalk.cyan(`npm run build\n`));
-      console.log(chalk.white(`The app should open on your device.\n`));
-    }
+    console.log(chalk.cyan(`npm run start\n`));
+    // if (port !== '') {
+    //   console.log(chalk.cyan(`npm run serve\n`));
+    //   console.log(chalk.white(`Visit ${chalk.cyan(`http://localhost:${port}`)} in your browser.\n`));
+    // } else {
+    //   console.log(chalk.cyan(`npm run build\n`));
+    //   console.log(chalk.white(`The app should open on your device.\n`));
+    // }
   }
 }
 

@@ -47,6 +47,9 @@ http.createServer(function (req, res) {
         if (argv.proxy) {
             console.log('----->', 'proxy-->');
             httpServer.web(req, res);
+        } else {
+            res.writeHead(404, {'Cache-Control': 'no-cache, no-store, must-revalidate'});
+            res.end();
         }
     }
     // res.writeHead(200, {'Content-Type': 'text/plain'});

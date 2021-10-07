@@ -40,12 +40,12 @@
     ]
   },
   "exclude": [
-    "http-server",
     "libs",
     "examples",
     "rollup.config.js",
     "test",
     "cli",
+    "create",
     "assets",
     "test-cli",
     "**/*.test.ts",
