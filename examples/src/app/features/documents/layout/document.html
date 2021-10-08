@@ -1,0 +1,54 @@
+<main>
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+            <svg class="bi me-2" width="40" height="32">
+                <use xlink:href="#bootstrap"/>
+            </svg>
+            <span class="fs-4">menu</span>
+        </a>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li class="nav-item">
+                <a router-link="/documents" class="nav-link text-white" aria-current="page"
+                   router-active-class="active">
+                    <svg class="bi me-2" width="16" height="16">
+                        <use xlink:href="#home"/>
+                    </svg>
+                    introduction
+                </a>
+            </li>
+            <li>
+                <a router-link="/documents/event" class="nav-link text-white" router-active-class="active">
+                    <svg class="bi me-2" width="16" height="16">
+                        <use xlink:href="#speedometer2"/>
+                    </svg>
+                    event
+                </a>
+            </li>
+            <li>
+                <a router-link="/documents/test" class="nav-link text-white" router-active-class="active">
+                    <svg class="bi me-2" width="16" height="16">
+                        <use xlink:href="#speedometer2"/>
+                    </svg>
+                    test
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="b-example-divider"></div>
+</main>
+
+<div>
+    <div test="${this.name}">
+    ${this.name}
+    </div>
+    <div test="${this.child}">
+    ${this.child?.name}
+    </div>
+    <main class="container">
+<!--        <scope component="this.child"></scope>-->
+        <scope component="this.child">22222222222</scope>
+    </main>
+
+</div>

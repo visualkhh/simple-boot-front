@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="row">
+        <div class="col-12">
+            <h1>
+                <a class="fas fa-hand-point-left" href='/#'></a> ajax example page
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <span type="button" dr-event-click="this.loadData()" class="btn btn-outline-dark">refresh</span>
+        <div>users</div>
+        <div>
+            <h1>profile</h1>
+            <div class="card" style="width: 18rem;">
+                <img dr-if="this.profile?.picture?.large" dr-attr="{src: this.profile?.picture?.large ??''}">
+                <div class="card-body">
+                    <h5 class="card-title">${this.profile?.name.title ?? ''}</h5>
+                    <p class="card-text">name: ${this.profile?.name.first ?? ''} ${this.profile?.name.last ?? ''}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">street: ${this.profile?.location?.street?.name ?? ''}</li>
+                    <li class="list-group-item">city: ${this.profile?.location?.city ?? ''}</li>
+                    <li class="list-group-item">state: ${this.profile?.location?.state ?? ''}</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -10,7 +10,7 @@ import { RouterAction } from 'simple-boot-core/route/RouterAction';
 @Sim()
 @Router({
     path: '',
-    childs: {
+    route: {
         '/': Home,
         '/user': User,
     }

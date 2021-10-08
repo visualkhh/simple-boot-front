@@ -1,0 +1,42 @@
+<h1>index</h1>dddd
+<profile></profile>
+${$scripts.say(1,2,3,4,5,6,7,78,5,5,3,'3,',444,'22222')}
+${$scripts.say(2221,2,3,4,5,6,7,78,5,5,3,'3,',444,'22222')}
+
+<div dr-if="this.friends">
+    <div dr-for-of="this.friends">
+        ${this.say('---')}
+    </div>
+</div>
+<div class="card mt-2" style="width: 100%;">
+    <div class="card-body">
+        <h5>default data set "module-value"</h5>
+        <input type="text" dr-value="this.data">
+    </div>
+</div>
+<div class="card mt-2" style="width: 100%;">
+    <div class="card-body">
+        <h5>variable module</h5>
+<!--        ${this.data}-->
+        ${this.data}
+        <div dr-if="this.data">ddd</div>
+        data link change event  <input type="text" dr-value="this.data" dr-value-link="this.data">
+    </div>
+</div>
+<button dr-event-click="this.data='zzz'">change defaultData</button>
+<div>11 ${this.tData} 22 </div>
+<div>
+    ${this.tData}
+    thisData <button dr-event-click="this.tDataChange()"> this data change</button>
+</div>
+<div>
+    <div dr-event-click="this.goto()">aaaaaaaaa</div>
+    <div dr-event-click="gotoUser">user</div>
+</div>
+
+${this.friends.length}
+<div dr-for-of="this.friends">
+    ${#it#.name}
+</div>
+
+<!--<button dr-event-click="this.friends.push({name:'zzzzz'})">add friends</button>-->

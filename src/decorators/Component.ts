@@ -1,6 +1,5 @@
 import { ConstructorType, GenericClassDecorator } from 'simple-boot-core/types/Types';
 import { ReflectUtils } from 'simple-boot-core/utils/reflect/ReflectUtils';
-import { SimGlobal } from 'simple-boot-core/global/SimGlobal';
 
 export const componentSelectors = new Map<string, ConstructorType<any>>();
 export interface ComponentConfig {
@@ -29,9 +28,14 @@ export const Component = (config?: ComponentConfig): GenericClassDecorator<Const
     // const component = SimGlobal().data.components;
     // console.log('component', SimGlobal().data)
     return (target: ConstructorType<any>) => {
-        if (config?.selector) {
-            componentSelectors.set(config?.selector, target);
+        //default set
+        if (!config) {
+            config = {}
         }
+        if (!config.selector) {
+            config.selector = target.name;
+        }
+        componentSelectors.set(config.selector.toLowerCase(), target);
         ReflectUtils.defineMetadata(ComponentMetadataKey, config, target);
         return class extends target {
             __componentInstances =  {}

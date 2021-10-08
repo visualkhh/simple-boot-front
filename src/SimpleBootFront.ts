@@ -6,6 +6,9 @@ import {
     componentSelectors,
     getComponent,
 } from './decorators/Component';
+import {
+    scripts
+} from './decorators/Script';
 import { DomRender } from 'dom-render/DomRender';
 import { SimAtomic } from 'simple-boot-core/simstance/SimAtomic';
 import { SimpleApplication } from 'simple-boot-core/SimpleApplication';
@@ -19,20 +22,37 @@ import { RouterManager } from 'simple-boot-core/route/RouterManager';
 import { DomRenderProxy } from 'dom-render/DomRenderProxy';
 import { ScriptUtils } from 'dom-render/utils/script/ScriptUtils';
 import { SimGlobal } from 'simple-boot-core/global/SimGlobal';
-import { RawSet } from 'dom-render/RawSet';
+import { RawSet, Render } from 'dom-render/RawSet';
 import { Config, TargetElement, TargetAttr } from 'dom-render/Config';
+import { ScriptRunnable } from 'script/ScriptRunnable';
 
 export class SimpleBootFront extends SimpleApplication {
     navigation!: Navigation;
     public domRendoerExcludeProxy = [SimpleApplication, IntentManager, RouterManager, SimstanceManager, SimFrontOption, Navigation, ViewService, HttpService, HTMLElement];
     public domRenderTargetElements: TargetElement[] = [];
     public domRenderTargetAttrs: TargetAttr[] = [];
+    public domRenderConfig: Config = {
+        targetElements: this.domRenderTargetElements,
+        targetAttrs: this.domRenderTargetAttrs,
+        onAttrInit: (attrName: string, attrValue: string, obj: any) => {
+            if (attrName === 'component') {
+                const bindObj = ScriptUtils.evalReturn(attrValue, obj);
+                (bindObj as any)?.onInit?.();
+            }
+        },
+        scripts: {'application': this},
+        applyEvents: [{
+            attrName: 'router-link', callBack: (elements: Element, attrValue: string, obj: any) => {
+                elements.addEventListener('click', (event) => {
+                    SimGlobal().application.simstanceManager.getOrNewSim(Navigation)?.go(attrValue)
+                })
+            }
+        }],
+        proxyExcludeTyps: this.domRendoerExcludeProxy
+    };
     constructor(public rootRouter: ConstructorType<any>, public option: SimFrontOption) {
         super(rootRouter, option);
         window.__dirname = 'simple-boot-front__dirname';
-        // for (const [key, value] of Object.entries(selectors)) {}
-        // console.log('-->???', SimGlobal().data.components.storage)
-        // const selectors = SimGlobal().data.components.storage as Map<string, ConstructorType<any>>;
         const selectors = componentSelectors;
         selectors.forEach((val, name) => {
             this.domRenderTargetElements.push({
@@ -55,16 +75,9 @@ export class SimpleBootFront extends SimpleApplication {
                     const componentOption = getComponent(componentObj);
                     const fag = this.option.window.document.createDocumentFragment();
                     if (componentOption) {
-                        // if (!obj.__componentInstances) {
-                        //     obj.__componentInstances = {};
-                        // }
                         obj.__componentInstances[rawSet.uuid] = componentObj;
-                        // obj.__componentInstances.vava = componentObj;
-                        // componentOption.instances.set(rawSet.uuid, componentObj);
-                        // console.log('-->',componentOption)
                         const template = this.option.window.document.createElement('div');
                         template.innerHTML = this.getComponentInnerHtml(componentObj);
-                        // SimGlobal.data.componentSelectors.instances.get('${rawSet.uuid}')
                         fag.append(RawSet.drThisCreate(template, `this.__componentInstances['${rawSet.uuid}']`, '', true, obj))
                     }
                     return fag;
@@ -100,31 +113,15 @@ export class SimpleBootFront extends SimpleApplication {
     public createDomRender<T extends object>(obj: T): T {
         const component = getComponent(obj);
         if (component && typeof obj === 'object') {
-            return DomRender.run(obj, undefined, {
-                targetElements: this.domRenderTargetElements,
-                targetAttrs: this.domRenderTargetAttrs,
-                onAttrInit: (attrName: string, attrValue: string, obj: any) => {
-                    if (attrName === 'component') {
-                    // console.log('-onInit-->', attrName, attrValue)
-                    const bindObj = ScriptUtils.evalReturn(attrValue, obj);
-                    (bindObj as any)?.onInit?.();
-                    }
-                },
-                applyEvents: [{
-                    attrName: 'router-link', callBack: (elements: Element, attrValue: string, obj: any) => {
-                        elements.addEventListener('click', (event) => {
-                            SimGlobal().application.simstanceManager.getOrNewSim(Navigation)?.go(attrValue)
-                        })
-                    }
-                }],
-                proxyExcludeTyps: this.domRendoerExcludeProxy
-            });
+            return DomRender.run(obj, undefined, this.domRenderConfig);
         }
         return obj;
     }
 
     public run() {
         super.run();
+        this.resetDomrenderScripts();
+
         this.navigation = this.simstanceManager.getOrNewSim(Navigation)!
         // rootRouter는 처음한번 그려준다.
         const routerAtomic = new SimAtomic(this.rootRouter);
@@ -181,5 +178,29 @@ export class SimpleBootFront extends SimpleApplication {
                 it.classList.remove(...classs);
             }
         });
+    }
+
+    public resetDomrenderScripts() {
+        const simstanceManager = this.simstanceManager;
+        scripts.forEach((val, name) => {
+            this.domRenderConfig.scripts![name] = function(...args: any) {
+                console.log(simstanceManager)
+                // (this._DomRender_proxy as DomRenderProxy<any>); // .render([render.rawset]);
+                // const simstanceManager = SimGlobal().application.simstanceManager as SimstanceManager;
+                // console.log('---------,', simstanceManager, val)
+                let obj: any = undefined;
+                try {
+                    obj = simstanceManager.getOrNewSim(val);
+                } catch (e) {
+                    console.log('eee')
+                    obj = simstanceManager.newSim(val)
+                }
+                const render = this.__render as Render;
+                const scriptRunnable = obj as ScriptRunnable;
+                scriptRunnable.rawSets.set(render.rawset, this);
+                return scriptRunnable.run(...args);
+            }
+
+        })
     }
 }

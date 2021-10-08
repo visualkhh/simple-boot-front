@@ -21,11 +21,11 @@
     }
   },
   "scripts": {
-    "start": "rollup -c && sbf serve --path ./dist --port 4500",
     "serve": "sbf serve --path ./dist --port 4500",
-    "serve:8080": "sbf serve --path ./dist --port 4500 --proxy http://localhost:8080",
+    "serve:proxy8080": "sbf serve --path ./dist --port 4500 --proxy http://localhost:8080",
     "bundle": "rollup -c ",
-    "bundle:watch": "rollup -c -w "
+    "bundle:watch": "rollup -c -w ",
+    "start": "rollup -c && sbf serve --path ./dist --port 4500"
   },
   "devDependencies": {
     "@rollup/plugin-node-resolve": "^13.0.5",
@@ -39,7 +39,7 @@
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-promise": "^4.3.1",
     "jest": "^26.6.3",
-    "rollup": "^2.52.8",
+    "rollup": "^2.58.0",
     "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-commonjs": "^10.1.0",
     "rollup-plugin-copy": "^3.4.0",
@@ -53,9 +53,10 @@
     "simple-boot-front-cli": "^1.0.0",
     "supertest": "^6.1.3",
     "ts-jest": "^26.5.4",
-    "typescript": "^4.3.5"
+    "typescript": "^4.4.3"
   },
   "dependencies": {
-    "simple-boot-front": "^1.0.78"
+    "dom-render": "file:../libs/dom-render/dist",
+    "simple-boot-front": "file:../dist"
   }
 }

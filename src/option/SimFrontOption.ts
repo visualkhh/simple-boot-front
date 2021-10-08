@@ -1,12 +1,9 @@
 import { SimOption } from 'simple-boot-core/SimOption';
 import { ConstructorType } from 'simple-boot-core/types/Types';
-import { Config} from 'dom-render/Config';
-
 export enum UrlType {
     path = 'path',
     hash = 'hash'
 }
-
 export class SimFrontOption extends SimOption {
     selector: string = '#app';
     urlType: UrlType = UrlType.path;
