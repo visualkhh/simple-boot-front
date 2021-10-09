@@ -20,6 +20,7 @@ import { SimstanceManager } from 'simple-boot-core/simstance/SimstanceManager';
 import { IntentManager } from 'simple-boot-core/intent/IntentManager';
 import { RouterManager } from 'simple-boot-core/route/RouterManager';
 import { DomRenderProxy } from 'dom-render/DomRenderProxy';
+import { RandomUtils } from 'dom-render/utils/random/RandomUtils';
 import { ScriptUtils } from 'dom-render/utils/script/ScriptUtils';
 import { SimGlobal } from 'simple-boot-core/global/SimGlobal';
 import { RawSet, Render } from 'dom-render/RawSet';
@@ -75,10 +76,12 @@ export class SimpleBootFront extends SimpleApplication {
                     const componentOption = getComponent(componentObj);
                     const fag = this.option.window.document.createDocumentFragment();
                     if (componentOption) {
-                        obj.__componentInstances[rawSet.uuid] = componentObj;
+
+                        const key = `_${RandomUtils.getRandomString(20)}`;
+                        obj.__componentInstances[key] = componentObj;
                         const template = this.option.window.document.createElement('div');
                         template.innerHTML = this.getComponentInnerHtml(componentObj);
-                        fag.append(RawSet.drThisCreate(template, `this.__componentInstances['${rawSet.uuid}']`, '', true, obj))
+                        fag.append(RawSet.drThisCreate(template, `this.__componentInstances.${key}`, '', true, obj))
                     }
                     return fag;
                 }
@@ -184,7 +187,7 @@ export class SimpleBootFront extends SimpleApplication {
         const simstanceManager = this.simstanceManager;
         scripts.forEach((val, name) => {
             this.domRenderConfig.scripts![name] = function(...args: any) {
-                console.log(simstanceManager)
+                // console.log(simstanceManager)
                 // (this._DomRender_proxy as DomRenderProxy<any>); // .render([render.rawset]);
                 // const simstanceManager = SimGlobal().application.simstanceManager as SimstanceManager;
                 // console.log('---------,', simstanceManager, val)

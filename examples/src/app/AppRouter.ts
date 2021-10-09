@@ -45,21 +45,15 @@ export class AppRouter implements RouterAction, FrontLifeCycle {
     }
 
     onInit(): void {
-        console.log('AppRouter--->onInit');
     }
     onChangedRender(): void {
-        console.log('AppRouter--->onChangedRender');
     }
     onInitedChild(): void {
-        console.log('AppRouter--->onInitedChild');
     }
     onFinish(): void {
-        console.log('AppRouter--->onFinish');
     }
     onCreate(): void {
-        console.log('AppRouter--->onCreate');
     }
-
     canActivate(url: Intent, module: any): void {
         this.data = this.data + '-------'
         // console.log('-------AppRouter----->', url, this.child, module, this.child !== module)

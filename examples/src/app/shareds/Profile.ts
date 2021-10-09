@@ -7,12 +7,7 @@ const styles = [
         padding: 10px;
         margin: 10px;
     }`];
-const template = `
-<h1>profile</h1>
-<div class="card" style="width: 18rem;">
-  <button dr-event-click="console.log('-------')">ddd</button>
-</div>
-`;
+import template from './Profile.html'
 
 @Component({
     template, styles
@@ -20,12 +15,19 @@ const template = `
 export class Profile {
     // private data: User = {name: {title:'zz'}};
     private data: User | undefined;
-
+    public currentOptionValue = 'f2';
+    public options: {key: string, title: string}[] = [{key: 'f1', title: 'f1name'}, {key: 'f2', title: 'f2name'}]
     constructor() {
     }
 
     public setUser(data?: User) {
         console.log('-setUser', this, data)
         this.data = data;
+    }
+
+
+    public changeOption() {
+        console.log('--changeOption')
+        this.currentOptionValue = 'f2'
     }
 }
