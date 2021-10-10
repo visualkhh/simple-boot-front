@@ -261,6 +261,34 @@ export class AppInfo {
     }
 }
 ```
+
+# Advice
+- global advice
+```typescript
+@Sim()
+export class Advice {
+
+    @ExceptionHandler()
+    public exception0(e: any) {
+        console.log('Advice Global exception:')
+    }
+
+    @Before({type: Aop, property: 'unkown'})
+    public beforeTest(obj: any, f: Function, name: string) {
+        console.log('before Test:')
+    }
+
+    @After({type: Aop, property: 'unkown'})
+    public afterTest(obj: any, f: Function, name: string) {
+        console.log('after Test:')
+    }
+}
+```
+```typescript
+const option = new SimFrontOption(window, [Advice]).setUrlType(UrlType.hash);
+const simpleApplication = new SimpleBootFront(AppRouter, option);
+simpleApplication.run();
+```
 ----
 # License
 * MIT
