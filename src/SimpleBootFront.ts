@@ -130,10 +130,8 @@ export class SimpleBootFront extends SimpleApplication {
         const routerAtomic = new SimAtomic(this.rootRouter);
         const target = this.option.window.document.querySelector(this.option.selector)
         if (target && routerAtomic.value) {
-            // console.log('target-->', routerAtomic.value)
             const component = routerAtomic.getConfig<ComponentConfig>(ComponentMetadataKey)
             const template = this.option.window.document.createElement('template')
-            // template.innerHTML = `<style>${component?.styles ?? ''}</style> ${component?.template ?? ''}`;
             const styles = (component?.styles?.map(it => `<style>${it}</style>`) ?? []).join(' ')
             target.innerHTML = `${styles} ${component?.template ?? ''}`;
             const val = routerAtomic.value;
@@ -145,7 +143,6 @@ export class SimpleBootFront extends SimpleApplication {
         this.option.window.addEventListener('intent', (event) => {
             const cevent = event as CustomEvent
             this.publishIntent(new Intent(cevent.detail.uri, cevent.detail.data, event));
-            //console.log('intent--?', event)
         });
         this.option.window.addEventListener('popstate', (event) => {
             const intent = new Intent(this.navigation.path ?? '');
@@ -171,15 +168,30 @@ export class SimpleBootFront extends SimpleApplication {
     }
 
     private afterSetting() {
-        this.option.window.document.querySelectorAll('[router-active-class]').forEach(it => {
-            const link = it.getAttribute('router-link') ?? '';
-            const activeClasss = it.getAttribute('router-active-class') ?? '';
-            const classs = activeClasss.split(',');
-            if (this.navigation.path === link) {
-                it.classList.add(...classs);
-            } else {
-                it.classList.remove(...classs);
+        this.option.window.document.querySelectorAll('[router-link]').forEach(it => {
+            const link = it.getAttribute('router-link');
+            if (link) {
+                const activeClasss = it.getAttribute('router-active-class');
+                const aClasss = activeClasss?.split(',');
+                const inActiveClasss = it.getAttribute('router-inactive-class');
+                const iClasss = inActiveClasss?.split(',');
+                if (this.navigation.path === link) {
+                    if (aClasss && aClasss.length > 0) {
+                        it.classList.add(...aClasss);
+                    }
+                    if (iClasss && iClasss.length > 0) {
+                        it.classList.remove(...iClasss);
+                    }
+                } else {
+                    if (aClasss && aClasss.length > 0) {
+                        it.classList.remove(...aClasss);
+                    }
+                    if (iClasss && iClasss.length > 0) {
+                        it.classList.add(...iClasss);
+                    }
+                }
             }
+
         });
     }
 
@@ -187,15 +199,10 @@ export class SimpleBootFront extends SimpleApplication {
         const simstanceManager = this.simstanceManager;
         scripts.forEach((val, name) => {
             this.domRenderConfig.scripts![name] = function(...args: any) {
-                // console.log(simstanceManager)
-                // (this._DomRender_proxy as DomRenderProxy<any>); // .render([render.rawset]);
-                // const simstanceManager = SimGlobal().application.simstanceManager as SimstanceManager;
-                // console.log('---------,', simstanceManager, val)
                 let obj: any = undefined;
                 try {
                     obj = simstanceManager.getOrNewSim(val);
                 } catch (e) {
-                    console.log('eee')
                     obj = simstanceManager.newSim(val)
                 }
                 const render = this.__render as Render;

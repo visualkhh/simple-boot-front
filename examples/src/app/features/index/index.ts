@@ -7,16 +7,25 @@ import {Navigation} from 'simple-boot-front/service/Navigation';
 import { Component } from 'simple-boot-front/decorators/Component';
 import { SayScript } from '../../scripts/SayScript';
 import { Profile } from '../../shareds/Profile';
+import { ScriptService } from 'simple-boot-front/service/ScriptService';
+import { TempScript } from '../../scripts/TempScript';
 @Sim({scheme: 'index'})
 @Component({
     template,
-    using:[SayScript, Profile]
+    using:[SayScript, Profile, TempScript]
 })
 export class Index {
     data = 'default data';
     tData = 5151;
     public friends = [{name: 'z'}, {name: 'b'}, {name: 'c'}]
-    constructor(public v: ViewService, public simstanceManager: SimstanceManager, public navigation: Navigation) {
+    constructor(public scriptService: ScriptService, public simstanceManager: SimstanceManager, public navigation: Navigation) {
+        const script = scriptService.getScript('say');
+        scriptService.getScript('say');
+        scriptService.getScript('say');
+        const script1 = scriptService.getScript('temp');
+        scriptService.getScript('temp');
+        scriptService.getScript('temp');
+        console.log('------', script, script1)
     }
 
     // onInit() {

@@ -11,7 +11,6 @@ import { Intent } from 'simple-boot-core/intent/Intent';
 import { RouterAction } from 'simple-boot-core/route/RouterAction';
 import template from './layouts/app.html';
 import css from './layouts/app.css';
-import { FrontLifeCycle } from 'simple-boot-front/module/FrontLifeCycle';
 import { SubNotfound } from './features/documents/errors/notfound/subNotfound';
 import { SimFrontOption } from 'simple-boot-front/option/SimFrontOption';
 
@@ -38,22 +37,13 @@ import { SimFrontOption } from 'simple-boot-front/option/SimFrontOption';
     },
     routers: [DocumentRouter]
 })
-export class AppRouter implements RouterAction, FrontLifeCycle {
+export class AppRouter implements RouterAction {
     child?: any;
     data = 'my name is visual'
     constructor(private subNotfound: SubNotfound, private option: SimFrontOption) {
     }
 
-    onInit(): void {
-    }
-    onChangedRender(): void {
-    }
-    onInitedChild(): void {
-    }
-    onFinish(): void {
-    }
-    onCreate(): void {
-    }
+
     canActivate(url: Intent, module: any): void {
         this.data = this.data + '-------'
         // console.log('-------AppRouter----->', url, this.child, module, this.child !== module)

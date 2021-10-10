@@ -9,11 +9,11 @@ import { Component } from 'simple-boot-front/decorators/Component';
 import { SimFrontOption } from 'simple-boot-front/option/SimFrontOption';
 import { Profile } from '../../shareds/Profile';
 import { User } from '../../models/UserResponse';
-import { FrontLifeCycle } from 'simple-boot-front/module/FrontLifeCycle';
+import { OnInit } from 'simple-boot-front/lifecycle/OnInit';
 
 @Sim({scheme: 'ajax'})
 @Component({template, styles: [css]})
-export class Ajax implements FrontLifeCycle {
+export class Ajax implements OnInit {
     public data: UserResponse | undefined;
     private profile: User | undefined;
     constructor(public option: SimFrontOption, public ajax: HttpService) {
@@ -23,20 +23,6 @@ export class Ajax implements FrontLifeCycle {
         this.data = undefined;
         console.log('onInit-->Method not implemented.');
     }
-    onChangedRender(): void {
-        console.log('onChangedRender-->Method not implemented.');
-    }
-    onInitedChild(): void {
-        console.log('onInitedChild-->Method not implemented.');
-    }
-    onFinish(): void {
-        console.log('onFinish-->Method not implemented.');
-    }
-    onCreate(): void {
-        this.loadData();
-        console.log('onCreate-->Method not implemented.');
-    }
-
 
     post() {
     }
