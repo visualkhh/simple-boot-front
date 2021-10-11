@@ -44,14 +44,36 @@ Objects managed by the SimpleBootFront framework
 ```
 
 ## @Component
+
+```html
+<!--template.html-->
+<h1>${this.title}</h1>
+<div dr-inner-html="this.html"></div>
+```
 ```typescript
 @Sim()
 @Component({
-    template,
-    styles: [style]
+  selector: 'index', // default class name LowerCase
+  template,
+  styles: [style]
 })
 export class Index {
+  public title = ''
+  public html = ''
+  public setData(title: string, html: string) {
+    this.title = title;
+    this.html = html;
+  }
 }
+```
+using
+```typescript
+constructor(index: Index){...}
+```
+```html
+<index></index>
+<!-- dr-set: $index.setData('data'); $element, $innerHTML, $attributes -->
+<index dr-set="$index.setData('hello component', $innerHTML)"></index>
 ```
 
 ## @Router
@@ -192,7 +214,21 @@ public exception2(e: SimNoSuch) {
 - **DomRender** [![npm version](https://img.shields.io/badge/npm-blue)](https://www.npmjs.com/package/dom-render) [![Github](https://img.shields.io/badge/-github-black?logo=github)](https://github.com/visualkhh/dom-render)
 - It's a compiler that takes your declarative components and converts them into efficient JavaScript that surgically updates the DOM.
 - Update view only for parts where the value has changed.
+- event: addEventListener (attribute)
+```html
+<div>
+    click: <button dr-event-click="this.name = 'name' + new Date()">click</button> <br>
+    change: <input type="text" dr-event-change="this.name = $target.value"> <br>
+    input: <input type="text" dr-event-input="this.name = $target.value"> <br>
+    keyup: <input type="text" dr-event-keyup="this.name = $target.value"> <br>
+    keydown: <input type="text" dr-event-keydown="this.name = $target.value"><br>
+    ...
+    submit: <form dr-event-submit="console.log($event); $event.preventDefault();"><input type="text"> <button type="submit">submit</button></form><br>
+    window-event-popstate: <input type="text" dr-window-event-popstate="alert(this.name)"><br>
+</div>...
 
+```
+- If you want to see more information Move here go ***dom-render github***
 ----
 
 
