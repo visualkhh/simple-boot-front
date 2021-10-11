@@ -22,6 +22,7 @@
   },
   "scripts": {
     "serve": "sbf serve --path ./dist --port 4500",
+    "serve:watch": "sbf serve --path ./dist --port 4500 --watch",
     "serve:proxy8080": "sbf serve --path ./dist --port 4500 --proxy http://localhost:8080",
     "bundle": "rollup -c ",
     "bundle:watch": "rollup -c -w ",
@@ -50,7 +51,7 @@
     "rollup-plugin-sourcemaps": "^0.6.3",
     "rollup-plugin-typescript2": "^0.30.0",
     "rollup-watch": "^4.3.1",
-    "simple-boot-front-cli": "^1.0.0",
+    "simple-boot-front-cli": "^1.0.1",
     "supertest": "^6.1.3",
     "ts-jest": "^26.5.4",
     "typescript": "^4.4.3"

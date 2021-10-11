@@ -7,6 +7,9 @@ examples
 # TypeScript
 # *.js
 # *.map
+test
+tip.md
+dist
 
 # JetBrains
 .idea

@@ -14,7 +14,10 @@ const argv = optimist.check((f) => {
     .default('path', './dist')
     .describe('serve', 'server')
     .argv;
-// console.log(argv);
+
+if (argv.argv) {
+    console.log(argv);
+}
 
 const MODE_SERVE = 'serve'
 const MODE_CREATE = 'create'
@@ -38,6 +41,7 @@ function printHelp() {
         console.log(`\t  --path\tdist path`)
         console.log(`\t  --port\tserver port`)
         console.log(`\t  --proxy\tproxy url`)
+        console.log(`\t  --watch\tfileChange browser refresh`)
     }
     console.log('');
     if (isChoiceMode === false || argv.has(MODE_CREATE)) {
