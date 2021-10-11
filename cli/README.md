@@ -17,5 +17,5 @@ npm install simple-boot-cli
 
 ## example
 ```shell
-sbf --path ../dist --watch
+sbf serve --path ../dist --watch
 ```

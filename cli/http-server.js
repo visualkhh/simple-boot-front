@@ -100,7 +100,7 @@ exports.httpServer = (argv) => {
                 if (exists) {
                     const ff = fs.statSync(webDirPath)
                     console.log('watch detect path:', webDirPath, 'isFile:' + ff.isFile(), 'size:' + ff.size)
-                    start = Date.now() + 500;
+                    start = Date.now() + 1000;
                     // if (start < changeNow) {
                     //     start = changeNow + 4000;
                     //     wantTick = true;
