@@ -84,7 +84,7 @@ constructor(index: Index){...}
     route: {
         '/': Home,
         '/user': User,
-        '/user/:id': UserDetaile
+        '/user/:id': UserDetail
     }
 })
 @Component({
