@@ -1,13 +1,14 @@
-const fs = require('fs');
-const path = require('path');
-const http = require('http');
-const httpProxy = require('http-proxy');
-const mime = require('mime-types')
-const fileUtils = require("./utils/FileUtils");
-// const argv = require('optimist').argv;
+
+import fs from 'fs'
+import path from 'path';
+import http from 'http';
+import httpProxy from 'http-proxy';
+import mime from 'mime-types'
+import WebSocket from 'ws';
+import {getDirectory, watch} from '../utils/FileUtils.js';
 
 
-exports.httpServer = (argv) => {
+export const httpServer = (argv) => {
     const webDirPath = path.resolve(argv.path); //path.join(__dirname, argv.path);
     console.log('localDist', webDirPath);
     console.log('serve', 'http://localhost:' + argv.port);
@@ -42,7 +43,7 @@ exports.httpServer = (argv) => {
             fs.readFile(localPath, 'binary', function (err, file) {
 
                 let fileSize = fileState.size;
-                const webscoketClient = `
+                const webscoketClient = argv.watch ? `
                         <script>
                             const webSocket = new WebSocket("ws://localhost:${argv.port+1}");
                             webSocket.onmessage = function (event) {
@@ -51,7 +52,7 @@ exports.httpServer = (argv) => {
                                     location.reload();
                                 }
                             }
-                        </script>`;
+                        </script>` : '';
 
                 if (requestPath === '/index.html') {
                     fileSize += webscoketClient.length;
@@ -85,14 +86,12 @@ exports.httpServer = (argv) => {
     }).listen(argv.port);
 
     if (argv.watch) {
-        const WebSocket = require('ws');
         const wss = new WebSocket.Server({port: argv.port+1});
 
         let start = Date.now();
-        // let wantTick = false;
-        const directorys = fileUtils.getDirectory(webDirPath, [webDirPath]);
+        const directorys = getDirectory(webDirPath, [webDirPath]);
         directorys.forEach(it => {
-            fileUtils.watch(it, (e, filename) => {
+            watch(it, (e, filename) => {
                 // console.log('change detect -->', filename, e)
                 const webDirPath = path.join(it, filename);
                 const exists = fs.existsSync(webDirPath);
@@ -100,11 +99,7 @@ exports.httpServer = (argv) => {
                 if (exists) {
                     const ff = fs.statSync(webDirPath)
                     console.log('watch detect path:', webDirPath, 'isFile:' + ff.isFile(), 'size:' + ff.size)
-                    start = Date.now() + 1000;
-                    // if (start < changeNow) {
-                    //     start = changeNow + 4000;
-                    //     wantTick = true;
-                    // }
+                    start = Date.now() + 500;
                 }
             })
         })
@@ -114,10 +109,9 @@ exports.httpServer = (argv) => {
                 wss.clients.forEach(function each(client) {
                     client.send(JSON.stringify({action: 'refresh'}));
                 });
-                // console.log('tttiiiiiiiccccccckkkk')
                 start = 0;
             }
-        }, 500)
+        }, 200)
 
         // setInterval(() => {
         //     wss.clients.forEach(function each(client) {
@@ -147,3 +141,4 @@ exports.httpServer = (argv) => {
         // });
     }
 }
+

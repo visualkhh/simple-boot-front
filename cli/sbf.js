@@ -2,7 +2,11 @@
 
 
 'use strict';
-const optimist = require('optimist');
+import optimist from 'optimist';
+import {httpServer} from './servers/http-server.js';
+import {rollupBuild} from './builds/rollup-build.js';
+import CreateSvelteCmd from 'create-simple-boot-front'
+// import {ggg} from './http-server'
 const argv = optimist.check((f) => {
     f.has = (key) => {
         // console.log(f._, key)
@@ -21,13 +25,17 @@ if (argv.argv) {
 
 const MODE_SERVE = 'serve'
 const MODE_CREATE = 'create'
-const MODES = [MODE_SERVE, MODE_CREATE];
+const MODE_ROLLUP_BUILD = 'rollup-build'
+const MODES = [MODE_SERVE, MODE_CREATE, MODE_ROLLUP_BUILD];
 if (argv.help) {
    printHelp();
 } else if (argv.has(MODE_SERVE)) {
-    require('./http-server.js').httpServer(argv)
-}  else if (argv.has(MODE_CREATE)) {
-    require('create-simple-boot-front/bin/run')
+    httpServer(argv);
+} else if (argv.has(MODE_CREATE)) {
+    CreateSvelteCmd.run();
+} else if (argv.has(MODE_ROLLUP_BUILD)) {
+    rollupBuild(argv);
+    // require('./builds/rollup-build.js').rollupBuild(argv)
 } else {
     printHelp();
 }
@@ -46,5 +54,10 @@ function printHelp() {
     console.log('');
     if (isChoiceMode === false || argv.has(MODE_CREATE)) {
         console.log(`\t${MODE_CREATE}\tsimple-boot-front template project`)
+    }
+    console.log('');
+    if (isChoiceMode === false || argv.has(MODE_ROLLUP_BUILD)) {
+        console.log(`\t${MODE_ROLLUP_BUILD}\trollup bundle`)
+        console.log(`\t  --path\trollup config path`)
     }
 }

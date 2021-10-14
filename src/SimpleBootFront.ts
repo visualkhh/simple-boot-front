@@ -54,39 +54,6 @@ export class SimpleBootFront extends SimpleApplication {
     constructor(public rootRouter: ConstructorType<any>, public option: SimFrontOption) {
         super(rootRouter, option);
         window.__dirname = 'simple-boot-front__dirname';
-        const selectors = componentSelectors;
-        selectors.forEach((val, name) => {
-            this.domRenderTargetElements.push({
-                name,
-                callBack: (element: Element, obj: any, rawSet: RawSet) => {
-                    const componentObj = this.simstanceManager.newSim(val);
-                    const set = element.getAttribute('dr-set')
-                    let any;
-                    if (set) {
-                        const comEvalTargetObj: any = {'$attribute': any = {}};
-                        element.getAttributeNames().forEach(it => {
-                            comEvalTargetObj['$attribute'][it] = element.getAttribute(it);
-                        });
-                        comEvalTargetObj['$innerHTML'] = element.innerHTML;
-                        comEvalTargetObj['$element'] = element;
-                        comEvalTargetObj[name] = componentObj;
-                        const script = `var ${name} = this['${name}']; var $element = this['$element']; var $innerHTML = this['$innerHTML']; var $attribute = this['$attribute'];  ${set} `;
-                        ScriptUtils.eval(script, Object.assign(comEvalTargetObj, obj))
-                    }
-                    const componentOption = getComponent(componentObj);
-                    const fag = this.option.window.document.createDocumentFragment();
-                    if (componentOption) {
-
-                        const key = `_${RandomUtils.getRandomString(20)}`;
-                        obj.__componentInstances[key] = componentObj;
-                        const template = this.option.window.document.createElement('div');
-                        template.innerHTML = this.getComponentInnerHtml(componentObj);
-                        fag.append(RawSet.drThisCreate(template, `this.__componentInstances.${key}`, '', true, obj))
-                    }
-                    return fag;
-                }
-            })
-        });
         // console.log('---sele-->', selectors, this.targetElements)
         this.domRenderTargetAttrs.push({
             name: 'component', callBack: (element: Element, attrValue: string, obj: any, rawSet: RawSet) => {
@@ -123,7 +90,8 @@ export class SimpleBootFront extends SimpleApplication {
 
     public run() {
         super.run();
-        this.resetDomrenderScripts();
+        this.initDomRenderScripts();
+        this.initDomRenderTargetElements();
 
         this.navigation = this.simstanceManager.getOrNewSim(Navigation)!
         // rootRouter는 처음한번 그려준다.
@@ -195,7 +163,7 @@ export class SimpleBootFront extends SimpleApplication {
         });
     }
 
-    public resetDomrenderScripts() {
+    public initDomRenderScripts() {
         const simstanceManager = this.simstanceManager;
         scripts.forEach((val, name) => {
             this.domRenderConfig.scripts![name] = function(...args: any) {
@@ -212,5 +180,13 @@ export class SimpleBootFront extends SimpleApplication {
             }
 
         })
+    }
+
+    private initDomRenderTargetElements() {
+        const selectors = componentSelectors;
+        selectors.forEach((val, name) => {
+            const component = getComponent(val);
+            this.domRenderTargetElements.push(RawSet.createComponentTargetElement(name, (e, o, r) => this.simstanceManager.newSim(val), component?.template, component?.styles, this.domRenderConfig.scripts));
+        });
     }
 }

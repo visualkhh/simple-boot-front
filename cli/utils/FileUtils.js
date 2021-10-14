@@ -1,6 +1,6 @@
-const fs = require('fs');
+import fs from 'fs';
 
-function getFiles (dir, files_){
+export const getFiles =  (dir, files_) => {
     files_ = files_ || [];
     var files = fs.readdirSync(dir);
     for (var i in files){
@@ -13,7 +13,7 @@ function getFiles (dir, files_){
     }
     return files_;
 }
-function getDirectory (dir, files_){
+export const getDirectory =  (dir, files_) => {
     files_ = files_ || [];
     var files = fs.readdirSync(dir);
     for (var i in files){
@@ -25,7 +25,7 @@ function getDirectory (dir, files_){
     return files_;
 }
 
-function watch(filename, callback) {
+export const watch = (filename, callback)  => {
     fs.watch(filename, callback);
     // function (event, filename) {
     //     console.log('event is: ' + event);
@@ -35,10 +35,4 @@ function watch(filename, callback) {
     //         console.log('filename not provided');
     //     }
     // }
-}
-
-module.exports = {
-    getFiles,
-    getDirectory,
-    watch
 }
