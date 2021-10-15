@@ -1,15 +1,15 @@
-import { rollup } from 'rollup';
-import path from 'path';
-// const typescript2 = require('rollup-plugin-typescript2');
-// const resolve = require('rollup-plugin-node-resolve');
-// function rollupBuild({ inputOptions, outputOptions }): Promise<any> {
-//     return rollup(inputOptions).then(bundle => bundle.write(outputOptions));
-// }
-
+import {exec} from "child_process";
 export const rollupBuild = (argv) => {
-    const webDirPath = path.resolve(argv.path); //path.join(__dirname, argv.path);
-    console.log('-->', webDirPath)
-    import(webDirPath).then(it => {
-        rollup(it.default)
-    });
+    const path = argv.config || '';
+    const watch = argv.watch ? '--watch' : '';
+    const command = `node ./node_modules/.bin/rollup -c ${path} ${watch}`;
+    console.log(command)
+    exec(command, (error, stdout, stderr) => {
+        console.log('rollup bundle execute: ', '-->', stdout, '-->', stderr, '-->', error);
+    })
+    // const webDirPath = path.resolve(argv.path); //path.join(__dirname, argv.path);
+    // console.log('-->', webDirPath)
+    // import(webDirPath).then(it => {
+    //     rollup(it.default)
+    // });
 }
