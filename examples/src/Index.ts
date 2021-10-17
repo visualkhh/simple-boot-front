@@ -6,3 +6,4 @@ const option = new SimFrontOption(window, [Advice]).setUrlType(UrlType.hash);
 const simpleApplication = new SimpleBootFront(AppRouter, option);
 simpleApplication.run();
 
+

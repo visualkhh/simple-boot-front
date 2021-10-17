@@ -20,18 +20,27 @@ const argv = optimist.check((f) => {
     .describe('serve', 'server')
     .argv;
 
-if (argv.argv) {
-    console.log(argv);
-}
+
 
 const MODE_SERVE = 'serve'
 const MODE_CREATE = 'create'
 const MODE_EXEC = 'exec'
 const MODE_ROLLUP_BUILD = 'rollup-build'
 const MODES = [MODE_SERVE, MODE_CREATE, MODE_ROLLUP_BUILD, MODE_EXEC];
+
+
 if (argv.help) {
-   printHelp();
-} else if (argv.has(MODE_SERVE)) {
+    printHelp();
+    process.exit();
+}
+
+if (argv.argv) {
+    console.log(argv);
+}
+execute(argv);
+
+
+if (argv.has(MODE_SERVE)) {
     if (argv.bundle === 'rollup') {
         rollupBuild(argv);
     }
