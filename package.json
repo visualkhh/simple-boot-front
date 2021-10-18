@@ -1,6 +1,6 @@
 {
   "name": "simple-boot-front",
-  "version": "1.0.86",
+  "version": "1.0.87",
   "main": "SimpleApplication.js",
   "license": "MIT",
   "description": "front end SPA frameworks",
@@ -74,7 +74,7 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
-    "dom-render": "^1.0.50",
+    "dom-render": "^1.0.51",
     "reflect-metadata": "^0.1.13",
     "simple-boot-core": "^1.0.21"
   }
