@@ -59,6 +59,7 @@
   },
   "dependencies": {
     "dom-render": "file:../libs/dom-render/dist",
+    "simple-boot-core": "file:../libs/simple-boot-core/dist",
     "simple-boot-front": "file:../dist"
   }
 }

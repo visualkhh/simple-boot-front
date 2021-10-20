@@ -19,13 +19,13 @@ export class Index {
     tData = 5151;
     public friends = [{name: 'z'}, {name: 'b'}, {name: 'c'}]
     constructor(public scriptService: ScriptService, public simstanceManager: SimstanceManager, public navigation: Navigation) {
-        const script = scriptService.getScript('say');
-        scriptService.getScript('say');
-        scriptService.getScript('say');
-        const script1 = scriptService.getScript('temp');
-        scriptService.getScript('temp');
-        scriptService.getScript('temp');
-        console.log('------', script, script1)
+        // const script = scriptService.getScript('say');
+        // scriptService.getScript('say');
+        // scriptService.getScript('say');
+        // const script1 = scriptService.getScript('temp');
+        // scriptService.getScript('temp');
+        // scriptService.getScript('temp');
+        // console.log('------', script, script1)
     }
 
     // onInit() {

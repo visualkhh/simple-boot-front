@@ -26,14 +26,12 @@ import { SimFrontOption } from 'simple-boot-front/option/SimFrontOption';
 @Router({
     path: '',
     route: {
-        '': Index,
         '/': Index,
         '/ajax': Ajax,
         '/intent': Intents,
         '/views': Views,
         '/exception': Exception,
         '/aop': Aop,
-        // '/user/:id': Views
     },
     routers: [DocumentRouter]
 })
@@ -45,8 +43,9 @@ export class AppRouter implements RouterAction {
 
 
     canActivate(url: Intent, module: any): void {
+        // console.trace();
         this.data = this.data + '-------'
-        // console.log('-------AppRouter----->', url, this.child, module, this.child !== module)
+        console.log('-----!!--AppRouter----->', url, module)
         if (!module) { // 404
             this.child = this.subNotfound;
         } else if (this.child !== module) {
