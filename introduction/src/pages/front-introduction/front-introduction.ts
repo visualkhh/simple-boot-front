@@ -29,6 +29,8 @@ npm start
 </html>
 `
 
+    public testHTML = '<div><b>aaaa</b></div>'
+
     public startTypeScript = `
 const option = new SimFrontOption(window).setUrlType(UrlType.hash);
 const simpleApplication = new SimpleBootFront(Index, option);

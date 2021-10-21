@@ -31,6 +31,9 @@ ul.badge-container {
     /*background-color: #3D99CE;*/
     /*text-align: center;*/
 }
+footer>ul.badge-container {
+    text-align: right;
+}
 
 ul.badge-container > li {
     display: inline-block;
@@ -43,6 +46,7 @@ ul.badge-container > li > a {
     color: white;
     text-decoration: none;
 }
+
 
 section figure figcaption {
     text-align: right;

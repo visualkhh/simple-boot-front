@@ -25,6 +25,10 @@
     "removeComments": true,
 //    "noImplicitAny": true,
 //    "plugins": [{ "name": "sample-ts-plugin" }],
+    "paths": {
+      "simple-boot-front/*": ["../src/*"],
+      "dom-render/*": ["../libs/dom-render/src/*"]
+    },
     /* Disallow inconsistently-cased references to the same file. */
     "lib": [
       "dom",
