@@ -114,7 +114,6 @@ export class SimpleBootFront extends SimpleApplication {
         this.option.window.addEventListener('popstate', (event) => {
             const intent = new Intent(this.navigation.path ?? '');
             this.routing<SimAtomic, any>(intent).then(async it => {
-            console.log('eeeeeeeee change popstate----->')
                 this.afterSetting();
             })
         })

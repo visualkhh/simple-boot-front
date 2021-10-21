@@ -1,0 +1,22 @@
+<div>
+  <header class="header">
+    <nav class="input-group">
+      <label class="input-group-text bg-white" for="inputGroupSelect01">simple-boot</label>
+      <select class="form-select form-select-lg" id="inputGroupSelect01" dr-on-init="this.category" dr-event-change="this.changeCategory($target.value)">
+        <option selected value="simple-boot-front">front</option>
+        <option value="dom-render">dom-render</option>
+        <option value="simple-boot-core">core</option>
+        <option value="create-simple-boot-front">create</option>
+        <option value="simple-boot-front-cli">cli</option>
+      </select>
+      <span class="input-group-text bg-light fs-6">⇢</span>
+      <select class="form-select form-select-sm" dr-on-init="this.detail" dr-event-change="this.changeDetail($target.value)">
+        <option dr-for-of="this.detailsItems" dr-value="#it#" dr-var="title=#it#?.split?.('/')?.[2] ?? '' ">${$var.title}</option>
+      </select>
+    </nav>
+  </header>
+  <main>
+    <router component="this.child"></router>
+  </main>
+  <footer></footer>
+</div>

@@ -3,7 +3,7 @@
 
 # Our primary goals are
 - Single Page Application Framworks for Web
--  Provide a radically faster and widely accessible getting started experience for all front end.
+- Provide a radically faster and widely accessible getting started experience for all front end.
 
 --- 
 # 🚀 Quick start cli

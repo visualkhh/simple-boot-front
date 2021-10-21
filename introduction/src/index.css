@@ -1,0 +1,50 @@
+header {
+    position: -webkit-sticky; /* 사파리 브라우저 지원 */
+    position: sticky;
+    top: 0px;
+    /*border: #656565 1px solid;*/
+    /*background: white;*/
+    /*border-bottom-left-radius: 5px;*/
+    /*border-bottom-right-radius: 5px;*/
+}
+
+/*footer,*/
+main {
+/*    border: #333333 1px solid;*/
+    color: rgb(30, 30, 30);
+    padding: 10px;
+/*    !*margin: 20px;*!*/
+}
+
+.code-container {
+    color: #a9b7c6;
+    background-color: #282b2e;
+    overflow-x: auto;
+    /*margin: 5px;*/
+    padding: 10px;
+    border-radius: 10px;
+}
+
+
+ul.badge-container {
+    padding-left: 0px;
+    /*background-color: #3D99CE;*/
+    /*text-align: center;*/
+}
+
+ul.badge-container > li {
+    display: inline-block;
+    /*padding: 10px 20px;*/
+}
+ul.badge-container > li:hover {
+    /*background-color: #2779BF;*/
+}
+ul.badge-container > li > a {
+    color: white;
+    text-decoration: none;
+}
+
+section figure figcaption {
+    text-align: right;
+    font-size: 0.5rem;
+}
