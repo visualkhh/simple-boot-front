@@ -11,7 +11,7 @@
       </select>
       <span class="input-group-text bg-light fs-6">⇢</span>
       <select class="form-select form-select-sm" dr-on-init="this.detail" dr-event-change="this.changeDetail($target.value)">
-        <option dr-for-of="this.detailsItems" dr-value="#it#" dr-var="title=#it#?.split?.('/')?.[2] ?? '' ">${$var.title}</option>
+        <option dr-for-of="this.detailsItems" dr-value="#it#" dr-attr="{selected: this.navagation.path === #it# ? 'selected' : null}">${#it#?.split?.('/')?.[2] ?? ''}$</option>
       </select>
     </nav>
   </header>
@@ -32,7 +32,6 @@
       <li>
         <a href="https://github.com/visualkhh/simple-boot-front" target="_blank"><img src="https://img.shields.io/badge/-github-black?logo=github"></a>
       </li>
-
       <li>
         <a href="maileto:visualkhh@gmail.com" target="_blank"><img src="https://img.shields.io/badge/visualkhh@gmail.com-lightgrey"></a>
       </li>

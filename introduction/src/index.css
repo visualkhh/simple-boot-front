@@ -16,12 +16,15 @@ main {
 /*    !*margin: 20px;*!*/
 }
 
-.code-container {
-    color: #a9b7c6;
-    background-color: #282b2e;
-    overflow-x: auto;
-    /*margin: 5px;*/
-    padding: 10px;
+/*.code-container {*/
+/*    color: #a9b7c6;*/
+/*    background-color: #282b2e;*/
+/*    overflow-x: auto;*/
+/*    !*margin: 5px;*!*/
+/*    padding: 10px;*/
+/*    border-radius: 10px;*/
+/*}*/
+pre code{
     border-radius: 10px;
 }
 

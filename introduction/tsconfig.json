@@ -51,6 +51,7 @@
     "test-cli",
     "**/*.test.ts",
     "templates",
+    "bundle.js",
     "dist"
   ]
 }

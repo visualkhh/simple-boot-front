@@ -189,6 +189,7 @@ typings/
 # Nuxt.js build / generate output
 .nuxt
 dist
+!introduction/dist
 
 # Gatsby files
 .cache/
@@ -271,3 +272,4 @@ gradle-app.setting
 /libs/
 /libs/**
 /src/package.json
+/create/lib/

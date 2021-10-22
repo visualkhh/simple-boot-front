@@ -15,12 +15,29 @@
         <h2>Create</h2>
         <figure>
             <figcaption>template.html</figcaption>
-            <pre class="code-container" dr-inner-html="hljs.code(this.createHTML, 'html')">
+            <pre dr-pre>
+                <code class="html">&lt;h1&gt;${this.name}&lt;/h1&gt;
+&lt;div dr-inner-html=&quot;this.html&quot;&gt;&lt;/div&gt;</code>
             </pre>
         </figure>
         <figure>
             <figcaption>typescript</figcaption>
-            <pre class="code-container" dr-inner-html="hljs.code(this.createTypeScript, 'typescript')">
+            <pre dr-pre>
+                <code class="typescript">@Sim()
+@Component({
+  selector: 'index',
+  template,
+  styles: [style]
+})
+export class Index {
+  public name = 'index class'
+  public title = ''
+  public html = ''
+  public setData(title: string, html: string) {
+    this.title = title;
+    this.html = html;
+  }
+}</code>
             </pre>
         </figure>
         </pre>
@@ -32,12 +49,17 @@
         <h2>using</h2>
         <figure>
             <figcaption>typescript</figcaption>
-            <pre class="code-container" dr-inner-html="hljs.code(this.usingTypeScript, 'typescript')">
+            <pre dr-pre>
+                <code class="typescript">constructor(index: Index){...}</code>
             </pre>
         </figure>
         <figure>
             <figcaption>html</figcaption>
-            <pre class="code-container" dr-inner-html="hljs.code(this.usingHTML, 'html')"></pre>
+            <pre dr-pre>
+                <code>&lt;index&gt;&lt;/index&gt;
+&lt;!-- dr-set: $index.setData(&#39;data&#39;); $element, $innerHTML, $attributes --&gt;
+&lt;index dr-set=&quot;$index.setData(&#39;hello component&#39;, $innerHTML)&quot;&gt;&lt;/index&gt;</code>
+            </pre>
         </figure>
     </section>
 </article>

@@ -35,14 +35,14 @@ export class Index implements OnInit, RouterAction {
     private category?: HTMLSelectElement;
     private detail?: HTMLSelectElement;
     public detailsItems: string[] = [];
-    constructor(private navagation: Navigation) {
+    constructor(public navagation: Navigation) {
         const data = getRouter(this)!;
         this. route = data.route;
         // hljs.highlight(this.createHTML, {language: 'html'}).value.replace(/\$\{/g,'$<span>{</span>')
-        hljs.code = (data: string, language: string) => {
-            return hljs.highlight(data, {language}).value.replace(/\$\{/g,'$<span>{</span>');
-        }
-        console.log(hljs.highlight)
+        // hljs.code = (data: string, language: string) => {
+        //     return hljs.highlight(data, {language}).value.replace(/\$\{/g,'$<span>{</span>');
+        // }
+        // console.log(hljs.highlight)
     }
 
     onInit(): void {
@@ -64,6 +64,7 @@ export class Index implements OnInit, RouterAction {
 
     canActivate(url: any, module: any): void {
         this.child = module;
+        hljs.highlightAll();
     }
 }
 const simpleApplication = new SimpleBootFront(Index, new SimFrontOption(window).setUrlType(UrlType.hash));

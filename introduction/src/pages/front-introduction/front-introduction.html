@@ -24,12 +24,14 @@
     </section>
 
     <hr>
-
     <section>
         <h2>🚀 Quick start cli</h2>
         <figure>
             <figcaption>terminal</figcaption>
-            <pre class="code-container" dr-inner-html="$scripts.code(this.quickStartCli, 'shell')">
+            <pre>
+                <code class="bash">npm init simple-boot-front projectname
+cd projectname
+npm start</code>
             </pre>
         </figure>
         </pre>
@@ -41,11 +43,24 @@
         <h2>📄 Code description</h2>
         <figure>
             <figcaption>html</figcaption>
-            <pre class="code-container" dr-inner-html="$scripts.code(this.startHTML, 'html')"></pre>
+            <pre>
+                <code class="html">&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;header&gt;
+        &lt;script src=&quot;./bundle.js&quot; defer&gt;&lt;/script&gt;
+    &lt;/header&gt;
+    &lt;body id=&quot;app&quot;&gt;
+    &lt;/body&gt;
+&lt;/html&gt;</code>
+            </pre>
         </figure>
         <figure>
             <figcaption>typescript</figcaption>
-            <pre class="code-container" dr-inner-html="$scripts.code(this.startTypeScript, 'typescript')"></pre>
+            <pre>
+                <code class="typescript">const option = new SimFrontOption(window).setUrlType(UrlType.hash);
+const simpleApplication = new SimpleBootFront(Index, option);
+simpleApplication.run();</code>
+            </pre>
         </figure>
     </section>
 </article>
