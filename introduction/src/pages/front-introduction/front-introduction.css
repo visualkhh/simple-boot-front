@@ -1,0 +1,23 @@
+/*pre code {*/
+/*    overflow-x: auto ;*/
+/*    overflow-y:hidden;*/
+/*    white-space: pre;*/
+/*    !*white-space: nowrap;*!*/
+
+/*}*/
+/*code {*/
+/*    white-space: pre;*/
+/*    -webkit-overflow-scrolling: auto;*/
+/*}*/
+/*#div1, #div2, #div3, #div4 {*/
+/*    border: 1px solid black;*/
+/*    width:  250px;*/
+/*    margin-bottom: 12px;*/
+/*}*/
+
+/*#div1 { overflow-x: hidden;}*/
+/*#div2 { overflow-x: scroll;}*/
+/*#div3 { overflow-x: visible;}*/
+/*#div4 { overflow-x: auto;*/
+/*    white-space: nowrap;*/
+/*}*/

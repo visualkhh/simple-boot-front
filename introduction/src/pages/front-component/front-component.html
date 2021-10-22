@@ -15,15 +15,12 @@
         <h2>Create</h2>
         <figure>
             <figcaption>template.html</figcaption>
-            <pre dr-pre>
-                <code class="html">&lt;h1&gt;${this.name}&lt;/h1&gt;
-&lt;div dr-inner-html=&quot;this.html&quot;&gt;&lt;/div&gt;</code>
-            </pre>
+            <pre dr-pre class="code-container html">&lt;h1&gt;${this.name}&lt;/h1&gt;
+&lt;div dr-inner-html=&quot;this.html&quot;&gt;&lt;/div&gt;</pre>
         </figure>
         <figure>
             <figcaption>typescript</figcaption>
-            <pre dr-pre>
-                <code class="typescript">@Sim()
+            <pre dr-pre class="code-container typescript">@Sim()
 @Component({
   selector: 'index',
   template,
@@ -37,8 +34,7 @@ export class Index {
     this.title = title;
     this.html = html;
   }
-}</code>
-            </pre>
+}</pre>
         </figure>
         </pre>
     </section>
@@ -49,17 +45,13 @@ export class Index {
         <h2>using</h2>
         <figure>
             <figcaption>typescript</figcaption>
-            <pre dr-pre>
-                <code class="typescript">constructor(index: Index){...}</code>
-            </pre>
+            <pre dr-pre class="code-container typescript">constructor(index: Index){...}</pre>
         </figure>
         <figure>
             <figcaption>html</figcaption>
-            <pre dr-pre>
-                <code>&lt;index&gt;&lt;/index&gt;
+            <pre dr-pre class="code-container html">&lt;index&gt;&lt;/index&gt;
 &lt;!-- dr-set: $index.setData(&#39;data&#39;); $element, $innerHTML, $attributes --&gt;
-&lt;index dr-set=&quot;$index.setData(&#39;hello component&#39;, $innerHTML)&quot;&gt;&lt;/index&gt;</code>
-            </pre>
+&lt;index dr-set=&quot;$index.setData(&#39;hello component&#39;, $innerHTML)&quot;&gt;&lt;/index&gt;</pre>
         </figure>
     </section>
 </article>

@@ -46,6 +46,7 @@ export class Index implements OnInit, RouterAction {
     }
 
     onInit(): void {
+
         console.log(this.category?.value, this.detail)
         this.detailsItems = this.getDetails(this.category?.value)
     }
@@ -64,7 +65,12 @@ export class Index implements OnInit, RouterAction {
 
     canActivate(url: any, module: any): void {
         this.child = module;
-        hljs.highlightAll();
+        // hljs.highlightAll();
+        // first, find all the div.code blocks
+        document.querySelectorAll('.code-container').forEach(el => {
+            // then highlight each
+            hljs.highlightElement(el);
+        });
     }
 }
 const simpleApplication = new SimpleBootFront(Index, new SimFrontOption(window).setUrlType(UrlType.hash));
