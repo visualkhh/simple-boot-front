@@ -4,6 +4,7 @@
     <section>
         <h2>Define</h2>
         <figure>
+            <figcaption>class</figcaption>
             <pre dr-pre class="code-container typescript">new DomRender.run(obj, target, {
   scripts: {
     concat: function (head: string, tail: string) {
@@ -28,7 +29,7 @@
     <section>
         <h2>Using in html</h2>
         <figure>
-            <figcaption>class</figcaption>
+            <figcaption>html</figcaption>
             <pre dr-pre class="code-container html">&lt;div&gt;${$scripts.concat(&#39;head&#39;, &#39;tail&#39;)}$&lt;/div&gt;
 &lt;div dr-if=&quot;$scripts.concat(&#39;wow&#39;, &#39;good&#39;) === &#39;wowgood&#39;&quot;&gt;
 is wowgood

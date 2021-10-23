@@ -4,6 +4,7 @@
     <section>
         <h2>dr-form</h2>
         <figure>
+            <figcaption>form</figcaption>
  <pre dr-pre class="code-container html">&lt;form dr-form=&quot;this.form&quot; dr-event-submit=&quot;this.submit(); $event.preventDefault();&quot;&gt;
   name: &lt;input name=&quot;name&quot;&gt;
   age: &lt;input name=&quot;age&quot;&gt;
@@ -12,6 +13,7 @@
 &lt;/form&gt;</pre>
         </figure>
         <figure>
+            <figcaption>typescript</figcaption>
             <pre dr-pre class="code-container typescript">class User {
   form = {};
   submit() {
@@ -39,6 +41,7 @@
     <section>
         <h2>validator</h2>
         <figure>
+            <figcaption>validation examples</figcaption>
             <pre dr-pre class="code-container html">&lt;form dr-form=&quot;this.form&quot; dr-event-submit=&quot;this.submit(); $event.preventDefault();&quot;&gt;
     &lt;h2&gt;validator&lt;/h2&gt;
     required: &lt;input name=&quot;required&quot;&gt; &lt;br&gt;
@@ -59,6 +62,7 @@
 &lt;/form&gt;</pre>
         </figure>
         <figure>
+            <figcaption>typescript</figcaption>
             <pre dr-pre class="code-container typescript">class PageValidator extends FormValidator {
     required = new RequiredValidator();
     notEmpty = new NotEmptyValidator();
@@ -129,7 +133,7 @@ class User {
     <section>
         <h2>Using in html</h2>
         <figure>
-            <figcaption>class</figcaption>
+            <figcaption>html</figcaption>
             <pre dr-pre class="code-container html">&lt;div&gt;${$scripts.concat(&#39;head&#39;, &#39;tail&#39;)}$&lt;/div&gt;
 &lt;div dr-if=&quot;$scripts.concat(&#39;wow&#39;, &#39;good&#39;) === &#39;wowgood&#39;&quot;&gt;
 is wowgood
