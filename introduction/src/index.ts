@@ -13,6 +13,8 @@ import { OnInit } from 'simple-boot-front/lifecycle/OnInit';
 import { Navigation } from 'simple-boot-front/service/Navigation';
 import { CodeScript } from './scripts/CodeScript';
 import { FrontQuickstart } from './pages/front-quickstart/front-quickstart';
+import { FrontOption } from './pages/front-options/front-option';
+import { FrontRouter } from './pages/front-router/front-router';
 declare const feather: any;
 declare const hljs: any;
 @Sim()
@@ -23,6 +25,8 @@ declare const hljs: any;
         '/simple-boot-front/introduction': FrontIntroduction,
         '/simple-boot-front/quick-start': FrontQuickstart,
         '/simple-boot-front/component': FrontComponent,
+        '/simple-boot-front/router': FrontRouter,
+        '/simple-boot-front/config-option': FrontOption,
         '/home': Home,
         '/user': User,
     }

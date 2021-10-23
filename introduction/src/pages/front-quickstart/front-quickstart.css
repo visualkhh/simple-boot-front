@@ -7,11 +7,13 @@ ul.root-directory > li::before {
 ul.root-directory > li:first-child::before {
     content: '┌ ';
     margin-left: -2px;
+    font-size: 0.9rem;
 }
 
 ul.root-directory > li:last-child::before {
     content: '└ ';
-    margin-left: -3px;
+    font-size: 0.9rem;
+    margin-left: -2px;
 }
 
 
@@ -21,11 +23,11 @@ ul.child-directory {
 }
 ul.child-directory > li::before {
     content: ' ├ ';
-    font-width: bold;
     padding-left: 4px;
 }
 ul.child-directory > li:last-child::before {
     content: '└ ';
+    font-size: 0.9rem;
     margin-left: -2px;
 }
 

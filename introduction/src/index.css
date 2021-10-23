@@ -73,7 +73,11 @@ section > figure figcaption {
     overflow-x: auto;
 }
 
+/*.dl-container > dt::before {*/
+/*    content: '- ';*/
 
+/*}*/
 .dl-container > dd {
     padding-left: 10px;
+    margin-bottom: 15px;
 }

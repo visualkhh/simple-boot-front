@@ -75,20 +75,36 @@ npm start</pre>
         </figure>
 
         <dl class="dl-container">
-            <dt>start</dt>
-            <dd>run the server after bundling</dd>
-            <dt>serve</dt>
-            <dd>run the server</dd>
-            <dt>serve:watch</dt>
-            <dd>run the server. It also updates the browser when there is a change in the dist directory file<span class="badge bg-secondary">(detect dist directory)</span></dd>
-            <dt>serve:watch:all</dt>
-            <dd>"serve:watch" is the same and updates are made even when the source file<span class="badge bg-secondary">(detect dist, src directory)</span></dd>
-            <dt>serve:8080</dt>
-            <dd>run the proxy server<span class="badge bg-secondary">--proxy address</span></dd>
-            <dt>bundle</dt>
-            <dd>rollup bundle</dd>
-            <dt>bundle:watch</dt>
-            <dd>rollup bundle watch</dd>
+            <ul>
+                <li>
+                    <dt>start</dt>
+                    <dd>run the server after bundling</dd>
+                </li>
+                <li>
+                    <dt>serve</dt>
+                    <dd>run the server</dd>
+                </li>
+                <li>
+                    <dt>serve:watch</dt>
+                    <dd>run the server. It also updates the browser when there is a change in the dist directory file<span class="badge bg-secondary">(detect dist directory)</span></dd>
+                </li>
+                <li>
+                    <dt>serve:watch:all</dt>
+                    <dd>"serve:watch" is the same and updates are made even when the source file<span class="badge bg-secondary">(detect dist, src directory)</span></dd>
+                </li>
+                <li>
+                    <dt>serve:8080</dt>
+                    <dd>run the proxy server<span class="badge bg-secondary">--proxy address</span></dd>
+                </li>
+                <li>
+                    <dt>bundle</dt>
+                    <dd>rollup bundle</dd>
+                </li>
+                <li>
+                    <dt>bundle:watch</dt>
+                    <dd>rollup bundle watch</dd>
+                </li>
+            </ul>
         </dl>
 
     </section>
@@ -138,57 +154,6 @@ export class Index {
     </section>
 
     <hr>
-    <section>
-        <h2>multiple route pages</h2>
-        <figure>
-            <figcaption>index.html</figcaption>
-            <pre dr-pre class="code-container html">&lt;header&gt;
-    &lt;nav&gt;
-        &lt;ul&gt;
-            &lt;li&gt;
-                &lt;button router-link=&quot;/&quot;&gt;home&lt;/button&gt;
-            &lt;/li&gt;
-            &lt;li&gt;
-                &lt;button router-link=&quot;/user&quot;&gt;user&lt;/button&gt;
-            &lt;/li&gt;
-        &lt;/ul&gt;
-    &lt;/nav&gt;
-&lt;/header&gt;
-
-&lt;main&gt;
-&lt;router component=&quot;this.child&quot;&gt;&lt;/router&gt;
-&lt;/main&gt;
-
-&lt;footer&gt;footer&lt;/footer&gt;
-</pre>
-        </figure>
-        <figure>
-            <figcaption>index.ts</figcaption>
-            <pre dr-pre class="code-container typescript">import template from './index.html'
-import style from './index.css'
-import { Home } from './pages/home';
-import { User } from './pages/user';
-import { RouterAction } from 'simple-boot-core/route/RouterAction';
-
-@Sim()
-@Router({
-    path: '',
-    route: {
-        '/': Home,
-        '/user': User,
-    }
-})
-@Component({
-    template,
-    styles: [style]
-})
-export class Index implements RouterAction {
-    child?: any;
-    canActivate(url: any, module: any): void {
-        this.child = module;
-    }
-}</pre>
-        </figure>
-    </section>
+    <router-template-secthion dr-on-init="$component.title = 'multiple route pages'"></router-template-secthion>
 </article>
 

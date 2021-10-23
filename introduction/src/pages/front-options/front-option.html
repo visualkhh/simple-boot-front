@@ -1,0 +1,106 @@
+<article>
+    <h1>option config</h1>
+    <p>simple-boot-front Framworks option</p>
+    <section>
+        <h2>SimFrontOption</h2>
+        <figure>
+            <figcaption>simple-boot-front/option/SimFrontOption.ts</figcaption>
+            <pre dr-pre class="code-container typescript">const config = new SimFrontOption(window);</pre>
+            <pre dr-pre class="code-container typescript">export declare enum UrlType {
+    path = "path",
+    hash = "hash"
+}
+export declare class SimFrontOption extends SimOption {
+    window: Window;
+    selector: string;
+    urlType: UrlType;
+    constructor(window: Window, advice?: ConstructorType&lt;any&gt;[]);
+    setSelector(selector: string): SimFrontOption;
+    setUrlType(urlType: UrlType): SimFrontOption;
+}
+</pre>
+        </figure>
+        <dl class="dl-container">
+            <ul>
+                <li>
+                    <dt>constructor</dt>
+                    <dd>
+                        <ol>
+                            <li>
+                                window object
+                            </li>
+                            <li>
+                                global advice class @Sim class type
+                            </li>
+                        </ol>
+                    </dd>
+                </li>
+                <li>
+                    <dt>selector</dt>
+                </li>
+                <dd>target element selector (default: '#app')</dd>
+                <li>
+                    <dt>urlType</dt>
+                    <dd>
+                        <ul>
+                            <li>UrlType.path (default)</li>
+                            <li>UrlType.hash</li>
+                        </ul>
+                    </dd>
+                </li>
+            </ul>
+        </dl>
+    </section>
+
+    <hr>
+
+    <section>
+        <h2>SimpleBootFront</h2>
+        <figure>
+            <figcaption>simple-boot-front/SimpleBootFront.ts</figcaption>
+            <pre dr-pre class="code-container typescript">const config = new SimFrontOption(window);
+new SimpleBootFront(Index, config).run();</pre>
+            <pre dr-pre class="code-container typescript">export declare class SimpleBootFront extends SimpleApplication {
+    rootRouter: ConstructorType&lt;any&gt;;
+    option: SimFrontOption;
+    navigation: Navigation;
+    domRendoerExcludeProxy: (typeof SimFrontOption | typeof SimstanceManager | typeof SimpleApplication | typeof Navigation | typeof HttpService | typeof IntentManager | typeof RouterManager)[];
+    domRenderTargetElements: TargetElement[];
+    domRenderTargetAttrs: TargetAttr[];
+    domRenderConfig: Config;
+    constructor(rootRouter: ConstructorType&lt;any&gt;, option: SimFrontOption);
+    getComponentInnerHtml(targetObj: any): string;
+    createDomRender&lt;T extends object&gt;(obj: T): T;
+    run(): void;
+    private afterSetting;
+    resetDomrenderScripts(): void;
+}</pre>
+        </figure>
+        <dl class="dl-container">
+            <ul>
+                <li>
+                    <dt>constructor</dt>
+                    <dd>
+                        <ol>
+                            <li>
+                                Router Component or Component class type
+                            </li>
+                            <li>
+                                SimFrontOption object
+                            </li>
+                        </ol>
+                    </dd>
+                </li>
+                <li>
+                    <dt>domRendoerExcludeProxy</dt>
+                </li>
+                <dd>domRender proxy exclude type list</dd>
+                <li>
+                    <dt>run</dt>
+                </li>
+                <dd>simple-boot-front start</span></dd>
+            </ul>
+        </dl>
+    </section>
+</article>
+
