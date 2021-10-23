@@ -70,8 +70,11 @@
         <figure>
             <figcaption>get RouterModule in Component</figcaption>
             <pre dr-pre class="code-container typescript">constructor(routerManager: RouterManager){
-    routerManager.activeRouterModule.pathData.id; // get path data  '/user/:id'
-    routerManager.activeRouterModule.data // receive data
+    // get path data  '/user/:id'
+    routerManager.activeRouterModule.pathData.id;
+
+    // receive data
+    routerManager.activeRouterModule.data
 }</pre>
         </figure>
     </section>
@@ -80,7 +83,7 @@
     <hr>
     <section>
         <h2>RouterAction</h2>
-        <p>Route Change callback</p>
+        <p>Route Change callback in Router</p>
         <figure>
             <figcaption>simple-boot-core/route/RouterAction</figcaption>
             <pre dr-pre class="code-container typescript">export interface RouterAction {

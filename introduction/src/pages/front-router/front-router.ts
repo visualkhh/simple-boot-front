@@ -19,6 +19,5 @@ export class FrontRouter implements OnInit {
 
     onInit(): void {
     }
-    getMarkdown() {
-    }
+
 }

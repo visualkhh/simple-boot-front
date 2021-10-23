@@ -15,6 +15,9 @@ import { CodeScript } from './scripts/CodeScript';
 import { FrontQuickstart } from './pages/front-quickstart/front-quickstart';
 import { FrontOption } from './pages/front-options/front-option';
 import { FrontRouter } from './pages/front-router/front-router';
+import { FrontScript } from './pages/front-script/front-script';
+import { CliIntroduction } from './pages/cli-introduction/cli-introduction';
+import { CreateIntroduction } from './pages/create-introduction/create-introduction';
 declare const feather: any;
 declare const hljs: any;
 @Sim()
@@ -26,7 +29,10 @@ declare const hljs: any;
         '/simple-boot-front/quick-start': FrontQuickstart,
         '/simple-boot-front/component': FrontComponent,
         '/simple-boot-front/router': FrontRouter,
+        '/simple-boot-front/script': FrontScript,
         '/simple-boot-front/config-option': FrontOption,
+        '/create-simple-boot-front/introduction': CreateIntroduction,
+        '/simple-boot-front-cli/introduction': CliIntroduction,
         '/home': Home,
         '/user': User,
     }
@@ -53,14 +59,22 @@ export class Index implements OnInit, RouterAction {
 
     changeCategory(data: string) {
         this.detailsItems = this.getDetails(data);
+        console.log('detal-ss>', data, this.detailsItems)
     }
 
     changeDetail(data: string) {
-        this.navagation.go(data);
+        console.log('--?', this.navagation.path, data)
+        if (data) {
+            this.navagation.go(data);
+        }
+    }
+
+    getPath(depth: number) {
+        return this.navagation.path?.split('/')[depth] ?? '';
     }
 
     getDetails(prefix: string = '') {
-        return Object.entries(this.route).filter(([k, v]) => k.startsWith('/' + prefix)).map(([k, v]) => k)
+        return Object.entries(this.route).filter(([k, v]) => k.split('/')[1] === prefix).map(([k, v]) => k)
     }
 
     canActivate(url: any, module: any): void {

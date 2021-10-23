@@ -5,10 +5,13 @@ import template from './front-introduction.html'
 import style from './front-introduction.css'
 import { ApiService } from 'services/ApiService';
 import { ScriptUtils } from 'dom-render/utils/script/ScriptUtils';
+import { CoreLifecycleTemplateSecthion } from '../core-introduction/section/core-lifecycle-template-secthion';
+import { FrontLifecycleTemplateSecthion } from '../front-introduction/section/front-lifecycle-template-secthion';
 @Sim()
 @Component({
     template,
-    styles: [style]
+    styles: [style],
+    using: [CoreLifecycleTemplateSecthion, FrontLifecycleTemplateSecthion]
 })
 export class FrontIntroduction implements OnInit {
 
@@ -16,7 +19,5 @@ export class FrontIntroduction implements OnInit {
     }
 
     onInit(): void {
-    }
-    getMarkdown() {
     }
 }

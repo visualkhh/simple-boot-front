@@ -5,10 +5,12 @@ import template from './front-component.html'
 import style from './front-component.css'
 import { ApiService } from 'services/ApiService';
 import { ScriptService } from 'simple-boot-front/service/ScriptService';
+import { ComponentTemplateSecthion } from '../domrender-component/section/component-template-secthion';
 @Sim()
 @Component({
     template,
-    styles: [style]
+    styles: [style],
+    using: [ComponentTemplateSecthion]
 })
 export class FrontComponent implements OnInit {
 
@@ -16,7 +18,5 @@ export class FrontComponent implements OnInit {
     }
 
     onInit(): void {
-    }
-    getMarkdown() {
     }
 }

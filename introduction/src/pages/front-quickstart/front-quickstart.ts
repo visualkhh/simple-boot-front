@@ -15,6 +15,4 @@ export class FrontQuickstart implements OnInit {
 
     onInit(): void {
     }
-    getMarkdown() {
-    }
 }

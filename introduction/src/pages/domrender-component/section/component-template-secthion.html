@@ -1,0 +1,33 @@
+<section>
+    <h2>${this.title}$</h2>
+    <figure>
+        <figcaption>typescript</figcaption>
+        <pre dr-pre class="code-container typescript">constructor(index: Index){...}</pre>
+    </figure>
+    <figure>
+        <figcaption>html</figcaption>
+        <pre dr-pre class="code-container html">&lt;index&gt;&lt;/index&gt;
+&lt;!-- dr-set: $index.setData(&#39;data&#39;); $element, $innerHTML, $attributes --&gt;
+&lt;index dr-on-init=&quot;$component.setData(&#39;hello component&#39;, $innerHTML)&quot;&gt;&lt;/index&gt;</pre>
+    </figure>
+    <dl dr-pre>
+        <ul>
+            <li>
+                <dt>&lt;tagname&gt;</dt>
+                <dd>component selector name</dd>
+            </li>
+            <li>
+                <dt>dr-on-init attribute</dt>
+                <dd>
+                    component created init call script
+                    <ul>
+                        <li><span class="badge bg-primary">$component</span> : component instance</li>
+                        <li><span class="badge bg-primary">$element</span> : this element instance</li>
+                        <li><span class="badge bg-primary">$attribute</span> : this element attribute object</li>
+                        <li><span class="badge bg-primary">$innerHTML</span> : this element innerHTML string</li>
+                    </ul>
+                </dd>
+            </li>
+        </ul>
+    </dl>
+</section>

@@ -9,12 +9,10 @@
 cd projectname
 npm start</pre>
         </figure>
-        </pre>
     </section>
 
     <hr>
     <section>
-        <i class="bi bi-alarm"></i>
         <h2>Directory structure</h2>
         <p>default bundler rollup (sample template)</p>
         <figure class="content-container-white" >
@@ -61,7 +59,7 @@ npm start</pre>
     "serve": "sbf serve --path ./dist --port 4500",
     "serve:watch": "sbf serve --path ./dist --port 4500 --watch",
     "serve:watch:all": "sbf serve --bundle rollup --path ./dist --port 4500 --watch",
-    "serve:8080": "sbf serve --path ./dist --port 4500 --proxy http://localhost:8080",
+    "serve:proxy": "sbf serve --path ./dist --port 4500 --proxy http://localhost:8080",
     "bundle": "rollup -c ",
     "bundle:watch": "rollup -c -w "
   },
@@ -93,7 +91,7 @@ npm start</pre>
                     <dd>"serve:watch" is the same and updates are made even when the source file<span class="badge bg-secondary">(detect dist, src directory)</span></dd>
                 </li>
                 <li>
-                    <dt>serve:8080</dt>
+                    <dt>serve:proxy</dt>
                     <dd>run the proxy server<span class="badge bg-secondary">--proxy address</span></dd>
                 </li>
                 <li>
@@ -131,9 +129,9 @@ npm start</pre>
         </figure>
         <figure>
             <figcaption>index.ts (simple-boot-front start)</figcaption>
-            <pre dr-pre class="code-container typescript">const config = new SimFrontOption(window).setUrlType(UrlType.hash);
-const simpleApplication = new SimpleBootFront(Index, config);
-simpleApplication.run();</pre>
+            <pre dr-pre class="code-container typescript">const config = new SimFrontOption(window);
+config.setUrlType(UrlType.hash);
+new SimpleBootFront(Index, config).run();</pre>
         </figure>
     </section>
 

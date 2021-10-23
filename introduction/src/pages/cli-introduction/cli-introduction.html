@@ -1,0 +1,71 @@
+<!--    <p>¯\_(ツ)_/¯ - Everyone</p>-->
+<article>
+    <h1>SIMPLE-BOOT-CLI (sbf)</h1>
+    <p>sbf cli</p>
+    <ul class="badge-container">
+        <li>
+            <a href="https://www.npmjs.com/package/simple-boot-front-cli" target="_blank"><img src="https://img.shields.io/badge/npm-blue?logo=npm"></a>
+        </li>
+        <li>
+            <img src="https://img.shields.io/badge/license-MIT-green">
+        </li>
+        <li>
+            <a href="https://github.com/visualkhh/simple-boot-front/tree/master/cli" target="_blank"><img src="https://img.shields.io/badge/-github-black?logo=github"></a>
+        </li>
+    </ul>
+    <section>
+        <h2>🚀 Quick start </h2>
+        <figure>
+            <figcaption>terminal</figcaption>
+            <pre class="code-container bash">npm install simple-boot-cli</pre>
+        </figure>
+        <dl class="dl-container">
+            <ul>
+                <li>
+                    <dt>serve</dt>
+                    <dd>
+                        http server and proxy
+                        <ul>
+                            <li>--path dist path</li>
+                            <li>--port server port</li>
+                            <li>--proxy proxy url</li>
+                            <li>--bundle  ex) rollup</li>
+                            <li>--watch fileChange browser refresh</li>
+                        </ul>
+                    </dd>
+                </li>
+                <li>
+                    <dt>create</dt>
+                    <dd>create simple-boot-front template project</dd>
+                </li>
+                <li>
+                    <dt>rollup-build</dt>
+                    <dd>
+                        project rollup bundle
+                        <ul>
+                            <li>--config rollup config path</li>
+                            <li>--watch rollup watc</li>
+                        </ul>
+                    </dd>
+                </li>
+                <li>
+                    <dt>exec</dt>
+                    <dd>
+                        executing Shell Commands (child-process)
+                        <ul>
+                            <li>--cmd 'copmmand' ...--cmd... (multiple)</li>
+                        </ul>
+                    </dd>
+                </li>
+            </ul>
+        </dl>
+    </section>
+    <hr>
+    <section>
+        <h2>example</h2>
+        <figure>
+            <figcaption>serve</figcaption>
+            <pre class="code-container bash">sbf serve --path ../dist --watch</pre>
+        </figure>
+    </section>
+</article>

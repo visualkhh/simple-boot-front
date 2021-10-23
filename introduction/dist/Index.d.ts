@@ -12,6 +12,7 @@ export declare class Index implements OnInit, RouterAction {
     onInit(): void;
     changeCategory(data: string): void;
     changeDetail(data: string): void;
+    getPath(depth: number): string;
     getDetails(prefix?: string): string[];
     canActivate(url: any, module: any): void;
 }

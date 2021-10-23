@@ -3,15 +3,15 @@
     <nav class="input-group">
       <label class="input-group-text bg-white" for="inputGroupSelect01">simple-boot</label>
       <select class="form-select form-select-lg" id="inputGroupSelect01" dr-on-init="this.category" dr-event-change="this.changeCategory($target.value)">
-        <option selected value="simple-boot-front">front</option>
-        <option value="dom-render">dom-render</option>
-        <option value="simple-boot-core">core</option>
-        <option value="create-simple-boot-front">create</option>
-        <option value="simple-boot-front-cli">cli</option>
+        <option selected value="simple-boot-front"  dr-attr="{selected: this.getPath(1) === $element.value ? 'selected' : null}">front </option>
+        <option value="dom-render" dr-attr="{selected: this.getPath(1) === $element.value ? 'selected' : null}">dom-render</option>
+        <option value="simple-boot-core" dr-attr="{selected: this.getPath(1) === $element.value ? 'selected' : null}">core</option>
+        <option value="create-simple-boot-front" dr-attr="{selected: this.getPath(1) === $element.value ? 'selected' : null}">create</option>
+        <option value="simple-boot-front-cli" dr-attr="{selected: this.getPath(1) === $element.value ? 'selected' : null}">cli</option>
       </select>
       <span class="input-group-text bg-light fs-6">⇢</span>
       <select class="form-select form-select-sm" dr-on-init="this.detail" dr-event-change="this.changeDetail($target.value)">
-        <option dr-for-of="this.detailsItems" dr-value="#it#" dr-attr="{selected: this.navagation.path === #it# ? 'selected' : null}">${#it#?.split?.('/')?.[2] ?? ''}$</option>
+        <option dr-for-of="this.detailsItems" dr-complete="this.changeDetail(this.detail.value)" dr-value="#it#" dr-attr="{selected: this.navagation.path === $element.value ? 'selected' : null}">${#it#?.split?.('/')?.[2] ?? ''}$</option>
       </select>
     </nav>
   </header>

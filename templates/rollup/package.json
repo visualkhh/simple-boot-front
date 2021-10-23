@@ -25,7 +25,7 @@
     "serve": "sbf serve --path ./dist --port 4500",
     "serve:watch": "sbf serve --path ./dist --port 4500 --watch",
     "serve:watch:all": "sbf serve --bundle rollup --path ./dist --port 4500 --watch",
-    "serve:8080": "sbf serve --path ./dist --port 4500 --proxy http://localhost:8080",
+    "serve:proxy": "sbf serve --path ./dist --port 4500 --proxy http://localhost:8080",
     "bundle": "rollup -c ",
     "bundle:watch": "rollup -c -w "
   },
