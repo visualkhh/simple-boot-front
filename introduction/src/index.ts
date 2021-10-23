@@ -18,6 +18,7 @@ import { FrontRouter } from './pages/front-router/front-router';
 import { FrontScript } from './pages/front-script/front-script';
 import { CliIntroduction } from './pages/cli-introduction/cli-introduction';
 import { CreateIntroduction } from './pages/create-introduction/create-introduction';
+import { CoreIntroduction } from './pages/core-introduction/core-introduction';
 declare const feather: any;
 declare const hljs: any;
 @Sim()
@@ -31,6 +32,7 @@ declare const hljs: any;
         '/simple-boot-front/router': FrontRouter,
         '/simple-boot-front/script': FrontScript,
         '/simple-boot-front/config-option': FrontOption,
+        '/simple-boot-core/introduction': CoreIntroduction,
         '/create-simple-boot-front/introduction': CreateIntroduction,
         '/simple-boot-front-cli/introduction': CliIntroduction,
         '/home': Home,

@@ -1,11 +1,11 @@
 import { Sim } from 'simple-boot-core/decorators/SimDecorator';
 import { Component } from 'simple-boot-front/decorators/Component';
-import template from './core-lifecycle-template-secthion.html'
+import template from './core-lifecycle-secthion.html'
 @Sim()
 @Component({
-    selector: 'core-lifecycle-template-secthion',
+    selector: 'core-lifecycle-secthion',
     template
 })
-export class CoreLifecycleTemplateSecthion {
+export class CoreLifecycleSecthion {
     title = 'core life cycle'
 }

@@ -1,11 +1,11 @@
 import { Sim } from 'simple-boot-core/decorators/SimDecorator';
 import { Component } from 'simple-boot-front/decorators/Component';
-import template from './component-template-secthion.html'
+import template from './domrender-component-template-secthion.html'
 @Sim()
 @Component({
-    selector: 'dom-render-component-template-secthion',
+    selector: 'domrender-component-template-secthion',
     template
 })
-export class ComponentTemplateSecthion {
+export class DomrenderComponentTemplateSecthion {
     title = 'Component'
 }

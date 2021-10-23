@@ -4,14 +4,15 @@ import { OnInit } from 'simple-boot-front/lifecycle/OnInit';
 import template from './front-introduction.html'
 import style from './front-introduction.css'
 import { ApiService } from 'services/ApiService';
-import { ScriptUtils } from 'dom-render/utils/script/ScriptUtils';
-import { CoreLifecycleTemplateSecthion } from '../core-introduction/section/core-lifecycle-template-secthion';
-import { FrontLifecycleTemplateSecthion } from '../front-introduction/section/front-lifecycle-template-secthion';
+import { CoreLifecycleSecthion } from '../core-introduction/section/lifecycle/core-lifecycle-secthion';
+import { CoreFunctionSecthion } from '../core-introduction/section/function/core-function-secthion';
+import { FrontLifecycleSecthion } from '../front-introduction/section/front-lifecycle-secthion';
+import { DomrenderFunctionSecthion } from '../domrender-component/section/function/domrender-function-secthion';
 @Sim()
 @Component({
     template,
     styles: [style],
-    using: [CoreLifecycleTemplateSecthion, FrontLifecycleTemplateSecthion]
+    using: [CoreLifecycleSecthion, FrontLifecycleSecthion, CoreFunctionSecthion, DomrenderFunctionSecthion]
 })
 export class FrontIntroduction implements OnInit {
 

@@ -81,3 +81,11 @@ section > figure figcaption {
     padding-left: 10px;
     margin-bottom: 15px;
 }
+
+dd > small {
+    font-size: 0.5rem;
+}
+
+li > small {
+    font-size: 0.5rem;
+}

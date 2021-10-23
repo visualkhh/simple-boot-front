@@ -1,0 +1,11 @@
+import { Sim } from 'simple-boot-core/decorators/SimDecorator';
+import { Component } from 'simple-boot-front/decorators/Component';
+import template from './core-function-secthion.html'
+@Sim()
+@Component({
+    selector: 'core-function-secthion',
+    template
+})
+export class CoreFunctionSecthion {
+    title = 'Core engine'
+}
