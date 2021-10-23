@@ -8,7 +8,7 @@ import typescript from 'rollup-plugin-typescript2';
 import sourcemaps from 'rollup-plugin-sourcemaps';
 import del from 'rollup-plugin-delete';
 export default {
-    input: 'src/Index.ts',
+    input: 'src/index.ts',
     output: {
         sourcemap: true,
         dir: 'dist',
