@@ -21,6 +21,7 @@ ul.child-directory {
 }
 ul.child-directory > li::before {
     content: ' ├ ';
+    font-width: bold;
     padding-left: 4px;
 }
 ul.child-directory > li:last-child::before {
