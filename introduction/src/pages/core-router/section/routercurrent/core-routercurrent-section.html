@@ -1,0 +1,14 @@
+
+<section>
+    <h2>${this.title}$</h2>
+    <figure>
+        <figcaption>get RouterModule in Component</figcaption>
+        <pre dr-pre class="code-container typescript">constructor(routerManager: RouterManager){
+    // get path data  '/user/:id'
+    routerManager.activeRouterModule.pathData.id;
+
+    // receive data
+    routerManager.activeRouterModule.data
+}</pre>
+    </figure>
+</section>

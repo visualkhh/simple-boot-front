@@ -1,96 +1,16 @@
 <article>
     <h1>@Router</h1>
     <p>page routing controller</p>
-    <section>
-        <h2>RouterConfig</h2>
-        <dl class="dl-container">
-            <ul>
-                <li>
-                    <dt>path</dt>
-                    <dd>router control path</dd>
-                </li>
-                <li>
-                    <dt>route</dt>
-                    <dd>mapping components</dd>
-                </li>
-                <li>
-                    <dt>routers</dt>
-                    <dd>sub router array</dd>
-                </li>
-            </ul>
-        </dl>
-    </section>
-
-
+    <core-routerconfig-section></core-routerconfig-section>
     <hr>
     <router-template-secthion dr-on-init="$component.title = 'Create'"></router-template-secthion>
     <hr>
-
-    <section>
-        <h2>Mapping</h2>
-        <figure>
-            <figcaption>@Router</figcaption>
-            <pre dr-pre class="code-container typescript">@Router({
-    path: '',
-    route: {
-        '/': Home,
-        '/jhon': '/user',
-        '/user': User,
-        '/user/:id': UserDetail,
-        '/welcom': [Welcom, {msg: 'welcom', other: 'other data'}]
-    }
-})</pre>
-        </figure>
-        <dl>
-            <ul>
-                <li>
-                    <dt>'path': Component</dt>
-                    <dd>matches the path, this Component call</dd>
-                </li>
-                <li>
-                    <dt>'path': 'path'</dt>
-                    <dd>Redirect end point (no url changed)</dd>
-                </li>
-                <li>
-                    <dt>'path': '/path/:data'</dt>
-                    <dd>url path variable</dd>
-                </li>
-                <li>
-                    <dt>'path': [Component, Data]</dt>
-                    <dd>call Component with Data</dd>
-                </li>
-            </ul>
-        </dl>
-    </section>
-
+    <core-routermapping-section></core-routermapping-section>
     <hr>
-
-    <section>
-        <h2>Current Route (RouterModule)</h2>
-        <figure>
-            <figcaption>get RouterModule in Component</figcaption>
-            <pre dr-pre class="code-container typescript">constructor(routerManager: RouterManager){
-    // get path data  '/user/:id'
-    routerManager.activeRouterModule.pathData.id;
-
-    // receive data
-    routerManager.activeRouterModule.data
-}</pre>
-        </figure>
-    </section>
-
-
+    <core-routercurrent-section></core-routercurrent-section>
     <hr>
-    <section>
-        <h2>RouterAction</h2>
-        <p>Route Change callback in Router</p>
-        <figure>
-            <figcaption>simple-boot-core/route/RouterAction</figcaption>
-            <pre dr-pre class="code-container typescript">export interface RouterAction {
-    canActivate(url: Intent, module: any): void;
-}</pre>
-        </figure>
-    </section>
+    <core-routeraction-section></core-routeraction-section>
+
     <hr>
     <section>
         <h2>Include Component</h2>

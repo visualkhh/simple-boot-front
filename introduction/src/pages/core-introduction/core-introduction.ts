@@ -5,7 +5,7 @@ import template from './core-introduction.html'
 import style from './core-introduction.css'
 import { ApiService } from 'services/ApiService';
 import { CoreLifecycleSecthion } from './section/lifecycle/core-lifecycle-secthion';
-import { CoreFunctionSecthion } from '../core-introduction/section/function/core-function-secthion';
+import { CoreFunctionSecthion } from './section/function/core-function-secthion';
 @Sim()
 @Component({
     template,

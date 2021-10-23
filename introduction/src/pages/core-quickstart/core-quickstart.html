@@ -1,0 +1,32 @@
+<article>
+    <h1>🚀 Quick start</h1>
+    <p>Start a project simply and quickly.</p>
+    <section>
+        <h2>Create project</h2>
+        <figure>
+            <figcaption>terminal</figcaption>
+            <pre class="code-container bash">npm install simple-boot-core</pre>
+        </figure>
+    </section>
+
+    <hr>
+    <section>
+        <h2>simple-boot-core start</h2>
+        <figure>
+            <figcaption>index.ts</figcaption>
+            <pre dr-pre class="code-container typescript">const option = new SimOption([GlobalAdvice]);
+const simpleApplication = new SimpleApplication(AppRouter, option);
+simpleApplication.run();
+const intent = new Intent(&#39;/user/456/addr&#39;);
+simpleApplication.routing&lt;SimAtomic&lt;any&gt;, any&gt;(intent)
+ .then(it =&gt; {
+    let moduleInstance = it.getModuleInstance&lt;UserAddr&gt;();
+    moduleInstance?.print();
+ });</pre>
+        </figure>
+    </section>
+
+    <hr>
+    <core-router-template-section></core-router-template-section>
+</article>
+

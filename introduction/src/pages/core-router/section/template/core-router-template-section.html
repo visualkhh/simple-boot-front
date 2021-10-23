@@ -1,0 +1,26 @@
+<section>
+    <h2>${this.title}$</h2>
+    <figure>
+        <figcaption>router.tx</figcaption>
+        <pre dr-pre class="code-container typescript">@Sim()
+@Router({
+    path: '',
+    route: {
+        '': '/',
+        '/': [Home, {data: 456}],
+        '/user': User,
+        '/user/:aa/addr': [UserAddr, {data:'data'}]
+    },
+    routers: [UserRouter]
+})
+export class AppRouter implements RouterAction {
+    constructor() {
+    }
+    canActivate(url: Intent, module: any): void {
+        console.log('AppRouter canActivate->>>>>', url, module)
+    }
+}</pre>
+    </figure>
+    </pre>
+</section>
+

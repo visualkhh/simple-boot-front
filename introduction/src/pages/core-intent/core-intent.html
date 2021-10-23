@@ -1,0 +1,80 @@
+<article>
+    <h1>⚡️Intent Event System</h1>
+    <p>transmit data between objects and generate events</p>
+    <p>send data and generate events to @Sim scheme</p>
+    <ul>
+        <li>Support Object transmission</li>
+        <li>Support query parameters</li>
+        <li>Allocate directly to variables</li>
+        <li>Calling the method</li>
+    </ul>
+    <hr>
+    <section>
+        <h2>intent publish</h2>
+        <figure>
+            <figcaption>publish</figcaption>
+            <pre dr-pre class="code-container typescript">@Sim({scheme:'user'})
+export class User {
+    constructor(private intentManager: IntentManager) {
+    }
+    publishEvent() {
+        // this.intentManager.publish(new Intent('targetScheme://path?a=55', 'ddddddddddd'));
+        // this.intentManager.publish(new Intent('targetScheme://path?bb=44&ff=44', '444'));
+        // this.intentManager.publish(new Intent('targetScheme://path?gg=55&sadfsdf=444', '55'));
+        //global
+        this.intentManager.publish('://path?query=a')
+        //target
+        this.intentManager.publish('scheme://path?query=a')
+    }
+}</pre>
+        </figure>
+    </section>
+    <hr>
+    <section>
+        <h2>intent subscribe</h2>
+
+
+
+        <figure>
+            <figcaption>implements interface IntentSubscribe</figcaption>
+            <pre dr-pre class="code-container typescript">export interface IntentSubscribe {
+    intentSubscribe(intent: Intent): void;
+}
+</pre>
+        </figure>
+        <figure>
+            <figcaption>method subscribe</figcaption>
+            <pre dr-pre class="code-container typescript">class User implements IntentSubscribe {
+    intentSubscribe(intent: Intent) {
+        //receive
+    }
+}</pre>
+        </figure>
+    </section>
+<hr>
+    <section>
+        <h2>intent</h2>
+        <figure>
+            <figcaption>simple-boot-core/intent/Intent</figcaption>
+            <pre dr-pre class="code-container typescript">export declare class Intent&lt;T = any, E = any&gt; {
+    uri: string;
+    data?: T | undefined;
+    event?: E | undefined;
+    constructor(uri: string, data?: T | undefined, event?: E | undefined);
+    get scheme(): string;
+    get paths(): string[];
+    get fullPath(): string;
+    get pathname(): string;
+    get query(): string;
+    get queryParams(): {
+        [key: string]: string;
+    };
+    getPathnameData(urlExpression: string): {
+        [name: string]: string;
+    } | undefined;
+}
+</pre>
+        </figure>
+    </section>
+</article>
+

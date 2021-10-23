@@ -1,11 +1,11 @@
 import { Sim } from 'simple-boot-core/decorators/SimDecorator';
 import { Component } from 'simple-boot-front/decorators/Component';
-import template from './core-lifecycle-secthion.html'
+import template from './core-routerconfig-section.html'
 @Sim()
 @Component({
-    selector: 'core-lifecycle-secthion',
+    selector: 'core-routerconfig-section',
     template
 })
-export class CoreLifecycleSecthion {
-    title = 'Core life cycle'
+export class CoreRouterconfigSection {
+    title = 'RouterConfig'
 }

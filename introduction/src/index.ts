@@ -19,6 +19,11 @@ import { FrontScript } from './pages/front-script/front-script';
 import { CliIntroduction } from './pages/cli-introduction/cli-introduction';
 import { CreateIntroduction } from './pages/create-introduction/create-introduction';
 import { CoreIntroduction } from './pages/core-introduction/core-introduction';
+import { CoreQuickstart } from './pages/core-quickstart/core-quickstart';
+import { CoreRouter } from './pages/core-router/core-router';
+import { CoreIntent } from './pages/core-intent/core-intent';
+import { CoreAop } from './pages/core-aop/core-aop';
+import { CoreAdvice } from './pages/core-advice/core-advice';
 declare const feather: any;
 declare const hljs: any;
 @Sim()
@@ -33,6 +38,11 @@ declare const hljs: any;
         '/simple-boot-front/script': FrontScript,
         '/simple-boot-front/config-option': FrontOption,
         '/simple-boot-core/introduction': CoreIntroduction,
+        '/simple-boot-core/quick-start': CoreQuickstart,
+        '/simple-boot-core/router': CoreRouter,
+        '/simple-boot-core/intent': CoreIntent,
+        '/simple-boot-core/aop': CoreAop,
+        '/simple-boot-core/advice': CoreAdvice,
         '/create-simple-boot-front/introduction': CreateIntroduction,
         '/simple-boot-front-cli/introduction': CliIntroduction,
         '/home': Home,

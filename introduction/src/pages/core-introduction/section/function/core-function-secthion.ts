@@ -3,7 +3,7 @@ import { Component } from 'simple-boot-front/decorators/Component';
 import template from './core-function-secthion.html'
 @Sim()
 @Component({
-    selector: 'core-function-secthion',
+    selector: 'core-function-section',
     template
 })
 export class CoreFunctionSecthion {

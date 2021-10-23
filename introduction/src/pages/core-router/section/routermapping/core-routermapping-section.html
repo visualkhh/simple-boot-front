@@ -1,0 +1,37 @@
+
+<section>
+    <h2>${this.title}$</h2>
+    <figure>
+        <figcaption>@Router</figcaption>
+        <pre dr-pre class="code-container typescript">@Router({
+    path: '',
+    route: {
+        '/': Home,
+        '/jhon': '/user',
+        '/user': User,
+        '/user/:id': UserDetail,
+        '/welcom': [Welcom, {msg: 'welcom', other: 'other data'}]
+    }
+})</pre>
+    </figure>
+    <dl dr-pre>
+        <ul>
+            <li>
+                <dt>'path': Component</dt>
+                <dd>matches the path, this Component call</dd>
+            </li>
+            <li>
+                <dt>'path': 'path'</dt>
+                <dd>Redirect end point (no url changed)</dd>
+            </li>
+            <li>
+                <dt>'path': '/path/:data'</dt>
+                <dd>url path variable</dd>
+            </li>
+            <li>
+                <dt>'path': [Component, Data]</dt>
+                <dd>call Component with Data</dd>
+            </li>
+        </ul>
+    </dl>
+</section>

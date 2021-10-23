@@ -1,0 +1,40 @@
+<article>
+    <h1>Exception Advice</h1>
+    <ul>
+        <li>Support Global, Exception Type Advice</li>
+    </ul>
+    <hr>
+    <section>
+        <h2>@ExceptionHandler</h2>
+        <figure>
+            <figcaption>ExceptionHandler simple-boot-core/decorators/exception/ExceptionDecorator</figcaption>
+            <pre dr-pre class="code-container typescript">@Sim()
+export class GlobalAdvice {
+
+    constructor() {
+    }
+
+    @ExceptionHandler()
+    print(error: any){
+        console.log('global advice errorr', error.msg)
+    }
+
+    @ExceptionHandler(NotFoundError)
+    print(error: NotFoundError){
+        console.log('NotFoundError', error)
+    }
+
+}
+</pre>
+        </figure>
+        <dl>ExceptionHandler
+            <ul>
+                <li>
+                    <dt>target</dt>
+                    <dl>target Exception Target (optional)</dl>
+                </li>
+            </ul>
+        </dl>
+    </section>
+</article>
+
