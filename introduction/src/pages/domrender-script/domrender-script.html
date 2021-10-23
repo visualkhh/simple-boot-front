@@ -1,0 +1,52 @@
+<article>
+    <h1>Script</h1>
+    <p>define script instructions and call</p>
+    <section>
+        <h2>Define</h2>
+        <figure>
+            <pre dr-pre class="code-container typescript">new DomRender.run(obj, target, {
+  scripts: {
+    concat: function (head: string, tail: string) {
+      return head + tail;
+    }
+  }
+});</pre>
+        </figure>
+    </section>
+
+    <hr>
+
+    <section>
+        <h2>Using in Class</h2>
+        <figure>
+            <figcaption>class</figcaption>
+            <pre dr-pre class="code-container typescript">const data = config.scripts.concat('head', 'tail')</pre>
+        </figure>
+    </section>
+    <hr>
+
+    <section>
+        <h2>Using in html</h2>
+        <figure>
+            <figcaption>class</figcaption>
+            <pre dr-pre class="code-container html">&lt;div&gt;${$scripts.concat(&#39;head&#39;, &#39;tail&#39;)}$&lt;/div&gt;
+&lt;div dr-if=&quot;$scripts.concat(&#39;wow&#39;, &#39;good&#39;) === &#39;wowgood&#39;&quot;&gt;
+is wowgood
+&lt;/div&gt;</pre>
+        </figure>
+        <figure>
+            <figcaption>html</figcaption>
+            <pre dr-pre class="code-container html">&lt;div&gt;${$scripts.calc(1, 4)}$&lt;/div&gt;
+&lt;div dr-if=&quot;$scripts.calc(1, 3) === 3&quot;&gt; is 3&lt;/div&gt;</pre>
+        </figure>
+        <dl>
+            <ul>
+                <li>
+                    <dt>$scripts</dt>
+                    <dd>scripts object</dd>
+                </li>
+            </ul>
+        </dl>
+    </section>
+</article>
+

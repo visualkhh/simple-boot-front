@@ -25,6 +25,15 @@ import { CoreIntent } from './pages/core-intent/core-intent';
 import { CoreAop } from './pages/core-aop/core-aop';
 import { CoreAdvice } from './pages/core-advice/core-advice';
 import { DomrenderIntroduction } from './pages/domrender-introduction/domrender-introduction';
+import { DomrenderQuickstart } from './pages/domrender-quickstart/domrender-quickstart';
+import { DomrenderFunction } from './pages/domrender-function/domrender-function';
+import { DomrenderScript } from './pages/domrender-script/domrender-script';
+import { DomrenderComponent } from './pages/domrender-component/domrender-component';
+import { DomrenderValidation } from './pages/domrender-validation/domrender-validation';
+import { DomrenderConfig } from './pages/domrender-config/domrender-config';
+import { DomrenderProxy } from './pages/domrender-proxy/domrender-proxy';
+import { DomrenderClass } from './pages/domrender-class/domrender-class';
+import { DomrenderDetect } from './pages/domrender-detect/domrender-detect';
 declare const feather: any;
 declare const hljs: any;
 @Sim()
@@ -38,6 +47,15 @@ declare const hljs: any;
         '/simple-boot-front/router': FrontRouter,
         '/simple-boot-front/script': FrontScript,
         '/dom-render/introduction': DomrenderIntroduction,
+        '/dom-render/quick-start': DomrenderQuickstart,
+        '/dom-render/function': DomrenderFunction,
+        '/dom-render/script': DomrenderScript,
+        '/dom-render/component': DomrenderComponent,
+        '/dom-render/validation': DomrenderValidation,
+        '/dom-render/class': DomrenderClass,
+        '/dom-render/proxy': DomrenderProxy,
+        '/dom-render/detect': DomrenderDetect,
+        '/dom-render/config': DomrenderConfig,
         '/simple-boot-front/config-option': FrontOption,
         '/simple-boot-core/introduction': CoreIntroduction,
         '/simple-boot-core/quick-start': CoreQuickstart,
@@ -73,11 +91,9 @@ export class Index implements OnInit, RouterAction {
 
     changeCategory(data: string) {
         this.detailsItems = this.getDetails(data);
-        console.log('detal-ss>', data, this.detailsItems)
     }
 
     changeDetail(data: string) {
-        console.log('--?', this.navagation.path, data)
         if (data) {
             this.navagation.go(data);
         }

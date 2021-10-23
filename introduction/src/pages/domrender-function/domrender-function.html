@@ -1,0 +1,181 @@
+<article>
+    <h1>⚡️ Function 🚀</h1>
+    <p>provides a powerful function for dome control</p>
+    <section>
+        <h2>Print and call</h2>
+        <figure>
+            <pre dr-pre class="code-container html">&lt;div&gt;${this.name}$&lt;/div&gt;
+&lt;div&gt;${this.office.addr.first}$, ${this.office.addr.last}$, ${this.office.addr.street}$ (${this.office.name}$)&lt;/div&gt;
+&lt;div dr=&quot;this.office.addr.street&quot;&gt;${this.getOfficeFullAddr()}$&lt;/div&gt;</pre>
+        </figure>
+    </section>
+    <hr>
+    <section>
+        <h2>dr-if</h2>
+        <figure>
+            <pre dr-pre class="code-container html">&lt;div dr-if=&quot;true&quot;&gt;true&lt;/div&gt;
+&lt;div dr-if=&quot;this.gender===&#39;M&#39;&quot;&gt;gender: M&lt;/div&gt;</pre>
+        </figure>
+    </section>
+    <hr>
+    <section>
+        <h2>dr-for, dr-for-of</h2>
+        <figure>
+            <pre dr-pre class="code-container html">&lt;div dr-for=&quot;var i = 0; i &lt; this.friends.length; i++&quot;&gt; friend&lt;/div&gt;
+&lt;div dr-for-of=&quot;this.friends&quot;&gt; ${#it#.name}$&lt;/div&gt;
+&lt;div dr-for-of=&quot;$range(10, 20)&quot;&gt;&lt;div&gt;${#it#}$&lt;/div&gt;&lt;div&gt;
+&lt;div dr-for=&quot;var i = 1 ; i &lt;= 9 ; i++&quot; dr-it=&quot;i&quot;&gt;
+    ${#it#}$ *
+    &lt;scope dr-for=&quot;var y = 1 ; y &lt;= 9 ; y++&quot; dr-it=&quot;y&quot; dr-var=&quot;superIt=#it#&quot; dr-strip=&quot;true&quot;&gt;
+        #it# = ${var.superIt * #it#}$
+    &lt;/scope&gt;
+&lt;/div&gt;</pre>
+        </figure>
+    </section>
+    <hr>
+    <section>
+        <h2>dr-repeat</h2>
+        <figure>
+            <pre dr-pre class="code-container html">&lt;div dr-repeat=&quot;10&quot;&gt;&lt;div&gt;#it#&lt;/div&gt;&lt;/div&gt;
+&lt;div dr-repeat=&quot;$range(10, 20)&quot;&gt;&lt;div&gt;#it#&lt;/div&gt;&lt;/div&gt;
+&lt;div dr-repeat=&quot;$range(10, 20, 5)&quot;&gt;&lt;div&gt;#it#&lt;/div&gt;&lt;/div&gt;
+&lt;div dr-repeat=&quot;$range(&#39;10..5, 2&#39;)&quot;&gt;&lt;div&gt;#it#&lt;/div&gt;&lt;/div&gt;</pre>
+        </figure>
+    </section>
+    <hr>
+    <section>
+        <h2>dr-inner-text, dr-inner-html</h2>
+        <figure>
+            <pre dr-pre class="code-container html">&lt;div dr-inner-text=&quot;&#39;&lt;b&gt;aa&lt;/b&gt; &lt;button dr-event-click=\&#39;alert(1)\&#39;&gt;aa&lt;/button&gt;&#39;&quot;&gt; friend&lt;/div&gt;
+&lt;div dr-inner-html=&quot;&#39;&lt;b&gt;aa&lt;/b&gt; &lt;button dr-event-click=\&#39;alert(1)\&#39;&gt;aa&lt;/button&gt;&#39;&quot;&gt; friend&lt;/div&gt;
+</pre>
+        </figure>
+    </section>
+    <hr>
+    <section>
+        <h2>⚡️event</h2>
+        <ul>
+            <li>
+                click, mousedown, mouseup, dblclick, mouseover, mouseout, mousemove, mouseenter, mouseleave, contextmenu, keyup, keydown, keypress, change, input, submit, resize, focus, blur
+            </li>
+            <li>ref: element</li>
+            <li>variable: $event, $target</li>
+        </ul>
+        <figure>
+            <pre dr-pre class="code-container html">click: &lt;button dr-event-click=&quot;this.name = &#39;name&#39; + new Date()&quot;&gt;click&lt;/button&gt; &lt;br&gt;
+change: &lt;input type=&quot;text&quot; dr-event-change=&quot;this.name = $target.value&quot;&gt; &lt;br&gt;
+input: &lt;input type=&quot;text&quot; dr-event-input=&quot;this.name = $target.value&quot;&gt; &lt;br&gt;
+keyup: &lt;input type=&quot;text&quot; dr-event-keyup=&quot;this.name = $target.value&quot;&gt; &lt;br&gt;
+...
+keydown: &lt;input type=&quot;text&quot; dr-event-keydown=&quot;this.name = $target.value&quot;&gt;&lt;br&gt;
+submit: &lt;form dr-event-submit=&quot;console.log($event); $event.preventDefault();&quot;&gt;&lt;input type=&quot;text&quot;&gt; &lt;button type=&quot;submit&quot;&gt;submit&lt;/button&gt;&lt;/form&gt;&lt;br&gt;</pre>
+        </figure>
+    </section>
+    <hr>
+    <section>
+        <h2>⚡️ window event</h2>
+        <ul>
+            <li>ref: window</li>
+            <li>variable: $target</li>
+        </ul>
+        <figure>
+            <pre dr-pre class="code-container html">window-event-popstate: &lt;input type=&quot;text&quot; dr-window-event-popstate=&quot;alert(this.name)&quot;&gt;&lt;br&gt;</pre>
+        </figure>
+    </section>
+    <hr>
+    <section>
+        <h2>⚡️ custom event (other)</h2>
+        <ul>
+            <li>other event</li>
+            <li>ref: element</li>
+            <li>variable: $params, $event</li>
+        </ul>
+        <figure>
+            <pre dr-pre class="code-container html">&lt;input dr-event:bind=&#39;eventName1, eventName2&#39; dr-event=&quot;console.log(&#39;event&#39;, $params, $event)&quot;  type=&quot;text&quot;&gt;</pre>
+        </figure>
+    </section>
+    <hr>
+    <section>
+        <h2>dr-value, value-link</h2>
+        <dl>
+            <ul>
+                <li>
+                    <dt>dr-value</dt>
+                    <dl>The value is assigned the first time.</dl>
+                </li>
+                <li>
+                    <dt>dr-value-link</dt>
+                    <dl>Value and variable values are referencing each other. It affects each other when changing. (Immediate reflection event: input)</dl>
+                </li>
+            </ul>
+        </dl>
+        <figure>
+            <pre dr-pre class="code-container html">dr-value: &lt;input type=&quot;text&quot; dr-value=&quot;this.office.name&quot;&gt; &lt;br&gt;
+dr-value-link: &lt;input type=&quot;text&quot; dr-value-link=&quot;this.office.addr.street&quot;&gt; &lt;br&gt;</pre>
+        </figure>
+    </section>
+    <hr>
+    <section>
+        <h2>dr-attr</h2>
+        <figure>
+            <pre dr-pre class="code-container html">&lt;textarea dr-attr=&quot;{rows: this.age/2, cols: this.age}&quot;&gt;&lt;/textarea&gt;
+&lt;div dr-attr=&quot;{wow: &#39;123&#39;, good: 123444}&quot;&gt;&lt;/div&gt;
+&lt;div dr-attr=&quot;[&#39;wow=123&#39;, &#39;good=123444&#39;]&quot;&gt;&lt;/div&gt;
+&lt;div dr-attr=&quot;&#39;wow=123, good=123444&#39;&quot;&gt;&lt;/div&gt;</pre>
+        </figure>
+    </section>
+    <hr>
+    <section>
+        <h2>dr-class</h2>
+        <figure>
+            <pre dr-pre class="code-container html">&lt;div dr-class=&quot;{big: this.age &gt; 50, red: this.age &gt; 50}&quot;&gt;
+&lt;div dr-class=&quot;&#39;big yellow &#39; + (this.age &gt; 50 ? &#39;old&#39; : &#39;young&#39;)&quot;&gt;
+&lt;div dr-class=&quot;[&#39;small&#39;, &#39;yellow&#39;]&quot;&gt;</pre>
+        </figure>
+    </section>
+    <hr>
+    <section>
+        <h2>dr-style</h2>
+        <figure>
+            <pre dr-pre class="code-container html">&lt;div dr-style=&quot;{fontSize: this.age + &#39;px&#39;}&quot;&gt; style &lt;/div&gt;
+&lt;div dr-style=&quot;{&#39;font-size&#39;: &#39;20px&#39;}&quot;&gt; style&lt;/div&gt;
+&lt;div dr-style=&quot;&#39;font-size: &#39; + this.age +&#39;px; margin: &#39; + this.age + &#39;px&#39;&quot;&gt; style &lt;/div&gt;
+&lt;div dr-style=&quot;[&#39;font-size: &#39; + this.age +&#39;px&#39;, &#39;margin: &#39; + this.age + &#39;px&#39;]&quot;&gt; style &lt;/div&gt;</pre>
+        </figure>
+    </section>
+    <hr>
+    <section>
+        <h2>dr-strip</h2>
+        <figure>
+            AS-IS
+            <pre dr-pre class="code-container html">&lt;div dr-strip=&quot;true&quot;&gt;&lt;span&gt;hello&lt;/span&gt;&lt;/div&gt;</pre>
+            TO-BE
+            <pre dr-pre class="code-container html">&lt;span&gt;hello&lt;/span&gt;</pre>
+        </figure>
+    </section>
+    <hr>
+    <section>
+        <h2>dr-on-init</h2>
+        <figure>
+            <pre dr-pre class="code-container html">&lt;input dr-on-init=&quot;this.onInitElement&quot;&gt;</pre>
+        </figure>
+    </section>
+    <hr>
+    <section>
+        <h2>dr-before, dr-after</h2>
+        <figure>
+            <pre dr-pre class="code-container html">&lt;div dr-before=&quot;console.log(&#39;process before&#39;)&quot; dr-after=&quot;console.log(&#39;process after&#39;)&quot;&gt;&lt;/div&gt;</pre>
+        </figure>
+    </section>
+    <hr>
+    <section>
+        <h2>dr-complete</h2>
+        <figure>
+            <pre dr-pre class="code-container html">&lt;select dr-value-link=&quot;this.currentContry&quot; dr-event-change=&quot;this.contryChange($event)&quot;&gt;
+    &lt;option dr-for-of=&quot;this.languages&quot; dr-value=&quot;#it#.key&quot; dr-complete=&quot;this.currentContry=&#39;defaultValue&#39;&quot;&gt;${#it#.title}$&lt;/option&gt;
+&lt;/select&gt;</pre>
+        </figure>
+    </section>
+
+</article>
+

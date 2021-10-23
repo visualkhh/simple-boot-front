@@ -1,0 +1,35 @@
+<article>
+    <h1>Config</h1>
+    <p>dom-render config</p>
+    <section>
+        <h2>Config</h2>
+        <figure>
+            <pre dr-pre class="code-container typescript">export type TargetElement = {
+    _name: string,
+    template?: string,
+    styles?: string[],
+    callBack: (target: Element, obj: any, rawSet: RawSet) => DocumentFragment,
+    complete?: (target: Element, obj: any, rawSet: RawSet) => void
+};
+
+export type TargetAttr = {
+    name: string,
+    callBack: (target: Element, attrValue: string, obj: any, rawSet: RawSet) => DocumentFragment,
+    complete?: (target: Element, attrValue: string, obj: any, rawSet: RawSet) => void
+};
+
+export interface Config {
+    targetElements?: TargetElement[];
+    targetAttrs?: TargetAttr[];
+    onElementInit?: (name: string, obj: any, rawSet: RawSet) =&gt; void;
+    onAttrInit?: (name: string, attrValue: string, obj: any, rawSet: RawSet) =&gt; void;
+    proxyExcludeTyps?: ConstructorType&lt;any&gt;[];
+    proxyExcludeOnBeforeReturnSets?: string[];
+    proxyExcludeOnBeforeReturnGets?: string[];
+    scripts?: { [n: string]: any };
+    applyEvents?: { attrName: string, callBack: (elements: Element, attrValue: string, obj: any) => void }[];
+}</pre>
+        </figure>
+    </section>
+</article>
+

@@ -5017,13 +5017,13 @@ exports.SimpleBootFront = SimpleBootFront;
 unwrapExports(SimpleBootFront_1);
 var SimpleBootFront_2 = SimpleBootFront_1.SimpleBootFront;
 
-var template$s = "<div>\n  <header class=\"header\">\n    <nav class=\"input-group\">\n      <label class=\"input-group-text bg-white\" for=\"inputGroupSelect01\">simple-boot</label>\n      <select class=\"form-select form-select-lg\" id=\"inputGroupSelect01\" dr-on-init=\"this.category\" dr-event-change=\"this.changeCategory($target.value)\">\n        <option selected=\"selected\" value=\"simple-boot-front\" dr-attr=\"{selected: this.getPath(1) === $element.value ? 'selected' : null}\">front </option>\n        <option value=\"dom-render\" dr-attr=\"{selected: this.getPath(1) === $element.value ? 'selected' : null}\">dom-render</option>\n        <option value=\"simple-boot-core\" dr-attr=\"{selected: this.getPath(1) === $element.value ? 'selected' : null}\">core</option>\n        <option value=\"create-simple-boot-front\" dr-attr=\"{selected: this.getPath(1) === $element.value ? 'selected' : null}\">create</option>\n        <option value=\"simple-boot-front-cli\" dr-attr=\"{selected: this.getPath(1) === $element.value ? 'selected' : null}\">cli</option>\n      </select>\n      <span class=\"input-group-text bg-light fs-6\">⇢</span>\n      <select class=\"form-select form-select-sm\" dr-on-init=\"this.detail\" dr-event-change=\"this.changeDetail($target.value)\">\n        <option dr-for-of=\"this.detailsItems\" dr-complete=\"this.changeDetail(this.detail.value)\" dr-value=\"#it#\" dr-attr=\"{selected: this.navagation.path === $element.value ? 'selected' : null}\">${#it#?.split?.('/')?.[2] ?? ''}$</option>\n      </select>\n    </nav>\n  </header>\n  <main>\n    <router component=\"this.child\"></router>\n  </main>\n  <footer>\n    <ul class=\"badge-container\">\n      <li>\n        <a href=\"https://www.npmjs.com/package/simple-boot-front\" target=\"_blank\"><img src=\"https://img.shields.io/badge/npm-blue?logo=npm\"></a>\n      </li>\n      <li>\n        <img src=\"https://img.shields.io/badge/license-MIT-green\">\n      </li>\n      <li>\n        <a href=\"https://discord.gg/PW56dpns\" target=\"_blank\"><img src=\"https://img.shields.io/badge/discord-brightgreen?logo=discord\"></a>\n      </li>\n      <li>\n        <a href=\"https://github.com/visualkhh/simple-boot-front\" target=\"_blank\"><img src=\"https://img.shields.io/badge/-github-black?logo=github\"></a>\n      </li>\n      <li>\n        <a href=\"maileto:visualkhh@gmail.com\" target=\"_blank\"><img src=\"https://img.shields.io/badge/visualkhh@gmail.com-lightgrey\"></a>\n      </li>\n    </ul>\n  </footer>\n</div>\n";
+var template$B = "<div>\n  <header class=\"header\">\n    <nav class=\"input-group\">\n      <label class=\"input-group-text bg-white\" for=\"inputGroupSelect01\">simple-boot</label>\n      <select class=\"form-select form-select-lg\" id=\"inputGroupSelect01\" dr-on-init=\"this.category\" dr-event-change=\"this.changeCategory($target.value)\">\n        <option selected=\"selected\" value=\"simple-boot-front\" dr-attr=\"{selected: this.getPath(1) === $element.value ? 'selected' : null}\">front </option>\n        <option value=\"dom-render\" dr-attr=\"{selected: this.getPath(1) === $element.value ? 'selected' : null}\">dom-render</option>\n        <option value=\"simple-boot-core\" dr-attr=\"{selected: this.getPath(1) === $element.value ? 'selected' : null}\">core</option>\n        <option value=\"create-simple-boot-front\" dr-attr=\"{selected: this.getPath(1) === $element.value ? 'selected' : null}\">create</option>\n        <option value=\"simple-boot-front-cli\" dr-attr=\"{selected: this.getPath(1) === $element.value ? 'selected' : null}\">cli</option>\n      </select>\n      <span class=\"input-group-text bg-light fs-6\">⇢</span>\n      <select class=\"form-select form-select-sm\" dr-on-init=\"this.detail\" dr-event-change=\"this.changeDetail($target.value)\">\n        <option dr-for-of=\"this.detailsItems\" dr-complete=\"this.changeDetail(this.detail.value)\" dr-value=\"#it#\" dr-attr=\"{selected: this.navagation.path === $element.value ? 'selected' : null}\">${#it#?.split?.('/')?.[2] ?? ''}$</option>\n      </select>\n    </nav>\n  </header>\n  <main>\n    <router component=\"this.child\"></router>\n  </main>\n  <footer>\n    <ul class=\"badge-container\">\n      <li>\n        <a href=\"https://www.npmjs.com/package/simple-boot-front\" target=\"_blank\"><img src=\"https://img.shields.io/badge/npm-blue?logo=npm\"></a>\n      </li>\n      <li>\n        <img src=\"https://img.shields.io/badge/license-MIT-green\">\n      </li>\n      <li>\n        <a href=\"https://discord.gg/PW56dpns\" target=\"_blank\"><img src=\"https://img.shields.io/badge/discord-brightgreen?logo=discord\"></a>\n      </li>\n      <li>\n        <a href=\"https://github.com/visualkhh/simple-boot-front\" target=\"_blank\"><img src=\"https://img.shields.io/badge/-github-black?logo=github\"></a>\n      </li>\n      <li>\n        <a href=\"maileto:visualkhh@gmail.com\" target=\"_blank\"><img src=\"https://img.shields.io/badge/visualkhh@gmail.com-lightgrey\"></a>\n      </li>\n    </ul>\n  </footer>\n</div>\n";
 
-var style$g = "header {\n    position: -webkit-sticky; /* 사파리 브라우저 지원 */\n    position: sticky;\n    top: 0px;\n    /*border: #656565 1px solid;*/\n    /*background: white;*/\n    /*border-bottom-left-radius: 5px;*/\n    /*border-bottom-right-radius: 5px;*/\n}\n\n/*footer,*/\nmain {\n/*    border: #333333 1px solid;*/\n    color: rgb(30, 30, 30);\n    padding: 10px;\n/*    !*margin: 20px;*!*/\n}\n\n.code-container {\n    color: #a9b7c6;\n    background-color: #282b2e;\n    overflow-x: auto;\n    /*margin: 5px;*/\n    padding: 10px;\n    border-radius: 10px;\n}\npre code{\n    border-radius: 10px;\n}\n\n\nul.badge-container {\n    padding-left: 0px;\n    /*background-color: #3D99CE;*/\n    /*text-align: center;*/\n}\nfooter>ul.badge-container {\n    text-align: right;\n}\n\nul.badge-container > li {\n    display: inline-block;\n    /*padding: 10px 20px;*/\n}\nul.badge-container > li:hover {\n    /*background-color: #2779BF;*/\n}\nul.badge-container > li > a {\n    color: white;\n    text-decoration: none;\n}\n\n\nsection > figure figcaption {\n    text-align: right;\n    font-size: 0.5rem;\n}\n\n\n.content-container {\n    color: #a9b7c6;\n    background-color: #282b2e;\n    border-radius: 10px;\n    padding: 7px;\n    overflow-x: auto;\n}\n\n.content-container-white {\n    color: #282b2e;\n    border: #dedede solid 1px;\n    border-radius: 10px;\n    padding: 7px;\n    overflow-x: auto;\n}\n\n/*.dl-container > dt::before {*/\n/*    content: '- ';*/\n\n/*}*/\n.dl-container > dd {\n    padding-left: 10px;\n    margin-bottom: 15px;\n}\n\ndd > small {\n    font-size: 0.5rem;\n}\n\nli > small {\n    font-size: 0.5rem;\n}\n";
+var style$p = "header {\n    position: -webkit-sticky; /* 사파리 브라우저 지원 */\n    position: sticky;\n    top: 0px;\n    /*border: #656565 1px solid;*/\n    /*background: white;*/\n    /*border-bottom-left-radius: 5px;*/\n    /*border-bottom-right-radius: 5px;*/\n}\n\n/*footer,*/\nmain {\n/*    border: #333333 1px solid;*/\n    color: rgb(30, 30, 30);\n    padding: 10px;\n/*    !*margin: 20px;*!*/\n}\n\n.code-container {\n    color: #a9b7c6;\n    background-color: #282b2e;\n    overflow-x: auto;\n    /*margin: 5px;*/\n    padding: 10px;\n    border-radius: 10px;\n}\npre code{\n    border-radius: 10px;\n}\n\n\nul.badge-container {\n    padding-left: 0px;\n    /*background-color: #3D99CE;*/\n    /*text-align: center;*/\n}\nfooter>ul.badge-container {\n    text-align: right;\n}\n\nul.badge-container > li {\n    display: inline-block;\n    /*padding: 10px 20px;*/\n}\nul.badge-container > li:hover {\n    /*background-color: #2779BF;*/\n}\nul.badge-container > li > a {\n    color: white;\n    text-decoration: none;\n}\n\n\nsection > figure figcaption {\n    text-align: right;\n    font-size: 0.5rem;\n}\n\n\n.content-container {\n    color: #a9b7c6;\n    background-color: #282b2e;\n    border-radius: 10px;\n    padding: 7px;\n    overflow-x: auto;\n}\n\n.content-container-white {\n    color: #282b2e;\n    border: #dedede solid 1px;\n    border-radius: 10px;\n    padding: 7px;\n    overflow-x: auto;\n}\n\n/*.dl-container > dt::before {*/\n/*    content: '- ';*/\n\n/*}*/\n.dl-container > dd {\n    padding-left: 10px;\n    margin-bottom: 15px;\n}\n\ndd > small {\n    font-size: 0.5rem;\n}\n\nli > small {\n    font-size: 0.5rem;\n}\n";
 
-var template$r = "<div>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.data, {language: 'typescript'}).value\"></code>\n    </pre>\n\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n\n</div>\n";
+var template$A = "<div>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.data, {language: 'typescript'}).value\"></code>\n    </pre>\n\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n\n</div>\n";
 
-var style$f = "";
+var style$o = "";
 
 var Home = (function () {
     function Home() {
@@ -5037,8 +5037,8 @@ var Home = (function () {
     Home = __decorate([
         SimDecorator_7(),
         Component_3({
-            template: template$r,
-            styles: [style$f]
+            template: template$A,
+            styles: [style$o]
         })
     ], Home);
     return Home;
@@ -5056,9 +5056,9 @@ var User = (function () {
     return User;
 }());
 
-var template$q = "<!--    <p>¯\\_(ツ)_/¯ - Everyone</p>-->\n<article>\n    <h1>SIMPLE-BOOT-FRONT</h1>\n    <p>Single Page Application Framworks for Web</p>\n\n    <ul class=\"badge-container\">\n        <li>\n            <a href=\"https://www.npmjs.com/package/simple-boot-front\" target=\"_blank\"><img src=\"https://img.shields.io/badge/npm-blue?logo=npm\"></a>\n        </li>\n        <li>\n            <img src=\"https://img.shields.io/badge/license-MIT-green\">\n        </li>\n        <li>\n            <a href=\"https://discord.gg/PW56dpns\" target=\"_blank\"><img src=\"https://img.shields.io/badge/discord-brightgreen?logo=discord\"></a>\n        </li>\n        <li>\n            <a href=\"https://github.com/visualkhh/simple-boot-front\" target=\"_blank\"><img src=\"https://img.shields.io/badge/-github-black?logo=github\"></a>\n        </li>\n    </ul>\n\n    <section>\n        <h2>Our primary goals are</h2>\n        <ul>\n            <li>Single Page Application Framworks for Web</li>\n            <li>Provide a radically faster and widely accessible getting started experience for all front end.</li>\n        </ul>\n    </section>\n\n    <hr>\n\n    <section>\n        <h2>Dependencies</h2>\n        <ul>\n            <li>dom-render <span class=\"badge bg-secondary\">Product line</span></li>\n            <li>simple-boot-core <span class=\"badge bg-secondary\">Product line</span></li>\n            <li>reflect-metadata</li>\n        </ul>\n    </section>\n\n    <hr>\n    <domrender-function-section></domrender-function-section>\n    <hr>\n    <core-function-section></core-function-section>\n    <hr>\n    <core-lifecycle-section></core-lifecycle-section>\n    <hr>\n    <front-lifecycle-section></front-lifecycle-section>\n    <hr>\n\n    <section>\n        <h2>Contributors</h2>\n        <a href=\"https://github.com/visualkhh/simple-boot-front/graphs/contributors\">\n            <img src=\"https://contrib.rocks/image?repo=visualkhh/simple-boot-front\">\n        </a>\n    </section>\n</article>\n";
+var template$z = "<!--    <p>¯\\_(ツ)_/¯ - Everyone</p>-->\n<article>\n    <h1>SIMPLE-BOOT-FRONT</h1>\n    <p>Single Page Application Framworks for Web</p>\n\n    <ul class=\"badge-container\">\n        <li>\n            <a href=\"https://www.npmjs.com/package/simple-boot-front\" target=\"_blank\"><img src=\"https://img.shields.io/badge/npm-blue?logo=npm\"></a>\n        </li>\n        <li>\n            <img src=\"https://img.shields.io/badge/license-MIT-green\">\n        </li>\n        <li>\n            <a href=\"https://discord.gg/PW56dpns\" target=\"_blank\"><img src=\"https://img.shields.io/badge/discord-brightgreen?logo=discord\"></a>\n        </li>\n        <li>\n            <a href=\"https://github.com/visualkhh/simple-boot-front\" target=\"_blank\"><img src=\"https://img.shields.io/badge/-github-black?logo=github\"></a>\n        </li>\n    </ul>\n\n    <section>\n        <h2>Our primary goals are</h2>\n        <ul>\n            <li>Single Page Application Framworks for Web</li>\n            <li>Provide a radically faster and widely accessible getting started experience for all front end.</li>\n        </ul>\n    </section>\n\n    <hr>\n\n    <section>\n        <h2>Dependencies</h2>\n        <ul>\n            <li>dom-render <span class=\"badge bg-secondary\">Product line</span></li>\n            <li>simple-boot-core <span class=\"badge bg-secondary\">Product line</span></li>\n            <li>reflect-metadata</li>\n        </ul>\n    </section>\n\n    <hr>\n    <domrender-function-section></domrender-function-section>\n    <hr>\n    <core-function-section></core-function-section>\n    <hr>\n    <core-lifecycle-section></core-lifecycle-section>\n    <hr>\n    <front-lifecycle-section></front-lifecycle-section>\n    <hr>\n\n    <section>\n        <h2>Contributors</h2>\n        <a href=\"https://github.com/visualkhh/simple-boot-front/graphs/contributors\">\n            <img src=\"https://contrib.rocks/image?repo=visualkhh/simple-boot-front\">\n        </a>\n    </section>\n</article>\n";
 
-var style$e = "/*pre code {*/\n/*    overflow-x: auto ;*/\n/*    overflow-y:hidden;*/\n/*    white-space: pre;*/\n/*    !*white-space: nowrap;*!*/\n\n/*}*/\n/*code {*/\n/*    white-space: pre;*/\n/*    -webkit-overflow-scrolling: auto;*/\n/*}*/\n/*#div1, #div2, #div3, #div4 {*/\n/*    border: 1px solid black;*/\n/*    width:  250px;*/\n/*    margin-bottom: 12px;*/\n/*}*/\n\n/*#div1 { overflow-x: hidden;}*/\n/*#div2 { overflow-x: scroll;}*/\n/*#div3 { overflow-x: visible;}*/\n/*#div4 { overflow-x: auto;*/\n/*    white-space: nowrap;*/\n/*}*/\n";
+var style$n = "/*pre code {*/\n/*    overflow-x: auto ;*/\n/*    overflow-y:hidden;*/\n/*    white-space: pre;*/\n/*    !*white-space: nowrap;*!*/\n\n/*}*/\n/*code {*/\n/*    white-space: pre;*/\n/*    -webkit-overflow-scrolling: auto;*/\n/*}*/\n/*#div1, #div2, #div3, #div4 {*/\n/*    border: 1px solid black;*/\n/*    width:  250px;*/\n/*    margin-bottom: 12px;*/\n/*}*/\n\n/*#div1 { overflow-x: hidden;}*/\n/*#div2 { overflow-x: scroll;}*/\n/*#div3 { overflow-x: visible;}*/\n/*#div4 { overflow-x: auto;*/\n/*    white-space: nowrap;*/\n/*}*/\n";
 
 var ApiService = (function () {
     function ApiService() {
@@ -5099,7 +5099,7 @@ var ApiService = (function () {
     return ApiService;
 }());
 
-var template$p = "<section>\n    <h2>${this.title}$</h2>\n    <dl dr-pre>\n        <ul>\n            <li>\n                <dt>onSimCreate()</dt>\n                <dd>Sim create just one call <small>(OnSimCreate.ts)</small></dd>\n            </li>\n        </ul>\n    </dl>\n</section>\n";
+var template$y = "<section>\n    <h2>${this.title}$</h2>\n    <dl dr-pre>\n        <ul>\n            <li>\n                <dt>onSimCreate()</dt>\n                <dd>Sim create just one call <small>(OnSimCreate.ts)</small></dd>\n            </li>\n        </ul>\n    </dl>\n</section>\n";
 
 var CoreLifecycleSection = (function () {
     function CoreLifecycleSection() {
@@ -5109,13 +5109,13 @@ var CoreLifecycleSection = (function () {
         SimDecorator_7(),
         Component_3({
             selector: 'core-lifecycle-section',
-            template: template$p
+            template: template$y
         })
     ], CoreLifecycleSection);
     return CoreLifecycleSection;
 }());
 
-var template$o = "<section>\n    <h2>${this.title}$</h2>\n    <p>simple-boot-core <a href=\"https://github.com/visualkhh/simple-boot-core\" target=\"_blank\"><img src=\"https://img.shields.io/badge/-github-black?logo=github\"></a></p>\n    <ul>\n        <li>Object management (@Sim)</li>\n        <li>Dependency Injection (DI)</li>\n        <li>Aspect Oriented Programming (AOP)</li>\n        <li>Global Advice</li>\n        <li>Intent Event System</li>\n        <li>Route System (@Router)</li>\n    </ul>\n</section>\n";
+var template$x = "<section>\n    <h2>${this.title}$</h2>\n    <p>simple-boot-core <a href=\"https://github.com/visualkhh/simple-boot-core\" target=\"_blank\"><img src=\"https://img.shields.io/badge/-github-black?logo=github\"></a></p>\n    <ul>\n        <li>Object management (@Sim)</li>\n        <li>Dependency Injection (DI)</li>\n        <li>Aspect Oriented Programming (AOP)</li>\n        <li>Global Advice</li>\n        <li>Intent Event System</li>\n        <li>Route System (@Router)</li>\n    </ul>\n</section>\n";
 
 var CoreFunctionSection = (function () {
     function CoreFunctionSection() {
@@ -5125,13 +5125,13 @@ var CoreFunctionSection = (function () {
         SimDecorator_7(),
         Component_3({
             selector: 'core-function-section',
-            template: template$o
+            template: template$x
         })
     ], CoreFunctionSection);
     return CoreFunctionSection;
 }());
 
-var template$n = "<section>\n    <h2>${this.title}$</h2>\n    <dl dr-pre>\n        <ul>\n            <li>\n                <dt>onChangedRender()</dt>\n                <dd>change rended in module event <small>(OnChangedRender.ts)</small></dd>\n            </li>\n            <li>\n                <dt>onFinish()</dt>\n                <dd>Sim create just one call <small>(OnFinish.ts)</small></dd>\n            </li>\n            <li>\n                <dt>onInit()</dt>\n                <dd>module load event <small>(OnInit.ts)</small></dd>\n            </li>\n            <li>\n                <dt>onDestroy()</dt>\n                <dd>module destroy event <small>(OnDestroy.ts)</small></dd>\n            </li>\n            <li>\n                <dt>onInitedChild()</dt>\n                <dd>module and child module inited event <small>(OnInitedChild.ts)</small></dd>\n            </li>\n        </ul>\n    </dl>\n</section>\n";
+var template$w = "<section>\n    <h2>${this.title}$</h2>\n    <dl dr-pre>\n        <ul>\n            <li>\n                <dt>onChangedRender()</dt>\n                <dd>change rended in module event <small>(OnChangedRender.ts)</small></dd>\n            </li>\n            <li>\n                <dt>onFinish()</dt>\n                <dd>Sim create just one call <small>(OnFinish.ts)</small></dd>\n            </li>\n            <li>\n                <dt>onInit()</dt>\n                <dd>module load event <small>(OnInit.ts)</small></dd>\n            </li>\n            <li>\n                <dt>onDestroy()</dt>\n                <dd>module destroy event <small>(OnDestroy.ts)</small></dd>\n            </li>\n            <li>\n                <dt>onInitedChild()</dt>\n                <dd>module and child module inited event <small>(OnInitedChild.ts)</small></dd>\n            </li>\n        </ul>\n    </dl>\n</section>\n";
 
 var FrontLifecycleSection = (function () {
     function FrontLifecycleSection() {
@@ -5141,13 +5141,13 @@ var FrontLifecycleSection = (function () {
         SimDecorator_7(),
         Component_3({
             selector: 'front-lifecycle-section',
-            template: template$n
+            template: template$w
         })
     ], FrontLifecycleSection);
     return FrontLifecycleSection;
 }());
 
-var template$m = "<section>\n    <h2>${this.title}$</h2>\n    <p>dom-render <a href=\"https://github.com/visualkhh/dom-render\" target=\"_blank\"><img src=\"https://img.shields.io/badge/-github-black?logo=github\"></a></p>\n    <ul>\n        <li>Dom control and reorder</li>\n        <li>Immediate reaction when the value changes</li>\n        <li>all internal variables are managed by proxy <small class=\"text-danger\">(DomRenderProxy)</small></li>\n    </ul>\n</section>\n";
+var template$v = "<section>\n    <h2>${this.title}$</h2>\n    <p>dom-render <a href=\"https://github.com/visualkhh/dom-render\" target=\"_blank\"><img src=\"https://img.shields.io/badge/-github-black?logo=github\"></a></p>\n    <ul>\n        <li>Dom control and reorder</li>\n        <li>Immediate reaction when the value changes</li>\n        <li>all internal variables are managed by proxy <small class=\"text-danger\">(DomRenderProxy)</small></li>\n    </ul>\n</section>\n";
 
 var DomrenderFunctionSection = (function () {
     function DomrenderFunctionSection() {
@@ -5157,7 +5157,7 @@ var DomrenderFunctionSection = (function () {
         SimDecorator_7(),
         Component_3({
             selector: 'domrender-function-section',
-            template: template$m
+            template: template$v
         })
     ], DomrenderFunctionSection);
     return DomrenderFunctionSection;
@@ -5172,8 +5172,8 @@ var FrontIntroduction = (function () {
     FrontIntroduction = __decorate([
         SimDecorator_7(),
         Component_3({
-            template: template$q,
-            styles: [style$e],
+            template: template$z,
+            styles: [style$n],
             using: [CoreLifecycleSection, FrontLifecycleSection, CoreFunctionSection, DomrenderFunctionSection]
         }),
         __metadata("design:paramtypes", [ApiService])
@@ -5181,11 +5181,11 @@ var FrontIntroduction = (function () {
     return FrontIntroduction;
 }());
 
-var template$l = "<article>\n    <h1>@Component</h1>\n    <p>minimum units that make up the page</p>\n    <section>\n        <h2>ComponentConfig</h2>\n        <dl class=\"dl-container\">\n            <ul>\n                <li>\n                    <dt>selector</dt>\n                    <dd>element name</dd>\n                </li>\n                <li>\n                    <dt>template</dt>\n                    <dd>html template string</dd>\n                </li>\n                <li>\n                    <dt>styles</dt>\n                    <dd>style string array</dd>\n                </li>\n                <li>\n                    <dt>using</dt>\n                    <dd>using components or scripts in this component</dd>\n                </li>\n            </ul>\n        </dl>\n    </section>\n\n    <hr>\n\n    <section>\n        <h2>Create</h2>\n        <figure>\n            <figcaption>template.html</figcaption>\n            <pre dr-pre class=\"code-container html\">&lt;h1&gt;${this.name}$&lt;/h1&gt;\n&lt;div dr-inner-html=&quot;this.html&quot;&gt;&lt;/div&gt;</pre>\n        </figure>\n        <figure>\n            <figcaption>typescript</figcaption>\n            <pre dr-pre class=\"code-container typescript\">@Sim()\n@Component({\n  selector: 'index',\n  template,\n  styles: [style]\n})\nexport class Index {\n  public name = 'index class'\n  public title = ''\n  public html = ''\n  public setData(title: string, html: string) {\n    this.title = title;\n    this.html = html;\n  }\n}</pre>\n        </figure>\n        \n    </section>\n\n    <hr>\n\n<domrender-component-template-section dr-on-init=\"$component.title='using'\"></domrender-component-template-section>\n</article>\n\n";
+var template$u = "<article>\n    <h1>@Component</h1>\n    <p>minimum units that make up the page</p>\n    <section>\n        <h2>ComponentConfig</h2>\n        <dl class=\"dl-container\">\n            <ul>\n                <li>\n                    <dt>selector</dt>\n                    <dd>element name</dd>\n                </li>\n                <li>\n                    <dt>template</dt>\n                    <dd>html template string</dd>\n                </li>\n                <li>\n                    <dt>styles</dt>\n                    <dd>style string array</dd>\n                </li>\n                <li>\n                    <dt>using</dt>\n                    <dd>using components or scripts in this component</dd>\n                </li>\n            </ul>\n        </dl>\n    </section>\n\n    <hr>\n\n    <section>\n        <h2>Create</h2>\n        <figure>\n            <figcaption>template.html</figcaption>\n            <pre dr-pre class=\"code-container html\">&lt;h1&gt;${this.name}$&lt;/h1&gt;\n&lt;div dr-inner-html=&quot;this.html&quot;&gt;&lt;/div&gt;</pre>\n        </figure>\n        <figure>\n            <figcaption>typescript</figcaption>\n            <pre dr-pre class=\"code-container typescript\">@Sim()\n@Component({\n  selector: 'index',\n  template,\n  styles: [style]\n})\nexport class Index {\n  public name = 'index class'\n  public title = ''\n  public html = ''\n  public setData(title: string, html: string) {\n    this.title = title;\n    this.html = html;\n  }\n}</pre>\n        </figure>\n        \n    </section>\n\n    <hr>\n\n<domrender-component-template-section dr-on-init=\"$component.title='using'\"></domrender-component-template-section>\n</article>\n\n";
 
-var style$d = "";
+var style$m = "";
 
-var template$k = "<section>\n    <h2>${this.title}$</h2>\n    <figure>\n        <figcaption>typescript</figcaption>\n        <pre dr-pre class=\"code-container typescript\">constructor(index: Index){...}</pre>\n    </figure>\n    <figure>\n        <figcaption>html</figcaption>\n        <pre dr-pre class=\"code-container html\">&lt;index&gt;&lt;/index&gt;\n&lt;!-- dr-set: $index.setData(&#39;data&#39;); $element, $innerHTML, $attributes --&gt;\n&lt;index dr-on-init=&quot;$component.setData(&#39;hello component&#39;, $innerHTML)&quot;&gt;&lt;/index&gt;</pre>\n    </figure>\n    <dl dr-pre>\n        <ul>\n            <li>\n                <dt>&lt;tagname&gt;</dt>\n                <dd>component selector name</dd>\n            </li>\n            <li>\n                <dt>dr-on-init attribute</dt>\n                <dd>\n                    component created init call script\n                    <ul>\n                        <li><span class=\"badge bg-primary\">$component</span> : component instance</li>\n                        <li><span class=\"badge bg-primary\">$element</span> : this element instance</li>\n                        <li><span class=\"badge bg-primary\">$attribute</span> : this element attribute object</li>\n                        <li><span class=\"badge bg-primary\">$innerHTML</span> : this element innerHTML string</li>\n                    </ul>\n                </dd>\n            </li>\n        </ul>\n    </dl>\n</section>\n";
+var template$t = "<section>\n    <h2>${this.title}$</h2>\n    <figure>\n        <figcaption>typescript</figcaption>\n        <pre dr-pre class=\"code-container typescript\">constructor(index: Index){...}</pre>\n    </figure>\n    <figure>\n        <figcaption>html</figcaption>\n        <pre dr-pre class=\"code-container html\">&lt;index&gt;&lt;/index&gt;\n&lt;!-- dr-set: $index.setData(&#39;data&#39;); $element, $innerHTML, $attributes --&gt;\n&lt;index dr-on-init=&quot;$component.setData(&#39;hello component&#39;, $innerHTML)&quot;&gt;&lt;/index&gt;</pre>\n    </figure>\n    <dl dr-pre>\n        <ul>\n            <li>\n                <dt>&lt;tagname&gt;</dt>\n                <dd>component selector name</dd>\n            </li>\n            <li>\n                <dt>dr-on-init attribute</dt>\n                <dd>\n                    component created init call script\n                    <ul>\n                        <li><span class=\"badge bg-primary\">$component</span> : component instance</li>\n                        <li><span class=\"badge bg-primary\">$element</span> : this element instance</li>\n                        <li><span class=\"badge bg-primary\">$attribute</span> : this element attribute object</li>\n                        <li><span class=\"badge bg-primary\">$innerHTML</span> : this element innerHTML string</li>\n                    </ul>\n                </dd>\n            </li>\n        </ul>\n    </dl>\n</section>\n";
 
 var DomrenderComponentTemplateSection = (function () {
     function DomrenderComponentTemplateSection() {
@@ -5195,7 +5195,7 @@ var DomrenderComponentTemplateSection = (function () {
         SimDecorator_7(),
         Component_3({
             selector: 'domrender-component-template-section',
-            template: template$k
+            template: template$t
         })
     ], DomrenderComponentTemplateSection);
     return DomrenderComponentTemplateSection;
@@ -5209,8 +5209,8 @@ var FrontComponent = (function () {
     FrontComponent = __decorate([
         SimDecorator_7(),
         Component_3({
-            template: template$l,
-            styles: [style$d],
+            template: template$u,
+            styles: [style$m],
             using: [DomrenderComponentTemplateSection]
         }),
         __metadata("design:paramtypes", [])
@@ -5263,11 +5263,11 @@ var CodeScript = (function (_super) {
     return CodeScript;
 }(ScriptRunnable_2));
 
-var template$j = "<article>\n    <h1>🚀 Quick start</h1>\n    <p>Start a project simply and quickly.</p>\n    <section>\n        <h2>Create project</h2>\n        <figure>\n            <figcaption>terminal</figcaption>\n            <pre class=\"code-container bash\">npm init simple-boot-front projectname\ncd projectname\nnpm start</pre>\n        </figure>\n    </section>\n\n    <hr>\n    <section>\n        <h2>Directory structure</h2>\n        <p>default bundler rollup (sample template)</p>\n        <figure class=\"content-container-white\">\n            <figcaption>structure</figcaption>\n            <ul class=\"root-directory\">\n                <li>assets</li>\n                <li>dist <small>out put directory</small></li>\n                <li>src <small>source</small>\n                    <ul class=\"child-directory\">\n                        <li>pages <small>your pages</small>\n                            <ul class=\"child-directory\">\n                                <li>home.ts <small>sample</small></li>\n                                <li>user.ts <small>sample</small></li>\n                            </ul>\n                        </li>\n                        <li>index.css <small class=\"text-primary\">index route page css</small></li>\n                        <li>index.html <small class=\"text-primary\">index route page template</small></li>\n                        <li>index.ts <small class=\"text-primary\">simple-boot-fornt start and route point</small></li>\n                    </ul>\n                </li>\n                <li>types <small>typescript type</small></li>\n                    <ul class=\"child-directory\">\n                        <li>index.d.ts <small>type definition</small></li>\n                    </ul>\n                \n                <li>index.html <small class=\"text-primary\">start point html</small></li>\n                <li>package.json <small>project config</small></li>\n                <li>rollup.config.js <small>rollup bundler config</small></li>\n                <li>tsconfig.json <small>typescript config</small></li>\n            </ul>\n        </figure>\n    </section>\n    <hr>\n    <section>\n        <h2>Execution command (package.json)</h2>\n        <figure>\n            <figcaption>package.json</figcaption>\n            <pre dr-pre class=\"code-container json\">{\n  \"name\": \"simple-boot-front-templates\",\n  \"version\": \"1.0.0\",\n                ...\n  \"scripts\": {\n    \"start\": \"rollup -c && sbf serve --path ./dist --port 4500\",\n    \"serve\": \"sbf serve --path ./dist --port 4500\",\n    \"serve:watch\": \"sbf serve --path ./dist --port 4500 --watch\",\n    \"serve:watch:all\": \"sbf serve --bundle rollup --path ./dist --port 4500 --watch\",\n    \"serve:proxy\": \"sbf serve --path ./dist --port 4500 --proxy http://localhost:8080\",\n    \"bundle\": \"rollup -c \",\n    \"bundle:watch\": \"rollup -c -w \"\n  },\n  \"devDependencies\": {\n    ...\n  },\n  \"dependencies\": {\n    \"simple-boot-front\": ...\n  }\n}</pre>\n        </figure>\n\n        <dl class=\"dl-container\">\n            <ul>\n                <li>\n                    <dt>start</dt>\n                    <dd>run the server after bundling</dd>\n                </li>\n                <li>\n                    <dt>serve</dt>\n                    <dd>run the server</dd>\n                </li>\n                <li>\n                    <dt>serve:watch</dt>\n                    <dd>run the server. It also updates the browser when there is a change in the dist directory file<span class=\"badge bg-secondary\">(detect dist directory)</span></dd>\n                </li>\n                <li>\n                    <dt>serve:watch:all</dt>\n                    <dd>\"serve:watch\" is the same and updates are made even when the source file<span class=\"badge bg-secondary\">(detect dist, src directory)</span></dd>\n                </li>\n                <li>\n                    <dt>serve:proxy</dt>\n                    <dd>run the proxy server<span class=\"badge bg-secondary\">--proxy address</span></dd>\n                </li>\n                <li>\n                    <dt>bundle</dt>\n                    <dd>rollup bundle</dd>\n                </li>\n                <li>\n                    <dt>bundle:watch</dt>\n                    <dd>rollup bundle watch</dd>\n                </li>\n            </ul>\n        </dl>\n\n    </section>\n\n    <hr>\n\n    <h1>📄 Code description</h1>\n    <section>\n        <h2>simple-boot-front start</h2>\n        <figure>\n            <figcaption>index.html</figcaption>\n            <pre dr-pre class=\"code-container html\">&lt;!DOCTYPE html&gt;\n&lt;html lang=&quot;en&quot;&gt;\n&lt;head&gt;\n    &lt;meta charset=&quot;UTF-8&quot;&gt;\n    &lt;title&gt;simple-boot-front&lt;/title&gt;\n    &lt;script src=&quot;bundle.js&quot; defer&gt;&lt;/script&gt;\n    &lt;link rel=&quot;shortcut icon&quot; href=&quot;assets/favicons/favicon.ico&quot;&gt;\n&lt;/head&gt;\n&lt;body id=&quot;app&quot;&gt;\n&lt;/body&gt;\n&lt;/html&gt;\n</pre>\n        </figure>\n        <figure>\n            <figcaption>index.ts (simple-boot-front start)</figcaption>\n            <pre dr-pre class=\"code-container typescript\">const config = new SimFrontOption(window);\nconfig.setUrlType(UrlType.hash);\nnew SimpleBootFront(Index, config).run();</pre>\n        </figure>\n    </section>\n\n    <hr>\n    <section>\n        <h2>single page</h2>\n        <figure>\n            <figcaption>index.ts</figcaption>\n            <pre dr-pre class=\"code-container typescript\">import template from './index.html'\nimport style from './index.css'\n@Component({\n    template,\n    styles: [style]\n})\nexport class Index {\n}</pre>\n        </figure>\n    </section>\n\n    <hr>\n    <router-template-section dr-on-init=\"$component.title = 'multiple route pages'\"></router-template-section>\n</article>\n\n";
+var template$s = "<article>\n    <h1>🚀 Quick start</h1>\n    <p>Start a project simply and quickly.</p>\n    <section>\n        <h2>Create project</h2>\n        <figure>\n            <figcaption>terminal</figcaption>\n            <pre class=\"code-container bash\">npm init simple-boot-front projectname\ncd projectname\nnpm start</pre>\n        </figure>\n    </section>\n\n    <hr>\n    <section>\n        <h2>Directory structure</h2>\n        <p>default bundler rollup (sample template)</p>\n        <figure class=\"content-container-white\">\n            <figcaption>structure</figcaption>\n            <ul class=\"root-directory\">\n                <li>assets</li>\n                <li>dist <small>out put directory</small></li>\n                <li>src <small>source</small>\n                    <ul class=\"child-directory\">\n                        <li>pages <small>your pages</small>\n                            <ul class=\"child-directory\">\n                                <li>home.ts <small>sample</small></li>\n                                <li>user.ts <small>sample</small></li>\n                            </ul>\n                        </li>\n                        <li>index.css <small class=\"text-primary\">index route page css</small></li>\n                        <li>index.html <small class=\"text-primary\">index route page template</small></li>\n                        <li>index.ts <small class=\"text-primary\">simple-boot-fornt start and route point</small></li>\n                    </ul>\n                </li>\n                <li>types <small>typescript type</small></li>\n                    <ul class=\"child-directory\">\n                        <li>index.d.ts <small>type definition</small></li>\n                    </ul>\n                \n                <li>index.html <small class=\"text-primary\">start point html</small></li>\n                <li>package.json <small>project config</small></li>\n                <li>rollup.config.js <small>rollup bundler config</small></li>\n                <li>tsconfig.json <small>typescript config</small></li>\n            </ul>\n        </figure>\n    </section>\n    <hr>\n    <section>\n        <h2>Execution command (package.json)</h2>\n        <figure>\n            <figcaption>package.json</figcaption>\n            <pre dr-pre class=\"code-container json\">{\n  \"name\": \"simple-boot-front-templates\",\n  \"version\": \"1.0.0\",\n                ...\n  \"scripts\": {\n    \"start\": \"rollup -c && sbf serve --path ./dist --port 4500\",\n    \"serve\": \"sbf serve --path ./dist --port 4500\",\n    \"serve:watch\": \"sbf serve --path ./dist --port 4500 --watch\",\n    \"serve:watch:all\": \"sbf serve --bundle rollup --path ./dist --port 4500 --watch\",\n    \"serve:proxy\": \"sbf serve --path ./dist --port 4500 --proxy http://localhost:8080\",\n    \"bundle\": \"rollup -c \",\n    \"bundle:watch\": \"rollup -c -w \"\n  },\n  \"devDependencies\": {\n    ...\n  },\n  \"dependencies\": {\n    \"simple-boot-front\": ...\n  }\n}</pre>\n        </figure>\n\n        <dl class=\"dl-container\">\n            <ul>\n                <li>\n                    <dt>start</dt>\n                    <dd>run the server after bundling</dd>\n                </li>\n                <li>\n                    <dt>serve</dt>\n                    <dd>run the server</dd>\n                </li>\n                <li>\n                    <dt>serve:watch</dt>\n                    <dd>run the server. It also updates the browser when there is a change in the dist directory file<span class=\"badge bg-secondary\">(detect dist directory)</span></dd>\n                </li>\n                <li>\n                    <dt>serve:watch:all</dt>\n                    <dd>\"serve:watch\" is the same and updates are made even when the source file<span class=\"badge bg-secondary\">(detect dist, src directory)</span></dd>\n                </li>\n                <li>\n                    <dt>serve:proxy</dt>\n                    <dd>run the proxy server<span class=\"badge bg-secondary\">--proxy address</span></dd>\n                </li>\n                <li>\n                    <dt>bundle</dt>\n                    <dd>rollup bundle</dd>\n                </li>\n                <li>\n                    <dt>bundle:watch</dt>\n                    <dd>rollup bundle watch</dd>\n                </li>\n            </ul>\n        </dl>\n\n    </section>\n\n    <hr>\n\n    <h1>📄 Code description</h1>\n    <section>\n        <h2>simple-boot-front start</h2>\n        <figure>\n            <figcaption>index.html</figcaption>\n            <pre dr-pre class=\"code-container html\">&lt;!DOCTYPE html&gt;\n&lt;html lang=&quot;en&quot;&gt;\n&lt;head&gt;\n    &lt;meta charset=&quot;UTF-8&quot;&gt;\n    &lt;title&gt;simple-boot-front&lt;/title&gt;\n    &lt;script src=&quot;bundle.js&quot; defer&gt;&lt;/script&gt;\n    &lt;link rel=&quot;shortcut icon&quot; href=&quot;assets/favicons/favicon.ico&quot;&gt;\n&lt;/head&gt;\n&lt;body id=&quot;app&quot;&gt;\n&lt;/body&gt;\n&lt;/html&gt;\n</pre>\n        </figure>\n        <figure>\n            <figcaption>index.ts (simple-boot-front start)</figcaption>\n            <pre dr-pre class=\"code-container typescript\">const config = new SimFrontOption(window);\nconfig.setUrlType(UrlType.hash);\nnew SimpleBootFront(Index, config).run();</pre>\n        </figure>\n    </section>\n\n    <hr>\n    <section>\n        <h2>single page</h2>\n        <figure>\n            <figcaption>index.ts</figcaption>\n            <pre dr-pre class=\"code-container typescript\">import template from './index.html'\nimport style from './index.css'\n@Component({\n    template,\n    styles: [style]\n})\nexport class Index {\n}</pre>\n        </figure>\n    </section>\n\n    <hr>\n    <router-template-section dr-on-init=\"$component.title = 'multiple route pages'\"></router-template-section>\n</article>\n\n";
 
-var style$c = "ul.root-directory {\n    list-style:none;\n}\nul.root-directory > li::before {\n    content: '├ ';\n}\nul.root-directory > li:first-child::before {\n    content: '┌ ';\n    margin-left: -1px;\n    font-size: 0.9rem;\n}\n\nul.root-directory > li:last-child::before {\n    content: '└ ';\n    font-size: 0.9rem;\n    margin-left: -1px;\n}\n\n\nul.child-directory {\n    list-style:none;\n    /*padding-left: calc(50 - 10px);*/\n}\nul.child-directory > li::before {\n    content: ' ├ ';\n    padding-left: 4px;\n}\nul.child-directory > li:last-child::before {\n    content: '└ ';\n    font-size: 0.9rem;\n    margin-left: -1px;\n}\n\nul.root-directory > li small, ul.child-directory > li small {\n    font-size: 0.5rem;\n    padding-left: 3px;\n}\nul.root-directory > li small::before, ul.child-directory > li small::before {\n    content: '(';\n}\nul.root-directory > li small::after, ul.child-directory > li small::after {\n    content: ')';\n}\n";
+var style$l = "ul.root-directory {\n    list-style:none;\n}\nul.root-directory > li::before {\n    content: '├ ';\n}\nul.root-directory > li:first-child::before {\n    content: '┌ ';\n    margin-left: -1px;\n    font-size: 0.9rem;\n}\n\nul.root-directory > li:last-child::before {\n    content: '└ ';\n    font-size: 0.9rem;\n    margin-left: -1px;\n}\n\n\nul.child-directory {\n    list-style:none;\n    /*padding-left: calc(50 - 10px);*/\n}\nul.child-directory > li::before {\n    content: ' ├ ';\n    padding-left: 4px;\n}\nul.child-directory > li:last-child::before {\n    content: '└ ';\n    font-size: 0.9rem;\n    margin-left: -1px;\n}\n\nul.root-directory > li small, ul.child-directory > li small {\n    font-size: 0.5rem;\n    padding-left: 3px;\n}\nul.root-directory > li small::before, ul.child-directory > li small::before {\n    content: '(';\n}\nul.root-directory > li small::after, ul.child-directory > li small::after {\n    content: ')';\n}\n";
 
-var template$i = "<section>\n    <h2>${this.title}$</h2>\n    <figure>\n        <figcaption>index.html</figcaption>\n        <pre dr-pre class=\"code-container html\">&lt;header&gt;\n    &lt;nav&gt;\n        &lt;ul&gt;\n            &lt;li&gt;\n                &lt;button router-link=&quot;/&quot;&gt;home&lt;/button&gt;\n            &lt;/li&gt;\n            &lt;li&gt;\n                &lt;button router-link=&quot;/user&quot;&gt;user&lt;/button&gt;\n            &lt;/li&gt;\n        &lt;/ul&gt;\n    &lt;/nav&gt;\n\n&lt;/header&gt;\n&lt;main&gt;\n    &lt;router component=&quot;this.child&quot;&gt;&lt;/router&gt;\n&lt;/main&gt;\n&lt;footer&gt;\n    footer\n&lt;/footer&gt;\n</pre>\n    </figure>\n    <figure>\n        <figcaption>router index.ts</figcaption>\n        <pre dr-pre class=\"code-container typescript\">@Sim()\n@Router({\n    path: '',\n    route: {\n        '/': Home,\n        '/users': User\n    }\n})\n@Component({\n    template,\n    styles: [style]\n})\nexport class Index implements RouterAction {\n    child?: any;\n    canActivate(url: any, module: any): void {\n        this.child = module;\n    }\n}</pre>\n    </figure>\n    \n</section>\n";
+var template$r = "<section>\n    <h2>${this.title}$</h2>\n    <figure>\n        <figcaption>index.html</figcaption>\n        <pre dr-pre class=\"code-container html\">&lt;header&gt;\n    &lt;nav&gt;\n        &lt;ul&gt;\n            &lt;li&gt;\n                &lt;button router-link=&quot;/&quot;&gt;home&lt;/button&gt;\n            &lt;/li&gt;\n            &lt;li&gt;\n                &lt;button router-link=&quot;/user&quot;&gt;user&lt;/button&gt;\n            &lt;/li&gt;\n        &lt;/ul&gt;\n    &lt;/nav&gt;\n\n&lt;/header&gt;\n&lt;main&gt;\n    &lt;router component=&quot;this.child&quot;&gt;&lt;/router&gt;\n&lt;/main&gt;\n&lt;footer&gt;\n    footer\n&lt;/footer&gt;\n</pre>\n    </figure>\n    <figure>\n        <figcaption>router index.ts</figcaption>\n        <pre dr-pre class=\"code-container typescript\">@Sim()\n@Router({\n    path: '',\n    route: {\n        '/': Home,\n        '/users': User\n    }\n})\n@Component({\n    template,\n    styles: [style]\n})\nexport class Index implements RouterAction {\n    child?: any;\n    canActivate(url: any, module: any): void {\n        this.child = module;\n    }\n}</pre>\n    </figure>\n    \n</section>\n";
 
 var RouterTemplateSection = (function () {
     function RouterTemplateSection() {
@@ -5277,7 +5277,7 @@ var RouterTemplateSection = (function () {
         SimDecorator_7(),
         Component_3({
             selector: 'router-template-section',
-            template: template$i
+            template: template$r
         })
     ], RouterTemplateSection);
     return RouterTemplateSection;
@@ -5291,8 +5291,8 @@ var FrontQuickstart = (function () {
     FrontQuickstart = __decorate([
         SimDecorator_7(),
         Component_3({
-            template: template$j,
-            styles: [style$c],
+            template: template$s,
+            styles: [style$l],
             using: [RouterTemplateSection]
         }),
         __metadata("design:paramtypes", [])
@@ -5300,9 +5300,9 @@ var FrontQuickstart = (function () {
     return FrontQuickstart;
 }());
 
-var template$h = "<article>\n    <h1>option config</h1>\n    <p>simple-boot-front Framworks option</p>\n    <section>\n        <h2>SimFrontOption</h2>\n        <figure>\n            <figcaption>simple-boot-front/option/SimFrontOption.ts</figcaption>\n            <pre dr-pre class=\"code-container typescript\">const config = new SimFrontOption(window);</pre>\n            <pre dr-pre class=\"code-container typescript\">export declare enum UrlType {\n    path = \"path\",\n    hash = \"hash\"\n}\nexport declare class SimFrontOption extends SimOption {\n    window: Window;\n    selector: string;\n    urlType: UrlType;\n    constructor(window: Window, advice?: ConstructorType&lt;any&gt;[]);\n    setSelector(selector: string): SimFrontOption;\n    setUrlType(urlType: UrlType): SimFrontOption;\n}\n</pre>\n        </figure>\n        <dl class=\"dl-container\">\n            <ul>\n                <li>\n                    <dt>constructor</dt>\n                    <dd>\n                        <ol>\n                            <li>\n                                window object\n                            </li>\n                            <li>\n                                global advice class @Sim class type\n                            </li>\n                        </ol>\n                    </dd>\n                </li>\n                <li>\n                    <dt>selector</dt>\n                </li>\n                <dd>target element selector (default: '#app')</dd>\n                <li>\n                    <dt>urlType</dt>\n                    <dd>\n                        <ul>\n                            <li>UrlType.path (default)</li>\n                            <li>UrlType.hash</li>\n                        </ul>\n                    </dd>\n                </li>\n            </ul>\n        </dl>\n    </section>\n\n    <hr>\n\n    <section>\n        <h2>SimpleBootFront</h2>\n        <figure>\n            <figcaption>simple-boot-front/SimpleBootFront.ts</figcaption>\n            <pre dr-pre class=\"code-container typescript\">const config = new SimFrontOption(window);\nnew SimpleBootFront(Index, config).run();</pre>\n            <pre dr-pre class=\"code-container typescript\">export declare class SimpleBootFront extends SimpleApplication {\n    rootRouter: ConstructorType&lt;any&gt;;\n    option: SimFrontOption;\n    navigation: Navigation;\n    domRendoerExcludeProxy: (typeof SimFrontOption | typeof SimstanceManager | typeof SimpleApplication | typeof Navigation | typeof HttpService | typeof IntentManager | typeof RouterManager)[];\n    domRenderTargetElements: TargetElement[];\n    domRenderTargetAttrs: TargetAttr[];\n    domRenderConfig: Config;\n    constructor(rootRouter: ConstructorType&lt;any&gt;, option: SimFrontOption);\n    getComponentInnerHtml(targetObj: any): string;\n    createDomRender&lt;T extends object&gt;(obj: T): T;\n    run(): void;\n    private afterSetting;\n    resetDomrenderScripts(): void;\n}</pre>\n        </figure>\n        <dl class=\"dl-container\">\n            <ul>\n                <li>\n                    <dt>constructor</dt>\n                    <dd>\n                        <ol>\n                            <li>\n                                Router Component or Component class type\n                            </li>\n                            <li>\n                                SimFrontOption object\n                            </li>\n                        </ol>\n                    </dd>\n                </li>\n                <li>\n                    <dt>domRendoerExcludeProxy</dt>\n                </li>\n                <dd>domRender proxy exclude type list</dd>\n                <li>\n                    <dt>run</dt>\n                </li>\n                <dd>simple-boot-front start</dd>\n            </ul>\n        </dl>\n    </section>\n</article>\n\n";
+var template$q = "<article>\n    <h1>option config</h1>\n    <p>simple-boot-front Framworks option</p>\n    <section>\n        <h2>SimFrontOption</h2>\n        <figure>\n            <figcaption>simple-boot-front/option/SimFrontOption.ts</figcaption>\n            <pre dr-pre class=\"code-container typescript\">const config = new SimFrontOption(window);</pre>\n            <pre dr-pre class=\"code-container typescript\">export declare enum UrlType {\n    path = \"path\",\n    hash = \"hash\"\n}\nexport declare class SimFrontOption extends SimOption {\n    window: Window;\n    selector: string;\n    urlType: UrlType;\n    constructor(window: Window, advice?: ConstructorType&lt;any&gt;[]);\n    setSelector(selector: string): SimFrontOption;\n    setUrlType(urlType: UrlType): SimFrontOption;\n}\n</pre>\n        </figure>\n        <dl class=\"dl-container\">\n            <ul>\n                <li>\n                    <dt>constructor</dt>\n                    <dd>\n                        <ol>\n                            <li>\n                                window object\n                            </li>\n                            <li>\n                                global advice class @Sim class type\n                            </li>\n                        </ol>\n                    </dd>\n                </li>\n                <li>\n                    <dt>selector</dt>\n                </li>\n                <dd>target element selector (default: '#app')</dd>\n                <li>\n                    <dt>urlType</dt>\n                    <dd>\n                        <ul>\n                            <li>UrlType.path (default)</li>\n                            <li>UrlType.hash</li>\n                        </ul>\n                    </dd>\n                </li>\n            </ul>\n        </dl>\n    </section>\n\n    <hr>\n\n    <section>\n        <h2>SimpleBootFront</h2>\n        <figure>\n            <figcaption>simple-boot-front/SimpleBootFront.ts</figcaption>\n            <pre dr-pre class=\"code-container typescript\">const config = new SimFrontOption(window);\nnew SimpleBootFront(Index, config).run();</pre>\n            <pre dr-pre class=\"code-container typescript\">export declare class SimpleBootFront extends SimpleApplication {\n    rootRouter: ConstructorType&lt;any&gt;;\n    option: SimFrontOption;\n    navigation: Navigation;\n    domRendoerExcludeProxy: (typeof SimFrontOption | typeof SimstanceManager | typeof SimpleApplication | typeof Navigation | typeof HttpService | typeof IntentManager | typeof RouterManager)[];\n    domRenderTargetElements: TargetElement[];\n    domRenderTargetAttrs: TargetAttr[];\n    domRenderConfig: Config;\n    constructor(rootRouter: ConstructorType&lt;any&gt;, option: SimFrontOption);\n    getComponentInnerHtml(targetObj: any): string;\n    createDomRender&lt;T extends object&gt;(obj: T): T;\n    run(): void;\n    private afterSetting;\n    resetDomrenderScripts(): void;\n}</pre>\n        </figure>\n        <dl class=\"dl-container\">\n            <ul>\n                <li>\n                    <dt>constructor</dt>\n                    <dd>\n                        <ol>\n                            <li>\n                                Router Component or Component class type\n                            </li>\n                            <li>\n                                SimFrontOption object\n                            </li>\n                        </ol>\n                    </dd>\n                </li>\n                <li>\n                    <dt>domRendoerExcludeProxy</dt>\n                </li>\n                <dd>domRender proxy exclude type list</dd>\n                <li>\n                    <dt>run</dt>\n                </li>\n                <dd>simple-boot-front start</dd>\n            </ul>\n        </dl>\n    </section>\n</article>\n\n";
 
-var style$b = "";
+var style$k = "";
 
 var FrontOption = (function () {
     function FrontOption(apiService) {
@@ -5313,19 +5313,19 @@ var FrontOption = (function () {
     FrontOption = __decorate([
         SimDecorator_7(),
         Component_3({
-            template: template$h,
-            styles: [style$b]
+            template: template$q,
+            styles: [style$k]
         }),
         __metadata("design:paramtypes", [ApiService])
     ], FrontOption);
     return FrontOption;
 }());
 
-var template$g = "<article>\n    <h1>@Router</h1>\n    <p>page routing controller</p>\n    <core-routerconfig-section></core-routerconfig-section>\n    <hr>\n    <router-template-section dr-on-init=\"$component.title = 'Create'\"></router-template-section>\n    <hr>\n    <core-routermapping-section></core-routermapping-section>\n    <hr>\n    <core-routercurrent-section></core-routercurrent-section>\n    <hr>\n    <core-routeraction-section></core-routeraction-section>\n\n    <hr>\n    <section>\n        <h2>Include Component</h2>\n        <p>Route Change callback Component Data</p>\n        <figure>\n            <figcaption>include component</figcaption>\n            <pre dr-pre class=\"code-container html\">&lt;route component=&quot;this.child&quot;&gt;&lt;/route&gt;</pre>\n        </figure>\n    </section>\n    <hr>\n    <section>\n        <h2>Routing in html</h2>\n        <figure>\n            <figcaption>router-link attribute</figcaption>\n            <pre dr-pre class=\"code-container html\">&lt;button router-link=&quot;/&quot;&gt;home&lt;/button&gt;\n&lt;a router-link=&quot;/home&quot; router-active-class=&quot;active&quot; router-inactive-class=&quot;inactive&quot;&gt;home&lt;/a&gt;</pre>\n        </figure>\n        <dl>\n            <ul>\n                <li>\n                    <dt>router-link</dt>\n                    <dd>Go to the page (route url)</dd>\n                </li>\n                <li>\n                    <dt>router-active-class</dt>\n                    <dd>current route path matching set className</dd>\n                </li>\n                <li>\n                    <dt>router-inactive-class</dt>\n                    <dd>current route path matching unset className</dd>\n                </li>\n            </ul>\n        </dl>\n    </section>\n</article>\n\n";
+var template$p = "<article>\n    <h1>@Router</h1>\n    <p>page routing controller</p>\n    <core-routerconfig-section></core-routerconfig-section>\n    <hr>\n    <router-template-section dr-on-init=\"$component.title = 'Create'\"></router-template-section>\n    <hr>\n    <core-routermapping-section></core-routermapping-section>\n    <hr>\n    <core-routercurrent-section></core-routercurrent-section>\n    <hr>\n    <core-routeraction-section></core-routeraction-section>\n\n    <hr>\n    <section>\n        <h2>Include Component</h2>\n        <p>Route Change callback Component Data</p>\n        <figure>\n            <figcaption>include component</figcaption>\n            <pre dr-pre class=\"code-container html\">&lt;route component=&quot;this.child&quot;&gt;&lt;/route&gt;</pre>\n        </figure>\n    </section>\n    <hr>\n    <section>\n        <h2>Routing in html</h2>\n        <figure>\n            <figcaption>router-link attribute</figcaption>\n            <pre dr-pre class=\"code-container html\">&lt;button router-link=&quot;/&quot;&gt;home&lt;/button&gt;\n&lt;a router-link=&quot;/home&quot; router-active-class=&quot;active&quot; router-inactive-class=&quot;inactive&quot;&gt;home&lt;/a&gt;</pre>\n        </figure>\n        <dl>\n            <ul>\n                <li>\n                    <dt>router-link</dt>\n                    <dd>Go to the page (route url)</dd>\n                </li>\n                <li>\n                    <dt>router-active-class</dt>\n                    <dd>current route path matching set className</dd>\n                </li>\n                <li>\n                    <dt>router-inactive-class</dt>\n                    <dd>current route path matching unset className</dd>\n                </li>\n            </ul>\n        </dl>\n    </section>\n</article>\n\n";
 
-var style$a = "";
+var style$j = "";
 
-var template$f = "<section>\n    <h2>${this.title}$</h2>\n    <dl class=\"dl-container\">\n        <ul>\n            <li>\n                <dt>path</dt>\n                <dd>router control path</dd>\n            </li>\n            <li>\n                <dt>route</dt>\n                <dd>mapping components</dd>\n            </li>\n            <li>\n                <dt>routers</dt>\n                <dd>sub router array</dd>\n            </li>\n        </ul>\n    </dl>\n</section>\n";
+var template$o = "<section>\n    <h2>${this.title}$</h2>\n    <dl class=\"dl-container\">\n        <ul>\n            <li>\n                <dt>path</dt>\n                <dd>router control path</dd>\n            </li>\n            <li>\n                <dt>route</dt>\n                <dd>mapping components</dd>\n            </li>\n            <li>\n                <dt>routers</dt>\n                <dd>sub router array</dd>\n            </li>\n        </ul>\n    </dl>\n</section>\n";
 
 var CoreRouterconfigSection = (function () {
     function CoreRouterconfigSection() {
@@ -5335,13 +5335,13 @@ var CoreRouterconfigSection = (function () {
         SimDecorator_7(),
         Component_3({
             selector: 'core-routerconfig-section',
-            template: template$f
+            template: template$o
         })
     ], CoreRouterconfigSection);
     return CoreRouterconfigSection;
 }());
 
-var template$e = "<section>\n    <h2>${this.title}$</h2>\n    <figure>\n        <figcaption>router.tx</figcaption>\n        <pre dr-pre class=\"code-container typescript\">@Sim()\n@Router({\n    path: '',\n    route: {\n        '': '/',\n        '/': [Home, {data: 456}],\n        '/user': User,\n        '/user/:aa/addr': [UserAddr, {data:'data'}]\n    },\n    routers: [UserRouter]\n})\nexport class AppRouter implements RouterAction {\n    constructor() {\n    }\n    canActivate(url: Intent, module: any): void {\n        console.log('AppRouter canActivate->>>>>', url, module)\n    }\n}</pre>\n    </figure>\n    \n</section>\n\n";
+var template$n = "<section>\n    <h2>${this.title}$</h2>\n    <figure>\n        <figcaption>router.tx</figcaption>\n        <pre dr-pre class=\"code-container typescript\">@Sim()\n@Router({\n    path: '',\n    route: {\n        '': '/',\n        '/': [Home, {data: 456}],\n        '/user': User,\n        '/user/:aa/addr': [UserAddr, {data:'data'}]\n    },\n    routers: [UserRouter]\n})\nexport class AppRouter implements RouterAction {\n    constructor() {\n    }\n    canActivate(url: Intent, module: any): void {\n        console.log('AppRouter canActivate->>>>>', url, module)\n    }\n}</pre>\n    </figure>\n    \n</section>\n\n";
 
 var CoreRouterTemplateSection = (function () {
     function CoreRouterTemplateSection() {
@@ -5351,13 +5351,13 @@ var CoreRouterTemplateSection = (function () {
         SimDecorator_7(),
         Component_3({
             selector: 'core-router-template-section',
-            template: template$e
+            template: template$n
         })
     ], CoreRouterTemplateSection);
     return CoreRouterTemplateSection;
 }());
 
-var template$d = "\n<section>\n    <h2>${this.title}$</h2>\n    <figure>\n        <figcaption>@Router</figcaption>\n        <pre dr-pre class=\"code-container typescript\">@Router({\n    path: '',\n    route: {\n        '/': Home,\n        '/jhon': '/user',\n        '/user': User,\n        '/user/:id': UserDetail,\n        '/welcom': [Welcom, {msg: 'welcom', other: 'other data'}]\n    }\n})</pre>\n    </figure>\n    <dl dr-pre>\n        <ul>\n            <li>\n                <dt>'path': Component</dt>\n                <dd>matches the path, this Component call</dd>\n            </li>\n            <li>\n                <dt>'path': 'path'</dt>\n                <dd>Redirect end point (no url changed)</dd>\n            </li>\n            <li>\n                <dt>'path': '/path/:data'</dt>\n                <dd>url path variable</dd>\n            </li>\n            <li>\n                <dt>'path': [Component, Data]</dt>\n                <dd>call Component with Data</dd>\n            </li>\n        </ul>\n    </dl>\n</section>\n";
+var template$m = "\n<section>\n    <h2>${this.title}$</h2>\n    <figure>\n        <figcaption>@Router</figcaption>\n        <pre dr-pre class=\"code-container typescript\">@Router({\n    path: '',\n    route: {\n        '/': Home,\n        '/jhon': '/user',\n        '/user': User,\n        '/user/:id': UserDetail,\n        '/welcom': [Welcom, {msg: 'welcom', other: 'other data'}]\n    }\n})</pre>\n    </figure>\n    <dl dr-pre>\n        <ul>\n            <li>\n                <dt>'path': Component</dt>\n                <dd>matches the path, this Component call</dd>\n            </li>\n            <li>\n                <dt>'path': 'path'</dt>\n                <dd>Redirect end point (no url changed)</dd>\n            </li>\n            <li>\n                <dt>'path': '/path/:data'</dt>\n                <dd>url path variable</dd>\n            </li>\n            <li>\n                <dt>'path': [Component, Data]</dt>\n                <dd>call Component with Data</dd>\n            </li>\n        </ul>\n    </dl>\n</section>\n";
 
 var CoreRoutermappingSection = (function () {
     function CoreRoutermappingSection() {
@@ -5367,13 +5367,13 @@ var CoreRoutermappingSection = (function () {
         SimDecorator_7(),
         Component_3({
             selector: 'core-routermapping-section',
-            template: template$d
+            template: template$m
         })
     ], CoreRoutermappingSection);
     return CoreRoutermappingSection;
 }());
 
-var template$c = "\n<section>\n    <h2>${this.title}$</h2>\n    <figure>\n        <figcaption>get RouterModule in Component</figcaption>\n        <pre dr-pre class=\"code-container typescript\">constructor(routerManager: RouterManager){\n    // get path data  '/user/:id'\n    routerManager.activeRouterModule.pathData.id;\n\n    // receive data\n    routerManager.activeRouterModule.data\n}</pre>\n    </figure>\n</section>\n";
+var template$l = "\n<section>\n    <h2>${this.title}$</h2>\n    <figure>\n        <figcaption>get RouterModule in Component</figcaption>\n        <pre dr-pre class=\"code-container typescript\">constructor(routerManager: RouterManager){\n    // get path data  '/user/:id'\n    routerManager.activeRouterModule.pathData.id;\n\n    // receive data\n    routerManager.activeRouterModule.data\n}</pre>\n    </figure>\n</section>\n";
 
 var CoreRoutercurrentSection = (function () {
     function CoreRoutercurrentSection() {
@@ -5383,13 +5383,13 @@ var CoreRoutercurrentSection = (function () {
         SimDecorator_7(),
         Component_3({
             selector: 'core-routercurrent-section',
-            template: template$c
+            template: template$l
         })
     ], CoreRoutercurrentSection);
     return CoreRoutercurrentSection;
 }());
 
-var template$b = "<section>\n    <h2>${this.title}$</h2>\n    <p>Route Change callback in Router</p>\n    <figure>\n        <figcaption>simple-boot-core/route/RouterAction</figcaption>\n        <pre dr-pre class=\"code-container typescript\">export interface RouterAction {\n    canActivate(url: Intent, module: any): void;\n}</pre>\n    </figure>\n</section>\n";
+var template$k = "<section>\n    <h2>${this.title}$</h2>\n    <p>Route Change callback in Router</p>\n    <figure>\n        <figcaption>simple-boot-core/route/RouterAction</figcaption>\n        <pre dr-pre class=\"code-container typescript\">export interface RouterAction {\n    canActivate(url: Intent, module: any): void;\n}</pre>\n    </figure>\n</section>\n";
 
 var CoreRouteractionSection = (function () {
     function CoreRouteractionSection() {
@@ -5399,7 +5399,7 @@ var CoreRouteractionSection = (function () {
         SimDecorator_7(),
         Component_3({
             selector: 'core-routeraction-section',
-            template: template$b
+            template: template$k
         })
     ], CoreRouteractionSection);
     return CoreRouteractionSection;
@@ -5413,8 +5413,8 @@ var FrontRouter = (function () {
     FrontRouter = __decorate([
         SimDecorator_7(),
         Component_3({
-            template: template$g,
-            styles: [style$a],
+            template: template$p,
+            styles: [style$j],
             using: [RouterTemplateSection, CoreRouterconfigSection, CoreRouterTemplateSection, CoreRoutermappingSection, CoreRoutercurrentSection, CoreRouteractionSection]
         }),
         __metadata("design:paramtypes", [])
@@ -5422,9 +5422,9 @@ var FrontRouter = (function () {
     return FrontRouter;
 }());
 
-var template$a = "<article>\n    <h1>@Script</h1>\n    <p>define script instructions and call</p>\n    <section>\n        <h2>RouterConfig</h2>\n        <dl class=\"dl-container\">\n            <ul>\n                <li>\n                    <dt>name</dt>\n                    <dd>script name</dd>\n                </li>\n                <li>\n                    <dt>using</dt>\n                    <dd>using components or scripts in this component</dd>\n                </li>\n            </ul>\n        </dl>\n    </section>\n\n    <hr>\n\n    <section>\n        <h2>Create</h2>\n        <p>extends ScriptRunnable class (create 'run' method) implements</p>\n        <figure>\n            <figcaption>define Script class</figcaption>\n            <pre dr-pre class=\"code-container typescript\">\n@Sim()\n@Script({\n    name: 'calc'\n})\nexport class CalcScript extends ScriptRunnable {\n    constructor() {\n        super();\n    }\n\n    run(data1: number, data2: nuber): any {\n        return data1 + data2;\n    }\n\n}</pre>\n        </figure>\n    </section>\n\n    <hr>\n\n    <section>\n        <h2>using</h2>\n        <figure>\n            <figcaption>class</figcaption>\n            <pre dr-pre class=\"code-container typescript\">counstructor(calcScript: CalcScript) {...}\ncounstructor(scriptService: ScriptService) {\n  const script = scriptService.getScript('calc');\n}</pre>\n        </figure>\n        <figure>\n            <figcaption>html</figcaption>\n            <pre dr-pre class=\"code-container html\">&lt;div&gt;${$scripts.calc(1, 4)}$&lt;/div&gt;\n&lt;div dr-if=&quot;$scripts.calc(1, 3) === 3&quot;&gt; is 3&lt;/div&gt;</pre>\n        </figure>\n    </section>\n\n\n    <hr>\n    <section>\n        <h2>Change Data and Ref re render</h2>\n        <p>If the data changes, re render the place you are referring to.</p>\n        <p>example: i18n Script</p>\n        <figure>\n            <figcaption>html</figcaption>\n            <pre dr-pre class=\"code-container html\">&lt;div&gt;${$scripts.i18n('hello')}$&lt;/div&gt;</pre>\n        </figure>\n        <figure>\n            <figcaption>I18nScript.ts</figcaption>\n            <pre dr-pre class=\"code-container typescript\">@Sim()\n@Script({\n    name: 'i18n'\n})\nexport class I18nScript extends ScriptRunnable {\n    public language?: Language;\n    constructor(public i18nService: I18nService) {\n        super();\n        i18nService.subject.subscribe(it => {\n            this.language = it;\n            this.render();  //  ref target  rerender\n        })\n    }\n    run(key: string): any {\n        return this.language?.defaultData?.[key] ?? key;\n    }\n}</pre>\n        </figure>\n        <figure>\n            <figcaption>I18nService.ts</figcaption>\n            <pre dr-pre class=\"code-container typescript\">import enUS from '@generate/i18n/message_en_US.json';\nimport koKR from '@generate/i18n/message_ko_KR.json';\nimport { ApiService } from 'services/ApiService';\nimport { Sim } from 'simple-boot-core/decorators/SimDecorator';\nimport { OnSimCreate } from 'simple-boot-core/lifecycle/OnSimCreate';\nimport { IntentManager } from 'simple-boot-core/intent/IntentManager';\nimport { BehaviorSubject } from 'rxjs';\nexport type Language = {\n    key: string;\n    param: string;\n    alt: string;\n    title: string;\n    defaultData: {[k: string]: string  }\n}\n\n\nexport const languages: Language[] = [\n    {\n        key: 'us',\n        param: 'en_US',\n        alt: 'United States',\n        title: 'English (US)',\n        defaultData: enUS\n    },\n\n    {\n        key: 'kr',\n        param: 'ko_KR',\n        alt: 'Korea',\n        title: '한국어',\n        defaultData: koKR\n    }\n];\n\n@Sim()\nexport class I18nService implements OnSimCreate {\n    public subject = new BehaviorSubject<language |undefined>(this.getData());\n    constructor(public apiService: ApiService, public indentManager: IntentManager) {\n    }\n\n    onSimCreate(): void {\n        const country = this.currentCountry;\n        this.changeCountry(country);\n    }\n\n    public changeCountry(country: string) {\n        this.apiService.get(`/langs/message_${country}.json`)\n            .then(data => {\n                const findLangguage = this.getData(country);\n                if (findLangguage) {\n                    findLangguage.defaultData = data;\n                    this.subject.next(findLangguage);\n                }\n            })\n    }\n\n    public getData(key: string = this.currentCountry) {\n        return languages.find(it => it.key === key);\n    }\n\n    public getDatas() {\n        return languages;\n    }\n\n    public get currentCountry() {\n        return navigator.language.toLowerCase().replace('-', '_').split('_') [1] ?? 'us'\n    }\n\n}\n</language></pre>\n        </figure>\n    </section>\n</article>\n\n";
+var template$j = "<article>\n    <h1>@Script</h1>\n    <p>define script instructions and call</p>\n    <section>\n        <h2>RouterConfig</h2>\n        <dl class=\"dl-container\">\n            <ul>\n                <li>\n                    <dt>name</dt>\n                    <dd>script name</dd>\n                </li>\n                <li>\n                    <dt>using</dt>\n                    <dd>using components or scripts in this component</dd>\n                </li>\n            </ul>\n        </dl>\n    </section>\n\n    <hr>\n\n    <section>\n        <h2>Create</h2>\n        <p>extends ScriptRunnable class (create 'run' method) implements</p>\n        <figure>\n            <figcaption>define Script class</figcaption>\n            <pre dr-pre class=\"code-container typescript\">\n@Sim()\n@Script({\n    name: 'calc'\n})\nexport class CalcScript extends ScriptRunnable {\n    constructor() {\n        super();\n    }\n\n    run(data1: number, data2: nuber): any {\n        return data1 + data2;\n    }\n\n}</pre>\n        </figure>\n    </section>\n\n    <hr>\n\n    <section>\n        <h2>using</h2>\n        <figure>\n            <figcaption>class</figcaption>\n            <pre dr-pre class=\"code-container typescript\">counstructor(calcScript: CalcScript) {...}\ncounstructor(scriptService: ScriptService) {\n  const script = scriptService.getScript('calc');\n}</pre>\n        </figure>\n        <figure>\n            <figcaption>html</figcaption>\n            <pre dr-pre class=\"code-container html\">&lt;div&gt;${$scripts.calc(1, 4)}$&lt;/div&gt;\n&lt;div dr-if=&quot;$scripts.calc(1, 3) === 3&quot;&gt; is 3&lt;/div&gt;</pre>\n        </figure>\n    </section>\n\n\n    <hr>\n    <section>\n        <h2>Change Data and Ref re render</h2>\n        <p>If the data changes, re render the place you are referring to.</p>\n        <p>example: i18n Script</p>\n        <figure>\n            <figcaption>html</figcaption>\n            <pre dr-pre class=\"code-container html\">&lt;div&gt;${$scripts.i18n('hello')}$&lt;/div&gt;</pre>\n        </figure>\n        <figure>\n            <figcaption>I18nScript.ts</figcaption>\n            <pre dr-pre class=\"code-container typescript\">@Sim()\n@Script({\n    name: 'i18n'\n})\nexport class I18nScript extends ScriptRunnable {\n    public language?: Language;\n    constructor(public i18nService: I18nService) {\n        super();\n        i18nService.subject.subscribe(it => {\n            this.language = it;\n            this.render();  //  ref target  rerender\n        })\n    }\n    run(key: string): any {\n        return this.language?.defaultData?.[key] ?? key;\n    }\n}</pre>\n        </figure>\n        <figure>\n            <figcaption>I18nService.ts</figcaption>\n            <pre dr-pre class=\"code-container typescript\">import enUS from '@generate/i18n/message_en_US.json';\nimport koKR from '@generate/i18n/message_ko_KR.json';\nimport { ApiService } from 'services/ApiService';\nimport { Sim } from 'simple-boot-core/decorators/SimDecorator';\nimport { OnSimCreate } from 'simple-boot-core/lifecycle/OnSimCreate';\nimport { IntentManager } from 'simple-boot-core/intent/IntentManager';\nimport { BehaviorSubject } from 'rxjs';\nexport type Language = {\n    key: string;\n    param: string;\n    alt: string;\n    title: string;\n    defaultData: {[k: string]: string  }\n}\n\n\nexport const languages: Language[] = [\n    {\n        key: 'us',\n        param: 'en_US',\n        alt: 'United States',\n        title: 'English (US)',\n        defaultData: enUS\n    },\n\n    {\n        key: 'kr',\n        param: 'ko_KR',\n        alt: 'Korea',\n        title: '한국어',\n        defaultData: koKR\n    }\n];\n\n@Sim()\nexport class I18nService implements OnSimCreate {\n    public subject = new BehaviorSubject<language |undefined>(this.getData());\n    constructor(public apiService: ApiService, public indentManager: IntentManager) {\n    }\n\n    onSimCreate(): void {\n        const country = this.currentCountry;\n        this.changeCountry(country);\n    }\n\n    public changeCountry(country: string) {\n        this.apiService.get(`/langs/message_${country}.json`)\n            .then(data => {\n                const findLangguage = this.getData(country);\n                if (findLangguage) {\n                    findLangguage.defaultData = data;\n                    this.subject.next(findLangguage);\n                }\n            })\n    }\n\n    public getData(key: string = this.currentCountry) {\n        return languages.find(it => it.key === key);\n    }\n\n    public getDatas() {\n        return languages;\n    }\n\n    public get currentCountry() {\n        return navigator.language.toLowerCase().replace('-', '_').split('_') [1] ?? 'us'\n    }\n\n}\n</language></pre>\n        </figure>\n    </section>\n</article>\n\n";
 
-var style$9 = "";
+var style$i = "";
 
 var FrontScript = (function () {
     function FrontScript() {
@@ -5434,17 +5434,17 @@ var FrontScript = (function () {
     FrontScript = __decorate([
         SimDecorator_7(),
         Component_3({
-            template: template$a,
-            styles: [style$9]
+            template: template$j,
+            styles: [style$i]
         }),
         __metadata("design:paramtypes", [])
     ], FrontScript);
     return FrontScript;
 }());
 
-var template$9 = "<!--    <p>¯\\_(ツ)_/¯ - Everyone</p>-->\n<article>\n    <h1>SIMPLE-BOOT-CLI (sbf)</h1>\n    <p>sbf cli</p>\n    <ul class=\"badge-container\">\n        <li>\n            <a href=\"https://www.npmjs.com/package/simple-boot-front-cli\" target=\"_blank\"><img src=\"https://img.shields.io/badge/npm-blue?logo=npm\"></a>\n        </li>\n        <li>\n            <img src=\"https://img.shields.io/badge/license-MIT-green\">\n        </li>\n        <li>\n            <a href=\"https://github.com/visualkhh/simple-boot-front/tree/master/cli\" target=\"_blank\"><img src=\"https://img.shields.io/badge/-github-black?logo=github\"></a>\n        </li>\n    </ul>\n    <section>\n        <h2>🚀 Quick start </h2>\n        <figure>\n            <figcaption>terminal</figcaption>\n            <pre class=\"code-container bash\">npm install simple-boot-cli</pre>\n        </figure>\n        <dl class=\"dl-container\">\n            <ul>\n                <li>\n                    <dt>serve</dt>\n                    <dd>\n                        http server and proxy\n                        <ul>\n                            <li>--path dist path</li>\n                            <li>--port server port</li>\n                            <li>--proxy proxy url</li>\n                            <li>--bundle rollup</li>\n                            <li>--watch fileChange(dist) browser refresh</li>\n                        </ul>\n                    </dd>\n                </li>\n                <li>\n                    <dt>create</dt>\n                    <dd>create simple-boot-front template project</dd>\n                </li>\n                <li>\n                    <dt>rollup-build</dt>\n                    <dd>\n                        project rollup bundle\n                        <ul>\n                            <li>--config rollup config path</li>\n                            <li>--watch rollup watc</li>\n                        </ul>\n                    </dd>\n                </li>\n                <li>\n                    <dt>exec</dt>\n                    <dd>\n                        executing Shell Commands <small>(child-process)</small>\n                        <ul>\n                            <li>--cmd 'copmmand' ...--cmd... <small>(multiple)</small></li>\n                        </ul>\n                    </dd>\n                </li>\n            </ul>\n        </dl>\n    </section>\n    <hr>\n    <section>\n        <h2>example</h2>\n        <figure>\n            <figcaption>serve</figcaption>\n            <pre class=\"code-container bash\">sbf serve --path ../dist --watch</pre>\n        </figure>\n    </section>\n</article>\n";
+var template$i = "<!--    <p>¯\\_(ツ)_/¯ - Everyone</p>-->\n<article>\n    <h1>SIMPLE-BOOT-CLI (sbf)</h1>\n    <p>sbf cli</p>\n    <ul class=\"badge-container\">\n        <li>\n            <a href=\"https://www.npmjs.com/package/simple-boot-front-cli\" target=\"_blank\"><img src=\"https://img.shields.io/badge/npm-blue?logo=npm\"></a>\n        </li>\n        <li>\n            <img src=\"https://img.shields.io/badge/license-MIT-green\">\n        </li>\n        <li>\n            <a href=\"https://github.com/visualkhh/simple-boot-front/tree/master/cli\" target=\"_blank\"><img src=\"https://img.shields.io/badge/-github-black?logo=github\"></a>\n        </li>\n    </ul>\n    <section>\n        <h2>🚀 Quick start </h2>\n        <figure>\n            <figcaption>terminal</figcaption>\n            <pre class=\"code-container bash\">npm install simple-boot-cli</pre>\n        </figure>\n        <dl class=\"dl-container\">\n            <ul>\n                <li>\n                    <dt>serve</dt>\n                    <dd>\n                        http server and proxy\n                        <ul>\n                            <li>--path dist path</li>\n                            <li>--port server port</li>\n                            <li>--proxy proxy url</li>\n                            <li>--bundle rollup</li>\n                            <li>--watch fileChange(dist) browser refresh</li>\n                        </ul>\n                    </dd>\n                </li>\n                <li>\n                    <dt>create</dt>\n                    <dd>create simple-boot-front template project</dd>\n                </li>\n                <li>\n                    <dt>rollup-build</dt>\n                    <dd>\n                        project rollup bundle\n                        <ul>\n                            <li>--config rollup config path</li>\n                            <li>--watch rollup watc</li>\n                        </ul>\n                    </dd>\n                </li>\n                <li>\n                    <dt>exec</dt>\n                    <dd>\n                        executing Shell Commands <small>(child-process)</small>\n                        <ul>\n                            <li>--cmd 'copmmand' ...--cmd... <small>(multiple)</small></li>\n                        </ul>\n                    </dd>\n                </li>\n            </ul>\n        </dl>\n    </section>\n    <hr>\n    <section>\n        <h2>example</h2>\n        <figure>\n            <figcaption>serve</figcaption>\n            <pre class=\"code-container bash\">sbf serve --path ../dist --watch</pre>\n        </figure>\n    </section>\n</article>\n";
 
-var style$8 = "";
+var style$h = "";
 
 var CliIntroduction = (function () {
     function CliIntroduction(apiService) {
@@ -5455,17 +5455,17 @@ var CliIntroduction = (function () {
     CliIntroduction = __decorate([
         SimDecorator_7(),
         Component_3({
-            template: template$9,
-            styles: [style$8]
+            template: template$i,
+            styles: [style$h]
         }),
         __metadata("design:paramtypes", [ApiService])
     ], CliIntroduction);
     return CliIntroduction;
 }());
 
-var template$8 = "<!--    <p>¯\\_(ツ)_/¯ - Everyone</p>-->\n<article>\n    <h1>CREATE-SIMPLE-BOOT</h1>\n    <p>default boilerplate template creater</p>\n    <ul class=\"badge-container\">\n        <li>\n            <a href=\"https://www.npmjs.com/package/create-simple-boot-front\" target=\"_blank\"><img src=\"https://img.shields.io/badge/npm-blue?logo=npm\"></a>\n        </li>\n        <li>\n            <img src=\"https://img.shields.io/badge/license-MIT-green\">\n        </li>\n        <li>\n            <a href=\"https://github.com/visualkhh/simple-boot-front/tree/master/create\" target=\"_blank\"><img src=\"https://img.shields.io/badge/-github-black?logo=github\"></a>\n        </li>\n    </ul>\n    <section>\n        <h2>🚀 Quick start </h2>\n        <figure>\n            <figcaption>terminal</figcaption>\n            <pre class=\"code-container bash\">npm init simple-boot-front projectname\ncd projectname\nnpm start</pre>\n        </figure>\n        <dl class=\"dl-container\">\n            <ul>\n                <li>\n                    <dt>bundler</dt>\n                    <dd>\n                        rollup <small>(default)</small>\n                    </dd>\n                </li>\n            </ul>\n        </dl>\n    </section>\n    <hr>\n    <section>\n        <h2>example</h2>\n        <figure>\n            <figcaption>serve</figcaption>\n            <pre class=\"code-container bash\">sbf serve --path ../dist --watch</pre>\n        </figure>\n    </section>\n</article>\n";
+var template$h = "<!--    <p>¯\\_(ツ)_/¯ - Everyone</p>-->\n<article>\n    <h1>CREATE-SIMPLE-BOOT</h1>\n    <p>default boilerplate template creater</p>\n    <ul class=\"badge-container\">\n        <li>\n            <a href=\"https://www.npmjs.com/package/create-simple-boot-front\" target=\"_blank\"><img src=\"https://img.shields.io/badge/npm-blue?logo=npm\"></a>\n        </li>\n        <li>\n            <img src=\"https://img.shields.io/badge/license-MIT-green\">\n        </li>\n        <li>\n            <a href=\"https://github.com/visualkhh/simple-boot-front/tree/master/create\" target=\"_blank\"><img src=\"https://img.shields.io/badge/-github-black?logo=github\"></a>\n        </li>\n    </ul>\n    <section>\n        <h2>🚀 Quick start </h2>\n        <figure>\n            <figcaption>terminal</figcaption>\n            <pre class=\"code-container bash\">npm init simple-boot-front projectname\ncd projectname\nnpm start</pre>\n        </figure>\n        <dl class=\"dl-container\">\n            <ul>\n                <li>\n                    <dt>bundler</dt>\n                    <dd>\n                        rollup <small>(default)</small>\n                    </dd>\n                </li>\n            </ul>\n        </dl>\n    </section>\n    <hr>\n    <section>\n        <h2>example</h2>\n        <figure>\n            <figcaption>serve</figcaption>\n            <pre class=\"code-container bash\">sbf serve --path ../dist --watch</pre>\n        </figure>\n    </section>\n</article>\n";
 
-var style$7 = "";
+var style$g = "";
 
 var CreateIntroduction = (function () {
     function CreateIntroduction(apiService) {
@@ -5476,17 +5476,17 @@ var CreateIntroduction = (function () {
     CreateIntroduction = __decorate([
         SimDecorator_7(),
         Component_3({
-            template: template$8,
-            styles: [style$7]
+            template: template$h,
+            styles: [style$g]
         }),
         __metadata("design:paramtypes", [ApiService])
     ], CreateIntroduction);
     return CreateIntroduction;
 }());
 
-var template$7 = "<article>\n    <h1>SIMPLE-BOOT-CORE</h1>\n    <p>Core Engine</p>\n\n    <ul class=\"badge-container\">\n        <li>\n            <a href=\"https://www.npmjs.com/package/simple-boot-core\" target=\"_blank\"><img src=\"https://img.shields.io/badge/npm-blue?logo=npm\"></a>\n        </li>\n        <li>\n            <img src=\"https://img.shields.io/badge/license-MIT-green\">\n        </li>\n        <li>\n            <a href=\"https://github.com/visualkhh/simple-boot-core\" target=\"_blank\"><img src=\"https://img.shields.io/badge/-github-black?logo=github\"></a>\n        </li>\n    </ul>\n\n    <section>\n        <h2>Our primary goals are</h2>\n        <ul>\n            <li>manage objects easily.</li>\n            <li>users focus only on business logic.</li>\n        </ul>\n    </section>\n\n    <hr>\n\n    <section>\n        <h2>Dependencies</h2>\n        <ul>\n            <li>0 zero dependency</li>\n        </ul>\n    </section>\n\n    <hr>\n    <core-lifecycle-section></core-lifecycle-section>\n    <hr>\n    <core-function-section></core-function-section>\n    <hr>\n\n    <section>\n        <h2>Contributors</h2>\n        <a href=\"https://github.com/visualkhh/simple-boot-core/graphs/contributors\">\n            <img src=\"https://contrib.rocks/image?repo=visualkhh/simple-boot-core\">\n        </a>\n    </section>\n</article>\n";
+var template$g = "<article>\n    <h1>SIMPLE-BOOT-CORE</h1>\n    <p>Core Engine</p>\n\n    <ul class=\"badge-container\">\n        <li>\n            <a href=\"https://www.npmjs.com/package/simple-boot-core\" target=\"_blank\"><img src=\"https://img.shields.io/badge/npm-blue?logo=npm\"></a>\n        </li>\n        <li>\n            <img src=\"https://img.shields.io/badge/license-MIT-green\">\n        </li>\n        <li>\n            <a href=\"https://github.com/visualkhh/simple-boot-core\" target=\"_blank\"><img src=\"https://img.shields.io/badge/-github-black?logo=github\"></a>\n        </li>\n    </ul>\n\n    <section>\n        <h2>Our primary goals are</h2>\n        <ul>\n            <li>manage objects easily.</li>\n            <li>users focus only on business logic.</li>\n        </ul>\n    </section>\n\n    <hr>\n\n    <section>\n        <h2>Dependencies</h2>\n        <ul>\n            <li>0 zero dependency</li>\n        </ul>\n    </section>\n\n    <hr>\n    <core-lifecycle-section></core-lifecycle-section>\n    <hr>\n    <core-function-section></core-function-section>\n    <hr>\n\n    <section>\n        <h2>Contributors</h2>\n        <a href=\"https://github.com/visualkhh/simple-boot-core/graphs/contributors\">\n            <img src=\"https://contrib.rocks/image?repo=visualkhh/simple-boot-core\">\n        </a>\n    </section>\n</article>\n";
 
-var style$6 = "";
+var style$f = "";
 
 var CoreIntroduction = (function () {
     function CoreIntroduction(apiService) {
@@ -5497,8 +5497,8 @@ var CoreIntroduction = (function () {
     CoreIntroduction = __decorate([
         SimDecorator_7(),
         Component_3({
-            template: template$7,
-            styles: [style$6],
+            template: template$g,
+            styles: [style$f],
             using: [CoreLifecycleSection, CoreFunctionSection]
         }),
         __metadata("design:paramtypes", [ApiService])
@@ -5506,9 +5506,9 @@ var CoreIntroduction = (function () {
     return CoreIntroduction;
 }());
 
-var template$6 = "<article>\n    <h1>🚀 Quick start</h1>\n    <p>Start a project simply and quickly.</p>\n    <section>\n        <h2>Create project</h2>\n        <figure>\n            <figcaption>terminal</figcaption>\n            <pre class=\"code-container bash\">npm install simple-boot-core</pre>\n        </figure>\n    </section>\n\n    <hr>\n    <section>\n        <h2>simple-boot-core start</h2>\n        <figure>\n            <figcaption>index.ts</figcaption>\n            <pre dr-pre class=\"code-container typescript\">const option = new SimOption([GlobalAdvice]);\nconst simpleApplication = new SimpleApplication(AppRouter, option);\nsimpleApplication.run();\nconst intent = new Intent(&#39;/user/456/addr&#39;);\nsimpleApplication.routing&lt;SimAtomic&lt;any&gt;, any&gt;(intent)\n .then(it =&gt; {\n    let moduleInstance = it.getModuleInstance&lt;UserAddr&gt;();\n    moduleInstance?.print();\n });</pre>\n        </figure>\n    </section>\n\n    <hr>\n    <core-router-template-section></core-router-template-section>\n</article>\n\n";
+var template$f = "<article>\n    <h1>🚀 Quick start</h1>\n    <p>Start a project simply and quickly.</p>\n    <section>\n        <h2>Create project</h2>\n        <figure>\n            <figcaption>terminal</figcaption>\n            <pre class=\"code-container bash\">npm install simple-boot-core</pre>\n        </figure>\n    </section>\n\n    <hr>\n    <section>\n        <h2>simple-boot-core start</h2>\n        <figure>\n            <figcaption>index.ts</figcaption>\n            <pre dr-pre class=\"code-container typescript\">const option = new SimOption([GlobalAdvice]);\nconst simpleApplication = new SimpleApplication(AppRouter, option);\nsimpleApplication.run();\nconst intent = new Intent(&#39;/user/456/addr&#39;);\nsimpleApplication.routing&lt;SimAtomic&lt;any&gt;, any&gt;(intent)\n .then(it =&gt; {\n    let moduleInstance = it.getModuleInstance&lt;UserAddr&gt;();\n    moduleInstance?.print();\n });</pre>\n        </figure>\n    </section>\n\n    <hr>\n    <core-router-template-section></core-router-template-section>\n</article>\n\n";
 
-var style$5 = "";
+var style$e = "";
 
 var CoreQuickstart = (function () {
     function CoreQuickstart() {
@@ -5518,8 +5518,8 @@ var CoreQuickstart = (function () {
     CoreQuickstart = __decorate([
         SimDecorator_7(),
         Component_3({
-            template: template$6,
-            styles: [style$5],
+            template: template$f,
+            styles: [style$e],
             using: [CoreRouterTemplateSection]
         }),
         __metadata("design:paramtypes", [])
@@ -5527,9 +5527,9 @@ var CoreQuickstart = (function () {
     return CoreQuickstart;
 }());
 
-var template$5 = "<article>\n    <h1>@Router</h1>\n    <p>routing controller</p>\n\n    <core-routerconfig-section></core-routerconfig-section>\n    <hr>\n    <core-router-template-section></core-router-template-section>\n    <hr>\n    <core-routermapping-section></core-routermapping-section>\n    <hr>\n    <core-routercurrent-section></core-routercurrent-section>\n    <hr>\n    <core-routeraction-section></core-routeraction-section>\n</article>\n\n";
+var template$e = "<article>\n    <h1>@Router</h1>\n    <p>routing controller</p>\n\n    <core-routerconfig-section></core-routerconfig-section>\n    <hr>\n    <core-router-template-section></core-router-template-section>\n    <hr>\n    <core-routermapping-section></core-routermapping-section>\n    <hr>\n    <core-routercurrent-section></core-routercurrent-section>\n    <hr>\n    <core-routeraction-section></core-routeraction-section>\n</article>\n\n";
 
-var style$4 = "";
+var style$d = "";
 
 var CoreRouter = (function () {
     function CoreRouter() {
@@ -5539,8 +5539,8 @@ var CoreRouter = (function () {
     CoreRouter = __decorate([
         SimDecorator_7(),
         Component_3({
-            template: template$5,
-            styles: [style$4],
+            template: template$e,
+            styles: [style$d],
             using: [CoreRouterconfigSection, CoreRouterTemplateSection, CoreRoutermappingSection, CoreRoutercurrentSection, CoreRouteractionSection]
         }),
         __metadata("design:paramtypes", [])
@@ -5548,9 +5548,9 @@ var CoreRouter = (function () {
     return CoreRouter;
 }());
 
-var template$4 = "<article>\n    <h1>⚡️Intent Event System</h1>\n    <p>transmit data between objects and generate events</p>\n    <p>send data and generate events to @Sim scheme</p>\n    <ul>\n        <li>Support Object transmission</li>\n        <li>Support query parameters</li>\n        <li>Allocate directly to variables</li>\n        <li>Calling the method</li>\n    </ul>\n    <hr>\n    <section>\n        <h2>intent publish</h2>\n        <figure>\n            <figcaption>publish</figcaption>\n            <pre dr-pre class=\"code-container typescript\">@Sim({scheme:'user'})\nexport class User {\n    constructor(private intentManager: IntentManager) {\n    }\n    publishEvent() {\n        // this.intentManager.publish(new Intent('targetScheme://path?a=55', 'ddddddddddd'));\n        // this.intentManager.publish(new Intent('targetScheme://path?bb=44&ff=44', '444'));\n        // this.intentManager.publish(new Intent('targetScheme://path?gg=55&sadfsdf=444', '55'));\n        //global\n        this.intentManager.publish('://path?query=a')\n        //target\n        this.intentManager.publish('scheme://path?query=a')\n    }\n}</pre>\n        </figure>\n    </section>\n    <hr>\n    <section>\n        <h2>intent subscribe</h2>\n\n\n\n        <figure>\n            <figcaption>implements interface IntentSubscribe</figcaption>\n            <pre dr-pre class=\"code-container typescript\">export interface IntentSubscribe {\n    intentSubscribe(intent: Intent): void;\n}\n</pre>\n        </figure>\n        <figure>\n            <figcaption>method subscribe</figcaption>\n            <pre dr-pre class=\"code-container typescript\">class User implements IntentSubscribe {\n    intentSubscribe(intent: Intent) {\n        //receive\n    }\n}</pre>\n        </figure>\n    </section>\n<hr>\n    <section>\n        <h2>intent</h2>\n        <figure>\n            <figcaption>simple-boot-core/intent/Intent</figcaption>\n            <pre dr-pre class=\"code-container typescript\">export declare class Intent&lt;T = any, E = any&gt; {\n    uri: string;\n    data?: T | undefined;\n    event?: E | undefined;\n    constructor(uri: string, data?: T | undefined, event?: E | undefined);\n    get scheme(): string;\n    get paths(): string[];\n    get fullPath(): string;\n    get pathname(): string;\n    get query(): string;\n    get queryParams(): {\n        [key: string]: string;\n    };\n    getPathnameData(urlExpression: string): {\n        [name: string]: string;\n    } | undefined;\n}\n</pre>\n        </figure>\n    </section>\n</article>\n\n";
+var template$d = "<article>\n    <h1>⚡️Intent Event System</h1>\n    <p>transmit data between objects and generate events</p>\n    <p>send data and generate events to @Sim scheme</p>\n    <ul>\n        <li>Support Object transmission</li>\n        <li>Support query parameters</li>\n        <li>Allocate directly to variables</li>\n        <li>Calling the method</li>\n    </ul>\n    <hr>\n    <section>\n        <h2>intent publish</h2>\n        <figure>\n            <figcaption>publish</figcaption>\n            <pre dr-pre class=\"code-container typescript\">@Sim({scheme:'user'})\nexport class User {\n    constructor(private intentManager: IntentManager) {\n    }\n    publishEvent() {\n        // this.intentManager.publish(new Intent('targetScheme://path?a=55', 'ddddddddddd'));\n        // this.intentManager.publish(new Intent('targetScheme://path?bb=44&ff=44', '444'));\n        // this.intentManager.publish(new Intent('targetScheme://path?gg=55&sadfsdf=444', '55'));\n        //global\n        this.intentManager.publish('://path?query=a')\n        //target\n        this.intentManager.publish('scheme://path?query=a')\n    }\n}</pre>\n        </figure>\n    </section>\n    <hr>\n    <section>\n        <h2>intent subscribe</h2>\n\n\n\n        <figure>\n            <figcaption>implements interface IntentSubscribe</figcaption>\n            <pre dr-pre class=\"code-container typescript\">export interface IntentSubscribe {\n    intentSubscribe(intent: Intent): void;\n}\n</pre>\n        </figure>\n        <figure>\n            <figcaption>method subscribe</figcaption>\n            <pre dr-pre class=\"code-container typescript\">class User implements IntentSubscribe {\n    intentSubscribe(intent: Intent) {\n        //receive\n    }\n}</pre>\n        </figure>\n    </section>\n<hr>\n    <section>\n        <h2>intent</h2>\n        <figure>\n            <figcaption>simple-boot-core/intent/Intent</figcaption>\n            <pre dr-pre class=\"code-container typescript\">export declare class Intent&lt;T = any, E = any&gt; {\n    uri: string;\n    data?: T | undefined;\n    event?: E | undefined;\n    constructor(uri: string, data?: T | undefined, event?: E | undefined);\n    get scheme(): string;\n    get paths(): string[];\n    get fullPath(): string;\n    get pathname(): string;\n    get query(): string;\n    get queryParams(): {\n        [key: string]: string;\n    };\n    getPathnameData(urlExpression: string): {\n        [name: string]: string;\n    } | undefined;\n}\n</pre>\n        </figure>\n    </section>\n</article>\n\n";
 
-var style$3 = "";
+var style$c = "";
 
 var CoreIntent = (function () {
     function CoreIntent() {
@@ -5560,17 +5560,17 @@ var CoreIntent = (function () {
     CoreIntent = __decorate([
         SimDecorator_7(),
         Component_3({
-            template: template$4,
-            styles: [style$3]
+            template: template$d,
+            styles: [style$c]
         }),
         __metadata("design:paramtypes", [])
     ], CoreIntent);
     return CoreIntent;
 }());
 
-var template$3 = "<article>\n    <h1>Aspect Oriented Programming (AOP)</h1>\n    <ul>\n        <li>Support method aop</li>\n    </ul>\n    <hr>\n    <section>\n        <h2>@After, @Before</h2>\n        <figure>\n            <figcaption>After, Before simple-boot-core/decorators/aop/AOPDecorato</figcaption>\n            <pre dr-pre class=\"code-container typescript\">@Sim()\nexport class User {\n    // target method\n    print() {\n        console.log('execute print method');\n    }\n\n    @Before({property: 'print'})\n    before() {\n        console.log('---Before----');\n    }\n\n    @After({property: 'print'})\n    after() {\n        console.log('---After----');\n    }\n}}</pre>\n        </figure>\n        <dl>AOPOption\n            <ul>\n                <li>\n                    <dt>type</dt>\n                    <dl>target Type (optional)</dl>\n                </li>\n                <li>\n                    <dt>property</dt>\n                    <dl>property method name</dl>\n                </li>\n            </ul>\n        </dl>\n    </section>\n</article>\n\n";
+var template$c = "<article>\n    <h1>Aspect Oriented Programming (AOP)</h1>\n    <ul>\n        <li>Support method aop</li>\n    </ul>\n    <hr>\n    <section>\n        <h2>@After, @Before</h2>\n        <figure>\n            <figcaption>After, Before simple-boot-core/decorators/aop/AOPDecorato</figcaption>\n            <pre dr-pre class=\"code-container typescript\">@Sim()\nexport class User {\n    // target method\n    print() {\n        console.log('execute print method');\n    }\n\n    @Before({property: 'print'})\n    before() {\n        console.log('---Before----');\n    }\n\n    @After({property: 'print'})\n    after() {\n        console.log('---After----');\n    }\n}}</pre>\n        </figure>\n        <dl>AOPOption\n            <ul>\n                <li>\n                    <dt>type</dt>\n                    <dl>target Type (optional)</dl>\n                </li>\n                <li>\n                    <dt>property</dt>\n                    <dl>property method name</dl>\n                </li>\n            </ul>\n        </dl>\n    </section>\n</article>\n\n";
 
-var style$2 = "";
+var style$b = "";
 
 var CoreAop = (function () {
     function CoreAop() {
@@ -5580,17 +5580,17 @@ var CoreAop = (function () {
     CoreAop = __decorate([
         SimDecorator_7(),
         Component_3({
-            template: template$3,
-            styles: [style$2]
+            template: template$c,
+            styles: [style$b]
         }),
         __metadata("design:paramtypes", [])
     ], CoreAop);
     return CoreAop;
 }());
 
-var template$2 = "<article>\n    <h1>Exception Advice</h1>\n    <ul>\n        <li>Support Global, Exception Type Advice</li>\n    </ul>\n    <hr>\n    <section>\n        <h2>@ExceptionHandler</h2>\n        <figure>\n            <figcaption>ExceptionHandler simple-boot-core/decorators/exception/ExceptionDecorator</figcaption>\n            <pre dr-pre class=\"code-container typescript\">@Sim()\nexport class GlobalAdvice {\n\n    constructor() {\n    }\n\n    @ExceptionHandler()\n    print(error: any){\n        console.log('global advice errorr', error.msg)\n    }\n\n    @ExceptionHandler(NotFoundError)\n    print(error: NotFoundError){\n        console.log('NotFoundError', error)\n    }\n\n}\n</pre>\n        </figure>\n        <dl>ExceptionHandler\n            <ul>\n                <li>\n                    <dt>target</dt>\n                    <dl>target Exception Target (optional)</dl>\n                </li>\n            </ul>\n        </dl>\n    </section>\n</article>\n\n";
+var template$b = "<article>\n    <h1>Exception Advice</h1>\n    <ul>\n        <li>Support Global, Exception Type Advice</li>\n    </ul>\n    <hr>\n    <section>\n        <h2>@ExceptionHandler</h2>\n        <figure>\n            <figcaption>ExceptionHandler simple-boot-core/decorators/exception/ExceptionDecorator</figcaption>\n            <pre dr-pre class=\"code-container typescript\">@Sim()\nexport class GlobalAdvice {\n\n    constructor() {\n    }\n\n    @ExceptionHandler()\n    print(error: any){\n        console.log('global advice errorr', error.msg)\n    }\n\n    @ExceptionHandler(NotFoundError)\n    print(error: NotFoundError){\n        console.log('NotFoundError', error)\n    }\n\n}\n</pre>\n        </figure>\n        <dl>ExceptionHandler\n            <ul>\n                <li>\n                    <dt>target</dt>\n                    <dl>target Exception Target (optional)</dl>\n                </li>\n            </ul>\n        </dl>\n    </section>\n</article>\n\n";
 
-var style$1 = "";
+var style$a = "";
 
 var CoreAdvice = (function () {
     function CoreAdvice() {
@@ -5600,19 +5600,19 @@ var CoreAdvice = (function () {
     CoreAdvice = __decorate([
         SimDecorator_7(),
         Component_3({
-            template: template$2,
-            styles: [style$1]
+            template: template$b,
+            styles: [style$a]
         }),
         __metadata("design:paramtypes", [])
     ], CoreAdvice);
     return CoreAdvice;
 }());
 
-var template$1 = "<article>\n    <h1>DOM-RENDER</h1>\n    <p>View template Engine</p>\n\n    <ul class=\"badge-container\">\n        <li>\n            <a href=\"https://www.npmjs.com/package/dom-render\" target=\"_blank\"><img src=\"https://img.shields.io/badge/npm-blue?logo=npm\"></a>\n        </li>\n        <li>\n            <img src=\"https://img.shields.io/badge/license-MIT-green\">\n        </li>\n        <li>\n            <a href=\"https://github.com/visualkhh/dom-render\" target=\"_blank\"><img src=\"https://img.shields.io/badge/-github-black?logo=github\"></a>\n        </li>\n    </ul>\n\n    <domrender-function-section></domrender-function-section>\n\n    <hr>\n\n    <section>\n        <h2>Dependencies</h2>\n        <ul>\n            <li>0 zero dependency</li>\n        </ul>\n    </section>\n\n    <hr>\n    <domrender-lifecycle-section></domrender-lifecycle-section>\n    <section>\n        <h2>Contributors</h2>\n        <a href=\"https://github.com/visualkhh/dom-render/graphs/contributors\">\n            <img src=\"https://contrib.rocks/image?repo=visualkhh/dom-render\">\n        </a>\n    </section>\n</article>\n";
+var template$a = "<article>\n    <h1>DOM-RENDER</h1>\n    <p>View template Engine</p>\n\n    <ul class=\"badge-container\">\n        <li>\n            <a href=\"https://www.npmjs.com/package/dom-render\" target=\"_blank\"><img src=\"https://img.shields.io/badge/npm-blue?logo=npm\"></a>\n        </li>\n        <li>\n            <img src=\"https://img.shields.io/badge/license-MIT-green\">\n        </li>\n        <li>\n            <a href=\"https://github.com/visualkhh/dom-render\" target=\"_blank\"><img src=\"https://img.shields.io/badge/-github-black?logo=github\"></a>\n        </li>\n    </ul>\n\n    <domrender-function-section></domrender-function-section>\n\n    <hr>\n\n    <section>\n        <h2>Dependencies</h2>\n        <ul>\n            <li>0 zero dependency</li>\n        </ul>\n    </section>\n\n    <hr>\n    <domrender-lifecycle-section></domrender-lifecycle-section>\n    <section>\n        <h2>Contributors</h2>\n        <a href=\"https://github.com/visualkhh/dom-render/graphs/contributors\">\n            <img src=\"https://contrib.rocks/image?repo=visualkhh/dom-render\">\n        </a>\n    </section>\n</article>\n";
 
-var style = "";
+var style$9 = "";
 
-var template = "<section>\n    <h2>${this.title}$</h2>\n    <dl dr-pre>\n        <ul>\n            <li>\n                <dt>onInitRender()</dt>\n                <dd>init rendered call<small>(OnInitRender.ts)</small></dd>\n            </li>\n        </ul>\n    </dl>\n</section>\n";
+var template$9 = "<section>\n    <h2>${this.title}$</h2>\n    <dl dr-pre>\n        <ul>\n            <li>\n                <dt>onInitRender()</dt>\n                <dd>init rendered call<small>(OnInitRender.ts)</small></dd>\n            </li>\n        </ul>\n    </dl>\n</section>\n";
 
 var DomrenderLifecycleSection = (function () {
     function DomrenderLifecycleSection() {
@@ -5622,7 +5622,7 @@ var DomrenderLifecycleSection = (function () {
         SimDecorator_7(),
         Component_3({
             selector: 'domrender-lifecycle-section',
-            template: template
+            template: template$9
         })
     ], DomrenderLifecycleSection);
     return DomrenderLifecycleSection;
@@ -5637,13 +5637,194 @@ var DomrenderIntroduction = (function () {
     DomrenderIntroduction = __decorate([
         SimDecorator_7(),
         Component_3({
-            template: template$1,
-            styles: [style],
+            template: template$a,
+            styles: [style$9],
             using: [DomrenderFunctionSection, DomrenderLifecycleSection]
         }),
         __metadata("design:paramtypes", [ApiService])
     ], DomrenderIntroduction);
     return DomrenderIntroduction;
+}());
+
+var template$8 = "<article>\n    <h1>🚀 Quick start</h1>\n    <p>Start a project simply and quickly.</p>\n    <section>\n        <h2>Create project</h2>\n        <figure>\n            <figcaption>terminal</figcaption>\n            <pre class=\"code-container bash\">npm install dom-render</pre>\n        </figure>\n    </section>\n\n    <hr>\n    <h1>📄 Code description</h1>\n    <section>\n        <h2>simple-boot-front start</h2>\n        <figure>\n            <figcaption>index.html</figcaption>\n            <pre dr-pre class=\"code-container html\">&lt;!DOCTYPE html&gt;\n&lt;html lang=&quot;en&quot;&gt;\n&lt;head&gt;\n    &lt;meta charset=&quot;UTF-8&quot;&gt;\n    &lt;title&gt;simple-boot-front&lt;/title&gt;\n    &lt;script src=&quot;bundle.js&quot; defer&gt;&lt;/script&gt;\n    &lt;link rel=&quot;shortcut icon&quot; href=&quot;assets/favicons/favicon.ico&quot;&gt;\n&lt;/head&gt;\n&lt;body id=&quot;app&quot;&gt;\n    &lt;div&gt;name: ${this.name} &lt;/div&gt;\n&lt;/body&gt;\n&lt;/html&gt;\n</pre>\n        </figure>\n        <figure>\n            <figcaption>index.ts (dom-render start)</figcaption>\n            <pre dr-pre class=\"code-container typescript\">const target = document.querySelector('#app');\nconst data = DomRender.run({name: 'my name is dom-render'}, target);\ndata.name = 'modify name';</pre>\n        </figure>\n    </section>\n\n    <hr>\n    <section>\n        <h2>Expressions (calc and innerTEXT)</h2>\n        <figure dr-pre class=\"content-container-white\">\n            <figcaption>${...}$</figcaption>\n            <dl>\n                <ul>\n                    <li>\n                        <dt>start</dt>\n                        <dl>${</dl>\n                    </li>\n                    <li>\n                        <dt>end</dt>\n                        <dl>}$</dl>\n                    </li>\n                </ul>\n            </dl>\n        </figure>\n    </section>\n    <section>\n        <h2>Expressions (calc and innerHTML)</h2>\n        <figure dr-pre class=\"content-container-white\">\n            <figcaption>#{...}#</figcaption>\n            <dl>\n                <ul>\n                    <li>\n                        <dt>start</dt>\n                        <dl>#{</dl>\n                    </li>\n                    <li>\n                        <dt>end</dt>\n                        <dl>}#</dl>\n                    </li>\n                </ul>\n            </dl>\n        </figure>\n    </section>\n</article>\n\n";
+
+var style$8 = "";
+
+var DomrenderQuickstart = (function () {
+    function DomrenderQuickstart() {
+    }
+    DomrenderQuickstart.prototype.onInit = function () {
+    };
+    DomrenderQuickstart = __decorate([
+        SimDecorator_7(),
+        Component_3({
+            template: template$8,
+            styles: [style$8],
+            using: [RouterTemplateSection]
+        }),
+        __metadata("design:paramtypes", [])
+    ], DomrenderQuickstart);
+    return DomrenderQuickstart;
+}());
+
+var template$7 = "<article>\n    <h1>⚡️ Function 🚀</h1>\n    <p>provides a powerful function for dome control</p>\n    <section>\n        <h2>Print and call</h2>\n        <figure>\n            <pre dr-pre class=\"code-container html\">&lt;div&gt;${this.name}$&lt;/div&gt;\n&lt;div&gt;${this.office.addr.first}$, ${this.office.addr.last}$, ${this.office.addr.street}$ (${this.office.name}$)&lt;/div&gt;\n&lt;div dr=&quot;this.office.addr.street&quot;&gt;${this.getOfficeFullAddr()}$&lt;/div&gt;</pre>\n        </figure>\n    </section>\n    <hr>\n    <section>\n        <h2>dr-if</h2>\n        <figure>\n            <pre dr-pre class=\"code-container html\">&lt;div dr-if=&quot;true&quot;&gt;true&lt;/div&gt;\n&lt;div dr-if=&quot;this.gender===&#39;M&#39;&quot;&gt;gender: M&lt;/div&gt;</pre>\n        </figure>\n    </section>\n    <hr>\n    <section>\n        <h2>dr-for, dr-for-of</h2>\n        <figure>\n            <pre dr-pre class=\"code-container html\">&lt;div dr-for=&quot;var i = 0; i &lt; this.friends.length; i++&quot;&gt; friend&lt;/div&gt;\n&lt;div dr-for-of=&quot;this.friends&quot;&gt; ${#it#.name}$&lt;/div&gt;\n&lt;div dr-for-of=&quot;$range(10, 20)&quot;&gt;&lt;div&gt;${#it#}$&lt;/div&gt;&lt;div&gt;\n&lt;div dr-for=&quot;var i = 1 ; i &lt;= 9 ; i++&quot; dr-it=&quot;i&quot;&gt;\n    ${#it#}$ *\n    &lt;scope dr-for=&quot;var y = 1 ; y &lt;= 9 ; y++&quot; dr-it=&quot;y&quot; dr-var=&quot;superIt=#it#&quot; dr-strip=&quot;true&quot;&gt;\n        #it# = ${var.superIt * #it#}$\n    &lt;/scope&gt;\n&lt;/div&gt;</pre>\n        </figure>\n    </section>\n    <hr>\n    <section>\n        <h2>dr-repeat</h2>\n        <figure>\n            <pre dr-pre class=\"code-container html\">&lt;div dr-repeat=&quot;10&quot;&gt;&lt;div&gt;#it#&lt;/div&gt;&lt;/div&gt;\n&lt;div dr-repeat=&quot;$range(10, 20)&quot;&gt;&lt;div&gt;#it#&lt;/div&gt;&lt;/div&gt;\n&lt;div dr-repeat=&quot;$range(10, 20, 5)&quot;&gt;&lt;div&gt;#it#&lt;/div&gt;&lt;/div&gt;\n&lt;div dr-repeat=&quot;$range(&#39;10..5, 2&#39;)&quot;&gt;&lt;div&gt;#it#&lt;/div&gt;&lt;/div&gt;</pre>\n        </figure>\n    </section>\n    <hr>\n    <section>\n        <h2>dr-inner-text, dr-inner-html</h2>\n        <figure>\n            <pre dr-pre class=\"code-container html\">&lt;div dr-inner-text=&quot;&#39;&lt;b&gt;aa&lt;/b&gt; &lt;button dr-event-click=\\&#39;alert(1)\\&#39;&gt;aa&lt;/button&gt;&#39;&quot;&gt; friend&lt;/div&gt;\n&lt;div dr-inner-html=&quot;&#39;&lt;b&gt;aa&lt;/b&gt; &lt;button dr-event-click=\\&#39;alert(1)\\&#39;&gt;aa&lt;/button&gt;&#39;&quot;&gt; friend&lt;/div&gt;\n</pre>\n        </figure>\n    </section>\n    <hr>\n    <section>\n        <h2>⚡️event</h2>\n        <ul>\n            <li>\n                click, mousedown, mouseup, dblclick, mouseover, mouseout, mousemove, mouseenter, mouseleave, contextmenu, keyup, keydown, keypress, change, input, submit, resize, focus, blur\n            </li>\n            <li>ref: element</li>\n            <li>variable: $event, $target</li>\n        </ul>\n        <figure>\n            <pre dr-pre class=\"code-container html\">click: &lt;button dr-event-click=&quot;this.name = &#39;name&#39; + new Date()&quot;&gt;click&lt;/button&gt; &lt;br&gt;\nchange: &lt;input type=&quot;text&quot; dr-event-change=&quot;this.name = $target.value&quot;&gt; &lt;br&gt;\ninput: &lt;input type=&quot;text&quot; dr-event-input=&quot;this.name = $target.value&quot;&gt; &lt;br&gt;\nkeyup: &lt;input type=&quot;text&quot; dr-event-keyup=&quot;this.name = $target.value&quot;&gt; &lt;br&gt;\n...\nkeydown: &lt;input type=&quot;text&quot; dr-event-keydown=&quot;this.name = $target.value&quot;&gt;&lt;br&gt;\nsubmit: &lt;form dr-event-submit=&quot;console.log($event); $event.preventDefault();&quot;&gt;&lt;input type=&quot;text&quot;&gt; &lt;button type=&quot;submit&quot;&gt;submit&lt;/button&gt;&lt;/form&gt;&lt;br&gt;</pre>\n        </figure>\n    </section>\n    <hr>\n    <section>\n        <h2>⚡️ window event</h2>\n        <ul>\n            <li>ref: window</li>\n            <li>variable: $target</li>\n        </ul>\n        <figure>\n            <pre dr-pre class=\"code-container html\">window-event-popstate: &lt;input type=&quot;text&quot; dr-window-event-popstate=&quot;alert(this.name)&quot;&gt;&lt;br&gt;</pre>\n        </figure>\n    </section>\n    <hr>\n    <section>\n        <h2>⚡️ custom event (other)</h2>\n        <ul>\n            <li>other event</li>\n            <li>ref: element</li>\n            <li>variable: $params, $event</li>\n        </ul>\n        <figure>\n            <pre dr-pre class=\"code-container html\">&lt;input dr-event:bind=&#39;eventName1, eventName2&#39; dr-event=&quot;console.log(&#39;event&#39;, $params, $event)&quot;  type=&quot;text&quot;&gt;</pre>\n        </figure>\n    </section>\n    <hr>\n    <section>\n        <h2>dr-value, value-link</h2>\n        <dl>\n            <ul>\n                <li>\n                    <dt>dr-value</dt>\n                    <dl>The value is assigned the first time.</dl>\n                </li>\n                <li>\n                    <dt>dr-value-link</dt>\n                    <dl>Value and variable values are referencing each other. It affects each other when changing. (Immediate reflection event: input)</dl>\n                </li>\n            </ul>\n        </dl>\n        <figure>\n            <pre dr-pre class=\"code-container html\">dr-value: &lt;input type=&quot;text&quot; dr-value=&quot;this.office.name&quot;&gt; &lt;br&gt;\ndr-value-link: &lt;input type=&quot;text&quot; dr-value-link=&quot;this.office.addr.street&quot;&gt; &lt;br&gt;</pre>\n        </figure>\n    </section>\n    <hr>\n    <section>\n        <h2>dr-attr</h2>\n        <figure>\n            <pre dr-pre class=\"code-container html\">&lt;textarea dr-attr=&quot;{rows: this.age/2, cols: this.age}&quot;&gt;&lt;/textarea&gt;\n&lt;div dr-attr=&quot;{wow: &#39;123&#39;, good: 123444}&quot;&gt;&lt;/div&gt;\n&lt;div dr-attr=&quot;[&#39;wow=123&#39;, &#39;good=123444&#39;]&quot;&gt;&lt;/div&gt;\n&lt;div dr-attr=&quot;&#39;wow=123, good=123444&#39;&quot;&gt;&lt;/div&gt;</pre>\n        </figure>\n    </section>\n    <hr>\n    <section>\n        <h2>dr-class</h2>\n        <figure>\n            <pre dr-pre class=\"code-container html\">&lt;div dr-class=&quot;{big: this.age &gt; 50, red: this.age &gt; 50}&quot;&gt;\n&lt;div dr-class=&quot;&#39;big yellow &#39; + (this.age &gt; 50 ? &#39;old&#39; : &#39;young&#39;)&quot;&gt;\n&lt;div dr-class=&quot;[&#39;small&#39;, &#39;yellow&#39;]&quot;&gt;</pre>\n        </figure>\n    </section>\n    <hr>\n    <section>\n        <h2>dr-style</h2>\n        <figure>\n            <pre dr-pre class=\"code-container html\">&lt;div dr-style=&quot;{fontSize: this.age + &#39;px&#39;}&quot;&gt; style &lt;/div&gt;\n&lt;div dr-style=&quot;{&#39;font-size&#39;: &#39;20px&#39;}&quot;&gt; style&lt;/div&gt;\n&lt;div dr-style=&quot;&#39;font-size: &#39; + this.age +&#39;px; margin: &#39; + this.age + &#39;px&#39;&quot;&gt; style &lt;/div&gt;\n&lt;div dr-style=&quot;[&#39;font-size: &#39; + this.age +&#39;px&#39;, &#39;margin: &#39; + this.age + &#39;px&#39;]&quot;&gt; style &lt;/div&gt;</pre>\n        </figure>\n    </section>\n    <hr>\n    <section>\n        <h2>dr-strip</h2>\n        <figure>\n            AS-IS\n            <pre dr-pre class=\"code-container html\">&lt;div dr-strip=&quot;true&quot;&gt;&lt;span&gt;hello&lt;/span&gt;&lt;/div&gt;</pre>\n            TO-BE\n            <pre dr-pre class=\"code-container html\">&lt;span&gt;hello&lt;/span&gt;</pre>\n        </figure>\n    </section>\n    <hr>\n    <section>\n        <h2>dr-on-init</h2>\n        <figure>\n            <pre dr-pre class=\"code-container html\">&lt;input dr-on-init=&quot;this.onInitElement&quot;&gt;</pre>\n        </figure>\n    </section>\n    <hr>\n    <section>\n        <h2>dr-before, dr-after</h2>\n        <figure>\n            <pre dr-pre class=\"code-container html\">&lt;div dr-before=&quot;console.log(&#39;process before&#39;)&quot; dr-after=&quot;console.log(&#39;process after&#39;)&quot;&gt;&lt;/div&gt;</pre>\n        </figure>\n    </section>\n    <hr>\n    <section>\n        <h2>dr-complete</h2>\n        <figure>\n            <pre dr-pre class=\"code-container html\">&lt;select dr-value-link=&quot;this.currentContry&quot; dr-event-change=&quot;this.contryChange($event)&quot;&gt;\n    &lt;option dr-for-of=&quot;this.languages&quot; dr-value=&quot;#it#.key&quot; dr-complete=&quot;this.currentContry=&#39;defaultValue&#39;&quot;&gt;${#it#.title}$&lt;/option&gt;\n&lt;/select&gt;</pre>\n        </figure>\n    </section>\n\n</article>\n\n";
+
+var style$7 = "";
+
+var DomrenderFunction = (function () {
+    function DomrenderFunction() {
+    }
+    DomrenderFunction.prototype.onInit = function () {
+    };
+    DomrenderFunction = __decorate([
+        SimDecorator_7(),
+        Component_3({
+            template: template$7,
+            styles: [style$7]
+        }),
+        __metadata("design:paramtypes", [])
+    ], DomrenderFunction);
+    return DomrenderFunction;
+}());
+
+var template$6 = "<article>\n    <h1>Script</h1>\n    <p>define script instructions and call</p>\n    <section>\n        <h2>Define</h2>\n        <figure>\n            <pre dr-pre class=\"code-container typescript\">new DomRender.run(obj, target, {\n  scripts: {\n    concat: function (head: string, tail: string) {\n      return head + tail;\n    }\n  }\n});</pre>\n        </figure>\n    </section>\n\n    <hr>\n\n    <section>\n        <h2>Using in Class</h2>\n        <figure>\n            <figcaption>class</figcaption>\n            <pre dr-pre class=\"code-container typescript\">const data = config.scripts.concat('head', 'tail')</pre>\n        </figure>\n    </section>\n    <hr>\n\n    <section>\n        <h2>Using in html</h2>\n        <figure>\n            <figcaption>class</figcaption>\n            <pre dr-pre class=\"code-container html\">&lt;div&gt;${$scripts.concat(&#39;head&#39;, &#39;tail&#39;)}$&lt;/div&gt;\n&lt;div dr-if=&quot;$scripts.concat(&#39;wow&#39;, &#39;good&#39;) === &#39;wowgood&#39;&quot;&gt;\nis wowgood\n&lt;/div&gt;</pre>\n        </figure>\n        <figure>\n            <figcaption>html</figcaption>\n            <pre dr-pre class=\"code-container html\">&lt;div&gt;${$scripts.calc(1, 4)}$&lt;/div&gt;\n&lt;div dr-if=&quot;$scripts.calc(1, 3) === 3&quot;&gt; is 3&lt;/div&gt;</pre>\n        </figure>\n        <dl>\n            <ul>\n                <li>\n                    <dt>$scripts</dt>\n                    <dd>scripts object</dd>\n                </li>\n            </ul>\n        </dl>\n    </section>\n</article>\n\n";
+
+var style$6 = "";
+
+var DomrenderScript = (function () {
+    function DomrenderScript() {
+    }
+    DomrenderScript.prototype.onInit = function () {
+    };
+    DomrenderScript = __decorate([
+        SimDecorator_7(),
+        Component_3({
+            template: template$6,
+            styles: [style$6]
+        }),
+        __metadata("design:paramtypes", [])
+    ], DomrenderScript);
+    return DomrenderScript;
+}());
+
+var template$5 = "<article>\n    <h1>Component</h1>\n    <p>create custom tags in component format</p>\n    <section>\n        <h2>Define</h2>\n        <figure>\n            <pre dr-pre class=\"code-container typescript\">export namespace Profile {\n  export const templat = &#39;&lt;div&gt;aaaaa${this.name}aaaaa &lt;/div&gt;&#39;;\n  export const styles = ['p {color: red}', 'div {margin: ${this.margin} + \\'px\\' }'];\n  export class Component {\n    public name = 'default name';\n    public margin = 5;\n    public say() {\n        console.log('say!~')\n    }\n  }\n}\n\nnew DomRender.run(obj, target, {\n  targetElements: [\n    RawSet.createComponentTargetElement('my-element', (e, o, r) => new Profile.Component(), Profile.templat, Profile.styles, scripts)\n  ],\n});</pre>\n        </figure>\n    </section>\n\n    <hr>\n\n<!--    <section>-->\n<!--        <h2>Using in Class</h2>-->\n<!--        <figure>-->\n<!--            <figcaption>class</figcaption>-->\n<!--            <pre dr-pre class=\"code-container typescript\">const data = config.scripts.concat('head', 'tail')</pre>-->\n<!--        </figure>-->\n<!--    </section>-->\n<!--    <hr>-->\n\n    <section>\n        <h2>Using in html</h2>\n        <figure>\n            <figcaption>class</figcaption>\n            <pre dr-pre class=\"code-container html\">&lt;my-element dr-on-init=&quot;$component.say();&quot;&gt;&lt;/my-element&gt;</pre>\n        </figure>\n        <figure>\n            <figcaption>html</figcaption>\n            <pre dr-pre class=\"code-container html\">&lt;div&gt;${$scripts.calc(1, 4)}$&lt;/div&gt;\n&lt;div dr-if=&quot;$scripts.calc(1, 3) === 3&quot;&gt; is 3&lt;/div&gt;</pre>\n        </figure>\n        attribute\n        <ul>\n            <li>\n                dr-on-init: ccomponent created init call script\n                <dl>\n                    <ul>\n                        <li>\n                            <dt>$componen</dt>\n                            <dd>component instance</dd>\n                        </li>\n                        <li>\n                            <dt>$element</dt>\n                            <dd>element instance</dd>\n                        </li>\n                        <li>\n                            <dt>$attribute</dt>\n                            <dd>element attribute object</dd>\n                        </li>\n                        <li>\n                            <dt>$innerHTML</dt>\n                            <dd>element innerHTML string</dd>\n                        </li>\n                    </ul>\n                </dl>\n            </li>\n        </ul>\n\n    </section>\n</article>\n\n";
+
+var style$5 = "";
+
+var DomrenderComponent = (function () {
+    function DomrenderComponent() {
+    }
+    DomrenderComponent.prototype.onInit = function () {
+    };
+    DomrenderComponent = __decorate([
+        SimDecorator_7(),
+        Component_3({
+            template: template$5,
+            styles: [style$5]
+        }),
+        __metadata("design:paramtypes", [])
+    ], DomrenderComponent);
+    return DomrenderComponent;
+}());
+
+var template$4 = "<article>\n    <h1>Validation</h1>\n    <p>Form and Validator</p>\n    <section>\n        <h2>dr-form</h2>\n        <figure>\n <pre dr-pre class=\"code-container html\">&lt;form dr-form=&quot;this.form&quot; dr-event-submit=&quot;this.submit(); $event.preventDefault();&quot;&gt;\n  name: &lt;input name=&quot;name&quot;&gt;\n  age: &lt;input name=&quot;age&quot;&gt;\n  addr: &lt;input dr-form:event=&quot;input&quot; name=&quot;addr&quot;&gt;\n  &lt;button type=&quot;submit&quot;&gt;submit&lt;/button&gt;\n&lt;/form&gt;</pre>\n        </figure>\n        <figure>\n            <pre dr-pre class=\"code-container typescript\">class User {\n  form = {};\n  submit() {\n    const form = (this.form as any)\n    console.log('submit->', form, form.name, form.age, form.addr);\n  }\n}</pre>\n        </figure>\n        <dl>\n            <ul>\n                <li>\n                    <dt>event</dt>\n                    <dd>change (default)</dd>\n                </li>\n                <li>\n                    <dt>modify event event</dt>\n                    <dd>dr-form:event=\"input\"</dd>\n                </li>\n            </ul>\n        </dl>\n    </section>\n\n    <hr>\n\n    <section>\n        <h2>validator</h2>\n        <figure>\n            <pre dr-pre class=\"code-container html\">&lt;form dr-form=&quot;this.form&quot; dr-event-submit=&quot;this.submit(); $event.preventDefault();&quot;&gt;\n    &lt;h2&gt;validator&lt;/h2&gt;\n    required: &lt;input name=&quot;required&quot;&gt; &lt;br&gt;\n    notEmpty: &lt;input name=&quot;notEmpty&quot;&gt; &lt;br&gt;\n    empty: &lt;input name=&quot;empty&quot;&gt; &lt;br&gt;\n    regexp: /[0-9]/ &lt;input name=&quot;regexp&quot;&gt; &lt;br&gt;\n    &lt;h2&gt;mix validator&lt;/h2&gt;\n    required, notEmpty: &lt;input name=&quot;mix&quot;&gt; &lt;br&gt;\n    &lt;h2&gt;all check required&lt;/h2&gt;\n    &lt;input name=&quot;all&quot; type=&quot;checkbox&quot; value=&quot;a&quot;&gt;a &lt;br&gt;\n    &lt;input name=&quot;all&quot; type=&quot;checkbox&quot; value=&quot;b&quot;&gt;b &lt;br&gt;\n\n    &lt;h2&gt;gender chose one&lt;/h2&gt;\n    &lt;input name=&quot;gender&quot; type=&quot;radio&quot; value=&quot;male&quot;&gt; Male &lt;br&gt;\n    &lt;input name=&quot;gender&quot; type=&quot;radio&quot; value=&quot;female&quot;&gt; Female&lt;br&gt;\n\n    &lt;button type=&quot;submit&quot;&gt;check valid&lt;/button&gt;\n&lt;/form&gt;</pre>\n        </figure>\n        <figure>\n            <pre dr-pre class=\"code-container typescript\">class PageValidator extends FormValidator {\n    required = new RequiredValidator();\n    notEmpty = new NotEmptyValidator();\n    empty = new EmptyValidator();\n    regexp = new RegExpTestValidator(/[0-9]/);\n    mix = new MultipleValidator([new RequiredValidator(), new NotEmptyValidator()]);\n\n    all = new ValidValidatorArray((v, t, e) => {\n        return !((v ?? []).filter(it => !it.checked).length > 0);\n    });\n\n    gender = new ValidValidatorArray((v, t, e) => {\n        return ((v ?? []).filter(it => it.checked).length > 0);\n    });\n}\nclass User {\n  form = new PageValidator();\n  submit() {\n    console.log('submit valid->', this.form.valid());\n  }\n\n  changeData() {\n    this.form.required.value = 'new value';\n  }\n}</pre>\n        </figure>\n        Validator types.\n        <dl>\n            <ul>\n                <li><dt>Validator (abstract)</dt><dd></dd></li>\n                <li><dt>ValidatorArray (abstract)</dt><dd></dd></li>\n                <li><dt>AllCheckedValidatorArray</dt><dd></dd></li>\n                <li><dt>AllUnCheckedValidatorArray</dt><dd></dd></li>\n                <li><dt>CheckedValidator</dt><dd></dd></li>\n                <li><dt>CountEqualsCheckedValidatorArray</dt><dd></dd></li>\n                <li><dt>CountEqualsUnCheckedValidatorArray</dt><dd></dd></li>\n                <li><dt>CountGreaterThanCheckedValidatorArray</dt><dd></dd></li>\n                <li><dt>CountGreaterThanEqualsCheckedValidatorArray</dt><dd></dd></li>\n                <li><dt>CountGreaterThanEqualsUnCheckedValidatorArray</dt><dd></dd></li>\n                <li><dt>CountGreaterThanUnCheckedValidatorArray</dt><dd></dd></li>\n                <li><dt>CountLessThanCheckedValidatorArray</dt><dd></dd></li>\n                <li><dt>CountLessThanEqualsCheckedValidatorArray</dt><dd></dd></li>\n                <li><dt>CountLessThanEqualsUnCheckedValidatorArray</dt><dd></dd></li>\n                <li><dt>CountLessThanUnCheckedValidatorArray</dt><dd></dd></li>\n                <li><dt>CountUnCheckedValidatorArray</dt><dd></dd></li>\n                <li><dt>EmptyValidator</dt><dd></dd></li>\n                <li><dt>ExcludeCheckedValidatorArray</dt><dd></dd></li>\n                <li><dt>FormValidator</dt><dd></dd></li>\n                <li><dt>IncludeCheckedValidatorArray</dt><dd></dd></li>\n                <li><dt>MultipleValidator</dt><dd></dd></li>\n                <li><dt>NonPassValidator</dt><dd></dd></li>\n                <li><dt>NotEmptyValidator</dt><dd></dd></li>\n                <li><dt>NotRegExpTestValidator</dt><dd></dd></li>\n                <li><dt>PassValidator</dt><dd></dd></li>\n                <li><dt>RegExpTestValidator</dt><dd></dd></li>\n                <li><dt>RequiredValidator</dt><dd></dd></li>\n                <li><dt>UnCheckedValidator</dt><dd></dd></li>\n                <li><dt>ValidMultipleValidator</dt><dd></dd></li>\n                <li><dt>ValidValidator</dt><dd></dd></li>\n                <li><dt>ValidValidatorArray</dt><dd></dd></li>\n                <li><dt>ValueEqualsValidator</dt><dd></dd></li>\n                <li><dt>ValueNotEqualsValidator</dt><dd></dd></li>\n            </ul>\n        </dl>\n    </section>\n    <hr>\n\n    <section>\n        <h2>Using in html</h2>\n        <figure>\n            <figcaption>class</figcaption>\n            <pre dr-pre class=\"code-container html\">&lt;div&gt;${$scripts.concat(&#39;head&#39;, &#39;tail&#39;)}$&lt;/div&gt;\n&lt;div dr-if=&quot;$scripts.concat(&#39;wow&#39;, &#39;good&#39;) === &#39;wowgood&#39;&quot;&gt;\nis wowgood\n&lt;/div&gt;</pre>\n        </figure>\n        <figure>\n            <figcaption>html</figcaption>\n            <pre dr-pre class=\"code-container html\">&lt;div&gt;${$scripts.calc(1, 4)}$&lt;/div&gt;\n&lt;div dr-if=&quot;$scripts.calc(1, 3) === 3&quot;&gt; is 3&lt;/div&gt;</pre>\n        </figure>\n        <dl>\n            <ul>\n                <li>\n                    <dt>$scripts</dt>\n                    <dd>scripts object</dd>\n                </li>\n            </ul>\n        </dl>\n    </section>\n</article>\n\n";
+
+var style$4 = "";
+
+var DomrenderValidation = (function () {
+    function DomrenderValidation() {
+    }
+    DomrenderValidation.prototype.onInit = function () {
+    };
+    DomrenderValidation = __decorate([
+        SimDecorator_7(),
+        Component_3({
+            template: template$4,
+            styles: [style$4]
+        }),
+        __metadata("design:paramtypes", [])
+    ], DomrenderValidation);
+    return DomrenderValidation;
+}());
+
+var template$3 = "<article>\n    <h1>Config</h1>\n    <p>dom-render config</p>\n    <section>\n        <h2>Config</h2>\n        <figure>\n            <pre dr-pre class=\"code-container typescript\">export type TargetElement = {\n    _name: string,\n    template?: string,\n    styles?: string[],\n    callBack: (target: Element, obj: any, rawSet: RawSet) => DocumentFragment,\n    complete?: (target: Element, obj: any, rawSet: RawSet) => void\n};\n\nexport type TargetAttr = {\n    name: string,\n    callBack: (target: Element, attrValue: string, obj: any, rawSet: RawSet) => DocumentFragment,\n    complete?: (target: Element, attrValue: string, obj: any, rawSet: RawSet) => void\n};\n\nexport interface Config {\n    targetElements?: TargetElement[];\n    targetAttrs?: TargetAttr[];\n    onElementInit?: (name: string, obj: any, rawSet: RawSet) =&gt; void;\n    onAttrInit?: (name: string, attrValue: string, obj: any, rawSet: RawSet) =&gt; void;\n    proxyExcludeTyps?: ConstructorType&lt;any&gt;[];\n    proxyExcludeOnBeforeReturnSets?: string[];\n    proxyExcludeOnBeforeReturnGets?: string[];\n    scripts?: { [n: string]: any };\n    applyEvents?: { attrName: string, callBack: (elements: Element, attrValue: string, obj: any) => void }[];\n}</pre>\n        </figure>\n    </section>\n</article>\n\n";
+
+var style$3 = "";
+
+var DomrenderConfig = (function () {
+    function DomrenderConfig() {
+    }
+    DomrenderConfig.prototype.onInit = function () {
+    };
+    DomrenderConfig = __decorate([
+        SimDecorator_7(),
+        Component_3({
+            template: template$3,
+            styles: [style$3]
+        }),
+        __metadata("design:paramtypes", [])
+    ], DomrenderConfig);
+    return DomrenderConfig;
+}());
+
+var template$2 = "<article>\n    <h1>Proxy</h1>\n    <p>all internal variables are managed by proxy (DomRenderProxy)</p>\n    <section>\n        <h2>Exclude proxy</h2>\n        <p>(situation: Maximum call stack error)</p>\n        <figure>\n            <pre dr-pre class=\"code-container typescript\">// frezz\n{name : Object.freeze({...})}\n\n// Shield Object type: {[k: string]: any}\n{name : new Shield()}\n\n// DomRenderProxy Final\n{name : DomRenderProxy.final({...})}</pre>\n        </figure>\n        <dl>\n            <dt>exclude detect property: Config</dt>\n            <dd>proxyExcludeTyps: [Class...]</dd>\n        </dl>\n    </section>\n</article>\n\n";
+
+var style$2 = "";
+
+var DomrenderProxy = (function () {
+    function DomrenderProxy() {
+    }
+    DomrenderProxy.prototype.onInit = function () {
+    };
+    DomrenderProxy = __decorate([
+        SimDecorator_7(),
+        Component_3({
+            template: template$2,
+            styles: [style$2]
+        }),
+        __metadata("design:paramtypes", [])
+    ], DomrenderProxy);
+    return DomrenderProxy;
+}());
+
+var template$1 = "<article>\n    <h1>Class</h1>\n    <p>define class in dom-render framworks</p>\n    <section>\n        <h2>Range</h2>\n        <figure>\n            <pre dr-pre class=\"code-container typescript\">const range = new Range(100,55, 10);\nfor (let data of new Range(100,55, 10)) {\n  console.log(data);\n}\nconst rangeArray = new Range(100,55, 10).toArray();</pre>\n        </figure>\n    </section>\n</article>\n\n";
+
+var style$1 = "";
+
+var DomrenderClass = (function () {
+    function DomrenderClass() {
+    }
+    DomrenderClass.prototype.onInit = function () {
+    };
+    DomrenderClass = __decorate([
+        SimDecorator_7(),
+        Component_3({
+            template: template$1,
+            styles: [style$1]
+        }),
+        __metadata("design:paramtypes", [])
+    ], DomrenderClass);
+    return DomrenderClass;
+}());
+
+var template = "<article>\n    <h1>Detect</h1>\n    <p>Detect get, set variable</p>\n    <section>\n        <h2>OnBeforeReturnSet</h2>\n        <figure>\n            <pre dr-pre class=\"code-container typescript\">export interface OnBeforeReturnSet {\n    onBeforeReturnSet(name: string, value: any, fullPath?: string[]): void;\n}</pre>\n        </figure>\n    </section>\n\n    <hr>\n\n    <section>\n        <h2>OnBeforeReturnGet</h2>\n        <figure>\n            <figcaption>class</figcaption>\n            <pre dr-pre class=\"code-container typescript\">export interface OnBeforeReturnGet {\n    onBeforeReturnGet(name: string, value: any, fullPath?: string[]): void;\n}</pre>\n        </figure>\n    </section>\n    <hr>\n\n    <section>\n        <h2>Using</h2>\n        <figure>\n            <figcaption>class</figcaption>\n            <pre dr-pre class=\"code-container typescript\">{\n    name: 'dom-render'\n    onBeforeReturnSet: (name: string, value: any, fullpath: string[]) => {\n        console.log('set name-->', name, value, fullpath);\n    }\n    onBeforeReturnGet: (name: string, value: any, fullpath: string[]) => {\n        console.log('get name-->', name, value, fullpath);\n    }\n}</pre>\n        </figure>\n        <p>exclude detect property: Config</p>\n        <dl>\n            <ul>\n                <li>\n                    <dt>proxyExcludeOnBeforeReturnGets: ['propertyName']</dt>\n                    <dd></dd>\n                </li>\n                <li>\n                    <dt>proxyExcludeOnBeforeReturnSets: ['propertyName']</dt>\n                    <dd></dd>\n                </li>\n            </ul>\n        </dl>\n    </section>\n</article>\n\n";
+
+var style = "";
+
+var DomrenderDetect = (function () {
+    function DomrenderDetect() {
+    }
+    DomrenderDetect.prototype.onInit = function () {
+    };
+    DomrenderDetect = __decorate([
+        SimDecorator_7(),
+        Component_3({
+            template: template,
+            styles: [style]
+        }),
+        __metadata("design:paramtypes", [])
+    ], DomrenderDetect);
+    return DomrenderDetect;
 }());
 
 var Index = (function () {
@@ -5659,10 +5840,8 @@ var Index = (function () {
     };
     Index.prototype.changeCategory = function (data) {
         this.detailsItems = this.getDetails(data);
-        console.log('detal-ss>', data, this.detailsItems);
     };
     Index.prototype.changeDetail = function (data) {
-        console.log('--?', this.navagation.path, data);
         if (data) {
             this.navagation.go(data);
         }
@@ -5700,6 +5879,15 @@ var Index = (function () {
                 '/simple-boot-front/router': FrontRouter,
                 '/simple-boot-front/script': FrontScript,
                 '/dom-render/introduction': DomrenderIntroduction,
+                '/dom-render/quick-start': DomrenderQuickstart,
+                '/dom-render/function': DomrenderFunction,
+                '/dom-render/script': DomrenderScript,
+                '/dom-render/component': DomrenderComponent,
+                '/dom-render/validation': DomrenderValidation,
+                '/dom-render/class': DomrenderClass,
+                '/dom-render/proxy': DomrenderProxy,
+                '/dom-render/detect': DomrenderDetect,
+                '/dom-render/config': DomrenderConfig,
                 '/simple-boot-front/config-option': FrontOption,
                 '/simple-boot-core/introduction': CoreIntroduction,
                 '/simple-boot-core/quick-start': CoreQuickstart,
@@ -5714,8 +5902,8 @@ var Index = (function () {
             }
         }),
         Component_3({
-            template: template$s,
-            styles: [style$g],
+            template: template$B,
+            styles: [style$p],
             using: [CodeScript]
         }),
         __metadata("design:paramtypes", [Navigation_2])

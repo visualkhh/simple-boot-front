@@ -1,0 +1,78 @@
+<article>
+    <h1>🚀 Quick start</h1>
+    <p>Start a project simply and quickly.</p>
+    <section>
+        <h2>Create project</h2>
+        <figure>
+            <figcaption>terminal</figcaption>
+            <pre class="code-container bash">npm install dom-render</pre>
+        </figure>
+    </section>
+
+    <hr>
+    <h1>📄 Code description</h1>
+    <section>
+        <h2>simple-boot-front start</h2>
+        <figure>
+            <figcaption>index.html</figcaption>
+            <pre dr-pre class="code-container html">&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;en&quot;&gt;
+&lt;head&gt;
+    &lt;meta charset=&quot;UTF-8&quot;&gt;
+    &lt;title&gt;simple-boot-front&lt;/title&gt;
+    &lt;script src=&quot;bundle.js&quot; defer&gt;&lt;/script&gt;
+    &lt;link rel=&quot;shortcut icon&quot; href=&quot;assets/favicons/favicon.ico&quot;&gt;
+&lt;/head&gt;
+&lt;body id=&quot;app&quot;&gt;
+    &lt;div&gt;name: ${this.name} &lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</pre>
+        </figure>
+        <figure>
+            <figcaption>index.ts (dom-render start)</figcaption>
+            <pre dr-pre class="code-container typescript">const target = document.querySelector('#app');
+const data = DomRender.run({name: 'my name is dom-render'}, target);
+data.name = 'modify name';</pre>
+        </figure>
+    </section>
+
+    <hr>
+    <section>
+        <h2>Expressions (calc and innerTEXT)</h2>
+        <figure dr-pre class="content-container-white">
+            <figcaption>${...}$</figcaption>
+            <dl>
+                <ul>
+                    <li>
+                        <dt>start</dt>
+                        <dl>${</dl>
+                    </li>
+                    <li>
+                        <dt>end</dt>
+                        <dl>}$</dl>
+                    </li>
+                </ul>
+            </dl>
+        </figure>
+    </section>
+    <section>
+        <h2>Expressions (calc and innerHTML)</h2>
+        <figure dr-pre class="content-container-white">
+            <figcaption>#{...}#</figcaption>
+            <dl>
+                <ul>
+                    <li>
+                        <dt>start</dt>
+                        <dl>#{</dl>
+                    </li>
+                    <li>
+                        <dt>end</dt>
+                        <dl>}#</dl>
+                    </li>
+                </ul>
+            </dl>
+        </figure>
+    </section>
+</article>
+
