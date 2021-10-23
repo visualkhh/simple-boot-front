@@ -24,6 +24,7 @@ import { CoreRouter } from './pages/core-router/core-router';
 import { CoreIntent } from './pages/core-intent/core-intent';
 import { CoreAop } from './pages/core-aop/core-aop';
 import { CoreAdvice } from './pages/core-advice/core-advice';
+import { DomrenderIntroduction } from './pages/domrender-introduction/domrender-introduction';
 declare const feather: any;
 declare const hljs: any;
 @Sim()
@@ -36,6 +37,7 @@ declare const hljs: any;
         '/simple-boot-front/component': FrontComponent,
         '/simple-boot-front/router': FrontRouter,
         '/simple-boot-front/script': FrontScript,
+        '/dom-render/introduction': DomrenderIntroduction,
         '/simple-boot-front/config-option': FrontOption,
         '/simple-boot-core/introduction': CoreIntroduction,
         '/simple-boot-core/quick-start': CoreQuickstart,

@@ -6,14 +6,14 @@ ul.root-directory > li::before {
 }
 ul.root-directory > li:first-child::before {
     content: '┌ ';
-    margin-left: -2px;
+    margin-left: -1px;
     font-size: 0.9rem;
 }
 
 ul.root-directory > li:last-child::before {
     content: '└ ';
     font-size: 0.9rem;
-    margin-left: -2px;
+    margin-left: -1px;
 }
 
 
@@ -28,7 +28,7 @@ ul.child-directory > li::before {
 ul.child-directory > li:last-child::before {
     content: '└ ';
     font-size: 0.9rem;
-    margin-left: -2px;
+    margin-left: -1px;
 }
 
 ul.root-directory > li small, ul.child-directory > li small {
@@ -41,20 +41,3 @@ ul.root-directory > li small::before, ul.child-directory > li small::before {
 ul.root-directory > li small::after, ul.child-directory > li small::after {
     content: ')';
 }
-/*ul.child-directory::before {*/
-/*    content: '│';*/
-/*    display: inline-block;*/
-/*    position: absolute;*/
-/*    width: 5px;*/
-/*    height: 5px;*/
-/*}*/
-
-/*ul.child-directory > li::before {*/
-/*    content: '│\00a0\00a0\00a0\00a0\00a0├ ';*/
-/*    padding-left: 4px;*/
-/*}*/
-/*ul.child-directory > li:last-child::before {*/
-/*    content: '│\00a0\00a0\00a0\00a0\00a0└ ';*/
-/*    padding-left: 4px;*/
-/*    margin-left: -2px;*/
-/*}*/

@@ -4,13 +4,13 @@ import { OnInit } from 'simple-boot-front/lifecycle/OnInit';
 import template from './core-introduction.html'
 import style from './core-introduction.css'
 import { ApiService } from 'services/ApiService';
-import { CoreLifecycleSecthion } from './section/lifecycle/core-lifecycle-secthion';
-import { CoreFunctionSecthion } from './section/function/core-function-secthion';
+import { CoreLifecycleSection } from './section/lifecycle/core-lifecycle-section';
+import { CoreFunctionSection } from './section/function/core-function-section';
 @Sim()
 @Component({
     template,
     styles: [style],
-    using: [CoreLifecycleSecthion, CoreFunctionSecthion]
+    using: [CoreLifecycleSection, CoreFunctionSection]
 })
 export class CoreIntroduction implements OnInit {
 

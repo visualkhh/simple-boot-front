@@ -1,0 +1,168 @@
+<article>
+    <h1>@Script</h1>
+    <p>define script instructions and call</p>
+    <section>
+        <h2>RouterConfig</h2>
+        <dl class="dl-container">
+            <ul>
+                <li>
+                    <dt>name</dt>
+                    <dd>script name</dd>
+                </li>
+                <li>
+                    <dt>using</dt>
+                    <dd>using components or scripts in this component</dd>
+                </li>
+            </ul>
+        </dl>
+    </section>
+
+    <hr>
+
+    <section>
+        <h2>Create</h2>
+        <p>extends ScriptRunnable class (create 'run' method) implements</p>
+        <figure>
+            <figcaption>define Script class</figcaption>
+            <pre dr-pre class="code-container typescript">
+@Sim()
+@Script({
+    name: 'calc'
+})
+export class CalcScript extends ScriptRunnable {
+    constructor() {
+        super();
+    }
+
+    run(data1: number, data2: nuber): any {
+        return data1 + data2;
+    }
+
+}</pre>
+        </figure>
+    </section>
+
+    <hr>
+
+    <section>
+        <h2>using</h2>
+        <figure>
+            <figcaption>class</figcaption>
+            <pre dr-pre class="code-container typescript">counstructor(calcScript: CalcScript) {...}
+counstructor(scriptService: ScriptService) {
+  const script = scriptService.getScript('calc');
+}</pre>
+        </figure>
+        <figure>
+            <figcaption>html</figcaption>
+            <pre dr-pre class="code-container html">&lt;div&gt;${$scripts.calc(1, 4)}$&lt;/div&gt;
+&lt;div dr-if=&quot;$scripts.calc(1, 3) === 3&quot;&gt; is 3&lt;/div&gt;</pre>
+        </figure>
+    </section>
+
+
+    <hr>
+    <section>
+        <h2>Change Data and Ref re render</h2>
+        <p>If the data changes, re render the place you are referring to.</p>
+        <p>example: i18n Script</p>
+        <figure>
+            <figcaption>html</figcaption>
+            <pre dr-pre class="code-container html">&lt;div&gt;${$scripts.i18n('hello')}$&lt;/div&gt;</pre>
+        </figure>
+        <figure>
+            <figcaption>I18nScript.ts</figcaption>
+            <pre dr-pre class="code-container typescript">@Sim()
+@Script({
+    name: 'i18n'
+})
+export class I18nScript extends ScriptRunnable {
+    public language?: Language;
+    constructor(public i18nService: I18nService) {
+        super();
+        i18nService.subject.subscribe(it => {
+            this.language = it;
+            this.render();  //  ref target  rerender
+        })
+    }
+    run(key: string): any {
+        return this.language?.defaultData?.[key] ?? key;
+    }
+}</pre>
+        </figure>
+        <figure>
+            <figcaption>I18nService.ts</figcaption>
+            <pre dr-pre class="code-container typescript">import enUS from '@generate/i18n/message_en_US.json';
+import koKR from '@generate/i18n/message_ko_KR.json';
+import { ApiService } from 'services/ApiService';
+import { Sim } from 'simple-boot-core/decorators/SimDecorator';
+import { OnSimCreate } from 'simple-boot-core/lifecycle/OnSimCreate';
+import { IntentManager } from 'simple-boot-core/intent/IntentManager';
+import { BehaviorSubject } from 'rxjs';
+export type Language = {
+    key: string;
+    param: string;
+    alt: string;
+    title: string;
+    defaultData: {[k: string]: string  }
+}
+
+
+export const languages: Language[] = [
+    {
+        key: 'us',
+        param: 'en_US',
+        alt: 'United States',
+        title: 'English (US)',
+        defaultData: enUS
+    },
+
+    {
+        key: 'kr',
+        param: 'ko_KR',
+        alt: 'Korea',
+        title: '한국어',
+        defaultData: koKR
+    }
+];
+
+@Sim()
+export class I18nService implements OnSimCreate {
+    public subject = new BehaviorSubject<Language|undefined>(this.getData());
+    constructor(public apiService: ApiService, public indentManager: IntentManager) {
+    }
+
+    onSimCreate(): void {
+        const country = this.currentCountry;
+        this.changeCountry(country);
+    }
+
+    public changeCountry(country: string) {
+        this.apiService.get(`/langs/message_${country}.json`)
+            .then(data => {
+                const findLangguage = this.getData(country);
+                if (findLangguage) {
+                    findLangguage.defaultData = data;
+                    this.subject.next(findLangguage);
+                }
+            })
+    }
+
+    public getData(key: string = this.currentCountry) {
+        return languages.find(it => it.key === key);
+    }
+
+    public getDatas() {
+        return languages;
+    }
+
+    public get currentCountry() {
+        return navigator.language.toLowerCase().replace('-', '_').split('_') [1] ?? 'us'
+    }
+
+}
+</pre>
+        </figure>
+    </section>
+</article>
+

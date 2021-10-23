@@ -39,52 +39,5 @@ export class User {
             </ul>
         </dl>
     </section>
-    <hr>
-    <section>
-        <h2>intent subscribe</h2>
-
-
-
-        <figure>
-            <figcaption>implements interface IntentSubscribe</figcaption>
-            <pre dr-pre class="code-container typescript">export interface IntentSubscribe {
-    intentSubscribe(intent: Intent): void;
-}
-</pre>
-        </figure>
-        <figure>
-            <figcaption>method subscribe</figcaption>
-            <pre dr-pre class="code-container typescript">class User implements IntentSubscribe {
-    intentSubscribe(intent: Intent) {
-        //receive
-    }
-}</pre>
-        </figure>
-    </section>
-<hr>
-    <section>
-        <h2>intent</h2>
-        <figure>
-            <figcaption>simple-boot-core/intent/Intent</figcaption>
-            <pre dr-pre class="code-container typescript">export declare class Intent&lt;T = any, E = any&gt; {
-    uri: string;
-    data?: T | undefined;
-    event?: E | undefined;
-    constructor(uri: string, data?: T | undefined, event?: E | undefined);
-    get scheme(): string;
-    get paths(): string[];
-    get fullPath(): string;
-    get pathname(): string;
-    get query(): string;
-    get queryParams(): {
-        [key: string]: string;
-    };
-    getPathnameData(urlExpression: string): {
-        [name: string]: string;
-    } | undefined;
-}
-</pre>
-        </figure>
-    </section>
 </article>
 
