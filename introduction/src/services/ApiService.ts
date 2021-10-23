@@ -30,6 +30,11 @@ export class ApiService {
     public getJson(url: string) {
         return fetch(url).then((response) => response.json());
     }
+
+    public json(url: string, requstInit?: RequestInit) {
+        // RequestInfo
+        return fetch(url, requstInit).then((response) => response.json());
+    }
     // public post(url: string, data: any) {
     //     // const p = new ProgressModal();
     //     // p.open();

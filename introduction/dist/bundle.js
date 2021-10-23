@@ -5015,13 +5015,13 @@ exports.SimpleBootFront = SimpleBootFront;
 unwrapExports(SimpleBootFront_1);
 var SimpleBootFront_2 = SimpleBootFront_1.SimpleBootFront;
 
-var template$3 = "<div>\n  <header class=\"header\">\n    <nav class=\"input-group\">\n      <label class=\"input-group-text bg-white\" for=\"inputGroupSelect01\">simple-boot</label>\n      <select class=\"form-select form-select-lg\" id=\"inputGroupSelect01\" dr-on-init=\"this.category\" dr-event-change=\"this.changeCategory($target.value)\">\n        <option selected=\"selected\" value=\"simple-boot-front\">front</option>\n        <option value=\"dom-render\">dom-render</option>\n        <option value=\"simple-boot-core\">core</option>\n        <option value=\"create-simple-boot-front\">create</option>\n        <option value=\"simple-boot-front-cli\">cli</option>\n      </select>\n      <span class=\"input-group-text bg-light fs-6\">⇢</span>\n      <select class=\"form-select form-select-sm\" dr-on-init=\"this.detail\" dr-event-change=\"this.changeDetail($target.value)\">\n        <option dr-for-of=\"this.detailsItems\" dr-value=\"#it#\" dr-attr=\"{selected: this.navagation.path === #it# ? 'selected' : null}\">${#it#?.split?.('/')?.[2] ?? ''}$</option>\n      </select>\n    </nav>\n  </header>\n  <main>\n    <router component=\"this.child\"></router>\n  </main>\n  <footer>\n    <ul class=\"badge-container\">\n      <li>\n        <a href=\"https://www.npmjs.com/package/simple-boot-front\" target=\"_blank\"><img src=\"https://img.shields.io/badge/npm-blue?logo=npm\"></a>\n      </li>\n      <li>\n        <img src=\"https://img.shields.io/badge/license-MIT-green\">\n      </li>\n      <li>\n        <a href=\"https://discord.gg/PW56dpns\" target=\"_blank\"><img src=\"https://img.shields.io/badge/discord-brightgreen?logo=discord\"></a>\n      </li>\n      <li>\n        <a href=\"https://github.com/visualkhh/simple-boot-front\" target=\"_blank\"><img src=\"https://img.shields.io/badge/-github-black?logo=github\"></a>\n      </li>\n      <li>\n        <a href=\"maileto:visualkhh@gmail.com\" target=\"_blank\"><img src=\"https://img.shields.io/badge/visualkhh@gmail.com-lightgrey\"></a>\n      </li>\n    </ul>\n  </footer>\n</div>\n";
+var template$4 = "<div>\n  <header class=\"header\">\n    <nav class=\"input-group\">\n      <label class=\"input-group-text bg-white\" for=\"inputGroupSelect01\">simple-boot</label>\n      <select class=\"form-select form-select-lg\" id=\"inputGroupSelect01\" dr-on-init=\"this.category\" dr-event-change=\"this.changeCategory($target.value)\">\n        <option selected=\"selected\" value=\"simple-boot-front\">front</option>\n        <option value=\"dom-render\">dom-render</option>\n        <option value=\"simple-boot-core\">core</option>\n        <option value=\"create-simple-boot-front\">create</option>\n        <option value=\"simple-boot-front-cli\">cli</option>\n      </select>\n      <span class=\"input-group-text bg-light fs-6\">⇢</span>\n      <select class=\"form-select form-select-sm\" dr-on-init=\"this.detail\" dr-event-change=\"this.changeDetail($target.value)\">\n        <option dr-for-of=\"this.detailsItems\" dr-value=\"#it#\" dr-attr=\"{selected: this.navagation.path === #it# ? 'selected' : null}\">${#it#?.split?.('/')?.[2] ?? ''}$</option>\n      </select>\n    </nav>\n  </header>\n  <main>\n    <router component=\"this.child\"></router>\n  </main>\n  <footer>\n    <ul class=\"badge-container\">\n      <li>\n        <a href=\"https://www.npmjs.com/package/simple-boot-front\" target=\"_blank\"><img src=\"https://img.shields.io/badge/npm-blue?logo=npm\"></a>\n      </li>\n      <li>\n        <img src=\"https://img.shields.io/badge/license-MIT-green\">\n      </li>\n      <li>\n        <a href=\"https://discord.gg/PW56dpns\" target=\"_blank\"><img src=\"https://img.shields.io/badge/discord-brightgreen?logo=discord\"></a>\n      </li>\n      <li>\n        <a href=\"https://github.com/visualkhh/simple-boot-front\" target=\"_blank\"><img src=\"https://img.shields.io/badge/-github-black?logo=github\"></a>\n      </li>\n      <li>\n        <a href=\"maileto:visualkhh@gmail.com\" target=\"_blank\"><img src=\"https://img.shields.io/badge/visualkhh@gmail.com-lightgrey\"></a>\n      </li>\n    </ul>\n  </footer>\n</div>\n";
 
-var style$3 = "header {\n    position: -webkit-sticky; /* 사파리 브라우저 지원 */\n    position: sticky;\n    top: 0px;\n    /*border: #656565 1px solid;*/\n    /*background: white;*/\n    /*border-bottom-left-radius: 5px;*/\n    /*border-bottom-right-radius: 5px;*/\n}\n\n/*footer,*/\nmain {\n/*    border: #333333 1px solid;*/\n    color: rgb(30, 30, 30);\n    padding: 10px;\n/*    !*margin: 20px;*!*/\n}\n\n.code-container {\n    color: #a9b7c6;\n    background-color: #282b2e;\n    overflow-x: auto;\n    /*margin: 5px;*/\n    padding: 10px;\n    border-radius: 10px;\n}\npre code{\n    border-radius: 10px;\n}\n\n\nul.badge-container {\n    padding-left: 0px;\n    /*background-color: #3D99CE;*/\n    /*text-align: center;*/\n}\nfooter>ul.badge-container {\n    text-align: right;\n}\n\nul.badge-container > li {\n    display: inline-block;\n    /*padding: 10px 20px;*/\n}\nul.badge-container > li:hover {\n    /*background-color: #2779BF;*/\n}\nul.badge-container > li > a {\n    color: white;\n    text-decoration: none;\n}\n\n\nsection figure figcaption {\n    text-align: right;\n    font-size: 0.5rem;\n}\n";
+var style$4 = "header {\n    position: -webkit-sticky; /* 사파리 브라우저 지원 */\n    position: sticky;\n    top: 0px;\n    /*border: #656565 1px solid;*/\n    /*background: white;*/\n    /*border-bottom-left-radius: 5px;*/\n    /*border-bottom-right-radius: 5px;*/\n}\n\n/*footer,*/\nmain {\n/*    border: #333333 1px solid;*/\n    color: rgb(30, 30, 30);\n    padding: 10px;\n/*    !*margin: 20px;*!*/\n}\n\n.code-container {\n    color: #a9b7c6;\n    background-color: #282b2e;\n    overflow-x: auto;\n    /*margin: 5px;*/\n    padding: 10px;\n    border-radius: 10px;\n}\npre code{\n    border-radius: 10px;\n}\n\n\nul.badge-container {\n    padding-left: 0px;\n    /*background-color: #3D99CE;*/\n    /*text-align: center;*/\n}\nfooter>ul.badge-container {\n    text-align: right;\n}\n\nul.badge-container > li {\n    display: inline-block;\n    /*padding: 10px 20px;*/\n}\nul.badge-container > li:hover {\n    /*background-color: #2779BF;*/\n}\nul.badge-container > li > a {\n    color: white;\n    text-decoration: none;\n}\n\n\nsection > figure figcaption {\n    text-align: right;\n    font-size: 0.5rem;\n}\n\n\n.content-container {\n    color: #a9b7c6;\n    background-color: #282b2e;\n    border-radius: 10px;\n    padding: 7px;\n    overflow-x: auto;\n}\n\n.content-container-white {\n    color: #282b2e;\n    border: #dedede solid 1px;\n    border-radius: 10px;\n    padding: 7px;\n    overflow-x: auto;\n}\n\n\n.dl-container > dd {\n    padding-left: 10px;\n}\n";
 
-var template$2 = "<div>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.data, {language: 'typescript'}).value\"></code>\n    </pre>\n\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n\n</div>\n";
+var template$3 = "<div>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.data, {language: 'typescript'}).value\"></code>\n    </pre>\n\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n\n</div>\n";
 
-var style$2 = "";
+var style$3 = "";
 
 var Home = (function () {
     function Home() {
@@ -5035,8 +5035,8 @@ var Home = (function () {
     Home = __decorate([
         SimDecorator_7(),
         Component_3({
-            template: template$2,
-            styles: [style$2]
+            template: template$3,
+            styles: [style$3]
         })
     ], Home);
     return Home;
@@ -5054,9 +5054,9 @@ var User = (function () {
     return User;
 }());
 
-var template$1 = "<article>\n    <h1>SIMPLE-BOOT-FRONT</h1>\n    <p>Single Page Application Framworks for Web</p>\n<!--    <p>¯\\_(ツ)_/¯ - Everyone</p>-->\n    <ul class=\"badge-container\">\n        <li>\n            <a href=\"https://www.npmjs.com/package/simple-boot-front\" target=\"_blank\"><img src=\"https://img.shields.io/badge/npm-blue?logo=npm\"></a>\n        </li>\n        <li>\n            <img src=\"https://img.shields.io/badge/license-MIT-green\">\n        </li>\n        <li>\n            <a href=\"https://discord.gg/PW56dpns\" target=\"_blank\"><img src=\"https://img.shields.io/badge/discord-brightgreen?logo=discord\"></a>\n        </li>\n        <li>\n            <a href=\"https://github.com/visualkhh/simple-boot-front\" target=\"_blank\"><img src=\"https://img.shields.io/badge/-github-black?logo=github\"></a>\n        </li>\n    </ul>\n    <section>\n        <h2>Our primary goals are</h2>\n        <ul>\n            <li>Single Page Application Framworks for Web</li>\n            <li>Provide a radically faster and widely accessible getting started experience for all front end.</li>\n        </ul>\n    </section>\n\n    <hr>\n    <section>\n        <h2>🚀 Quick start cli</h2>\n        <figure>\n            <figcaption>terminal</figcaption>\n            <pre class=\"code-container bash\">npm init simple-boot-front projectname\ncd projectname\nnpm start</pre>\n        </figure>\n        \n    </section>\n\n    <hr>\n    <section>\n        <h2>📄 Code description</h2>\n        <figure class=\"site-content\">\n            <figcaption>html</figcaption>\n            <pre dr-pre class=\"code-container html\">&lt;!DOCTYPE html&gt;\n&lt;html&gt;\n    &lt;header&gt;\n        &lt;script src=&quot;./bundle.js&quot; defer&gt;&lt;/script&gt;\n    &lt;/header&gt;\n    &lt;body id=&quot;app&quot;&gt;\n    &lt;/body&gt;\n&lt;/html&gt;</pre>\n        </figure>\n        <figure>\n            <figcaption>typescript</figcaption>\n            <pre dr-pre class=\"code-container typescript\">const option = new SimFrontOption(window).setUrlType(UrlType.hash);\nconst simpleApplication = new SimpleBootFront(Index, option);\nsimpleApplication.run();</pre>\n        </figure>\n    </section>\n</article>\n\n<!--<dl>-->\n<!--    <dt>Beast of Bodmin</dt>-->\n<!--    <dd>A large feline inhabiting Bodmin Moor.</dd>-->\n\n<!--    <dt>Morgawr</dt>-->\n<!--    <dd>A sea serpent.</dd>-->\n\n<!--    <dt>Owlman</dt>-->\n<!--    <dd>A giant owl-like creature.</dd>-->\n<!--</dl>-->\n<!--<div>-->\n<!--    <img class=\"img-fluid\" src=\"https://github.com/visualkhh/simple-boot-front/blob/master/assets/banner.png?raw=true\">-->\n\n<!--</div>-->\n";
+var template$2 = "<article>\n    <h1>SIMPLE-BOOT-FRONT</h1>\n    <p>Single Page Application Framworks for Web</p>\n<!--    <p>¯\\_(ツ)_/¯ - Everyone</p>-->\n\n    <ul class=\"badge-container\">\n        <li>\n            <a href=\"https://www.npmjs.com/package/simple-boot-front\" target=\"_blank\"><img src=\"https://img.shields.io/badge/npm-blue?logo=npm\"></a>\n        </li>\n        <li>\n            <img src=\"https://img.shields.io/badge/license-MIT-green\">\n        </li>\n        <li>\n            <a href=\"https://discord.gg/PW56dpns\" target=\"_blank\"><img src=\"https://img.shields.io/badge/discord-brightgreen?logo=discord\"></a>\n        </li>\n        <li>\n            <a href=\"https://github.com/visualkhh/simple-boot-front\" target=\"_blank\"><img src=\"https://img.shields.io/badge/-github-black?logo=github\"></a>\n        </li>\n    </ul>\n    <section>\n        <h2>Our primary goals are</h2>\n        <ul>\n            <li>Single Page Application Framworks for Web</li>\n            <li>Provide a radically faster and widely accessible getting started experience for all front end.</li>\n        </ul>\n    </section>\n\n    <hr>\n\n    <section>\n        <h2>Contributors</h2>\n        <a href=\"https://github.com/visualkhh/simple-boot-front/graphs/contributors\">\n            <img src=\"https://contrib.rocks/image?repo=visualkhh/simple-boot-front\">\n        </a>\n    </section>\n    <i class=\"bi bi-alarm\"></i>\n\n</article>\n\n<!--<dl>-->\n<!--    <dt>Beast of Bodmin</dt>-->\n<!--    <dd>A large feline inhabiting Bodmin Moor.</dd>-->\n\n<!--    <dt>Morgawr</dt>-->\n<!--    <dd>A sea serpent.</dd>-->\n\n<!--    <dt>Owlman</dt>-->\n<!--    <dd>A giant owl-like creature.</dd>-->\n<!--</dl>-->\n<!--<div>-->\n<!--    <img class=\"img-fluid\" src=\"https://github.com/visualkhh/simple-boot-front/blob/master/assets/banner.png?raw=true\">-->\n\n<!--</div>-->\n";
 
-var style$1 = "/*pre code {*/\n/*    overflow-x: auto ;*/\n/*    overflow-y:hidden;*/\n/*    white-space: pre;*/\n/*    !*white-space: nowrap;*!*/\n\n/*}*/\n/*code {*/\n/*    white-space: pre;*/\n/*    -webkit-overflow-scrolling: auto;*/\n/*}*/\n/*#div1, #div2, #div3, #div4 {*/\n/*    border: 1px solid black;*/\n/*    width:  250px;*/\n/*    margin-bottom: 12px;*/\n/*}*/\n\n/*#div1 { overflow-x: hidden;}*/\n/*#div2 { overflow-x: scroll;}*/\n/*#div3 { overflow-x: visible;}*/\n/*#div4 { overflow-x: auto;*/\n/*    white-space: nowrap;*/\n/*}*/\n";
+var style$2 = "/*pre code {*/\n/*    overflow-x: auto ;*/\n/*    overflow-y:hidden;*/\n/*    white-space: pre;*/\n/*    !*white-space: nowrap;*!*/\n\n/*}*/\n/*code {*/\n/*    white-space: pre;*/\n/*    -webkit-overflow-scrolling: auto;*/\n/*}*/\n/*#div1, #div2, #div3, #div4 {*/\n/*    border: 1px solid black;*/\n/*    width:  250px;*/\n/*    margin-bottom: 12px;*/\n/*}*/\n\n/*#div1 { overflow-x: hidden;}*/\n/*#div2 { overflow-x: scroll;}*/\n/*#div3 { overflow-x: visible;}*/\n/*#div4 { overflow-x: auto;*/\n/*    white-space: nowrap;*/\n/*}*/\n";
 
 var ApiService = (function () {
     function ApiService() {
@@ -5087,6 +5087,9 @@ var ApiService = (function () {
     ApiService.prototype.getJson = function (url) {
         return fetch(url).then(function (response) { return response.json(); });
     };
+    ApiService.prototype.json = function (url, requstInit) {
+        return fetch(url, requstInit).then(function (response) { return response.json(); });
+    };
     ApiService = __decorate([
         SimDecorator_7(),
         __metadata("design:paramtypes", [])
@@ -5099,23 +5102,50 @@ var FrontIntroduction = (function () {
         this.apiService = apiService;
     }
     FrontIntroduction.prototype.onInit = function () {
+        var _this = this;
+        fetch('https://registry.npmjs.org/simple-boot-front', {
+            method: 'GET',
+            mode: 'no-cors',
+            cache: 'no-cache',
+            credentials: 'include',
+            headers: {},
+            redirect: 'follow',
+            referrer: 'no-referrer',
+        }).then(function (it) { return __awaiter(_this, void 0, void 0, function () {
+            var reader, _a, _b;
+            return __generator(this, function (_c) {
+                switch (_c.label) {
+                    case 0:
+                        console.log('-ff->', it.body);
+                        reader = new FileReader();
+                        _b = (_a = reader).readAsDataURL;
+                        return [4, it.blob()];
+                    case 1:
+                        _b.apply(_a, [_c.sent()]);
+                        reader.onloadend = function () {
+                            console.log(reader.result);
+                        };
+                        return [2];
+                }
+            });
+        }); });
     };
     FrontIntroduction.prototype.getMarkdown = function () {
     };
     FrontIntroduction = __decorate([
         SimDecorator_7(),
         Component_3({
-            template: template$1,
-            styles: [style$1]
+            template: template$2,
+            styles: [style$2]
         }),
         __metadata("design:paramtypes", [ApiService])
     ], FrontIntroduction);
     return FrontIntroduction;
 }());
 
-var template = "<article>\n    <h1>@Component</h1>\n    <p>Single Page Application Framworks for Web</p>\n    <section>\n        <h2>Our primary goals are</h2>\n        <ul>\n            <li>Single Page Application Framworks for Web</li>\n            <li>Provide a radically faster and widely accessible getting started experience for all front end.</li>\n        </ul>\n    </section>\n\n    <hr>\n\n    <section>\n        <h2>Create</h2>\n        <figure>\n            <figcaption>template.html</figcaption>\n            <pre dr-pre class=\"code-container html\">&lt;h1&gt;${this.name}&lt;/h1&gt;\n&lt;div dr-inner-html=&quot;this.html&quot;&gt;&lt;/div&gt;</pre>\n        </figure>\n        <figure>\n            <figcaption>typescript</figcaption>\n            <pre dr-pre class=\"code-container typescript\">@Sim()\n@Component({\n  selector: 'index',\n  template,\n  styles: [style]\n})\nexport class Index {\n  public name = 'index class'\n  public title = ''\n  public html = ''\n  public setData(title: string, html: string) {\n    this.title = title;\n    this.html = html;\n  }\n}</pre>\n        </figure>\n        \n    </section>\n\n    <hr>\n\n    <section>\n        <h2>using</h2>\n        <figure>\n            <figcaption>typescript</figcaption>\n            <pre dr-pre class=\"code-container typescript\">constructor(index: Index){...}</pre>\n        </figure>\n        <figure>\n            <figcaption>html</figcaption>\n            <pre dr-pre class=\"code-container html\">&lt;index&gt;&lt;/index&gt;\n&lt;!-- dr-set: $index.setData(&#39;data&#39;); $element, $innerHTML, $attributes --&gt;\n&lt;index dr-set=&quot;$index.setData(&#39;hello component&#39;, $innerHTML)&quot;&gt;&lt;/index&gt;</pre>\n        </figure>\n    </section>\n</article>\n\n";
+var template$1 = "<article>\n    <h1>@Component</h1>\n    <p>Single Page Application Framworks for Web</p>\n    <section>\n        <h2>Our primary goals are</h2>\n        <ul>\n            <li>Single Page Application Framworks for Web</li>\n            <li>Provide a radically faster and widely accessible getting started experience for all front end.</li>\n        </ul>\n    </section>\n\n    <hr>\n\n    <section>\n        <h2>Create</h2>\n        <figure>\n            <figcaption>template.html</figcaption>\n            <pre dr-pre class=\"code-container html\">&lt;h1&gt;${this.name}&lt;/h1&gt;\n&lt;div dr-inner-html=&quot;this.html&quot;&gt;&lt;/div&gt;</pre>\n        </figure>\n        <figure>\n            <figcaption>typescript</figcaption>\n            <pre dr-pre class=\"code-container typescript\">@Sim()\n@Component({\n  selector: 'index',\n  template,\n  styles: [style]\n})\nexport class Index {\n  public name = 'index class'\n  public title = ''\n  public html = ''\n  public setData(title: string, html: string) {\n    this.title = title;\n    this.html = html;\n  }\n}</pre>\n        </figure>\n        \n    </section>\n\n    <hr>\n\n    <section>\n        <h2>using</h2>\n        <figure>\n            <figcaption>typescript</figcaption>\n            <pre dr-pre class=\"code-container typescript\">constructor(index: Index){...}</pre>\n        </figure>\n        <figure>\n            <figcaption>html</figcaption>\n            <pre dr-pre class=\"code-container html\">&lt;index&gt;&lt;/index&gt;\n&lt;!-- dr-set: $index.setData(&#39;data&#39;); $element, $innerHTML, $attributes --&gt;\n&lt;index dr-set=&quot;$index.setData(&#39;hello component&#39;, $innerHTML)&quot;&gt;&lt;/index&gt;</pre>\n        </figure>\n    </section>\n</article>\n\n";
 
-var style = "";
+var style$1 = "";
 
 var FrontComponent = (function () {
     function FrontComponent() {
@@ -5127,8 +5157,8 @@ var FrontComponent = (function () {
     FrontComponent = __decorate([
         SimDecorator_7(),
         Component_3({
-            template: template,
-            styles: [style]
+            template: template$1,
+            styles: [style$1]
         }),
         __metadata("design:paramtypes", [])
     ], FrontComponent);
@@ -5180,6 +5210,28 @@ var CodeScript = (function (_super) {
     return CodeScript;
 }(ScriptRunnable_2));
 
+var template = "<article>\n    <h1>🚀 Quick start</h1>\n    <p>Start a project simply and quickly.</p>\n    <section>\n        <h2>Create project</h2>\n        <figure>\n            <figcaption>terminal</figcaption>\n            <pre class=\"code-container bash\">npm init simple-boot-front projectname\ncd projectname\nnpm start</pre>\n        </figure>\n        \n    </section>\n\n    <hr>\n    <section>\n        <i class=\"bi bi-alarm\"></i>\n        <h2>Directory structure</h2>\n        <p>default bundler rollup (sample template)</p>\n        <figure class=\"content-container-white\">\n            <figcaption>structure</figcaption>\n            <ul class=\"root-directory\">\n                <li>assets</li>\n                <li>dist <small>out put directory</small></li>\n                <li>src <small>source</small>\n                    <ul class=\"child-directory\">\n                        <li>pages <small>your pages</small>\n                            <ul class=\"child-directory\">\n                                <li>home.ts <small>sample</small></li>\n                                <li>user.ts <small>sample</small></li>\n                            </ul>\n                        </li>\n                        <li>index.css <small class=\"text-primary\">index route page css</small></li>\n                        <li>index.html <small class=\"text-primary\">index route page template</small></li>\n                        <li>index.ts <small class=\"text-primary\">simple-boot-fornt start and route point</small></li>\n                    </ul>\n                </li>\n                <li>types <small>typescript type</small></li>\n                    <ul class=\"child-directory\">\n                        <li>index.d.ts <small>type definition</small></li>\n                    </ul>\n                \n                <li>index.html <small class=\"text-primary\">start point html</small></li>\n                <li>package.json <small>project config</small></li>\n                <li>rollup.config.js <small>rollup bundler config</small></li>\n                <li>tsconfig.json <small>typescript config</small></li>\n            </ul>\n        </figure>\n    </section>\n    <hr>\n    <section>\n        <h2>Execution command (package.json)</h2>\n        <figure>\n            <figcaption>package.json</figcaption>\n            <pre dr-pre class=\"code-container json\">{\n  \"name\": \"simple-boot-front-templates\",\n  \"version\": \"1.0.0\",\n                ...\n  \"scripts\": {\n    \"start\": \"rollup -c && sbf serve --path ./dist --port 4500\",\n    \"serve\": \"sbf serve --path ./dist --port 4500\",\n    \"serve:watch\": \"sbf serve --path ./dist --port 4500 --watch\",\n    \"serve:watch:all\": \"sbf serve --bundle rollup --path ./dist --port 4500 --watch\",\n    \"serve:8080\": \"sbf serve --path ./dist --port 4500 --proxy http://localhost:8080\",\n    \"bundle\": \"rollup -c \",\n    \"bundle:watch\": \"rollup -c -w \"\n  },\n  \"devDependencies\": {\n    ...\n  },\n  \"dependencies\": {\n    \"simple-boot-front\": ...\n  }\n}</pre>\n        </figure>\n\n        <dl class=\"dl-container\">\n            <dt>start</dt>\n            <dd>run the server after bundling</dd>\n            <dt>serve</dt>\n            <dd>run the server</dd>\n            <dt>serve:watch</dt>\n            <dd>run the server. It also updates the browser when there is a change in the dist directory file<span class=\"badge bg-secondary\">(detect dist directory)</span></dd>\n            <dt>serve:watch:all</dt>\n            <dd>\"serve:watch\" is the same and updates are made even when the source file is<span class=\"badge bg-secondary\">(detect dist, src directory)</span></dd>\n            <dt>serve:8080</dt>\n            <dd>run the proxy server<span class=\"badge bg-secondary\">--proxy address</span></dd>\n            <dt>bundle</dt>\n            <dd>rollup bundle</dd>\n            <dt>bundle:watch</dt>\n            <dd>rollup bundle watch</dd>\n        </dl>\n\n    </section>\n\n    <hr>\n\n    <h1>📄 Code description</h1>\n    <section>\n        <h2>simple-boot-front start</h2>\n        <figure>\n            <figcaption>index.html</figcaption>\n            <pre dr-pre class=\"code-container html\">&lt;!DOCTYPE html&gt;\n&lt;html lang=&quot;en&quot;&gt;\n&lt;head&gt;\n    &lt;meta charset=&quot;UTF-8&quot;&gt;\n    &lt;title&gt;simple-boot-front&lt;/title&gt;\n    &lt;script src=&quot;bundle.js&quot; defer&gt;&lt;/script&gt;\n    &lt;link rel=&quot;shortcut icon&quot; href=&quot;assets/favicons/favicon.ico&quot;&gt;\n&lt;/head&gt;\n&lt;body id=&quot;app&quot;&gt;\n&lt;/body&gt;\n&lt;/html&gt;\n</pre>\n        </figure>\n        <figure>\n            <figcaption>index.ts (simple-boot-front start)</figcaption>\n            <pre dr-pre class=\"code-container typescript\">const config = new SimFrontOption(window).setUrlType(UrlType.hash);\nconst simpleApplication = new SimpleBootFront(Index, config);\nsimpleApplication.run();</pre>\n        </figure>\n    </section>\n\n    <hr>\n    <section>\n        <h2>single page</h2>\n        <figure>\n            <figcaption>index.ts</figcaption>\n            <pre dr-pre class=\"code-container typescript\">import template from './index.html'\nimport style from './index.css'\n@Component({\n    template,\n    styles: [style]\n})\nexport class Index {\n}</pre>\n        </figure>\n    </section>\n\n    <hr>\n    <section>\n        <h2>multiple route pages</h2>\n        <figure>\n            <figcaption>index.html</figcaption>\n            <pre dr-pre class=\"code-container html\">&lt;header&gt;\n    &lt;nav&gt;\n        &lt;ul&gt;\n            &lt;li&gt;\n                &lt;button router-link=&quot;/&quot;&gt;home&lt;/button&gt;\n            &lt;/li&gt;\n            &lt;li&gt;\n                &lt;button router-link=&quot;/user&quot;&gt;user&lt;/button&gt;\n            &lt;/li&gt;\n        &lt;/ul&gt;\n    &lt;/nav&gt;\n&lt;/header&gt;\n\n&lt;main&gt;\n&lt;router component=&quot;this.child&quot;&gt;&lt;/router&gt;\n&lt;/main&gt;\n\n&lt;footer&gt;footer&lt;/footer&gt;\n</pre>\n        </figure>\n        <figure>\n            <figcaption>index.ts</figcaption>\n            <pre dr-pre class=\"code-container typescript\">import template from './index.html'\nimport style from './index.css'\nimport { Home } from './pages/home';\nimport { User } from './pages/user';\nimport { RouterAction } from 'simple-boot-core/route/RouterAction';\n\n@Sim()\n@Router({\n    path: '',\n    route: {\n        '/': Home,\n        '/user': User,\n    }\n})\n@Component({\n    template,\n    styles: [style]\n})\nexport class Index implements RouterAction {\n    child?: any;\n    canActivate(url: any, module: any): void {\n        this.child = module;\n    }\n}</pre>\n        </figure>\n    </section>\n</article>\n\n";
+
+var style = "ul.root-directory {\n    list-style:none;\n}\nul.root-directory > li::before {\n    content: '├ ';\n}\nul.root-directory > li:first-child::before {\n    content: '┌ ';\n    margin-left: -2px;\n}\n\nul.root-directory > li:last-child::before {\n    content: '└ ';\n    margin-left: -3px;\n}\n\n\nul.child-directory {\n    list-style:none;\n    /*padding-left: calc(50 - 10px);*/\n}\nul.child-directory > li::before {\n    content: ' ├ ';\n    padding-left: 4px;\n}\nul.child-directory > li:last-child::before {\n    content: '└ ';\n    margin-left: -2px;\n}\n\nul.root-directory > li small, ul.child-directory > li small {\n    font-size: 0.5rem;\n    padding-left: 3px;\n}\nul.root-directory > li small::before, ul.child-directory > li small::before {\n    content: '(';\n}\nul.root-directory > li small::after, ul.child-directory > li small::after {\n    content: ')';\n}\n/*ul.child-directory::before {*/\n/*    content: '│';*/\n/*    display: inline-block;*/\n/*    position: absolute;*/\n/*    width: 5px;*/\n/*    height: 5px;*/\n/*}*/\n\n/*ul.child-directory > li::before {*/\n/*    content: '│\\00a0\\00a0\\00a0\\00a0\\00a0├ ';*/\n/*    padding-left: 4px;*/\n/*}*/\n/*ul.child-directory > li:last-child::before {*/\n/*    content: '│\\00a0\\00a0\\00a0\\00a0\\00a0└ ';*/\n/*    padding-left: 4px;*/\n/*    margin-left: -2px;*/\n/*}*/\n";
+
+var FrontQuickstart = (function () {
+    function FrontQuickstart() {
+    }
+    FrontQuickstart.prototype.onInit = function () {
+    };
+    FrontQuickstart.prototype.getMarkdown = function () {
+    };
+    FrontQuickstart = __decorate([
+        SimDecorator_7(),
+        Component_3({
+            template: template,
+            styles: [style]
+        }),
+        __metadata("design:paramtypes", [])
+    ], FrontQuickstart);
+    return FrontQuickstart;
+}());
+
 var Index = (function () {
     function Index(navagation) {
         this.navagation = navagation;
@@ -5188,9 +5240,8 @@ var Index = (function () {
         this.route = data.route;
     }
     Index.prototype.onInit = function () {
-        var _a, _b;
-        console.log((_a = this.category) === null || _a === void 0 ? void 0 : _a.value, this.detail);
-        this.detailsItems = this.getDetails((_b = this.category) === null || _b === void 0 ? void 0 : _b.value);
+        var _a;
+        this.detailsItems = this.getDetails((_a = this.category) === null || _a === void 0 ? void 0 : _a.value);
     };
     Index.prototype.changeCategory = function (data) {
         this.detailsItems = this.getDetails(data);
@@ -5210,6 +5261,7 @@ var Index = (function () {
     };
     Index.prototype.canActivate = function (url, module) {
         this.child = module;
+        feather.replace({ 'aria-hidden': 'true' });
         document.querySelectorAll('.code-container').forEach(function (el) {
             hljs.highlightElement(el);
         });
@@ -5221,14 +5273,15 @@ var Index = (function () {
             route: {
                 '/': '/simple-boot-front/introduction',
                 '/simple-boot-front/introduction': FrontIntroduction,
+                '/simple-boot-front/quick-start': FrontQuickstart,
                 '/simple-boot-front/component': FrontComponent,
                 '/home': Home,
                 '/user': User,
             }
         }),
         Component_3({
-            template: template$3,
-            styles: [style$3],
+            template: template$4,
+            styles: [style$4],
             using: [CodeScript]
         }),
         __metadata("design:paramtypes", [Navigation_2])

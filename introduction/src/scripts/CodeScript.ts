@@ -11,6 +11,5 @@ export class CodeScript extends ScriptRunnable {
         console.log('data-->', data, language)
         return hljs.highlight(data, {language}).value.replace(/\$\{/g,'$<span>{</span>');
     }
-
 }
 

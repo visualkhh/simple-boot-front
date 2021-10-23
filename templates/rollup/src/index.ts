@@ -4,8 +4,8 @@ import { Router, Sim } from 'simple-boot-core/decorators/SimDecorator';
 import { Component } from 'simple-boot-front/decorators/Component';
 import template from './index.html'
 import style from './index.css'
-import { Home } from 'pages/Home';
-import { User } from 'pages/User';
+import { Home } from './pages/home';
+import { User } from './pages/user';
 import { RouterAction } from 'simple-boot-core/route/RouterAction';
 
 @Sim()
@@ -26,5 +26,7 @@ export class Index implements RouterAction {
         this.child = module;
     }
 }
-const simpleApplication = new SimpleBootFront(Index, new SimFrontOption(window).setUrlType(UrlType.hash));
+
+const config = new SimFrontOption(window).setUrlType(UrlType.hash);
+const simpleApplication = new SimpleBootFront(Index, config);
 simpleApplication.run();

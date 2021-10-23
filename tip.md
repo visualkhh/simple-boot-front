@@ -42,6 +42,10 @@ tip
             - https://kdydesign.github.io/2020/10/06/spa-route-tutorial/
     - Webpack, Typescript에서 Path Alias 설정하기: https://jonghyun-park.medium.com/webpack-typescript%EC%97%90%EC%84%9C-path-alias-%EC%84%A4%EC%A0%95%ED%95%98%EA%B8%B0-ec32428622d2
 
+- rollup
+  - https://rollupjs.org/guide/en/
+  - https://flamingotiger.github.io/frontend/DevEnv/rollup-setup/
+
 - javascript
   - function parameter name: https://stackoverflow.com/questions/1007981/how-to-get-function-parameter-names-values-dynamically
     
