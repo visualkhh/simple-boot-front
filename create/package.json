@@ -1,7 +1,7 @@
 {
   "name": "create-simple-boot-front",
   "description": "Create a simple-boot-front or Sapper site in a single command.",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "author": "visualkhh",
   "bin": {
     "create-simple-boot-front": "./bin/run",
