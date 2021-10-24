@@ -10,10 +10,13 @@ import { ApiService } from 'services/ApiService';
     styles: [style]
 })
 export class CliIntroduction implements OnInit {
-
+    public package?: {version: string, license: string};
     constructor(public apiService: ApiService) {
     }
 
     onInit(): void {
+        this.apiService.getJson('https://visualkhh.github.io/simple-boot-front/cli/package.json').then(it => {
+            this.package = it;
+        })
     }
 }

@@ -10,10 +10,13 @@ import { ApiService } from 'services/ApiService';
     styles: [style]
 })
 export class CreateIntroduction implements OnInit {
-
+    public package?: {version: string, license: string};
     constructor(public apiService: ApiService) {
     }
 
     onInit(): void {
+        this.apiService.getJson('https://visualkhh.github.io/simple-boot-front/create/package.json').then(it => {
+            this.package = it;
+        })
     }
 }

@@ -13,10 +13,13 @@ import { DomrenderLifecycleSection } from './section/lifecycle/domrender-lifecyc
     using: [DomrenderFunctionSection, DomrenderLifecycleSection]
 })
 export class DomrenderIntroduction implements OnInit {
-
+    public package?: {version: string, license: string};
     constructor(public apiService: ApiService) {
     }
 
     onInit(): void {
+        this.apiService.getJson('https://visualkhh.github.io/dom-render/package.json').then(it => {
+            this.package = it;
+        })
     }
 }

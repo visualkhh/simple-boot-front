@@ -13,10 +13,13 @@ import { CoreFunctionSection } from './section/function/core-function-section';
     using: [CoreLifecycleSection, CoreFunctionSection]
 })
 export class CoreIntroduction implements OnInit {
-
+    public package?: {version: string, license: string};
     constructor(public apiService: ApiService) {
     }
 
     onInit(): void {
+        this.apiService.getJson('https://visualkhh.github.io/simple-boot-core/package.json').then(it => {
+            this.package = it;
+        })
     }
 }

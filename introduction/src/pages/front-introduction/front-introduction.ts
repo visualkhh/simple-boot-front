@@ -15,10 +15,13 @@ import { DomrenderFunctionSection } from '../domrender-introduction/section/func
     using: [CoreLifecycleSection, FrontLifecycleSection, CoreFunctionSection, DomrenderFunctionSection]
 })
 export class FrontIntroduction implements OnInit {
-
+    public package?: {version: string, license: string};
     constructor(public apiService: ApiService) {
     }
 
     onInit(): void {
+        this.apiService.getJson('https://visualkhh.github.io/simple-boot-front/package.json').then(it => {
+            this.package = it;
+        })
     }
 }
