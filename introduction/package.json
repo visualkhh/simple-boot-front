@@ -58,7 +58,6 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
-    "dom-render": "file:../libs/dom-render/dist",
-    "simple-boot-front": "file:../dist"
+    "simple-boot-front": "1.0.96"
   }
 }
