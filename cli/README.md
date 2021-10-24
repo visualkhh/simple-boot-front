@@ -2,7 +2,7 @@ simple-boot-cli
 ===
 # sbf
 ```shell
-npm install simple-boot-cli
+npm install simple-boot-front-cli
 ```
 
 ## serve
