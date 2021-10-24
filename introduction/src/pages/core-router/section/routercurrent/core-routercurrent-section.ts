@@ -7,5 +7,5 @@ import template from './core-routercurrent-section.html'
     template
 })
 export class CoreRoutercurrentSection {
-    title = 'Current Route (RouterModule)'
+    title = 'current Route (RouterModule)'
 }

@@ -7,5 +7,5 @@ import template from './front-lifecycle-section.html'
     template
 })
 export class FrontLifecycleSection {
-    title = 'Front life cycle'
+    title = 'front life cycle'
 }

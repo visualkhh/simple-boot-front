@@ -7,5 +7,5 @@ import template from './core-function-section.html'
     template
 })
 export class CoreFunctionSection {
-    title = 'Core engine'
+    title = 'core engine'
 }

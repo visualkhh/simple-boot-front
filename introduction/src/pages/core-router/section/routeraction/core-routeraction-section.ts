@@ -7,5 +7,5 @@ import template from './core-routeraction-section.html'
     template
 })
 export class CoreRouteractionSection {
-    title = 'RouterAction'
+    title = 'routerAction'
 }

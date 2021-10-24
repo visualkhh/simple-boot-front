@@ -27,7 +27,17 @@ export class GlobalAdvice {
 }
 </pre>
         </figure>
-        <dl>ExceptionHandler
+    </section>
+    <hr>
+    <section>
+        <h2>exceptionHandler</h2>
+        <figure>
+            <figcaption>ExceptionDecorator.ts</figcaption>
+            <pre dr-pre class="code-container typescript">export const ExceptionHandler = (target?: ConstructorType&lt;any&gt;) =&gt; {
+    return ReflectUtils.metadata(ExceptionHandlerMetadataKey, target ?? null);
+}</pre>
+        </figure>
+        <dl>
             <ul>
                 <li>
                     <dt>target</dt>

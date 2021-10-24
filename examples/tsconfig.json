@@ -9,8 +9,8 @@
     "outDir": "./dist",                        /* Redirect output structure to the directory. */
 //    "outFile": "./dist/dom-render33.js",                        /* Redirect output structure to the directory. */
     "rootDir": "./src",                       /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
-    "importHelpers": true,
-    "noEmitHelpers": true,
+//    "importHelpers": true,
+//    "noEmitHelpers": true,
     /* Strict Type-Checking Options */
     "strict": true,                           /* Enable all strict type-checking options. */
     /* Module Resolution Options */

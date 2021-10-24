@@ -9,7 +9,7 @@ import typescript from 'rollup-plugin-typescript2';
 import sourcemaps from 'rollup-plugin-sourcemaps';
 import del from 'rollup-plugin-delete';
 export default {
-    input: 'src/Index.ts',
+    input: 'src/index.ts',
     output: {
         sourcemap: true,
         dir: 'dist',
@@ -35,7 +35,8 @@ export default {
             "function __extends(d, b) {\n  if (typeof b !== \"function\" && b !== null) throw new TypeError(\"Class extends value \" + String(b) + \" is not a constructor or null\");\n  extendStatics(d, b);"
                 :
                 "function __extends(d, b) {if (typeof b !== \"function\" && b !== null) throw new TypeError(\"Class extends value \" + String(b) + \" is not a constructor or null\");",
-            delimiters: ['\n', '\n']
+            delimiters: ['\n', '\n'],
+            preventAssignment: true
         }),
         // replace({
         //     preventAssignment: true,

@@ -7,5 +7,5 @@ import template from './core-routermapping-section.html'
     template
 })
 export class CoreRoutermappingSection {
-    title = 'Router Mapping'
+    title = 'router Mapping'
 }

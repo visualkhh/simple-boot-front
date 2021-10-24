@@ -7,5 +7,5 @@ import template from './core-routerconfig-section.html'
     template
 })
 export class CoreRouterconfigSection {
-    title = 'RouterConfig'
+    title = 'routerConfig'
 }

@@ -7,5 +7,5 @@ import template from './domrender-lifecycle-section.html'
     template
 })
 export class DomrenderLifecycleSection {
-    title = 'Dom-render life cycle'
+    title = 'dom-render life cycle'
 }

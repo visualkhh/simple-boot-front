@@ -2,25 +2,7 @@
     <h1>@Script</h1>
     <p>define script instructions and call</p>
     <section>
-        <h2>RouterConfig</h2>
-        <dl class="dl-container">
-            <ul>
-                <li>
-                    <dt>name</dt>
-                    <dd>script name</dd>
-                </li>
-                <li>
-                    <dt>using</dt>
-                    <dd>using components or scripts in this component</dd>
-                </li>
-            </ul>
-        </dl>
-    </section>
-
-    <hr>
-
-    <section>
-        <h2>Create</h2>
+        <h2>create</h2>
         <p>extends ScriptRunnable class (create 'run' method) implements</p>
         <figure>
             <figcaption>define Script class</figcaption>
@@ -59,13 +41,34 @@ counstructor(scriptService: ScriptService) {
 &lt;div dr-if=&quot;$scripts.calc(1, 3) === 3&quot;&gt; is 3&lt;/div&gt;</pre>
         </figure>
     </section>
-
-
     <hr>
     <section>
-        <h2>Change Data and Ref re render</h2>
+        <h2>scriptConfig</h2>
+        <figure>
+            <figcaption>ScriptConfig.ts</figcaption>
+            <pre dr-pre class="code-container typescript">export interface ScriptConfig {
+    name?: string,
+    using?: (ConstructorType&lt;any&gt;)[],
+}</pre>
+        </figure>
+        <dl class="dl-container">
+            <ul>
+                <li>
+                    <dt>name</dt>
+                    <dd>script name</dd>
+                </li>
+                <li>
+                    <dt>using</dt>
+                    <dd>using components or scripts in this component</dd>
+                </li>
+            </ul>
+        </dl>
+    </section>
+    <hr>
+    <section>
+        <h2>change Data and Ref re render</h2>
         <p>If the data changes, re render the place you are referring to.</p>
-        <p>example: i18n Script</p>
+        <p>🔨 example: i18n Script</p>
         <figure>
             <figcaption>html</figcaption>
             <pre dr-pre class="code-container html">&lt;div&gt;${$scripts.i18n('hello')}$&lt;/div&gt;</pre>

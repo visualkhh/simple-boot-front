@@ -2,33 +2,7 @@
     <h1>@Component</h1>
     <p>minimum units that make up the page</p>
     <section>
-        <h2>ComponentConfig</h2>
-        <dl class="dl-container">
-            <ul>
-                <li>
-                    <dt>selector</dt>
-                    <dd>element name</dd>
-                </li>
-                <li>
-                    <dt>template</dt>
-                    <dd>html template string</dd>
-                </li>
-                <li>
-                    <dt>styles</dt>
-                    <dd>style string array</dd>
-                </li>
-                <li>
-                    <dt>using</dt>
-                    <dd>using components or scripts in this component</dd>
-                </li>
-            </ul>
-        </dl>
-    </section>
-
-    <hr>
-
-    <section>
-        <h2>Create</h2>
+        <h2>create</h2>
         <figure>
             <figcaption>template.html</figcaption>
             <pre dr-pre class="code-container html">&lt;h1&gt;${this.name}$&lt;/h1&gt;
@@ -57,6 +31,42 @@ export class Index {
 
     <hr>
 
-<domrender-component-template-section dr-on-init="$component.title='using'"></domrender-component-template-section>
+    <domrender-component-template-section dr-on-init="$component.title='using'"></domrender-component-template-section>
+    <hr>
+
+    <section>
+        <h2>componentConfig</h2>
+        <figure>
+            <figcaption>ComponentConfig.ts</figcaption>
+            <pre dr-pre class="code-container typescript">export interface ComponentConfig {
+    selector?: string,
+    template?: string,
+    styles?: (string)[],
+    using?: (ConstructorType&lt;any&gt;)[],
+}</pre>
+        </figure>
+        <dl class="dl-container" dr-pre>
+            <ul>
+                <li>
+                    <dt>selector</dt>
+                    <dd>element name</dd>
+                </li>
+                <li>
+                    <dt>template</dt>
+                    <dd>html template string</dd>
+                </li>
+                <li>
+                    <dt>styles</dt>
+                    <dd>style string array</dd>
+                </li>
+                <li>
+                    <dt>using</dt>
+                    <dd>using components or scripts in this component</dd>
+                </li>
+            </ul>
+        </dl>
+    </section>
+
+
 </article>
 

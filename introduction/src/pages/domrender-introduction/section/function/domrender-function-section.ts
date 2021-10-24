@@ -7,5 +7,5 @@ import template from './domrender-function-section.html'
     template
 })
 export class DomrenderFunctionSection {
-    title = 'View Template engine'
+    title = 'view Template engine'
 }

@@ -7,5 +7,5 @@ import template from './core-lifecycle-section.html'
     template
 })
 export class CoreLifecycleSection {
-    title = 'Core life cycle'
+    title = 'core life cycle'
 }

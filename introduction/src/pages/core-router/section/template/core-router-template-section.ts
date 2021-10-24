@@ -7,5 +7,5 @@ import template from './core-router-template-section.html'
     template
 })
 export class CoreRouterTemplateSection {
-    title = 'Router'
+    title = 'router'
 }
