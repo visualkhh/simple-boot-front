@@ -5002,44 +5002,9 @@ exports.SimpleBootFront = SimpleBootFront;
 unwrapExports(SimpleBootFront_1);
 var SimpleBootFront_2 = SimpleBootFront_1.SimpleBootFront;
 
-var template$C = "<div>\n  <header class=\"header\">\n    <nav class=\"input-group\">\n      <label class=\"input-group-text bg-white\" for=\"inputGroupSelect01\">simple-boot</label>\n      <select class=\"form-select form-select-lg\" id=\"inputGroupSelect01\" dr-on-init=\"this.category\" dr-event-change=\"this.changeCategory($target.value)\">\n        <option selected=\"selected\" value=\"simple-boot-front\" dr-attr=\"{selected: this.getPath(1) === $element.value ? 'selected' : null}\">front </option>\n        <option value=\"dom-render\" dr-attr=\"{selected: this.getPath(1) === $element.value ? 'selected' : null}\">dom-render</option>\n        <option value=\"simple-boot-core\" dr-attr=\"{selected: this.getPath(1) === $element.value ? 'selected' : null}\">core</option>\n        <option value=\"create-simple-boot-front\" dr-attr=\"{selected: this.getPath(1) === $element.value ? 'selected' : null}\">create</option>\n        <option value=\"simple-boot-front-cli\" dr-attr=\"{selected: this.getPath(1) === $element.value ? 'selected' : null}\">cli</option>\n      </select>\n      <span class=\"input-group-text bg-light fs-6\">⇢</span>\n      <select class=\"form-select form-select-sm\" dr-on-init=\"this.detail\" dr-event-change=\"this.changeDetail($target.value)\">\n        <option dr-for-of=\"this.detailsItems\" dr-complete=\"this.changeDetail(this.detail.value)\" dr-value=\"#it#\" dr-attr=\"{selected: this.navagation.path === $element.value ? 'selected' : null}\">${#it#?.split?.('/')?.[2] ?? ''}$</option>\n      </select>\n    </nav>\n  </header>\n  <main>\n    <router component=\"this.child\"></router>\n  </main>\n  <footer>\n    <ul class=\"badge-container\">\n      <li>\n        <a href=\"https://www.npmjs.com/package/simple-boot-front\" target=\"_blank\"><img src=\"https://img.shields.io/badge/npm-blue?logo=npm\"></a>\n      </li>\n      <li>\n        <img src=\"https://img.shields.io/badge/license-MIT-green\">\n      </li>\n      <li>\n        <a href=\"https://discord.gg/PW56dpns\" target=\"_blank\"><img src=\"https://img.shields.io/badge/discord-brightgreen?logo=discord\"></a>\n      </li>\n      <li>\n        <a href=\"https://github.com/visualkhh/simple-boot-front\" target=\"_blank\"><img src=\"https://img.shields.io/badge/-github-black?logo=github\"></a>\n      </li>\n      <li>\n        <a href=\"maileto:visualkhh@gmail.com\" target=\"_blank\"><img src=\"https://img.shields.io/badge/visualkhh@gmail.com-lightgrey\"></a>\n      </li>\n    </ul>\n  </footer>\n</div>\n";
+var template$B = "<div>\n  <header class=\"header\">\n    <nav class=\"input-group\">\n      <label class=\"input-group-text bg-white\" for=\"inputGroupSelect01\">simple-boot</label>\n      <select class=\"form-select form-select-lg\" id=\"inputGroupSelect01\" dr-on-init=\"this.category\" dr-event-change=\"this.changeCategory($target.value)\">\n        <option selected=\"selected\" value=\"simple-boot-front\" dr-attr=\"{selected: this.getPath(1) === $element.value ? 'selected' : null}\">front </option>\n        <option value=\"dom-render\" dr-attr=\"{selected: this.getPath(1) === $element.value ? 'selected' : null}\">dom-render</option>\n        <option value=\"simple-boot-core\" dr-attr=\"{selected: this.getPath(1) === $element.value ? 'selected' : null}\">core</option>\n        <option value=\"create-simple-boot-front\" dr-attr=\"{selected: this.getPath(1) === $element.value ? 'selected' : null}\">create</option>\n        <option value=\"simple-boot-front-cli\" dr-attr=\"{selected: this.getPath(1) === $element.value ? 'selected' : null}\">cli</option>\n      </select>\n      <span class=\"input-group-text bg-light fs-6\">⇢</span>\n      <select class=\"form-select form-select-sm\" dr-on-init=\"this.detail\" dr-event-change=\"this.changeDetail($target.value)\">\n        <option dr-for-of=\"this.detailsItems\" dr-complete=\"this.changeDetail(this.detail.value)\" dr-value=\"#it#\" dr-attr=\"{selected: this.navagation.path === $element.value ? 'selected' : null}\">${#it#?.split?.('/')?.[2] ?? ''}$</option>\n      </select>\n    </nav>\n  </header>\n  <main>\n    <router component=\"this.child\"></router>\n  </main>\n  <footer>\n    <ul class=\"badge-container\">\n      <li>\n        <a href=\"https://www.npmjs.com/package/simple-boot-front\" target=\"_blank\"><img src=\"https://img.shields.io/badge/npm-blue?logo=npm\"></a>\n      </li>\n      <li>\n        <img src=\"https://img.shields.io/badge/license-MIT-green\">\n      </li>\n      <li>\n        <a href=\"https://discord.gg/PW56dpns\" target=\"_blank\"><img src=\"https://img.shields.io/badge/discord-brightgreen?logo=discord\"></a>\n      </li>\n      <li>\n        <a href=\"https://github.com/visualkhh/simple-boot-front\" target=\"_blank\"><img src=\"https://img.shields.io/badge/-github-black?logo=github\"></a>\n      </li>\n      <li>\n        <a href=\"maileto:visualkhh@gmail.com\" target=\"_blank\"><img src=\"https://img.shields.io/badge/visualkhh@gmail.com-lightgrey\"></a>\n      </li>\n    </ul>\n  </footer>\n</div>\n";
 
-var style$p = "header {\n    position: -webkit-sticky; /* 사파리 브라우저 지원 */\n    position: sticky;\n    top: 0px;\n    /*border: #656565 1px solid;*/\n    /*background: white;*/\n    /*border-bottom-left-radius: 5px;*/\n    /*border-bottom-right-radius: 5px;*/\n}\n\n/*footer,*/\nmain {\n/*    border: #333333 1px solid;*/\n    color: rgb(30, 30, 30);\n    padding: 10px;\n/*    !*margin: 20px;*!*/\n}\n\n.code-container {\n    color: #a9b7c6;\n    background-color: #282b2e;\n    overflow-x: auto;\n    /*margin: 5px;*/\n    padding: 10px;\n    border-radius: 10px;\n}\npre code{\n    border-radius: 10px;\n}\n\n\nul.badge-container {\n    padding-left: 0px;\n    /*background-color: #3D99CE;*/\n    /*text-align: center;*/\n}\nfooter>ul.badge-container {\n    text-align: right;\n}\n\nul.badge-container > li {\n    display: inline-block;\n    /*padding: 10px 20px;*/\n}\nul.badge-container > li:hover {\n    /*background-color: #2779BF;*/\n}\nul.badge-container > li > a {\n    color: white;\n    text-decoration: none;\n}\n\n\nsection > figure figcaption {\n    text-align: right;\n    font-size: 0.5rem;\n}\n\n\n.content-container {\n    color: #a9b7c6;\n    background-color: #282b2e;\n    border-radius: 10px;\n    padding: 7px;\n    overflow-x: auto;\n}\n\n.content-container-white {\n    color: #282b2e;\n    border: #dedede solid 1px;\n    border-radius: 10px;\n    padding: 7px;\n    overflow-x: auto;\n}\n\n/*.dl-container > dt::before {*/\n/*    content: '- ';*/\n\n/*}*/\n.dl-container > dd {\n    padding-left: 10px;\n    margin-bottom: 15px;\n}\n\ndd > small {\n    font-size: 0.5rem;\n}\n\nli > small {\n    font-size: 0.5rem;\n}\n";
-
-var template$B = "<div>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.data, {language: 'typescript'}).value\"></code>\n    </pre>\n\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n    <pre class=\"code-container\">\n        <code dr-inner-html=\"hljs.highlight(this.dataHtml, {language: 'html'}).value\"></code>\n    </pre>\n\n</div>\n";
-
-var style$o = "";
-
-var Home = (function () {
-    function Home() {
-        this.data = "\n        @Sim()\n        @Component({ ${this}\n            template: '<div>home</div>'\n        })\n        export class Home {\n        }\n    ";
-        this.dataHtml = "\n<pre>\n  <code class=\"typescript\" dr-inner-html=\"hljs.highlight(this.data, {language: 'typescript'}).value\">\n  </code>\n</pre>\n<per>\n    <button router-link=\"/user\">user</button>\n</per>\n<pre><code class=\"html\"\n    ";
-    }
-    Home.prototype.onInit = function () {
-    };
-    Home.prototype.getMarkdown = function () {
-    };
-    Home = __decorate([
-        SimDecorator_7(),
-        Component_3({
-            template: template$B,
-            styles: [style$o]
-        })
-    ], Home);
-    return Home;
-}());
-
-var User = (function () {
-    function User() {
-    }
-    User = __decorate([
-        SimDecorator_7(),
-        Component_3({
-            template: '<div>user<pre><code class="typescript">const a = 10;</code></pre></div>'
-        })
-    ], User);
-    return User;
-}());
+var style$o = "html {\n    scroll-behavior: smooth;\n}\nheader {\n    position: -webkit-sticky; /* 사파리 브라우저 지원 */\n    position: sticky;\n    top: 0px;\n    /*border: #656565 1px solid;*/\n    /*background: white;*/\n    /*border-bottom-left-radius: 5px;*/\n    /*border-bottom-right-radius: 5px;*/\n}\n\n/*footer,*/\nmain {\n/*    border: #333333 1px solid;*/\n    color: rgb(30, 30, 30);\n    padding: 10px;\n/*    !*margin: 20px;*!*/\n}\n\n.code-container {\n    color: #a9b7c6;\n    background-color: #282b2e;\n    overflow-x: auto;\n    /*margin: 5px;*/\n    padding: 10px;\n    border-radius: 10px;\n}\npre code{\n    border-radius: 10px;\n}\n\n\nul.badge-container {\n    padding-left: 0px;\n    /*background-color: #3D99CE;*/\n    /*text-align: center;*/\n}\nfooter>ul.badge-container {\n    text-align: right;\n}\n\nul.badge-container > li {\n    display: inline-block;\n    /*padding: 10px 20px;*/\n}\nul.badge-container > li:hover {\n    /*background-color: #2779BF;*/\n}\nul.badge-container > li > a {\n    color: white;\n    text-decoration: none;\n}\n\n\nsection > figure figcaption {\n    text-align: right;\n    font-size: 0.5rem;\n}\n\n\n.content-container {\n    color: #a9b7c6;\n    background-color: #282b2e;\n    border-radius: 10px;\n    padding: 7px;\n    overflow-x: auto;\n}\n\n.content-container-white {\n    color: #282b2e;\n    border: #dedede solid 1px;\n    border-radius: 10px;\n    padding: 7px;\n    overflow-x: auto;\n}\n\n/*.dl-container > dt::before {*/\n/*    content: '- ';*/\n\n/*}*/\n.dl-container > dd {\n    padding-left: 10px;\n    margin-bottom: 15px;\n}\n\ndd > small {\n    font-size: 0.5rem;\n}\n\nli > small {\n    font-size: 0.5rem;\n}\n";
 
 var template$A = "<!--    <p>¯\\_(ツ)_/¯ - Everyone</p>-->\n<article>\n    <h1>SIMPLE-BOOT-FRONT</h1>\n    <p>Single Page Application Framworks for Web</p>\n\n    <ul class=\"badge-container\">\n        <li>\n            <a href=\"https://www.npmjs.com/package/simple-boot-front\" target=\"_blank\"><img src=\"https://img.shields.io/badge/npm-blue?logo=npm\"></a>\n        </li>\n        <li>\n            <img src=\"https://img.shields.io/badge/license-MIT-green\">\n        </li>\n        <li>\n            <a href=\"https://discord.gg/PW56dpns\" target=\"_blank\"><img src=\"https://img.shields.io/badge/discord-brightgreen?logo=discord\"></a>\n        </li>\n        <li>\n            <a href=\"https://github.com/visualkhh/simple-boot-front\" target=\"_blank\"><img src=\"https://img.shields.io/badge/-github-black?logo=github\"></a>\n        </li>\n    </ul>\n\n    <section>\n        <h2>our primary goals are</h2>\n        <ul>\n            <li>Single Page Application Framworks for Web</li>\n            <li>Provide a radically faster and widely accessible getting started experience for all front end.</li>\n        </ul>\n    </section>\n\n    <hr>\n\n    <section>\n        <h2>dependencies</h2>\n        <ul>\n            <li>dom-render <span class=\"badge bg-secondary\">Product line</span></li>\n            <li>simple-boot-core <span class=\"badge bg-secondary\">Product line</span></li>\n            <li>reflect-metadata</li>\n        </ul>\n    </section>\n\n    <hr>\n    <domrender-function-section></domrender-function-section>\n    <hr>\n    <core-function-section></core-function-section>\n    <hr>\n    <core-lifecycle-section></core-lifecycle-section>\n    <hr>\n    <front-lifecycle-section></front-lifecycle-section>\n    <hr>\n\n    <section>\n        <h2>contributors</h2>\n        <a href=\"https://github.com/visualkhh/simple-boot-front/graphs/contributors\">\n            <img src=\"https://contrib.rocks/image?repo=visualkhh/simple-boot-front\">\n        </a>\n    </section>\n</article>\n";
 
@@ -5100,7 +5065,7 @@ var CoreLifecycleSection = (function () {
     return CoreLifecycleSection;
 }());
 
-var template$y = "<section>\n    <h2>${this.title}$</h2>\n    <p>simple-boot-core <a href=\"https://github.com/visualkhh/simple-boot-core\" target=\"_blank\"><img src=\"https://img.shields.io/badge/-github-black?logo=github\"></a></p>\n    <ul>\n        <li>Object management (@Sim)</li>\n        <li>Dependency Injection (DI)</li>\n        <li>Aspect Oriented Programming (AOP)</li>\n        <li>Global Advice</li>\n        <li>Intent Event System</li>\n        <li>Route System (@Router)</li>\n    </ul>\n</section>\n";
+var template$y = "<section>\n    <h2>${this.title}$</h2>\n    <p>simple-boot-core <a href=\"https://github.com/visualkhh/simple-boot-core\" target=\"_blank\"><img src=\"https://img.shields.io/badge/-github-black?logo=github\"></a></p>\n    <ul>\n        <li>Object management <small>(@Sim)</small></li>\n        <li>Dependency Injection <small>(DI)</small></li>\n        <li>Aspect Oriented Programming <small>(AOP)</small></li>\n        <li>Global Advice</li>\n        <li>Intent Event System</li>\n        <li>Route System <small>(@Router)</small></li>\n    </ul>\n</section>\n";
 
 var CoreFunctionSection = (function () {
     function CoreFunctionSection() {
@@ -5864,6 +5829,7 @@ var Index = (function () {
         });
     };
     Index.prototype.canActivate = function (url, module) {
+        window.scrollTo(0, 0);
         this.child = module;
         feather.replace({ 'aria-hidden': 'true' });
         document.querySelectorAll('.code-container').forEach(function (el) {
@@ -5899,14 +5865,12 @@ var Index = (function () {
                 '/simple-boot-core/aop': CoreAop,
                 '/simple-boot-core/advice': CoreAdvice,
                 '/create-simple-boot-front/introduction': CreateIntroduction,
-                '/simple-boot-front-cli/introduction': CliIntroduction,
-                '/home': Home,
-                '/user': User,
+                '/simple-boot-front-cli/introduction': CliIntroduction
             }
         }),
         Component_3({
-            template: template$C,
-            styles: [style$p],
+            template: template$B,
+            styles: [style$o],
             using: [CodeScript]
         }),
         __metadata("design:paramtypes", [Navigation_2])

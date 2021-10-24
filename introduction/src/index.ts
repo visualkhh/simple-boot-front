@@ -4,8 +4,6 @@ import { getRouter, Route, Router, Sim } from 'simple-boot-core/decorators/SimDe
 import { Component } from 'simple-boot-front/decorators/Component';
 import template from './index.html'
 import style from './index.css'
-import { Home } from './pages/Home';
-import { User } from './pages/User';
 import { RouterAction } from 'simple-boot-core/route/RouterAction';
 import { FrontIntroduction } from './pages/front-introduction/front-introduction';
 import { FrontComponent } from './pages/front-component/front-component';
@@ -64,9 +62,7 @@ declare const hljs: any;
         '/simple-boot-core/aop': CoreAop,
         '/simple-boot-core/advice': CoreAdvice,
         '/create-simple-boot-front/introduction': CreateIntroduction,
-        '/simple-boot-front-cli/introduction': CliIntroduction,
-        '/home': Home,
-        '/user': User,
+        '/simple-boot-front-cli/introduction': CliIntroduction
     }
 })
 @Component({
@@ -108,12 +104,14 @@ export class Index implements OnInit, RouterAction {
     }
 
     canActivate(url: any, module: any): void {
+        window.scrollTo(0, 0);
         this.child = module;
         // hljs.highlightAll();
         feather.replace({ 'aria-hidden': 'true' })
         document.querySelectorAll('.code-container').forEach(el => {
             hljs.highlightElement(el);
         });
+
     }
 }
 const simpleApplication = new SimpleBootFront(Index, new SimFrontOption(window).setUrlType(UrlType.hash));
