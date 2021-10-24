@@ -54,7 +54,7 @@ ul.badge-container > li > a {
 }
 
 
-section > figure figcaption {
+figure figcaption {
     text-align: right;
     font-size: 0.5rem;
 }
@@ -75,6 +75,10 @@ section > figure figcaption {
     padding: 7px;
     overflow-x: auto;
 }
+.no-overflow {
+    overflow-x: visible;
+    overflow-y: visible;
+}
 
 /*.dl-container > dt::before {*/
 /*    content: '- ';*/
@@ -91,4 +95,24 @@ dd > small {
 
 li > small {
     font-size: 0.5rem;
+}
+
+
+/*------------------------*/
+.bd-callout-info {
+    border-left-color: #5bc0de !important;
+}
+.bd-callout-warning {
+    border-left-color: #f0ad4e !important;
+}
+.bd-callout-danger {
+    border-left-color: #d9534f !important;
+}
+.bd-callout {
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid #e9ecef;
+    border-left-width: .25rem;
+    border-radius: .25rem;
 }

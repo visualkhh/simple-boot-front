@@ -34,6 +34,9 @@ export class SimpleBootFront extends SimpleApplication {
     public domRenderConfig: Config = {
         targetElements: this.domRenderTargetElements,
         targetAttrs: this.domRenderTargetAttrs,
+        onElementInit: (name: string, obj: any, rawSet: RawSet, targetElement: TargetElement) => {
+            targetElement?.__render?.component?.onInit?.();
+        },
         onAttrInit: (attrName: string, attrValue: string, obj: any) => {
             if (attrName === 'component') {
                 const bindObj = ScriptUtils.evalReturn(attrValue, obj);
@@ -171,7 +174,25 @@ export class SimpleBootFront extends SimpleApplication {
         const selectors = componentSelectors;
         selectors.forEach((val, name) => {
             const component = getComponent(val);
-            this.domRenderTargetElements.push(RawSet.createComponentTargetElement(name, (e, o, r) => this.simstanceManager.newSim(val), component?.template, component?.styles, this.domRenderConfig.scripts));
+            const items = RawSet.createComponentTargetElement(name,
+                (e, o, r) => {
+                    const newSim = this.simstanceManager.newSim(val);
+                    // newSim?.onInit?.();
+                    return newSim
+                },
+                component?.template,
+                component?.styles,
+                this.domRenderConfig.scripts
+                // ,
+                // (target: Element, obj: any, rawSet: RawSet) => {
+                //     (items as any).render?.component?.onInit?.();
+                // }
+            );
+
+            // items.complete = (target: Element, obj: any, rawSet: RawSet) => {
+            //     (items as any).render?.component?.onInit?.();
+            // }
+            this.domRenderTargetElements.push(items);
         });
     }
 }
