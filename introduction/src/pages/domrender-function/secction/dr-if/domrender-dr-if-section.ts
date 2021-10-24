@@ -13,7 +13,6 @@ export class DomrenderDrIfSection {
     isVisible = true;
 
     toggle() {
-        console.log('---')
         return this.isVisible = !this.isVisible;
     }
 }

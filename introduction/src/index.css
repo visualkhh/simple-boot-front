@@ -116,3 +116,18 @@ li > small {
     border-left-width: .25rem;
     border-radius: .25rem;
 }
+
+/*domrender section------------*/
+.result-container {
+    display: flex;
+    flex-direction: column;
+}
+.result-container .result {
+    color: #282b2e;
+    border: #dedede solid 1px;
+    border-radius: 10px;
+    padding: 7px;
+    overflow-x: auto;
+    height: 100%;
+}
+

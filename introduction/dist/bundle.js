@@ -113,7 +113,6 @@ var SimOption = (function () {
     return SimOption;
 }());
 exports.SimOption = SimOption;
-
 });
 
 unwrapExports(SimOption_1);
@@ -164,7 +163,6 @@ var SimFrontOption = (function (_super) {
     return SimFrontOption;
 }(SimOption_1.SimOption));
 exports.SimFrontOption = SimFrontOption;
-
 });
 
 unwrapExports(SimFrontOption_1);
@@ -213,7 +211,6 @@ var ReflectUtils = (function () {
     return ReflectUtils;
 }());
 exports.ReflectUtils = ReflectUtils;
-
 });
 
 unwrapExports(ReflectUtils_1);
@@ -273,7 +270,6 @@ var getComponent = function (target) {
     }
 };
 exports.getComponent = getComponent;
-
 });
 
 unwrapExports(Component_1);
@@ -313,7 +309,6 @@ var getScript = function (target) {
     }
 };
 exports.getScript = getScript;
-
 });
 
 unwrapExports(Script_1);
@@ -2362,7 +2357,6 @@ var SimGlobal = function () {
     }
 };
 exports.SimGlobal = SimGlobal;
-
 });
 
 unwrapExports(SimGlobal_1);
@@ -2418,7 +2412,6 @@ var getPostConstruct = function (target, propertyKey) {
     return ReflectUtils_1.ReflectUtils.getMetadata(PostConstructMetadataKey, target, propertyKey);
 };
 exports.getPostConstruct = getPostConstruct;
-
 });
 
 unwrapExports(SimDecorator);
@@ -2462,7 +2455,6 @@ var SimAtomic = (function () {
     return SimAtomic;
 }());
 exports.SimAtomic = SimAtomic;
-
 });
 
 unwrapExports(SimAtomic_1);
@@ -3612,7 +3604,6 @@ var SimError = (function () {
     return SimError;
 }());
 exports.SimError = SimError;
-
 });
 
 unwrapExports(SimError_1);
@@ -3645,7 +3636,6 @@ var SimNoSuch = (function (_super) {
     return SimNoSuch;
 }(SimError_1.SimError));
 exports.SimNoSuch = SimNoSuch;
-
 });
 
 unwrapExports(SimNoSuch_1);
@@ -3721,7 +3711,6 @@ var ObjectUtils = (function () {
     return ObjectUtils;
 }());
 exports.ObjectUtils = ObjectUtils;
-
 });
 
 unwrapExports(ObjectUtils_1);
@@ -3760,7 +3749,6 @@ var FunctionUtils = (function () {
     return FunctionUtils;
 }());
 exports.FunctionUtils = FunctionUtils;
-
 });
 
 unwrapExports(FunctionUtils_1);
@@ -3796,7 +3784,6 @@ var getInject = function (target, propertyKey) {
     }
 };
 exports.getInject = getInject;
-
 });
 
 unwrapExports(Inject_1);
@@ -3848,7 +3835,6 @@ var MetaDataPropertyAtomic = (function (_super) {
     return MetaDataPropertyAtomic;
 }(MetaDataAtomic));
 exports.MetaDataPropertyAtomic = MetaDataPropertyAtomic;
-
 });
 
 unwrapExports(MetaDataAtomic_1);
@@ -3881,7 +3867,6 @@ var getTargetAndIncludeNullAndSortExceptionHandlers = function (target, error) {
         .sort(function (a, b) { return ObjectUtils_1.ObjectUtils.getAllProtoType(a.metaData).length - ObjectUtils_1.ObjectUtils.getAllProtoType(b.metaData).length; });
 };
 exports.getTargetAndIncludeNullAndSortExceptionHandlers = getTargetAndIncludeNullAndSortExceptionHandlers;
-
 });
 
 unwrapExports(ExceptionDecorator);
@@ -3934,7 +3919,6 @@ var getProtoBefores = function (target, propertyKey, type) {
     return exports.getBefores(target).filter(function (it) { var _a; return propertyKey === it.metaData.property && type === ((_a = it.metaData.type) === null || _a === void 0 ? void 0 : _a.prototype); }) || [];
 };
 exports.getProtoBefores = getProtoBefores;
-
 });
 
 unwrapExports(AOPDecorator);
@@ -4035,7 +4019,6 @@ var SimProxyHandler = (function () {
     return SimProxyHandler;
 }());
 exports.SimProxyHandler = SimProxyHandler;
-
 });
 
 unwrapExports(SimProxyHandler_1);
@@ -4189,7 +4172,6 @@ var SimstanceManager = (function () {
     return SimstanceManager;
 }());
 exports.SimstanceManager = SimstanceManager;
-
 });
 
 unwrapExports(SimstanceManager_1);
@@ -4281,7 +4263,6 @@ var Intent = (function () {
     return Intent;
 }());
 exports.Intent = Intent;
-
 });
 
 unwrapExports(Intent_1);
@@ -4330,7 +4311,6 @@ var IntentManager = (function () {
     return IntentManager;
 }());
 exports.IntentManager = IntentManager;
-
 });
 
 unwrapExports(IntentManager_1);
@@ -4353,7 +4333,6 @@ var RouterModule = (function () {
     return RouterModule;
 }());
 exports.RouterModule = RouterModule;
-
 });
 
 unwrapExports(RouterModule_1);
@@ -4517,7 +4496,6 @@ var RouterManager = (function () {
     return RouterManager;
 }());
 exports.RouterManager = RouterManager;
-
 });
 
 unwrapExports(RouterManager_1);
@@ -4556,7 +4534,6 @@ var SimpleApplication = (function () {
     return SimpleApplication;
 }());
 exports.SimpleApplication = SimpleApplication;
-
 });
 
 unwrapExports(SimpleApplication_1);
@@ -4596,7 +4573,6 @@ var LocationUtils = (function () {
     return LocationUtils;
 }());
 exports.LocationUtils = LocationUtils;
-
 });
 
 unwrapExports(LocationUtils_1);
@@ -4677,7 +4653,6 @@ var Navigation = (function () {
     return Navigation;
 }());
 exports.Navigation = Navigation;
-
 });
 
 unwrapExports(Navigation_1);
@@ -4712,7 +4687,6 @@ var View = (function () {
     return View;
 }());
 exports.View = View;
-
 });
 
 unwrapExports(View_1);
@@ -4764,7 +4738,6 @@ var ViewService = (function () {
     return ViewService;
 }());
 exports.ViewService = ViewService;
-
 });
 
 unwrapExports(ViewService_1);
@@ -4793,7 +4766,6 @@ var HttpService = (function () {
     return HttpService;
 }());
 exports.HttpService = HttpService;
-
 });
 
 unwrapExports(HttpService_1);
@@ -5038,7 +5010,6 @@ var SimpleBootFront = (function (_super) {
     return SimpleBootFront;
 }(SimpleApplication_1.SimpleApplication));
 exports.SimpleBootFront = SimpleBootFront;
-
 });
 
 unwrapExports(SimpleBootFront_1);
@@ -5046,7 +5017,7 @@ var SimpleBootFront_2 = SimpleBootFront_1.SimpleBootFront;
 
 var template$D = "<div>\n  <header class=\"header\">\n    <nav class=\"input-group\">\n      <label class=\"input-group-text bg-white\" for=\"inputGroupSelect01\">simple-boot</label>\n      <select class=\"form-select form-select-lg\" id=\"inputGroupSelect01\" dr-on-init=\"this.category\" dr-event-change=\"this.changeCategory($target.value)\">\n        <option selected=\"selected\" value=\"simple-boot-front\" dr-attr=\"{selected: this.getPath(1) === $element.value ? 'selected' : null}\">front </option>\n        <option value=\"dom-render\" dr-attr=\"{selected: this.getPath(1) === $element.value ? 'selected' : null}\">dom-render</option>\n        <option value=\"simple-boot-core\" dr-attr=\"{selected: this.getPath(1) === $element.value ? 'selected' : null}\">core</option>\n        <option value=\"create-simple-boot-front\" dr-attr=\"{selected: this.getPath(1) === $element.value ? 'selected' : null}\">create</option>\n        <option value=\"simple-boot-front-cli\" dr-attr=\"{selected: this.getPath(1) === $element.value ? 'selected' : null}\">cli</option>\n      </select>\n      <span class=\"input-group-text bg-light fs-6\">⇢</span>\n      <select class=\"form-select form-select-sm\" dr-on-init=\"this.detail\" dr-event-change=\"this.changeDetail($target.value)\">\n        <option dr-for-of=\"this.detailsItems\" dr-complete=\"this.changeDetail(this.detail.value)\" dr-value=\"#it#\" dr-attr=\"{selected: this.navagation.path === $element.value ? 'selected' : null}\">${#it#?.split?.('/')?.[2] ?? ''}$</option>\n      </select>\n    </nav>\n  </header>\n  <main>\n    <router component=\"this.child\"></router>\n  </main>\n  <footer>\n    <ul class=\"badge-container\">\n<!--      <li>-->\n<!--        <a href=\"https://www.npmjs.com/package/simple-boot-front\" target=\"_blank\"><img src=\"https://img.shields.io/badge/npm-blue?logo=npm\"></a>-->\n<!--      </li>-->\n<!--      <li>-->\n<!--        <img src=\"https://img.shields.io/badge/license-MIT-green\">-->\n<!--      </li>-->\n<!--      <li>-->\n<!--        <a href=\"https://discord.gg/PW56dpns\" target=\"_blank\"><img src=\"https://img.shields.io/badge/discord-brightgreen?logo=discord\"></a>-->\n<!--      </li>-->\n<!--      <li>-->\n<!--        <a href=\"https://github.com/visualkhh/simple-boot-front\" target=\"_blank\"><img src=\"https://img.shields.io/badge/-github-black?logo=github\"></a>-->\n<!--      </li>-->\n      <li>\n        <a href=\"maileto:visualkhh@gmail.com\" target=\"_blank\"><img src=\"https://img.shields.io/badge/visualkhh@gmail.com-lightgrey\"></a>\n      </li> &nbsp;\n    </ul>\n  </footer>\n</div>\n";
 
-var style$o = "html {\n    scroll-behavior: smooth;\n}\nheader {\n    position: -webkit-sticky; /* 사파리 브라우저 지원 */\n    position: sticky;\n    top: 0px;\n    /*border: #656565 1px solid;*/\n    /*background: white;*/\n    /*border-bottom-left-radius: 5px;*/\n    /*border-bottom-right-radius: 5px;*/\n}\n\n/*footer,*/\nmain {\n/*    border: #333333 1px solid;*/\n    color: rgb(30, 30, 30);\n    padding: 10px;\n/*    !*margin: 20px;*!*/\n}\n\n.code-container {\n    color: #a9b7c6;\n    background-color: #282b2e;\n    overflow-x: auto;\n    /*margin: 5px;*/\n    padding: 10px;\n    border-radius: 10px;\n}\npre code{\n    border-radius: 10px;\n}\n\n\nul.badge-container {\n    padding-left: 0px;\n    /*background-color: #3D99CE;*/\n    /*text-align: center;*/\n}\nfooter>ul.badge-container {\n    text-align: right;\n}\n\nul.badge-container > li {\n    display: inline-block;\n    /*padding: 10px 20px;*/\n}\nul.badge-container > li:hover {\n    /*background-color: #2779BF;*/\n}\nul.badge-container > li > a {\n    color: white;\n    text-decoration: none;\n}\n\n\nfigure figcaption {\n    text-align: right;\n    font-size: 0.5rem;\n}\n\n\n.content-container {\n    color: #a9b7c6;\n    background-color: #282b2e;\n    border-radius: 10px;\n    padding: 7px;\n    overflow-x: auto;\n}\n\n.content-container-white {\n    color: #282b2e;\n    border: #dedede solid 1px;\n    border-radius: 10px;\n    padding: 7px;\n    overflow-x: auto;\n}\n.no-overflow {\n    overflow-x: visible;\n    overflow-y: visible;\n}\n\n/*.dl-container > dt::before {*/\n/*    content: '- ';*/\n\n/*}*/\n.dl-container > dd {\n    padding-left: 10px;\n    margin-bottom: 15px;\n}\n\ndd > small {\n    font-size: 0.5rem;\n}\n\nli > small {\n    font-size: 0.5rem;\n}\n\n\n/*------------------------*/\n.bd-callout-info {\n    border-left-color: #5bc0de !important;\n}\n.bd-callout-warning {\n    border-left-color: #f0ad4e !important;\n}\n.bd-callout-danger {\n    border-left-color: #d9534f !important;\n}\n.bd-callout {\n    padding: 1.25rem;\n    margin-top: 1.25rem;\n    margin-bottom: 1.25rem;\n    border: 1px solid #e9ecef;\n    border-left-width: .25rem;\n    border-radius: .25rem;\n}\n";
+var style$o = "html {\n    scroll-behavior: smooth;\n}\nheader {\n    position: -webkit-sticky; /* 사파리 브라우저 지원 */\n    position: sticky;\n    top: 0px;\n    /*border: #656565 1px solid;*/\n    /*background: white;*/\n    /*border-bottom-left-radius: 5px;*/\n    /*border-bottom-right-radius: 5px;*/\n}\n\n/*footer,*/\nmain {\n/*    border: #333333 1px solid;*/\n    color: rgb(30, 30, 30);\n    padding: 10px;\n/*    !*margin: 20px;*!*/\n}\n\n.code-container {\n    color: #a9b7c6;\n    background-color: #282b2e;\n    overflow-x: auto;\n    /*margin: 5px;*/\n    padding: 10px;\n    border-radius: 10px;\n}\npre code{\n    border-radius: 10px;\n}\n\n\nul.badge-container {\n    padding-left: 0px;\n    /*background-color: #3D99CE;*/\n    /*text-align: center;*/\n}\nfooter>ul.badge-container {\n    text-align: right;\n}\n\nul.badge-container > li {\n    display: inline-block;\n    /*padding: 10px 20px;*/\n}\nul.badge-container > li:hover {\n    /*background-color: #2779BF;*/\n}\nul.badge-container > li > a {\n    color: white;\n    text-decoration: none;\n}\n\n\nfigure figcaption {\n    text-align: right;\n    font-size: 0.5rem;\n}\n\n\n.content-container {\n    color: #a9b7c6;\n    background-color: #282b2e;\n    border-radius: 10px;\n    padding: 7px;\n    overflow-x: auto;\n}\n\n.content-container-white {\n    color: #282b2e;\n    border: #dedede solid 1px;\n    border-radius: 10px;\n    padding: 7px;\n    overflow-x: auto;\n}\n.no-overflow {\n    overflow-x: visible;\n    overflow-y: visible;\n}\n\n/*.dl-container > dt::before {*/\n/*    content: '- ';*/\n\n/*}*/\n.dl-container > dd {\n    padding-left: 10px;\n    margin-bottom: 15px;\n}\n\ndd > small {\n    font-size: 0.5rem;\n}\n\nli > small {\n    font-size: 0.5rem;\n}\n\n\n/*------------------------*/\n.bd-callout-info {\n    border-left-color: #5bc0de !important;\n}\n.bd-callout-warning {\n    border-left-color: #f0ad4e !important;\n}\n.bd-callout-danger {\n    border-left-color: #d9534f !important;\n}\n.bd-callout {\n    padding: 1.25rem;\n    margin-top: 1.25rem;\n    margin-bottom: 1.25rem;\n    border: 1px solid #e9ecef;\n    border-left-width: .25rem;\n    border-radius: .25rem;\n}\n\n/*domrender section------------*/\n.result-container {\n    display: flex;\n    flex-direction: column;\n}\n.result-container .result {\n    color: #282b2e;\n    border: #dedede solid 1px;\n    border-radius: 10px;\n    padding: 7px;\n    overflow-x: auto;\n    height: 100%;\n}\n\n";
 
 var template$C = "<!--    <p>¯\\_(ツ)_/¯ - Everyone</p>-->\n<article>\n    <h1>SIMPLE-BOOT-FRONT</h1>\n    <p>Single Page Application Framworks for Web</p>\n\n    <ul class=\"badge-container\">\n        <li>\n            <a href=\"https://www.npmjs.com/package/simple-boot-front\" target=\"_blank\"><img dr-attr=\"{'src': 'https://img.shields.io/badge/npm-'+(this.package?.version??'')+'-blue?logo=npm'}\"></a>\n        </li>\n        <li>\n            <img dr-attr=\"{'src': 'https://img.shields.io/badge/license-'+(this.package?.license??'')+'-green'}\">\n        </li>\n        <li>\n            <a href=\"https://discord.gg/PW56dpns\" target=\"_blank\"><img src=\"https://img.shields.io/badge/discord-brightgreen?logo=discord\"></a>\n        </li>\n        <li>\n            <a href=\"https://github.com/visualkhh/simple-boot-front\" target=\"_blank\"><img src=\"https://img.shields.io/badge/-github-black?logo=github\"></a>\n        </li>\n    </ul>\n\n    <section>\n        <h2>our primary goals are</h2>\n        <ul>\n            <li>Single Page Application Framworks for Web</li>\n            <li>Provide a radically faster and widely accessible getting started experience for all front end.</li>\n        </ul>\n    </section>\n\n    <hr>\n\n    <section>\n        <h2>dependencies</h2>\n        <ul>\n            <li>dom-render <span class=\"badge bg-secondary\">Product line</span></li>\n            <li>simple-boot-core <span class=\"badge bg-secondary\">Product line</span></li>\n            <li>reflect-metadata</li>\n        </ul>\n    </section>\n\n    <hr>\n    <domrender-function-section></domrender-function-section>\n    <hr>\n    <core-function-section></core-function-section>\n    <hr>\n    <core-lifecycle-section></core-lifecycle-section>\n    <hr>\n    <front-lifecycle-section></front-lifecycle-section>\n    <hr>\n\n    <section>\n        <h2>contributors</h2>\n        <a href=\"https://github.com/visualkhh/simple-boot-front/graphs/contributors\">\n            <img src=\"https://contrib.rocks/image?repo=visualkhh/simple-boot-front\">\n        </a>\n    </section>\n</article>\n";
 
@@ -5253,7 +5224,6 @@ var ScriptRunnable = (function () {
     return ScriptRunnable;
 }());
 exports.ScriptRunnable = ScriptRunnable;
-
 });
 
 unwrapExports(ScriptRunnable_1);
@@ -5701,7 +5671,7 @@ var template$9 = "<article>\n    <h1>⚡️ Function 🚀</h1>\n    <p>provides 
 
 var style$7 = "";
 
-var template$8 = "<section>\n    <h2>expression</h2>\n    <article class=\"content-container-white no-overflow\">\n        <div class=\"row\">\n            <figure class=\"m-0\">\n                <figcaption>template.html</figcaption>\n                <pre dr-on-init=\"this.templateCodeContainer\" dr-pre class=\"code-container html m-0\">first: ${this.first}$ &lt;br&gt;\nfullName: ${this.getFullName()}$&lt;br&gt;\n${this.getStrongTagFullName()}$&lt;br&gt;\n#{this.getStrongTagFullName()}#</pre>\n            </figure>\n        </div>\n        <div class=\"row\">\n            <div class=\"col-sm-6\">\n                <figure class=\"m-0\">\n                    <figcaption>component class body</figcaption>\n                    <pre dr-pre class=\"code-container typescript m-0\">first = 'simple';\nmiddle = 'boot';\nlast = 'front';\n\ngetFullName() {\n    return this.first + this.middle + this.last;\n}\n\ngetStrongTagFullName() {\n    return `&lt;strong&gt;${this.getFullName()}&lt;/strong&gt;`\n}</pre>\n                </figure>\n            </div>\n            <div class=\"col-sm-6\">\n                <figure class=\"m-0\">\n                    <figcaption><strong>result</strong></figcaption>\n                    <div dr-on-init=\"this.resultContainer\">\n                    first: ${this.first}$ <br>\n                    fullName: ${this.getFullName()}$<br>\n                    ${this.getStrongTagFullName()}$<br>\n                    #{this.getStrongTagFullName()}#\n                    </div>\n                </figure>\n            </div>\n        </div>\n    </article>\n</section>\n";
+var template$8 = "<section>\n    <h2>expression</h2>\n    <article class=\"content-container-white no-overflow\">\n        <div class=\"row\">\n            <figure class=\"m-0\">\n                <figcaption>template.html</figcaption>\n                <pre dr-on-init=\"this.templateCodeContainer\" dr-pre class=\"code-container html m-0\">first: ${this.first}$ &lt;br&gt;\nfullName: ${this.getFullName()}$&lt;br&gt;\n${this.getStrongTagFullName()}$&lt;br&gt;\n#{this.getStrongTagFullName()}#</pre>\n            </figure>\n        </div>\n        <div class=\"row\">\n            <div class=\"col-sm-6\">\n                <figure class=\"m-0\">\n                    <figcaption>component class body</figcaption>\n                    <pre dr-pre class=\"code-container typescript m-0\">first = 'simple';\nmiddle = 'boot';\nlast = 'front';\n\ngetFullName() {\n    return this.first + this.middle + this.last;\n}\n\ngetStrongTagFullName() {\n    return `&lt;strong&gt;${this.getFullName()}&lt;/strong&gt;`\n}</pre>\n                </figure>\n            </div>\n            <div class=\"col-sm-6\">\n                <figure class=\"m-0 result-container h-100\">\n                    <figcaption><strong>result</strong></figcaption>\n                    <div class=\"result\">\n                    first: ${this.first}$ <br>\n                    fullName: ${this.getFullName()}$<br>\n                    ${this.getStrongTagFullName()}$<br>\n                    #{this.getStrongTagFullName()}#\n                    </div>\n                </figure>\n            </div>\n        </div>\n    </article>\n</section>\n";
 
 var DomrenderExpressionSection = (function () {
     function DomrenderExpressionSection() {
@@ -5725,14 +5695,13 @@ var DomrenderExpressionSection = (function () {
     return DomrenderExpressionSection;
 }());
 
-var template$7 = "<section>\n    <h2>dr-if</h2>\n    <article class=\"content-container-white no-overflow\">\n        <div class=\"row\">\n            <figure class=\"m-0\">\n                <figcaption>template.html</figcaption>\n                <pre dr-on-init=\"this.templateCodeContainer\" dr-pre class=\"code-container html m-0\">&lt;button dr-event-click=&quot;this.toggle()&quot;&gt;toggle&lt;/button&gt;\n&lt;img dr-if=&quot;this.isVisible&quot; width=&quot;50&quot; height=&quot;50&quot; src=&quot;https://www.npmjs.com/npm-avatar/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdmF0YXJVUkwiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci8wYzVmYzU4MDczY2FiMWUxMGQ1NzhiZmYxY2RhY2ZmMT9zaXplPTQ5NiZkZWZhdWx0PXJldHJvIn0.KfOeIzhFTipcdnU39eQXEbtFEFUPZxcxn9tDq3_o5z0&quot;&gt;</pre>\n            </figure>\n        </div>\n        <div class=\"row\">\n            <div class=\"col-sm-6\">\n                <figure class=\"m-0\">\n                    <figcaption>component class body</figcaption>\n                    <pre dr-pre class=\"code-container typescript m-0\">isVisible = true;\ntoggle() {\n    return this.isVisible = !this.isVisible;\n}</pre>\n                </figure>\n            </div>\n            <div class=\"col-sm-6\">\n                <figure class=\"m-0\">\n                    <figcaption><strong>result</strong></figcaption>\n                    <div dr-on-init=\"this.resultContainer\">\n                        <button dr-event-click=\"this.toggle()\">toggle</button>\n                        <img dr-if=\"this.isVisible\" width=\"50\" height=\"50\" src=\"https://www.npmjs.com/npm-avatar/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdmF0YXJVUkwiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci8wYzVmYzU4MDczY2FiMWUxMGQ1NzhiZmYxY2RhY2ZmMT9zaXplPTQ5NiZkZWZhdWx0PXJldHJvIn0.KfOeIzhFTipcdnU39eQXEbtFEFUPZxcxn9tDq3_o5z0\">\n                    </div>\n                </figure>\n            </div>\n        </div>\n    </article>\n</section>\n";
+var template$7 = "<section>\n    <h2>dr-if</h2>\n    <article class=\"content-container-white no-overflow\">\n        <div class=\"row\">\n            <figure class=\"m-0\">\n                <figcaption>template.html</figcaption>\n                <pre dr-on-init=\"this.templateCodeContainer\" dr-pre class=\"code-container html m-0\">&lt;button dr-event-click=&quot;this.toggle()&quot;&gt;toggle&lt;/button&gt;\n&lt;img dr-if=&quot;this.isVisible&quot; width=&quot;50&quot; height=&quot;50&quot; src=&quot;https://www.npmjs.com/npm-avatar/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdmF0YXJVUkwiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci8wYzVmYzU4MDczY2FiMWUxMGQ1NzhiZmYxY2RhY2ZmMT9zaXplPTQ5NiZkZWZhdWx0PXJldHJvIn0.KfOeIzhFTipcdnU39eQXEbtFEFUPZxcxn9tDq3_o5z0&quot;&gt;</pre>\n            </figure>\n        </div>\n        <div class=\"row\">\n            <div class=\"col-sm-6\">\n                <figure class=\"m-0\">\n                    <figcaption>component class body</figcaption>\n                    <pre dr-pre class=\"code-container typescript m-0\">isVisible = true;\ntoggle() {\n    return this.isVisible = !this.isVisible;\n}</pre>\n                </figure>\n            </div>\n            <div class=\"col-sm-6\">\n                <figure class=\"m-0 result-container h-100\">\n                    <figcaption><strong>result</strong></figcaption>\n                    <div class=\"result\">\n                        <button dr-event-click=\"this.toggle()\">toggle</button>\n                        <img dr-if=\"this.isVisible\" width=\"50\" height=\"50\" src=\"https://www.npmjs.com/npm-avatar/eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdmF0YXJVUkwiOiJodHRwczovL3MuZ3JhdmF0YXIuY29tL2F2YXRhci8wYzVmYzU4MDczY2FiMWUxMGQ1NzhiZmYxY2RhY2ZmMT9zaXplPTQ5NiZkZWZhdWx0PXJldHJvIn0.KfOeIzhFTipcdnU39eQXEbtFEFUPZxcxn9tDq3_o5z0\">\n                    </div>\n                </figure>\n            </div>\n        </div>\n    </article>\n</section>\n";
 
 var DomrenderDrIfSection = (function () {
     function DomrenderDrIfSection() {
         this.isVisible = true;
     }
     DomrenderDrIfSection.prototype.toggle = function () {
-        console.log('---');
         return this.isVisible = !this.isVisible;
     };
     DomrenderDrIfSection = __decorate([
