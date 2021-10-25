@@ -58,6 +58,6 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
-    "simple-boot-front": "1.0.96"
+    "simple-boot-front": "1.0.97"
   }
 }

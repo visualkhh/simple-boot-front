@@ -1,0 +1,44 @@
+<section>
+    <h2>⚡️ dr-event-submit</h2>
+    <article class="content-container-white no-overflow">
+        <div class="row">
+            <figure class="m-0">
+                <figcaption>template.html</figcaption>
+                <pre dr-pre class="code-container html m-0" >&lt;form dr-event-submit=&quot;this.submit($target, $event);&quot;&gt;
+    &lt;p&gt;target: ${this.target}$&lt;/p&gt;
+    &lt;p&gt;event: ${this.event}$&lt;/p&gt;
+    &lt;p&gt;lastSubmit: ${this.lastSubmit}$&lt;/p&gt;
+    &lt;button type=&quot;submit&quot;&gt;submit&lt;/button&gt;
+&lt;/form&gt;</pre>
+            </figure>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <figure class="m-0">
+                    <figcaption>class, object body code</figcaption>
+                    <pre dr-pre class="code-container typescript m-0">target?: Element;
+event?: Event;
+lastSubmit = new Date();
+submit(target: Element, event: Event) {
+    this.target = target;
+    this.event = event;
+    this.lastSubmit = new Date();
+    event.preventDefault();
+}</pre></figure>
+            </div>
+            <div class="col-sm-6">
+                <figure class="m-0 result-container h-100">
+                    <figcaption><strong>result</strong></figcaption>
+                    <div class="result">
+                        <form dr-event-submit="this.submit($target, $event);">
+                            <p>target: ${this.target}$</p>
+                            <p>event: ${this.event}$</p>
+                            <p>lastSubmit: ${this.lastSubmit}$</p>
+                            <button type="submit">submit</button>
+                        </form>
+                    </div>
+                </figure>
+            </div>
+        </div>
+    </article>
+</section>

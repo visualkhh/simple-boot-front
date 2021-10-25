@@ -1,0 +1,37 @@
+<section>
+    <h2>dr-for</h2>
+    <article class="content-container-white no-overflow">
+        <div class="row">
+            <figure class="m-0">
+                <figcaption>template.html</figcaption>
+                <pre dr-pre class="code-container html">&lt;button dr-for=&quot;var i = 0 ; i &lt; this.products.length; i++&quot; dr-it=&quot;&#39;this.products[&#39;+i+&#39;]&#39;&quot;&gt;
+    ${#it#.name}$
+&lt;/button&gt;
+&lt;input type=&quot;text&quot; dr-for=&quot;var i = 0 ; i &lt; this.products.length; i++&quot; dr-it=&quot;this.products[i].value&quot; dr-value=&quot;&#39;#it#&#39;&quot;&gt;</pre>
+            </figure>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <figure class="m-0">
+                    <figcaption>class, object body code</figcaption>
+                    <pre dr-pre class="code-container typescript m-0">public products = [
+    {name: 'front', value: 'front-value'},
+    {name: 'core', value: 'core-value'},
+    {name: 'dom-render', value: 'dom-render-value'},
+];</pre>
+                </figure>
+            </div>
+            <div class="col-sm-6">
+                <figure class="m-0 result-container h-100">
+                    <figcaption><strong>result</strong></figcaption>
+                    <div class="result">
+                        <button dr-for="var i = 0 ; i < this.products.length; i++" dr-it="'this.products['+i+']'">
+                            ${#it#.name}$
+                        </button>
+                        <input type="text" dr-for="var i = 0 ; i < this.products.length; i++" dr-it="this.products[i].value" dr-value="'#it#'">
+                    </div>
+                </figure>
+            </div>
+        </div>
+    </article>
+</section>

@@ -31,13 +31,13 @@ const rangeArray = new Range(100,55, 10).toArray();</pre>
 
         <figure>
             <figcaption>Range iterator class</figcaption>
-            <pre dr-pre class="code-container typescript">export declare class Range implements Iterable<number> {
+            <pre dr-pre class="code-container typescript">export declare class Range implements Iterable&lt;number&gt; {
     first: number;
     last: number;
     step: number;
     readonly isRange = true;
     constructor(first: number, last: number, step?: number);
-    [Symbol.iterator](): Iterator<number>;
+    [Symbol.iterator](): Iterator&lt;number&gt;;
     static range(first: number | string, last?: number, step?: number): Range;
     toArray(): number[];
 }</pre>

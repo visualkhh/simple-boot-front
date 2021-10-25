@@ -131,3 +131,18 @@ li > small {
     height: 100%;
 }
 
+/*.result-container .result ul, .result-container .result ol {*/
+.result-container .result :is(ul, ol) {
+    display: inline-block;
+    border: #c8c8c8 1px solid;
+    margin: 2px;
+}
+
+
+ul.subsection-container {
+    list-style: none;
+    padding-left: 5px;
+}
+ul.subsection-container > li {
+    margin-bottom: 20px;
+}

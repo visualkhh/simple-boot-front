@@ -7,113 +7,46 @@
 <!--            <p>Using color to add meaning only provides a visual indication, which will not be conveyed to users of assistive technologies – such as screen readers. Ensure that information denoted by the color is either obvious from the content itself (e.g. the visible text), or is included through alternative means, such as additional text hidden with the <code>.visually-hidden</code> class.-->
 <!--            </p></div>-->
 <!--    </section>-->
+
     <domrender-expression-section></domrender-expression-section>
     <hr>
     <domrender-dr-if-section></domrender-dr-if-section>
     <hr>
-    <section>
-        <h2>dr-for, dr-for-of</h2>
-        <figure>
-            <figcaption>example</figcaption>
-            <pre dr-pre class="code-container html">&lt;div dr-for=&quot;var i = 0; i &lt; this.friends.length; i++&quot;&gt; friend&lt;/div&gt;
-&lt;div dr-for-of=&quot;this.friends&quot;&gt; ${#it#.name}$&lt;/div&gt;
-&lt;div dr-for-of=&quot;$range(10, 20)&quot;&gt;&lt;div&gt;${#it#}$&lt;/div&gt;&lt;div&gt;
-&lt;div dr-for=&quot;var i = 1 ; i &lt;= 9 ; i++&quot; dr-it=&quot;i&quot;&gt;
-    ${#it#}$ *
-    &lt;scope dr-for=&quot;var y = 1 ; y &lt;= 9 ; y++&quot; dr-it=&quot;y&quot; dr-var=&quot;superIt=#it#&quot; dr-strip=&quot;true&quot;&gt;
-        #it# = ${var.superIt * #it#}$
-    &lt;/scope&gt;
-&lt;/div&gt;</pre>
-        </figure>
-    </section>
+    <domrender-dr-repeat-section></domrender-dr-repeat-section>
     <hr>
-    <section>
-        <h2>dr-repeat</h2>
-        <figure>
-            <figcaption>example</figcaption>
-            <pre dr-pre class="code-container html">&lt;div dr-repeat=&quot;10&quot;&gt;&lt;div&gt;#it#&lt;/div&gt;&lt;/div&gt;
-&lt;div dr-repeat=&quot;$range(10, 20)&quot;&gt;&lt;div&gt;#it#&lt;/div&gt;&lt;/div&gt;
-&lt;div dr-repeat=&quot;$range(10, 20, 5)&quot;&gt;&lt;div&gt;#it#&lt;/div&gt;&lt;/div&gt;
-&lt;div dr-repeat=&quot;$range(&#39;10..5, 2&#39;)&quot;&gt;&lt;div&gt;#it#&lt;/div&gt;&lt;/div&gt;</pre>
-        </figure>
-    </section>
+    <domrender-dr-for-section></domrender-dr-for-section>
     <hr>
-    <section>
-        <h2>dr-inner-text, dr-inner-html</h2>
-        <figure>
-            <figcaption>example</figcaption>
-            <pre dr-pre class="code-container html">&lt;div dr-inner-text=&quot;&#39;&lt;b&gt;aa&lt;/b&gt; &lt;button dr-event-click=\&#39;alert(1)\&#39;&gt;aa&lt;/button&gt;&#39;&quot;&gt; friend&lt;/div&gt;
-&lt;div dr-inner-html=&quot;&#39;&lt;b&gt;aa&lt;/b&gt; &lt;button dr-event-click=\&#39;alert(1)\&#39;&gt;aa&lt;/button&gt;&#39;&quot;&gt; friend&lt;/div&gt;
-</pre>
-        </figure>
-    </section>
+    <domrender-dr-for-of-section></domrender-dr-for-of-section>
     <hr>
-    <section>
-        <h2>⚡️event</h2>
-        <ul>
-            <li>
-                click, mousedown, mouseup, dblclick, mouseover, mouseout, mousemove, mouseenter, mouseleave, contextmenu, keyup, keydown, keypress, change, input, submit, resize, focus, blur
-            </li>
-            <li>ref: element</li>
-            <li>variable: $event, $target</li>
-        </ul>
-        <figure>
-            <figcaption>example</figcaption>
-            <pre dr-pre class="code-container html">click: &lt;button dr-event-click=&quot;this.name = &#39;name&#39; + new Date()&quot;&gt;click&lt;/button&gt; &lt;br&gt;
-change: &lt;input type=&quot;text&quot; dr-event-change=&quot;this.name = $target.value&quot;&gt; &lt;br&gt;
-input: &lt;input type=&quot;text&quot; dr-event-input=&quot;this.name = $target.value&quot;&gt; &lt;br&gt;
-keyup: &lt;input type=&quot;text&quot; dr-event-keyup=&quot;this.name = $target.value&quot;&gt; &lt;br&gt;
-...
-keydown: &lt;input type=&quot;text&quot; dr-event-keydown=&quot;this.name = $target.value&quot;&gt;&lt;br&gt;
-submit: &lt;form dr-event-submit=&quot;console.log($event); $event.preventDefault();&quot;&gt;&lt;input type=&quot;text&quot;&gt; &lt;button type=&quot;submit&quot;&gt;submit&lt;/button&gt;&lt;/form&gt;&lt;br&gt;</pre>
-        </figure>
-    </section>
+    <domrender-dr-inner-text-section></domrender-dr-inner-text-section>
     <hr>
-    <section>
-        <h2>⚡️ window event</h2>
-        <ul>
-            <li>ref: window</li>
-            <li>variable: $target</li>
-        </ul>
-        <figure>
-            <figcaption>example</figcaption>
-            <pre dr-pre class="code-container html">window-event-popstate: &lt;input type=&quot;text&quot; dr-window-event-popstate=&quot;alert(this.name)&quot;&gt;&lt;br&gt;</pre>
-        </figure>
-    </section>
+    <domrender-dr-inner-html-section></domrender-dr-inner-html-section>
     <hr>
-    <section>
-        <h2>⚡️ custom event (other)</h2>
-        <ul>
-            <li>other event</li>
-            <li>ref: element</li>
-            <li>variable: $params, $event</li>
-        </ul>
-        <figure>
-            <figcaption>example</figcaption>
-            <pre dr-pre class="code-container html">&lt;input dr-event:bind=&#39;eventName1, eventName2&#39; dr-event=&quot;console.log(&#39;event&#39;, $params, $event)&quot;  type=&quot;text&quot;&gt;</pre>
-        </figure>
-    </section>
-    <hr>
-    <section>
-        <h2>dr-value, value-link</h2>
-        <dl>
-            <ul>
-                <li>
-                    <dt>dr-value</dt>
-                    <dl>The value is assigned the first time.</dl>
-                </li>
-                <li>
-                    <dt>dr-value-link</dt>
-                    <dl>Value and variable values are referencing each other. It affects each other when changing. (Immediate reflection event: input)</dl>
-                </li>
-            </ul>
-        </dl>
-        <figure>
-            <figcaption>example</figcaption>
-            <pre dr-pre class="code-container html">dr-value: &lt;input type=&quot;text&quot; dr-value=&quot;this.office.name&quot;&gt; &lt;br&gt;
-dr-value-link: &lt;input type=&quot;text&quot; dr-value-link=&quot;this.office.addr.street&quot;&gt; &lt;br&gt;</pre>
-        </figure>
-    </section>
+
+    <h1>⚡️ dr-event</h1>
+    <ul class="subsection-container">
+        <li><domrender-event-attribute-values-section></domrender-event-attribute-values-section></li>
+        <li><domrender-dr-event-click-section></domrender-dr-event-click-section></li>
+        <li><domrender-dr-event-mousedown-section></domrender-dr-event-mousedown-section></li>
+        <li><domrender-dr-event-mouseup-section></domrender-dr-event-mouseup-section></li>
+        <li><domrender-dr-event-dblclick-section></domrender-dr-event-dblclick-section></li>
+        <li><domrender-dr-event-mouseover-section></domrender-dr-event-mouseover-section></li>
+        <li><domrender-dr-event-mousemove-section></domrender-dr-event-mousemove-section></li>
+        <li><domrender-dr-event-mouseenter-section></domrender-dr-event-mouseenter-section></li>
+        <li><domrender-dr-event-mouseleave-section></domrender-dr-event-mouseleave-section></li>
+        <li><domrender-dr-event-contextmenu-section></domrender-dr-event-contextmenu-section></li>
+        <li><domrender-dr-event-keyup-section></domrender-dr-event-keyup-section></li>
+        <li><domrender-dr-event-keydown-section></domrender-dr-event-keydown-section></li>
+        <li><domrender-dr-event-keypress-section></domrender-dr-event-keypress-section></li>
+        <li><domrender-dr-event-change-section></domrender-dr-event-change-section></li>
+        <li><domrender-dr-event-input-section></domrender-dr-event-input-section></li>
+        <li><domrender-dr-event-submit-section></domrender-dr-event-submit-section></li>
+        <li><domrender-dr-event-resize-section></domrender-dr-event-resize-section></li>
+        <li><domrender-dr-event-focus-section></domrender-dr-event-focus-section></li>
+        <li><domrender-dr-event-blur-section></domrender-dr-event-blur-section></li>
+        <li><domrender-dr-window-event-popstate-section></domrender-dr-window-event-popstate-section></li>
+        <li><domrender-dr-event-section></domrender-dr-event-section></li>
+    </ul>
     <hr>
     <section>
         <h2>dr-attr</h2>

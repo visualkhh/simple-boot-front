@@ -1,0 +1,26 @@
+<section>
+    <h2>⚡️ dr-event-contextmenu</h2>
+    <article class="content-container-white no-overflow">
+        <div class="row">
+            <figure class="m-0">
+                <figcaption>template.html</figcaption>
+                <pre dr-pre class="code-container html m-0" >&lt;button dr-event-contextmenu=&quot;this.count++&quot;&gt;${this.count}$ mouse contextmenu(mouse right click)&lt;/button&gt;</pre>
+            </figure>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <figure class="m-0">
+                    <figcaption>class, object body code</figcaption>
+                    <pre dr-pre class="code-container typescript m-0">count = 1;</pre></figure>
+            </div>
+            <div class="col-sm-6">
+                <figure class="m-0 result-container h-100">
+                    <figcaption><strong>result</strong></figcaption>
+                    <div class="result">
+                        <button dr-event-contextmenu="this.count++;">${this.count}$  mouse contextmenu(mouse right click)</button>
+                    </div>
+                </figure>
+            </div>
+        </div>
+    </article>
+</section>

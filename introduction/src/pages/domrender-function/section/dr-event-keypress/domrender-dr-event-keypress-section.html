@@ -1,0 +1,32 @@
+<section>
+    <h2>⚡️ dr-event-keypress</h2>
+    <article class="content-container-white no-overflow">
+        <div class="row">
+            <figure class="m-0">
+                <figcaption>template.html</figcaption>
+                <pre dr-pre class="code-container html m-0" >&lt;input type=&quot;text&quot; dr-event-keypress=&quot;this.target = $target; this.value = $target.value; this.event = $event;&quot;&gt;
+&lt;p&gt;value: ${this.value}$&lt;/p&gt;
+&lt;p&gt;target: ${this.target}$&lt;/p&gt;
+&lt;p&gt;event: ${this.event}$&lt;/p&gt;</pre>
+            </figure>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <figure class="m-0">
+                    <figcaption>class, object body code</figcaption>
+                    <pre dr-pre class="code-container typescript m-0">count = 1;</pre></figure>
+            </div>
+            <div class="col-sm-6">
+                <figure class="m-0 result-container h-100">
+                    <figcaption><strong>result</strong></figcaption>
+                    <div class="result">
+                        <input type="text" dr-event-keypress="this.target = $target; this.value = $target.value; this.event = $event;">
+                        <p>value: ${this.value}$</p>
+                        <p>target: ${this.target}$</p>
+                        <p>event: ${this.event}$</p>
+                    </div>
+                </figure>
+            </div>
+        </div>
+    </article>
+</section>
