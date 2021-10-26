@@ -31,7 +31,11 @@ import { DomrenderDrEventFocusSection } from './section/dr-event-focus/domrender
 import { DomrenderDrEventBlurSection } from './section/dr-event-blur/domrender-dr-event-blur-section';
 import { DomrenderDrWindowEventPopstateSection } from './section/dr-window-event-popstate/domrender-dr-window-event-popstate-section';
 import { DomrenderDrEventSection } from './section/dr-event/domrender-dr-event-section';
-import { DomrenderDrWindowEventResizeSection } from 'simple-boot-front/pages/domrender-function/section/dr-window-event-resize/domrender-dr-window-event-resize-section';
+import { DomrenderDrWindowEventResizeSection } from './section/dr-window-event-resize/domrender-dr-window-event-resize-section';
+import { DomrenderDrAttrSection } from './section/dr-attr/domrender-dr-attr-section';
+import { DomrenderDrClassSection } from './section/dr-class/domrender-dr-class-section';
+import { DomrenderDrStyleSection } from './section/dr-style/domrender-dr-style-section';
+import { DomrenderDrStripSection } from './section/dr-strip/domrender-dr-strip-section';
 @Sim()
 @Component({
     template,
@@ -42,7 +46,8 @@ import { DomrenderDrWindowEventResizeSection } from 'simple-boot-front/pages/dom
         DomrenderDrEventClickSection, DomrenderEventAttributeValuesSection,
         DomrenderDrEventMousedownSection, DomrenderDrEventMouseupSection, DomrenderDrEventDblclickSection, DomrenderDrEventMouseoverSection, DomrenderDrEventMousemoveSection, DomrenderDrEventMouseenterSection, DomrenderDrEventMouseleaveSection, DomrenderDrEventContextmenuSection,
         DomrenderDrEventKeyupSection, DomrenderDrEventKeydownSection, DomrenderDrEventKeypressSection, DomrenderDrEventChangeSection,DomrenderDrEventInputSection,
-        DomrenderDrEventSubmitSection, DomrenderDrEventResizeSection, DomrenderDrEventFocusSection, DomrenderDrEventBlurSection,DomrenderDrWindowEventPopstateSection, DomrenderDrEventSection, DomrenderDrWindowEventResizeSection
+        DomrenderDrEventSubmitSection, DomrenderDrEventResizeSection, DomrenderDrEventFocusSection, DomrenderDrEventBlurSection,DomrenderDrWindowEventPopstateSection, DomrenderDrEventSection, DomrenderDrWindowEventResizeSection,
+        DomrenderDrAttrSection, DomrenderDrClassSection, DomrenderDrStyleSection, DomrenderDrStripSection
     ]
 })
 export class DomrenderFunction implements OnInit {

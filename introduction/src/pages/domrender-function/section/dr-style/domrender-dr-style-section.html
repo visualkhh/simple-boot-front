@@ -1,0 +1,36 @@
+<section>
+    <h2>dr-style</h2>
+    <article class="content-container-white no-overflow">
+        <div class="row">
+            <figure class="m-0">
+                <figcaption>template.html</figcaption>
+                <pre dr-pre class="code-container html m-0" >&lt;button dr-event-click=&quot;this.change()&quot;&gt;change&lt;/button&gt;
+&lt;div dr-style=&quot;{fontSize: this.size + &#39;px&#39;, margin: this.size + &#39;px&#39;}&quot;&gt; content &lt;/div&gt;
+&lt;div dr-style=&quot;&#39;font-size: &#39; + this.size +&#39;px; margin: &#39; + this.size + &#39;px&#39;&quot;&gt; content &lt;/div&gt;
+&lt;div dr-style=&quot;[&#39;font-size: &#39; + this.size +&#39;px&#39;, &#39;margin: &#39; + this.size + &#39;px&#39;]&quot;&gt; content &lt;/div&gt;</pre>
+            </figure>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <figure class="m-0">
+                    <figcaption>class, object body code</figcaption>
+                    <pre dr-pre class="code-container typescript m-0">    size = 10;
+
+change() {
+    this.size = Math.floor(Math.random() * 40);
+}</pre></figure>
+            </div>
+            <div class="col-6">
+                <figure class="m-0 result-container h-100">
+                    <figcaption><strong>result</strong></figcaption>
+                    <div class="result">
+                        <button dr-event-click="this.change()">change</button>
+                        <div dr-style="{fontSize: this.size + 'px', margin: this.size + 'px'}"> content </div>
+                        <div dr-style="'font-size: ' + this.size +'px; margin: ' + this.size + 'px'"> content </div>
+                        <div dr-style="['font-size: ' + this.size +'px', 'margin: ' + this.size + 'px']"> content </div>
+                    </div>
+                </figure>
+            </div>
+        </div>
+    </article>
+</section>

@@ -49,48 +49,13 @@
         <li><domrender-dr-event-section></domrender-dr-event-section></li>
     </ul>
     <hr>
-    <section>
-        <h2>dr-attr</h2>
-        <figure>
-            <figcaption>example</figcaption>
-            <pre dr-pre class="code-container html">&lt;textarea dr-attr=&quot;{rows: this.age/2, cols: this.age}&quot;&gt;&lt;/textarea&gt;
-&lt;div dr-attr=&quot;{wow: &#39;123&#39;, good: 123444}&quot;&gt;&lt;/div&gt;
-&lt;div dr-attr=&quot;[&#39;wow=123&#39;, &#39;good=123444&#39;]&quot;&gt;&lt;/div&gt;
-&lt;div dr-attr=&quot;&#39;wow=123, good=123444&#39;&quot;&gt;&lt;/div&gt;</pre>
-        </figure>
-    </section>
+    <domrender-dr-attr-section></domrender-dr-attr-section>
     <hr>
-    <section>
-        <h2>dr-class</h2>
-        <figure>
-            <figcaption>example</figcaption>
-            <pre dr-pre class="code-container html">&lt;div dr-class=&quot;{big: this.age &gt; 50, red: this.age &gt; 50}&quot;&gt;
-&lt;div dr-class=&quot;&#39;big yellow &#39; + (this.age &gt; 50 ? &#39;old&#39; : &#39;young&#39;)&quot;&gt;
-&lt;div dr-class=&quot;[&#39;small&#39;, &#39;yellow&#39;]&quot;&gt;</pre>
-        </figure>
-    </section>
+    <domrender-dr-class-section></domrender-dr-class-section>
     <hr>
-    <section>
-        <h2>dr-style</h2>
-        <figure>
-            <figcaption>example</figcaption>
-            <pre dr-pre class="code-container html">&lt;div dr-style=&quot;{fontSize: this.age + &#39;px&#39;}&quot;&gt; style &lt;/div&gt;
-&lt;div dr-style=&quot;{&#39;font-size&#39;: &#39;20px&#39;}&quot;&gt; style&lt;/div&gt;
-&lt;div dr-style=&quot;&#39;font-size: &#39; + this.age +&#39;px; margin: &#39; + this.age + &#39;px&#39;&quot;&gt; style &lt;/div&gt;
-&lt;div dr-style=&quot;[&#39;font-size: &#39; + this.age +&#39;px&#39;, &#39;margin: &#39; + this.age + &#39;px&#39;]&quot;&gt; style &lt;/div&gt;</pre>
-        </figure>
-    </section>
+    <domrender-dr-style-section></domrender-dr-style-section>
     <hr>
-    <section>
-        <h2>dr-strip</h2>
-        <figure>
-            <figcaption>example</figcaption>
-            AS-IS
-            <pre dr-pre class="code-container html">&lt;div dr-strip=&quot;true&quot;&gt;&lt;span&gt;hello&lt;/span&gt;&lt;/div&gt;</pre>
-            TO-BE
-            <pre dr-pre class="code-container html">&lt;span&gt;hello&lt;/span&gt;</pre>
-        </figure>
-    </section>
+    <domrender-dr-strip-section></domrender-dr-strip-section>
     <hr>
     <section>
         <h2>dr-on-init</h2>

@@ -8,11 +8,12 @@ import { CoreLifecycleSection } from '../core-introduction/section/lifecycle/cor
 import { CoreFunctionSection } from '../core-introduction/section/function/core-function-section';
 import { FrontLifecycleSection } from '../front-introduction/section/lifecycle/front-lifecycle-section';
 import { DomrenderFunctionSection } from '../domrender-introduction/section/function/domrender-function-section';
+import { DomrenderLifecycleSection } from '../domrender-introduction/section/lifecycle/domrender-lifecycle-section';
 @Sim()
 @Component({
     template,
     styles: [style],
-    using: [CoreLifecycleSection, FrontLifecycleSection, CoreFunctionSection, DomrenderFunctionSection]
+    using: [CoreLifecycleSection, FrontLifecycleSection, CoreFunctionSection, DomrenderFunctionSection, DomrenderLifecycleSection]
 })
 export class FrontIntroduction implements OnInit {
     public package?: {version: string, license: string};

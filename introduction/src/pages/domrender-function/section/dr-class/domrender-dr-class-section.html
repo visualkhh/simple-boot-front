@@ -1,0 +1,54 @@
+<section>
+    <h2>dr-class</h2>
+    <article class="content-container-white no-overflow">
+        <div class="row">
+            <figure class="m-0">
+                <figcaption>template.html</figcaption>
+                <pre dr-pre class="code-container html m-0" >&lt;style&gt;
+    .color {
+        color: red;
+    }
+    .bgColor {
+        background-color: yellow;
+    }
+&lt;/style&gt;
+&lt;button dr-event-click=&quot;this.change()&quot;&gt;change&lt;/button&gt;
+&lt;div dr-class=&quot;{color: this.color, bgColor: this.bgColor}&quot;&gt;content&lt;/div&gt;
+&lt;div dr-class=&quot;[&#39;bgColor&#39;]&quot;&gt;content&lt;/div&gt;
+&lt;div dr-class=&quot;&#39;color&#39;&quot;&gt;content&lt;/div&gt;</pre>
+            </figure>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <figure class="m-0">
+                    <figcaption>class, object body code</figcaption>
+                    <pre dr-pre class="code-container typescript m-0">color = false;
+bgColor = false;
+
+change() {
+    this.color = (Math.random() * 10) > 5;
+    this.bgColor = (Math.random() * 10) > 5;
+}</pre></figure>
+            </div>
+            <div class="col-6">
+                <figure class="m-0 result-container h-100">
+                    <figcaption><strong>result</strong></figcaption>
+                    <div class="result">
+                        <style>
+                            .color {
+                                color: red;
+                            }
+                            .bgColor {
+                                background-color: yellow;
+                            }
+                        </style>
+                        <button dr-event-click="this.change()">change</button>
+                        <div dr-class="{color: this.color, bgColor: this.bgColor}">content</div>
+                        <div dr-class="['bgColor']">content</div>
+                        <div dr-class="'color'">content</div>
+                    </div>
+                </figure>
+            </div>
+        </div>
+    </article>
+</section>
