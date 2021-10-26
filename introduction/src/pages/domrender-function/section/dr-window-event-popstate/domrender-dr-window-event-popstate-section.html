@@ -4,7 +4,7 @@
         <div class="row">
             <figure class="m-0">
                 <figcaption>template.html</figcaption>
-                <pre dr-pre class="code-container html m-0" >&lt;input type=&quot;text&quot; dr-window-event-popstate=&quot;this.value = location.href; &quot;&gt;
+                <pre dr-pre class="code-container html m-0" >&lt;input type=&quot;text&quot; dr-window-event-popstate=&quot;this.value = location.href; console.log($target) &quot;&gt;
 &lt;p&gt;value: ${this.value}$&lt;/p&gt;</pre>
             </figure>
         </div>
@@ -18,7 +18,7 @@
                 <figure class="m-0 result-container h-100">
                     <figcaption><strong>result</strong></figcaption>
                     <div class="result">
-                        <input type="text" dr-window-event-popstate="this.value = location.href;">
+                        <input type="text" dr-window-event-popstate="this.value = location.href; console.log($target)">
                         <p>value: ${this.value}$</p>
                     </div>
                 </figure>

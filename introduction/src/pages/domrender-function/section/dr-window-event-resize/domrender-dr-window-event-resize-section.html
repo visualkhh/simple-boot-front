@@ -1,0 +1,30 @@
+<section>
+    <h2>⚡️ dr-window-event-resize</h2>
+    <article class="content-container-white no-overflow">
+        <div class="row">
+            <figure class="m-0">
+                <figcaption>template.html</figcaption>
+                <pre dr-pre class="code-container html m-0" >&lt;input type=&quot;text&quot; dr-window-event-resize=&quot;this.event = $event; this.target = $target&quot;&gt;
+    &lt;p&gt;innerWidth: ${this.target?.innerWidth}$&lt;/p&gt;
+    &lt;p&gt;innerHeight: ${this.target?.innerHeight}$&lt;/p&gt;</figure>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <figure class="m-0">
+                    <figcaption>class, object body code</figcaption>
+                    <pre dr-pre class="code-container typescript m-0">event?: Event;
+target?: Window;</pre></figure>
+            </div>
+            <div class="col-sm-6">
+                <figure class="m-0 result-container h-100">
+                    <figcaption><strong>result</strong></figcaption>
+                    <div class="result">
+                        <input type="text" dr-window-event-resize="this.event = $event; this.target = $target">
+                        <p>innerWidth: ${this.target?.innerWidth}$</p>
+                        <p>innerHeight: ${this.target?.innerHeight}$</p>
+                    </div>
+                </figure>
+            </div>
+        </div>
+    </article>
+</section>

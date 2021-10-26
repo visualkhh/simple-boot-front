@@ -17,7 +17,7 @@
    &lt;li dr-repeat=&quot;$range(this.start, this.end, this.step)&quot;&gt;#it#&lt;/li&gt;
 &lt;/ol&gt;
 &lt;ol&gt;
-   &lt;li dr-repeat=&quot;$range(&#39;50..60,2&#39;)&quot;&gt;#it#&lt;/li&gt;
+   &lt;li dr-repeat=&quot;$range(&#39;50..60, 2&#39;)&quot;&gt;#it#&lt;/li&gt;
 &lt;/ol&gt;</pre>
             </figure>
         </div>
@@ -26,7 +26,8 @@
                 <figure class="m-0">
                     <figcaption>class, object body code</figcaption>
                     <pre dr-pre class="code-container typescript m-0">public start = 10;
-public end = 15;</pre>
+public end = 20;
+public step = 2;</pre>
                 </figure>
             </div>
             <div class="col-sm-6">
@@ -46,7 +47,7 @@ public end = 15;</pre>
                            <li dr-repeat="$range(this.start, this.end, this.step)">#it#</li>
                         </ol>
                         <ol>
-                           <li dr-repeat="$range('50..60,2')">#it#</li>
+                           <li dr-repeat="$range('50..60, 2')">#it#</li>
                         </ol>
                     </div>
                 </figure>

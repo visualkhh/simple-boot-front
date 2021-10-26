@@ -18,6 +18,9 @@ export class DomrenderExpressionSection  {
         return this.first + this.middle + this.last;
     }
 
+    onInitRender() {
+    }
+
     getStrongTagFullName() {
         return `<strong>${this.getFullName()}</strong>`
     }

@@ -32,6 +32,7 @@ import { DomrenderConfig } from './pages/domrender-config/domrender-config';
 import { DomrenderProxy } from './pages/domrender-proxy/domrender-proxy';
 import { DomrenderClass } from './pages/domrender-class/domrender-class';
 import { DomrenderDetect } from './pages/domrender-detect/domrender-detect';
+declare const bootstrap: any;
 declare const feather: any;
 declare const hljs: any;
 @Sim()
@@ -76,15 +77,84 @@ export class Index implements OnInit, RouterAction {
     private category?: HTMLSelectElement;
     private detail?: HTMLSelectElement;
     public detailsItems: string[] = [];
+    public defaultAutoSeconds = 10;
+    public autoSeconds = this.defaultAutoSeconds;
+    public forceAutoStop = false;
+    public footer?: Element;
+    // public autoInterval?: any;
+    private autoInterval?: NodeJS.Timer;
     constructor(public navagation: Navigation) {
         const data = getRouter(this)!;
         this. route = data.route;
     }
 
     onInit(): void {
-        this.detailsItems = this.getDetails(this.category?.value)
+        this.detailsItems = this.getDetails(this.category?.value);
+        document.addEventListener('scroll', () => {
+            if (this.footer) {
+                this.autoPage(this.footer)
+            }
+        }, {
+            passive: true
+        });
     }
 
+    isAutoPage(el: Element) {
+        const rect = el.getBoundingClientRect();
+        const sw = (
+            Math.floor(rect.top) >= 0 &&
+            Math.floor(rect.left) >= 0 &&
+            Math.floor(rect.bottom) <= (window.innerHeight || document.documentElement.clientHeight) &&
+            Math.floor(rect.right) <= (window.innerWidth || document.documentElement.clientWidth)
+        );
+        // console.log(rect.top, rect.left, rect.bottom, rect.right, window.innerHeight, window.innerWidth)
+        // console.log(rect.top, rect.left, rect.bottom, rect.right, document.documentElement.clientHeight, document.documentElement.clientWidth)
+        return sw;
+    }
+
+    setFooter(footer: Element) {
+        this.footer = footer;
+        this.autoPage(this.footer!);
+    }
+
+    autoPage(footer: Element) {
+        // console.log('???', footer)
+        if (this.forceAutoStop) {
+            clearInterval(this.autoInterval!);
+            return;
+        }
+        const sw = this.isAutoPage(footer);
+        // console.log('sw?', sw)
+        if (sw && this.autoInterval === undefined) {
+            this.autoInterval = setInterval(() => {
+                this.autoSeconds--;
+                if (this.autoSeconds < 0) {
+                    if (this.detail!.selectedIndex < this.detail!?.options.length -1) {
+                        this.detail!.value = this.detail!?.options[this.detail!.selectedIndex + 1].value;
+                        this.changeDetail(this.detail!.value)
+                    } else if (this.category!.selectedIndex < this.category!?.options.length -1) {
+                        this.category!.value = this.category!?.options[this.category!.selectedIndex + 1].value;
+                        this.changeCategory(this.category!.value)
+                    } else {
+                        this.category!.value = this.category!?.options[0].value;
+                        this.changeCategory(this.category!.value)
+                    }
+                    // this.detail?.selectedIndex;
+                    // this.detail?.options
+                    // console.log(this.category, this.detail)
+                }
+            }, 1000)
+        } else if (this.autoInterval) {
+            clearInterval(this.autoInterval);
+            this.autoInterval = undefined;
+            this.autoSeconds = this.defaultAutoSeconds;
+        }
+    }
+
+    toggleAutoPage() {
+        clearInterval(this.autoInterval!);
+        this.forceAutoStop = !this.forceAutoStop;
+    }
     changeCategory(data: string) {
         this.detailsItems = this.getDetails(data);
     }
@@ -105,6 +175,12 @@ export class Index implements OnInit, RouterAction {
 
     canActivate(url: any, module: any): void {
         window.scrollTo(0, 0);
+        clearInterval(this.autoInterval!)
+        this.autoInterval = undefined;
+        this.autoSeconds = this.defaultAutoSeconds;
+        this.autoPage(this.footer!);
+
+
         this.child = module;
         // hljs.highlightAll();
         feather.replace({ 'aria-hidden': 'true' })

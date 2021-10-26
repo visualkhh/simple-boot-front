@@ -31,6 +31,7 @@ import { DomrenderDrEventFocusSection } from './section/dr-event-focus/domrender
 import { DomrenderDrEventBlurSection } from './section/dr-event-blur/domrender-dr-event-blur-section';
 import { DomrenderDrWindowEventPopstateSection } from './section/dr-window-event-popstate/domrender-dr-window-event-popstate-section';
 import { DomrenderDrEventSection } from './section/dr-event/domrender-dr-event-section';
+import { DomrenderDrWindowEventResizeSection } from 'simple-boot-front/pages/domrender-function/section/dr-window-event-resize/domrender-dr-window-event-resize-section';
 @Sim()
 @Component({
     template,
@@ -41,7 +42,7 @@ import { DomrenderDrEventSection } from './section/dr-event/domrender-dr-event-s
         DomrenderDrEventClickSection, DomrenderEventAttributeValuesSection,
         DomrenderDrEventMousedownSection, DomrenderDrEventMouseupSection, DomrenderDrEventDblclickSection, DomrenderDrEventMouseoverSection, DomrenderDrEventMousemoveSection, DomrenderDrEventMouseenterSection, DomrenderDrEventMouseleaveSection, DomrenderDrEventContextmenuSection,
         DomrenderDrEventKeyupSection, DomrenderDrEventKeydownSection, DomrenderDrEventKeypressSection, DomrenderDrEventChangeSection,DomrenderDrEventInputSection,
-        DomrenderDrEventSubmitSection, DomrenderDrEventResizeSection, DomrenderDrEventFocusSection, DomrenderDrEventBlurSection,DomrenderDrWindowEventPopstateSection, DomrenderDrEventSection
+        DomrenderDrEventSubmitSection, DomrenderDrEventResizeSection, DomrenderDrEventFocusSection, DomrenderDrEventBlurSection,DomrenderDrWindowEventPopstateSection, DomrenderDrEventSection, DomrenderDrWindowEventResizeSection
     ]
 })
 export class DomrenderFunction implements OnInit {

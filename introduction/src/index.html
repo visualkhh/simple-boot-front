@@ -1,8 +1,8 @@
 <div>
   <header class="header">
     <nav class="input-group">
-      <label class="input-group-text bg-white" for="inputGroupSelect01">simple-boot</label>
-      <select class="form-select form-select-lg" id="inputGroupSelect01" dr-on-init="this.category" dr-event-change="this.changeCategory($target.value)">
+      <label class="input-group-text bg-white" for="groupSelect">simple-boot</label>
+      <select class="form-select form-select-lg" id="groupSelect" dr-on-init="this.category" dr-event-change="this.changeCategory($target.value)">
         <option selected value="simple-boot-front"  dr-attr="{selected: this.getPath(1) === $element.value ? 'selected' : null}">front </option>
         <option value="dom-render" dr-attr="{selected: this.getPath(1) === $element.value ? 'selected' : null}">dom-render</option>
         <option value="simple-boot-core" dr-attr="{selected: this.getPath(1) === $element.value ? 'selected' : null}">core</option>
@@ -18,23 +18,26 @@
   <main>
     <route component="this.child"></route>
   </main>
-  <footer>
-    <ul class="badge-container">
-<!--      <li>-->
-<!--        <a href="https://www.npmjs.com/package/simple-boot-front" target="_blank"><img src="https://img.shields.io/badge/npm-blue?logo=npm"></a>-->
-<!--      </li>-->
-<!--      <li>-->
-<!--        <img src="https://img.shields.io/badge/license-MIT-green">-->
-<!--      </li>-->
-<!--      <li>-->
-<!--        <a href="https://discord.gg/PW56dpns" target="_blank"><img src="https://img.shields.io/badge/discord-brightgreen?logo=discord"></a>-->
-<!--      </li>-->
-<!--      <li>-->
-<!--        <a href="https://github.com/visualkhh/simple-boot-front" target="_blank"><img src="https://img.shields.io/badge/-github-black?logo=github"></a>-->
-<!--      </li>-->
-      <li>
-        <a href="maileto:visualkhh@gmail.com" target="_blank"><img src="https://img.shields.io/badge/visualkhh@gmail.com-lightgrey"></a>
-      </li> &nbsp;
-    </ul>
+  <footer id="footer" dr-on-init="this.setFooter" style="display: flex; justify-content: space-between">
+    <div class="ps-3 text-secondary">
+      You will be moved to the next page in ${this.autoSeconds}$ seconds. <button class="btn btn-outline-secondary" dr-event-click="this.toggleAutoPage()"> ${this.forceAutoStop ? 'auto move start' : 'auto move stop'}$</button>
+    </div>
+      <ul class="badge-container">
+  <!--      <li>-->
+  <!--        <a href="https://www.npmjs.com/package/simple-boot-front" target="_blank"><img src="https://img.shields.io/badge/npm-blue?logo=npm"></a>-->
+  <!--      </li>-->
+  <!--      <li>-->
+  <!--        <img src="https://img.shields.io/badge/license-MIT-green">-->
+  <!--      </li>-->
+  <!--      <li>-->
+  <!--        <a href="https://discord.gg/PW56dpns" target="_blank"><img src="https://img.shields.io/badge/discord-brightgreen?logo=discord"></a>-->
+  <!--      </li>-->
+  <!--      <li>-->
+  <!--        <a href="https://github.com/visualkhh/simple-boot-front" target="_blank"><img src="https://img.shields.io/badge/-github-black?logo=github"></a>-->
+  <!--      </li>-->
+        <li>
+          <a href="maileto:visualkhh@gmail.com" target="_blank"><img src="https://img.shields.io/badge/visualkhh@gmail.com-lightgrey"></a>
+        </li> &nbsp;
+      </ul>
   </footer>
 </div>

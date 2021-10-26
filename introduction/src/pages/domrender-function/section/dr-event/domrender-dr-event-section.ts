@@ -10,6 +10,7 @@ import template from './domrender-dr-event-section.html'
 })
 export class DomrenderDrEventSection {
     targetElement?: Element;
+    params?: any;
     event?: Event;
     target?: Element;
 
