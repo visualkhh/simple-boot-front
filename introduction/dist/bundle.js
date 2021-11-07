@@ -164,6 +164,7 @@ var SimFrontOption = (function (_super) {
     return SimFrontOption;
 }(SimOption_1.SimOption));
 exports.SimFrontOption = SimFrontOption;
+
 });
 
 unwrapExports(SimFrontOption_1);
@@ -272,6 +273,7 @@ var getComponent = function (target) {
     }
 };
 exports.getComponent = getComponent;
+
 });
 
 unwrapExports(Component_1);
@@ -311,6 +313,7 @@ var getScript = function (target) {
     }
 };
 exports.getScript = getScript;
+
 });
 
 unwrapExports(Script_1);
@@ -1087,7 +1090,7 @@ var EventManager = (function () {
                 varName = varName.replace(/this\./, '');
             }
             EventManager.VARNAMES.forEach(function (it) {
-                raws = raws.replace(RegExp(it.replace('$', '\\$'), 'g'), "this?.___" + it);
+                raws = raws.replace(RegExp(it.replace('$', '\\$'), 'g'), "this.___" + it);
             });
             var variablePaths = ScriptUtils.getVariablePaths(raws !== null && raws !== void 0 ? raws : '');
             return variablePaths.has(varName);
@@ -1515,7 +1518,7 @@ var RawSet = (function () {
             }
             if (script) {
                 EventManager.VARNAMES.forEach(function (it) {
-                    script = script.replace(RegExp(it.replace('$', '\\$'), 'g'), "this?.___" + it);
+                    script = script.replace(RegExp(it.replace('$', '\\$'), 'g'), "this.___" + it);
                 });
                 Array.from(ScriptUtils.getVariablePaths(script)).filter(function (it) { return !it.startsWith("___" + EventManager.SCRIPTS_VARNAME) && !it.startsWith("___" + EventManager.SCRIPTS_VARNAME); }).forEach(function (it) { return usingTriggerVariables.add(it); });
             }
@@ -4607,6 +4610,7 @@ var LocationUtils = (function () {
     return LocationUtils;
 }());
 exports.LocationUtils = LocationUtils;
+
 });
 
 unwrapExports(LocationUtils_1);
@@ -4687,6 +4691,7 @@ var Navigation = (function () {
     return Navigation;
 }());
 exports.Navigation = Navigation;
+
 });
 
 unwrapExports(Navigation_1);
@@ -4721,6 +4726,7 @@ var View = (function () {
     return View;
 }());
 exports.View = View;
+
 });
 
 unwrapExports(View_1);
@@ -4772,6 +4778,7 @@ var ViewService = (function () {
     return ViewService;
 }());
 exports.ViewService = ViewService;
+
 });
 
 unwrapExports(ViewService_1);
@@ -4800,6 +4807,7 @@ var HttpService = (function () {
     return HttpService;
 }());
 exports.HttpService = HttpService;
+
 });
 
 unwrapExports(HttpService_1);
@@ -5044,6 +5052,7 @@ var SimpleBootFront = (function (_super) {
     return SimpleBootFront;
 }(SimpleApplication_1.SimpleApplication));
 exports.SimpleBootFront = SimpleBootFront;
+
 });
 
 unwrapExports(SimpleBootFront_1);
@@ -5274,6 +5283,7 @@ var ScriptRunnable = (function () {
     return ScriptRunnable;
 }());
 exports.ScriptRunnable = ScriptRunnable;
+
 });
 
 unwrapExports(ScriptRunnable_1);
