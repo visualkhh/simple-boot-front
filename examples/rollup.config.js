@@ -30,7 +30,6 @@ export default {
         commonjs(),
         typescript({ tsconfig: './tsconfig.json', clean: true }),
         sourcemaps(),
-        // typescript({outDir: './dist', module: 'commonjs', declaration: false}),
         replace({
             "function __extends(d, b) {\n  if (typeof b !== \"function\" && b !== null) throw new TypeError(\"Class extends value \" + String(b) + \" is not a constructor or null\");\n  extendStatics(d, b);"
                 :
@@ -38,6 +37,10 @@ export default {
             delimiters: ['\n', '\n'],
             preventAssignment: true
         }),
+        // replace({
+        //     '@Router': '@Routerss',
+        //     delimiters: ['', '']
+        // }),
         // replace({
         //     preventAssignment: true,
         //     "Object.defineProperty(exports, '__esModule', { value: true });": "try{if(!exports) {var exports = {}}}catch (e) {var exports = {}} Object.defineProperty(exports, '__esModule', { value: true });",

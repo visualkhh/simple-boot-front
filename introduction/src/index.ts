@@ -32,6 +32,7 @@ import { DomrenderConfig } from './pages/domrender-config/domrender-config';
 import { DomrenderProxy } from './pages/domrender-proxy/domrender-proxy';
 import { DomrenderClass } from './pages/domrender-class/domrender-class';
 import { DomrenderDetect } from './pages/domrender-detect/domrender-detect';
+import { MyBtn } from 'simple-boot-front/shareds/btn-component/my-btn';
 declare const bootstrap: any;
 declare const feather: any;
 declare const hljs: any;
@@ -69,7 +70,7 @@ declare const hljs: any;
 @Component({
     template,
     styles: [style],
-    using: [CodeScript]
+    using: [CodeScript, MyBtn]
 })
 export class Index implements OnInit, RouterAction {
     child?: any;
