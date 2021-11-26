@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "type": "module",
   "jest": {
     "transform": {
       "^.+\\.ts$": "ts-jest"
@@ -27,7 +28,10 @@
     "serve:proxy8080": "sbf serve --path ./dist --port 4500 --proxy http://localhost:8080",
     "bundle": "rollup -c ",
     "bundle:watch": "rollup -c -w ",
-    "start": "rollup -c && sbf serve --path ./dist --port 4500"
+    "start": "rollup -c && sbf serve --path ./dist --port 4500",
+    "server:dev-test": "ts-node-dev -P tsconfig.json -r tsconfig-paths/register src/index.ts",
+    "server": "ts-node -P tsconfig.json -r tsconfig-paths/register src/server.ts",
+    "server:dev": "ts-node-dev --respawn  -P tsconfig.json -r tsconfig-paths/register src/server.ts"
   },
   "devDependencies": {
     "@rollup/plugin-babel": "^5.3.0",
@@ -56,10 +60,14 @@
     "simple-boot-front-cli": "^1.0.6",
     "supertest": "^6.1.3",
     "ts-jest": "^27.0.7",
+    "ts-node": "^10.4.0",
+    "ts-node-dev": "^1.1.8",
+    "tsconfig-paths": "^3.12.0",
     "tslib": "^2.3.1",
     "typescript": "^4.4.3"
   },
   "dependencies": {
-    "simple-boot-front": "file:../dist"
+    "simple-boot-front": "file:../dist",
+    "simple-boot-http-server": "file:../libs/simple-boot-http-server/dist"
   }
 }
