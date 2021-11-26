@@ -31,7 +31,7 @@ import { SimFrontOption } from 'simple-boot-front/option/SimFrontOption';
         '/intent': Intents,
         '/views': Views,
         '/exception': Exception,
-        '/aop': Aop,
+        '/aop': Aop
     },
     routers: [DocumentRouter]
 })
@@ -41,7 +41,6 @@ export class AppRouter implements RouterAction {
     constructor(private subNotfound: SubNotfound, private option: SimFrontOption) {
     }
 
-
     canActivate(url: Intent, module: any): void {
         // console.trace();
         this.data = this.data + '-------'
@@ -50,8 +49,8 @@ export class AppRouter implements RouterAction {
             this.child = this.subNotfound;
         } else if (this.child !== module) {
             this.child = module;
-            setTimeout( () => {
-                this.child.data='zzzzzz'
+            setTimeout(() => {
+                this.child.data = 'zzzzzz'
             }, 5000)
         }
     }

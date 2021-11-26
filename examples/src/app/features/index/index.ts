@@ -12,7 +12,7 @@ import { TempScript } from '../../scripts/TempScript';
 @Sim({scheme: 'index'})
 @Component({
     template,
-    using:[SayScript, Profile, TempScript]
+    using: [SayScript, Profile, TempScript]
 })
 export class Index {
     data = 'default data';
@@ -52,14 +52,16 @@ export class Index {
         this.tData = Math.floor(RandomUtils.random(1, 400));
         console.log('thisDataChange', this.tData)
     }
+
     //
     // go($event: KeyboardEvent, view: View<Element>) {
     //     $event.preventDefault();
     // }
     //
     say() {
-       console.log('say~')
+        console.log('say~')
     }
+
     goto() {
         console.log('-->na', this.navigation)
         this.navigation.go('/exception');

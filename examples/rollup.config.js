@@ -1,4 +1,4 @@
-import babel from "@rollup/plugin-babel";
+import babel from '@rollup/plugin-babel';
 import replace from '@rollup/plugin-replace';
 import copy from 'rollup-plugin-copy';
 import resolve from 'rollup-plugin-node-resolve';

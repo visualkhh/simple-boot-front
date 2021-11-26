@@ -4,7 +4,7 @@ import {
     ComponentConfig,
     ComponentMetadataKey,
     componentSelectors,
-    getComponent,
+    getComponent
 } from './decorators/Component';
 import {
     scripts
@@ -43,9 +43,10 @@ export class SimpleBootFront extends SimpleApplication {
                 (bindObj as any)?.onInit?.();
             }
         },
-        scripts: {'application': this},
+        scripts: {application: this},
         applyEvents: [{
-            attrName: 'router-link', callBack: (elements: Element, attrValue: string, obj: any) => {
+            attrName: 'router-link',
+            callBack: (elements: Element, attrValue: string, obj: any) => {
                 elements.addEventListener('click', (event) => {
                     SimGlobal().application.simstanceManager.getOrNewSim(Navigation)?.go(attrValue)
                 })
@@ -53,12 +54,14 @@ export class SimpleBootFront extends SimpleApplication {
         }],
         proxyExcludeTyps: this.domRendoerExcludeProxy
     };
+
     constructor(public rootRouter: ConstructorType<any>, public option: SimFrontOption) {
         super(rootRouter, option);
         window.__dirname = 'simple-boot-front__dirname';
         // console.log('---sele-->', selectors, this.targetElements)
         this.domRenderTargetAttrs.push({
-            name: 'component', callBack: (element: Element, attrValue: string, obj: any, rawSet: RawSet) => {
+            name: 'component',
+            callBack: (element: Element, attrValue: string, obj: any, rawSet: RawSet) => {
                 const fag = this.option.window.document.createDocumentFragment();
                 if (attrValue) {
                     const targetObj = ScriptUtils.eval(`return ${attrValue}`, obj)
@@ -109,17 +112,20 @@ export class SimpleBootFront extends SimpleApplication {
             domRenderProxy.initRender(target);
             (val as any)?.onInit?.();
         }
+
         // new Event('mouseleave', { bubbles: true, cancelable: true });
         this.option.window.addEventListener('intent', (event) => {
             const cevent = event as CustomEvent
             this.publishIntent(new Intent(cevent.detail.uri, cevent.detail.data, event));
         });
+
         this.option.window.addEventListener('popstate', (event) => {
             const intent = new Intent(this.navigation.path ?? '');
             this.routing<SimAtomic, any>(intent).then(async it => {
                 this.afterSetting();
             })
-        })
+        });
+
         this.option.window.dispatchEvent(new Event('popstate'))
     }
 
@@ -147,7 +153,6 @@ export class SimpleBootFront extends SimpleApplication {
                     }
                 }
             }
-
         });
     }
 
@@ -155,7 +160,7 @@ export class SimpleBootFront extends SimpleApplication {
         const simstanceManager = this.simstanceManager;
         scripts.forEach((val, name) => {
             this.domRenderConfig.scripts![name] = function(...args: any) {
-                let obj: any = undefined;
+                let obj: any;
                 try {
                     obj = simstanceManager.getOrNewSim(val);
                 } catch (e) {
@@ -166,7 +171,6 @@ export class SimpleBootFront extends SimpleApplication {
                 scriptRunnable.rawSets.set(render.rawset, this);
                 return scriptRunnable.run(...args);
             }
-
         })
     }
 
