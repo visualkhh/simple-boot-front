@@ -6,14 +6,14 @@ import template from './index.html'
 import style from './index.css'
 import { RouterAction } from 'simple-boot-core/route/RouterAction';
 import { OnInit } from '../../../dist/lifecycle/OnInit';
-import { Main } from './pages/Main';
+import { UserComponent } from './pages/user.component';
 import { UserServiceFront } from '../front/UserServiceFront';
 @Sim()
 @Router({
     path: '',
     route: {
-        '': '/',
-        '/': Main,
+        // '': '/',
+        '/': UserComponent,
     }
 })
 @Component({
@@ -23,6 +23,7 @@ import { UserServiceFront } from '../front/UserServiceFront';
 export class Index implements OnInit, RouterAction {
     child?: any;
     constructor() {
+        console.log('Index constructor')
     }
 
     onInit(): void {
@@ -33,7 +34,6 @@ export class Index implements OnInit, RouterAction {
     }
 }
 export const factory = (window: Window) => {
-    UserServiceFront;
     return new SimpleBootFront(Index, new SimFrontOption(window).setUrlType(UrlType.path));
 }
 factory(window).run();

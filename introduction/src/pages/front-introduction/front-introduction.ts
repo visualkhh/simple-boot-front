@@ -18,6 +18,7 @@ import { DomrenderLifecycleSection } from '../domrender-introduction/section/lif
 export class FrontIntroduction implements OnInit {
     public package?: {version: string, license: string};
     constructor(public apiService: ApiService) {
+        console.log('FrontIntroduction constructor');
     }
 
     onInit(): void {

@@ -1,10 +1,13 @@
 import { Sim } from 'simple-boot-core/decorators/SimDecorator';
 import { Component } from 'simple-boot-front/decorators/Component';
-import template from './main.html';
+import template from './html.html';
 @Sim()
 @Component({
     template
 })
-export class Main {
+export class UserComponent {
 
+    constructor() {
+        console.log('UserComponent constructor');
+    }
 }

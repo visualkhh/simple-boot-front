@@ -6,13 +6,13 @@ import template from './index.html'
 import style from './index.css'
 import { RouterAction } from 'simple-boot-core/route/RouterAction';
 import { OnInit } from '../../../dist/lifecycle/OnInit';
-import { Main } from 'simple-boot-front/pages/Main';
+import { UserComponent } from 'simple-boot-front/pages/user.component';
 @Sim()
 @Router({
     path: '',
     route: {
         '': '/',
-        '/': Main,
+        '/': UserComponent,
     }
 })
 @Component({
@@ -22,6 +22,7 @@ import { Main } from 'simple-boot-front/pages/Main';
 export class Index implements OnInit, RouterAction {
     child?: any;
     constructor() {
+        console.log('index constructor')
     }
 
     onInit(): void {

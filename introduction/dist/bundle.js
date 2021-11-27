@@ -23,7 +23,7 @@ var extendStatics = function(d, b) {
     return extendStatics(d, b);
 };
 
-function __extends$2(d, b) {
+function __extends(d, b) {
     if (typeof b !== "function" && b !== null)
         throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
     extendStatics(d, b);
@@ -322,6 +322,9 @@ var Script_3 = Script_1.Script;
 Script_1.ScriptMetadataKey;
 Script_1.scripts;
 
+var ValidUtils_1 = createCommonjsModule(function (module, exports) {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ValidUtils = void 0;
 var ValidUtils = (function () {
     function ValidUtils() {
     }
@@ -391,15 +394,25 @@ var ValidUtils = (function () {
     };
     return ValidUtils;
 }());
+exports.ValidUtils = ValidUtils;
+
+});
+
+unwrapExports(ValidUtils_1);
+ValidUtils_1.ValidUtils;
+
+var RandomUtils_1 = createCommonjsModule(function (module, exports) {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.RandomUtils = void 0;
 
 var RandomUtils = (function () {
     function RandomUtils() {
     }
     RandomUtils.random = function (min, max) {
-        if (ValidUtils.isNullOrUndefined(min)) {
+        if (ValidUtils_1.ValidUtils.isNullOrUndefined(min)) {
             return Math.random();
         }
-        else if (!ValidUtils.isNullOrUndefined(min) && ValidUtils.isNullOrUndefined(max)) {
+        else if (!ValidUtils_1.ValidUtils.isNullOrUndefined(min) && ValidUtils_1.ValidUtils.isNullOrUndefined(max)) {
             return Math.random() * (min || 0);
         }
         else {
@@ -433,7 +446,16 @@ var RandomUtils = (function () {
     RandomUtils.d = '';
     return RandomUtils;
 }());
+exports.RandomUtils = RandomUtils;
 
+});
+
+unwrapExports(RandomUtils_1);
+RandomUtils_1.RandomUtils;
+
+var StringUtils_1 = createCommonjsModule(function (module, exports) {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.StringUtils = void 0;
 var StringUtils = (function () {
     function StringUtils() {
     }
@@ -454,8 +476,15 @@ var StringUtils = (function () {
     };
     return StringUtils;
 }());
+exports.StringUtils = StringUtils;
 
-var __values$1 = (undefined && undefined.__values) || function(o) {
+});
+
+unwrapExports(StringUtils_1);
+StringUtils_1.StringUtils;
+
+var ScriptUtils_1 = createCommonjsModule(function (module, exports) {
+var __values = (commonjsGlobal && commonjsGlobal.__values) || function(o) {
     var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
     if (m) return m.call(o);
     if (o && typeof o.length === "number") return {
@@ -466,7 +495,7 @@ var __values$1 = (undefined && undefined.__values) || function(o) {
     };
     throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
 };
-var __read$4 = (undefined && undefined.__read) || function (o, n) {
+var __read = (commonjsGlobal && commonjsGlobal.__read) || function (o, n) {
     var m = typeof Symbol === "function" && o[Symbol.iterator];
     if (!m) return o;
     var i = m.call(o), r, ar = [], e;
@@ -482,6 +511,8 @@ var __read$4 = (undefined && undefined.__read) || function (o, n) {
     }
     return ar;
 };
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ScriptUtils = void 0;
 var ScriptUtils = (function () {
     function ScriptUtils() {
     }
@@ -530,8 +561,8 @@ var ScriptUtils = (function () {
             tag.onload = resolve;
             tag.onerror = reject;
             try {
-                for (var _b = __values$1(Object.entries(attribute)), _c = _b.next(); !_c.done; _c = _b.next()) {
-                    var _d = __read$4(_c.value, 2), key = _d[0], value = _d[1];
+                for (var _b = __values(Object.entries(attribute)), _c = _b.next(); !_c.done; _c = _b.next()) {
+                    var _d = __read(_c.value, 2), key = _d[0], value = _d[1];
                     tag.setAttribute(key, value);
                 }
             }
@@ -560,12 +591,16 @@ var ScriptUtils = (function () {
     };
     return ScriptUtils;
 }());
+exports.ScriptUtils = ScriptUtils;
 
-var ScriptUtils$1 = /*#__PURE__*/Object.freeze({
-    __proto__: null,
-    ScriptUtils: ScriptUtils
 });
 
+unwrapExports(ScriptUtils_1);
+ScriptUtils_1.ScriptUtils;
+
+var DomUtils_1 = createCommonjsModule(function (module, exports) {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DomUtils = void 0;
 var DomUtils = (function () {
     function DomUtils() {
     }
@@ -609,8 +644,15 @@ var DomUtils = (function () {
     };
     return DomUtils;
 }());
+exports.DomUtils = DomUtils;
 
-var __read$3 = (undefined && undefined.__read) || function (o, n) {
+});
+
+unwrapExports(DomUtils_1);
+DomUtils_1.DomUtils;
+
+var Range_1 = createCommonjsModule(function (module, exports) {
+var __read = (commonjsGlobal && commonjsGlobal.__read) || function (o, n) {
     var m = typeof Symbol === "function" && o[Symbol.iterator];
     if (!m) return o;
     var i = m.call(o), r, ar = [], e;
@@ -626,7 +668,7 @@ var __read$3 = (undefined && undefined.__read) || function (o, n) {
     }
     return ar;
 };
-var __spreadArray$1 = (undefined && undefined.__spreadArray) || function (to, from, pack) {
+var __spreadArray = (commonjsGlobal && commonjsGlobal.__spreadArray) || function (to, from, pack) {
     if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
         if (ar || !(i in from)) {
             if (!ar) ar = Array.prototype.slice.call(from, 0, i);
@@ -635,6 +677,8 @@ var __spreadArray$1 = (undefined && undefined.__spreadArray) || function (to, fr
     }
     return to.concat(ar || Array.prototype.slice.call(from));
 };
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Range = exports.RangeIterator = exports.RangeResult = void 0;
 var RangeResult = (function () {
     function RangeResult(value, done) {
         this.done = done;
@@ -642,6 +686,7 @@ var RangeResult = (function () {
     }
     return RangeResult;
 }());
+exports.RangeResult = RangeResult;
 var RangeIterator = (function () {
     function RangeIterator(first, last, step) {
         this._current = this._first = first;
@@ -665,6 +710,7 @@ var RangeIterator = (function () {
     };
     return RangeIterator;
 }());
+exports.RangeIterator = RangeIterator;
 var Range = (function () {
     function Range(first, last, step) {
         if (step === void 0) { step = 1; }
@@ -682,8 +728,8 @@ var Range = (function () {
             return new Range(0, first, step);
         }
         else if (typeof first === 'string') {
-            var _a = __read$3(first.split('..'), 2), _first = _a[0], _b = _a[1], _last = _b === void 0 ? '0' : _b;
-            var _c = __read$3(_last.split(','), 2), __last = _c[0], _d = _c[1], _step = _d === void 0 ? '1' : _d;
+            var _a = __read(first.split('..'), 2), _first = _a[0], _b = _a[1], _last = _b === void 0 ? '0' : _b;
+            var _c = __read(_last.split(','), 2), __last = _c[0], _d = _c[1], _step = _d === void 0 ? '1' : _d;
             return new Range(Number(_first.trim()), Number(__last.trim()), Number(_step.trim()));
         }
         else {
@@ -691,12 +737,21 @@ var Range = (function () {
         }
     };
     Range.prototype.toArray = function () {
-        return __spreadArray$1([], __read$3(this), false);
+        return __spreadArray([], __read(this), false);
     };
     return Range;
 }());
+exports.Range = Range;
 
-var __read$2 = (undefined && undefined.__read) || function (o, n) {
+});
+
+unwrapExports(Range_1);
+Range_1.Range;
+Range_1.RangeIterator;
+Range_1.RangeResult;
+
+var EventManager_1 = createCommonjsModule(function (module, exports) {
+var __read = (commonjsGlobal && commonjsGlobal.__read) || function (o, n) {
     var m = typeof Symbol === "function" && o[Symbol.iterator];
     if (!m) return o;
     var i = m.call(o), r, ar = [], e;
@@ -712,7 +767,7 @@ var __read$2 = (undefined && undefined.__read) || function (o, n) {
     }
     return ar;
 };
-var __values = (undefined && undefined.__values) || function(o) {
+var __values = (commonjsGlobal && commonjsGlobal.__values) || function(o) {
     var s = typeof Symbol === "function" && Symbol.iterator, m = s && o[s], i = 0;
     if (m) return m.call(o);
     if (o && typeof o.length === "number") return {
@@ -723,6 +778,11 @@ var __values = (undefined && undefined.__values) || function(o) {
     };
     throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
 };
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.eventManager = exports.EventManager = void 0;
+
+
+
 var EventManager = (function () {
     function EventManager() {
         var _this = this;
@@ -758,12 +818,12 @@ var EventManager = (function () {
                         if (script) {
                             var obj = it.obj;
                             var config = (_a = obj === null || obj === void 0 ? void 0 : obj._DomRender_proxy) === null || _a === void 0 ? void 0 : _a.config;
-                            ScriptUtils.eval(_this.bindScript + " " + script + " ", Object.assign(obj, {
+                            ScriptUtils_1.ScriptUtils.eval(_this.bindScript + " " + script + " ", Object.assign(obj, {
                                 __render: Object.freeze({
-                                    target: DomRenderProxy.final(event.target),
+                                    target: _this.DomrenderProxyFinal(event.target),
                                     element: it,
                                     event: event,
-                                    range: Range.range,
+                                    range: Range_1.Range.range,
                                     scripts: EventManager.setBindProperty(config === null || config === void 0 ? void 0 : config.scripts, obj)
                                 })
                             }));
@@ -773,6 +833,10 @@ var EventManager = (function () {
             });
         }
     }
+    EventManager.prototype.DomrenderProxyFinal = function (obj) {
+        obj._DomRender_isFinal = true;
+        return obj;
+    };
     EventManager.prototype.findAttrElements = function (fragment, config) {
         var _a, _b;
         var elements = new Set();
@@ -793,7 +857,7 @@ var EventManager = (function () {
         this.procAttr(childNodes, this.attrPrefix + 'value', function (it, attribute) {
             var script = attribute;
             if (script) {
-                var data = ScriptUtils.evalReturn(script, obj);
+                var data = ScriptUtils_1.ScriptUtils.evalReturn(script, obj);
                 if (it.value !== data) {
                     it.value = data;
                 }
@@ -867,14 +931,14 @@ var EventManager = (function () {
                 script = 'return ' + script;
             }
             if (_this.isUsingThisVar(script, varName) || varName === undefined) {
-                var data = ScriptUtils.eval("const $element = this.__render.element; " + script + " ", Object.assign(obj, {
+                var data = ScriptUtils_1.ScriptUtils.eval("const $element = this.__render.element; " + script + " ", Object.assign(obj, {
                     __render: Object.freeze({
                         element: it
                     })
                 }));
                 if (typeof data === 'string') {
                     data.split(',').forEach(function (sit) {
-                        var _a = __read$2(sit.split('='), 2), key = _a[0], value = _a[1];
+                        var _a = __read(sit.split('='), 2), key = _a[0], value = _a[1];
                         var s = value.trim();
                         var k = key.trim();
                         if (s === 'null') {
@@ -887,7 +951,7 @@ var EventManager = (function () {
                 }
                 else if (Array.isArray(data)) {
                     data.forEach(function (sit) {
-                        var _a = __read$2(sit.split('='), 2), key = _a[0], value = _a[1];
+                        var _a = __read(sit.split('='), 2), key = _a[0], value = _a[1];
                         var s = value.trim();
                         var k = key.trim();
                         if (s === 'null') {
@@ -901,7 +965,7 @@ var EventManager = (function () {
                 else {
                     try {
                         for (var _b = __values(Object.entries(data)), _c = _b.next(); !_c.done; _c = _b.next()) {
-                            var _d = __read$2(_c.value, 2), key = _d[0], value = _d[1];
+                            var _d = __read(_c.value, 2), key = _d[0], value = _d[1];
                             if (value === null) {
                                 it.removeAttribute(key);
                             }
@@ -927,7 +991,7 @@ var EventManager = (function () {
                 script = 'return ' + script;
             }
             if (_this.isUsingThisVar(script, varName) || varName === undefined) {
-                var data = ScriptUtils.eval("const $element = this.__render.element;  " + script + " ", Object.assign(obj, {
+                var data = ScriptUtils_1.ScriptUtils.eval("const $element = this.__render.element;  " + script + " ", Object.assign(obj, {
                     __render: Object.freeze({
                         element: it
                     })
@@ -941,7 +1005,7 @@ var EventManager = (function () {
                 else {
                     try {
                         for (var _b = __values(Object.entries(data)), _c = _b.next(); !_c.done; _c = _b.next()) {
-                            var _d = __read$2(_c.value, 2), key = _d[0], value = _d[1];
+                            var _d = __read(_c.value, 2), key = _d[0], value = _d[1];
                             if (it instanceof HTMLElement) {
                                 it.style[key] = String(value);
                             }
@@ -964,7 +1028,7 @@ var EventManager = (function () {
                 script = 'return ' + script;
             }
             if (_this.isUsingThisVar(script, varName) || varName === undefined) {
-                var data = ScriptUtils.eval("const $element = this.element;  " + script + " ", Object.assign(obj, {
+                var data = ScriptUtils_1.ScriptUtils.eval("const $element = this.element;  " + script + " ", Object.assign(obj, {
                     __render: Object.freeze({
                         element: it
                     })
@@ -978,7 +1042,7 @@ var EventManager = (function () {
                 else {
                     try {
                         for (var _b = __values(Object.entries(data)), _c = _b.next(); !_c.done; _c = _b.next()) {
-                            var _d = __read$2(_c.value, 2), key = _d[0], value = _d[1];
+                            var _d = __read(_c.value, 2), key = _d[0], value = _d[1];
                             if (it instanceof HTMLElement) {
                                 if (value) {
                                     it.classList.add(key);
@@ -1006,12 +1070,12 @@ var EventManager = (function () {
         this.procAttr(elements, attr, function (it, attribute) {
             var script = attribute;
             it.addEventListener(eventName, function (event) {
-                ScriptUtils.eval(_this.bindScript + " " + script + " ", Object.assign(obj, {
+                ScriptUtils_1.ScriptUtils.eval(_this.bindScript + " " + script + " ", Object.assign(obj, {
                     __render: Object.freeze({
                         event: event,
                         element: it,
                         target: event.target,
-                        range: Range.range,
+                        range: Range_1.Range.range,
                         scripts: EventManager.setBindProperty(config === null || config === void 0 ? void 0 : config.scripts, obj)
                     })
                 }));
@@ -1027,20 +1091,20 @@ var EventManager = (function () {
                 var params_1 = {};
                 var prefix_1 = attr + ':';
                 Object.entries(attributes).filter(function (_a) {
-                    var _b = __read$2(_a, 2), k = _b[0]; _b[1];
+                    var _b = __read(_a, 2), k = _b[0]; _b[1];
                     return k.startsWith(prefix_1);
                 }).forEach(function (_a) {
-                    var _b = __read$2(_a, 2), k = _b[0], v = _b[1];
+                    var _b = __read(_a, 2), k = _b[0], v = _b[1];
                     params_1[k.slice(prefix_1.length)] = v;
                 });
                 bind.split(',').forEach(function (eventName) {
                     it.addEventListener(eventName.trim(), function (event) {
-                        ScriptUtils.eval("const $params = this.__render.params; " + _this.bindScript + "  " + script_1 + " ", Object.assign(obj, {
+                        ScriptUtils_1.ScriptUtils.eval("const $params = this.__render.params; " + _this.bindScript + "  " + script_1 + " ", Object.assign(obj, {
                             __render: Object.freeze({
                                 event: event,
                                 element: it,
                                 target: event.target,
-                                range: Range.range,
+                                range: Range_1.Range.range,
                                 scripts: EventManager.setBindProperty(config === null || config === void 0 ? void 0 : config.scripts, obj),
                                 params: params_1
                             })
@@ -1067,21 +1131,21 @@ var EventManager = (function () {
         });
         sets.forEach(function (it) {
             var attr = it.getAttribute(attrName);
-            var attrs = DomUtils.getAttributeToObject(it);
+            var attrs = DomUtils_1.DomUtils.getAttributeToObject(it);
             if (attr) {
                 callBack(it, attr, attrs);
             }
         });
     };
     EventManager.prototype.getValue = function (obj, name, value) {
-        var r = ScriptUtils.evalReturn(name, obj);
+        var r = ScriptUtils_1.ScriptUtils.evalReturn(name, obj);
         if (typeof r === 'function') {
             r = r.bind(obj);
         }
         return r;
     };
     EventManager.prototype.setValue = function (obj, name, value) {
-        ScriptUtils.eval("this." + name + " = this.value", {
+        ScriptUtils_1.ScriptUtils.eval("this." + name + " = this.value", {
             this: obj,
             value: value
         });
@@ -1094,7 +1158,7 @@ var EventManager = (function () {
             EventManager.VARNAMES.forEach(function (it) {
                 raws = raws.replace(RegExp(it.replace('$', '\\$'), 'g'), "this?.___" + it);
             });
-            var variablePaths = ScriptUtils.getVariablePaths(raws !== null && raws !== void 0 ? raws : '');
+            var variablePaths = ScriptUtils_1.ScriptUtils.getVariablePaths(raws !== null && raws !== void 0 ? raws : '');
             return variablePaths.has(varName);
         }
         return false;
@@ -1105,7 +1169,7 @@ var EventManager = (function () {
             var newScripts = Object.assign({}, scripts);
             try {
                 for (var _b = __values(Object.entries(newScripts)), _c = _b.next(); !_c.done; _c = _b.next()) {
-                    var _d = __read$2(_c.value, 2), key = _d[0], value = _d[1];
+                    var _d = __read(_c.value, 2), key = _d[0], value = _d[1];
                     if (typeof value === 'function') {
                         newScripts[key] = value.bind(obj);
                     }
@@ -1134,9 +1198,17 @@ var EventManager = (function () {
     EventManager.WINDOW_EVENTS = [EventManager.WINDOW_EVENT_POPSTATE, EventManager.WINDOW_EVENT_RESIZE];
     return EventManager;
 }());
-var eventManager = new EventManager();
+exports.EventManager = EventManager;
+exports.eventManager = new EventManager();
 
-var __read$1 = (undefined && undefined.__read) || function (o, n) {
+});
+
+unwrapExports(EventManager_1);
+EventManager_1.eventManager;
+EventManager_1.EventManager;
+
+var Validator_1 = createCommonjsModule(function (module, exports) {
+var __read = (commonjsGlobal && commonjsGlobal.__read) || function (o, n) {
     var m = typeof Symbol === "function" && o[Symbol.iterator];
     if (!m) return o;
     var i = m.call(o), r, ar = [], e;
@@ -1152,6 +1224,8 @@ var __read$1 = (undefined && undefined.__read) || function (o, n) {
     }
     return ar;
 };
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Validator = void 0;
 var Validator = (function () {
     function Validator(_value, target, event, autoValid, autoValidAction) {
         if (autoValid === void 0) { autoValid = true; }
@@ -1305,21 +1379,21 @@ var Validator = (function () {
     };
     Validator.prototype.childInValid = function () {
         var inValid = this.childValidator().filter(function (_a) {
-            var _b = __read$1(_a, 2); _b[0]; var v = _b[1];
+            var _b = __read(_a, 2); _b[0]; var v = _b[1];
             return !v.valid();
         });
         return inValid.length > 0;
     };
     Validator.prototype.childInValidAction = function () {
         var inValid = this.childValidator().filter(function (_a) {
-            var _b = __read$1(_a, 2); _b[0]; var v = _b[1];
+            var _b = __read(_a, 2); _b[0]; var v = _b[1];
             return !v.validAction();
         });
         return inValid.length > 0;
     };
     Validator.prototype.childValidator = function () {
         return Object.entries(this).filter(function (_a) {
-            var _b = __read$1(_a, 2); _b[0]; var v = _b[1];
+            var _b = __read(_a, 2); _b[0]; var v = _b[1];
             return (v instanceof Validator);
         });
     };
@@ -1333,8 +1407,15 @@ var Validator = (function () {
     });
     return Validator;
 }());
+exports.Validator = Validator;
 
-var __extends$1 = (undefined && undefined.__extends) || (function () {
+});
+
+unwrapExports(Validator_1);
+Validator_1.Validator;
+
+var NonPassValidator_1 = createCommonjsModule(function (module, exports) {
+var __extends = (commonjsGlobal && commonjsGlobal.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -1349,8 +1430,11 @@ var __extends$1 = (undefined && undefined.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.NonPassValidator = void 0;
+
 var NonPassValidator = (function (_super) {
-    __extends$1(NonPassValidator, _super);
+    __extends(NonPassValidator, _super);
     function NonPassValidator(value, target, event, autoValid) {
         if (autoValid === void 0) { autoValid = true; }
         return _super.call(this, value, target, event, autoValid) || this;
@@ -1359,9 +1443,16 @@ var NonPassValidator = (function (_super) {
         return false;
     };
     return NonPassValidator;
-}(Validator));
+}(Validator_1.Validator));
+exports.NonPassValidator = NonPassValidator;
 
-var __extends = (undefined && undefined.__extends) || (function () {
+});
+
+unwrapExports(NonPassValidator_1);
+NonPassValidator_1.NonPassValidator;
+
+var ValidatorArray_1 = createCommonjsModule(function (module, exports) {
+var __extends = (commonjsGlobal && commonjsGlobal.__extends) || (function () {
     var extendStatics = function (d, b) {
         extendStatics = Object.setPrototypeOf ||
             ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -1376,13 +1467,17 @@ var __extends = (undefined && undefined.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.ValidatorArray = void 0;
+
+
 var ValidatorArray = (function (_super) {
     __extends(ValidatorArray, _super);
     function ValidatorArray(value, target, event, autoValid) {
         if (autoValid === void 0) { autoValid = true; }
         var _this = _super.call(this, value, target, event, autoValid) || this;
         _this._makeValidatorFactory = function (value, target, event) {
-            return new NonPassValidator(value, target, event);
+            return new NonPassValidator_1.NonPassValidator(value, target, event);
         };
         return _this;
     }
@@ -1412,7 +1507,7 @@ var ValidatorArray = (function (_super) {
         if (!this.value) {
             this.value = [];
         }
-        if (value instanceof Validator) {
+        if (value instanceof Validator_1.Validator) {
             (_a = this.value) === null || _a === void 0 ? void 0 : _a.push(value);
         }
         else {
@@ -1452,9 +1547,16 @@ var ValidatorArray = (function (_super) {
         return this._makeValidatorFactory(value, target, event);
     };
     return ValidatorArray;
-}(Validator));
+}(Validator_1.Validator));
+exports.ValidatorArray = ValidatorArray;
 
-var __assign = (undefined && undefined.__assign) || function () {
+});
+
+unwrapExports(ValidatorArray_1);
+ValidatorArray_1.ValidatorArray;
+
+var RawSet_1 = createCommonjsModule(function (module, exports) {
+var __assign = (commonjsGlobal && commonjsGlobal.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
             s = arguments[i];
@@ -1465,7 +1567,7 @@ var __assign = (undefined && undefined.__assign) || function () {
     };
     return __assign.apply(this, arguments);
 };
-var __read = (undefined && undefined.__read) || function (o, n) {
+var __read = (commonjsGlobal && commonjsGlobal.__read) || function (o, n) {
     var m = typeof Symbol === "function" && o[Symbol.iterator];
     if (!m) return o;
     var i = m.call(o), r, ar = [], e;
@@ -1481,7 +1583,7 @@ var __read = (undefined && undefined.__read) || function (o, n) {
     }
     return ar;
 };
-var __spreadArray = (undefined && undefined.__spreadArray) || function (to, from, pack) {
+var __spreadArray = (commonjsGlobal && commonjsGlobal.__spreadArray) || function (to, from, pack) {
     if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
         if (ar || !(i in from)) {
             if (!ar) ar = Array.prototype.slice.call(from, 0, i);
@@ -1490,6 +1592,15 @@ var __spreadArray = (undefined && undefined.__spreadArray) || function (to, from
     }
     return to.concat(ar || Array.prototype.slice.call(from));
 };
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.RawSet = void 0;
+
+
+
+
+
+
+
 var RawSet = (function () {
     function RawSet(uuid, point, fragment, data) {
         if (data === void 0) { data = {}; }
@@ -1519,10 +1630,10 @@ var RawSet = (function () {
                 script = targetAttrNames.map(function (it) { return (element_1.getAttribute(it)); }).filter(function (it) { return it; }).join(';');
             }
             if (script) {
-                EventManager.VARNAMES.forEach(function (it) {
+                EventManager_1.EventManager.VARNAMES.forEach(function (it) {
                     script = script.replace(RegExp(it.replace('$', '\\$'), 'g'), "this?.___" + it);
                 });
-                Array.from(ScriptUtils.getVariablePaths(script)).filter(function (it) { return !it.startsWith("___" + EventManager.SCRIPTS_VARNAME) && !it.startsWith("___" + EventManager.SCRIPTS_VARNAME); }).forEach(function (it) { return usingTriggerVariables.add(it); });
+                Array.from(ScriptUtils_1.ScriptUtils.getVariablePaths(script)).filter(function (it) { return !it.startsWith("___" + EventManager_1.EventManager.SCRIPTS_VARNAME) && !it.startsWith("___" + EventManager_1.EventManager.SCRIPTS_VARNAME); }).forEach(function (it) { return usingTriggerVariables.add(it); });
             }
         });
         return usingTriggerVariables;
@@ -1538,10 +1649,10 @@ var RawSet = (function () {
             var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w, _x, _y, _z, _0, _1, _2, _3, _4;
             var __render = Object.freeze({
                 rawset: _this,
-                scripts: EventManager.setBindProperty(config === null || config === void 0 ? void 0 : config.scripts, obj),
-                range: Range.range,
+                scripts: EventManager_1.EventManager.setBindProperty(config === null || config === void 0 ? void 0 : config.scripts, obj),
+                range: Range_1.Range.range,
                 element: cNode,
-                bindScript: "\n                    const " + EventManager.SCRIPTS_VARNAME + " = this.__render.scripts;\n                    const " + EventManager.RAWSET_VARNAME + " = this.__render.rawset;\n                    const " + EventManager.ELEMENT_VARNAME + " = this.__render.element;\n                    const " + EventManager.RANGE_VARNAME + " = this.__render.range;\n            "
+                bindScript: "\n                    const " + EventManager_1.EventManager.SCRIPTS_VARNAME + " = this.__render.scripts;\n                    const " + EventManager_1.EventManager.RAWSET_VARNAME + " = this.__render.rawset;\n                    const " + EventManager_1.EventManager.ELEMENT_VARNAME + " = this.__render.element;\n                    const " + EventManager_1.EventManager.RANGE_VARNAME + " = this.__render.range;\n            "
             });
             var fag = document.createDocumentFragment();
             if (cNode.nodeType === Node.TEXT_NODE && cNode.textContent) {
@@ -1549,13 +1660,13 @@ var RawSet = (function () {
                 var runText = RawSet.exporesionGrouops(textContent)[0][1];
                 var n = void 0;
                 if (textContent === null || textContent === void 0 ? void 0 : textContent.startsWith('#')) {
-                    var r = ScriptUtils.eval(__render.bindScript + " return " + runText, Object.assign(obj, { __render: __render }));
+                    var r = ScriptUtils_1.ScriptUtils.eval(__render.bindScript + " return " + runText, Object.assign(obj, { __render: __render }));
                     var template = document.createElement('template');
                     template.innerHTML = r;
                     n = template.content;
                 }
                 else {
-                    var r = ScriptUtils.eval(__render.bindScript + "  return " + runText, Object.assign(obj, { __render: __render }));
+                    var r = ScriptUtils_1.ScriptUtils.eval(__render.bindScript + "  return " + runText, Object.assign(obj, { __render: __render }));
                     n = document.createTextNode(r);
                 }
                 (_a = cNode.parentNode) === null || _a === void 0 ? void 0 : _a.replaceChild(n, cNode);
@@ -1588,7 +1699,7 @@ var RawSet = (function () {
                     var itRandom = RawSet.drItOtherEncoding(element_2);
                     var vars = RawSet.drVarEncoding(element_2, (_b = drAttr_1.drVarOption) !== null && _b !== void 0 ? _b : '');
                     var newTemp = document.createElement('temp');
-                    ScriptUtils.eval("\n                        " + __render.bindScript + "\n                        const n = $element.cloneNode(true);\n                        var destIt = " + drAttr_1.drItOption + ";\n                        if (destIt !== undefined) {\n                            n.getAttributeNames().forEach(it => n.setAttribute(it, n.getAttribute(it).replace(/\\#it\\#/g, destIt)))\n                            console.log('----', n.innerHTML);\n                            n.innerHTML = n.innerHTML.replace(/\\#it\\#/g, destIt);\n                            console.log('----', n.innerHTML);\n                        }\n                        if (this.__render.drStripOption) {\n                            Array.from(n.childNodes).forEach(it => this.__fag.append(it));\n                        } else {\n                            this.__render.fag.append(n);\n                        }", Object.assign(obj, {
+                    ScriptUtils_1.ScriptUtils.eval("\n                        " + __render.bindScript + "\n                        const n = $element.cloneNode(true);\n                        var destIt = " + drAttr_1.drItOption + ";\n                        if (destIt !== undefined) {\n                            n.getAttributeNames().forEach(it => n.setAttribute(it, n.getAttribute(it).replace(/\\#it\\#/g, destIt)))\n                            console.log('----', n.innerHTML);\n                            n.innerHTML = n.innerHTML.replace(/\\#it\\#/g, destIt);\n                            console.log('----', n.innerHTML);\n                        }\n                        if (this.__render.drStripOption) {\n                            Array.from(n.childNodes).forEach(it => this.__fag.append(it));\n                        } else {\n                            this.__render.fag.append(n);\n                        }", Object.assign(obj, {
                         __render: Object.freeze(__assign({ fag: newTemp, drStripOption: drAttr_1.drStripOption }, __render))
                     }));
                     RawSet.drVarDecoding(newTemp, vars);
@@ -1604,7 +1715,7 @@ var RawSet = (function () {
                     var itRandom = RawSet.drItOtherEncoding(element_2);
                     var vars = RawSet.drVarEncoding(element_2, (_d = drAttr_1.drVarOption) !== null && _d !== void 0 ? _d : '');
                     var newTemp = document.createElement('temp');
-                    ScriptUtils.eval("\n                    " + __render.bindScript + "\n                    " + ((_e = drAttr_1.drBeforeOption) !== null && _e !== void 0 ? _e : '') + "\n                    if(" + drAttr_1.drIf + ") {\n                        const n = $element.cloneNode(true);\n                        var destIt = " + drAttr_1.drItOption + ";\n                        if (destIt !== undefined) {\n                            n.getAttributeNames().forEach(it => n.setAttribute(it, n.getAttribute(it).replace(/\\#it\\#/g, destIt)))\n                            n.innerHTML = n.innerHTML.replace(/\\#it\\#/g, destIt);\n                        }\n                        if (this.__render.drStripOption) {\n                            Array.from(n.childNodes).forEach(it => this.__render.fag.append(it));\n                        } else {\n                            this.__render.fag.append(n);\n                        }\n                    }\n                    " + ((_f = drAttr_1.drAfterOption) !== null && _f !== void 0 ? _f : '') + "\n                    ", Object.assign(obj, {
+                    ScriptUtils_1.ScriptUtils.eval("\n                    " + __render.bindScript + "\n                    " + ((_e = drAttr_1.drBeforeOption) !== null && _e !== void 0 ? _e : '') + "\n                    if(" + drAttr_1.drIf + ") {\n                        const n = $element.cloneNode(true);\n                        var destIt = " + drAttr_1.drItOption + ";\n                        if (destIt !== undefined) {\n                            n.getAttributeNames().forEach(it => n.setAttribute(it, n.getAttribute(it).replace(/\\#it\\#/g, destIt)))\n                            n.innerHTML = n.innerHTML.replace(/\\#it\\#/g, destIt);\n                        }\n                        if (this.__render.drStripOption) {\n                            Array.from(n.childNodes).forEach(it => this.__render.fag.append(it));\n                        } else {\n                            this.__render.fag.append(n);\n                        }\n                    }\n                    " + ((_f = drAttr_1.drAfterOption) !== null && _f !== void 0 ? _f : '') + "\n                    ", Object.assign(obj, {
                         __render: Object.freeze(__assign({ fag: newTemp, drStripOption: drAttr_1.drStripOption }, __render))
                     }));
                     RawSet.drVarDecoding(newTemp, vars);
@@ -1617,7 +1728,7 @@ var RawSet = (function () {
                     raws.push.apply(raws, __spreadArray([], __read(rr), false));
                 }
                 if (drAttr_1.drThis) {
-                    var r = ScriptUtils.evalReturn(drAttr_1.drThis, obj);
+                    var r = ScriptUtils_1.ScriptUtils.evalReturn(drAttr_1.drThis, obj);
                     if (r) {
                         fag.append(RawSet.drThisCreate(element_2, drAttr_1.drThis, (_h = drAttr_1.drVarOption) !== null && _h !== void 0 ? _h : '', drAttr_1.drStripOption, obj));
                         var rr = RawSet.checkPointCreates(fag, config);
@@ -1630,23 +1741,23 @@ var RawSet = (function () {
                 }
                 if (drAttr_1.drForm) {
                     RawSet.drFormOtherMoveAttr(element_2, 'name', 'temp-name');
-                    var data = ScriptUtils.evalReturn("" + drAttr_1.drForm, obj);
-                    if (data instanceof Validator) {
+                    var data = ScriptUtils_1.ScriptUtils.evalReturn("" + drAttr_1.drForm, obj);
+                    if (data instanceof Validator_1.Validator) {
                         data.setTarget(element_2);
                     }
                     element_2.querySelectorAll('[name]').forEach(function (it) {
                         var _a;
                         var eventName = (_a = it.getAttribute('dr-form:event')) !== null && _a !== void 0 ? _a : 'change';
-                        var attrEventName = eventManager.attrPrefix + 'event-' + eventName;
+                        var attrEventName = EventManager_1.eventManager.attrPrefix + 'event-' + eventName;
                         var varpath = it.getAttribute('name');
                         if (varpath != null) {
-                            var data_1 = ScriptUtils.evalReturn("" + drAttr_1.drForm + (varpath ? '.' + varpath : ''), obj);
-                            if (data_1 instanceof ValidatorArray) {
+                            var data_1 = ScriptUtils_1.ScriptUtils.evalReturn("" + drAttr_1.drForm + (varpath ? '.' + varpath : ''), obj);
+                            if (data_1 instanceof ValidatorArray_1.ValidatorArray) {
                                 varpath = drAttr_1.drForm + '.' + varpath;
                                 it.setAttribute(attrEventName, varpath + ".setArrayValue($target, $target.value, $event);");
                                 data_1.addValidator(it.value, it);
                             }
-                            else if (data_1 instanceof Validator) {
+                            else if (data_1 instanceof Validator_1.Validator) {
                                 var fieldPath = drAttr_1.drForm + '.' + varpath;
                                 varpath += (varpath ? '.value' : 'value');
                                 varpath = drAttr_1.drForm + '.' + varpath;
@@ -1665,7 +1776,7 @@ var RawSet = (function () {
                 }
                 if (drAttr_1.drInnerText) {
                     var newTemp = document.createElement('temp');
-                    ScriptUtils.eval(" \n                        " + __render.bindScript + "\n                        const n = $element.cloneNode(true);  \n                        " + ((_k = drAttr_1.drBeforeOption) !== null && _k !== void 0 ? _k : '') + "\n                        n.innerText = " + drAttr_1.drInnerText + ";\n                        if (this.__render.drStripOption) {\n                            Array.from(n.childNodes).forEach(it => this.__render.fag.append(it));\n                        } else {\n                            this.__render.fag.append(n);\n                        }\n                        " + ((_l = drAttr_1.drAfterOption) !== null && _l !== void 0 ? _l : '') + "\n                    ", Object.assign(obj, {
+                    ScriptUtils_1.ScriptUtils.eval(" \n                        " + __render.bindScript + "\n                        const n = $element.cloneNode(true);  \n                        " + ((_k = drAttr_1.drBeforeOption) !== null && _k !== void 0 ? _k : '') + "\n                        n.innerText = " + drAttr_1.drInnerText + ";\n                        if (this.__render.drStripOption) {\n                            Array.from(n.childNodes).forEach(it => this.__render.fag.append(it));\n                        } else {\n                            this.__render.fag.append(n);\n                        }\n                        " + ((_l = drAttr_1.drAfterOption) !== null && _l !== void 0 ? _l : '') + "\n                    ", Object.assign(obj, {
                         __render: Object.freeze(__assign({ drStripOption: drAttr_1.drStripOption, fag: newTemp }, __render))
                     }));
                     var tempalte = document.createElement('template');
@@ -1677,7 +1788,7 @@ var RawSet = (function () {
                 }
                 if (drAttr_1.drInnerHTML) {
                     var newTemp = document.createElement('temp');
-                    ScriptUtils.eval("\n                        " + __render.bindScript + "\n                        const n = $element.cloneNode(true);\n                        " + ((_o = drAttr_1.drBeforeOption) !== null && _o !== void 0 ? _o : '') + "\n                        n.innerHTML = " + drAttr_1.drInnerHTML + ";\n                        if (this.__render.drStripOption) {\n                            Array.from(n.childNodes).forEach(it => this.__render.fag.append(it));\n                        } else {\n                            this.__render.fag.append(n);\n                        }\n                        " + ((_p = drAttr_1.drAfterOption) !== null && _p !== void 0 ? _p : '') + "\n                    ", Object.assign(obj, {
+                    ScriptUtils_1.ScriptUtils.eval("\n                        " + __render.bindScript + "\n                        const n = $element.cloneNode(true);\n                        " + ((_o = drAttr_1.drBeforeOption) !== null && _o !== void 0 ? _o : '') + "\n                        n.innerHTML = " + drAttr_1.drInnerHTML + ";\n                        if (this.__render.drStripOption) {\n                            Array.from(n.childNodes).forEach(it => this.__render.fag.append(it));\n                        } else {\n                            this.__render.fag.append(n);\n                        }\n                        " + ((_p = drAttr_1.drAfterOption) !== null && _p !== void 0 ? _p : '') + "\n                    ", Object.assign(obj, {
                         __render: Object.freeze(__assign({ drStripOption: drAttr_1.drStripOption, fag: newTemp }, __render))
                     }));
                     var tempalte = document.createElement('template');
@@ -1691,7 +1802,7 @@ var RawSet = (function () {
                     var itRandom = RawSet.drItOtherEncoding(element_2);
                     var vars = RawSet.drVarEncoding(element_2, (_r = drAttr_1.drVarOption) !== null && _r !== void 0 ? _r : '');
                     var newTemp = document.createElement('temp');
-                    ScriptUtils.eval("\n                    " + __render.bindScript + "\n                    " + ((_s = drAttr_1.drBeforeOption) !== null && _s !== void 0 ? _s : '') + "\n                    for(" + drAttr_1.drFor + ") {\n                        const n = this.__render.element.cloneNode(true);\n                        var destIt = " + drAttr_1.drItOption + ";\n                        if (destIt !== undefined) {\n                            n.getAttributeNames().forEach(it => n.setAttribute(it, n.getAttribute(it).replace(/\\#it\\#/g, destIt))) \n                            n.innerHTML = n.innerHTML.replace(/\\#it\\#/g, destIt);\n                        }\n                        if (this.__render.drStripOption) {\n                            Array.from(n.childNodes).forEach(it => this.__render.fag.append(it));\n                        } else {\n                            this.__render.fag.append(n);\n                        }\n                    }\n                    " + ((_t = drAttr_1.drAfterOption) !== null && _t !== void 0 ? _t : '') + "\n                    ", Object.assign(obj, {
+                    ScriptUtils_1.ScriptUtils.eval("\n                    " + __render.bindScript + "\n                    " + ((_s = drAttr_1.drBeforeOption) !== null && _s !== void 0 ? _s : '') + "\n                    for(" + drAttr_1.drFor + ") {\n                        const n = this.__render.element.cloneNode(true);\n                        var destIt = " + drAttr_1.drItOption + ";\n                        if (destIt !== undefined) {\n                            n.getAttributeNames().forEach(it => n.setAttribute(it, n.getAttribute(it).replace(/\\#it\\#/g, destIt))) \n                            n.innerHTML = n.innerHTML.replace(/\\#it\\#/g, destIt);\n                        }\n                        if (this.__render.drStripOption) {\n                            Array.from(n.childNodes).forEach(it => this.__render.fag.append(it));\n                        } else {\n                            this.__render.fag.append(n);\n                        }\n                    }\n                    " + ((_t = drAttr_1.drAfterOption) !== null && _t !== void 0 ? _t : '') + "\n                    ", Object.assign(obj, {
                         __render: Object.freeze(__assign({ fag: newTemp, drStripOption: drAttr_1.drStripOption }, __render))
                     }));
                     RawSet.drVarDecoding(newTemp, vars);
@@ -1707,7 +1818,7 @@ var RawSet = (function () {
                     var itRandom = RawSet.drItOtherEncoding(element_2);
                     var vars = RawSet.drVarEncoding(element_2, (_v = drAttr_1.drVarOption) !== null && _v !== void 0 ? _v : '');
                     var newTemp = document.createElement('temp');
-                    ScriptUtils.eval("\n                    " + __render.bindScript + "\n                    " + ((_w = drAttr_1.drBeforeOption) !== null && _w !== void 0 ? _w : '') + "\n                    var i = 0; \n                    const forOf = " + drAttr_1.drForOf + ";\n                    const forOfStr = `" + drAttr_1.drForOf + "`.trim();\n                    for(const it of forOf) {\n                        var destIt = it;\n                        if (/\\[(.*,?)\\],/g.test(forOfStr)) {\n                            if (typeof it === 'string') {\n                                destIt = it;\n                            } else {\n                                destIt = forOfStr.substring(1, forOfStr.length-1).split(',')[i];\n                            }\n                        } else if (forOf.isRange) {\n                                destIt = it;\n                        }  else {\n                            destIt = forOfStr + '[' + i +']'\n                        }\n                        const n = this.__render.element.cloneNode(true);\n                        n.getAttributeNames().forEach(it => n.setAttribute(it, n.getAttribute(it).replace(/\\#it\\#/g, destIt)))\n                        n.innerHTML = n.innerHTML.replace(/\\#it\\#/g, destIt);\n                        if (this.__render.drStripOption) {\n                            Array.from(n.childNodes).forEach(it => this.__render.fag.append(it));\n                        } else {\n                            this.__render.fag.append(n);\n                        }\n                        i++;\n                    }\n                    " + ((_x = drAttr_1.drAfterOption) !== null && _x !== void 0 ? _x : '') + "\n                    ", Object.assign(obj, {
+                    ScriptUtils_1.ScriptUtils.eval("\n                    " + __render.bindScript + "\n                    " + ((_w = drAttr_1.drBeforeOption) !== null && _w !== void 0 ? _w : '') + "\n                    var i = 0; \n                    const forOf = " + drAttr_1.drForOf + ";\n                    const forOfStr = `" + drAttr_1.drForOf + "`.trim();\n                    for(const it of forOf) {\n                        var destIt = it;\n                        if (/\\[(.*,?)\\],/g.test(forOfStr)) {\n                            if (typeof it === 'string') {\n                                destIt = it;\n                            } else {\n                                destIt = forOfStr.substring(1, forOfStr.length-1).split(',')[i];\n                            }\n                        } else if (forOf.isRange) {\n                                destIt = it;\n                        }  else {\n                            destIt = forOfStr + '[' + i +']'\n                        }\n                        const n = this.__render.element.cloneNode(true);\n                        n.getAttributeNames().forEach(it => n.setAttribute(it, n.getAttribute(it).replace(/\\#it\\#/g, destIt)))\n                        n.innerHTML = n.innerHTML.replace(/\\#it\\#/g, destIt);\n                        if (this.__render.drStripOption) {\n                            Array.from(n.childNodes).forEach(it => this.__render.fag.append(it));\n                        } else {\n                            this.__render.fag.append(n);\n                        }\n                        i++;\n                    }\n                    " + ((_x = drAttr_1.drAfterOption) !== null && _x !== void 0 ? _x : '') + "\n                    ", Object.assign(obj, {
                         __render: Object.freeze(__assign({ drStripOption: drAttr_1.drStripOption, fag: newTemp }, __render))
                     }));
                     RawSet.drVarDecoding(newTemp, vars);
@@ -1723,7 +1834,7 @@ var RawSet = (function () {
                     var itRandom = RawSet.drItOtherEncoding(element_2);
                     var vars = RawSet.drVarEncoding(element_2, (_z = drAttr_1.drVarOption) !== null && _z !== void 0 ? _z : '');
                     var newTemp = document.createElement('temp');
-                    ScriptUtils.eval("\n                    " + __render.bindScript + "\n                    " + ((_0 = drAttr_1.drBeforeOption) !== null && _0 !== void 0 ? _0 : '') + "\n                    var i = 0; \n                    const repeat = " + drAttr_1.drRepeat + ";\n                    const repeatStr = `" + drAttr_1.drRepeat + "`;\n                    let range = repeat;\n                    if (typeof repeat === 'number') {\n                        range = " + EventManager.RANGE_VARNAME + "(repeat);\n                    } \n                    for(const it of range) {\n                        var destIt = it;\n                        if (range.isRange) {\n                            destIt = it;\n                        }  else {\n                            destIt = repeatStr + '[' + i +']'\n                        }\n                        const n = this.__render.element.cloneNode(true);\n                        n.getAttributeNames().forEach(it => n.setAttribute(it, n.getAttribute(it).replace(/\\#it\\#/g, destIt)))\n                        n.innerHTML = n.innerHTML.replace(/\\#it\\#/g, destIt);\n                        \n                        if (this.__render.drStripOption) {\n                            Array.from(n.childNodes).forEach(it => this.__render.fag.append(it));\n                        } else {\n                            this.__render.fag.append(n);\n                        }\n                        i++;\n                    }\n                    " + ((_1 = drAttr_1.drAfterOption) !== null && _1 !== void 0 ? _1 : '') + "\n                    ", Object.assign(obj, {
+                    ScriptUtils_1.ScriptUtils.eval("\n                    " + __render.bindScript + "\n                    " + ((_0 = drAttr_1.drBeforeOption) !== null && _0 !== void 0 ? _0 : '') + "\n                    var i = 0; \n                    const repeat = " + drAttr_1.drRepeat + ";\n                    const repeatStr = `" + drAttr_1.drRepeat + "`;\n                    let range = repeat;\n                    if (typeof repeat === 'number') {\n                        range = " + EventManager_1.EventManager.RANGE_VARNAME + "(repeat);\n                    } \n                    for(const it of range) {\n                        var destIt = it;\n                        if (range.isRange) {\n                            destIt = it;\n                        }  else {\n                            destIt = repeatStr + '[' + i +']'\n                        }\n                        const n = this.__render.element.cloneNode(true);\n                        n.getAttributeNames().forEach(it => n.setAttribute(it, n.getAttribute(it).replace(/\\#it\\#/g, destIt)))\n                        n.innerHTML = n.innerHTML.replace(/\\#it\\#/g, destIt);\n                        \n                        if (this.__render.drStripOption) {\n                            Array.from(n.childNodes).forEach(it => this.__render.fag.append(it));\n                        } else {\n                            this.__render.fag.append(n);\n                        }\n                        i++;\n                    }\n                    " + ((_1 = drAttr_1.drAfterOption) !== null && _1 !== void 0 ? _1 : '') + "\n                    ", Object.assign(obj, {
                         __render: Object.freeze(__assign({ fag: newTemp, drStripOption: drAttr_1.drStripOption }, __render))
                     }));
                     RawSet.drVarDecoding(newTemp, vars);
@@ -1780,11 +1891,11 @@ var RawSet = (function () {
         this.replaceBody(genNode);
         drAttrs.forEach(function (it) {
             if (it.drCompleteOption) {
-                ScriptUtils.eval("\n                const " + EventManager.FAG_VARNAME + " = this.__render.fag;\n                const " + EventManager.SCRIPTS_VARNAME + " = this.__render.scripts;\n                const " + EventManager.RAWSET_VARNAME + " = this.__render.rawset;\n                " + it.drCompleteOption + "\n                ", Object.assign(obj, {
+                ScriptUtils_1.ScriptUtils.eval("\n                const " + EventManager_1.EventManager.FAG_VARNAME + " = this.__render.fag;\n                const " + EventManager_1.EventManager.SCRIPTS_VARNAME + " = this.__render.scripts;\n                const " + EventManager_1.EventManager.RAWSET_VARNAME + " = this.__render.rawset;\n                " + it.drCompleteOption + "\n                ", Object.assign(obj, {
                     __render: Object.freeze({
                         rawset: _this,
                         fag: genNode,
-                        scripts: EventManager.setBindProperty(config === null || config === void 0 ? void 0 : config.scripts, obj)
+                        scripts: EventManager_1.EventManager.setBindProperty(config === null || config === void 0 ? void 0 : config.scripts, obj)
                     })
                 }));
             }
@@ -1799,7 +1910,7 @@ var RawSet = (function () {
     };
     RawSet.prototype.applyEvent = function (obj, fragment, config) {
         if (fragment === void 0) { fragment = this.fragment; }
-        eventManager.applyEvent(obj, eventManager.findAttrElements(fragment, config), config);
+        EventManager_1.eventManager.applyEvent(obj, EventManager_1.eventManager.findAttrElements(fragment, config), config);
     };
     RawSet.prototype.getAttribute = function (element, attr) {
         var data = element.getAttribute(attr);
@@ -1821,7 +1932,7 @@ var RawSet = (function () {
             acceptNode: function (node) {
                 var _a, _b, _c, _d, _e;
                 if (node.nodeType === Node.TEXT_NODE) {
-                    var between = RawSet.exporesionGrouops(StringUtils.deleteEnter((_a = node.data) !== null && _a !== void 0 ? _a : ''));
+                    var between = RawSet.exporesionGrouops(StringUtils_1.StringUtils.deleteEnter((_a = node.data) !== null && _a !== void 0 ? _a : ''));
                     return (between === null || between === void 0 ? void 0 : between.length) > 0 ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
                 }
                 else if (node.nodeType === Node.ELEMENT_NODE) {
@@ -1843,7 +1954,7 @@ var RawSet = (function () {
                 var a = RawSet.exporesionGrouops(text);
                 var map = a.map(function (it) {
                     return {
-                        uuid: RandomUtils.uuid(),
+                        uuid: RandomUtils_1.RandomUtils.uuid(),
                         content: it[0],
                         regexArr: it
                     };
@@ -1869,7 +1980,7 @@ var RawSet = (function () {
                 (_b = currentNode === null || currentNode === void 0 ? void 0 : currentNode.parentNode) === null || _b === void 0 ? void 0 : _b.replaceChild(template_1.content, currentNode);
             }
             else {
-                var uuid = RandomUtils.uuid();
+                var uuid = RandomUtils_1.RandomUtils.uuid();
                 var fragment = document.createDocumentFragment();
                 var start = document.createComment("start " + uuid);
                 var end = document.createComment("end " + uuid);
@@ -1898,7 +2009,7 @@ var RawSet = (function () {
         }
     };
     RawSet.drItOtherEncoding = function (element) {
-        var random = RandomUtils.uuid();
+        var random = RandomUtils_1.RandomUtils.uuid();
         var regex = /#it#/g;
         element.querySelectorAll("[" + RawSet.DR_IT_OPTIONNAME + "], [" + RawSet.DR_FOR_OF_NAME + "], [" + RawSet.DR_REPEAT_NAME + "]").forEach(function (it) {
             it.innerHTML = it.innerHTML.replace(regex, random);
@@ -1911,20 +2022,20 @@ var RawSet = (function () {
         });
     };
     RawSet.drThisEncoding = function (element, drThis) {
-        var thisRandom = RandomUtils.uuid();
+        var thisRandom = RandomUtils_1.RandomUtils.uuid();
         element.querySelectorAll("[" + RawSet.DR_PRE_NAME + "]").forEach(function (it) {
             it.innerHTML = it.innerHTML.replace(/this/g, thisRandom);
         });
         element.querySelectorAll("[" + RawSet.DR_THIS_NAME + "]").forEach(function (it) {
             var message = it.innerHTML;
-            StringUtils.regexExec(/([^(dr\-)])?this(?=.?)/g, message).reverse().forEach(function (it) {
+            StringUtils_1.StringUtils.regexExec(/([^(dr\-)])?this(?=.?)/g, message).reverse().forEach(function (it) {
                 var _a;
                 message = message.substr(0, it.index) + message.substr(it.index).replace(it[0], "" + ((_a = it[1]) !== null && _a !== void 0 ? _a : '') + drThis);
             });
             it.innerHTML = message;
         });
         var message = element.innerHTML;
-        StringUtils.regexExec(/([^(dr\-)])?this(?=.?)/g, message).reverse().forEach(function (it) {
+        StringUtils_1.StringUtils.regexExec(/([^(dr\-)])?this(?=.?)/g, message).reverse().forEach(function (it) {
             var _a;
             message = message.substr(0, it.index) + message.substr(it.index).replace(it[0], "" + ((_a = it[1]) !== null && _a !== void 0 ? _a : '') + drThis);
         });
@@ -1972,7 +2083,7 @@ var RawSet = (function () {
                 name: name,
                 value: value,
                 regex: RegExp('\\$var\\.' + name + '(?=.?)', 'g'),
-                random: RandomUtils.uuid()
+                random: RandomUtils_1.RandomUtils.uuid()
             };
         });
         element.querySelectorAll("[" + RawSet.DR_VAR_OPTIONNAME + "]").forEach(function (it) {
@@ -2020,7 +2131,7 @@ var RawSet = (function () {
                     obj.__domrender_components = {};
                 }
                 var domrenderComponents = obj.__domrender_components;
-                var componentKey = '_' + RandomUtils.getRandomString(20);
+                var componentKey = '_' + RandomUtils_1.RandomUtils.getRandomString(20);
                 domrenderComponents[componentKey] = objFactory(element, obj, rawSet);
                 var instance = domrenderComponents[componentKey];
                 var attribute = {};
@@ -2034,13 +2145,13 @@ var RawSet = (function () {
                     attribute: attribute,
                     rawset: rawSet,
                     componentKey: componentKey,
-                    scripts: EventManager.setBindProperty(scripts, obj)
+                    scripts: EventManager_1.EventManager.setBindProperty(scripts, obj)
                 });
                 this.__render = render;
                 var oninit = element.getAttribute('dr-on-init');
                 if (oninit) {
                     var script = "var $component = this.__render.component; var $element = this.__render.$element; var $innerHTML = this.__render.$innerHTML; var $attribute = this.__render.$attribute;  " + oninit + " ";
-                    ScriptUtils.eval(script, Object.assign(obj, {
+                    ScriptUtils_1.ScriptUtils.eval(script, Object.assign(obj, {
                         __render: render
                     }));
                 }
@@ -2056,7 +2167,7 @@ var RawSet = (function () {
     };
     RawSet.exporesionGrouops = function (data) {
         var reg = /(?:[$#]\{(?:(([$#]\{)??[^$#]*?)\}[$#]))/g;
-        return StringUtils.regexExec(reg, data);
+        return StringUtils_1.StringUtils.regexExec(reg, data);
     };
     RawSet.DR = 'dr';
     RawSet.DR_IF_NAME = 'dr-if';
@@ -2078,17 +2189,34 @@ var RawSet = (function () {
     RawSet.DR_ATTRIBUTES = [RawSet.DR, RawSet.DR_IF_NAME, RawSet.DR_FOR_OF_NAME, RawSet.DR_FOR_NAME, RawSet.DR_THIS_NAME, RawSet.DR_FORM_NAME, RawSet.DR_PRE_NAME, RawSet.DR_INNERHTML_NAME, RawSet.DR_INNERTEXT_NAME, RawSet.DR_REPEAT_NAME];
     return RawSet;
 }());
+exports.RawSet = RawSet;
 
-var RawSet$1 = /*#__PURE__*/Object.freeze({
-    __proto__: null,
-    RawSet: RawSet
 });
 
+unwrapExports(RawSet_1);
+RawSet_1.RawSet;
+
+var Types = createCommonjsModule(function (module, exports) {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.Shield = void 0;
 var Shield = (function () {
     function Shield() {
     }
     return Shield;
 }());
+exports.Shield = Shield;
+
+});
+
+unwrapExports(Types);
+Types.Shield;
+
+var DomRenderProxy_1 = createCommonjsModule(function (module, exports) {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DomRenderProxy = void 0;
+
+
+
 
 var excludeGetSetPropertys = ['onBeforeReturnGet', 'onBeforeReturnSet', '__domrender_components', '__render', '_DomRender_isFinal', '_domRender_ref', '_rawSets', '_domRender_proxy', '_targets', '_DomRender_origin', '_DomRender_ref', '_DomRender_proxy'];
 var DomRenderProxy = (function () {
@@ -2121,7 +2249,7 @@ var DomRenderProxy = (function () {
             Object.keys(obj).forEach(function (it) {
                 var _a, _b, _c;
                 var target = obj[it];
-                if (target !== undefined && target !== null && typeof target === 'object' && !DomRenderProxy.isFinal(target) && !Object.isFrozen(target) && !(obj instanceof Shield)) {
+                if (target !== undefined && target !== null && typeof target === 'object' && !DomRenderProxy.isFinal(target) && !Object.isFrozen(target) && !(obj instanceof Types.Shield)) {
                     var filter = (_c = (_b = (_a = _this.config) === null || _a === void 0 ? void 0 : _a.proxyExcludeTyps) === null || _b === void 0 ? void 0 : _b.filter(function (it) { return target instanceof it; })) !== null && _c !== void 0 ? _c : [];
                     if (filter.length === 0) {
                         var proxyAfter = _this.proxy(objProxy, target, it);
@@ -2138,8 +2266,8 @@ var DomRenderProxy = (function () {
         var _this = this;
         var _a, _b;
         this._targets.add(target);
-        var rawSets = RawSet.checkPointCreates(target, this.config);
-        eventManager.applyEvent(this._domRender_proxy, eventManager.findAttrElements(target, this.config), this.config);
+        var rawSets = RawSet_1.RawSet.checkPointCreates(target, this.config);
+        EventManager_1.eventManager.applyEvent(this._domRender_proxy, EventManager_1.eventManager.findAttrElements(target, this.config), this.config);
         rawSets.forEach(function (it) {
             var strings = it.getUsingTriggerVariables(_this.config);
             if (strings.size <= 0) {
@@ -2196,7 +2324,7 @@ var DomRenderProxy = (function () {
                 var iterable = this._rawSets.get(fullPathStr_1);
                 var front = strings.slice(0, strings.length - 1).join('.');
                 var last = strings[strings.length - 1];
-                if (!isNaN(Number(last)) && Array.isArray(ScriptUtils.evalReturn('this.' + front, this._domRender_proxy))) {
+                if (!isNaN(Number(last)) && Array.isArray(ScriptUtils_1.ScriptUtils.evalReturn('this.' + front, this._domRender_proxy))) {
                     var aIterable = this._rawSets.get(front);
                     if (aIterable) {
                         this.render(Array.from(aIterable));
@@ -2207,8 +2335,8 @@ var DomRenderProxy = (function () {
                 }
                 this._targets.forEach(function (it) {
                     if (it.nodeType === Node.DOCUMENT_FRAGMENT_NODE || it.nodeType === Node.ELEMENT_NODE) {
-                        var targets = eventManager.findAttrElements(it, _this.config);
-                        eventManager.changeVar(_this._domRender_proxy, targets, "this." + fullPathStr_1);
+                        var targets = EventManager_1.eventManager.findAttrElements(it, _this.config);
+                        EventManager_1.eventManager.changeVar(_this._domRender_proxy, targets, "this." + fullPathStr_1);
                     }
                 });
             }
@@ -2259,14 +2387,14 @@ var DomRenderProxy = (function () {
     DomRenderProxy.prototype.proxy = function (parentProxy, obj, p) {
         var _a, _b, _c;
         var proxyTarget = ((_c = (_b = (_a = this.config) === null || _a === void 0 ? void 0 : _a.proxyExcludeTyps) === null || _b === void 0 ? void 0 : _b.filter(function (it) { return obj instanceof it; })) !== null && _c !== void 0 ? _c : []).length <= 0;
-        if (proxyTarget && obj !== undefined && obj !== null && typeof obj === 'object' && !('_DomRender_isProxy' in obj) && !DomRenderProxy.isFinal(obj) && !Object.isFrozen(obj) && !(obj instanceof Shield)) {
+        if (proxyTarget && obj !== undefined && obj !== null && typeof obj === 'object' && !('_DomRender_isProxy' in obj) && !DomRenderProxy.isFinal(obj) && !Object.isFrozen(obj) && !(obj instanceof Types.Shield)) {
             var domRender = new DomRenderProxy(obj, undefined, this.config);
             domRender.addRef(parentProxy, p);
             var proxy = new Proxy(obj, domRender);
             domRender.run(proxy);
             return proxy;
         }
-        if (proxyTarget && obj !== undefined && obj !== null && typeof obj === 'object' && ('_DomRender_isProxy' in obj) && !DomRenderProxy.isFinal(obj) && !Object.isFrozen(obj) && !(obj instanceof Shield)) {
+        if (proxyTarget && obj !== undefined && obj !== null && typeof obj === 'object' && ('_DomRender_isProxy' in obj) && !DomRenderProxy.isFinal(obj) && !Object.isFrozen(obj) && !(obj instanceof Types.Shield)) {
             var d = obj._DomRender_proxy;
             d.addRef(this._domRender_proxy, p);
             return obj;
@@ -2316,6 +2444,16 @@ var DomRenderProxy = (function () {
     };
     return DomRenderProxy;
 }());
+exports.DomRenderProxy = DomRenderProxy;
+
+});
+
+unwrapExports(DomRenderProxy_1);
+DomRenderProxy_1.DomRenderProxy;
+
+var DomRender_1 = createCommonjsModule(function (module, exports) {
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.DomRender = void 0;
 
 var DomRender = (function () {
     function DomRender() {
@@ -2329,7 +2467,7 @@ var DomRender = (function () {
             robj = obj;
             return robj;
         }
-        var domRender = new DomRenderProxy(obj, target, config);
+        var domRender = new DomRenderProxy_1.DomRenderProxy(obj, target, config);
         var dest = new Proxy(obj, domRender);
         robj = dest;
         domRender.run(robj);
@@ -2337,11 +2475,12 @@ var DomRender = (function () {
     };
     return DomRender;
 }());
+exports.DomRender = DomRender;
 
-var DomRender$1 = /*#__PURE__*/Object.freeze({
-    __proto__: null,
-    DomRender: DomRender
 });
+
+unwrapExports(DomRender_1);
+DomRender_1.DomRender;
 
 var SimGlobal_1 = createCommonjsModule(function (module, exports) {
 Object.defineProperty(exports, "__esModule", { value: true });
@@ -4907,13 +5046,14 @@ var SimpleBootFront = (function (_super) {
             onAttrInit: function (attrName, attrValue, obj) {
                 var _a, _b;
                 if (attrName === 'component') {
-                    var bindObj = ScriptUtils$1.ScriptUtils.evalReturn(attrValue, obj);
+                    var bindObj = ScriptUtils_1.ScriptUtils.evalReturn(attrValue, obj);
                     (_b = (_a = bindObj) === null || _a === void 0 ? void 0 : _a.onInit) === null || _b === void 0 ? void 0 : _b.call(_a);
                 }
             },
-            scripts: { 'application': _this },
+            scripts: { application: _this },
             applyEvents: [{
-                    attrName: 'router-link', callBack: function (elements, attrValue, obj) {
+                    attrName: 'router-link',
+                    callBack: function (elements, attrValue, obj) {
                         elements.addEventListener('click', function (event) {
                             var _a;
                             (_a = (0, SimGlobal_1.SimGlobal)().application.simstanceManager.getOrNewSim(Navigation_1.Navigation)) === null || _a === void 0 ? void 0 : _a.go(attrValue);
@@ -4924,14 +5064,15 @@ var SimpleBootFront = (function (_super) {
         };
         window.__dirname = 'simple-boot-front__dirname';
         _this.domRenderTargetAttrs.push({
-            name: 'component', callBack: function (element, attrValue, obj, rawSet) {
+            name: 'component',
+            callBack: function (element, attrValue, obj, rawSet) {
                 var fag = _this.option.window.document.createDocumentFragment();
                 if (attrValue) {
-                    var targetObj = ScriptUtils$1.ScriptUtils.eval("return " + attrValue, obj);
+                    var targetObj = ScriptUtils_1.ScriptUtils.eval("return " + attrValue, obj);
                     var n = element.cloneNode(true);
                     var innerHTML = _this.getComponentInnerHtml(targetObj);
                     n.innerHTML = innerHTML;
-                    fag.append(RawSet$1.RawSet.drThisCreate(n, attrValue, '', true, obj));
+                    fag.append(RawSet_1.RawSet.drThisCreate(n, attrValue, '', true, obj));
                 }
                 return fag;
             }
@@ -4951,7 +5092,7 @@ var SimpleBootFront = (function (_super) {
     SimpleBootFront.prototype.createDomRender = function (obj) {
         var component = (0, Component_1.getComponent)(obj);
         if (component && typeof obj === 'object') {
-            return DomRender$1.DomRender.run(obj, undefined, this.domRenderConfig);
+            return DomRender_1.DomRender.run(obj, undefined, this.domRenderConfig);
         }
         return obj;
     };
@@ -5028,7 +5169,7 @@ var SimpleBootFront = (function (_super) {
                 for (var _i = 0; _i < arguments.length; _i++) {
                     args[_i] = arguments[_i];
                 }
-                var obj = undefined;
+                var obj;
                 try {
                     obj = simstanceManager.getOrNewSim(val);
                 }
@@ -5047,7 +5188,7 @@ var SimpleBootFront = (function (_super) {
         var selectors = Component_1.componentSelectors;
         selectors.forEach(function (val, name) {
             var component = (0, Component_1.getComponent)(val);
-            var items = RawSet$1.RawSet.createComponentTargetElement(name, function (e, o, r) {
+            var items = RawSet_1.RawSet.createComponentTargetElement(name, function (e, o, r) {
                 var newSim = _this.simstanceManager.newSim(val);
                 return newSim;
             }, component === null || component === void 0 ? void 0 : component.template, component === null || component === void 0 ? void 0 : component.styles, _this.domRenderConfig.scripts);
@@ -5193,6 +5334,7 @@ var DomrenderLifecycleSection = (function () {
 var FrontIntroduction = (function () {
     function FrontIntroduction(apiService) {
         this.apiService = apiService;
+        console.log('FrontIntroduction constructor');
     }
     FrontIntroduction.prototype.onInit = function () {
         var _this = this;
@@ -5295,7 +5437,7 @@ unwrapExports(ScriptRunnable_1);
 var ScriptRunnable_2 = ScriptRunnable_1.ScriptRunnable;
 
 var CodeScript = (function (_super) {
-    __extends$2(CodeScript, _super);
+    __extends(CodeScript, _super);
     function CodeScript() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
