@@ -37,6 +37,7 @@ export const Component = (config?: ComponentConfig): GenericClassDecorator<Const
         }
         componentSelectors.set(config.selector.toLowerCase(), target);
         ReflectUtils.defineMetadata(ComponentMetadataKey, config, target);
+        // return target;
         return class extends target {
             __componentInstances =  {}
         }

@@ -2,6 +2,7 @@ import * as JSDOM from 'jsdom';
 console.log(JSDOM.JSDOM);
 import { getComponent } from 'simple-boot-front/decorators/Component';
 import { SimFrontOption, UrlType } from 'simple-boot-front/option/SimFrontOption';
+import { UserServiceServer } from '../server/UserServiceServer';
 const jsdom = new JSDOM.JSDOM('<!doctype html><html><body id="app">...</body></html>');
 jsdom.reconfigure({
     url: 'http://localhost',
@@ -21,8 +22,8 @@ console.log('--',document)
 console.log('---',window.location.href, window.location.pathname)
 //
 // @ts-ignore
-import ('./index').then(it => {
-    it.factory(window).run()
+import ('./bootfactory').then(it => {
+    it.factory(window, [UserServiceServer]).run()
     console.log('--??', document.documentElement.outerHTML)
 })
 // import { factory } from './index';

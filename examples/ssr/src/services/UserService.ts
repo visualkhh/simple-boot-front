@@ -1,3 +1,3 @@
-export abstract class UserService {
-    abstract sayHello(): string;
+export interface UserService {
+    sayHello(): string;
 }
