@@ -748,28 +748,30 @@ var EventManager = (function () {
         this.eventNames.forEach(function (it) {
             _this.attrNames.push(_this.attrPrefix + 'event-' + it);
         });
-        EventManager.WINDOW_EVENTS.forEach(function (eventName) {
-            window.addEventListener(eventName, function (event) {
-                var targetAttr = "dr-window-event-" + eventName;
-                document.querySelectorAll("[" + targetAttr + "]").forEach(function (it) {
-                    var _a;
-                    var script = it.getAttribute(targetAttr);
-                    if (script) {
-                        var obj = it.obj;
-                        var config = (_a = obj === null || obj === void 0 ? void 0 : obj._DomRender_proxy) === null || _a === void 0 ? void 0 : _a.config;
-                        ScriptUtils.eval(_this.bindScript + " " + script + " ", Object.assign(obj, {
-                            __render: Object.freeze({
-                                target: DomRenderProxy.final(event.target),
-                                element: it,
-                                event: event,
-                                range: Range.range,
-                                scripts: EventManager.setBindProperty(config === null || config === void 0 ? void 0 : config.scripts, obj)
-                            })
-                        }));
-                    }
+        if (typeof window !== 'undefined') {
+            EventManager.WINDOW_EVENTS.forEach(function (eventName) {
+                window === null || window === void 0 ? void 0 : window.addEventListener(eventName, function (event) {
+                    var targetAttr = "dr-window-event-" + eventName;
+                    document.querySelectorAll("[" + targetAttr + "]").forEach(function (it) {
+                        var _a;
+                        var script = it.getAttribute(targetAttr);
+                        if (script) {
+                            var obj = it.obj;
+                            var config = (_a = obj === null || obj === void 0 ? void 0 : obj._DomRender_proxy) === null || _a === void 0 ? void 0 : _a.config;
+                            ScriptUtils.eval(_this.bindScript + " " + script + " ", Object.assign(obj, {
+                                __render: Object.freeze({
+                                    target: DomRenderProxy.final(event.target),
+                                    element: it,
+                                    event: event,
+                                    range: Range.range,
+                                    scripts: EventManager.setBindProperty(config === null || config === void 0 ? void 0 : config.scripts, obj)
+                                })
+                            }));
+                        }
+                    });
                 });
             });
-        });
+        }
     }
     EventManager.prototype.findAttrElements = function (fragment, config) {
         var _a, _b;
@@ -1090,7 +1092,7 @@ var EventManager = (function () {
                 varName = varName.replace(/this\./, '');
             }
             EventManager.VARNAMES.forEach(function (it) {
-                raws = raws.replace(RegExp(it.replace('$', '\\$'), 'g'), "this.___" + it);
+                raws = raws.replace(RegExp(it.replace('$', '\\$'), 'g'), "this?.___" + it);
             });
             var variablePaths = ScriptUtils.getVariablePaths(raws !== null && raws !== void 0 ? raws : '');
             return variablePaths.has(varName);
@@ -1518,7 +1520,7 @@ var RawSet = (function () {
             }
             if (script) {
                 EventManager.VARNAMES.forEach(function (it) {
-                    script = script.replace(RegExp(it.replace('$', '\\$'), 'g'), "this.___" + it);
+                    script = script.replace(RegExp(it.replace('$', '\\$'), 'g'), "this?.___" + it);
                 });
                 Array.from(ScriptUtils.getVariablePaths(script)).filter(function (it) { return !it.startsWith("___" + EventManager.SCRIPTS_VARNAME) && !it.startsWith("___" + EventManager.SCRIPTS_VARNAME); }).forEach(function (it) { return usingTriggerVariables.add(it); });
             }
@@ -1734,7 +1736,7 @@ var RawSet = (function () {
                     raws.push.apply(raws, __spreadArray([], __read(rr), false));
                 }
                 (_3 = config === null || config === void 0 ? void 0 : config.targetElements) === null || _3 === void 0 ? void 0 : _3.forEach(function (it) {
-                    var _a, _b, _c, _d, _e;
+                    var _a, _b;
                     var name = it.name;
                     if (name.toLowerCase() === element_2.tagName.toLowerCase()) {
                         var documentFragment = it.callBack(element_2, obj, _this);
@@ -1749,7 +1751,6 @@ var RawSet = (function () {
                                 targetElement: it
                             });
                             (_b = it === null || it === void 0 ? void 0 : it.complete) === null || _b === void 0 ? void 0 : _b.call(it, element_2, obj, _this);
-                            (_e = (_d = (_c = it === null || it === void 0 ? void 0 : it.__render) === null || _c === void 0 ? void 0 : _c.component) === null || _d === void 0 ? void 0 : _d.onInitRender) === null || _e === void 0 ? void 0 : _e.call(_d, it === null || it === void 0 ? void 0 : it.__render);
                         }
                     }
                 });
@@ -1788,7 +1789,11 @@ var RawSet = (function () {
                 }));
             }
         });
-        onElementInitCallBack.forEach(function (it) { var _a; return (_a = config === null || config === void 0 ? void 0 : config.onElementInit) === null || _a === void 0 ? void 0 : _a.call(config, it.name, obj, _this, it.targetElement); });
+        onElementInitCallBack.forEach(function (it) {
+            var _a, _b, _c, _d, _e, _f;
+            (_d = (_c = (_b = (_a = it.targetElement) === null || _a === void 0 ? void 0 : _a.__render) === null || _b === void 0 ? void 0 : _b.component) === null || _c === void 0 ? void 0 : _c.onInitRender) === null || _d === void 0 ? void 0 : _d.call(_c, (_e = it.targetElement) === null || _e === void 0 ? void 0 : _e.__render);
+            (_f = config === null || config === void 0 ? void 0 : config.onElementInit) === null || _f === void 0 ? void 0 : _f.call(config, it.name, obj, _this, it.targetElement);
+        });
         onAttrInitCallBack.forEach(function (it) { var _a; return (_a = config === null || config === void 0 ? void 0 : config.onAttrInit) === null || _a === void 0 ? void 0 : _a.call(config, it.attrName, it.attrValue, obj, _this); });
         return raws;
     };
