@@ -273,3 +273,4 @@ gradle-app.setting
 /libs/**
 /src/package.json
 /create/lib/
+/examples/ssr/dist-server/
