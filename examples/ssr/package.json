@@ -22,14 +22,15 @@
   },
   "scripts": {
     "start": "rollup -c && sbf serve --path ./dist --port 4500",
-    "serve": "sbf serve --path ./dist --port 4500",
-    "serve:watch": "sbf serve --path ./dist --port 4500 --watch",
     "serve:watch:all": "sbf serve --bundle rollup --path ./dist --port 4500 --watch",
     "serve:8080": "sbf serve --path ./dist --port 4500 --proxy http://localhost:8080",
+    "serve": "sbf serve --path ./dist-front --port 4500",
     "server": "node dist-server/bundle",
-    "bundle": "rollup -c ",
+    "serve:watch": "sbf serve --path ./dist --port 4500 --watch",
+    "bundle:front": "rollup -c rollup.front.config.js",
+    "bundle:front:watch": "rollup -c rollup.front.config.js -w ",
     "bundle:server": "rollup -c rollup.server.config.js",
-    "bundle:watch": "rollup -c -w "
+    "bundle:server:watch": "rollup -c rollup.server.config.js -w "
   },
   "devDependencies": {
     "@rollup/plugin-replace": "^2.4.2",

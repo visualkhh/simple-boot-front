@@ -32,7 +32,7 @@ export default {
         }),
         // resolve(),
         // nodeResolve(),
-        typescript({outDir: 'dist-server'}),
+        typescript({tsconfig: 'tsconfig.server.json'}),
         del({ targets: ['dist-server/*'] })
         // commonjs(),
         // typescript({ tsconfig: './tsconfig.json', clean: true })

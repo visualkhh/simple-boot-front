@@ -11,7 +11,7 @@ export default {
     input: 'src/index.ts',
     output: {
         sourcemap: true,
-        dir: 'dist',
+        dir: 'dist-front',
         entryFileNames: 'bundle.js',
         format: 'cjs'
     },
@@ -21,19 +21,19 @@ export default {
         html({include: '**/*.html'}),
         copy({
             targets: [
-                { src: 'index.html', dest: 'dist' },
-                { src: 'assets', dest: 'dist' }
+                { src: 'index.html', dest: 'dist-front' },
+                { src: 'assets', dest: 'dist-front' }
             ]
         }),
         resolve(),
         commonjs(),
-        typescript({ tsconfig: './tsconfig.json', clean: true }),
+        typescript({ tsconfig: './tsconfig.front.json', clean: true }),
         sourcemaps(),
         replace({
             preventAssignment: true,
             "Object.defineProperty(exports, '__esModule', { value: true });": "try{if(!exports) {var exports = {}}}catch (e) {var exports = {}} Object.defineProperty(exports, '__esModule', { value: true });",
             delimiters: ['\n', '\n']
         }),
-        del({ targets: ['dist/*'] })
+        del({ targets: ['dist-front/*'] })
     ]
 };
