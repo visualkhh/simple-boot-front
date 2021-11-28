@@ -12,8 +12,12 @@ export class UserServiceServer implements UserService {
     }
 
     getUserData(param: User): Promise<User> {
-        console.log('request data', param)
-        return Promise.resolve({id: 1, name: 'visualkhh', email: 'vv@vv.com'});
+        // if (process) {
+            console.log('request data', param)
+            return Promise.resolve({id: 1, name: 'visualkhh', email: 'vv@vv.com'});
+        // } else {
+        //     return Promise.reject('error');
+        // }
     }
 
 }

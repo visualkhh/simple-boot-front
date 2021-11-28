@@ -4,7 +4,8 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import html from 'rollup-plugin-html';
 import css from 'rollup-plugin-import-css';
-import typescript from 'rollup-plugin-typescript2';
+// import typescript from 'rollup-plugin-typescript2';
+import typescript from '@rollup/plugin-typescript';
 import sourcemaps from 'rollup-plugin-sourcemaps';
 import del from 'rollup-plugin-delete';
 export default {
@@ -27,13 +28,14 @@ export default {
         }),
         resolve(),
         commonjs(),
-        typescript({ tsconfig: './tsconfig.front.json', clean: true }),
-        sourcemaps(),
-        replace({
-            preventAssignment: true,
-            "Object.defineProperty(exports, '__esModule', { value: true });": "try{if(!exports) {var exports = {}}}catch (e) {var exports = {}} Object.defineProperty(exports, '__esModule', { value: true });",
-            delimiters: ['\n', '\n']
-        }),
+        typescript({tsconfig: 'tsconfig.front.json'}),
+        // typescript({ tsconfig: './tsconfig.front.json', clean: true }),
+        // sourcemaps(),
+        // replace({
+        //     preventAssignment: true,
+        //     "Object.defineProperty(exports, '__esModule', { value: true });": "try{if(!exports) {var exports = {}}}catch (e) {var exports = {}} Object.defineProperty(exports, '__esModule', { value: true });",
+        //     delimiters: ['\n', '\n']
+        // }),
         del({ targets: ['dist-front/*'] })
     ]
 };

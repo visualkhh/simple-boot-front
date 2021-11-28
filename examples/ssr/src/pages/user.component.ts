@@ -21,6 +21,9 @@ export class UserComponent implements OnInit {
 
     onInit(): void {
         console.log('onInit')
+        this.userService.getUserData({id: 2}).then(it => {
+            this.user = it;
+        });
     }
 
     request() {
