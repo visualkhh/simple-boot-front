@@ -93,7 +93,7 @@ export class SimpleBootFront extends SimpleApplication {
         return obj;
     }
 
-    public run() {
+    public run(): SimpleBootFront {
         super.run();
         this.initDomRenderScripts();
         this.initDomRenderTargetElements();
@@ -126,7 +126,8 @@ export class SimpleBootFront extends SimpleApplication {
             })
         });
 
-        this.option.window.dispatchEvent(new Event('popstate'))
+        this.option.window.dispatchEvent(new Event('popstate'));
+        return this;
     }
 
     private afterSetting() {
@@ -198,5 +199,9 @@ export class SimpleBootFront extends SimpleApplication {
             // }
             this.domRenderTargetElements.push(items);
         });
+    }
+
+    public go(url: string) {
+        SimGlobal().application.simstanceManager.getOrNewSim(Navigation)?.go(url);
     }
 }

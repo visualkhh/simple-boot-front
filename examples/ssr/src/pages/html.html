@@ -1,3 +1,6 @@
 <div>
-  main
+  main <button dr-event-click="this.request()">request</button>
+  <div dr-if="this.user">
+    ${this.user.email}$
+  </div>
 </div>

@@ -274,3 +274,4 @@ gradle-app.setting
 /src/package.json
 /create/lib/
 /examples/ssr/dist-server/
+/examples/ssr/dist-front/

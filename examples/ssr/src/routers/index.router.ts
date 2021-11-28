@@ -7,12 +7,14 @@ import style from './index.css'
 import { RouterAction } from 'simple-boot-core/route/RouterAction';
 import { OnInit } from 'simple-boot-front/lifecycle/OnInit';
 import { UserComponent } from '../pages/user.component';
+import { MainComponent } from '../pages/main.component';
 @Sim()
 @Router({
     path: '',
     route: {
         // '': '/',
         '/': UserComponent,
+        '/main': MainComponent,
     }
 })
 @Component({
@@ -30,5 +32,6 @@ export class IndexRouter implements OnInit, RouterAction {
 
     canActivate(url: any, module: any): void {
         this.child = module;
+        console.log('canActivate-->', url, module)
     }
 }
