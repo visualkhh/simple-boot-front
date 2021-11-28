@@ -5,12 +5,13 @@ import { User, UserService } from '../services/UserService';
 import { Inject } from 'simple-boot-core/decorators/inject/Inject';
 import { UserServiceFront } from '../../front/UserServiceFront';
 import { OnInit } from 'simple-boot-front/lifecycle/OnInit';
+import { SayScript } from '../scripts/SayScript';
 // import { UserService } from '../services/UserService';
 // import { UserServiceFront } from '../../front/UserServiceFront';
 @Sim()
 @Component({
     template,
-    // using: [UserServiceFront]
+    using: [SayScript]
 })
 export class UserComponent implements OnInit {
     name = 'UserComponentUserComponent'

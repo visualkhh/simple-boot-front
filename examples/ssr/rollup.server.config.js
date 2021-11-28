@@ -13,6 +13,7 @@ import css from "rollup-plugin-import-css";
 export default {
     input: 'src/server.ts',
     output: {
+        sourcemap: true,
         dir: 'dist-server',
         entryFileNames: 'bundle.js',
         format: 'cjs'
