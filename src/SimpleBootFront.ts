@@ -6,9 +6,7 @@ import {
     componentSelectors,
     getComponent
 } from './decorators/Component';
-import {
-    scripts
-} from './decorators/Script';
+import { scripts } from './decorators/Script';
 import { DomRender } from 'dom-render/DomRender';
 import { SimAtomic } from 'simple-boot-core/simstance/SimAtomic';
 import { SimpleApplication } from 'simple-boot-core/SimpleApplication';

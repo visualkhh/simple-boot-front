@@ -55,6 +55,7 @@
     "npm-publish": "npm run npm-build && npm publish ./dist",
     "tsc": "tsc",
     "tsc:watch": "rm -rf ./dist && mkdir dist && cp package.json dist && tsc --watch --sourceMap true",
+    "tsc:watch:dist": "rm -rf ./dist && mkdir dist && cp package-dist.json dist/package.json && tsc --watch --sourceMap true",
     "tsc:watch:dev": "rm -rf ./dist && mkdir dist && cp package-dev.json dist && tsc --watch --sourceMap true",
     "test": "jest --detectOpenHandles --forceExit"
   },
@@ -74,8 +75,8 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
-    "dom-render": "file:libs/dom-render/dist",
+    "dom-render": "file:../dom-render/dist",
     "reflect-metadata": "^0.1.13",
-    "simple-boot-core": "file:libs/simple-boot-core/dist"
+    "simple-boot-core": "file:../simple-boot-core/dist"
   }
 }
