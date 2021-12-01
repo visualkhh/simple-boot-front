@@ -60,6 +60,7 @@ export class SimpleBootFront extends SimpleApplication {
         this.domRenderTargetAttrs.push({
             name: 'component',
             callBack: (element: Element, attrValue: string, obj: any, rawSet: RawSet) => {
+                // console.log('---?', element, attrValue, obj, rawSet)
                 const fag = this.option.window.document.createDocumentFragment();
                 if (attrValue) {
                     const targetObj = ScriptUtils.eval(`return ${attrValue}`, obj)
@@ -108,6 +109,7 @@ export class SimpleBootFront extends SimpleApplication {
             const val = routerAtomic.value;
             const domRenderProxy = val._DomRender_proxy as DomRenderProxy<any>
             domRenderProxy.initRender(target);
+            // console.log('onInit-----?', val);
             (val as any)?.onInit?.();
         }
 
