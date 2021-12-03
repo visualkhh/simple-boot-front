@@ -23,6 +23,7 @@ import { SimGlobal } from 'simple-boot-core/global/SimGlobal';
 import { RawSet, Render } from 'dom-render/RawSet';
 import { Config, TargetElement, TargetAttr } from 'dom-render/Config';
 import { ScriptRunnable } from 'script/ScriptRunnable';
+import { RouterMetadataKey } from 'simple-boot-core/decorators/SimDecorator';
 
 export class SimpleBootFront extends SimpleApplication {
     navigation!: Navigation;
@@ -38,6 +39,7 @@ export class SimpleBootFront extends SimpleApplication {
         onAttrInit: (attrName: string, attrValue: string, obj: any) => {
             if (attrName === 'component') {
                 const bindObj = ScriptUtils.evalReturn(attrValue, obj);
+                // console.log('--------->', attrName, attrValue, obj);
                 (bindObj as any)?.onInit?.();
             }
         },
@@ -121,6 +123,9 @@ export class SimpleBootFront extends SimpleApplication {
 
         this.option.window.addEventListener('popstate', (event) => {
             const intent = new Intent(this.navigation.path ?? '');
+            // this.simstanceManager.getSimAtomics().filter(it => it.getConfig(RouterMetadataKey)).forEach(it => {
+            //     console.log('--------------', it)
+            // })
             this.routing<SimAtomic, any>(intent).then(async it => {
                 this.afterSetting();
             })
