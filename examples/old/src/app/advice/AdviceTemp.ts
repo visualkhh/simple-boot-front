@@ -4,7 +4,7 @@ import {After, Before} from 'simple-boot-core/decorators/aop/AOPDecorator';
 import {Aop} from 'app/features/aop/aop';
 import { Component } from 'simple-boot-front/decorators/Component';
 @Sim()
-export class Advice {
+export class AdviceTemp {
     constructor() {
         // console.log('-Advice-->?')
     }
