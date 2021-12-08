@@ -206,6 +206,9 @@ export class SimpleBootFront extends SimpleApplication {
         });
     }
 
+    public getSimstanceManager() {
+        return this.simstanceManager;
+    }
     public go(url: string) {
         SimGlobal().application.simstanceManager.getOrNewSim(Navigation)?.go(url);
     }

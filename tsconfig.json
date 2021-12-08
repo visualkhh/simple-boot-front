@@ -14,11 +14,6 @@
     /* Module Resolution Options */
     "moduleResolution": "node",            /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
     "baseUrl": "src",                       /* Base directory to resolve non-absolute module names. */
-    "paths": {
-      "dom-render/*": ["./libs/dom-render/src/*"],
-      "simple-boot-core/*": ["./libs/simple-boot-core/src/*"],
-      "simple-boot-front/*": ["./src/*"],
-    },
     "typeRoots": ["@type", "node_modules/@types", "node_modules/handlebars", "node_modules/reflect-metadata", "@types"],                       /* List of folders to include type definitions from. */
     "types": ["node", "reflect-metadata", "jest"],                     /* Type declaration files to be included in compilation. */
     "esModuleInterop": true,                  /* Enables emit interoperability between CommonJS and ES Modules via creation of namespace objects for all imports. Implies 'allowSyntheticDefaultImports'. */

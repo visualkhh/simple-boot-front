@@ -54,9 +54,10 @@
     "npm-build": "rm -rf dist && tsc --outDir dist --declarationDir dist && cp package-prod.json dist/package.json && cp README.MD dist",
     "npm-publish": "npm run npm-build && npm publish ./dist",
     "tsc": "tsc",
-    "tsc:root-dist": "tsc --outDir ../dist-simple-boot-front --declarationDir ../dist-simple-boot-front",
+    "setting:root-dist": "rm -rf ../dist-simple-boot-front && mkdirp ../dist-simple-boot-front && cp package-root-dist.json ../dist-simple-boot-front/package.json",
+    "tsc:root-dist": "npm run setting:root-dist && tsc --outDir ../dist-simple-boot-front --declarationDir ../dist-simple-boot-front",
     "tsc:watch": "rm -rf ./dist && mkdir dist && cp package.json dist && tsc --watch --sourceMap true",
-    "tsc:watch:root-dist": "rm -rf ../dist-simple-boot-front && mkdirp ../dist-simple-boot-front && cp package.json ../dist-simple-boot-front && tsc --outDir ../dist-simple-boot-front --declarationDir ../dist-simple-boot-front --watch --sourceMap true",
+    "tsc:watch:root-dist": "npm run setting:root-dist && tsc --outDir ../dist-simple-boot-front --declarationDir ../dist-simple-boot-front --watch --sourceMap true",
     "tsc:watch:dev": "rm -rf ./dist && mkdir dist && cp package-dev.json dist && tsc --watch --sourceMap true",
     "test": "jest --detectOpenHandles --forceExit"
   },
