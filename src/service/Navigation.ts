@@ -31,7 +31,7 @@ export class Navigation {
         return {path: this.path, queryParams: this.queryParams};
     }
 
-    go(path: string, data = {}, title = '') {
+    go(path: string, data: any = {}, title = '') {
         if (UrlType.path === this.option.urlType) {
             history.pushState(data, title, path)
         } else if (UrlType.hash === this.option.urlType) {
@@ -41,5 +41,9 @@ export class Navigation {
         window.dispatchEvent(new Event('popstate'));
         // window.dispatchEvent(new Event('pushstate'));
         // window.dispatchEvent(new Event('locationchange'));
+    }
+
+    state(): any {
+        return history.state;
     }
 }
