@@ -7,6 +7,13 @@ export class Navigation {
     constructor(private option: SimFrontOption) {
     }
 
+    get url(): string {
+        const queryParams = this.queryParamsObject;
+        const queryString = Object.entries(queryParams).map(([key, value]) => `${key}=${value}`).join('&');
+        const path = this.path;
+        return path + (queryString.length > 0 ? ('?'+queryString) : '');
+    }
+
     get path(): string {
         if (UrlType.path === this.option.urlType) {
             return LocationUtils.path();
@@ -24,6 +31,16 @@ export class Navigation {
             return LocationUtils.hashQueryParams();
         } else {
             return new Map<string, string>();
+        }
+    }
+
+    get queryParamsObject(): any {
+        if (UrlType.path === this.option.urlType) {
+            return LocationUtils.pathQueryParamsObject();
+        } else if (UrlType.hash === this.option.urlType) {
+            return LocationUtils.pathQueryParamsObject();
+        } else {
+            return {};
         }
     }
 

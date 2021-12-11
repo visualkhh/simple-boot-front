@@ -24,6 +24,8 @@ import { RawSet, Render } from 'dom-render/RawSet';
 import { Config, TargetElement, TargetAttr } from 'dom-render/Config';
 import { ScriptRunnable } from 'script/ScriptRunnable';
 import { RouterMetadataKey } from 'simple-boot-core/decorators/SimDecorator';
+import { OnInitParameter } from 'lifecycle/OnInit';
+import { DomRenderFinalProxy } from 'dom-render/types/Types';
 
 export class SimpleBootFront extends SimpleApplication {
     navigation!: Navigation;
@@ -34,13 +36,13 @@ export class SimpleBootFront extends SimpleApplication {
         targetElements: this.domRenderTargetElements,
         targetAttrs: this.domRenderTargetAttrs,
         onElementInit: (name: string, obj: any, rawSet: RawSet, targetElement: TargetElement) => {
-            targetElement?.__render?.component?.onInit?.();
+            targetElement?.__render?.component?.onInit?.(rawSet);
         },
-        onAttrInit: (attrName: string, attrValue: string, obj: any) => {
+        onAttrInit: (attrName: string, attrValue: string, obj: any, rawSet: RawSet) => {
             if (attrName === 'component') {
                 const bindObj = ScriptUtils.evalReturn(attrValue, obj);
                 // console.log('--------->', attrName, attrValue, obj);
-                (bindObj as any)?.onInit?.();
+                (bindObj as any)?.onInit?.(DomRenderFinalProxy.final({makerObj: obj, rawSet}) as OnInitParameter);
             }
         },
         scripts: {application: this},
@@ -122,7 +124,8 @@ export class SimpleBootFront extends SimpleApplication {
         });
 
         this.option.window.addEventListener('popstate', (event) => {
-            const intent = new Intent(this.navigation.path ?? '');
+            // const intent = new Intent(this.navigation.path ?? '');
+            const intent = new Intent(this.navigation.url ?? '');
             // this.simstanceManager.getSimAtomics().filter(it => it.getConfig(RouterMetadataKey)).forEach(it => {
             //     console.log('--------------', it)
             // })

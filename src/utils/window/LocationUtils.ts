@@ -16,6 +16,10 @@ export class LocationUtils {
         return window.location.pathname;
     }
 
+    static pathQueryParamsObject(): { [key:string]: string } {
+        return this.queryStringToObject(window.location.search.substring(1));
+    }
+
     static pathQueryParams(): Map<string, string> {
         return this.queryStringToMap(window.location.search.substring(1));
     }
@@ -25,7 +29,20 @@ export class LocationUtils {
         const vars = s.split('&') || [];
         vars.forEach(it => {
             const kv = it.split('=') || [];
-            params.set(kv[0], kv[1]);
+            if (kv[0] && kv[0].length > 0) {
+                params.set(kv[0], kv[1]);
+            }
+        })
+        return params;
+    }
+    private static queryStringToObject(s: string): { [key:string]: string } {
+        const params = {} as { [key:string]: string };
+        const vars = s.split('&') || [];
+        vars.forEach(it => {
+            const kv = it.split('=') || [];
+            if (kv[0] && kv[0].length > 0) {
+                params[kv[0]] = kv[1];
+            }
         })
         return params;
     }
