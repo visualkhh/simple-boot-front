@@ -20,10 +20,14 @@ export class CookieService {
         return all;
     }
 
-    set(name: string, value: string, exp: number) {
-        var date = new Date();
-        date.setTime(date.getTime() + exp); // exp*24*60*60*1000
-        document.cookie = name + '=' + value + ';expires=' + date.toUTCString() + ';path=/';
+    set(name: string, value: string, exp?: number) {
+        if (exp === undefined) {
+            document.cookie = name + '=' + value + ';path=/';
+        } else {
+            var date = new Date();
+            date.setTime(date.getTime() + exp); // exp*24*60*60*1000
+            document.cookie = name + '=' + value + ';expires=' + date.toUTCString() + ';path=/';
+        }
     }
 
     delete(name: string) {
