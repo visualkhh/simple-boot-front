@@ -48,6 +48,13 @@ export class Navigation {
         return {path: this.path, queryParams: this.queryParams};
     }
 
+    reload() {
+        window.dispatchEvent(new Event('popstate'));
+    }
+    static pathAndSearch(): string {
+        return window.location.pathname + window.location.search;
+    }
+
     go(path: string, data: any = {}, title = '') {
         if (UrlType.path === this.option.urlType) {
             history.pushState(data, title, path)
