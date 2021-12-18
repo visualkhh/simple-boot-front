@@ -19,7 +19,6 @@ import { IntentManager } from 'simple-boot-core/intent/IntentManager';
 import { RouterManager } from 'simple-boot-core/route/RouterManager';
 import { DomRenderProxy } from 'dom-render/DomRenderProxy';
 import { ScriptUtils } from 'dom-render/utils/script/ScriptUtils';
-import { SimGlobal } from 'simple-boot-core/global/SimGlobal';
 import { RawSet, Render } from 'dom-render/RawSet';
 import { Config, TargetElement, TargetAttr } from 'dom-render/Config';
 import { ScriptRunnable } from 'script/ScriptRunnable';
@@ -57,7 +56,8 @@ export class SimpleBootFront extends SimpleApplication {
                 attrName: 'router-link',
                 callBack: (elements: Element, attrValue: string, obj: any) => {
                     elements.addEventListener('click', (event) => {
-                        SimGlobal().application.simstanceManager.getOrNewSim(Navigation)?.go(attrValue)
+                        this.getSimstanceManager().getOrNewSim(Navigation)?.go(attrValue)
+                        // SimGlobal().application.simstanceManager.getOrNewSim(Navigation)?.go(attrValue)
                     })
                 }
             }],
@@ -130,7 +130,7 @@ export class SimpleBootFront extends SimpleApplication {
 
         this.navigation = this.simstanceManager.getOrNewSim(Navigation)!
         // rootRouter는 처음한번 그려준다.
-        const routerAtomic = new SimAtomic(this.rootRouter);
+        const routerAtomic = new SimAtomic(this.rootRouter, this.getSimstanceManager());
         const target = this.option.window.document.querySelector(this.option.selector)
         if (target && routerAtomic.value) {
             const component = routerAtomic.getConfig<ComponentConfig>(ComponentMetadataKey)
@@ -247,6 +247,6 @@ export class SimpleBootFront extends SimpleApplication {
         return this.simstanceManager;
     }
     public go(url: string) {
-        SimGlobal().application.simstanceManager.getOrNewSim(Navigation)?.go(url);
+        this.getSimstanceManager().getOrNewSim(Navigation)?.go(url);
     }
 }

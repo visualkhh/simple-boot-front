@@ -1,7 +1,5 @@
 import { ConstructorType, GenericClassDecorator } from 'simple-boot-core/types/Types';
 import { ReflectUtils } from 'simple-boot-core/utils/reflect/ReflectUtils';
-import { SimGlobal } from 'simple-boot-core/global/SimGlobal';
-import { SimpleBootFront } from 'SimpleBootFront';
 import { ScriptRunnable } from 'script/ScriptRunnable';
 
 export const scripts = new Map<string, ConstructorType<ScriptRunnable>>();
