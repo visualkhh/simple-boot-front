@@ -49,25 +49,26 @@ export class Navigation {
     }
 
     reload() {
-        window.dispatchEvent(new Event('popstate'));
+        this.option.window.dispatchEvent(new Event('popstate'));
     }
-    static pathAndSearch(): string {
-        return window.location.pathname + window.location.search;
+
+    pathAndSearch(): string {
+        return this.option.window.location.pathname + this.option.window.location.search;
     }
 
     go(path: string, data: any = {}, title = '') {
         if (UrlType.path === this.option.urlType) {
-            history.pushState(data, title, path)
+            this.option.window.history.pushState(data, title, path)
         } else if (UrlType.hash === this.option.urlType) {
             path = '#' + path.substring(1)
-            history.pushState(data, title, path)
+            this.option.window.history.pushState(data, title, path)
         }
-        window.dispatchEvent(new Event('popstate'));
+        this.option.window.dispatchEvent(new Event('popstate'));
         // window.dispatchEvent(new Event('pushstate'));
         // window.dispatchEvent(new Event('locationchange'));
     }
 
     state(): any {
-        return history.state;
+        return this.option.window.history.state;
     }
 }

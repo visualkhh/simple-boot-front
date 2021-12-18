@@ -64,7 +64,7 @@ export class SimpleBootFront extends SimpleApplication {
             proxyExcludeTyps: this.domRendoerExcludeProxy
         };
 
-        window.__dirname = 'simple-boot-front__dirname';
+        (this.option.window as any).__dirname = 'simple-boot-front__dirname';
         // console.log('---sele-->', selectors, this.targetElements)
         this.domRenderTargetAttrs.push({
             name: 'component',
@@ -88,9 +88,11 @@ export class SimpleBootFront extends SimpleApplication {
 
 
     public regDoneRouteCallBack(callBackObj: OnDoneRoute) {
+        console.log('regDoneRouteCallBack-->', callBackObj)
         this.onDoneRouteSubject.set(callBackObj, []);
     }
     public pushDoneRouteCallBack(callBackObj: OnDoneRoute, param: any) {
+        console.log('pushDoneRouteCallBack-->', callBackObj, param)
         let newVar = this.onDoneRouteSubject.get(callBackObj);
         if (!newVar) {
             newVar = [];
@@ -156,9 +158,10 @@ export class SimpleBootFront extends SimpleApplication {
             // this.simstanceManager.getSimAtomics().filter(it => it.getConfig(RouterMetadataKey)).forEach(it => {
             //     console.log('--------------', it)
             // })
-            this.routing<SimAtomic, any>(intent).then(async it => {
+            this.routing<SimAtomic, any>(intent).then(it => {
                 this.afterSetting();
                 this.onDoneRouteSubject.forEach((val, key) => {
+                    console.log('doneRoute Subject length->', val.length)
                     while (val.length) {
                         key.onDoneRoute(val.pop());
                     }
