@@ -34,33 +34,36 @@ export class SimpleBootFront extends SimpleApplication {
     public domRenderTargetElements: TargetElement[] = [];
     public domRenderTargetAttrs: TargetAttr[] = [];
     public onDoneRouteSubject = new Map<OnDoneRoute, any[]>();
-    public domRenderConfig: Config = {
-        targetElements: this.domRenderTargetElements,
-        targetAttrs: this.domRenderTargetAttrs,
-        onElementInit: (name: string, obj: any, rawSet: RawSet, targetElement: TargetElement) => {
-            targetElement?.__render?.component?.onInit?.(rawSet);
-        },
-        onAttrInit: (attrName: string, attrValue: string, obj: any, rawSet: RawSet) => {
-            if (attrName === 'component') {
-                const bindObj = ScriptUtils.evalReturn(attrValue, obj);
-                // console.log('--------->', attrName, attrValue, obj);
-                (bindObj as any)?.onInit?.(DomRenderFinalProxy.final({makerObj: obj, rawSet}) as OnInitParameter);
-            }
-        },
-        scripts: {application: this},
-        applyEvents: [{
-            attrName: 'router-link',
-            callBack: (elements: Element, attrValue: string, obj: any) => {
-                elements.addEventListener('click', (event) => {
-                    SimGlobal().application.simstanceManager.getOrNewSim(Navigation)?.go(attrValue)
-                })
-            }
-        }],
-        proxyExcludeTyps: this.domRendoerExcludeProxy
-    };
+    public domRenderConfig: Config;
 
     constructor(public rootRouter: ConstructorType<any>, public option: SimFrontOption) {
         super(rootRouter, option);
+        this.domRenderConfig = {
+            window: option.window,
+            targetElements: this.domRenderTargetElements,
+            targetAttrs: this.domRenderTargetAttrs,
+            onElementInit: (name: string, obj: any, rawSet: RawSet, targetElement: TargetElement) => {
+                targetElement?.__render?.component?.onInit?.(rawSet);
+            },
+            onAttrInit: (attrName: string, attrValue: string, obj: any, rawSet: RawSet) => {
+                if (attrName === 'component') {
+                    const bindObj = ScriptUtils.evalReturn(attrValue, obj);
+                    // console.log('--------->', attrName, attrValue, obj);
+                    (bindObj as any)?.onInit?.(DomRenderFinalProxy.final({makerObj: obj, rawSet}) as OnInitParameter);
+                }
+            },
+            scripts: {application: this},
+            applyEvents: [{
+                attrName: 'router-link',
+                callBack: (elements: Element, attrValue: string, obj: any) => {
+                    elements.addEventListener('click', (event) => {
+                        SimGlobal().application.simstanceManager.getOrNewSim(Navigation)?.go(attrValue)
+                    })
+                }
+            }],
+            proxyExcludeTyps: this.domRendoerExcludeProxy
+        };
+
         window.__dirname = 'simple-boot-front__dirname';
         // console.log('---sele-->', selectors, this.targetElements)
         this.domRenderTargetAttrs.push({
@@ -73,7 +76,7 @@ export class SimpleBootFront extends SimpleApplication {
                     const n = element.cloneNode(true) as Element;
                     const innerHTML = this.getComponentInnerHtml(targetObj);
                     n.innerHTML = innerHTML;
-                    fag.append(RawSet.drThisCreate(n, attrValue, '', true, obj));
+                    fag.append(RawSet.drThisCreate(n, attrValue, '', true, obj, this.option));
                 }
                 return fag;
             }
@@ -216,7 +219,8 @@ export class SimpleBootFront extends SimpleApplication {
         const selectors = componentSelectors;
         selectors.forEach((val, name) => {
             const component = getComponent(val);
-            const items = RawSet.createComponentTargetElement(name,
+            const items = RawSet.createComponentTargetElement(
+                name,
                 (e, o, r) => {
                     const newSim = this.simstanceManager.newSim(val);
                     // newSim?.onInit?.();
@@ -224,7 +228,8 @@ export class SimpleBootFront extends SimpleApplication {
                 },
                 component?.template,
                 component?.styles,
-                this.domRenderConfig.scripts
+                this.domRenderConfig.scripts,
+                this.domRenderConfig
                 // ,
                 // (target: Element, obj: any, rawSet: RawSet) => {
                 //     (items as any).render?.component?.onInit?.();

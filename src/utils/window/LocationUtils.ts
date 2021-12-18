@@ -1,26 +1,26 @@
 export class LocationUtils {
-    static hash(): string {
+    static hash(window: Window): string {
         return window.location.hash.replace('#', '')
     }
 
-    static hashPath(): string {
+    static hashPath(window: Window): string {
         return '/' + window.location.hash.replace('#', '').split('?')[0]
     }
 
-    static hashQueryParams(): Map<string, string> {
+    static hashQueryParams(window: Window): Map<string, string> {
         const s = window.location.hash.replace('#', '').split('?')[1] || '';
         return this.queryStringToMap(s);
     }
 
-    static path(): string {
+    static path(window: Window): string {
         return window.location.pathname;
     }
 
-    static pathQueryParamsObject(): { [key:string]: string } {
+    static pathQueryParamsObject(window: Window): { [key:string]: string } {
         return this.queryStringToObject(window.location.search.substring(1));
     }
 
-    static pathQueryParams(): Map<string, string> {
+    static pathQueryParams(window: Window): Map<string, string> {
         return this.queryStringToMap(window.location.search.substring(1));
     }
 

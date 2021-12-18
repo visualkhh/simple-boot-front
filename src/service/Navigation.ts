@@ -16,9 +16,9 @@ export class Navigation {
 
     get path(): string {
         if (UrlType.path === this.option.urlType) {
-            return LocationUtils.path();
+            return LocationUtils.path(this.option.window);
         } else if (UrlType.hash === this.option.urlType) {
-            return LocationUtils.hashPath();
+            return LocationUtils.hashPath(this.option.window);
         } else {
             return '';
         }
@@ -26,9 +26,9 @@ export class Navigation {
 
     get queryParams(): Map<string, string> {
         if (UrlType.path === this.option.urlType) {
-            return LocationUtils.pathQueryParams();
+            return LocationUtils.pathQueryParams(this.option.window);
         } else if (UrlType.hash === this.option.urlType) {
-            return LocationUtils.hashQueryParams();
+            return LocationUtils.hashQueryParams(this.option.window);
         } else {
             return new Map<string, string>();
         }
@@ -36,9 +36,9 @@ export class Navigation {
 
     get queryParamsObject(): any {
         if (UrlType.path === this.option.urlType) {
-            return LocationUtils.pathQueryParamsObject();
+            return LocationUtils.pathQueryParamsObject(this.option.window);
         } else if (UrlType.hash === this.option.urlType) {
-            return LocationUtils.pathQueryParamsObject();
+            return LocationUtils.pathQueryParamsObject(this.option.window);
         } else {
             return {};
         }
