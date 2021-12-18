@@ -26,12 +26,14 @@ import { ScriptRunnable } from 'script/ScriptRunnable';
 import { RouterMetadataKey } from 'simple-boot-core/decorators/SimDecorator';
 import { OnInitParameter } from 'lifecycle/OnInit';
 import { DomRenderFinalProxy } from 'dom-render/types/Types';
+import { OnDoneRoute } from './route/OnDoneRoute';
 
 export class SimpleBootFront extends SimpleApplication {
     navigation!: Navigation;
     public domRendoerExcludeProxy = [SimpleApplication, IntentManager, RouterManager, SimstanceManager, SimFrontOption, Navigation, ViewService, HttpService, HTMLElement];
     public domRenderTargetElements: TargetElement[] = [];
     public domRenderTargetAttrs: TargetAttr[] = [];
+    public onDoneRouteSubject = new Map<OnDoneRoute, any[]>();
     public domRenderConfig: Config = {
         targetElements: this.domRenderTargetElements,
         targetAttrs: this.domRenderTargetAttrs,
@@ -80,6 +82,28 @@ export class SimpleBootFront extends SimpleApplication {
             onProxy: (it: any) => this.createDomRender(it)
         };
     }
+
+
+    public regDoneRouteCallBack(callBackObj: OnDoneRoute) {
+        this.onDoneRouteSubject.set(callBackObj, []);
+    }
+    public pushDoneRouteCallBack(callBackObj: OnDoneRoute, param: any) {
+        let newVar = this.onDoneRouteSubject.get(callBackObj);
+        if (!newVar) {
+            newVar = [];
+            this.onDoneRouteSubject.set(callBackObj, newVar);
+        }
+        newVar?.push(param);
+    }
+    // public removeDoneRouteCallBack(callBackObj: OnDoneRoute, param: any) {
+    //     let newVar = this.onDoneRouteSubject.get(callBackObj);
+    //     if (newVar) {
+    //         const index = newVar.indexOf(param);
+    //         if (index > -1) {
+    //             newVar.splice(index, 1);
+    //         }
+    //     }
+    // }
 
     public getComponentInnerHtml(targetObj: any) {
         const component = getComponent(targetObj)
@@ -131,7 +155,12 @@ export class SimpleBootFront extends SimpleApplication {
             // })
             this.routing<SimAtomic, any>(intent).then(async it => {
                 this.afterSetting();
-            })
+                this.onDoneRouteSubject.forEach((val, key) => {
+                    while (val.length) {
+                        key.onDoneRoute(val.pop());
+                    }
+                });
+            });
         });
 
         this.option.window.dispatchEvent(new Event('popstate'));
