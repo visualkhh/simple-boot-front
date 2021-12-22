@@ -14,33 +14,22 @@ export const ComponentMetadataKey = Symbol('Component');
 
 //Partial<ComponentConfig>
 export const Component = (config?: ComponentConfig): GenericClassDecorator<ConstructorType<any>> => {
-    // if (!SimGlobal().data.components) {
-    //     SimGlobal().data.components = {
-    //         storage: new Map<string, ConstructorType<any>>(),
-    //         getComponentInstance: (tagName: string, uuid: string) => {
-    //             // console.log('----------?', tagName, uuid)
-    //             const components = SimGlobal().data.components.storage.get(tagName);
-    //             const componentsOption = getComponent(components);
-    //             // console.log('getComponent------', componentsOption?.instances?.get(uuid))
-    //             return componentsOption?.instances?.get(uuid);
-    //         }}
-    // }
-    // const component = SimGlobal().data.components;
-    // console.log('component', SimGlobal().data)
     return (target: ConstructorType<any>) => {
-        //default set
         if (!config) {
             config = {}
         }
         if (!config.selector) {
             config.selector = target.name;
         }
-        componentSelectors.set(config.selector.toLowerCase(), target);
         ReflectUtils.defineMetadata(ComponentMetadataKey, config, target);
+        componentSelectors.set(config.selector.toLowerCase(), target);
+        // console.log('component----> target1', target)
+        // console.log('component----> target2', ReflectUtils.getMetadata(ComponentMetadataKey, target))
+        // return class extends target{};
         // return target;
-        return class extends target {
-            __componentInstances =  {}
-        }
+        // return class extends target {
+        //     __componentInstances =  {}
+        // }
     }
 }
 
