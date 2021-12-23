@@ -125,8 +125,8 @@ export class SimpleBootFront extends SimpleApplication {
         return obj;
     }
 
-    public run(): SimpleBootFront {
-        super.run();
+    public run(otherInstanceSim?: Map<ConstructorType<any>, any>): SimpleBootFront {
+        super.run(otherInstanceSim);
         this.initDomRenderScripts();
         this.initDomRenderTargetElements();
 
