@@ -20,6 +20,10 @@ export class LocationUtils {
         return this.queryStringToObject(window.location.search.substring(1));
     }
 
+    static hashQueryParamsObject(window: Window): { [key:string]: string } {
+        return this.queryStringToObject(window.location.hash.split('?').pop() ?? '');
+    }
+
     static pathQueryParams(window: Window): Map<string, string> {
         return this.queryStringToMap(window.location.search.substring(1));
     }

@@ -9,6 +9,8 @@ export class Navigation {
 
     get url(): string {
         const queryParams = this.queryParamsObject;
+        // (reqUrlObj1.searchParams.toString() ? '&'+reqUrlObj1.searchParams.toString() : '' )
+        // 위를 쓸수도있지만 hash 타입도 있기때문에 아래 처럼 순수하게 처리함.
         const queryString = Object.entries(queryParams).map(([key, value]) => `${key}=${value}`).join('&');
         const path = this.path;
         return path + (queryString.length > 0 ? ('?'+queryString) : '');
@@ -38,7 +40,7 @@ export class Navigation {
         if (UrlType.path === this.option.urlType) {
             return LocationUtils.pathQueryParamsObject(this.option.window);
         } else if (UrlType.hash === this.option.urlType) {
-            return LocationUtils.pathQueryParamsObject(this.option.window);
+            return LocationUtils.hashQueryParamsObject(this.option.window);
         } else {
             return {};
         }
