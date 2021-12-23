@@ -88,11 +88,9 @@ export class SimpleBootFront extends SimpleApplication {
 
 
     public regDoneRouteCallBack(callBackObj: OnDoneRoute) {
-        console.log('regDoneRouteCallBack-->', callBackObj)
         this.onDoneRouteSubject.set(callBackObj, []);
     }
     public pushDoneRouteCallBack(callBackObj: OnDoneRoute, param: any) {
-        console.log('pushDoneRouteCallBack-->', callBackObj, param)
         let newVar = this.onDoneRouteSubject.get(callBackObj);
         if (!newVar) {
             newVar = [];
