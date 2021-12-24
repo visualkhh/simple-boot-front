@@ -42,7 +42,11 @@ export class SimpleBootFront extends SimpleApplication {
             targetElements: this.domRenderTargetElements,
             targetAttrs: this.domRenderTargetAttrs,
             onElementInit: (name: string, obj: any, rawSet: RawSet, targetElement: TargetElement) => {
-                targetElement?.__render?.component?.onInit?.(rawSet);
+                if (rawSet.point.thisVariableName) {
+                    targetElement?.__render?.component?.onInit?.(new Proxy(ScriptUtils.evalReturn(rawSet.point.thisVariableName, obj), new DomRenderFinalProxy()));
+                } else {
+                    targetElement?.__render?.component?.onInit?.(rawSet);
+                }
             },
             onAttrInit: (attrName: string, attrValue: string, obj: any, rawSet: RawSet) => {
                 if (attrName === 'component') {
@@ -50,6 +54,11 @@ export class SimpleBootFront extends SimpleApplication {
                     // console.log('--------->', attrName, attrValue, obj);
                     // obj.__domrender_component_creator_variable_name = attrValue;
                     // (bindObj as any)?.onInit?.(DomRenderFinalProxy.final({makerObj: obj, rawSet}) as OnInitParameter);
+                    if (bindObj?.__domrender_component_new?.creator) {
+                        (bindObj as any)?.onInit?.(bindObj?.__domrender_component_new?.creator);
+                    } else {
+                        (bindObj as any)?.onInit();
+                    }
                 }
             },
             scripts: {application: this},
@@ -66,25 +75,27 @@ export class SimpleBootFront extends SimpleApplication {
         };
 
         (this.option.window as any).__dirname = 'simple-boot-front__dirname';
-        // console.log('---sele-->', selectors, this.targetElements)
-        this.domRenderTargetAttrs.push({
-            name: 'component',
-            callBack: (element: Element, attrValue: string, obj: any, rawSet: RawSet) => {
-                // console.log('---?', element, attrValue, obj, rawSet)
+
+        const targetAttribute = RawSet.createComponentTargetAttribute(
+            'component',
+            (element: Element, attrValue: string, obj: any, rawSet: RawSet) => {
+                return ScriptUtils.eval(`return ${attrValue}`, obj);
+            },
+            (element: Element, attrValue: string, obj: any, rawSet: RawSet) => {
+                // console.log('domRenderTargetAttrs---callBack', element, attrValue, obj, rawSet);
+                rawSet.point.thisVariableName = attrValue;
                 if (attrValue) {
                     const targetObj = ScriptUtils.eval(`return ${attrValue}`, obj)
                     const n = element.cloneNode(true) as Element;
-                    // if (targetObj) {
-                    //     targetObj['__domrender_component_new'] = targetObj['__domrender_component_new'] ?? new Proxy({}, new DomRenderFinalProxy());
-                    //     targetObj['__domrender_component_new'].creator_variable_name = attrValue;
-                    // }
                     const innerHTML = this.getComponentInnerHtml(targetObj);
                     n.innerHTML = innerHTML;
+                    return RawSet.drThisCreate(n, attrValue, '', true, obj, this.option);
                 }
-                // (fag as any).__domrender_component_creatorVariableName = attrValue;
-                return this.option.window.document.createDocumentFragment();
+                const fag = this.option.window.document.createDocumentFragment();
+                return fag;
             }
-        });
+        );
+        this.domRenderTargetAttrs.push(targetAttribute);
         option.proxy = {
             onProxy: (it: any) => this.createDomRender(it)
         };
