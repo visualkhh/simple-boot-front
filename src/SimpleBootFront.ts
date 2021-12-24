@@ -168,9 +168,9 @@ export class SimpleBootFront extends SimpleApplication {
             this.routing<SimAtomic, any>(intent).then(it => {
                 this.afterSetting();
                 this.onDoneRouteSubject.forEach((val, key) => {
-                    console.log('doneRoute Subject length->', val.length)
+                    // console.log('doneRoute Subject length->', val.length)
                     while (val.length) {
-                        key.onDoneRoute(val.pop());
+                        key.onDoneRoute(it, val.pop());
                     }
                 });
             });

@@ -1,3 +1,5 @@
+import {RouterModule} from 'simple-boot-core/route/RouterModule';
+
 export interface OnDoneRoute {
-    onDoneRoute(param: any): void
+    onDoneRoute(routerModule: RouterModule, param: any): void
 }
