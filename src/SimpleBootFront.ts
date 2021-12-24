@@ -48,7 +48,8 @@ export class SimpleBootFront extends SimpleApplication {
                 if (attrName === 'component') {
                     const bindObj = ScriptUtils.evalReturn(attrValue, obj);
                     // console.log('--------->', attrName, attrValue, obj);
-                    (bindObj as any)?.onInit?.(DomRenderFinalProxy.final({makerObj: obj, rawSet}) as OnInitParameter);
+                    // obj.__domrender_component_creator_variable_name = attrValue;
+                    // (bindObj as any)?.onInit?.(DomRenderFinalProxy.final({makerObj: obj, rawSet}) as OnInitParameter);
                 }
             },
             scripts: {application: this},
@@ -70,15 +71,18 @@ export class SimpleBootFront extends SimpleApplication {
             name: 'component',
             callBack: (element: Element, attrValue: string, obj: any, rawSet: RawSet) => {
                 // console.log('---?', element, attrValue, obj, rawSet)
-                const fag = this.option.window.document.createDocumentFragment();
                 if (attrValue) {
                     const targetObj = ScriptUtils.eval(`return ${attrValue}`, obj)
                     const n = element.cloneNode(true) as Element;
+                    // if (targetObj) {
+                    //     targetObj['__domrender_component_new'] = targetObj['__domrender_component_new'] ?? new Proxy({}, new DomRenderFinalProxy());
+                    //     targetObj['__domrender_component_new'].creator_variable_name = attrValue;
+                    // }
                     const innerHTML = this.getComponentInnerHtml(targetObj);
                     n.innerHTML = innerHTML;
-                    fag.append(RawSet.drThisCreate(n, attrValue, '', true, obj, this.option));
                 }
-                return fag;
+                // (fag as any).__domrender_component_creatorVariableName = attrValue;
+                return this.option.window.document.createDocumentFragment();
             }
         });
         option.proxy = {
@@ -143,19 +147,13 @@ export class SimpleBootFront extends SimpleApplication {
             // console.log('onInit-----?', val);
             (val as any)?.onInit?.();
         }
-
-        // new Event('mouseleave', { bubbles: true, cancelable: true });
         this.option.window.addEventListener('intent', (event) => {
             const cevent = event as CustomEvent
             this.publishIntent(new Intent(cevent.detail.uri, cevent.detail.data, event));
         });
 
         this.option.window.addEventListener('popstate', (event) => {
-            // const intent = new Intent(this.navigation.path ?? '');
             const intent = new Intent(this.navigation.url ?? '');
-            // this.simstanceManager.getSimAtomics().filter(it => it.getConfig(RouterMetadataKey)).forEach(it => {
-            //     console.log('--------------', it)
-            // })
             this.routing<SimAtomic, any>(intent).then(it => {
                 this.afterSetting();
                 this.onDoneRouteSubject.forEach((val, key) => {
