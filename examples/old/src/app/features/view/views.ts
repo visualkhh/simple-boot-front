@@ -18,7 +18,7 @@ export class Views {
     }
 
     onInit() {
-        console.log('-->', this.routerManager.activeRouterModule)
+       // console.log('-->', this.routerManager.activeRouterModule)
     }
 
     click() {

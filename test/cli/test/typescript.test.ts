@@ -21,7 +21,7 @@ describe('typescript', () => {
         // var arr = it.match(regExp);
 
         const s = it.replace(regExp, 'zz$1fffff');
-        console.log('-->', s)
+        //console.log('-->', s)
         done()
     })
 

@@ -35,7 +35,7 @@ export class SimpleBootFront extends SimpleApplication {
     public domRenderTargetAttrs: TargetAttr[] = [];
     public onDoneRouteSubject = new Map<OnDoneRoute, any[]>();
     public domRenderConfig: Config;
-    // public elementAndComponent
+    public elementAndComponentOnInitFirstCheckMakers: FirstCheckMaker[] = [];
 
     constructor(public rootRouter: ConstructorType<any>, public option: SimFrontOption) {
         super(rootRouter, option);
@@ -46,30 +46,33 @@ export class SimpleBootFront extends SimpleApplication {
             onElementInit: (name: string, obj: any, rawSet: RawSet, targetElement: TargetElement) => {
                 const target = targetElement?.__render?.component;
                 const targetKey = 'onInit';
-                const firstCheckMaker: FirstCheckMaker = (type: ConstructorType<any>, idx: number, saveInjectionConfig?: SaveInjectConfig) => {
+                const firstCheckMaker: FirstCheckMaker[] = [(ownerObj: {target: Object, targetKey?: string | symbol}, type: ConstructorType<any>, idx: number, saveInjectionConfig?: SaveInjectConfig) => {
                     if (InjectFrontSituationType.OPENER === saveInjectionConfig?.config.situationType && rawSet.point.thisVariableName){
+                        console.log('---opener--?', saveInjectionConfig, obj)
                         return new Proxy(ScriptUtils.evalReturn(rawSet.point.thisVariableName, obj), new DomRenderFinalProxy())
                     }
-                }
+                }]
                 if (rawSet.point.thisVariableName) {
-                    target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey, firstCheckMaker: [firstCheckMaker]}));
+                    target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey, firstCheckMaker: firstCheckMaker.concat(this.elementAndComponentOnInitFirstCheckMakers)}));
+                    // target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey}));
                 } else {
-                    target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey, firstCheckMaker: [firstCheckMaker]}));
+                    target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey, firstCheckMaker: firstCheckMaker.concat(this.elementAndComponentOnInitFirstCheckMakers)}));
+                    // target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey}));
                 }
             },
             onAttrInit: (attrName: string, attrValue: string, obj: any, rawSet: RawSet) => {
                 if (attrName === 'component') {
                     const target = ScriptUtils.evalReturn(attrValue, obj) as any;
                     const targetKey = 'onInit';
-                    const firstCheckMaker: FirstCheckMaker = (type: ConstructorType<any>, idx: number, saveInjectionConfig?: SaveInjectConfig) => {
+                    const firstCheckMaker: FirstCheckMaker[] = [(obj: {target: Object, targetKey?: string | symbol}, type: ConstructorType<any>, idx: number, saveInjectionConfig?: SaveInjectConfig) => {
                         if (InjectFrontSituationType.OPENER === saveInjectionConfig?.config.situationType && target?.__domrender_component_new?.creator){
                             return target?.__domrender_component_new?.creator;
                         }
-                    }
+                    }];
                     if (rawSet.point.thisVariableName) {
-                        target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey, firstCheckMaker: [firstCheckMaker]}));
+                        target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey, firstCheckMaker: firstCheckMaker.concat(this.elementAndComponentOnInitFirstCheckMakers)}));
                     } else {
-                        target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey, firstCheckMaker: [firstCheckMaker]}));
+                        target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey, firstCheckMaker: firstCheckMaker.concat(this.elementAndComponentOnInitFirstCheckMakers)}));
                     }
                 }
             },

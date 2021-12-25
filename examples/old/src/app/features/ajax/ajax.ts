@@ -31,7 +31,7 @@ export class Ajax implements OnInit {
     // }
 
     goo(intent: Intent) {
-        console.log('-->', intent)
+        // console.log('-->', intent)
     }
 
     loadData() {
