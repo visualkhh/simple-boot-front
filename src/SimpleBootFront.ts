@@ -22,10 +22,11 @@ import { ScriptUtils } from 'dom-render/utils/script/ScriptUtils';
 import { RawSet, Render } from 'dom-render/RawSet';
 import { Config, TargetElement, TargetAttr } from 'dom-render/Config';
 import { ScriptRunnable } from 'script/ScriptRunnable';
-import { RouterMetadataKey } from 'simple-boot-core/decorators/SimDecorator';
-import { OnInitParameter } from 'lifecycle/OnInit';
 import { DomRenderFinalProxy } from 'dom-render/types/Types';
 import { OnDoneRoute } from './route/OnDoneRoute';
+import { SaveInjectConfig } from 'simple-boot-core/decorators/inject/Inject';
+import { InjectFrontSituationType } from './decorators/inject/InjectFrontSituationType';
+import { FirstCheckMaker } from 'simple-boot-core/simstance/SimstanceManager';
 
 export class SimpleBootFront extends SimpleApplication {
     navigation!: Navigation;
@@ -34,6 +35,7 @@ export class SimpleBootFront extends SimpleApplication {
     public domRenderTargetAttrs: TargetAttr[] = [];
     public onDoneRouteSubject = new Map<OnDoneRoute, any[]>();
     public domRenderConfig: Config;
+    // public elementAndComponent
 
     constructor(public rootRouter: ConstructorType<any>, public option: SimFrontOption) {
         super(rootRouter, option);
@@ -42,22 +44,32 @@ export class SimpleBootFront extends SimpleApplication {
             targetElements: this.domRenderTargetElements,
             targetAttrs: this.domRenderTargetAttrs,
             onElementInit: (name: string, obj: any, rawSet: RawSet, targetElement: TargetElement) => {
+                const target = targetElement?.__render?.component;
+                const targetKey = 'onInit';
+                const firstCheckMaker: FirstCheckMaker = (type: ConstructorType<any>, idx: number, saveInjectionConfig?: SaveInjectConfig) => {
+                    if (InjectFrontSituationType.OPENER === saveInjectionConfig?.config.situationType && rawSet.point.thisVariableName){
+                        return new Proxy(ScriptUtils.evalReturn(rawSet.point.thisVariableName, obj), new DomRenderFinalProxy())
+                    }
+                }
                 if (rawSet.point.thisVariableName) {
-                    targetElement?.__render?.component?.onInit?.(new Proxy(ScriptUtils.evalReturn(rawSet.point.thisVariableName, obj), new DomRenderFinalProxy()));
+                    target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey, firstCheckMaker: [firstCheckMaker]}));
                 } else {
-                    targetElement?.__render?.component?.onInit?.(rawSet);
+                    target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey, firstCheckMaker: [firstCheckMaker]}));
                 }
             },
             onAttrInit: (attrName: string, attrValue: string, obj: any, rawSet: RawSet) => {
                 if (attrName === 'component') {
-                    const bindObj = ScriptUtils.evalReturn(attrValue, obj);
-                    // console.log('--------->', attrName, attrValue, obj);
-                    // obj.__domrender_component_creator_variable_name = attrValue;
-                    // (bindObj as any)?.onInit?.(DomRenderFinalProxy.final({makerObj: obj, rawSet}) as OnInitParameter);
-                    if (bindObj?.__domrender_component_new?.creator) {
-                        (bindObj as any)?.onInit?.(bindObj?.__domrender_component_new?.creator);
+                    const target = ScriptUtils.evalReturn(attrValue, obj) as any;
+                    const targetKey = 'onInit';
+                    const firstCheckMaker: FirstCheckMaker = (type: ConstructorType<any>, idx: number, saveInjectionConfig?: SaveInjectConfig) => {
+                        if (InjectFrontSituationType.OPENER === saveInjectionConfig?.config.situationType && target?.__domrender_component_new?.creator){
+                            return target?.__domrender_component_new?.creator;
+                        }
+                    }
+                    if (rawSet.point.thisVariableName) {
+                        target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey, firstCheckMaker: [firstCheckMaker]}));
                     } else {
-                        (bindObj as any)?.onInit();
+                        target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey, firstCheckMaker: [firstCheckMaker]}));
                     }
                 }
             },

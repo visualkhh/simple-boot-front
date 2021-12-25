@@ -4,5 +4,5 @@ export type OnInitParameter = {
     rawSet: RawSet;
 }
 export interface OnInit {
-    onInit(parameter?: OnInitParameter): void;
+    onInit(...data: any): any;
 }
