@@ -97,7 +97,7 @@ export class SimpleBootFront extends SimpleApplication {
             },
             (element: Element, attrValue: string, obj: any, rawSet: RawSet) => {
                 // console.log('domRenderTargetAttrs---callBack', element, attrValue, obj, rawSet);
-                rawSet.point.thisVariableName = attrValue;
+                // rawSet.point.thisVariableName = attrValue;
                 if (attrValue) {
                     const targetObj = ScriptUtils.eval(`return ${attrValue}`, obj)
                     const n = element.cloneNode(true) as Element;
