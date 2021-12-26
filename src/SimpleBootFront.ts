@@ -35,7 +35,7 @@ export class SimpleBootFront extends SimpleApplication {
     public domRenderTargetAttrs: TargetAttr[] = [];
     public onDoneRouteSubject = new Map<OnDoneRoute, any[]>();
     public domRenderConfig: Config;
-    public elementAndComponentOnInitFirstCheckMakers: FirstCheckMaker[] = [];
+    // public elementAndComponentOnInitFirstCheckMakers: FirstCheckMaker[] = [];
 
     constructor(public rootRouter: ConstructorType<any>, public option: SimFrontOption) {
         super(rootRouter, option);
@@ -48,15 +48,14 @@ export class SimpleBootFront extends SimpleApplication {
                 const targetKey = 'onInit';
                 const firstCheckMaker: FirstCheckMaker[] = [(ownerObj: {target: Object, targetKey?: string | symbol}, type: ConstructorType<any>, idx: number, saveInjectionConfig?: SaveInjectConfig) => {
                     if (InjectFrontSituationType.OPENER === saveInjectionConfig?.config.situationType && rawSet.point.thisVariableName){
-                        console.log('---opener--?', saveInjectionConfig, obj)
                         return new Proxy(ScriptUtils.evalReturn(rawSet.point.thisVariableName, obj), new DomRenderFinalProxy())
                     }
                 }]
                 if (rawSet.point.thisVariableName) {
-                    target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey, firstCheckMaker: firstCheckMaker.concat(this.elementAndComponentOnInitFirstCheckMakers)}));
+                    target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey, firstCheckMaker: firstCheckMaker})); // .concat(this.elementAndComponentOnInitFirstCheckMakers)
                     // target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey}));
                 } else {
-                    target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey, firstCheckMaker: firstCheckMaker.concat(this.elementAndComponentOnInitFirstCheckMakers)}));
+                    target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey, firstCheckMaker: firstCheckMaker})); // .concat(this.elementAndComponentOnInitFirstCheckMakers)
                     // target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey}));
                 }
             },
@@ -70,9 +69,9 @@ export class SimpleBootFront extends SimpleApplication {
                         }
                     }];
                     if (rawSet.point.thisVariableName) {
-                        target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey, firstCheckMaker: firstCheckMaker.concat(this.elementAndComponentOnInitFirstCheckMakers)}));
+                        target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey, firstCheckMaker: firstCheckMaker})); // .concat(this.elementAndComponentOnInitFirstCheckMakers)
                     } else {
-                        target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey, firstCheckMaker: firstCheckMaker.concat(this.elementAndComponentOnInitFirstCheckMakers)}));
+                        target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey, firstCheckMaker: firstCheckMaker})); // .concat(this.elementAndComponentOnInitFirstCheckMakers)
                     }
                 }
             },
