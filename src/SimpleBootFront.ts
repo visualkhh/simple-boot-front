@@ -245,7 +245,15 @@ export class SimpleBootFront extends SimpleApplication {
             const component = getComponent(val);
             const items = RawSet.createComponentTargetElement(
                 name,
-                (e, o, r) => {
+                (e, obj, r) => {
+                    // const parameter = e.getAttribute('dr-on-constructor-params');
+                    // const params = new Map<ConstructorType<any>, any>();
+                    // if (parameter) {
+                    //     (ScriptUtils.evalReturn(parameter, obj) as any[])?.forEach((val) => {
+                    //         params.set(val.constructor, val);
+                    //     });
+                    // }
+                    // const newSim = this.simstanceManager.newSim(val, undefined, params);
                     const newSim = this.simstanceManager.newSim(val);
                     // newSim?.onInit?.();
                     return newSim
