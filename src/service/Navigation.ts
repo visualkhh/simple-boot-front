@@ -4,7 +4,7 @@ import {LocationUtils} from '../utils/window/LocationUtils';
 
 @Sim()
 export class Navigation {
-    constructor(private option: SimFrontOption) {
+    constructor(public option: SimFrontOption) {
     }
 
     get url(): string {
