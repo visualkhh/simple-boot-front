@@ -23,17 +23,17 @@ import { RawSet, Render } from 'dom-render/RawSet';
 import { Config, TargetElement, TargetAttr } from 'dom-render/Config';
 import { ScriptRunnable } from 'script/ScriptRunnable';
 import { DomRenderFinalProxy } from 'dom-render/types/Types';
-import { OnDoneRoute } from './route/OnDoneRoute';
 import { SaveInjectConfig } from 'simple-boot-core/decorators/inject/Inject';
 import { InjectFrontSituationType } from './decorators/inject/InjectFrontSituationType';
 import { FirstCheckMaker } from 'simple-boot-core/simstance/SimstanceManager';
+import { RouterModule } from 'simple-boot-core/route/RouterModule';
 
 export class SimpleBootFront extends SimpleApplication {
     navigation!: Navigation;
     public domRendoerExcludeProxy = [SimpleApplication, IntentManager, RouterManager, SimstanceManager, SimFrontOption, Navigation, ViewService, HttpService, HTMLElement];
     public domRenderTargetElements: TargetElement[] = [];
     public domRenderTargetAttrs: TargetAttr[] = [];
-    public onDoneRouteSubject = new Map<OnDoneRoute, any[]>();
+    // public onDoneRouteSubject = new Map<OnDoneRoute, any[]>();
     public domRenderConfig: Config;
     // public elementAndComponentOnInitFirstCheckMakers: FirstCheckMaker[] = [];
 
@@ -116,17 +116,17 @@ export class SimpleBootFront extends SimpleApplication {
     }
 
 
-    public regDoneRouteCallBack(callBackObj: OnDoneRoute) {
-        this.onDoneRouteSubject.set(callBackObj, []);
-    }
-    public pushDoneRouteCallBack(callBackObj: OnDoneRoute, param: any) {
-        let newVar = this.onDoneRouteSubject.get(callBackObj);
-        if (!newVar) {
-            newVar = [];
-            this.onDoneRouteSubject.set(callBackObj, newVar);
-        }
-        newVar?.push(param);
-    }
+    // public regDoneRouteCallBack(callBackObj: OnDoneRoute) {
+    //     this.onDoneRouteSubject.set(callBackObj, []);
+    // }
+    // public pushDoneRouteCallBack(callBackObj: OnDoneRoute, param: any) {
+    //     let newVar = this.onDoneRouteSubject.get(callBackObj);
+    //     if (!newVar) {
+    //         newVar = [];
+    //         this.onDoneRouteSubject.set(callBackObj, newVar);
+    //     }
+    //     newVar?.push(param);
+    // }
     // public removeDoneRouteCallBack(callBackObj: OnDoneRoute, param: any) {
     //     let newVar = this.onDoneRouteSubject.get(callBackObj);
     //     if (newVar) {
@@ -152,7 +152,7 @@ export class SimpleBootFront extends SimpleApplication {
         return obj;
     }
 
-    public run(otherInstanceSim?: Map<ConstructorType<any>, any>): SimpleBootFront {
+    private initRun(otherInstanceSim?: Map<ConstructorType<any>, any>) {
         super.run(otherInstanceSim);
         this.initDomRenderScripts();
         this.initDomRenderTargetElements();
@@ -181,15 +181,30 @@ export class SimpleBootFront extends SimpleApplication {
             const intent = new Intent(this.navigation.url ?? '');
             this.routing<SimAtomic, any>(intent).then(it => {
                 this.afterSetting();
-                this.onDoneRouteSubject.forEach((val, key) => {
-                    // console.log('doneRoute Subject length->', val.length)
-                    while (val.length) {
-                        key.onDoneRoute(it, val.pop());
-                    }
-                });
+                // this.onDoneRouteSubject.forEach((val, key) => {
+                //     // console.log('doneRoute Subject length->', val.length)
+                //     while (val.length) {
+                //         key.onDoneRoute(it, val.pop());
+                //     }
+                // });
             });
         });
 
+    }
+    async runRouting(otherInstanceSim?: Map<ConstructorType<any>, any>): Promise<RouterModule<SimAtomic<Object>, any>> {
+        this.initRun(otherInstanceSim);
+        const intent = new Intent(this.navigation.url ?? '');
+        const data = await this.routing<SimAtomic, any>(intent);
+        this.afterSetting();
+        return data;
+        // this.onDoneRouteSubject.forEach((val, key) => {
+        //     while (val.length) {
+        //         key.onDoneRoute(data, val.pop());
+        //     }
+        // });
+    }
+    public run(otherInstanceSim?: Map<ConstructorType<any>, any>): SimpleBootFront {
+        this.initRun(otherInstanceSim);
         this.option.window.dispatchEvent(new Event('popstate'));
         return this;
     }
