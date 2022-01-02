@@ -163,7 +163,7 @@ export class SimpleBootFront extends SimpleApplication {
         const target = this.option.window.document.querySelector(this.option.selector)
         if (target && routerAtomic.value) {
             const component = routerAtomic.getConfig<ComponentConfig>(ComponentMetadataKey)
-            const template = this.option.window.document.createElement('template')
+            // const template = this.option.window.document.createElement('template')
             const styles = (component?.styles?.map(it => `<style>${it}</style>`) ?? []).join(' ')
             target.innerHTML = `${styles} ${component?.template ?? ''}`;
             const val = routerAtomic.value;
@@ -248,7 +248,9 @@ export class SimpleBootFront extends SimpleApplication {
                 }
                 const render = this.__render as Render;
                 const scriptRunnable = obj as ScriptRunnable;
-                scriptRunnable.rawSets.set(render.rawset, this);
+                if (render.rawset) {
+                    scriptRunnable.rawSets.set(render.rawset, this);
+                }
                 return scriptRunnable.run(...args);
             }
         })
