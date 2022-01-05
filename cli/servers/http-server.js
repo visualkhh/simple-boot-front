@@ -1,7 +1,7 @@
 
 import fs from 'fs'
 import path from 'path';
-import http, {ServerOptions} from 'http';
+import http from 'http';
 import httpProxy from 'http-proxy';
 import mime from 'mime-types'
 import WebSocket, { WebSocketServer } from 'ws';
