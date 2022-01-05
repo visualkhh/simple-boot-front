@@ -62,6 +62,7 @@ function printHelp() {
     if (isChoiceMode === false || argv.has(MODE_SERVE)) {
         console.log(`\t${MODE_SERVE}\thttp server and proxy`)
         console.log(`\t  --path\tdist path`)
+        console.log(`\t  --host\tserver host (default: localhost)`)
         console.log(`\t  --port\tserver port`)
         console.log(`\t  --proxy\tproxy url`)
         console.log(`\t  --bundle\tex)rollup`)

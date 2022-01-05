@@ -1,10 +1,10 @@
 
 import fs from 'fs'
 import path from 'path';
-import http from 'http';
+import http, {ServerOptions} from 'http';
 import httpProxy from 'http-proxy';
 import mime from 'mime-types'
-import WebSocket from 'ws';
+import WebSocket, { WebSocketServer } from 'ws';
 import {getDirectory, watch} from '../utils/FileUtils.js';
 
 
@@ -15,6 +15,7 @@ export const httpServer = (argv) => {
     console.log('port', argv.port);
     console.log('proxy', argv.proxy);
     console.log('watch', argv.watch);
+    console.log('host', argv.host);
 // console.log(__dirname)
 // console.log(path.join(__dirname,'/zz/asd.jpg'))
 // console.log(path.dirname("/foo/bar/baz/asdf/image.png"))
@@ -83,10 +84,10 @@ export const httpServer = (argv) => {
                 res.end();
             }
         }
-    }).listen(argv.port);
+    }).listen(argv.port, argv.host ? argv.host : 'localhost');
 
     if (argv.watch) {
-        const wss = new WebSocket.Server({port: argv.port+1});
+        const wss = new WebSocketServer({port: argv.port+1});
 
         let start = Date.now();
         const directorys = getDirectory(webDirPath, [webDirPath]);
