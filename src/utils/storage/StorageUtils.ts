@@ -1,6 +1,9 @@
 export class StorageUtils {
 
-    public static setLocalStorageItem(k: string, v: string, window: Window) {
+    public static setLocalStorageItem(k: string, v: string | any, window: Window) {
+        if (typeof v === 'object') {
+            v = JSON.stringify(v);
+        }
         window.localStorage.setItem(k, v);
     }
 
