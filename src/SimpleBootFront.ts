@@ -166,7 +166,7 @@ export class SimpleBootFront extends SimpleApplication {
             // const template = this.option.window.document.createElement('template')
             const styles = (component?.styles?.map(it => `<style>${it}</style>`) ?? []).join(' ')
             target.innerHTML = `${styles} ${component?.template ?? ''}`;
-            const val = routerAtomic.value;
+            const val = routerAtomic.value as any;
             const domRenderProxy = val._DomRender_proxy as DomRenderProxy<any>
             domRenderProxy.initRender(target);
             // console.log('onInit-----?', val);
@@ -189,10 +189,21 @@ export class SimpleBootFront extends SimpleApplication {
                 // });
             });
         });
-
     }
-    async runRouting(otherInstanceSim?: Map<ConstructorType<any>, any>): Promise<RouterModule<SimAtomic<Object>, any>> {
+
+    async goRouting(url: string) {
+        this.navigation.go(url);
+        const intent = new Intent(this.navigation.url ?? '');
+        const data = await this.routing<SimAtomic, any>(intent);
+        this.afterSetting();
+        return data;
+    }
+
+    async runRouting(otherInstanceSim?: Map<ConstructorType<any>, any>, url?: string): Promise<RouterModule<SimAtomic<Object>, any>> {
         this.initRun(otherInstanceSim);
+        if (url) {
+            this.navigation.go(url);
+        }
         const intent = new Intent(this.navigation.url ?? '');
         const data = await this.routing<SimAtomic, any>(intent);
         this.afterSetting();
@@ -203,8 +214,11 @@ export class SimpleBootFront extends SimpleApplication {
         //     }
         // });
     }
-    public run(otherInstanceSim?: Map<ConstructorType<any>, any>): SimpleBootFront {
+    public run(otherInstanceSim?: Map<ConstructorType<any>, any>, url?: string): SimpleBootFront {
         this.initRun(otherInstanceSim);
+        if (url) {
+            this.navigation.go(url);
+        }
         this.option.window.dispatchEvent(new Event('popstate'));
         return this;
     }
