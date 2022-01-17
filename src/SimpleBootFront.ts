@@ -191,9 +191,9 @@ export class SimpleBootFront extends SimpleApplication {
         });
     }
 
-    routing<R = SimAtomic, M = any>(intent: Intent) {
-        return super.routing<R, M>(intent);
-    }
+    // routing<R = SimAtomic, M = any>(intent: Intent) {
+    //     return super.routing<R, M>(intent);
+    // }
 
     async goRouting(url: string) {
         this.navigation.go(url);
