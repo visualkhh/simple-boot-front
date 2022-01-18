@@ -24,7 +24,11 @@ export class StorageUtils {
     public static getLocalStorageJsonItem<T>(k: string, window: Window): T | undefined {
         const item = window.localStorage.getItem(k);
         if (item) {
-            return JSON.parse(item);
+            try{
+                return JSON.parse(item);
+            } catch (e) {
+                return undefined;
+            }
         } else {
             return undefined;
         }
