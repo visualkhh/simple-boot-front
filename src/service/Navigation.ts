@@ -1,6 +1,6 @@
 import {Sim} from 'simple-boot-core/decorators/SimDecorator'
 import {SimFrontOption, UrlType} from '../option/SimFrontOption';
-import {LocationUtils} from '../utils/window/LocationUtils';
+import {LocationUtils} from 'dom-render/utils/location/LocationUtils';
 
 @Sim()
 export class Navigation {

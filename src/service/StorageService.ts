@@ -1,6 +1,6 @@
 import { Sim } from 'simple-boot-core/decorators/SimDecorator';
 import { SimFrontOption } from '../option/SimFrontOption';
-import { StorageUtils } from '../utils/storage/StorageUtils';
+import { StorageUtils } from 'dom-render/utils/storage/StorageUtils';
 
 @Sim()
 export class StorageService {
