@@ -196,17 +196,21 @@ export class SimpleBootFront extends SimpleApplication {
     // }
 
     async goRouting(url: string) {
-        this.navigation.go(url);
+        // console.time('goRouting')
+        this.navigation.goNoPopStateEvent(url);
         const intent = new Intent(this.navigation.url ?? '');
+        // console.timeEnd('goRouting')
+        // console.time('goRouting--')
         const data = await this.routing<SimAtomic, any>(intent);
         this.afterSetting();
+        // console.timeEnd('goRouting--')
         return data;
     }
 
     async runRouting(otherInstanceSim?: Map<ConstructorType<any>, any>, url?: string): Promise<RouterModule<SimAtomic<Object>, any>> {
         this.initRun(otherInstanceSim);
         if (url) {
-            this.navigation.go(url);
+            this.navigation.goNoPopStateEvent(url);
         }
         const intent = new Intent(this.navigation.url ?? '');
         const data = await this.routing<SimAtomic, any>(intent);

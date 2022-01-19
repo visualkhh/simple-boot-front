@@ -13,7 +13,7 @@ export class Navigation {
         // 위를 쓸수도있지만 hash 타입도 있기때문에 아래 처럼 순수하게 처리함.
         const queryString = Object.entries(queryParams).map(([key, value]) => `${key}=${value}`).join('&');
         const path = this.path;
-        return path + (queryString.length > 0 ? ('?'+queryString) : '');
+        return path + (queryString.length > 0 ? ('?' + queryString) : '');
     }
 
     get path(): string {
@@ -58,13 +58,17 @@ export class Navigation {
         return this.option.window.location.pathname + this.option.window.location.search;
     }
 
-    go(path: string, data: any = {}, title = '') {
+    goNoPopStateEvent(path: string, data: any = {}, title = '') {
         if (UrlType.path === this.option.urlType) {
             this.option.window.history.pushState(data, title, path)
         } else if (UrlType.hash === this.option.urlType) {
             path = '#' + path.substring(1)
             this.option.window.history.pushState(data, title, path)
         }
+    }
+
+    go(path: string, data: any = {}, title = '') {
+        this.goNoPopStateEvent(path, data, title);
         this.option.window.dispatchEvent(new Event('popstate'));
         // window.dispatchEvent(new Event('pushstate'));
         // window.dispatchEvent(new Event('locationchange'));
