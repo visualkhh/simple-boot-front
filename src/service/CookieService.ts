@@ -33,8 +33,8 @@ export class CookieService {
         }
     }
 
-    delete(name: string) {
-        this.option.window.document.cookie = name + '=; expires=Thu, 01 Jan 1999 00:00:10 GMT;';
+    delete(name: string, path = '/') {
+        this.option.window.document.cookie = name + '=; expires=Thu, 01 Jan 1999 00:00:10 GMT;' + ` path=${path}`;
     }
 
 }
