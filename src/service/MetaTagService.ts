@@ -7,6 +7,14 @@ export class MetaTagService {
     constructor(public option: SimFrontOption) {
     }
 
+    /*
+        <meta property="og:url" content="공유시 이동 url">
+        <meta property="og:title" content="공유시 보여질 제목">
+        <meta property="og:type" content="website">
+        <meta property="og:image" content="공유시 보여질 이미지 경로">
+        <meta property="og:description" content="공유시 보여질 설명">
+        // this.metaTagService.setMetaTag('meta[property="og:image"]', {content: atData.url ?? '/assets/images/guest-pet.png'})
+     */
     setMetaTag(selector: string, set: {[key:string]: string}) {
         const target = this.option.window.document.querySelector(selector);
         if (!target) {
