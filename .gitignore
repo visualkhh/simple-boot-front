@@ -269,9 +269,9 @@ gradle-app.setting
 /**/dist/
 /templates/parcel-bundler/dist/
 /cli/lib/
-/libs/
-/libs/**
 /src/package.json
 /create/lib/
 /examples/ssr/dist-server/
 /examples/ssr/dist-front/
+/libs/dist-dom-render/
+/libs/dist-simple-boot-core/

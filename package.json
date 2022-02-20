@@ -77,8 +77,8 @@
     "typescript": "^4.4.3"
   },
   "dependencies": {
-    "dom-render": "file:../dist-dom-render",
     "reflect-metadata": "^0.1.13",
-    "simple-boot-core": "file:../dist-simple-boot-core"
+    "dom-render": "file:libs/dist-dom-render",
+    "simple-boot-core": "file:libs/dist-simple-boot-core"
   }
 }

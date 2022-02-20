@@ -1,12 +1,11 @@
 #!/usr/bin/env node
 
-
 'use strict';
 import optimist from 'optimist';
 import {httpServer} from './servers/http-server.js';
 import {rollupBuild} from './builds/rollup-build.js';
 import CreateSvelteCmd from 'create-simple-boot-front'
-import {execute} from "./execute/execute.js";
+import {execute} from './execute/execute.js';
 // import {ggg} from './http-server'
 const argv = optimist.check((f) => {
     f.has = (key) => {
@@ -20,14 +19,11 @@ const argv = optimist.check((f) => {
     .describe('serve', 'server')
     .argv;
 
-
-
 const MODE_SERVE = 'serve'
 const MODE_CREATE = 'create'
 const MODE_EXEC = 'exec'
 const MODE_ROLLUP_BUILD = 'rollup-build'
 const MODES = [MODE_SERVE, MODE_CREATE, MODE_ROLLUP_BUILD, MODE_EXEC];
-
 
 if (argv.help) {
     printHelp();
@@ -38,7 +34,6 @@ if (argv.argv) {
     console.log(argv);
 }
 execute(argv);
-
 
 if (argv.has(MODE_SERVE)) {
     if (argv.bundle === 'rollup') {
@@ -55,18 +50,17 @@ if (argv.has(MODE_SERVE)) {
     printHelp();
 }
 
-
 function printHelp() {
     let isChoiceMode = false;
     MODES.forEach(it => isChoiceMode = isChoiceMode || argv.has(it))
     if (isChoiceMode === false || argv.has(MODE_SERVE)) {
         console.log(`\t${MODE_SERVE}\thttp server and proxy`)
-        console.log(`\t  --path\tdist path`)
-        console.log(`\t  --host\tserver host (default: localhost)`)
-        console.log(`\t  --port\tserver port`)
-        console.log(`\t  --proxy\tproxy url`)
-        console.log(`\t  --bundle\tex)rollup`)
-        console.log(`\t  --watch\tfileChange browser refresh`)
+        console.log('\t  --path\tdist path')
+        console.log('\t  --host\tserver host (default: localhost)')
+        console.log('\t  --port\tserver port')
+        console.log('\t  --proxy\tproxy url')
+        console.log('\t  --bundle\tex)rollup')
+        console.log('\t  --watch\tfileChange browser refresh')
     }
     console.log('');
     if (isChoiceMode === false || argv.has(MODE_CREATE)) {
@@ -75,12 +69,12 @@ function printHelp() {
     console.log('');
     if (isChoiceMode === false || argv.has(MODE_ROLLUP_BUILD)) {
         console.log(`\t${MODE_ROLLUP_BUILD}\trollup bundle`)
-        console.log(`\t  --config\trollup config path`)
-        console.log(`\t  --watch\trollup watch`)
+        console.log('\t  --config\trollup config path')
+        console.log('\t  --watch\trollup watch')
     }
     console.log('');
     if (isChoiceMode === false || argv.has(MODE_EXEC)) {
         console.log(`\t${MODE_EXEC}\tExecuting Shell Commands (child-process)`)
-        console.log(`\t  --cmd\tcopmmands ... (multiple)`)
+        console.log('\t  --cmd\tcopmmands ... (multiple)')
     }
 }

@@ -1,0 +1,56 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "target": "es5",
+    "module": "ES2015",
+    "strict": true,
+    "moduleResolution": "node",                  /* Specify module resolution strategy: 'node' (Node.js) or 'classic' (TypeScript pre-1.6). */
+    "esModuleInterop": true,
+    "experimentalDecorators": true,              /* Enables experimental support for ES7 decorators. */
+    "emitDecoratorMetadata": true,               /* Enables experimental support for emitting type metadata for decorators. */
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "baseUrl": "src",
+    "typeRoots": ["./node_modules/@types", "./types", "jest"],
+    "types" : ["jest", "node", "index", "rxjs"],
+//    "typeRoots": ["./node_modules/@types", "./types",  "node_modules/reflect-metadata" ,"jest"],
+//    "types": ["node", "reflect-metadata",  "jest"],
+    "paths": {
+      "@server/*": ["../server/*"],
+      "@front/*": ["../front/*"],
+      "@src/*": ["../src/*"],
+      "@generate/*": ["../generate/*"],
+//      "simple-boot-core/*": ["../../libs/simple-boot-core/src/*"],
+//      "simple-boot-front/*": ["../../libs/simple-boot-front/src/*"],
+//      "simple-boot-http-ssr/*": ["../../libs/simple-boot-http-ssr/src/*"],
+//      "dom-render/*": ["../../libs/dom-render/src/*"],
+    },
+    "lib": [
+      "dom",
+      "es5",
+      "es2017",
+      "scripthost",
+      "es2015.proxy",
+      "es2015.collection"
+    ]
+  },
+  "exclude": [
+    "bin",
+    "example",
+    "examples",
+    "rollup.config.js",
+    "rollup.**.config.js",
+    "test",
+    "cli",
+    "tsconfig**.json",
+    "ormconfig**.json",
+    "assets",
+    "test-cli",
+    "**/*.test.ts",
+    "dist",
+    "dist-server",
+    "dist-front"
+  ]
+}

@@ -4,31 +4,31 @@ import path from 'path';
 import http from 'http';
 import httpProxy from 'http-proxy';
 import mime from 'mime-types'
-import WebSocket, { WebSocketServer } from 'ws';
+// import WebSocket, { WebSocketServer } from 'ws';
+import WebSocket from 'ws';
 import {getDirectory, watch} from '../utils/FileUtils.js';
 
-
 export const httpServer = (argv) => {
-    const webDirPath = path.resolve(argv.path); //path.join(__dirname, argv.path);
+    const webDirPath = path.resolve(argv.path); // path.join(__dirname, argv.path);
     console.log('localDist', webDirPath);
     console.log('serve', 'http://localhost:' + argv.port);
     console.log('port', argv.port);
     console.log('proxy', argv.proxy);
     console.log('watch', argv.watch);
     console.log('host', argv.host);
-// console.log(__dirname)
-// console.log(path.join(__dirname,'/zz/asd.jpg'))
-// console.log(path.dirname("/foo/bar/baz/asdf/image.png"))
-// console.log(path.resolve(__dirname, "/zz/asd.jpg"))
+    // console.log(__dirname)
+    // console.log(path.join(__dirname,'/zz/asd.jpg'))
+    // console.log(path.dirname("/foo/bar/baz/asdf/image.png"))
+    // console.log(path.resolve(__dirname, "/zz/asd.jpg"))
     const httpServer = argv.proxy ? httpProxy.createProxyServer({target: argv.proxy}) : null; // .listen(99845);
     if (httpServer) {
         httpServer.on('proxyReq', function (proxyReq, req, res, options) {
             // proxyReq.setHeader('X-Special-Proxy-Header', 'foobar');
         });
     }
-//
-// Create your target server
-//
+    //
+    // Create your target server
+    //
     http.createServer(function (req, res) {
         let requestPath = req.url.split('?')[0];
         if (requestPath === '/') {
@@ -42,18 +42,19 @@ export const httpServer = (argv) => {
             const contentType = mime.lookup(localPath);
             console.log('----->', 'isFile', fileState.isFile());
             fs.readFile(localPath, 'binary', function (err, file) {
-
                 let fileSize = fileState.size;
-                const webscoketClient = argv.watch ? `
+                const webscoketClient = argv.watch
+                    ? `
                         <script>
-                            const webSocket = new WebSocket("ws://localhost:${argv.port+1}");
+                            const webSocket = new WebSocket("ws://localhost:${argv.port + 1}");
                             webSocket.onmessage = function (event) {
                                 const data = JSON.parse(event.data);
                                 if (data.action === 'refresh') {
                                     location.reload();
                                 }
                             }
-                        </script>` : '';
+                        </script>`
+                    : '';
 
                 if (requestPath === '/index.html') {
                     fileSize += webscoketClient.length;
@@ -70,8 +71,6 @@ export const httpServer = (argv) => {
                     res.write(webscoketClient, 'utf8');
                 }
 
-
-
                 res.end();
             })
             // Do something
@@ -87,7 +86,7 @@ export const httpServer = (argv) => {
     }).listen(argv.port, argv.host ? argv.host : 'localhost');
 
     if (argv.watch) {
-        const wss = new WebSocketServer({port: argv.port+1});
+        const wss = new WebSocket.Server({port: argv.port + 1});
 
         let start = Date.now();
         const directorys = getDirectory(webDirPath, [webDirPath]);
@@ -142,4 +141,3 @@ export const httpServer = (argv) => {
         // });
     }
 }
-
