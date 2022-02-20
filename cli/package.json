@@ -1,6 +1,6 @@
 {
   "name": "simple-boot-front-cli",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "main": "sbf.js",
   "license": "MIT",
   "type": "module",
@@ -44,6 +44,7 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
+    "ws": "^8.5.0",
     "create-simple-boot-front": "1.0.5",
     "http-proxy": "^1.18.1",
     "mime-types": "^2.1.32",
