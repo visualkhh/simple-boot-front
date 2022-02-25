@@ -207,7 +207,7 @@ export class SimpleBootFront extends SimpleApplication {
         return data;
     }
 
-    async runRouting(otherInstanceSim?: Map<ConstructorType<any>, any>, url?: string): Promise<RouterModule<SimAtomic<Object>, any>> {
+    async runRouting(otherInstanceSim?: Map<ConstructorType<any>, any>, url?: string): Promise<RouterModule<SimAtomic<Object>, any> | undefined> {
         this.initRun(otherInstanceSim);
         if (url) {
             this.navigation.goNoPopStateEvent(url);
