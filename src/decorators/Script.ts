@@ -10,10 +10,9 @@ export interface ScriptConfig {
 
 export const ScriptMetadataKey = Symbol('Script');
 
-//Partial<ComponentConfig>
 export const Script = (config?: ScriptConfig): GenericClassDecorator<ConstructorType<ScriptRunnable>> => {
     return (target: ConstructorType<any>) => {
-        //default set
+        // default set
         if (!config) {
             config = {}
         }
@@ -22,33 +21,9 @@ export const Script = (config?: ScriptConfig): GenericClassDecorator<Constructor
         }
         scripts.set(config.name, target);
         ReflectUtils.defineMetadata(ScriptMetadataKey, config, target);
-        // const application = SimGlobal().application as SimpleBootFront;
-        // const optionalParams = SimGlobal();
-        // console.log('llllll', optionalParams, optionalParams._application);
-        // Object.entries(optionalParams).forEach(it => {
-        //     console.log(it[0], it[1])
-        // })
         return target;
-        // return class extends target {
-        //     __componentInstances =  {}
-        // }
     }
 }
-
-// function classDecorator<T extends {new(...args:any[]):{}}>(constructor:T) {
-//     return class extends constructor {
-//         newProperty = "new property";
-//         hello = "override";
-//     }
-// }
-// export const TestComponent = (c: ConstructorType<any>) => {
-//     return class extends c {
-//         wow = 'zz'
-//     }
-// }
-// Component.create = <T>(obj: T, raws?: RawSet): T => {
-//     return SimGlobal().application.createDomRender(obj, raws);
-// }
 
 export const getScript = (target: ConstructorType<any> | Function | any): ScriptConfig | undefined => {
     if (target && typeof target === 'object') {

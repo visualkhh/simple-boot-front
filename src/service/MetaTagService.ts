@@ -28,13 +28,13 @@ export class MetaTagService {
                 }
             });
         }
-        //.setAttribute('content', set[selector]);
+        // .setAttribute('content', set[selector]);
     }
 
     createMetaTag(set: { [p: string]: string }) {
         const meta = this.option.window.document.createElement('meta');
         Object.entries(set).forEach(([key, value]) => {
-            if (null !== value) {
+            if (value !== null) {
                 meta.setAttribute(key, value);
             }
         });
