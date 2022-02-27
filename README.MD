@@ -1,5 +1,5 @@
 ![Single Page Application Framworks](assets/banner.png)
-[![npm version](https://img.shields.io/badge/npm-v1.0.81-blue)](https://www.npmjs.com/package/simple-boot-front) [![license](https://img.shields.io/badge/license-MIT-green)](LICENSE.md) [![Chat](https://img.shields.io/badge/discord-20%20online-brightgreen?logo=discord)](https://discord.gg/PW56dpns) [![Github](https://img.shields.io/badge/-github-black?logo=github)](https://github.com/visualkhh/simple-boot-front)
+[![typescript](https://img.shields.io/badge/-npm-black?logo=npm)](https://www.npmjs.com/package/simple-boot-front) [![license](https://img.shields.io/badge/license-MIT-green)](LICENSE.md) [![Chat](https://img.shields.io/badge/discord-20%20online-brightgreen?logo=discord)](https://discord.gg/PW56dpns) [![Github](https://img.shields.io/badge/-github-black?logo=github)](https://github.com/visualkhh/simple-boot-front)
 
 # Our primary goals are
 - Single Page Application Framworks for Web
@@ -88,7 +88,7 @@ constructor(index: Index){...}
     route: {
         '/': Home,
         '/user': User,
-        '/user/:id': UserDetail
+        '/user/{id}': UserDetail
     }
 })
 @Component({

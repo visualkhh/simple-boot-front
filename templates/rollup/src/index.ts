@@ -1,19 +1,20 @@
-import { SimFrontOption, UrlType } from 'simple-boot-front/option/SimFrontOption';
-import { SimpleBootFront } from 'simple-boot-front/SimpleBootFront';
-import { Router, Sim } from 'simple-boot-core/decorators/SimDecorator';
-import { Component } from 'simple-boot-front/decorators/Component';
+import {SimFrontOption, UrlType} from 'simple-boot-front/option/SimFrontOption';
+import {SimpleBootFront} from 'simple-boot-front/SimpleBootFront';
+import {Sim} from 'simple-boot-core/decorators/SimDecorator';
+import {Router} from 'simple-boot-core/decorators/route/Router';
+import {Component} from 'simple-boot-front/decorators/Component';
 import template from './index.html'
 import style from './index.css'
-import { Home } from './pages/home';
-import { User } from './pages/user';
-import { RouterAction } from 'simple-boot-core/route/RouterAction';
+import {Home} from './pages/home';
+import {User} from './pages/user';
+import {RouterAction} from 'simple-boot-core/route/RouterAction';
 
 @Sim()
 @Router({
     path: '',
     route: {
         '/': Home,
-        '/user': User,
+        '/user': User
     }
 })
 @Component({
@@ -22,7 +23,8 @@ import { RouterAction } from 'simple-boot-core/route/RouterAction';
 })
 export class Index implements RouterAction {
     child?: any;
-    canActivate(url: any, module: any): void {
+
+    async canActivate(url: any, module: any) {
         this.child = module;
     }
 }

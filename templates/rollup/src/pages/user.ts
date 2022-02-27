@@ -8,4 +8,3 @@ import { Sim } from 'simple-boot-core/decorators/SimDecorator';
 export class User {
 
 }
-
