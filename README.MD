@@ -45,8 +45,34 @@ npm start
 └──tsconfig.json (typescript config)
 ```
 
-## index.ts 
+## source 
 * simple-boot-front start and route point  (set: ts, html, css)
+<details>
+  <summary>pages/home.ts<strong>🔻(click)</strong></summary>
+
+```typescript
+@Sim()
+@Component({
+    template: '<div>home</div>'
+})
+export class Home {
+
+}
+```
+</details>
+<details>
+  <summary>pages/user.ts<strong>🔻(click)</strong></summary>
+
+```typescript
+@Sim()
+@Component({
+  template: '<div>user</div>'
+})
+export class User {
+
+}
+```
+</details>
 <details>
   <summary>index.html<strong>🔻(click)</strong></summary>
 
@@ -85,7 +111,7 @@ header, footer, main {
 ```
 </details>
 
-
+index.ts ▼
 ```typescript
 import template from './index.html'
 import style from './index.css'
