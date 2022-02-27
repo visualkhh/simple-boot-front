@@ -23,7 +23,6 @@ import {RouterAction} from 'simple-boot-core/route/RouterAction';
 })
 export class Index implements RouterAction {
     child?: any;
-
     async canActivate(url: any, module: any) {
         this.child = module;
     }

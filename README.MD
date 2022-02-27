@@ -1,11 +1,16 @@
-![Single Page Application Framworks](assets/banner.png)
-[![typescript](https://img.shields.io/badge/-npm-black?logo=npm)](https://www.npmjs.com/package/simple-boot-front) [![license](https://img.shields.io/badge/license-MIT-green)](LICENSE.md) [![Chat](https://img.shields.io/badge/discord-20%20online-brightgreen?logo=discord)](https://discord.gg/PW56dpns) [![Github](https://img.shields.io/badge/-github-black?logo=github)](https://github.com/visualkhh/simple-boot-front)
+![Single Page Application Framworks](assets/banner.png)  
+![typescript](https://img.shields.io/badge/-typescript-black?logo=typescript) [![npm](https://img.shields.io/badge/-npm-black?logo=npm)](https://www.npmjs.com/package/simple-boot-front) [![license](https://img.shields.io/badge/license-MIT-green)](LICENSE.md) [![Chat](https://img.shields.io/badge/discord-20%20online-brightgreen?logo=discord)](https://discord.gg/PW56dpns) [![Github](https://img.shields.io/badge/-github-black?logo=github)](https://github.com/visualkhh/simple-boot-front)
 
-# Our primary goals are
-- Single Page Application Framworks for Web
-- Provide a radically faster and widely accessible getting started experience for all front end.
+**Our primary goals are**
+* Single Page Application Framworks for Web
+* Provide a radically faster and widely accessible getting started experience for all front end.
 
-# [📄 introduction page [link]](https://simple-boot-front.github.io)
+### dependencies
+* dom-render [![npm](https://img.shields.io/badge/-npm-black?logo=npm)](https://www.npmjs.com/package/dom-render)
+* simple-boot-core [![npm](https://img.shields.io/badge/-npm-black?logo=npm)](https://www.npmjs.com/package/simple-boot-core)
+
+
+# [📄 introduction page 🔗](https://simple-boot-front.github.io)
 - [https://simple-boot-front.github.io](https://simple-boot-front.github.io)
 
 
@@ -15,39 +20,115 @@
 npm init simple-boot-front projectname
 cd projectname
 npm start
+# open browser: http://localhost:4500
 ```
 
-
-- Installation and Getting Started
-```
-npm install simple-boot-front
-```
----
-
-# 😃 examples
-- [examples project](./examples)
+# 😃 templates
 - [templates](./templates)
---- 
 
-# 📄 Code description
-## start
-```html
-<!DOCTYPE html><html lang="en"><body id="app"></body></html>
+# directory structure
 ```
+┌─ assets
+├──dist (out put directory)
+├──src (source)
+│    ├──pages (your pages)
+│    │     ├ home.ts (sample page)
+│    │     └ user.ts (sample page)
+│    ├──index.css (index route page css)
+│    ├──index.html (index route page template)
+│    └──index.ts (simple-boot-fornt start and route point)
+├──types (typescript type)
+│    └ index.d.ts (type definition)
+├──index.html start (point html)
+├──package.json (project config)
+├──rollup.config.js (rollup bundler config)
+└──tsconfig.json (typescript config)
+```
+
+## index.ts 
+* simple-boot-front start and route point  (set: ts, html, css)
+<details>
+  <summary>index.html<strong>🔻(click)</strong></summary>
+
+```html
+<header>
+    <nav>
+        <ul>
+            <li>
+                <button router-link="/">home</button>
+            </li>
+            <li>
+                <button router-link="/user">user</button>
+            </li>
+        </ul>
+    </nav>
+
+</header>
+<main>
+    <router component="this.child"></router>
+</main>
+<footer>
+    footer
+</footer>
+```
+</details>
+
+<details>
+  <summary>index.css<strong>🔻(click)</strong></summary>
+
+```css
+header, footer, main {
+    border: #333333 1px solid;
+    padding: 20px;
+    margin: 20px;
+}
+```
+</details>
+
+
 ```typescript
-const option = new SimFrontOption(window).setUrlType(UrlType.hash);
-const simpleApplication = new SimpleBootFront(Index, option);
+import template from './index.html'
+import style from './index.css'
+@Sim()
+@Router({
+  path: '',
+  route: {
+    '/': Home,
+    '/user': User
+  }
+})
+@Component({
+  template,
+  styles: [style]
+})
+export class Index implements RouterAction {
+  child?: any;
+  async canActivate(url: any, module: any) {
+    this.child = module;
+  }
+}
+
+const config = new SimFrontOption(window).setUrlType(UrlType.hash);
+const simpleApplication = new SimpleBootFront(Index, config);
 simpleApplication.run();
 ```
 
-## @Sim
+## Decorator
+<details>
+  <summary>@Sim<strong>🔻(click)</strong></summary>
+
 Objects managed by the SimpleBootFront framework
 - parameter: SimConfig  {schema: string}
+
 ```typescript
 @Sim({scheme: 'index'})
 ```
+</details>
 
-## @Component
+
+<details>
+  <summary>@Component<strong>🔻(click)</strong></summary>
+
 
 ```html
 <!--template.html-->
@@ -55,6 +136,8 @@ Objects managed by the SimpleBootFront framework
 <div dr-inner-html="this.html"></div>
 ```
 ```typescript
+import template from './index.html'
+import style from './index.css'
 @Sim()
 @Component({
   selector: 'index', // default class name LowerCase
@@ -70,7 +153,7 @@ export class Index {
   }
 }
 ```
-using
+### using
 ```typescript
 constructor(index: Index){...}
 ```
@@ -79,9 +162,14 @@ constructor(index: Index){...}
 <!-- dr-set: $index.setData('data'); $element, $innerHTML, $attributes -->
 <index dr-set="$index.setData('hello component', $innerHTML)"></index>
 ```
+</details>
 
-## @Router
+<details>
+  <summary>@Router<strong>🔻(click)</strong></summary>
+
 ```typescript
+import template from './index.html'
+import style from './index.css'
 @Sim()
 @Router({
     path: '',
@@ -102,6 +190,7 @@ export class Index implements RouterAction {
     }
 }
 ```
+
 ### activeRoute
 ```typescript
 constructor(routerManager: RouterManager){
@@ -115,6 +204,7 @@ constructor(routerManager: RouterManager){
 <route component="this.child"></route>
 ```
 
+
 ### router option
 - attribute
   - **router-active-class**: url === href attribute => class add (a-classname, b-classname)
@@ -126,10 +216,12 @@ constructor(routerManager: RouterManager){
   ```
   - **router-link**:
     - value: router link
+    
+</details>
 
+<details>
+  <summary>@Script<strong>🔻(click)</strong></summary>
 
-
-## @Script
 ```typescript
 @Sim({scheme: 'i18nScript'})
 @Script({
@@ -161,17 +253,25 @@ counstructor(scriptService: ScriptService) {
 <div dr-if="$scripts.i18n('Get Locale JSON') === 'wow'"> is wow</div>
 ```
 
+</details>
 
-## @PostConstruct
+<details>
+  <summary>@PostConstruct<strong>🔻(click)</strong></summary>
+
 Methods that you run for a separate initialization operation after the object is created
+
 ```typescript
 @PostConstruct
 post(projectService: ProjectService) {
     console.log('post Construct  and dependency injection')
 }
 ```
+</details>
 
-## @After, @Before (AOP)
+
+<details>
+  <summary>@After, @Before (AOP)<strong>🔻(click)</strong></summary>
+
 ```typescript
 fire($event: MouseEvent, view: View<Element>) {
     console.log('fire method')
@@ -188,8 +288,11 @@ after(obj: any, protoType: Function) {
     console.log('after', obj, protoType)
 }
 ```
+</details>
 
-## @ExceptionHandler
+<details>
+  <summary>@ExceptionHandler<strong>🔻(click)</strong></summary>
+
 ```typescript
 @ExceptionHandler(TypeError)
 public exceptionTypeError(e: TypeError) {
@@ -211,28 +314,26 @@ public exception2(e: SimNoSuch) {
   console.log('NoSuchSim exception:')
 }
 ```
+</details>
 
-----
 
-# View template engine (dom-render)
-- **DomRender** [![npm version](https://img.shields.io/badge/npm-blue)](https://www.npmjs.com/package/dom-render) [![Github](https://img.shields.io/badge/-github-black?logo=github)](https://github.com/visualkhh/dom-render)
-- It's a compiler that takes your declarative components and converts them into efficient JavaScript that surgically updates the DOM.
-- Update view only for parts where the value has changed.
-- event: addEventListener (attribute)
-```html
-<div>
-    click: <button dr-event-click="this.name = 'name' + new Date()">click</button> <br>
-    change: <input type="text" dr-event-change="this.name = $target.value"> <br>
-    input: <input type="text" dr-event-input="this.name = $target.value"> <br>
-    keyup: <input type="text" dr-event-keyup="this.name = $target.value"> <br>
-    keydown: <input type="text" dr-event-keydown="this.name = $target.value"><br>
-    ...
-    submit: <form dr-event-submit="console.log($event); $event.preventDefault();"><input type="text"> <button type="submit">submit</button></form><br>
-    window-event-popstate: <input type="text" dr-window-event-popstate="alert(this.name)"><br>
-</div>...
+# Framework Core (simple-boot-core)  
+[![npm version](https://img.shields.io/badge/-npm-black?logo=npm)](https://www.npmjs.com/package/simple-boot-core) [![Github](https://img.shields.io/badge/-github-black?logo=github)](https://github.com/visualkhh/simple-boot-core) 
+* Object management.
+  * Dependency Injection (DI)
+  * Life cycle provided.
+* Aspect Oriented Programming (AOP)
+* ExceptionHandler (Global or Local)
+* Router System
+* Intent Event System
 
-```
-- If you want to see more information Move here go ***dom-render github***
+
+# View template engine (dom-render)  
+[![npm version](https://img.shields.io/badge/-npm-black?logo=npm)](https://www.npmjs.com/package/dom-render) [![Github](https://img.shields.io/badge/-github-black?logo=github)](https://github.com/visualkhh/dom-render)
+* view template engine
+* Dom control and reorder and render
+* all internal variables are managed by proxy. (DomRenderProxy)
+
 ----
 
 
@@ -252,83 +353,6 @@ public exception2(e: SimNoSuch) {
 * OnInitedChild
   - onInitedChild(): module and child module inited event
 
-----
-
-# Intent event broker 
-```typescript
-constructor(intentManager: IntentManager){...}
-// call
-queryParamCall() {
-  this.intentManager.publish(new Intent('layout://info/data?a=wow&aa=zzz', Math.floor(RandomUtils.random(0, 100))));
-}
-call() {
-  this.intentManager(new Intent('layout://info/datas', Math.floor(RandomUtils.random(0, 100))));
-}
-targetCall() {
-  this.intentManager(new Intent('layout://', Math.floor(RandomUtils.random(0, 100))));
-  // default callback method -> subscribe(i: Intent)
-}
-globalCall() {
-  this.intentManager(new Intent('://info/datas', Math.floor(RandomUtils.random(0, 100))));
-}
-windowEventCall() {
-  const data = new CustomEvent('intent', {detail: {uri: 'index://showStore', data: {id: 'id data'}}});
-  window.dispatchEvent(data);
-}
-
-// receive
-showStore(i: Intent) {
-  this.datas = i.data + '->' + i.params.aa
-}
-```
-
-```typescript
-@Sim({scheme: 'layout'})
-@Component({
-  template,
-  styles: [css]
-})
-export class App {
-    info = new AppInfo();
-    constructor() {}
-}
-```
-```typescript
-export class AppInfo {
-    datas = 'default data';
-    data(i: Intent) {
-        this.datas = i.data + '->' + i.params.aa
-    }
-}
-```
-
-# Advice
-- global advice
-```typescript
-@Sim()
-export class Advice {
-
-    @ExceptionHandler()
-    public exception0(e: any) {
-        console.log('Advice Global exception:')
-    }
-
-    @Before({type: Aop, property: 'unkown'})
-    public beforeTest(obj: any, f: Function, name: string) {
-        console.log('before Test:')
-    }
-
-    @After({type: Aop, property: 'unkown'})
-    public afterTest(obj: any, f: Function, name: string) {
-        console.log('after Test:')
-    }
-}
-```
-```typescript
-const option = new SimFrontOption(window, [Advice]).setUrlType(UrlType.hash);
-const simpleApplication = new SimpleBootFront(AppRouter, option);
-simpleApplication.run();
-```
 ----
 # License
 * MIT
