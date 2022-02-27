@@ -133,7 +133,7 @@ Objects managed by the SimpleBootFront framework
 ```html
 <!--template.html-->
 <h1>${this.title}</h1>
-<div dr-inner-html="this.html"></div>
+<div>#innerHTML#</div>
 ```
 ```typescript
 import template from './index.html'
@@ -146,10 +146,8 @@ import style from './index.css'
 })
 export class Index {
   public title = ''
-  public html = ''
-  public setData(title: string, html: string) {
+  public setData(title: string) {
     this.title = title;
-    this.html = html;
   }
 }
 ```
@@ -160,7 +158,11 @@ constructor(index: Index){...}
 ```html
 <index></index>
 <!-- dr-set: $index.setData('data'); $element, $innerHTML, $attributes -->
-<index dr-set="$index.setData('hello component', $innerHTML)"></index>
+<index dr-set="$index.setData('hello component')">
+  <ul>
+    <li>content</li>
+  </ul>
+</index>
 ```
 </details>
 
