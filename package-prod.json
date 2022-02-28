@@ -78,7 +78,6 @@
   },
   "dependencies": {
     "dom-render": "^1.0.68",
-    "simple-boot-core": "^1.0.24",
-    "reflect-metadata": "^0.1.13"
+    "simple-boot-core": "^1.0.28"
   }
 }

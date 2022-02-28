@@ -23,8 +23,9 @@ npm start
 # open browser: http://localhost:4500
 ```
 
-# 😃 templates
+# 😃 examples, templates
 - [templates](./templates)
+- [examples](./examples)
 
 # directory structure
 ```
