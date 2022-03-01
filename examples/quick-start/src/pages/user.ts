@@ -8,5 +8,6 @@ import template from './user.html';
     using: [ProfileComponent]
 })
 export class User {
-
+    name = 'User';
+    toggle = true;
 }

@@ -16,7 +16,8 @@ export default {
         dir: 'dist',
         entryFileNames: 'bundle.js',
         format: 'cjs',
-        esModule: false
+        esModule: false,
+        intro: 'try{if(!exports){exports = {};} }catch(e){var exports = {}};'
     },
     plugins: [
         // babel(),

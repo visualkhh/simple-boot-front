@@ -9,4 +9,12 @@ import template from './profile.html'
 export class ProfileComponent {
     name = '';
     age = 0;
+
+    constructor() {
+        console.log('new ProfileComponent');
+    }
+
+    change(data: any) {
+        console.log('-------', data)
+    }
 }

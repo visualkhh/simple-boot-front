@@ -1,4 +1,9 @@
 <div>
     home
     <div>${$scripts.concat('hello', 'world')}$</div>
+    <button dr-if="this.toggle">
+        test
+    </button>
+
+    <button dr-event-click="this.toggle = !this.toggle">toggle</button>
 </div>

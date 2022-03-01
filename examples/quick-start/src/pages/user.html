@@ -1,4 +1,21 @@
 <div>
-    <profile dr-on-init="$component.name='jhon'; $component.age=44;"></profile>
-    <profile dr-on-init="$component.name='sam'; $component.age=11;"></profile>
+<!--    <profile dr-detect="this.name" dr-detect-action="$component.name = this.name" dr-on-init="$component.name=this.name; $component.age=44;">-->
+    <dr dr-if="this.toggle" dr-strip="true">
+        <profile dr-detect="this.name" dr-detect-action="$component.name = this.name" dr-on-init="$component.name=this.name; $component.age=44;">
+            <input type="text" dr-value-link="this.name">
+            <h6>${#component#.name}$</h6>
+            <h6>${this.name}$</h6>
+        </profile>
+    </dr>
+<!--    <profile dr-on-init="$component.name='sam'; $component.age=11;">-->
+<!--    </profile>-->
+
+    <div>
+        <h6>${this.name}$</h6>
+<!--        <h6>${this.name}$</h6>-->
+        <button dr-event-click="this.name=new Date().toString();">change</button>
+    </div>
+    <div>
+        <button dr-event-click="this.toggle = !this.toggle">toggle</button>
+    </div>
 </div>

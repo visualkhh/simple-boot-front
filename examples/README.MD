@@ -10,9 +10,11 @@ git submodule init
 git submodule update
 
 cd libs/dom-render
+git checkout master
 npm run npm-build
 
 cd libs/simple-boot-core
+git checkout master
 npm run npm-build
 
 #cd root directory
