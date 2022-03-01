@@ -245,7 +245,6 @@ export class SimpleBootFront extends SimpleApplication {
                 },
                 component?.template,
                 component?.styles,
-                this.domRenderConfig.scripts,
                 this.domRenderConfig
             );
 
