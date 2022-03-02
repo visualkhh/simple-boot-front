@@ -1,11 +1,6 @@
 import {SimFrontOption} from './option/SimFrontOption';
 import {ConstructorType} from 'simple-boot-core/types/Types';
-import {
-    ComponentConfig,
-    ComponentMetadataKey,
-    componentSelectors,
-    getComponent
-} from './decorators/Component';
+import {ComponentConfig, ComponentMetadataKey, componentSelectors, getComponent} from './decorators/Component';
 import {scripts} from './decorators/Script';
 import {DomRender} from 'dom-render/DomRender';
 import {SimAtomic} from 'simple-boot-core/simstance/SimAtomic';
@@ -177,13 +172,12 @@ export class SimpleBootFront extends SimpleApplication {
         return data;
     }
 
-    public run(otherInstanceSim?: Map<ConstructorType<any>, any>, url?: string): SimpleBootFront {
+    public run(otherInstanceSim?: Map<ConstructorType<any>, any>, url?: string) {
         this.initRun(otherInstanceSim);
         if (url) {
             this.navigation.go(url);
         }
         this.option.window.dispatchEvent(new Event('popstate'));
-        return this;
     }
 
     private afterSetting() {
