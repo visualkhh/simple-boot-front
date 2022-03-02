@@ -18,9 +18,7 @@ git checkout master
 npm run npm-build
 
 #cd root directory
-npm run npm-build
-```
-```shell
+npm install
 npm run npm-build
 ```
 
