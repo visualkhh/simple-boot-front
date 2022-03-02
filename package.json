@@ -49,7 +49,9 @@
   },
   "workspaces": [
     "libs/dom-render/dist",
-    "libs/simple-boot-core/dist"
+    "libs/simple-boot-core/dist",
+    "../dom-render/dist",
+    "../simple-boot-core/dist"
   ],
   "scripts": {
     "build": "rm -rf dist && tsc --outDir dist --declarationDir dist",
