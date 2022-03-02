@@ -30,20 +30,20 @@ npm start
 # directory structure
 ```
 ┌─ assets
-├──dist (out put directory)
-├──src (source)
-│    ├──pages (your pages)
+├─ dist (out put directory)
+├─ src (source)
+│    ├─ pages (your pages)
 │    │     ├ home.ts (sample page)
 │    │     └ user.ts (sample page)
-│    ├──index.css (index route page css)
-│    ├──index.html (index route page template)
-│    └──index.ts (simple-boot-fornt start and route point)
-├──types (typescript type)
+│    ├─ index.css (index route page css)
+│    ├─ index.html (index route page template)
+│    └─ index.ts (simple-boot-fornt start and route point)
+├─ types (typescript type)
 │    └ index.d.ts (type definition)
-├──index.html start (point html)
-├──package.json (project config)
-├──rollup.config.js (rollup bundler config)
-└──tsconfig.json (typescript config)
+├─ index.html start (point html)
+├─ package.json (project config)
+├─ rollup.config.js (rollup bundler config)
+└─ tsconfig.json (typescript config)
 ```
 
 ## source 
