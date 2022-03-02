@@ -55,7 +55,7 @@
     "build": "rm -rf dist && tsc --outDir dist --declarationDir dist",
     "dev:serve": "npm run serve --workspace=dev",
     "dev-onepage:serve": "npm run serve --workspace=dev-onepage",
-    "npm-build": "rm -rf dist && tsc --outDir dist --declarationDir dist && cp package-prod.json dist/package.json && cp README.MD dist",
+    "npm-build": "rm -rf dist && mkdir dist && cp package-prod.json dist/package.json && cp README.MD dist && tsc --outDir dist --declarationDir dist",
     "npm-publish": "npm run npm-build && npm publish ./dist",
     "tsc": "tsc",
     "setting:root-dist": "rm -rf ../dist-simple-boot-front && mkdirp ../dist-simple-boot-front && cp package-root-dist.json ../dist-simple-boot-front/package.json",
