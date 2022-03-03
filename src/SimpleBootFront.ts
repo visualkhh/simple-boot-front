@@ -125,12 +125,9 @@ export class SimpleBootFront extends SimpleApplication {
 
         this.navigation = this.simstanceManager.getOrNewSim(Navigation)!
         // rootRouter first draw
-        const routerAtomic = new SimAtomic(this.rootRouter, this.getSimstanceManager());
-        const target = this.option.window.document.querySelector(this.option.selector)
-        if (target && routerAtomic.value) {
-            const component = routerAtomic.getConfig<ComponentConfig>(ComponentMetadataKey)
-            const styles = (component?.styles?.map(it => `<style>${it}</style>`) ?? []).join(' ')
-            target.innerHTML = `${styles} ${component?.template ?? ''}`;
+        const routerAtomic = this.writeRootRouter();
+        const target = this.option.window.document.querySelector(this.option.selector);
+        if (target && routerAtomic && routerAtomic.value) {
             const val = routerAtomic.value as any;
             const domRenderProxy = val._DomRender_proxy as DomRenderProxy<any>
             domRenderProxy.initRender(target);
@@ -149,7 +146,26 @@ export class SimpleBootFront extends SimpleApplication {
         });
     }
 
-    // routing<R = SimAtomic, M = any>(intent: Intent) {
+    // public rootRouterComponentHTML() {
+    //     const routerAtomic = new SimAtomic(this.rootRouter, this.getSimstanceManager());
+    //     const target = this.option.window.document.querySelector(this.option.selector)
+    //     const component = routerAtomic.getConfig<ComponentConfig>(ComponentMetadataKey)
+    //     const styles = (component?.styles?.map(it => `<style>${it}</style>`) ?? []).join(' ')
+    //     return `${styles} ${component?.template ?? ''}`;
+    // }
+
+    public writeRootRouter() {
+        const routerAtomic = new SimAtomic(this.rootRouter, this.getSimstanceManager());
+        const target = this.option.window.document.querySelector(this.option.selector);
+        if (target && routerAtomic.value) {
+            const component = routerAtomic.getConfig<ComponentConfig>(ComponentMetadataKey)
+            const styles = (component?.styles?.map(it => `<style>${it}</style>`) ?? []).join(' ')
+            target.innerHTML = `${styles} ${component?.template ?? ''}`;
+        }
+        return routerAtomic;
+    }
+
+// routing<R = SimAtomic, M = any>(intent: Intent) {
     //     return super.routing<R, M>(intent);
     // }
 
