@@ -149,6 +149,16 @@ export class SimpleBootFront extends SimpleApplication {
             (val as any)?.onInit?.();
         }
     }
+    // public ninitWriteRootRouter() {
+    //     const routerAtomic = this.writeRootRouter();
+    //     const target = this.option.window.document.querySelector(this.option.selector);
+    //     if (target && routerAtomic && routerAtomic.value) {
+    //         const val = routerAtomic.value as any;
+    //         const domRenderProxy = val._DomRender_proxy as DomRenderProxy<any>
+    //         // domRenderProxy.initRender(target);
+    //     //     // (val as any)?.onInit?.();
+    //     }
+    // }
     // public rootRouterComponentHTML() {
     //     const routerAtomic = new SimAtomic(this.rootRouter, this.getSimstanceManager());
     //     const target = this.option.window.document.querySelector(this.option.selector)
