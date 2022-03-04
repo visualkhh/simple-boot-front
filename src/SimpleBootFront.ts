@@ -125,14 +125,7 @@ export class SimpleBootFront extends SimpleApplication {
 
         this.navigation = this.simstanceManager.getOrNewSim(Navigation)!
         // rootRouter first draw
-        const routerAtomic = this.writeRootRouter();
-        const target = this.option.window.document.querySelector(this.option.selector);
-        if (target && routerAtomic && routerAtomic.value) {
-            const val = routerAtomic.value as any;
-            const domRenderProxy = val._DomRender_proxy as DomRenderProxy<any>
-            domRenderProxy.initRender(target);
-            (val as any)?.onInit?.();
-        }
+        this.initWriteRootRouter();
         this.option.window.addEventListener('intent', (event) => {
             const cevent = event as CustomEvent
             this.publishIntent(new Intent(cevent.detail.uri, cevent.detail.data, event));
@@ -146,6 +139,16 @@ export class SimpleBootFront extends SimpleApplication {
         });
     }
 
+    public initWriteRootRouter() {
+        const routerAtomic = this.writeRootRouter();
+        const target = this.option.window.document.querySelector(this.option.selector);
+        if (target && routerAtomic && routerAtomic.value) {
+            const val = routerAtomic.value as any;
+            const domRenderProxy = val._DomRender_proxy as DomRenderProxy<any>
+            domRenderProxy.initRender(target);
+            (val as any)?.onInit?.();
+        }
+    }
     // public rootRouterComponentHTML() {
     //     const routerAtomic = new SimAtomic(this.rootRouter, this.getSimstanceManager());
     //     const target = this.option.window.document.querySelector(this.option.selector)
