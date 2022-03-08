@@ -2,7 +2,7 @@
 <!--    <profile dr-detect="this.name" dr-detect-action="$component.name = this.name" dr-on-init="$component.name=this.name; $component.age=44;">-->
 <!--        <profile dr-if="this.toggle" dr-detect="$component.name = this.name" dr-on-init="$component.name=this.name; $component.age=44;">-->
 <!--    <dr dr-if="this.toggle" dr-strip="true">-->
-        <profile dr-if="this.toggle" dr-detect="$component.name = this.name" dr-on-init="$component.name=this.name; $component.age=44;" style="border: #217ac0 1px solid">
+        <profile dr-if="this.toggle" dr-detect="$component.name = this.name" dr-on-component-init="$component.name=this.name; $component.age=44;" style="border: #217ac0 1px solid">
             <input type="text" dr-value-link="this.name" size="40">
             <h6>${#component#.name}$</h6>
             <h6>${this.name}$</h6>
