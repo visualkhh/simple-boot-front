@@ -61,7 +61,7 @@
     "npm-publish": "npm run npm-build && npm publish ./dist",
     "tsc": "tsc",
     "tsc:watch": "rm -rf ./dist && mkdir dist && cp package.json dist && tsc --watch --outDir dist --declarationDir dist --sourceMap true",
-    "tsc:watch:prod": "rm -rf ./dist && mkdir dist && cp package-prod.json dist/package.json && tsc --watch --outDir dist --declarationDir dist --sourceMap true",
+    "build:ts:watch": "rm -rf ./dist && mkdir dist && cp package-prod.json dist/package.json && tsc --watch --outDir dist --declarationDir dist --sourceMap true",
     "test": "jest --detectOpenHandles --forceExit"
   },
   "alias": {},
