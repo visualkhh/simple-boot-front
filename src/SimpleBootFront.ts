@@ -33,6 +33,7 @@ export class SimpleBootFront extends SimpleApplication {
     constructor(public rootRouter: ConstructorType<any>, public option: SimFrontOption) {
         super(rootRouter, option);
         this.domRenderConfig = {
+            routerType: 'none',
             window: option.window,
             targetElements: this.domRenderTargetElements,
             targetAttrs: this.domRenderTargetAttrs,
@@ -132,7 +133,7 @@ export class SimpleBootFront extends SimpleApplication {
         });
 
         this.option.window.addEventListener('popstate', (event) => {
-            const intent = new Intent(this.navigation.url ?? '');
+            const intent = new Intent(this.navigation.url || '/');
             this.routing<SimAtomic, any>(intent).then(it => {
                 this.afterSetting();
             });

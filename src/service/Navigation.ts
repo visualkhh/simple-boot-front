@@ -62,7 +62,7 @@ export class Navigation {
         if (UrlType.path === this.option.urlType) {
             this.option.window.history.pushState(data, title, path)
         } else if (UrlType.hash === this.option.urlType) {
-            path = '#' + path.substring(1)
+            path = '#' + path
             this.option.window.history.pushState(data, title, path)
         }
     }

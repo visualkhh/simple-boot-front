@@ -29,5 +29,6 @@ export class Index implements RouterAction {
 }
 
 const config = new SimFrontOption(window).setUrlType(UrlType.hash);
+// const config = new SimFrontOption(window).setUrlType(UrlType.path);
 const simpleApplication = new SimpleBootFront(Index, config);
 simpleApplication.run();
