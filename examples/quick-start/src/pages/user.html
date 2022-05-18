@@ -1,19 +1,12 @@
 <div>
-<!--    <profile dr-detect="this.name" dr-detect-action="$component.name = this.name" dr-on-init="$component.name=this.name; $component.age=44;">-->
-<!--        <profile dr-if="this.toggle" dr-detect="$component.name = this.name" dr-on-init="$component.name=this.name; $component.age=44;">-->
-<!--    <dr dr-if="this.toggle" dr-strip="true">-->
-        <profile dr-if="this.toggle" dr-detect="$component.name = this.name" dr-on-component-init="$component.name=this.name; $component.age=44;" style="border: #217ac0 1px solid">
-            <input type="text" dr-value-link="this.name" size="40">
-            <h6>${#component#.name}$</h6>
-            <h6>${this.name}$</h6>
-        </profile>
-<!--    </dr>-->
-<!--    <profile dr-on-init="$component.name='sam'; $component.age=11;">-->
-<!--    </profile>-->
+    <h3>${this.name}$</h3>
+    <profile dr-if="this.toggle" dr-detect="$component.name = this.name" dr-on-component-init="$component.name=this.name; $component.age=44;" style="border: #217ac0 1px solid">
+        <input type="text" dr-value-link="this.name" size="40">
+        <h6>${#component#.name}$</h6>
+        <h6>${this.name}$</h6>
+    </profile>
 
     <div>
-<!--        <h6>${this.name}$</h6>-->
-<!--        <h6>${this.name}$</h6>-->
         <button dr-event-click="this.name=new Date().toString();">change</button>
     </div>
     <div>

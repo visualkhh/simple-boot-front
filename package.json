@@ -55,8 +55,6 @@
   ],
   "scripts": {
     "build": "rm -rf dist && tsc --outDir dist --declarationDir dist",
-    "dev:serve": "npm run serve --workspace=dev",
-    "dev-onepage:serve": "npm run serve --workspace=dev-onepage",
     "npm-build": "rm -rf dist && mkdir dist && cp package-prod.json dist/package.json && cp README.MD dist && tsc --outDir dist --declarationDir dist",
     "npm-publish": "npm run npm-build && npm publish ./dist",
     "tsc": "tsc",
@@ -81,7 +79,7 @@
   },
   "dependencies": {
     "reflect-metadata": "^0.1.13",
-    "dom-render": "^1.0.74",
-    "simple-boot-core": "^1.0.29"
+    "dom-render": "^1.0.75",
+    "simple-boot-core": "^1.0.30"
   }
 }

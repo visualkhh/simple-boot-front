@@ -6,6 +6,7 @@ SIMPLE-BOOT-FRONT
 
 ### STEP 1
 ```shell
+#cd root directory
 git submodule init
 git submodule update
 
@@ -16,14 +17,17 @@ npm run npm-build
 cd libs/simple-boot-core
 git checkout master
 npm run npm-build
+```
 
+### STEP 2
+```shell
 #cd root directory
 npm install
 npm run npm-build
 ```
 
 
-### STEP 2
+### STEP 3
 ```shell
 cd examples/{examples-name}
 npm install

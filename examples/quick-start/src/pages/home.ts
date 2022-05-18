@@ -8,5 +8,6 @@ import {ConcatScript} from '../scripts/concat.script';
     using: [ConcatScript]
 })
 export class Home {
+    name = 'home';
     toggle = false;
 }

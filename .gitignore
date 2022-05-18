@@ -275,3 +275,4 @@ gradle-app.setting
 /examples/ssr/dist-front/
 /libs/dist-dom-render/
 /libs/dist-simple-boot-core/
+/temp/

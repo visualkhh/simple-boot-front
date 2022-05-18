@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "start": "rollup -c && sbf serve --path ./dist --port 4500",
+    "start:watch": "npm run bundle:watch & npm run serve:watch",
     "serve": "sbf serve --path ./dist --port 4500",
     "serve:watch": "sbf serve --path ./dist --port 4500 --watch",
     "serve:proxy": "sbf serve --path ./dist --port 4500 --proxy http://localhost:8080",
