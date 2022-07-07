@@ -15,7 +15,9 @@ import {RouterManager} from 'simple-boot-core/route/RouterManager';
 import {DomRenderProxy} from 'dom-render/DomRenderProxy';
 import {ScriptUtils} from 'dom-render/utils/script/ScriptUtils';
 import {RawSet, Render} from 'dom-render/RawSet';
-import {Config, TargetElement, TargetAttr} from 'dom-render/Config';
+import {Config} from 'dom-render/configs/Config';
+import {TargetAttr} from 'dom-render/configs/TargetAttr';
+import {TargetElement} from 'dom-render/configs/TargetElement';
 import {ScriptRunnable} from 'script/ScriptRunnable';
 import {DomRenderFinalProxy} from 'dom-render/types/Types';
 import {SaveInjectConfig} from 'simple-boot-core/decorators/inject/Inject';
@@ -92,7 +94,7 @@ export class SimpleBootFront extends SimpleApplication {
                     const n = element.cloneNode(true) as Element;
                     const innerHTML = this.getComponentInnerHtml(targetObj);
                     n.innerHTML = innerHTML;
-                    return RawSet.drThisCreate(n, attrValue, '', true, obj, this.option);
+                    return RawSet.drThisCreate(rawSet, n, attrValue, '', true, obj, this.option);
                 }
                 const fag = this.option.window.document.createDocumentFragment();
                 return fag;
@@ -247,9 +249,7 @@ export class SimpleBootFront extends SimpleApplication {
                     return newSim
                 },
                 component?.template,
-                component?.styles,
-                false,
-                this.domRenderConfig
+                component?.styles
             );
 
             this.domRenderTargetElements.push(items);
