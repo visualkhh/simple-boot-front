@@ -1,6 +1,6 @@
 import {SimFrontOption} from './option/SimFrontOption';
 import {ConstructorType} from 'simple-boot-core/types/Types';
-import {ComponentConfig, ComponentMetadataKey, componentSelectors, getComponent} from './decorators/Component';
+import {componentSelectors, getComponent} from './decorators/Component';
 import {scripts} from './decorators/Script';
 import {DomRender} from 'dom-render/DomRender';
 import {SimAtomic} from 'simple-boot-core/simstance/SimAtomic';
@@ -9,12 +9,12 @@ import {Intent} from 'simple-boot-core/intent/Intent';
 import {Navigation} from './service/Navigation';
 import {ViewService} from './service/view/ViewService';
 import {HttpService} from './service/HttpService';
-import {SimstanceManager} from 'simple-boot-core/simstance/SimstanceManager';
+import {FirstCheckMaker, SimstanceManager} from 'simple-boot-core/simstance/SimstanceManager';
 import {IntentManager} from 'simple-boot-core/intent/IntentManager';
 import {RouterManager} from 'simple-boot-core/route/RouterManager';
 import {DomRenderProxy} from 'dom-render/DomRenderProxy';
 import {ScriptUtils} from 'dom-render/utils/script/ScriptUtils';
-import {RawSet, Render} from 'dom-render/RawSet';
+import {RawSet, RawSetType, Render} from 'dom-render/RawSet';
 import {Config} from 'dom-render/configs/Config';
 import {TargetAttr} from 'dom-render/configs/TargetAttr';
 import {TargetElement} from 'dom-render/configs/TargetElement';
@@ -22,7 +22,6 @@ import {ScriptRunnable} from 'script/ScriptRunnable';
 import {DomRenderFinalProxy} from 'dom-render/types/Types';
 import {SaveInjectConfig} from 'simple-boot-core/decorators/inject/Inject';
 import {InjectFrontSituationType} from './decorators/inject/InjectFrontSituationType';
-import {FirstCheckMaker} from 'simple-boot-core/simstance/SimstanceManager';
 import {RouterModule} from 'simple-boot-core/route/RouterModule';
 
 export class SimpleBootFront extends SimpleApplication {
@@ -108,7 +107,7 @@ export class SimpleBootFront extends SimpleApplication {
 
     public getComponentInnerHtml(targetObj: any, id: string) {
         const component = getComponent(targetObj)
-        const styles = RawSet.styleTransformLocal(component?.styles ?? [], id);
+        const styles = RawSet.generateStyleTransform(component?.styles ?? [], id);
         const template = (component?.template ?? '');
         return styles + template;
     }
@@ -157,9 +156,11 @@ export class SimpleBootFront extends SimpleApplication {
         const routerAtomic = new SimAtomic(this.rootRouter, this.getSimstanceManager());
         const target = this.option.window.document.querySelector(this.option.selector);
         if (target && routerAtomic.value) {
-            const component = routerAtomic.getConfig<ComponentConfig>(ComponentMetadataKey)
-            const styles = (component?.styles?.map(it => `<style>${it}</style>`) ?? []).join(' ')
-            target.innerHTML = `${styles} ${component?.template ?? ''}`;
+            const id = 'root-router';
+            const startEndPoint = RawSet.createStartEndPoint(id, RawSetType.TARGET_ELEMENT, this.domRenderConfig);
+            target.appendChild(startEndPoint.start);
+            target.insertAdjacentHTML('beforeend', this.getComponentInnerHtml(this.rootRouter, id));
+            target.appendChild(startEndPoint.end);
         }
         return routerAtomic;
     }
