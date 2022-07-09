@@ -92,7 +92,7 @@ export class SimpleBootFront extends SimpleApplication {
                 if (attrValue) {
                     const targetObj = ScriptUtils.eval(`return ${attrValue}`, obj)
                     const n = element.cloneNode(true) as Element;
-                    const innerHTML = this.getComponentInnerHtml(targetObj);
+                    const innerHTML = this.getComponentInnerHtml(targetObj, rawSet.uuid);
                     n.innerHTML = innerHTML;
                     return RawSet.drThisCreate(rawSet, n, attrValue, '', true, obj, this.option);
                 }
@@ -106,9 +106,9 @@ export class SimpleBootFront extends SimpleApplication {
         };
     }
 
-    public getComponentInnerHtml(targetObj: any) {
+    public getComponentInnerHtml(targetObj: any, id: string) {
         const component = getComponent(targetObj)
-        const styles = (component?.styles?.map(it => `<style>${it}</style>`) ?? []).join(' ');
+        const styles = RawSet.styleTransformLocal(component?.styles ?? [], id);
         const template = (component?.template ?? '');
         return styles + template;
     }

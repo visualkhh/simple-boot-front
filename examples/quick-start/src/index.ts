@@ -5,9 +5,10 @@ import {Router} from 'simple-boot-core/decorators/route/Router';
 import {Component} from 'simple-boot-front/decorators/Component';
 import template from './index.html'
 import style from './index.css'
-import {Home} from './pages/home';
+import {Home} from './pages/home/home';
 import {User} from './pages/user';
 import {RouterAction} from 'simple-boot-core/route/RouterAction';
+import {ItemComponent} from './components/item/item.component';
 
 @Sim()
 @Router({
@@ -19,7 +20,8 @@ import {RouterAction} from 'simple-boot-core/route/RouterAction';
 })
 @Component({
     template,
-    styles: [style]
+    styles: [style],
+    using: [ItemComponent]
 })
 export class Index implements RouterAction {
     child?: any;
