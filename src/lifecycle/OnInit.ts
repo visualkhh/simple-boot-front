@@ -1,4 +1,4 @@
-import { RawSet } from 'dom-render/RawSet';
+import { RawSet } from 'dom-render/rawsets/RawSet';
 export type OnInitParameter = {
     makerObj: any;
     rawSet: RawSet;

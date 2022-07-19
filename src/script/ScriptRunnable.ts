@@ -1,5 +1,5 @@
 import { Runnable } from 'simple-boot-core/run/Runnable';
-import { RawSet } from 'dom-render/RawSet';
+import { RawSet } from 'dom-render/rawsets/RawSet';
 import { DomRenderProxy } from 'dom-render/DomRenderProxy';
 export abstract class ScriptRunnable implements Runnable {
     public rawSets = new Map<RawSet, any>();

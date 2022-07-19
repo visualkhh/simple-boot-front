@@ -14,7 +14,9 @@ import {IntentManager} from 'simple-boot-core/intent/IntentManager';
 import {RouterManager} from 'simple-boot-core/route/RouterManager';
 import {DomRenderProxy} from 'dom-render/DomRenderProxy';
 import {ScriptUtils} from 'dom-render/utils/script/ScriptUtils';
-import {RawSet, RawSetType, Render} from 'dom-render/RawSet';
+import {RawSet} from 'dom-render/rawsets/RawSet';
+import {RawSetType} from 'dom-render/rawsets/RawSetType';
+import {Render} from 'dom-render/rawsets/Render';
 import {Config} from 'dom-render/configs/Config';
 import {TargetAttr} from 'dom-render/configs/TargetAttr';
 import {TargetElement} from 'dom-render/configs/TargetElement';
@@ -121,7 +123,7 @@ export class SimpleBootFront extends SimpleApplication {
     }
 
     private initRun(otherInstanceSim?: Map<ConstructorType<any>, any>) {
-        super.run(otherInstanceSim);
+        const simstanceManager = super.run(otherInstanceSim);
         this.initDomRenderScripts();
         this.initDomRenderTargetElements();
 
@@ -139,6 +141,7 @@ export class SimpleBootFront extends SimpleApplication {
                 this.afterSetting();
             });
         });
+        return simstanceManager;
     }
 
     public initWriteRootRouter() {
@@ -174,7 +177,7 @@ export class SimpleBootFront extends SimpleApplication {
     }
 
     async runRouting(otherInstanceSim?: Map<ConstructorType<any>, any>, url?: string): Promise<RouterModule<SimAtomic<Object>, any> | undefined> {
-        this.initRun(otherInstanceSim);
+        const simstanceManager = this.initRun(otherInstanceSim);
         if (url) {
             this.navigation.goNoPopStateEvent(url);
         }
@@ -185,11 +188,12 @@ export class SimpleBootFront extends SimpleApplication {
     }
 
     public run(otherInstanceSim?: Map<ConstructorType<any>, any>, url?: string) {
-        this.initRun(otherInstanceSim);
+        const simstanceManager = this.initRun(otherInstanceSim);
         if (url) {
             this.navigation.go(url);
         }
         this.option.window.dispatchEvent(new Event('popstate'));
+        return simstanceManager;
     }
 
     private afterSetting() {
