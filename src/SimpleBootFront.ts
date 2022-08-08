@@ -161,6 +161,7 @@ export class SimpleBootFront extends SimpleApplication {
         if (target && routerAtomic.value) {
             const id = 'root-router';
             const startEndPoint = RawSet.createStartEndPoint(id, RawSetType.TARGET_ELEMENT, this.domRenderConfig);
+            target.innerHTML = '';
             target.appendChild(startEndPoint.start);
             target.insertAdjacentHTML('beforeend', this.getComponentInnerHtml(this.rootRouter, id));
             target.appendChild(startEndPoint.end);
