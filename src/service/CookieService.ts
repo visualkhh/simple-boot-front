@@ -1,7 +1,7 @@
 import { Sim } from 'simple-boot-core/decorators/SimDecorator';
 import { SimFrontOption } from '../option/SimFrontOption';
 
-@Sim()
+@Sim
 export class CookieService {
     constructor(private option: SimFrontOption) {
     }

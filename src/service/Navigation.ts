@@ -2,7 +2,7 @@ import {Sim} from 'simple-boot-core/decorators/SimDecorator'
 import {SimFrontOption, UrlType} from '../option/SimFrontOption';
 import {LocationUtils} from 'dom-render/utils/location/LocationUtils';
 
-@Sim()
+@Sim
 export class Navigation {
     constructor(public option: SimFrontOption) {
     }

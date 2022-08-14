@@ -27,6 +27,7 @@ export class Index implements RouterAction {
     child?: any;
     async canActivate(url: any, module: any) {
         this.child = module;
+        console.log('route->', url, module);
     }
 }
 

@@ -1,7 +1,7 @@
 import {Sim} from 'simple-boot-core/decorators/SimDecorator'
 import {View} from '../../service/view/View';
 
-@Sim()
+@Sim
 export class ViewService {
     constructor() {
     }

@@ -1,5 +1,5 @@
 import {Sim} from 'simple-boot-core/decorators/SimDecorator'
-@Sim()
+@Sim
 export class HttpService {
     constructor() {
     }

@@ -2,7 +2,7 @@ import {Sim} from 'simple-boot-core/decorators/SimDecorator'
 import { ScriptRunnable } from '../script/ScriptRunnable';
 import { scripts } from '../decorators/Script';
 import { SimstanceManager } from 'simple-boot-core/simstance/SimstanceManager';
-@Sim()
+@Sim
 export class ScriptService {
     constructor(private simstanceManager: SimstanceManager) {
     }
