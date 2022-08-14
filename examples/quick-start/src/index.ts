@@ -10,7 +10,7 @@ import {User} from './pages/user';
 import {RouterAction} from 'simple-boot-core/route/RouterAction';
 import {ItemComponent} from './components/item/item.component';
 
-@Sim()
+@Sim
 @Router({
     path: '',
     route: {

@@ -25,6 +25,7 @@
         "eol-last": "off",
         "semi": "off",
         "camelcase": "off",
+        "no-redeclare": "off",
         "no-trailing-spaces": "off",
         "indent": ["error", 4],
         "node/no-path-concat": "off",

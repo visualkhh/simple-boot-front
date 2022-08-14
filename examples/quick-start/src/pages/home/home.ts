@@ -3,7 +3,7 @@ import { Sim } from 'simple-boot-core/decorators/SimDecorator';
 import template from './home.html';
 import style from './home.css';
 import {ConcatScript} from '../../scripts/concat.script';
-@Sim()
+@Sim
 @Component({
     template,
     styles: [style],
