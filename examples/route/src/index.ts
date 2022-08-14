@@ -35,18 +35,13 @@ export class Index implements RouterAction {
     child?: any;
 
     @Route({path: '/'})
-    home() {
-        return Home;
-    }
-
-    @Route({path: '/user1'})
     @Injection
-    user1(user: User) {
-        return user;
+    home(home: Home) {
+        return home;
     }
 
-    @Route({path: '/user2'})
-    user2() {
+    @Route({path: '/user'})
+    user() {
         const user = new User(new Date().toISOString());
         return user;
     }
