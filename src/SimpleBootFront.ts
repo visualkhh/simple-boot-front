@@ -9,11 +9,10 @@ import {Intent} from 'simple-boot-core/intent/Intent';
 import {Navigation} from './service/Navigation';
 import {ViewService} from './service/view/ViewService';
 import {HttpService} from './service/HttpService';
-import {FirstCheckMaker, SimstanceManager} from 'simple-boot-core/simstance/SimstanceManager';
+import {SimstanceManager} from 'simple-boot-core/simstance/SimstanceManager';
 import {IntentManager} from 'simple-boot-core/intent/IntentManager';
 import {RouterManager} from 'simple-boot-core/route/RouterManager';
 import {DomRenderProxy} from 'dom-render/DomRenderProxy';
-import {ScriptUtils} from 'dom-render/utils/script/ScriptUtils';
 import {RawSet} from 'dom-render/rawsets/RawSet';
 import {RawSetType} from 'dom-render/rawsets/RawSetType';
 import {Render} from 'dom-render/rawsets/Render';
@@ -21,9 +20,6 @@ import {Config} from 'dom-render/configs/Config';
 import {TargetAttr} from 'dom-render/configs/TargetAttr';
 import {TargetElement} from 'dom-render/configs/TargetElement';
 import {ScriptRunnable} from 'script/ScriptRunnable';
-import {DomRenderFinalProxy} from 'dom-render/types/Types';
-import {SaveInjectConfig} from 'simple-boot-core/decorators/inject/Inject';
-import {InjectFrontSituationType} from './decorators/inject/InjectFrontSituationType';
 import {RouterModule} from 'simple-boot-core/route/RouterModule';
 
 export class SimpleBootFront extends SimpleApplication {
@@ -41,36 +37,8 @@ export class SimpleBootFront extends SimpleApplication {
             targetElements: this.domRenderTargetElements,
             targetAttrs: this.domRenderTargetAttrs,
             onElementInit: (name: string, obj: any, rawSet: RawSet, targetElement: TargetElement) => {
-                // 제거
-                // const target = targetElement?.__render?.component;
-                // const targetKey = 'onInit';
-                // const firstCheckMaker: FirstCheckMaker[] = [(ownerObj: { target: Object, targetKey?: string | symbol }, type: ConstructorType<any>, idx: number, saveInjectionConfig?: SaveInjectConfig) => {
-                //     if (InjectFrontSituationType.OPENER === saveInjectionConfig?.config.situationType && rawSet.point.thisVariableName) {
-                //         return new Proxy(ScriptUtils.evalReturn(rawSet.point.thisVariableName, obj), new DomRenderFinalProxy())
-                //     }
-                // }]
-                // if (rawSet.point.thisVariableName) {
-                //     target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey, firstCheckMaker: firstCheckMaker})); // .concat(this.elementAndComponentOnInitFirstCheckMakers)
-                // } else {
-                //     target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey, firstCheckMaker: firstCheckMaker})); // .concat(this.elementAndComponentOnInitFirstCheckMakers)
-                // }
             },
             onAttrInit: (attrName: string, attrValue: string, obj: any, rawSet: RawSet) => {
-                // 제거
-                // if (attrName === 'component') {
-                //     const target = ScriptUtils.evalReturn(attrValue, obj) as any;
-                //     const targetKey = 'onInit';
-                //     const firstCheckMaker: FirstCheckMaker[] = [(obj: { target: Object, targetKey?: string | symbol }, type: ConstructorType<any>, idx: number, saveInjectionConfig?: SaveInjectConfig) => {
-                //         if (InjectFrontSituationType.OPENER === saveInjectionConfig?.config.situationType && target?.__domrender_component_new?.creator) {
-                //             return target?.__domrender_component_new?.creator;
-                //         }
-                //     }];
-                //     if (rawSet.point.thisVariableName) {
-                //         target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey, firstCheckMaker: firstCheckMaker})); // .concat(this.elementAndComponentOnInitFirstCheckMakers)
-                //     } else {
-                //         target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey, firstCheckMaker: firstCheckMaker})); // .concat(this.elementAndComponentOnInitFirstCheckMakers)
-                //     }
-                // }
             },
             scripts: {application: this},
             applyEvents: [{
@@ -86,25 +54,6 @@ export class SimpleBootFront extends SimpleApplication {
 
         (this.option.window as any).__dirname = 'simple-boot-front__dirname';
 
-        // 제거
-        // const targetAttribute = RawSet.createComponentTargetAttribute(
-        //     'component',
-        //     (element: Element, attrValue: string, obj: any, rawSet: RawSet) => {
-        //         return ScriptUtils.eval(`return ${attrValue}`, obj);
-        //     },
-        //     (element: Element, attrValue: string, obj: any, rawSet: RawSet) => {
-        //         if (attrValue) {
-        //             const targetObj = ScriptUtils.eval(`return ${attrValue}`, obj)
-        //             const n = element.cloneNode(true) as Element;
-        //             const innerHTML = this.getComponentInnerHtml(targetObj, rawSet.uuid);
-        //             n.innerHTML = innerHTML;
-        //             return RawSet.drThisCreate(rawSet, n, attrValue, '', true, obj, this.option);
-        //         }
-        //         const fag = this.option.window.document.createDocumentFragment();
-        //         return fag;
-        //     }
-        // );
-        // this.domRenderTargetAttrs.push(targetAttribute);
         option.proxy = {
             onProxy: (it: any) => this.createDomRender(it)
         };

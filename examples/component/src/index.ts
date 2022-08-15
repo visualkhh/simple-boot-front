@@ -7,6 +7,8 @@ import template from './index.html'
 import style from './index.css'
 import {RouterAction} from 'simple-boot-core/route/RouterAction';
 import {User} from './components/user/user';
+import {OnInitRender} from 'dom-render/lifecycle/OnInitRender';
+import {OnCreateRender} from 'dom-render/lifecycle/OnCreateRender';
 
 @Sim
 @Component({
@@ -14,7 +16,15 @@ import {User} from './components/user/user';
     styles: [style],
     using: [User]
 })
-export class Index {
+export class Index implements OnCreateRender, OnInitRender {
+    onCreateRender(...param: any[]): void {
+        console.log('Index onCreateRender', param, document.body.innerHTML);
+
+    }
+
+    onInitRender(...param: any[]): void {
+        console.log('Index onInitRender', param, document.body.innerHTML);
+    }
 }
 
 new SimpleBootFront(Index, new SimFrontOption(window).setUrlType(UrlType.hash)).run();
