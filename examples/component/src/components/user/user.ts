@@ -10,20 +10,16 @@ import {OnCreateRender} from 'dom-render/lifecycle/OnCreateRender';
     template,
     styles: [style]
 })
-export class User implements OnInit, OnCreateRender, OnInitRender {
+export class User implements OnCreateRender, OnInitRender {
     constructor() {
         console.log('User constructor');
     }
 
-    onInit(...data: any): any {
-        console.log('onInit', data)
-    }
-
     onInitRender(data1: any, data2: any, data3: any): void {
-        console.log('onInitRender', data1, data2, data3)
+        console.log('onInitRender', data1, data2, data3, document.querySelector('#user'))
     }
 
     onCreateRender(...param: any[]): void {
-        console.log('onCreateRender----->', param);
+        console.log('onCreateRender----->', param, document.querySelector('#user'));
     }
 }
