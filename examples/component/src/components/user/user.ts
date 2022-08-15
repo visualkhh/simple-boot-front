@@ -16,10 +16,10 @@ export class User implements OnCreateRender, OnInitRender {
     }
 
     onInitRender(data1: any, data2: any, data3: any): void {
-        console.log('onInitRender', data1, data2, data3, document.querySelector('#user'))
+        console.log('User onInitRender', data1, data2, data3, document.querySelector('#user'))
     }
 
     onCreateRender(...param: any[]): void {
-        console.log('onCreateRender----->', param, document.querySelector('#user'));
+        console.log('User onCreateRender----->', param, document.querySelector('#user'));
     }
 }
