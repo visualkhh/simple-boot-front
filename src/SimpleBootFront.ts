@@ -55,20 +55,20 @@ export class SimpleBootFront extends SimpleApplication {
                 }
             },
             onAttrInit: (attrName: string, attrValue: string, obj: any, rawSet: RawSet) => {
-                if (attrName === 'component') {
-                    const target = ScriptUtils.evalReturn(attrValue, obj) as any;
-                    const targetKey = 'onInit';
-                    const firstCheckMaker: FirstCheckMaker[] = [(obj: { target: Object, targetKey?: string | symbol }, type: ConstructorType<any>, idx: number, saveInjectionConfig?: SaveInjectConfig) => {
-                        if (InjectFrontSituationType.OPENER === saveInjectionConfig?.config.situationType && target?.__domrender_component_new?.creator) {
-                            return target?.__domrender_component_new?.creator;
-                        }
-                    }];
-                    if (rawSet.point.thisVariableName) {
-                        target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey, firstCheckMaker: firstCheckMaker})); // .concat(this.elementAndComponentOnInitFirstCheckMakers)
-                    } else {
-                        target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey, firstCheckMaker: firstCheckMaker})); // .concat(this.elementAndComponentOnInitFirstCheckMakers)
-                    }
-                }
+                // if (attrName === 'component') {
+                //     const target = ScriptUtils.evalReturn(attrValue, obj) as any;
+                //     const targetKey = 'onInit';
+                //     const firstCheckMaker: FirstCheckMaker[] = [(obj: { target: Object, targetKey?: string | symbol }, type: ConstructorType<any>, idx: number, saveInjectionConfig?: SaveInjectConfig) => {
+                //         if (InjectFrontSituationType.OPENER === saveInjectionConfig?.config.situationType && target?.__domrender_component_new?.creator) {
+                //             return target?.__domrender_component_new?.creator;
+                //         }
+                //     }];
+                //     if (rawSet.point.thisVariableName) {
+                //         target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey, firstCheckMaker: firstCheckMaker})); // .concat(this.elementAndComponentOnInitFirstCheckMakers)
+                //     } else {
+                //         target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey, firstCheckMaker: firstCheckMaker})); // .concat(this.elementAndComponentOnInitFirstCheckMakers)
+                //     }
+                // }
             },
             scripts: {application: this},
             applyEvents: [{
@@ -84,24 +84,25 @@ export class SimpleBootFront extends SimpleApplication {
 
         (this.option.window as any).__dirname = 'simple-boot-front__dirname';
 
-        const targetAttribute = RawSet.createComponentTargetAttribute(
-            'component',
-            (element: Element, attrValue: string, obj: any, rawSet: RawSet) => {
-                return ScriptUtils.eval(`return ${attrValue}`, obj);
-            },
-            (element: Element, attrValue: string, obj: any, rawSet: RawSet) => {
-                if (attrValue) {
-                    const targetObj = ScriptUtils.eval(`return ${attrValue}`, obj)
-                    const n = element.cloneNode(true) as Element;
-                    const innerHTML = this.getComponentInnerHtml(targetObj, rawSet.uuid);
-                    n.innerHTML = innerHTML;
-                    return RawSet.drThisCreate(rawSet, n, attrValue, '', true, obj, this.option);
-                }
-                const fag = this.option.window.document.createDocumentFragment();
-                return fag;
-            }
-        );
-        this.domRenderTargetAttrs.push(targetAttribute);
+        // 제거
+        // const targetAttribute = RawSet.createComponentTargetAttribute(
+        //     'component',
+        //     (element: Element, attrValue: string, obj: any, rawSet: RawSet) => {
+        //         return ScriptUtils.eval(`return ${attrValue}`, obj);
+        //     },
+        //     (element: Element, attrValue: string, obj: any, rawSet: RawSet) => {
+        //         if (attrValue) {
+        //             const targetObj = ScriptUtils.eval(`return ${attrValue}`, obj)
+        //             const n = element.cloneNode(true) as Element;
+        //             const innerHTML = this.getComponentInnerHtml(targetObj, rawSet.uuid);
+        //             n.innerHTML = innerHTML;
+        //             return RawSet.drThisCreate(rawSet, n, attrValue, '', true, obj, this.option);
+        //         }
+        //         const fag = this.option.window.document.createDocumentFragment();
+        //         return fag;
+        //     }
+        // );
+        // this.domRenderTargetAttrs.push(targetAttribute);
         option.proxy = {
             onProxy: (it: any) => this.createDomRender(it)
         };

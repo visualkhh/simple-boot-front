@@ -8,6 +8,7 @@ import style from './index.css'
 import {RouterAction} from 'simple-boot-core/route/RouterAction';
 import {Inject} from 'simple-boot-core/decorators/inject/Inject';
 import {Injection} from 'simple-boot-core/decorators/inject/Injection';
+import {ComponentSet} from 'simple-boot-front/components/ComponentSet';
 
 @Sim
 @Component({
@@ -18,7 +19,8 @@ class Home {
 
 @Sim
 @Component({
-    template: '<div><h1>user [name: ${this.name}$]</h1></div>'
+    template: '<h1>user [name: ${this.name}$]</h1><div>good</div>',
+    styles: ['div {color: red}']
 })
 class User {
     constructor(@Inject({disabled: true}) public name: string | undefined = 'default') {
@@ -47,7 +49,11 @@ export class Index implements RouterAction {
     }
 
     async canActivate(url: any, module: any) {
-        this.child = module;
+        this.child = new ComponentSet(module)
+        // if (module) {
+        //     this.child = module;
+        //     // this.child = new ComponentSet(module, '<div>aa</div>')
+        // }
         console.log('route->', url, module);
     }
 }
