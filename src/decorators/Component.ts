@@ -12,16 +12,22 @@ export interface ComponentConfig {
 export const ComponentMetadataKey = Symbol('Component');
 
 // Partial<ComponentConfig>
-export const Component = (config?: ComponentConfig): GenericClassDecorator<ConstructorType<any>> => {
-    return (target: ConstructorType<any>) => {
-        if (!config) {
-            config = {}
+const componentProcess = (config: ComponentConfig, target: ConstructorType<any>) => {
+    if (!config.selector) {
+        config.selector = target.name.toLowerCase();
+    }
+    ReflectUtils.defineMetadata(ComponentMetadataKey, config, target);
+    componentSelectors.set(config.selector.toLowerCase(), target);
+}
+export function Component(target: ConstructorType<any>): void;
+export function Component(config: ComponentConfig): GenericClassDecorator<ConstructorType<any>>;
+export function Component(configOrTarget: ConstructorType<any> | ComponentConfig): void | GenericClassDecorator<ConstructorType<any>> {
+    if (typeof configOrTarget === 'function') {
+        componentProcess({}, configOrTarget);
+    } else {
+        return (target: ConstructorType<any>) => {
+            componentProcess(configOrTarget, target);
         }
-        if (!config.selector) {
-            config.selector = target.name;
-        }
-        ReflectUtils.defineMetadata(ComponentMetadataKey, config, target);
-        componentSelectors.set(config.selector.toLowerCase(), target);
     }
 }
 

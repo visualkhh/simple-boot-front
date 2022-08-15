@@ -1,3 +1,3 @@
-export enum InjectFrontSituationType {
-    OPENER = 'SIMPLE_BOOT_FRONT://OPENER',
-}
+// export enum InjectFrontSituationType {
+//     OPENER = 'SIMPLE_BOOT_FRONT://OPENER',
+// }

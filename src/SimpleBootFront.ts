@@ -41,20 +41,22 @@ export class SimpleBootFront extends SimpleApplication {
             targetElements: this.domRenderTargetElements,
             targetAttrs: this.domRenderTargetAttrs,
             onElementInit: (name: string, obj: any, rawSet: RawSet, targetElement: TargetElement) => {
-                const target = targetElement?.__render?.component;
-                const targetKey = 'onInit';
-                const firstCheckMaker: FirstCheckMaker[] = [(ownerObj: { target: Object, targetKey?: string | symbol }, type: ConstructorType<any>, idx: number, saveInjectionConfig?: SaveInjectConfig) => {
-                    if (InjectFrontSituationType.OPENER === saveInjectionConfig?.config.situationType && rawSet.point.thisVariableName) {
-                        return new Proxy(ScriptUtils.evalReturn(rawSet.point.thisVariableName, obj), new DomRenderFinalProxy())
-                    }
-                }]
-                if (rawSet.point.thisVariableName) {
-                    target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey, firstCheckMaker: firstCheckMaker})); // .concat(this.elementAndComponentOnInitFirstCheckMakers)
-                } else {
-                    target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey, firstCheckMaker: firstCheckMaker})); // .concat(this.elementAndComponentOnInitFirstCheckMakers)
-                }
+                // 제거
+                // const target = targetElement?.__render?.component;
+                // const targetKey = 'onInit';
+                // const firstCheckMaker: FirstCheckMaker[] = [(ownerObj: { target: Object, targetKey?: string | symbol }, type: ConstructorType<any>, idx: number, saveInjectionConfig?: SaveInjectConfig) => {
+                //     if (InjectFrontSituationType.OPENER === saveInjectionConfig?.config.situationType && rawSet.point.thisVariableName) {
+                //         return new Proxy(ScriptUtils.evalReturn(rawSet.point.thisVariableName, obj), new DomRenderFinalProxy())
+                //     }
+                // }]
+                // if (rawSet.point.thisVariableName) {
+                //     target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey, firstCheckMaker: firstCheckMaker})); // .concat(this.elementAndComponentOnInitFirstCheckMakers)
+                // } else {
+                //     target?.onInit?.(...this.simstanceManager.getParameterSim({target, targetKey, firstCheckMaker: firstCheckMaker})); // .concat(this.elementAndComponentOnInitFirstCheckMakers)
+                // }
             },
             onAttrInit: (attrName: string, attrValue: string, obj: any, rawSet: RawSet) => {
+                // 제거
                 // if (attrName === 'component') {
                 //     const target = ScriptUtils.evalReturn(attrValue, obj) as any;
                 //     const targetKey = 'onInit';
