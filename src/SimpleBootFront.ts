@@ -202,8 +202,13 @@ export class SimpleBootFront extends SimpleApplication {
             const component = getComponent(val);
             const items = RawSet.createComponentTargetElement(
                 name,
-                (e, obj, r) => {
-                    const newSim = this.simstanceManager.newSim(val);
+                (e, obj, r, counstructorParam) => {
+                    let newSim;
+                    if (counstructorParam?.length) {
+                        newSim = new val(...counstructorParam);
+                    } else {
+                        newSim = this.simstanceManager.newSim(val);
+                    }
                     return newSim
                 },
                 component?.template,

@@ -1,11 +1,9 @@
 import {SimFrontOption, UrlType} from 'simple-boot-front/option/SimFrontOption';
 import {SimpleBootFront} from 'simple-boot-front/SimpleBootFront';
 import {Sim} from 'simple-boot-core/decorators/SimDecorator';
-import {Router, Route} from 'simple-boot-core/decorators/route/Router';
 import {Component} from 'simple-boot-front/decorators/Component';
 import template from './index.html'
 import style from './index.css'
-import {RouterAction} from 'simple-boot-core/route/RouterAction';
 import {User} from './components/user/user';
 import {OnInitRender} from 'dom-render/lifecycle/OnInitRender';
 import {OnCreateRender} from 'dom-render/lifecycle/OnCreateRender';
@@ -17,13 +15,22 @@ import {OnCreateRender} from 'dom-render/lifecycle/OnCreateRender';
     using: [User]
 })
 export class Index implements OnCreateRender, OnInitRender {
+    public userName = 'userName';
+    public userComponent?: User;
     onCreateRender(...param: any[]): void {
-        console.log('Index onCreateRender', param, document.body.innerHTML);
-
+        console.log('Index onCreateRender');
     }
 
     onInitRender(...param: any[]): void {
-        console.log('Index onInitRender', param, document.body.innerHTML);
+        console.log('Index onInitRender');
+    }
+
+    changeName() {
+        console.log('------>', this.userComponent)
+        if (this.userComponent) {
+            this.userComponent.name = new Date().toISOString();
+        }
+        // this.userName = new Date().toISOString();
     }
 }
 

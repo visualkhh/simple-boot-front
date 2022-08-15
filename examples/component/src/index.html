@@ -1,5 +1,10 @@
 <div>
     aaa
-    <user dr-on-create:callback="console.log('col');" dr-on-create:arguments="[1,2,3]" dr-on-init:arguments="[6,7]"></user>
-    bbb
+    <user
+            dr-detect="$component.name = this.userName"
+            dr-on-create:callback="this.userComponent = $component"
+            dr-on-create:arguments="[1,2,3]"
+            dr-on-init:arguments="[6,7]"
+    ></user>
+    bbb<button dr-event-click="this.changeName()">change user name</button>
 </div>
