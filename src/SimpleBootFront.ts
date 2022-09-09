@@ -21,6 +21,7 @@ import {TargetAttr} from 'dom-render/configs/TargetAttr';
 import {TargetElement} from 'dom-render/configs/TargetElement';
 import {ScriptRunnable} from 'script/ScriptRunnable';
 import {RouterModule} from 'simple-boot-core/route/RouterModule';
+import {ComponentSet} from 'dom-render/components/ComponentSet';
 
 export class SimpleBootFront extends SimpleApplication {
     navigation!: Navigation;
@@ -49,7 +50,24 @@ export class SimpleBootFront extends SimpleApplication {
                     })
                 }
             }],
-            proxyExcludeTyps: this.domRendoerExcludeProxy
+            proxyExcludeTyps: this.domRendoerExcludeProxy,
+            operatorAround: {
+                drThis: {
+                    before: (data, operatorExecutor) => {
+                        if (data && !(data instanceof ComponentSet) && operatorExecutor.elementSource.element.getAttribute(`${RawSet.DR_THIS_NAME}:type`) === 'outlet') {
+                            const component = getComponent(data);
+                            if (component) {
+                                const styles = component?.styles ?? [];
+                                const template = component?.template ?? '';
+                                return new ComponentSet(operatorExecutor, template, styles, {objPath: null});
+                            } else {
+                                return undefined;
+                            }
+                        }
+                        return data;
+                    }
+                }
+            }
         };
 
         (this.option.window as any).__dirname = 'simple-boot-front__dirname';

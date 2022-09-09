@@ -49,7 +49,8 @@ export class Index implements RouterAction {
     }
 
     async canActivate(url: any, module: any) {
-        this.child = new ComponentSet(module)
+        // console.log('------', module)
+        this.child = module;
         // if (module) {
         //     this.child = module;
         //     // this.child = new ComponentSet(module, '<div>aa</div>')
