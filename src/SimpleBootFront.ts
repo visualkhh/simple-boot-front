@@ -59,7 +59,7 @@ export class SimpleBootFront extends SimpleApplication {
                             if (component) {
                                 const styles = component?.styles ?? [];
                                 const template = component?.template ?? '';
-                                return new ComponentSet(operatorExecutor, template, styles, {objPath: null});
+                                return new ComponentSet(data, template, styles, {objPath: null});
                             } else {
                                 return undefined;
                             }
