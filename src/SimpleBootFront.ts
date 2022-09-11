@@ -98,6 +98,7 @@ export class SimpleBootFront extends SimpleApplication {
         this.initDomRenderTargetElements();
 
         this.navigation = this.simstanceManager.getOrNewSim(Navigation)!
+        // this.navigation.domRenderConfig = this.domRenderConfig;
         // rootRouter first draw
         this.initWriteRootRouter();
         this.option.window.addEventListener('intent', (event) => {

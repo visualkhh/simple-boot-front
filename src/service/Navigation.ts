@@ -1,9 +1,12 @@
 import {Sim} from 'simple-boot-core/decorators/SimDecorator'
 import {SimFrontOption, UrlType} from '../option/SimFrontOption';
 import {LocationUtils} from 'dom-render/utils/location/LocationUtils';
+import {SimpleBootFront} from '../SimpleBootFront';
+import {Config} from 'dom-render/configs/Config';
 
 @Sim
 export class Navigation {
+    // public domRenderConfig?: Config;
     constructor(public option: SimFrontOption) {
     }
 
@@ -50,7 +53,18 @@ export class Navigation {
         return {path: this.path, queryParams: this.queryParams};
     }
 
+    // get router(): any {
+    //     // this.option.
+    //     return this.domRenderConfig?.router;
+    //     // this.option.
+    // }
+
     reload() {
+        // if (this.domRenderConfig?.router) {
+        //     this.domRenderConfig?.router.reload();
+        // } else {
+        //     this.option.window.dispatchEvent(new Event('popstate'));
+        // }
         this.option.window.dispatchEvent(new Event('popstate'));
     }
 
@@ -68,8 +82,16 @@ export class Navigation {
     }
 
     go(path: string, data: any = {}, title = '') {
+        // if (this.domRenderConfig?.router) {
+        //     this.domRenderConfig?.router.go(path, data, title);
+        // } else {
+        //     this.goNoPopStateEvent(path, data, title);
+        //     this.option.window.dispatchEvent(new Event('popstate'));
+        // }
         this.goNoPopStateEvent(path, data, title);
         this.option.window.dispatchEvent(new Event('popstate'));
+        // this.goNoPopStateEvent(path, data, title);
+        // this.option.window.dispatchEvent(new Event('popstate'));
         // window.dispatchEvent(new Event('pushstate'));
         // window.dispatchEvent(new Event('locationchange'));
     }
