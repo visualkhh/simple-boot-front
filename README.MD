@@ -52,7 +52,7 @@ npm start
   <summary>pages/home.ts<strong>🔻(click)</strong></summary>
 
 ```typescript
-@Sim()
+@Sim
 @Component({
     template: '<div>home</div>'
 })
@@ -65,7 +65,7 @@ export class Home {
   <summary>pages/user.ts<strong>🔻(click)</strong></summary>
 
 ```typescript
-@Sim()
+@Sim
 @Component({
   template: '<div>user</div>'
 })
@@ -92,7 +92,7 @@ export class User {
 
 </header>
 <main>
-    <router component="this.child"></router>
+    <router dr-this="this.child" dr-this:type="outlet" dr-strip="false"></router>
 </main>
 <footer>
     footer
@@ -116,7 +116,7 @@ index.ts ▼
 ```typescript
 import template from './index.html'
 import style from './index.css'
-@Sim()
+@Sim
 @Router({
   path: '',
   route: {
@@ -165,7 +165,7 @@ Objects managed by the SimpleBootFront framework
 ```typescript
 import template from './index.html'
 import style from './index.css'
-@Sim()
+@Sim
 @Component({
   selector: 'index', // default class name LowerCase
   template,
@@ -199,7 +199,7 @@ constructor(index: Index){...}
 ```typescript
 import template from './index.html'
 import style from './index.css'
-@Sim()
+@Sim
 @Router({
     path: '',
     route: {

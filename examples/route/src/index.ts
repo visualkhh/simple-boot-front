@@ -8,7 +8,6 @@ import style from './index.css'
 import {RouterAction} from 'simple-boot-core/route/RouterAction';
 import {Inject} from 'simple-boot-core/decorators/inject/Inject';
 import {Injection} from 'simple-boot-core/decorators/inject/Injection';
-import {ComponentSet} from 'simple-boot-front/components/ComponentSet';
 
 @Sim
 @Component({
