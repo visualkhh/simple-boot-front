@@ -1,7 +1,7 @@
 import {Sim} from 'simple-boot-core/decorators/SimDecorator';
 import {Component} from 'simple-boot-front/decorators/Component';
 import template from './profile.html'
-@Sim()
+@Sim
 @Component({
     selector: 'profile',
     template

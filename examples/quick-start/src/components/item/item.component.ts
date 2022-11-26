@@ -2,7 +2,7 @@ import {Sim} from 'simple-boot-core/decorators/SimDecorator';
 import {Component} from 'simple-boot-front/decorators/Component';
 import template from './item.html'
 import style from './item.css'
-@Sim()
+@Sim
 @Component({
     selector: 'item',
     template,
