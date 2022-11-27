@@ -5,8 +5,7 @@ export const componentSelectors = new Map<string, ConstructorType<any>>();
 export interface ComponentConfig {
     selector?: string,
     template?: string,
-    styles?: (string)[],
-    using?: (ConstructorType<any>)[],
+    styles?: (string)[]
 }
 
 export const ComponentMetadataKey = Symbol('Component');

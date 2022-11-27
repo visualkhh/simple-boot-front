@@ -4,8 +4,7 @@ import { ScriptRunnable } from 'script/ScriptRunnable';
 
 export const scripts = new Map<string, ConstructorType<ScriptRunnable>>();
 export interface ScriptConfig {
-    name?: string,
-    using?: (ConstructorType<any>)[],
+    name?: string
 }
 
 export const ScriptMetadataKey = Symbol('Script');
