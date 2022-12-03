@@ -50,6 +50,8 @@ export class SimpleBootFront extends SimpleApplication {
                     })
                 }
             }],
+            eventVariables: {
+            },
             proxyExcludeTyps: this.domRendoerExcludeProxy,
             operatorAround: {
                 drThis: {
@@ -96,8 +98,12 @@ export class SimpleBootFront extends SimpleApplication {
         const simstanceManager = super.run(otherInstanceSim);
         this.initDomRenderScripts();
         this.initDomRenderTargetElements();
-
         this.navigation = this.simstanceManager.getOrNewSim(Navigation)!
+        this.domRenderConfig.eventVariables = {
+            $router: this.navigation,
+            $application: this
+        }
+
         // this.navigation.domRenderConfig = this.domRenderConfig;
         // rootRouter first draw
         this.initWriteRootRouter();

@@ -8,14 +8,26 @@ import style from './index.css'
 import {RouterAction} from 'simple-boot-core/route/RouterAction';
 import {Inject} from 'simple-boot-core/decorators/inject/Inject';
 import {Injection} from 'simple-boot-core/decorators/inject/Injection';
+import {OnInitRender} from 'dom-render/lifecycle/OnInitRender';
+import {OnCreateRender} from 'dom-render/lifecycle/OnCreateRender';
 
 @Sim
 @Component({
     template: '<div><h1>home</h1></div>'
 })
-class Home {
-}
+class Home implements OnInitRender, OnCreateRender {
+    constructor() {
+        console.log('constructor home')
+    }
 
+    onCreateRender(...param: any[]): void {
+        console.log('home onCreateRender')
+    }
+
+    onInitRender(...param: any[]): void {
+        console.log('home onInitRender')
+    }
+}
 @Sim
 @Component({
     template: '<h1>user [name: ${this.name}$]</h1><div>good</div>',
@@ -28,6 +40,13 @@ class User {
 
 @Sim
 @Router
+({
+    path: '',
+    route: {
+        '/': Home,
+        '/user': User
+    }
+})
 @Component({
     template,
     styles: [style]
@@ -35,25 +54,20 @@ class User {
 export class Index implements RouterAction {
     child?: any;
 
-    @Route({path: '/'})
-    @Injection
-    home(home: Home) {
-        return home;
-    }
+    // @Route({path: '/'})
+    // @Injection
+    // home(home: Home) {
+    //     return home;
+    // }
 
-    @Route({path: '/user'})
+    // @Route({path: '/user'})
     user() {
         const user = new User(new Date().toISOString());
         return user;
     }
 
     async canActivate(url: any, module: any) {
-        // console.log('------', module)
         this.child = module;
-        // if (module) {
-        //     this.child = module;
-        //     // this.child = new ComponentSet(module, '<div>aa</div>')
-        // }
         console.log('route->', url, module);
     }
 }

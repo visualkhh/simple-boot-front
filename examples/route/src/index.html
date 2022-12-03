@@ -5,7 +5,9 @@
                 <button router-link="/">home</button>
             </li>
             <li>
-                <button router-link="/user">user</button>
+                <button router-link="/user">user00</button>
+                <button dr-event-click="$router.go('/user')" >user121</button>
+                <button dr-for-of="$range(5)" dr-event-click="$router.go('/user' + #it#)" >user</button>
             </li>
         </ul>
     </nav>
