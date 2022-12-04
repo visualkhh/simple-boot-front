@@ -10,14 +10,19 @@ import {Inject} from 'simple-boot-core/decorators/inject/Inject';
 import {Injection} from 'simple-boot-core/decorators/inject/Injection';
 import {OnInitRender} from 'dom-render/lifecycle/OnInitRender';
 import {OnCreateRender} from 'dom-render/lifecycle/OnCreateRender';
+import {AvatarService} from '../services/AvatarService';
 
 @Sim
 @Component({
-    template: '<div><h1>home</h1></div>'
+    template: '<div><h1>home</h1><img class="w-8 h-8 rounded-full" src="${this.avatarService.randomAvatarUrl()}$" alt="Neil image"></div>'
 })
 class Home implements OnInitRender, OnCreateRender {
-    constructor() {
+    constructor(public avatarService: AvatarService) {
         console.log('constructor home')
+    }
+
+    url() {
+        return 'https://avatars.dicebear.com/api/adventurer-neutral/0.6226264321020589.svg';
     }
 
     onCreateRender(...param: any[]): void {
@@ -36,6 +41,11 @@ class Home implements OnInitRender, OnCreateRender {
 class User {
     constructor(@Inject({disabled: true}) public name: string | undefined = 'default') {
     }
+
+    // url() {
+    //     return 'https://yt3.ggpht.com/ytc/AMLnZu8Zv9UuA3wTqAiSdmhBK3Dcvq1iuGDiHeNBa4xpMmg=s88-c-k-c0x00ffffff-no-rj-mo';
+    // }
+
 }
 
 @Sim
@@ -64,6 +74,14 @@ export class Index implements RouterAction {
     user() {
         const user = new User(new Date().toISOString());
         return user;
+    }
+
+    url() {
+        return 'https://yt3.ggpht.com/ytc/AMLnZu8Zv9UuA3wTqAiSdmhBK3Dcvq1iuGDiHeNBa4xpMmg=s88-c-k-c0x00ffffff-no-rj-mo';
+    }
+
+    say() {
+        return 'zzzz';
     }
 
     async canActivate(url: any, module: any) {
