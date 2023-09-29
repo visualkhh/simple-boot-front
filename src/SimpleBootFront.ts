@@ -32,7 +32,6 @@ export class SimpleBootFront extends SimpleApplication {
 
     constructor(public rootRouter: ConstructorType<any>, public option: SimFrontOption) {
         super(rootRouter, option);
-        // console.log('-----create-->', option)
         this.domRenderConfig = {
             routerType: 'none',
             window: option.window,
@@ -90,7 +89,6 @@ export class SimpleBootFront extends SimpleApplication {
     public createDomRender<T extends object>(obj: T): T {
         const component = getComponent(obj);
         if (component && typeof obj === 'object') {
-            // console.log('donrenderConfig, ', this.domRenderConfig);
             return DomRender.run(obj, undefined, this.domRenderConfig);
         }
         return obj;
