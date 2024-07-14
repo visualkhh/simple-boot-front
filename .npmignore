@@ -6,7 +6,7 @@ examples
 # DO NOT IGNORE TYPESCRIPT FILES FOR NPM
 # TypeScript
 # *.js
-# *.map
+ *.map
 
 # JetBrains
 .idea

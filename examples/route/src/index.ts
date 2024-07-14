@@ -11,6 +11,7 @@ import {Injection} from 'simple-boot-core/decorators/inject/Injection';
 import {OnInitRender} from 'dom-render/lifecycle/OnInitRender';
 import {OnCreateRender} from 'dom-render/lifecycle/OnCreateRender';
 import {AvatarService} from '../services/AvatarService';
+import { MypageRouter } from './pages/mypage.router';
 
 @Sim
 @Component({
@@ -54,7 +55,8 @@ class User {
     path: '',
     route: {
         '/': Home,
-        '/user': User
+        '/user': User,
+        '/mypage': MypageRouter
     }
 })
 @Component({
@@ -90,4 +92,4 @@ export class Index implements RouterAction {
     }
 }
 
-new SimpleBootFront(Index, new SimFrontOption(window).setUrlType(UrlType.hash)).run();
+new SimpleBootFront(Index, new SimFrontOption(window).setUrlType(UrlType.path)).run();
