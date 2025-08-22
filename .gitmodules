@@ -1,8 +1,0 @@
-[submodule "libs/dom-render"]
-	path = libs/dom-render
-	url = https://github.com/visualkhh/dom-render.git
-	branch = master
-[submodule "libs/simple-boot-core"]
-	path = libs/simple-boot-core
-	url = https://github.com/visualkhh/simple-boot-core.git
-	branch = master
